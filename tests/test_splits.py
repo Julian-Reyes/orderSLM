@@ -204,7 +204,7 @@ def test_verify_catches_an_unlogged_edit(dirs):
 
 ALLOWED = {  # regex -> the only modules that may contain it
     r"\btest_split_dir\b": {"paths.py", "data/splits.py"},
-    r"include_held_out=True": {"menus.py", "data/splits.py"},
+    r"include_held_out=True": {"menus.py", "data/splits.py", "app/main.py"},  # app: test split only
     r"\bUNSEAL_ENV\b": {"paths.py", "data/pizza.py"},
     r"\bload_cases\b": {"data/pizza.py"},
     r"(?<![A-Z_])_TEST\b": {"paths.py"},
