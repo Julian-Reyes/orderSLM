@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+.DS_Store
+
+# Record/replay cache of provider responses (M3+). Large and regenerable; eval outputs in runs/ are committed.
+.llm-cache/
+
+# Model weights, adapters and quantized files (M5+) go to Hugging Face, not git.
+models/
+*.gguf
+*.safetensors

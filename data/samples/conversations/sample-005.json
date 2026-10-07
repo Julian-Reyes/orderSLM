@@ -1,0 +1,222 @@
+{
+  "conversation": {
+    "id": "sample-005",
+    "business_id": "halfmoon-pizza",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-10-07T20:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "large pizza half pepperoni half hawaiian",
+        "sent_at": "2026-10-07T20:15:06-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "and garlic knots",
+        "sent_at": "2026-10-07T20:15:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "actually make it 2 garlic knots",
+        "sent_at": "2026-10-07T20:15:19-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "delivery to 18 Elm Street apt 3B, ring the side door",
+        "sent_at": "2026-10-07T20:15:44-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-07T20:15:49-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half",
+    "correction",
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "large pizza half pepperoni half hawaiian"
+          }
+        ],
+        "halves": [
+          {
+            "menu_item_id": "pepperoni"
+          },
+          {
+            "menu_item_id": "hawaiian"
+          }
+        ],
+        "variant_id": "16in"
+      },
+      {
+        "line_id": "L2",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "garlic knots"
+          },
+          {
+            "message_index": 3,
+            "quote": "make it 2 garlic knots"
+          }
+        ],
+        "menu_item_id": "garlic_knots"
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "delivery to 18 Elm Street apt 3B"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Elm Street",
+      "number": "18",
+      "unit": "3B",
+      "raw_text": "18 Elm Street apt 3B",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "18 Elm Street apt 3B"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [
+      {
+        "text": "ring the side door",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "ring the side door"
+          }
+        ]
+      }
+    ],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "SMALL_TALK",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "MODIFY_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "'large' maps to the 16in variant by name. 'make it 2' is a quantity correction on L2, not a new line. 'ring the side door' is a delivery instruction (note), not part of the address."
+}

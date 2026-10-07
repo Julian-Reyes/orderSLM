@@ -1,0 +1,25 @@
+#!/bin/sh
+# Blocks the commit if lint or tests fail (adapted from AgentDesk's .githooks/pre-commit).
+# Enable once per clone with:
+#   git config core.hooksPath .githooks
+# Never bypass with --no-verify; fix the failure instead.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+UV="${UV:-uv}"
+command -v "$UV" >/dev/null 2>&1 || UV="$HOME/.local/bin/uv"
+
+echo "pre-commit: lint..."
+if ! "$UV" run -q ruff check . || ! "$UV" run -q ruff format --check . >/dev/null; then
+  echo "pre-commit: lint failed (run 'make format'); commit blocked."
+  exit 1
+fi
+
+echo "pre-commit: tests..."
+log="$(mktemp)"
+if ! "$UV" run -q pytest >"$log" 2>&1; then
+  tail -40 "$log"
+  rm -f "$log"
+  echo "pre-commit: tests failed; commit blocked."
+  exit 1
+fi
+tail -1 "$log"
+rm -f "$log"

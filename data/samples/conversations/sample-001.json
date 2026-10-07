@@ -1,0 +1,184 @@
+{
+  "conversation": {
+    "id": "sample-001",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get 2 cheeseburgers and a coke",
+        "sent_at": "2026-10-07T18:02:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "actually make one of them no onions",
+        "sent_at": "2026-10-07T18:02:20-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "and swap the coke for a sprite",
+        "sent_at": "2026-10-07T18:02:35-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup at 7, paying cash",
+        "sent_at": "2026-10-07T18:03:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "correction",
+    "ambiguous_reference"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ],
+        "menu_item_id": "cheeseburger"
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          },
+          {
+            "message_index": 1,
+            "quote": "make one of them no onions"
+          }
+        ],
+        "menu_item_id": "cheeseburger",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "no_onion",
+            "raw_text": "no onions"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "swap the coke for a sprite"
+          }
+        ],
+        "menu_item_id": "sprite"
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup at 7"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "pickup at 7"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "MODIFY_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "MODIFY_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "'one of them' splits the 2 cheeseburgers into two lines. 'at 7' is 19:00: the shop opens at 11. Message 3 gives first-time details, so PLACE_ORDER, not MODIFY_ORDER."
+}

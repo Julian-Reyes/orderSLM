@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "sample-010",
+    "business_id": "halfmoon-pizza",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "are you guys hiring?",
+        "sent_at": "2026-10-07T16:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "also can i get a medium margherita",
+        "sent_at": "2026-10-07T16:20:10-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "nvm cancel it, sorry 🙏",
+        "sent_at": "2026-10-07T16:20:55-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope",
+    "cancellation"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a medium margherita"
+          }
+        ],
+        "menu_item_id": "margherita",
+        "variant_id": "12in"
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "method_evidence": [],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "nvm cancel it"
+        }
+      ]
+    },
+    "notes": [],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "OUT_OF_SCOPE",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "CANCEL_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "A cancelled order keeps its items (what was cancelled) and has nothing to clarify."
+}

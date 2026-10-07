@@ -1,0 +1,182 @@
+{
+  "conversation": {
+    "id": "sample-009",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 veggie burgers for pickup, i'll pay by card",
+        "sent_at": "2026-10-07T12:00:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 2 Veggie Burgers for pickup. Total $19.98, paying by card. Is that right?",
+        "sent_at": "2026-10-07T12:00:15-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "yes",
+        "sent_at": "2026-10-07T12:00:25-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Great, your order is in! Ready in about 20 minutes.",
+        "sent_at": "2026-10-07T12:00:30-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh wait can u make one of them with no tomato",
+        "sent_at": "2026-10-07T12:01:30-04:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "also i already paid on the app",
+        "sent_at": "2026-10-07T12:01:40-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "payment_claim",
+    "contextual_yes",
+    "ambiguous_reference"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 veggie burgers"
+          }
+        ],
+        "menu_item_id": "veggie_burger"
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 veggie burgers"
+          },
+          {
+            "message_index": 4,
+            "quote": "make one of them with no tomato"
+          }
+        ],
+        "menu_item_id": "veggie_burger",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "no_tomato",
+            "raw_text": "no tomato"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "i'll pay by card"
+        },
+        {
+          "message_index": 5,
+          "quote": "i already paid"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "CONFIRM_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PAYMENT_CLAIM",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "The change after confirmation resets customer_decision to pending: the new order needs a new yes. 'already paid' is a claim (customer_claims_paid), never a verified payment. The change is time-sensitive because the kitchen may already be preparing it."
+}

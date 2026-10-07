@@ -1,0 +1,58 @@
+{
+  "conversation": {
+    "id": "sample-008",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "the bacon was missing from my bacon burger",
+        "sent_at": "2026-10-07T20:30:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i want a refund or let me talk to someone",
+        "sent_at": "2026-10-07T20:30:30-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem",
+    "two_requests",
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "ORDER_PROBLEM",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "REFUND_REQUEST",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": true
+        },
+        "secondary": "HUMAN_REQUEST"
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample"
+}

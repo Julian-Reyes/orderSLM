@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "sample-007",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "where's my food?? ordered like an hour ago",
+        "sent_at": "2026-10-07T19:45:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "WHY IS IT TAKING SO LONG",
+        "sent_at": "2026-10-07T19:45:40-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "Time-sensitive because the order is an hour old, not because of the caps (frustration alone is not urgency)."
+}

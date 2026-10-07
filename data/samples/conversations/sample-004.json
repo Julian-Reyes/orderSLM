@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "sample-004",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 chicken sandwiches and large fries 🍟",
+        "sent_at": "2026-10-07T13:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "oh and a chocolate shake 😋",
+        "sent_at": "2026-10-07T13:05:12-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu",
+    "multi_message_order",
+    "missing_info"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 chicken sandwiches"
+          }
+        ],
+        "unmatched_text": "chicken sandwiches"
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "large fries"
+          }
+        ],
+        "menu_item_id": "fries",
+        "variant_id": "large"
+      },
+      {
+        "line_id": "L3",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a chocolate shake"
+          }
+        ],
+        "menu_item_id": "milkshake",
+        "variant_id": "chocolate"
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "method_evidence": [],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "off_menu",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have chicken sandwiches. Would you like something else instead? Also, is this for pickup or delivery, and card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample"
+}

@@ -1,0 +1,124 @@
+{
+  "conversation": {
+    "id": "sample-002",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo lemme get a bacon burger and a shake",
+        "sent_at": "2026-10-07T12:31:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "delivery pls",
+        "sent_at": "2026-10-07T12:31:08-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ],
+        "menu_item_id": "bacon_burger"
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a shake"
+          }
+        ],
+        "menu_item_id": "milkshake"
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivery pls"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L2"
+      },
+      {
+        "field": "address",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What flavor would you like for the shake (vanilla, chocolate or strawberry), what's the delivery address, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "No time stated: not_mentioned and not asked (default is ASAP). Milkshake has no default flavor."
+}

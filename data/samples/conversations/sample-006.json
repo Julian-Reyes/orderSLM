@@ -1,0 +1,166 @@
+{
+  "conversation": {
+    "id": "sample-006",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a double cheeseburger no pickles and a coke for pickup",
+        "sent_at": "2026-10-07T17:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 1 Cheeseburger (double, no pickles), 1 Coke for pickup. Total $14.48. Card or cash?",
+        "sent_at": "2026-10-07T17:40:20-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card. name's Dana",
+        "sent_at": "2026-10-07T17:40:35-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks Dana! Is everything correct?",
+        "sent_at": "2026-10-07T17:40:45-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-10-07T17:40:53-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a double cheeseburger no pickles"
+          }
+        ],
+        "menu_item_id": "cheeseburger",
+        "variant_id": "double",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "no_pickle",
+            "raw_text": "no pickles"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a coke"
+          }
+        ],
+        "menu_item_id": "coke"
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Dana",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "name's Dana"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "yep"
+        }
+      ]
+    },
+    "notes": [],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "CONFIRM_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "'yep' only means CONFIRM_ORDER because the business just asked a yes/no question about the order."
+}

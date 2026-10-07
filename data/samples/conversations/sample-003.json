@@ -1,0 +1,106 @@
+{
+  "conversation": {
+    "id": "sample-003",
+    "business_id": "corner-patty",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a cheeseburger combo with onion rings and a lemonade, also do you deliver to 42 Oak St?",
+        "sent_at": "2026-10-07T19:10:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests",
+    "combo",
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "schema_version": "extraction@0.1",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger combo with onion rings and a lemonade"
+          }
+        ],
+        "menu_item_id": "cheeseburger_combo",
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "onion_rings"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "method_evidence": [],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Oak St",
+      "number": "42",
+      "raw_text": "42 Oak St",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "42 Oak St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Would you like it delivered to 42 Oak St or will you pick it up, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        },
+        "secondary": "DELIVERY_QUESTION"
+      }
+    }
+  ],
+  "annotator": "claude-m0-sample",
+  "annotation_notes": "Asking whether they deliver is not choosing delivery: method stays unknown. The address is stated, so it's provided. The delivery answer comes from the menu's delivery policy, not the model."
+}
