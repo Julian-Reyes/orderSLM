@@ -1,4 +1,4 @@
-"""Shared building blocks for every ShopRoute contract.
+"""Shared building blocks for every OrderSLM contract.
 
 Language neutrality: every enum value is a language-independent code
 (snake_case or UPPER_CASE ASCII). Only customer text, quotes, raw_text fields

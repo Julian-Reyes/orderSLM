@@ -11,7 +11,7 @@ from typing import Generic, Literal, TypeVar
 
 from pydantic import Field, model_validator
 
-from shoproute.domain.money import Cents
+from orderslm.domain.money import Cents
 
 from .common import ID_PATTERN, Strict
 from .extraction import FulfillmentMethod, Modification

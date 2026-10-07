@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from shoproute.paths import SAMPLES
-from shoproute.schema import AnnotatedConversation, MenuCatalog
+from orderslm.paths import SAMPLES
+from orderslm.schema import AnnotatedConversation, MenuCatalog
 
 SAMPLE_FILES = sorted((SAMPLES / "conversations").glob("*.json"))
 MENU_FILES = sorted((SAMPLES / "menus").glob("*.json"))

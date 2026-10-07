@@ -8,7 +8,7 @@ from enum import StrEnum
 
 from pydantic import Field, model_validator
 
-from shoproute.domain.money import Cents
+from orderslm.domain.money import Cents
 
 from .common import ID_PATTERN, Strict
 

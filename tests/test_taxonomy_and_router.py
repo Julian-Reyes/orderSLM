@@ -5,7 +5,7 @@ import re
 import pytest
 from pydantic import ValidationError
 
-from shoproute.interfaces.decision import (
+from orderslm.interfaces.decision import (
     Answer,
     DecisionError,
     DecisionRequest,
@@ -13,9 +13,9 @@ from shoproute.interfaces.decision import (
     check_against_limits,
     validate_response,
 )
-from shoproute.mocks.decision import ScriptedDecisionProvider, router_answers
-from shoproute.router import RouterContext, build_router_request, parse_router_response, render_input
-from shoproute.schema.routing import (
+from orderslm.mocks.decision import ScriptedDecisionProvider, router_answers
+from orderslm.router import RouterContext, build_router_request, parse_router_response, render_input
+from orderslm.schema.routing import (
     LABEL_DESCRIPTIONS,
     ORDER_LABELS,
     ContextFlags,

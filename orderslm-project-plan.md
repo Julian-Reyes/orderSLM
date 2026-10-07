@@ -1,4 +1,4 @@
-# ShopRoute: Food-Order Understanding, Decision Routing, and Distilled Small Models
+# OrderSLM: Food-Order Understanding, Decision Routing, and Distilled Small Models
 
 Updated October 7, 2026. This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, human-written evaluation, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
 
@@ -11,7 +11,7 @@ Small food businesses (burger shops, pizzerias, cafés) take many orders by chat
 > "and swap the coke for a sprite"
 > "pickup at 7, paying cash"
 
-ShopRoute turns a conversation like that into a **structured, menu-matched order**, detects what's missing and asks a clarifying question, and shows the business a clean order ticket.
+OrderSLM turns a conversation like that into a **structured, menu-matched order**, detects what's missing and asks a clarifying question, and shows the business a clean order ticket.
 
 It is an ML portfolio project built around four measured comparisons:
 
@@ -277,11 +277,11 @@ Total budget: **$5–10 USD**.
 
 ## 15. AgentDesk reuse
 
-Julian's earlier project, AgentDesk (https://github.com/Julian-Reyes/AgentDesk), is an English online-store agent-ops project. **It is written in TypeScript** (Node 24, Hono, Postgres/Drizzle, Zod, React + Vite). ShopRoute is Python, so reuse means **porting patterns and logic into Python**, not copying TypeScript files.
+Julian's earlier project, AgentDesk (https://github.com/Julian-Reyes/AgentDesk), is an English online-store agent-ops project. **It is written in TypeScript** (Node 24, Hono, Postgres/Drizzle, Zod, React + Vite). OrderSLM is Python, so reuse means **porting patterns and logic into Python**, not copying TypeScript files.
 
 **Candidates to port** (verify each in Milestone 0; paths as of October 7, 2026):
 
-| AgentDesk pattern | Path | Use in ShopRoute |
+| AgentDesk pattern | Path | Use in OrderSLM |
 |---|---|---|
 | Models as config; one OpenAI-compatible client for all providers | `server/config/models.json`, `server/src/llm/openai-compatible.ts`, `server/src/llm/config.ts`, `server/src/llm/factory.ts` | Python provider client and model config (OpenAI, Gemini, DeepSeek all expose OpenAI-compatible APIs; verify each) |
 | Response cache and rate throttling | `server/src/llm/cache.ts`, `server/src/llm/throttle.ts` | Port |
@@ -292,16 +292,16 @@ Julian's earlier project, AgentDesk (https://github.com/Julian-Reyes/AgentDesk),
 | Eval run storage layout and reports | `server/src/evals/runner/store.ts`, `report.ts`, `server/eval-results/` | Adapt the structure |
 | Tracing of each step | `server/src/tracing/tracer.ts` | Adapt for router/extractor/tool traces |
 | Conventions: injected clock, integer-cents money, `{ok, data}` / `{ok: false, error}` tool results | `server/src/domain/clock.ts`, `server/src/domain/money.ts`, `server/src/tools/define.ts` | Same conventions in Python |
-| Static results export for GitHub Pages | `server/src/static/export.ts` | Same approach for ShopRoute's results site |
+| Static results export for GitHub Pages | `server/src/static/export.ts` | Same approach for OrderSLM's results site |
 | Working rules, pre-commit hook, PROGRESS.md style | `CLAUDE.md`, `.githooks/pre-commit` | Adapt for a Python toolchain |
 
-**Frontend:** non-visual logic may be adapted (e.g. chat state handling, streaming/SSE client, comparison data shaping in `web/src/storefront/chat-state.ts`, `web/src/lib/sse.ts`, `web/src/ops/comparison.ts`). **Do not copy AgentDesk's styling, layout, or page designs** (`web/src/styles.css`, page components). ShopRoute's UI must look clearly different: its own colors, typography, and layout suited to a food-ordering product.
+**Frontend:** non-visual logic may be adapted (e.g. chat state handling, streaming/SSE client, comparison data shaping in `web/src/storefront/chat-state.ts`, `web/src/lib/sse.ts`, `web/src/ops/comparison.ts`). **Do not copy AgentDesk's styling, layout, or page designs** (`web/src/styles.css`, page components). OrderSLM's UI must look clearly different: its own colors, typography, and layout suited to a food-ordering product.
 
-**Do not reuse:** the Larchgrove catalog, refund/coupon/goodwill policies, the multi-agent loop and handoffs (ShopRoute does extraction, not agents), or Postgres (JSON files or SQLite are enough).
+**Do not reuse:** the Larchgrove catalog, refund/coupon/goodwill policies, the multi-agent loop and handoffs (OrderSLM does extraction, not agents), or Postgres (JSON files or SQLite are enough).
 
-**Spending note:** AgentDesk has its own provider spend caps (e.g. Gemini, Groq). Use separate API keys or projects for ShopRoute so its costs are tracked independently.
+**Spending note:** AgentDesk has its own provider spend caps (e.g. Gemini, Groq). Use separate API keys or projects for OrderSLM so its costs are tracked independently.
 
-Record what was ported, from which path, and what changed in `docs/AGENTDESK_REUSE.md`. Do not modify AgentDesk. ShopRoute must run independently.
+Record what was ported, from which path, and what changed in `docs/AGENTDESK_REUSE.md`. Do not modify AgentDesk. OrderSLM must run independently.
 
 ## 16. Demo (V1)
 

@@ -15,7 +15,7 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from shoproute.domain.money import Cents
+from orderslm.domain.money import Cents
 
 from .common import EXTRACTION_SCHEMA_VERSION, ID_PATTERN, Evidence, Strict
 

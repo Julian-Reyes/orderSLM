@@ -6,8 +6,8 @@ import re
 import pytest
 from pydantic import ValidationError
 
-from shoproute.schema import ExtractionOutput
-from shoproute.schema.common import Strict
+from orderslm.schema import ExtractionOutput
+from orderslm.schema.common import Strict
 
 
 def mutate(raw: dict, fn) -> dict:

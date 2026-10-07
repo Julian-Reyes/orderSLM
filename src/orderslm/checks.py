@@ -9,9 +9,9 @@ model outputs (hallucination metrics).
 import re
 from dataclasses import dataclass
 
-from shoproute.schema.conversation import Conversation
-from shoproute.schema.extraction import ExtractionOutput, Modification
-from shoproute.schema.menu import MenuCatalog, ModifierKind
+from orderslm.schema.conversation import Conversation
+from orderslm.schema.extraction import ExtractionOutput, Modification
+from orderslm.schema.menu import MenuCatalog, ModifierKind
 
 
 @dataclass(frozen=True)

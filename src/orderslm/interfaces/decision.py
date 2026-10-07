@@ -16,7 +16,7 @@ from typing import Protocol, runtime_checkable
 
 from pydantic import Field, model_validator
 
-from shoproute.schema.common import ID_PATTERN, Strict
+from orderslm.schema.common import ID_PATTERN, Strict
 
 
 class QuestionType(StrEnum):

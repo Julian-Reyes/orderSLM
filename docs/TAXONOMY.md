@@ -1,7 +1,7 @@
 # Router taxonomy V1 (`taxonomy@0.1`)
 
 One decision per **customer message**, made with the conversation context (up to 6 earlier messages, and
-whether a draft or placed order exists). Source of truth: `src/shoproute/schema/routing.py`. The
+whether a draft or placed order exists). Source of truth: `src/orderslm/schema/routing.py`. The
 descriptions below are sent **verbatim** to every provider and shown in the annotation tool;
 `tests/test_docs_sync.py` fails if this table and the code drift apart.
 

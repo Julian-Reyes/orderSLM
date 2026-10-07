@@ -1,8 +1,8 @@
 """An OrderExtractor that returns scripted raw text, so tests exercise the same parse path as real models."""
 
-from shoproute.interfaces.decision import Usage
-from shoproute.interfaces.extractor import ExtractionRequest, ExtractionResult, parse_model_output
-from shoproute.schema.extraction import ExtractionOutput
+from orderslm.interfaces.decision import Usage
+from orderslm.interfaces.extractor import ExtractionRequest, ExtractionResult, parse_model_output
+from orderslm.schema.extraction import ExtractionOutput
 
 
 class ScriptedExtractor:

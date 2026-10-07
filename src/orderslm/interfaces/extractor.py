@@ -9,10 +9,10 @@ from typing import Protocol, runtime_checkable
 
 from pydantic import Field
 
-from shoproute.schema.common import Strict
-from shoproute.schema.conversation import Conversation
-from shoproute.schema.extraction import ExtractionOutput
-from shoproute.schema.menu import MenuCatalog
+from orderslm.schema.common import Strict
+from orderslm.schema.conversation import Conversation
+from orderslm.schema.extraction import ExtractionOutput
+from orderslm.schema.menu import MenuCatalog
 
 from .decision import Usage
 

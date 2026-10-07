@@ -1,7 +1,7 @@
 """In-memory business tools for the demo, tests and evals. Deterministic: injected clock, sequential ids."""
 
-from shoproute.domain.clock import Clock
-from shoproute.schema.order import (
+from orderslm.domain.clock import Clock
+from orderslm.schema.order import (
     HandoffReason,
     HandoffTicket,
     OrderRecord,
@@ -10,7 +10,7 @@ from shoproute.schema.order import (
     ToolOk,
     ToolResult,
 )
-from shoproute.schema.routing import Urgency
+from orderslm.schema.routing import Urgency
 
 TOOLS_VERSION = "tools.mock@0.1"
 

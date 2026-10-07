@@ -14,7 +14,7 @@ class Role(StrEnum):
 
 
 class Split(StrEnum):
-    """Which dataset a conversation belongs to. `test` is sealed (see shoproute.paths)."""
+    """Which dataset a conversation belongs to. `test` is sealed (see orderslm.paths)."""
 
     sample = "sample"  # docs/examples in data/samples; never used for scoring
     dev = "dev"

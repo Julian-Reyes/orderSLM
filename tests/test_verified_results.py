@@ -5,11 +5,11 @@ from datetime import UTC, datetime
 import pytest
 from pydantic import ValidationError
 
-from shoproute.domain.clock import fixed_clock
-from shoproute.domain.money import format_cents, percent_of
-from shoproute.mocks.tools import InMemoryBusinessTools
-from shoproute.schema.order import HandoffReason, OrderRecord, OrderStatus, Quote, ToolErr, ToolOk
-from shoproute.schema.routing import Urgency
+from orderslm.domain.clock import fixed_clock
+from orderslm.domain.money import format_cents, percent_of
+from orderslm.mocks.tools import InMemoryBusinessTools
+from orderslm.schema.order import HandoffReason, OrderRecord, OrderStatus, Quote, ToolErr, ToolOk
+from orderslm.schema.routing import Urgency
 
 NOW = datetime(2026, 10, 7, 18, 0, tzinfo=UTC)
 

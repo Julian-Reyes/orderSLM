@@ -33,7 +33,7 @@ Copied from the spec (stated as verified 2026-10-07 from official pages). **Not 
 provider integration yet). Re-check each against the official pricing page on the day of the run and
 record the URL and date here.
 
-| Model | Standard in / out per 1M | Discounted | Verified by ShopRoute |
+| Model | Standard in / out per 1M | Discounted | Verified by OrderSLM |
 |---|---|---|---|
 | OpenAI `gpt-6-luna` | $0.10 / $0.50 | Batch $0.05 / $0.25 | not yet |
 | Google `gemini-3.1-flash-lite` | $0.25 / $1.50 | Batch $0.125 / $0.75 | not yet (free tier data is used by Google: don't use it) |
@@ -45,6 +45,6 @@ record the URL and date here.
 
 ## Spend controls
 
-- Separate ShopRoute API keys/projects, with provider-side spend caps where offered (record the cap here when set).
+- Separate OrderSLM API keys/projects, with provider-side spend caps where offered (record the cap here when set).
 - Preflight estimate → priced pilot → compare pilot actual vs. estimate → bulk run.
 - `LLM_CACHE=replay` reruns cost $0 (M3).

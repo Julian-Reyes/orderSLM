@@ -35,11 +35,11 @@ Customer claims are recorded as claims (`customer_claims_paid`), never as facts 
 Directories marked *(Mx)* are created in that milestone; everything else exists now.
 
 ```
-shoproute/
+orderslm/
 ├── pyproject.toml, uv.lock, Makefile, CLAUDE.md, PROGRESS.md, README.md
 ├── .githooks/pre-commit          lint + tests before every commit
 ├── config/                       (M3) models.json: provider, model, pricing, rpm/tpm; label/prompt versions
-├── src/shoproute/
+├── src/orderslm/
 │   ├── schema/                   versioned contracts (docs/SCHEMA.md)
 │   │   ├── common.py             versions, Strict base, Evidence
 │   │   ├── conversation.py       Message, Conversation, Split, Source
@@ -103,7 +103,7 @@ app. Never exposes paid API keys; anything public is rate-limited or replay-only
 
 Non-visual logic may be adapted from AgentDesk (chat-state reducer, SSE parser, comparison data shaping;
 docs/AGENTDESK_REUSE.md). **Nothing visual is copied.** AgentDesk uses forest green / stone / rust with
-system sans-serif and an ops-dashboard layout; ShopRoute deliberately looks like a food counter:
+system sans-serif and an ops-dashboard layout; OrderSLM deliberately looks like a food counter:
 
 - **Concept: "order counter."** The order is a paper kitchen ticket, not a dashboard card.
 - **Palette:** receipt paper `#FFFDF6`, ink `#1F1B2E`, mustard `#F2B705` (highlights, "new" tickets),
@@ -121,7 +121,7 @@ system sans-serif and an ops-dashboard layout; ShopRoute deliberately looks like
 
 ## Planned commands (later milestones)
 
-All via `make` (thin wrappers over `uv run python -m shoproute.<module>`). Targets for unimplemented
+All via `make` (thin wrappers over `uv run python -m orderslm.<module>`). Targets for unimplemented
 milestones exit with an error today. Anything that spends money prints an estimate and requires `--yes`
 (and asks Julian first if > $2).
 
@@ -129,14 +129,14 @@ milestones exit with an error today. Anything that spends money prints an estima
 |---|---|---|
 | 1 | `make menus` | Validate `data/menus/*.json` (3 + held-out), print item/variant/modifier counts. |
 | 1 | `make test` | Pricing, matching, order-state, rules-baseline tests. |
-| 2 | `uv run python -m shoproute.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) and convert it to AnnotatedConversation drafts against the pizzeria menu. Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
+| 2 | `uv run python -m orderslm.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) and convert it to AnnotatedConversation drafts against the pizzeria menu. Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
 | 2 | `make annotate` | Local annotation tool (FastAPI + Vite/Preact) (writes AnnotatedConversation JSON; blind relabel mode for the 30-conversation self-consistency check). |
-| 2 | `uv run python -m shoproute.data.split --seal` | Lock dev/test, write counts per label/scenario, record test-file hashes. |
+| 2 | `uv run python -m orderslm.data.split --seal` | Lock dev/test, write counts per label/scenario, record test-file hashes. |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |
 | 4 | `make synth ARGS="--pilot 200"` | Generate pilot conversations (generator model ≠ teacher), dedup, distribution log. |
 | 4 | `make label ARGS="--pilot"` / `make label` | Teacher labels (batch API where available), consistency checks, drop-rate log, actual cost. |
 | 5 | `make student-bakeoff` | Zero-shot local run of Qwen3.5-0.8B/2B, Qwen3-1.7B, Gemma 4 E2B on ~20 dev conversations (after license/tooling checks; model downloads need approval). |
 | 6 | `make train` | Prints/exports the Colab/Kaggle notebook + config; training runs there (LoRA; QLoRA only if needed). |
-| 6 | `make eval ARGS="--split test"` | Requires `SHOPROUTE_UNSEAL_TEST=<reason>`; zero-shot vs few-shot vs fine-tuned vs teacher vs rules. |
+| 6 | `make eval ARGS="--split test"` | Requires `ORDERSLM_UNSEAL_TEST=<reason>`; zero-shot vs few-shot vs fine-tuned vs teacher vs rules. |
 | 7 | `make router-bench` | Rules vs Julia-1 vs Jev vs OpenAI Decisions; 3 repeats, option-order shuffles, latency, cost. |
 | 8 | `make demo` | Demo pages on the M2 FastAPI app + Vite frontend; `make site` exports the static results site. |

@@ -7,7 +7,7 @@ A step is a DecisionResponse, a function of the request, or an exception to rais
 
 from collections.abc import Callable
 
-from shoproute.interfaces.decision import (
+from orderslm.interfaces.decision import (
     Answer,
     DecisionRequest,
     DecisionResponse,

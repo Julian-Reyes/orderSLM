@@ -1,6 +1,6 @@
 # Schema
 
-Code is the source of truth: `src/shoproute/schema/`. This page explains the design. Versions live in
+Code is the source of truth: `src/orderslm/schema/`. This page explains the design. Versions live in
 `schema/common.py` and are logged with every run.
 
 | Contract | Version | File |
@@ -28,7 +28,7 @@ Code is the source of truth: `src/shoproute/schema/`. This page explains the des
    `language` (BCP-47, `en` for V1). Adding Portuguese needs new data and reply templates, not schema changes.
 5. **Unknown ≠ absent ≠ not applicable.** Slots carry an explicit `SlotState`.
 6. **Evidence for everything stated.** Each item and each provided field cites `{message_index, quote}`;
-   `shoproute.checks` verifies the quote is in that message (case/whitespace-insensitive) and every id is in the menu.
+   `orderslm.checks` verifies the quote is in that message (case/whitespace-insensitive) and every id is in the menu.
 
 ## Extraction output (`extraction@0.1`)
 
@@ -96,7 +96,7 @@ required for every non-`unknown` value.
 - `change_for_cents` only for cash. `customer_claims_paid` records a claim; there is no "paid" field in model output.
 - `replacement_modifier_id` only for `substitute` modifications.
 
-### Checks beyond the schema (`shoproute.checks`)
+### Checks beyond the schema (`orderslm.checks`)
 
 `check_evidence`: every quote occurs in the cited message. `check_catalog`: items, variants, modifiers
 (allowed on that item, right kind), combo slots/choices and splittable halves exist in the menu. Used on gold
@@ -116,7 +116,7 @@ The same shape is used for gold annotations and for normalized provider output.
 
 ## Decision providers (`interfaces/decision.py`)
 
-ShopRoute's own provider-neutral abstraction, *not* any provider's wire format:
+OrderSLM's own provider-neutral abstraction, *not* any provider's wire format:
 `DecisionRequest {request_id, input, questions[{name, type: choice|score|boolean, prompt, options[{id, description}]}], prompt_version}`
 → `DecisionResponse {provider, model, answers{name: {choice|score|boolean, confidence?, probabilities?, refused}}, usage, latency_ms, cost_micros, cached}`.
 `check_against_limits` rejects requests over a provider's option limit before sending;

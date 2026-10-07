@@ -8,16 +8,16 @@ count it instead of hiding it.
 
 from dataclasses import dataclass, field
 
-from shoproute.interfaces.decision import (
+from orderslm.interfaces.decision import (
     DecisionRequest,
     DecisionResponse,
     Option,
     Question,
     QuestionType,
 )
-from shoproute.schema.common import TAXONOMY_VERSION
-from shoproute.schema.conversation import Conversation, Role
-from shoproute.schema.routing import (
+from orderslm.schema.common import TAXONOMY_VERSION
+from orderslm.schema.conversation import Conversation, Role
+from orderslm.schema.routing import (
     LABEL_DESCRIPTIONS,
     REFERENCE_DESCRIPTIONS,
     URGENCY_DESCRIPTIONS,

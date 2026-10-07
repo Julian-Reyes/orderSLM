@@ -2,9 +2,9 @@
 
 import pytest
 
-from shoproute.checks import check_all, check_catalog, check_evidence
-from shoproute.schema import Role, Scenario, Split
-from shoproute.schema.extraction import ExtractionOutput
+from orderslm.checks import check_all, check_catalog, check_evidence
+from orderslm.schema import Role, Scenario, Split
+from orderslm.schema.extraction import ExtractionOutput
 
 from .conftest import MENU_FILES, SAMPLE_FILES
 

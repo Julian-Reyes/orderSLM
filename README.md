@@ -1,4 +1,4 @@
-# ShopRoute
+# OrderSLM
 
 Turns informal, multi-message food-order chats into structured, menu-matched orders, and measures every
 model choice along the way:
@@ -12,7 +12,7 @@ English first; the schema is language-neutral so Brazilian Portuguese can follow
 always computed in code, never by a model.
 
 **Status:** Milestone 0 (contracts, docs, mocks). No model has been called yet, so there are no results.
-See [PROGRESS.md](PROGRESS.md) and the plan in [shoproute-project-plan.md](shoproute-project-plan.md).
+See [PROGRESS.md](PROGRESS.md) and the plan in [orderslm-project-plan.md](orderslm-project-plan.md).
 
 ## Setup
 

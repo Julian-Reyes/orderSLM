@@ -1,8 +1,18 @@
 # Progress
 
-Read this first each session. Spec: `shoproute-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
+Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
 _Last updated 2026-10-07._
+
+## Rename (2026-10-07)
+
+The project was renamed **ShopRoute → OrderSLM** (Julian's request) after the two M0 commits: package
+`src/shoproute` → `src/orderslm` (moved with `git mv`, so history follows), spec
+`shoproute-project-plan.md` → `orderslm-project-plan.md`, env var `SHOPROUTE_UNSEAL_TEST` →
+`ORDERSLM_UNSEAL_TEST`, and every mention in docs, Makefile, CLAUDE.md, tests and `pyproject.toml`
+("OrderSLM" in prose, "orderslm" for package/repo names). `uv.lock` regenerated. Earlier commit
+messages keep the old name. Not renamed: the local checkout folder (`~/Documents/GitHub/shoproute`);
+rename it and any GitHub repo yourself if wanted.
 
 ## Milestones
 
@@ -29,7 +39,7 @@ _Last updated 2026-10-07._
 - **Ported now:** integer cents, injected clock, `ToolOk | ToolErr` results, scripted fake providers,
   working rules + pre-commit hook. **Planned:** LLM client/cache/throttle/estimate/run store (M3), stats
   with paired tests (M3), judge agreement (M6), tracing (M6/M8), static export + frontend logic (M8).
-- **Contracts** (`src/shoproute/schema/`, versioned): `extraction@0.1` (snapshot proposal with evidence,
+- **Contracts** (`src/orderslm/schema/`, versioned): `extraction@0.1` (snapshot proposal with evidence,
   explicit slot states, no price fields, `extra="forbid"`), `router@0.1` + `taxonomy@0.1` (15 labels,
   secondary, urgency, context flags; descriptions sent verbatim to every provider), conversation, menu,
   verified `Quote`/`OrderRecord`/tool results (arithmetic-checked integer cents).
@@ -44,7 +54,7 @@ _Last updated 2026-10-07._
   corrections (incl. after confirmation), missing info, two-request messages, off-menu, combo,
   half-and-half, contextual yes, status question, order problem + refund + human, payment claim,
   cancellation, out-of-scope. Split `sample`: examples only, never scored.
-- **Sealed test guard:** `paths.test_split_dir()` refuses unless `SHOPROUTE_UNSEAL_TEST` is set.
+- **Sealed test guard:** `paths.test_split_dir()` refuses unless `ORDERSLM_UNSEAL_TEST` is set.
 
 ## Files added
 
@@ -52,7 +62,7 @@ _Last updated 2026-10-07._
 pyproject.toml  uv.lock  Makefile  README.md  CLAUDE.md  PROGRESS.md  .gitignore  .env.example
 .githooks/pre-commit
 docs/  AGENTDESK_REUSE.md  SCHEMA.md  TAXONOMY.md  ARCHITECTURE.md  ANNOTATION_GUIDE.md  COSTS.md
-src/shoproute/  __init__.py  router.py  checks.py  paths.py
+src/orderslm/  __init__.py  router.py  checks.py  paths.py
   schema/       __init__.py common.py conversation.py menu.py extraction.py routing.py order.py annotation.py
   domain/       __init__.py money.py clock.py
   interfaces/   __init__.py decision.py extractor.py tools.py
@@ -62,7 +72,7 @@ data/samples/conversations/  sample-001.json … sample-010.json
 tests/  __init__.py conftest.py test_extraction_schema.py test_samples.py test_taxonomy_and_router.py
         test_verified_results.py test_contracts.py test_docs_sync.py
 ```
-(`shoproute-project-plan.md` was already present and is committed unchanged.)
+(`orderslm-project-plan.md` was already present and is committed unchanged.)
 
 ## Checks run
 

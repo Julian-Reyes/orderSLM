@@ -1,7 +1,7 @@
 """Docs that restate contracts must match the code, so providers, annotators and readers see the same wording."""
 
-from shoproute.paths import ROOT
-from shoproute.schema.routing import LABEL_DESCRIPTIONS, REFERENCE_DESCRIPTIONS, URGENCY_DESCRIPTIONS
+from orderslm.paths import ROOT
+from orderslm.schema.routing import LABEL_DESCRIPTIONS, REFERENCE_DESCRIPTIONS, URGENCY_DESCRIPTIONS
 
 TAXONOMY = (ROOT / "docs" / "TAXONOMY.md").read_text()
 

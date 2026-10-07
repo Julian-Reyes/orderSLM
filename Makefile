@@ -1,4 +1,4 @@
-# ShopRoute. Targets for later milestones fail loudly until that milestone implements them,
+# OrderSLM. Targets for later milestones fail loudly until that milestone implements them,
 # so nothing silently produces empty results. Planned commands: docs/ARCHITECTURE.md, "Planned commands".
 UV ?= uv
 RUN := $(UV) run

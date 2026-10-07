@@ -1,7 +1,7 @@
 """Where data lives, and the guard that keeps the sealed test set sealed (spec §7, §19).
 
 Code reaches the test split only through `test_split_dir()`, which refuses
-unless SHOPROUTE_UNSEAL_TEST is set to a reason (e.g. "final-eval M6"). Training
+unless ORDERSLM_UNSEAL_TEST is set to a reason (e.g. "final-eval M6"). Training
 and synthetic-generation code must never call it; M2 adds a test that greps
 for violations.
 """
@@ -17,7 +17,7 @@ DEV = DATA / "dev"  # M2
 _TEST = DATA / "test"  # M2, sealed
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)
 
-UNSEAL_ENV = "SHOPROUTE_UNSEAL_TEST"
+UNSEAL_ENV = "ORDERSLM_UNSEAL_TEST"
 
 
 class SealedSplitError(PermissionError):

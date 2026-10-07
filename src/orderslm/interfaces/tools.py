@@ -6,10 +6,10 @@ proposals (ExtractionOutput) go in; verified records come out.
 
 from typing import Protocol, runtime_checkable
 
-from shoproute.schema.extraction import ExtractionOutput
-from shoproute.schema.menu import MenuCatalog
-from shoproute.schema.order import HandoffReason, HandoffTicket, OrderRecord, Quote, ToolResult
-from shoproute.schema.routing import Urgency
+from orderslm.schema.extraction import ExtractionOutput
+from orderslm.schema.menu import MenuCatalog
+from orderslm.schema.order import HandoffReason, HandoffTicket, OrderRecord, Quote, ToolResult
+from orderslm.schema.routing import Urgency
 
 
 @runtime_checkable
@@ -29,7 +29,7 @@ class BusinessTools(Protocol):
 
 @runtime_checkable
 class PricingEngine(Protocol):
-    """Deterministic: menu + proposal -> Quote. Implemented in M1 (shoproute.core.pricing).
+    """Deterministic: menu + proposal -> Quote. Implemented in M1 (orderslm.core.pricing).
 
     Returns ToolErr (e.g. UNMATCHED_ITEM, MISSING_VARIANT, UNKNOWN_MODIFIER,
     UNAVAILABLE) when the proposal can't be priced yet; never guesses.

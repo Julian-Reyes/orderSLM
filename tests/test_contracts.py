@@ -2,14 +2,14 @@
 
 import pytest
 
-from shoproute.domain.clock import fixed_clock
-from shoproute.interfaces.decision import DecisionProvider
-from shoproute.interfaces.extractor import ExtractionRequest, OrderExtractor
-from shoproute.interfaces.tools import BusinessTools
-from shoproute.mocks.decision import ScriptedDecisionProvider, router_answers
-from shoproute.mocks.extractor import ScriptedExtractor
-from shoproute.mocks.tools import InMemoryBusinessTools
-from shoproute.paths import UNSEAL_ENV, SealedSplitError, test_split_dir
+from orderslm.domain.clock import fixed_clock
+from orderslm.interfaces.decision import DecisionProvider
+from orderslm.interfaces.extractor import ExtractionRequest, OrderExtractor
+from orderslm.interfaces.tools import BusinessTools
+from orderslm.mocks.decision import ScriptedDecisionProvider, router_answers
+from orderslm.mocks.extractor import ScriptedExtractor
+from orderslm.mocks.tools import InMemoryBusinessTools
+from orderslm.paths import UNSEAL_ENV, SealedSplitError, test_split_dir
 
 
 def test_mocks_implement_the_protocols():
@@ -52,7 +52,7 @@ def test_invalid_model_output_is_kept_not_raised(raw, request_for):
 
 def test_scripted_provider_records_and_exhausts():
     p = ScriptedDecisionProvider([router_answers("SMALL_TALK"), RuntimeError("provider down")])
-    from shoproute.interfaces.decision import DecisionRequest
+    from orderslm.interfaces.decision import DecisionRequest
 
     req = DecisionRequest(
         request_id="r1",
@@ -91,7 +91,7 @@ def test_no_third_party_dataset_is_tracked_by_git():
     """PIZZA is CC-BY-NC-4.0 (no redistribution): only scripts may be committed, never data/external/."""
     import subprocess
 
-    from shoproute.paths import ROOT
+    from orderslm.paths import ROOT
 
     tracked = subprocess.run(
         ["git", "ls-files", "data/external"], cwd=ROOT, capture_output=True, text=True, check=True
