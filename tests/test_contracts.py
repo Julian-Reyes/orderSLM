@@ -97,3 +97,19 @@ def test_no_third_party_dataset_is_tracked_by_git():
     ).stdout
     assert tracked == ""
     assert "data/external/" in (ROOT / ".gitignore").read_text()
+
+
+def test_secrets_and_local_files_are_ignored_but_env_example_is_tracked():
+    import subprocess
+
+    from orderslm.paths import ROOT
+
+    def ignored(path: str) -> bool:
+        return subprocess.run(["git", "check-ignore", "-q", path], cwd=ROOT).returncode == 0
+
+    for path in (".env", ".env.local", ".env.production", ".venv/bin/python", "data/external/pizza/x.json"):
+        assert ignored(path), path
+    assert not ignored(".env.example")
+    tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+    assert ".env.example" in tracked.split()
+    assert not [f for f in tracked.split() if f.startswith(".env") and f != ".env.example"]
