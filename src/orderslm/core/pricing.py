@@ -166,7 +166,14 @@ class DeterministicPricing:
         ]
         if not proposal.items:
             issues.append(PricingIssue("NO_ITEMS", None, "the order has no items yet"))
-        lines = [ql for line in proposal.items if (ql := _price_line(menu, line, issues)) is not None]
+        # Lines check_catalog rejected (e.g. an unknown modifier id) are not priced: an invented id must
+        # come back as a ToolErr, never reach modifier_price.
+        rejected = {i.line_id for i in issues}
+        lines = [
+            ql
+            for line in proposal.items
+            if line.line_id not in rejected and (ql := _price_line(menu, line, issues)) is not None
+        ]
         if issues:
             return _err(issues)
 

@@ -192,5 +192,25 @@ def test_two_crusts_is_an_error_not_a_guess():
     assert codes(HM, o) == ["EXCLUSIVE_GROUP_CONFLICT"]
 
 
+def test_unknown_modifier_is_an_error_not_a_crash():
+    # a model proposing an id that isn't on the menu must get a ToolErr back, never an exception
+    o = order(line("L1", "cheese_pizza", variant="medium", mods=[("add", "truffle_oil")]))
+    assert codes(HM, o) == ["UNKNOWN_MODIFIER"]
+
+
+def test_unknown_modifier_on_a_half_is_an_error_not_a_crash():
+    bad = line("x", mods=[("add", "truffle_oil")])["modifications"][0]
+    halves = [{"menu_item_id": "cheese_pizza", "modifications": [bad]}, {"menu_item_id": "pepperoni_pizza"}]
+    assert codes(HM, order(line("L1", halves=halves, variant="large"))) == ["UNKNOWN_MODIFIER"]
+
+
+def test_a_rejected_line_does_not_hide_problems_on_other_lines():
+    o = order(
+        line("L1", "cheese_pizza", variant="medium", mods=[("add", "truffle_oil")]),
+        line("L2", "pepperoni_pizza"),
+    )
+    assert codes(HM, o) == ["UNKNOWN_MODIFIER", "MISSING_VARIANT"]
+
+
 def test_modifier_not_allowed_on_item():
     assert codes(CP, order(line("L1", "coke", mods=[("add", "bacon")]))) == ["MODIFIER_NOT_ALLOWED"]

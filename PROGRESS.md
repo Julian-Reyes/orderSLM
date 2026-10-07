@@ -98,6 +98,11 @@ changed   src/orderslm/schema/{common,menu,extraction,order}.py  src/orderslm/{c
    by the M2 script from a fixed-seed sample of ~200 test orders plus distractors (~30–40 toppings), used
    only for the PIZZA evaluation. Orders are never filtered to fit a menu.
 
+**Bug fixed after M1** (found while trimming Halfmoon): `DeterministicPricing.quote` priced lines that
+`check_catalog` had already rejected, so a proposal with an unknown modifier id raised `AssertionError`
+instead of returning a `ToolErr`. Rejected lines are now skipped; 3 regression tests (whole item, half,
+other lines still reported). 221 tests.
+
 Still open from M1: **"w oat milk" on a latte** is annotated as a substitute of the included milk (guide
 updated); the rules baseline records it as an add, which prices the same.
 
