@@ -5,11 +5,11 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 
 | Contract | Version | File |
 |---|---|---|
-| Extraction output (model proposal) | `extraction@0.1` | `schema/extraction.py` |
+| Extraction output (model proposal) | `extraction@0.2` | `schema/extraction.py` |
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
 | Conversation | `conversation@0.1` | `schema/conversation.py` |
-| Menu catalog | `menu@0.2` | `schema/menu.py` |
+| Menu catalog | `menu@0.3` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
 
@@ -30,7 +30,10 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 6. **Evidence for everything stated.** Each item and each provided field cites `{message_index, quote}`;
    `orderslm.checks` verifies the quote is in that message (case/whitespace-insensitive) and every id is in the menu.
 
-## Extraction output (`extraction@0.1`)
+## Extraction output (`extraction@0.2`)
+
+0.2 (M1) added `Modification.amount` (`normal | extra | light`), needed for "extra cheese" / "light on the
+sauce" and for the PIZZA dataset's EXTRA/LIGHT qualifiers.
 
 **Input** (`ExtractionRequest`): menu catalog + conversation (customer and business messages, timestamped)
 + current draft (`ExtractionOutput | null`) + prompt version.
@@ -43,7 +46,7 @@ see PROGRESS.md open question 1.)
 
 ```jsonc
 {
-  "schema_version": "extraction@0.1",
+  "schema_version": "extraction@0.2",
   "items": [{
     "line_id": "L2",                      // stable within the conversation
     "menu_item_id": "cheeseburger",       // exactly one of menu_item_id | unmatched_text | halves
@@ -51,7 +54,7 @@ see PROGRESS.md open question 1.)
     "halves": null,                       // half-and-half: two {menu_item_id, modifications}
     "quantity": 1,                        // 1-99, or null if stated but unclear ("some wings")
     "variant_id": null,                   // null = not stated (catalog default applies if any)
-    "modifications": [{"kind": "remove", "modifier_id": "no_onion", "raw_text": "no onions"}],
+    "modifications": [{"kind": "remove", "modifier_id": "onion", "amount": "normal", "raw_text": "no onions"}],
     "combo_selections": [],               // [{slot_id, menu_item_id, variant_id?}]
     "notes": null,
     "evidence": [{"message_index": 0, "quote": "2 cheeseburgers"},
@@ -94,12 +97,16 @@ required for every non-`unknown` value.
 - Pickup ⇒ address `not_applicable`; delivery/unknown ⇒ address is not `not_applicable`.
 - `normalized_local` is strict `HH:MM`, only for `provided` + `clock_time`.
 - `change_for_cents` only for cash. `customer_claims_paid` records a claim; there is no "paid" field in model output.
-- `replacement_modifier_id` only for `substitute` modifications.
+- `replacement_modifier_id` only for `substitute` modifications; `amount` other than `normal` only for `add`.
+- Modification meaning: `remove` an ingredient ("no onions"); `add` an add-on ("add bacon") or, with `extra`/`light`,
+  change the amount of any ingredient ("extra cheese", "light sauce"); `substitute` swaps one modifier for another
+  ("oat milk instead of whole"). Pricing of each case: docs/PRICING.md.
 
 ### Checks beyond the schema (`orderslm.checks`)
 
 `check_evidence`: every quote occurs in the cited message. `check_catalog`: items, variants, modifiers
-(allowed on that item, right kind), combo slots/choices and splittable halves exist in the menu. Used on gold
+(allowed on that item; at most one per exclusive group, e.g. one crust), combo slots/choices and splittable
+halves exist in the menu. Used on gold
 annotations (tests), teacher labels (drop + log the drop rate, M4), and model outputs (hallucination rate, M6).
 
 ### `missing_or_ambiguous` fields
@@ -128,15 +135,20 @@ Adapters (M7) map this to each provider's documented API after verifying it.
 `QuoteLine`, `Quote` (arithmetic-checked), `OrderRecord` (`status`, `payment_confirmed` set only by
 staff/payment systems), `HandoffTicket`, and `ToolOk[T] | ToolErr` (`error.code` is `UPPER_SNAKE`).
 Order statuses: `draft → awaiting_confirmation → new → preparing → ready → completed`, or `cancelled`.
-Allowed transitions are implemented in M1.
+Allowed transitions: `core/state.py` (customer changes to a placed order go to staff).
 
-## Menu catalog (`menu@0.2`)
+## Menu catalog (`menu@0.3`)
 
-Business id, currency, timezone, hours, delivery policy (`fee_cents`, `min_order_cents`), modifiers
-(`add` with price, `remove` free), items with aliases, base price, variants (price deltas, optional default),
-allowed modifiers, `splittable`, combo slots. `held_out: true` marks the test-only menu.
-`name_required_for_pickup` (added in 0.2) makes a missing name on a pickup order a `customer_name / missing` entry. References are
-validated (unknown modifier or combo choice ids fail). Samples: `data/samples/menus/`.
+Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents`, `min_order_cents`),
+`name_required_for_pickup` (0.2), `exclusive_groups` (0.3), modifiers, and items.
+- **Modifiers** (0.3) are ingredients/add-ons with a `group` (topping, sauce, crust, milk…), `aliases` and a
+  `price_cents` for adding one portion. They no longer have an add/remove kind.
+- **Items**: aliases, base price, variants (price delta, aliases, optional default), `ingredient_ids`
+  (included: removable, adjustable), `addon_ids` (may be added), `splittable`, combo slots, `available`.
+- `held_out: true` marks the test-only menu, which lives in `data/menus/held_out/` and is loaded only with
+  `load_menus(include_held_out=True)`.
+References are validated (unknown modifier ids, combo choices, unused exclusive groups fail). The menus
+themselves: docs/MENUS.md.
 
 ## Annotated conversation
 

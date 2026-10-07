@@ -48,8 +48,16 @@ def _check_slot(state: SlotState, has_value: bool, evidence: list[Evidence], whe
 
 class ModificationKind(StrEnum):
     remove = "remove"  # "no onions"
-    add = "add"  # "extra bacon"
-    substitute = "substitute"  # "mayo instead of ketchup"
+    add = "add"  # "add bacon", "extra cheese", "go light on the sauce"
+    substitute = "substitute"  # "oat milk instead of regular"
+
+
+class Amount(StrEnum):
+    """How much of an added ingredient (extraction@0.2). Covers PIZZA's EXTRA/LIGHT qualifiers."""
+
+    normal = "normal"
+    extra = "extra"  # "extra cheese", "lots of", "heavy on"
+    light = "light"  # "light on the sauce", "just a little"
 
 
 class Modification(Strict):
@@ -60,12 +68,15 @@ class Modification(Strict):
         description="catalog modifier; null if the request is not on the menu",
     )
     replacement_modifier_id: str | None = Field(default=None, pattern=ID_PATTERN)
+    amount: Amount = Amount.normal
     raw_text: str = Field(min_length=1, description="the request as the customer wrote it")
 
     @model_validator(mode="after")
     def _replacement(self) -> "Modification":
         if self.replacement_modifier_id is not None and self.kind is not ModificationKind.substitute:
             raise ValueError("replacement_modifier_id is only for kind 'substitute'")
+        if self.amount is not Amount.normal and self.kind is not ModificationKind.add:
+            raise ValueError("amount extra/light is only for kind 'add'")
         return self
 
 
@@ -297,7 +308,7 @@ class MissingInfo(Strict):
 
 
 class ExtractionOutput(Strict):
-    schema_version: Literal["extraction@0.1"] = EXTRACTION_SCHEMA_VERSION
+    schema_version: Literal["extraction@0.2"] = EXTRACTION_SCHEMA_VERSION
     items: list[ItemProposal] = Field(default_factory=list)
     fulfillment: Fulfillment
     address: Address
@@ -336,6 +347,18 @@ class ExtractionOutput(Strict):
             ):
                 raise ValueError(f"{item.line_id}: off-menu item must be listed as item_menu_match/off_menu")
         return self
+
+    @classmethod
+    def empty(cls) -> "ExtractionOutput":
+        """The order before anything has been said: no items, every field unknown/not mentioned."""
+        return cls(
+            fulfillment=Fulfillment(
+                method=FulfillmentMethod.unknown, requested_time=RequestedTime(state=SlotState.not_mentioned)
+            ),
+            address=Address(state=SlotState.not_mentioned),
+            payment=Payment(method=PaymentMethod.unknown),
+            customer_name=CustomerName(state=SlotState.not_mentioned),
+        )
 
     def iter_evidence(self) -> Iterator[tuple[str, Evidence]]:
         """Every evidence entry with a readable path, for the consistency checks."""

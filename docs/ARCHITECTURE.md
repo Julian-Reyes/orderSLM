@@ -17,7 +17,7 @@ customer message(s) + conversation context + draft order state
         │        ▼
         │   checks.py: evidence quotes exist, ids exist in menu  ──► reject/flag hallucinations
         │        ▼
-        │   Deterministic core (M1): menu matching, PricingEngine.quote → Quote (verified, integer cents),
+        │   Deterministic core: menu matching, PricingEngine.quote → Quote (verified, integer cents),
         │   order state transitions, diff vs. previous draft (the patch shown to the business)
         │
         └─ other label ──► BusinessTools: lookup_order / order_status / request_handoff → ToolOk | ToolErr
@@ -54,8 +54,9 @@ orderslm/
 │   ├── router.py                 DecisionRequest builder + response parser
 │   ├── checks.py                 evidence + catalog grounding checks
 │   ├── paths.py                  data locations, sealed test-split guard
-│   ├── core/                     (M1) pricing.py, matching.py, state.py, diff.py, replies.py
-│   ├── baselines/                (M1) rules extractor (regex + fuzzy menu match), keyword router
+│   ├── core/                     pricing.py, missing.py, diff.py, state.py, replies.py, matching.py
+│   ├── baselines/                rules_extractor.py (regex + menu matching), rules_router.py (keywords)
+│   ├── menus.py                  load_menus (held-out excluded by default), menu_version
 │   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
@@ -65,8 +66,8 @@ orderslm/
 │   ├── tracing.py                (M6/M8) step traces to JSONL/SQLite
 │   └── app/                      (M2) FastAPI app: annotation API first; chat simulator, tickets, comparison in M8
 ├── data/
-│   ├── samples/                  M0 examples: menus/ + conversations/ (split "sample", never scored)
-│   ├── menus/                    (M1) 3 business menus + 1 held-out menu
+│   ├── samples/                  conversations/: annotated examples (split "sample": few-shot only, never evaluated)
+│   ├── menus/                    3 business menus, held_out/ (1 test-only menu)
 │   ├── dev/                      (M2) ~80 human-written, labeled
 │   ├── test/                     (M2) ~200 human-written, SEALED (paths.test_split_dir guard)
 │   ├── synthetic/                (M4) pilot + bulk, with distribution logs
@@ -84,10 +85,10 @@ live ticket store. No Postgres.
 
 | Interface | File | Implementations |
 |---|---|---|
-| `DecisionProvider.decide(DecisionRequest) → DecisionResponse` | `interfaces/decision.py` | `ScriptedDecisionProvider` (M0); keyword baseline (M1); Julia-1, Jev, OpenAI Decisions adapters (M7) |
-| `OrderExtractor.extract(ExtractionRequest) → ExtractionResult` | `interfaces/extractor.py` | `ScriptedExtractor` (M0); rules baseline (M1); teacher API extractors (M3); local students (M5/M6) |
+| `DecisionProvider.decide(DecisionRequest) → DecisionResponse` | `interfaces/decision.py` | `ScriptedDecisionProvider` (M0); `KeywordDecisionProvider` (M1); Julia-1, Jev, OpenAI Decisions adapters (M7) |
+| `OrderExtractor.extract(ExtractionRequest) → ExtractionResult` | `interfaces/extractor.py` | `ScriptedExtractor` (M0); `RulesExtractor` (M1); teacher API extractors (M3); local students (M5/M6) |
 | `BusinessTools.lookup_order / order_status / request_handoff → ToolResult` | `interfaces/tools.py` | `InMemoryBusinessTools` (M0) |
-| `PricingEngine.quote(menu, proposal) → ToolResult[Quote]` | `interfaces/tools.py` | deterministic engine (M1) |
+| `PricingEngine.quote(menu, proposal) → ToolResult[Quote]` | `interfaces/tools.py` | `DeterministicPricing` (M1), docs/PRICING.md |
 
 Every model-backed extractor parses through `parse_model_output`, which never raises: invalid JSON is kept
 as `raw_text` + `error`, so JSON-validity rates come from saved outputs.
@@ -129,7 +130,7 @@ milestones exit with an error today. Anything that spends money prints an estima
 |---|---|---|
 | 1 | `make menus` | Validate `data/menus/*.json` (3 + held-out), print item/variant/modifier counts. |
 | 1 | `make test` | Pricing, matching, order-state, rules-baseline tests. |
-| 2 | `uv run python -m orderslm.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) and convert it to AnnotatedConversation drafts against the pizzeria menu. Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
+| 2 | `uv run python -m orderslm.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) sample the PIZZA test orders (fixed seed), generate the PIZZA benchmark catalog from them, and convert them against that catalog (all under `data/external/`). Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
 | 2 | `make annotate` | Local annotation tool (FastAPI + Vite/Preact) (writes AnnotatedConversation JSON; blind relabel mode for the 30-conversation self-consistency check). |
 | 2 | `uv run python -m orderslm.data.split --seal` | Lock dev/test, write counts per label/scenario, record test-file hashes. |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |

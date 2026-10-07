@@ -1,0 +1,528 @@
+{
+  "business_id": "lucky-lime",
+  "name": "Lucky Lime Taqueria",
+  "currency": "USD",
+  "timezone": "America/Denver",
+  "opens_at": "10:30",
+  "closes_at": "21:30",
+  "delivery": {
+    "available": true,
+    "fee_cents": 349,
+    "min_order_cents": 2000
+  },
+  "accepts_payment": [
+    "card",
+    "cash"
+  ],
+  "held_out": true,
+  "name_required_for_pickup": false,
+  "exclusive_groups": [
+    "tortilla"
+  ],
+  "modifiers": [
+    {
+      "id": "onion",
+      "name": "Onion",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": [
+        "onions"
+      ]
+    },
+    {
+      "id": "cilantro",
+      "name": "Cilantro",
+      "group": "herb",
+      "price_cents": 0,
+      "aliases": []
+    },
+    {
+      "id": "lettuce",
+      "name": "Lettuce",
+      "group": "veg",
+      "price_cents": 0,
+      "aliases": []
+    },
+    {
+      "id": "salsa_verde",
+      "name": "Salsa verde",
+      "group": "salsa",
+      "price_cents": 0,
+      "aliases": [
+        "green salsa",
+        "verde"
+      ]
+    },
+    {
+      "id": "salsa_roja",
+      "name": "Salsa roja",
+      "group": "salsa",
+      "price_cents": 0,
+      "aliases": [
+        "red salsa",
+        "roja"
+      ]
+    },
+    {
+      "id": "pico_de_gallo",
+      "name": "Pico de gallo",
+      "group": "salsa",
+      "price_cents": 50,
+      "aliases": [
+        "pico"
+      ]
+    },
+    {
+      "id": "guacamole",
+      "name": "Guacamole",
+      "group": "extra",
+      "price_cents": 175,
+      "aliases": [
+        "guac"
+      ]
+    },
+    {
+      "id": "queso_fresco",
+      "name": "Queso fresco",
+      "group": "cheese",
+      "price_cents": 75,
+      "aliases": [
+        "cheese",
+        "queso"
+      ]
+    },
+    {
+      "id": "sour_cream",
+      "name": "Sour cream",
+      "group": "extra",
+      "price_cents": 50,
+      "aliases": [
+        "crema"
+      ]
+    },
+    {
+      "id": "jalapenos",
+      "name": "Jalapeños",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": [
+        "jalapeno",
+        "jalapeño"
+      ]
+    },
+    {
+      "id": "rice",
+      "name": "Rice",
+      "group": "filling",
+      "price_cents": 50,
+      "aliases": []
+    },
+    {
+      "id": "black_beans",
+      "name": "Black beans",
+      "group": "filling",
+      "price_cents": 50,
+      "aliases": []
+    },
+    {
+      "id": "pinto_beans",
+      "name": "Pinto beans",
+      "group": "filling",
+      "price_cents": 50,
+      "aliases": [
+        "beans"
+      ]
+    },
+    {
+      "id": "corn_tortilla",
+      "name": "Corn tortilla",
+      "group": "tortilla",
+      "price_cents": 0,
+      "aliases": [
+        "corn"
+      ]
+    },
+    {
+      "id": "flour_tortilla",
+      "name": "Flour tortilla",
+      "group": "tortilla",
+      "price_cents": 0,
+      "aliases": [
+        "flour"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "taco",
+      "name": "Taco",
+      "category": "tacos",
+      "base_price_cents": 349,
+      "aliases": [
+        "tacos",
+        "street taco"
+      ],
+      "variants": [
+        {
+          "id": "carne_asada",
+          "name": "Carne asada",
+          "price_delta_cents": 100,
+          "aliases": [
+            "asada",
+            "steak",
+            "beef"
+          ]
+        },
+        {
+          "id": "al_pastor",
+          "name": "Al pastor",
+          "price_delta_cents": 0,
+          "aliases": [
+            "pastor",
+            "pork"
+          ]
+        },
+        {
+          "id": "pollo",
+          "name": "Pollo",
+          "price_delta_cents": 0,
+          "aliases": [
+            "chicken"
+          ]
+        },
+        {
+          "id": "carnitas",
+          "name": "Carnitas",
+          "price_delta_cents": 50,
+          "aliases": []
+        },
+        {
+          "id": "veggie",
+          "name": "Veggie",
+          "price_delta_cents": -50,
+          "aliases": [
+            "vegetarian",
+            "veg"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "onion",
+        "cilantro",
+        "salsa_verde",
+        "corn_tortilla"
+      ],
+      "addon_ids": [
+        "guacamole",
+        "queso_fresco",
+        "sour_cream",
+        "jalapenos",
+        "pico_de_gallo",
+        "salsa_roja",
+        "lettuce",
+        "flour_tortilla"
+      ]
+    },
+    {
+      "id": "burrito",
+      "name": "Burrito",
+      "category": "burritos",
+      "base_price_cents": 1099,
+      "aliases": [
+        "burritos",
+        "burro"
+      ],
+      "variants": [
+        {
+          "id": "carne_asada",
+          "name": "Carne asada",
+          "price_delta_cents": 100,
+          "aliases": [
+            "asada",
+            "steak",
+            "beef"
+          ]
+        },
+        {
+          "id": "al_pastor",
+          "name": "Al pastor",
+          "price_delta_cents": 0,
+          "aliases": [
+            "pastor",
+            "pork"
+          ]
+        },
+        {
+          "id": "pollo",
+          "name": "Pollo",
+          "price_delta_cents": 0,
+          "aliases": [
+            "chicken"
+          ]
+        },
+        {
+          "id": "carnitas",
+          "name": "Carnitas",
+          "price_delta_cents": 50,
+          "aliases": []
+        },
+        {
+          "id": "veggie",
+          "name": "Veggie",
+          "price_delta_cents": -50,
+          "aliases": [
+            "vegetarian",
+            "veg"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "rice",
+        "pinto_beans",
+        "queso_fresco",
+        "pico_de_gallo",
+        "flour_tortilla"
+      ],
+      "addon_ids": [
+        "guacamole",
+        "sour_cream",
+        "jalapenos",
+        "salsa_roja",
+        "salsa_verde",
+        "lettuce",
+        "corn_tortilla",
+        "onion",
+        "cilantro",
+        "black_beans"
+      ]
+    },
+    {
+      "id": "quesadilla",
+      "name": "Quesadilla",
+      "category": "mains",
+      "base_price_cents": 899,
+      "aliases": [
+        "quesa",
+        "quesadillas"
+      ],
+      "variants": [
+        {
+          "id": "cheese_only",
+          "name": "Cheese only",
+          "price_delta_cents": -200,
+          "aliases": [
+            "cheese",
+            "plain"
+          ]
+        },
+        {
+          "id": "pollo",
+          "name": "Pollo",
+          "price_delta_cents": 0,
+          "aliases": [
+            "chicken"
+          ]
+        },
+        {
+          "id": "carne_asada",
+          "name": "Carne asada",
+          "price_delta_cents": 100,
+          "aliases": [
+            "steak",
+            "asada"
+          ]
+        }
+      ],
+      "default_variant_id": "cheese_only",
+      "ingredient_ids": [
+        "queso_fresco",
+        "flour_tortilla"
+      ],
+      "addon_ids": [
+        "guacamole",
+        "sour_cream",
+        "jalapenos",
+        "pico_de_gallo"
+      ]
+    },
+    {
+      "id": "nachos",
+      "name": "Nachos",
+      "category": "mains",
+      "base_price_cents": 899,
+      "aliases": [
+        "nacho"
+      ],
+      "variants": [
+        {
+          "id": "regular",
+          "name": "Regular",
+          "price_delta_cents": 0,
+          "aliases": [
+            "regular"
+          ]
+        },
+        {
+          "id": "grande",
+          "name": "Grande",
+          "price_delta_cents": 400,
+          "aliases": [
+            "grande",
+            "large",
+            "big"
+          ]
+        }
+      ],
+      "default_variant_id": "regular",
+      "ingredient_ids": [
+        "queso_fresco",
+        "pinto_beans",
+        "pico_de_gallo",
+        "jalapenos",
+        "sour_cream"
+      ],
+      "addon_ids": [
+        "guacamole",
+        "black_beans"
+      ]
+    },
+    {
+      "id": "chips_salsa",
+      "name": "Chips & Salsa",
+      "category": "sides",
+      "base_price_cents": 399,
+      "aliases": [
+        "chips and salsa",
+        "chips"
+      ]
+    },
+    {
+      "id": "chips_guac",
+      "name": "Chips & Guac",
+      "category": "sides",
+      "base_price_cents": 649,
+      "aliases": [
+        "chips and guac",
+        "chips and guacamole"
+      ]
+    },
+    {
+      "id": "horchata",
+      "name": "Horchata",
+      "category": "drinks",
+      "base_price_cents": 349,
+      "aliases": [],
+      "variants": [
+        {
+          "id": "small",
+          "name": "Small",
+          "price_delta_cents": 0,
+          "aliases": [
+            "small",
+            "regular"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large",
+          "price_delta_cents": 150,
+          "aliases": [
+            "large",
+            "big"
+          ]
+        }
+      ],
+      "default_variant_id": "small"
+    },
+    {
+      "id": "jarritos",
+      "name": "Jarritos",
+      "category": "drinks",
+      "base_price_cents": 299,
+      "aliases": [
+        "jarrito"
+      ],
+      "variants": [
+        {
+          "id": "mandarin",
+          "name": "Mandarin",
+          "price_delta_cents": 0,
+          "aliases": [
+            "mandarin",
+            "orange"
+          ]
+        },
+        {
+          "id": "lime",
+          "name": "Lime",
+          "price_delta_cents": 0,
+          "aliases": []
+        },
+        {
+          "id": "tamarind",
+          "name": "Tamarind",
+          "price_delta_cents": 0,
+          "aliases": []
+        },
+        {
+          "id": "pineapple",
+          "name": "Pineapple",
+          "price_delta_cents": 0,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "mexican_coke",
+      "name": "Mexican Coke",
+      "category": "drinks",
+      "base_price_cents": 349,
+      "aliases": [
+        "coke",
+        "glass bottle coke"
+      ]
+    },
+    {
+      "id": "two_taco_plate",
+      "name": "Two-Taco Plate",
+      "category": "combos",
+      "base_price_cents": 1299,
+      "aliases": [
+        "taco plate",
+        "plate"
+      ],
+      "combo_slots": [
+        {
+          "id": "taco_1",
+          "name": "First taco",
+          "choices": [
+            "taco"
+          ]
+        },
+        {
+          "id": "taco_2",
+          "name": "Second taco",
+          "choices": [
+            "taco"
+          ]
+        },
+        {
+          "id": "side",
+          "name": "Side",
+          "choices": [
+            "chips_salsa"
+          ]
+        },
+        {
+          "id": "drink",
+          "name": "Drink",
+          "choices": [
+            "horchata",
+            "jarritos",
+            "mexican_coke"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -30,6 +30,7 @@ def test_round_trips_through_json(raw_extraction):
 
 
 PRICE_WORDS = re.compile(r"price|total|subtotal|fee|amount|cost", re.I)
+NOT_MONEY = {"amount"}  # Modification.amount is ingredient quantity (normal/extra/light), an enum, not money
 
 
 def _all_property_names(schema: dict) -> set[str]:
@@ -42,7 +43,9 @@ def _all_property_names(schema: dict) -> set[str]:
 def test_extraction_schema_has_no_price_fields():
     names = _all_property_names(ExtractionOutput.model_json_schema())
     assert names, "schema should have properties"
-    assert not [n for n in names if PRICE_WORDS.search(n)]
+    assert not [n for n in names - NOT_MONEY if PRICE_WORDS.search(n)]
+    amount = ExtractionOutput.model_json_schema()["$defs"]["Modification"]["properties"]["amount"]
+    assert "$ref" in amount and amount["$ref"].endswith("/Amount")  # stays an enum, never a number
 
 
 @pytest.mark.parametrize("field", ["total_cents", "price", "subtotal"])

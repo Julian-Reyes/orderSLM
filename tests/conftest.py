@@ -3,11 +3,11 @@ from pathlib import Path
 
 import pytest
 
+from orderslm.menus import load_menus
 from orderslm.paths import SAMPLES
 from orderslm.schema import AnnotatedConversation, MenuCatalog
 
 SAMPLE_FILES = sorted((SAMPLES / "conversations").glob("*.json"))
-MENU_FILES = sorted((SAMPLES / "menus").glob("*.json"))
 
 
 def load_json(path: Path) -> dict:
@@ -16,11 +16,8 @@ def load_json(path: Path) -> dict:
 
 @pytest.fixture(scope="session")
 def menus() -> dict[str, MenuCatalog]:
-    out = {}
-    for p in MENU_FILES:
-        m = MenuCatalog.model_validate(load_json(p))
-        out[m.business_id] = m
-    return out
+    """The three business menus (not the held-out one)."""
+    return load_menus()
 
 
 @pytest.fixture(scope="session")

@@ -1,0 +1,138 @@
+{
+  "conversation": {
+    "id": "sample-011",
+    "business_id": "morning-crumb",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i grab a large latte w oat milk and a blueberry muffin",
+        "sent_at": "2026-10-07T07:52:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup at 8:15",
+        "sent_at": "2026-10-07T07:52:12-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "schema_version": "extraction@0.2",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large latte w oat milk"
+          }
+        ],
+        "menu_item_id": "latte",
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "raw_text": "w oat milk",
+            "replacement_modifier_id": "oat_milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a blueberry muffin"
+          }
+        ],
+        "menu_item_id": "muffin",
+        "variant_id": "blueberry"
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup at 8:15"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 8:15",
+        "normalized_local": "08:15",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "pickup at 8:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Can I get a name for the order, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m1-sample",
+  "annotation_notes": "Morning Crumb requires a name for pickup. Oat milk replaces the latte's included whole milk (substitute). 8:15 is 08:15: the café closes at 15:00."
+}

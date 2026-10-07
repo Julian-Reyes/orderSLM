@@ -29,7 +29,10 @@ class OrderStatus(StrEnum):
 
 class QuoteLine(Strict):
     line_id: str
-    menu_item_id: str = Field(pattern=ID_PATTERN)
+    menu_item_id: str = Field(
+        pattern=ID_PATTERN, description="for half-and-half: the half that sets the price"
+    )
+    half_menu_item_ids: list[str] | None = Field(default=None, min_length=2, max_length=2)
     display_name: str
     quantity: int = Field(ge=1, le=99)
     variant_id: str | None = None

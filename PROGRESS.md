@@ -4,23 +4,13 @@ Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; r
 
 _Last updated 2026-10-07._
 
-## Rename (2026-10-07)
-
-The project was renamed **ShopRoute → OrderSLM** (Julian's request) after the two M0 commits: package
-`src/shoproute` → `src/orderslm` (moved with `git mv`, so history follows), spec
-`shoproute-project-plan.md` → `orderslm-project-plan.md`, env var `SHOPROUTE_UNSEAL_TEST` →
-`ORDERSLM_UNSEAL_TEST`, and every mention in docs, Makefile, CLAUDE.md, tests and `pyproject.toml`
-("OrderSLM" in prose, "orderslm" for package/repo names). `uv.lock` regenerated. Earlier commit
-messages keep the old name. Not renamed: the local checkout folder (`~/Documents/GitHub/shoproute`);
-rename it and any GitHub repo yourself if wanted.
-
 ## Milestones
 
 | # | Work | Status |
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
-| 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | Next |
-| 2 | Annotation tool; dev + sealed test sets | Not started |
+| 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
+| 2 | Annotation tool (FastAPI + Vite/Preact); PIZZA conversion script; dev + sealed test sets | Next |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling | Not started |
 | 5 | Student bake-off | Not started |
@@ -28,100 +18,128 @@ rename it and any GitHub repo yourself if wanted.
 | 7 | Router benchmark | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.00** (docs/COSTS.md). No API calls, model downloads, training or deployment in M0.
+**Spend to date: $0.00** (docs/COSTS.md). No API calls, model downloads, training or deployment so far.
+No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
 
-## M0 summary
+## Rename (2026-10-07)
 
-- **AgentDesk inspected** at commit `c24529c` (read-only shallow clone in a scratch directory, not in this
-  repo, not modified). All 26 paths from spec §15 exist. Mapping with Python equivalents and status:
-  `docs/AGENTDESK_REUSE.md`. Correction to the spec: the winner rule is `pickWinner` in
-  `evals/runner/comparison-sets.ts`; `wilson` is in `evals/judge/agreement.ts`.
-- **Ported now:** integer cents, injected clock, `ToolOk | ToolErr` results, scripted fake providers,
-  working rules + pre-commit hook. **Planned:** LLM client/cache/throttle/estimate/run store (M3), stats
-  with paired tests (M3), judge agreement (M6), tracing (M6/M8), static export + frontend logic (M8).
-- **Contracts** (`src/orderslm/schema/`, versioned): `extraction@0.1` (snapshot proposal with evidence,
-  explicit slot states, no price fields, `extra="forbid"`), `router@0.1` + `taxonomy@0.1` (15 labels,
-  secondary, urgency, context flags; descriptions sent verbatim to every provider), conversation, menu,
-  verified `Quote`/`OrderRecord`/tool results (arithmetic-checked integer cents).
-- **Interfaces + mocks:** `DecisionProvider` (provider-neutral choice/score/boolean questions, option-limit
-  check, response validation), `OrderExtractor` (single `parse_model_output` path that never raises),
-  `BusinessTools` and `PricingEngine` protocols; `ScriptedDecisionProvider`, `ScriptedExtractor`,
-  `InMemoryBusinessTools`. `router.py` builds identical requests for all providers and reports any repair
-  it applies to an answer.
-- **Grounding checks** (`checks.py`): evidence quotes exist in the cited message; items, variants,
-  modifiers, combo choices and halves exist in the menu.
-- **Samples:** 2 sample menus, 10 annotated English conversations covering multi-message orders,
-  corrections (incl. after confirmation), missing info, two-request messages, off-menu, combo,
-  half-and-half, contextual yes, status question, order problem + refund + human, payment claim,
-  cancellation, out-of-scope. Split `sample`: examples only, never scored.
-- **Sealed test guard:** `paths.test_split_dir()` refuses unless `ORDERSLM_UNSEAL_TEST` is set.
+ShopRoute → **OrderSLM** (Julian's request), committed as `a2bf6cb` after the two M0 commits:
+`src/shoproute` → `src/orderslm` (`git mv`, history follows), spec → `orderslm-project-plan.md`, env var
+→ `ORDERSLM_UNSEAL_TEST`, every mention in docs, Makefile, CLAUDE.md, tests, `pyproject.toml`; `uv.lock`
+regenerated. Earlier commit messages keep the old name. Julian renamed the local folder to
+`~/Documents/GitHub/orderslm` and recreated `.venv`; GitHub remote: `origin` = Julian-Reyes/orderSLM (private).
 
-## Files added
+## M1 summary
+
+- **Menus** (`data/menus/`, docs/MENUS.md): Corner Patty (burgers) and Halfmoon Pizza from the M0 samples,
+  Morning Crumb Café (new; pickup only; **name required for pickup**), and the new held-out Lucky Lime
+  Taqueria in `data/menus/held_out/`. `load_menus()` excludes the held-out menu unless asked
+  (`include_held_out=True`); `make menus` validates and prints each menu's content hash.
+- **Halfmoon is a realistic pizzeria** (M1 review, item 4): 8 pizzas × 5 sizes, 23 toppings, 3 sauces,
+  4 crusts, 2 sides, 6 drinks. PIZZA evaluation gets its own benchmark catalog, generated by the M2 script
+  into `data/external/` (docs/MENUS.md). No PIZZA-derived file is committed (tested). PIZZA's license
+  confirmed CC-BY-NC-4.0 from the dataset's LICENSE/README.
+- **Contract changes** (samples and docs updated):
+  - `extraction@0.2`: `Modification.amount` = `normal | extra | light` ("extra cheese", "light on the sauce").
+  - `menu@0.3`: modifiers are ingredients/add-ons (`ingredient_ids`, `addon_ids` per item) instead of
+    add/remove kinds (every topping would otherwise need both an add and a remove entry); variant and modifier aliases;
+    `exclusive_groups` (one crust, one milk). Pizza items are now `*_pizza` ids named "… Pizza".
+- **Deterministic core** (`src/orderslm/core/`):
+  - `pricing.py`: `DeterministicPricing` → verified `Quote` or a `ToolErr` listing every problem; rules in
+    docs/PRICING.md (half-and-half = dearer half + half-priced toppings, rounded up; extra = one more portion).
+  - `missing.py`: the annotation guide's "what counts as missing" as code (all 10 sample golds agree with it).
+  - `diff.py`: snapshot → patch for the business (`ExtractionOutput.empty()` added for the first turn).
+  - `state.py`: status transitions; customer changes to a placed order → `NEEDS_STAFF`; a "yes" only
+    confirms when a summary was sent and nothing changed.
+  - `replies.py`: English templates keyed by language; amounts only from the Quote; a model's clarification
+    question is replaced by a template if it states any amount.
+  - `matching.py`: menu lexicon with span-preserving, plural- and typo-tolerant longest-match lookup.
+- **Rules baselines** (`src/orderslm/baselines/`): `RulesExtractor` (an `OrderExtractor`; corrections,
+  half-and-half, toppings, amounts, combos, contextual yes, times normalized against opening hours,
+  addresses, payment/claims/change, names; always schema-valid and grounded) and `KeywordDecisionProvider`
+  (a `DecisionProvider` reading the same `DecisionRequest` the hosted providers get, via the new
+  `router.parse_input`). `render_input` now collapses whitespace per message → `router-prompt@0.2`.
+- **Samples:** updated to the new ids; added sample-011 (café, name required, milk substitution, 08:15) and
+  sample-012 (pizza with crust + light/extra amounts, canned drinks). Baseline tests use their own
+  invented conversations, never the samples.
+
+## M1 files
 
 ```
-pyproject.toml  uv.lock  Makefile  README.md  CLAUDE.md  PROGRESS.md  .gitignore  .env.example
-.githooks/pre-commit
-docs/  AGENTDESK_REUSE.md  SCHEMA.md  TAXONOMY.md  ARCHITECTURE.md  ANNOTATION_GUIDE.md  COSTS.md
-src/orderslm/  __init__.py  router.py  checks.py  paths.py
-  schema/       __init__.py common.py conversation.py menu.py extraction.py routing.py order.py annotation.py
-  domain/       __init__.py money.py clock.py
-  interfaces/   __init__.py decision.py extractor.py tools.py
-  mocks/        __init__.py decision.py extractor.py tools.py
-data/samples/menus/          corner-patty.json  halfmoon-pizza.json
-data/samples/conversations/  sample-001.json … sample-010.json
-tests/  __init__.py conftest.py test_extraction_schema.py test_samples.py test_taxonomy_and_router.py
-        test_verified_results.py test_contracts.py test_docs_sync.py
+added     data/menus/{corner-patty,halfmoon-pizza,morning-crumb}.json  data/menus/held_out/lucky-lime.json
+          data/samples/conversations/sample-011.json  sample-012.json
+          src/orderslm/menus.py  src/orderslm/core/{__init__,pricing,missing,diff,state,replies,matching}.py
+          src/orderslm/baselines/{__init__,rules_extractor,rules_router}.py
+          docs/PRICING.md  docs/MENUS.md
+          tests/builders.py  tests/{test_menus,test_pricing,test_order_logic,test_replies,test_baselines}.py
+removed   data/samples/menus/ (now data/menus/)
+changed   src/orderslm/schema/{common,menu,extraction,order}.py  src/orderslm/{checks,router}.py
+          data/samples/conversations/sample-001…010.json  Makefile (make menus)
+          docs/{SCHEMA,ANNOTATION_GUIDE,ARCHITECTURE}.md  tests/{conftest,test_samples,test_contracts,
+          test_extraction_schema,test_docs_sync}.py  PROGRESS.md
 ```
-(`orderslm-project-plan.md` was already present and is committed unchanged.)
 
-## Checks run
+## Checks run (M1)
 
-- `make check` → `ruff check` clean, `ruff format --check` clean, **pytest: 102 passed** (after recording
-  the decisions below; 100 at the M0 commit).
-- Toolchain: Python 3.12.15 (uv-managed), pydantic 2.13.5, pytest 9.1.1, ruff 0.16.10, uv 0.12.23.
-- Tests cover: schema rules (identity, slots, evidence, clarification, pickup/address, cash change,
-  cancellation), no price fields + extra-field rejection on every contract, language-neutral enum codes,
-  quote arithmetic and strict cents, tool results and mock tools, protocol conformance, invalid model output
-  kept not raised, router request limits/identical wording/parsing/abstention/repairs, every sample valid
-  and grounded, grounding checks catch each error type, scenario coverage, taxonomy doc ↔ code sync,
-  sealed test guard.
+- `make check`: `ruff check` clean, `ruff format --check` clean, **pytest: 227 passed**.
+- `make menus`: all four menus validate (Halfmoon: 16 items, 54 variants, 30 modifiers).
+- Pricing tests assert hand-worked amounts (e.g. sample-005-style half-and-half: $18.99 + 2 × $5.99 +
+  $2.99 fee = $33.96); the business messages in samples 006/009 ($14.48, $19.98) match the engine.
 
-## Environment notes
+## M1 review (Julian, 2026-10-07)
 
-- The machine had only Python 3.9. `brew install uv` started compiling cmake from source, so it was
-  stopped (nothing was installed by it). uv 0.12.23 was installed from its official GitHub release
-  (sha256 verified) to `~/.local/bin`; it manages Python 3.12 and the project venv (`.venv`).
-- `requires-python >=3.12` (Julia-1 needs ≥ 3.11; 3.12 for `type` aliases).
+1. Pricing rules approved as documented (docs/PRICING.md).
+2. PIZZA drink-size mappings: review during the M2 conversion with real examples.
+3. No PIZZA-derived file is ever committed: the coverage map is generated by the M2 script under
+   `data/external/`. The unpushed local history was rewritten so neither `pizza-coverage.json` nor the
+   PIZZA-catalog version of Halfmoon (85 toppings, 23 styles, 22 drinks, copied from the dataset's
+   catalogs) appears in any commit.
+4. Menus split: Halfmoon is realistic (chat data + demo); a separate PIZZA benchmark catalog is generated
+   by the M2 script from a fixed-seed sample of ~200 test orders plus distractors (~30–40 toppings), used
+   only for the PIZZA evaluation. Orders are never filtered to fit a menu.
+
+Still open from M1: **"w oat milk" on a latte** is annotated as a substitute of the included milk (guide
+updated); the rules baseline records it as an add, which prices the same.
+
+Workflow: one branch per milestone, merged into main when done; push after each merge, **only with
+Julian's permission each time**.
 
 ## Decisions (Julian, 2026-10-07, answers to the M0 open questions)
 
-1. **Snapshot output approved:** the model outputs the full order; code derives the patch.
-2. **Menus:** Corner Patty and Halfmoon Pizza become 2 of the 3 real menus. The pizzeria menu must cover
-   the toppings, sizes and drinks used in the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset)
-   so it can be converted in M2. The held-out menu must be new.
-3. **Customer name** stays optional in the schema. Added the per-business setting
-   `name_required_for_pickup` (menu schema `menu@0.2`, default false, tested); M1 enables it for one business
-   so missing-name clarifications get tested. Annotation guide and SCHEMA.md updated.
-4. **Samples** may be few-shot examples but never appear in any evaluation (rule in CLAUDE.md; the M3 eval
-   loader must reject `split: sample`, with a test).
-5. **Test sets are committed**, sealing is enforced in code. **Exception: PIZZA data is never committed**
-   (CC-BY-NC-4.0, no redistribution): only a download + conversion script. `data/external/` is gitignored
-   and a test fails if anything under it is tracked. The license will be checked against the dataset's own
-   LICENSE file when the script is written (M2).
-6. **Frontend stack approved** (Vite + Preact + TypeScript, FastAPI). Set up in **M2** for the
-   annotation/review tool, not M8. ARCHITECTURE.md and AGENTDESK_REUSE.md updated.
-7. **Prices** are re-verified against each provider's official page before its first paid run.
+1. Snapshot output approved: the model outputs the full order; code derives the patch.
+2. Corner Patty and Halfmoon Pizza are 2 of the 3 real menus; the held-out menu is new. **Done in M1.**
+   (The original "pizzeria covers PIZZA's vocabulary" plan was replaced in the M1 review, item 4.)
+3. Customer name optional in the schema; per-business `name_required_for_pickup`, enabled for one business.
+   **Done (Morning Crumb).**
+4. Samples may be few-shot examples, never in any evaluation (CLAUDE.md; the M3 eval loader must reject
+   `split: sample`, with a test).
+5. Test sets are committed, sealing enforced in code. PIZZA data is never committed (CC-BY-NC-4.0): only a
+   download + conversion script; `data/external/` is gitignored and tested.
+6. Frontend (Vite + Preact + TypeScript, FastAPI) approved, set up in **M2** for the annotation tool.
+7. Provider prices re-verified against official pages before each first paid run.
 
-## Next: Milestone 1
+## M0 summary (condensed)
 
-Menus (3 businesses incl. a pizzeria with half-and-half and a café/bakery, + 1 held-out menu) under
-`data/menus/`; `core/pricing.py` implementing `PricingEngine` (variants, modifiers, combos, half-and-half
-rule, delivery fee/minimum) → `Quote`; `core/state.py` order transitions; `core/diff.py` snapshot → patch;
-`core/replies.py` templates from verified results; rules baselines (regex + fuzzy menu matching extractor,
-keyword router) implementing the M0 interfaces; deterministic tests. No model, no spend.
-Also from the decisions: the pizzeria menu covers the PIZZA dataset's toppings, sizes and drinks (to be
-checked against the dataset's vocabulary; reading it for this is fine, committing it is not); a new held-out
-menu; `name_required_for_pickup` enabled for one business.
+AgentDesk inspected read-only at `c24529c`; reuse map in docs/AGENTDESK_REUSE.md. Ported: integer cents,
+injected clock, `ToolOk | ToolErr`, scripted fakes, working rules + pre-commit hook. Contracts and
+interfaces with mocks (`DecisionProvider`, `OrderExtractor`, `BusinessTools`, `PricingEngine`), grounding
+checks, sealed-test guard, 10 annotated samples, docs (SCHEMA, TAXONOMY, ARCHITECTURE, ANNOTATION_GUIDE,
+COSTS). Environment: uv 0.12.23 from its GitHub release (sha256 verified) in `~/.local/bin`, managing
+Python 3.12; `brew install uv` was stopped because it was compiling cmake from source.
 
-**M2 additions:** PIZZA download + conversion script (data stays in `data/external/`); FastAPI + Vite/Preact
-set up for the annotation/review tool.
+## Next: Milestone 2
+
+- **Frontend + API setup:** FastAPI app (`src/orderslm/app/`) and Vite + Preact + TypeScript (`web/`) with
+  OrderSLM's own design (docs/ARCHITECTURE.md). New dependencies (fastapi, uvicorn, Node toolchain): will
+  confirm versions before adding.
+- **Annotation/review tool** (`make annotate`): write a conversation against a menu, label gold extraction
+  and routing, validate + grounding-check on save, show the rule-derived missing info and the priced quote;
+  blind relabel mode for the 30-conversation self-consistency check.
+- **PIZZA script:** download into `data/external/` (gitignored); sample ~200 test orders (fixed seed);
+  generate the PIZZA benchmark catalog (entities the sample mentions + distractors to ~30–40 toppings) and
+  the coverage map there; report entity counts the sample uses; convert the orders against that catalog
+  and report unmappable cases. Review drink-size mappings with Julian on real examples.
+  Decide with Julian how converted PIZZA data is used (it's single-utterance, so likely extraction-only).
+- **Splits:** dev ~80 / test ~200 (sealed), counts per label and scenario, test-file hashes recorded;
+  self-consistency sample scheduled. Julian writes and labels; the tool and checks are my part.
+- Guards: tests that synthetic/training code paths can't reach `data/test/` or the held-out menu.

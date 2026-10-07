@@ -1,0 +1,1267 @@
+{
+  "business_id": "halfmoon-pizza",
+  "name": "Halfmoon Pizza",
+  "currency": "USD",
+  "timezone": "America/Chicago",
+  "opens_at": "12:00",
+  "closes_at": "23:00",
+  "delivery": {
+    "available": true,
+    "fee_cents": 299,
+    "min_order_cents": 1200
+  },
+  "accepts_payment": [
+    "card",
+    "cash"
+  ],
+  "held_out": false,
+  "name_required_for_pickup": false,
+  "exclusive_groups": [
+    "crust"
+  ],
+  "modifiers": [
+    {
+      "id": "pepperoni",
+      "name": "Pepperoni",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": []
+    },
+    {
+      "id": "sausage",
+      "name": "Sausage",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": []
+    },
+    {
+      "id": "ham",
+      "name": "Ham",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": []
+    },
+    {
+      "id": "bacon",
+      "name": "Bacon",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": [
+        "applewood bacon"
+      ]
+    },
+    {
+      "id": "beef",
+      "name": "Ground beef",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": [
+        "ground beef",
+        "hamburger"
+      ]
+    },
+    {
+      "id": "grilled_chicken",
+      "name": "Grilled chicken",
+      "group": "topping",
+      "price_cents": 200,
+      "aliases": []
+    },
+    {
+      "id": "anchovies",
+      "name": "Anchovies",
+      "group": "topping",
+      "price_cents": 250,
+      "aliases": []
+    },
+    {
+      "id": "mushrooms",
+      "name": "Mushrooms",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "onions",
+      "name": "Onions",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "red_onions",
+      "name": "Red onions",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "green_peppers",
+      "name": "Green peppers",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "olives",
+      "name": "Black olives",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": [
+        "black olives",
+        "black olive"
+      ]
+    },
+    {
+      "id": "jalapenos",
+      "name": "Jalapeños",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": [
+        "jalapeno",
+        "jalapeno peppers",
+        "jalapeño"
+      ]
+    },
+    {
+      "id": "pineapple",
+      "name": "Pineapple",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "tomatoes",
+      "name": "Tomatoes",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "spinach",
+      "name": "Spinach",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "banana_peppers",
+      "name": "Banana peppers",
+      "group": "topping",
+      "price_cents": 150,
+      "aliases": []
+    },
+    {
+      "id": "basil",
+      "name": "Basil",
+      "group": "topping",
+      "price_cents": 50,
+      "aliases": []
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "group": "topping",
+      "price_cents": 50,
+      "aliases": [
+        "fresh garlic"
+      ]
+    },
+    {
+      "id": "cheese",
+      "name": "House cheese blend",
+      "group": "topping",
+      "price_cents": 175,
+      "aliases": [
+        "cheese",
+        "mozzarella blend"
+      ]
+    },
+    {
+      "id": "mozzarella",
+      "name": "Fresh mozzarella",
+      "group": "topping",
+      "price_cents": 175,
+      "aliases": [
+        "mozzarella cheese",
+        "fresh mozz"
+      ]
+    },
+    {
+      "id": "feta_cheese",
+      "name": "Feta",
+      "group": "topping",
+      "price_cents": 175,
+      "aliases": [
+        "feta"
+      ]
+    },
+    {
+      "id": "parmesan",
+      "name": "Parmesan",
+      "group": "topping",
+      "price_cents": 175,
+      "aliases": [
+        "parmesan cheese",
+        "parm"
+      ]
+    },
+    {
+      "id": "tomato_sauce",
+      "name": "Tomato sauce",
+      "group": "sauce",
+      "price_cents": 75,
+      "aliases": [
+        "sauce",
+        "red sauce",
+        "marinara"
+      ]
+    },
+    {
+      "id": "bbq_sauce",
+      "name": "BBQ sauce",
+      "group": "sauce",
+      "price_cents": 75,
+      "aliases": []
+    },
+    {
+      "id": "olive_oil",
+      "name": "Olive oil",
+      "group": "sauce",
+      "price_cents": 75,
+      "aliases": []
+    },
+    {
+      "id": "crust_thin",
+      "name": "Thin crust",
+      "group": "crust",
+      "price_cents": 0,
+      "aliases": [
+        "thin crust",
+        "thin"
+      ]
+    },
+    {
+      "id": "crust_thick",
+      "name": "Thick crust",
+      "group": "crust",
+      "price_cents": 0,
+      "aliases": [
+        "thick crust",
+        "hand tossed"
+      ]
+    },
+    {
+      "id": "crust_stuffed",
+      "name": "Stuffed crust",
+      "group": "crust",
+      "price_cents": 250,
+      "aliases": [
+        "stuffed crust"
+      ]
+    },
+    {
+      "id": "crust_gluten_free",
+      "name": "Gluten-free crust",
+      "group": "crust",
+      "price_cents": 300,
+      "aliases": [
+        "gluten free",
+        "gf crust"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "cheese_pizza",
+      "name": "Cheese Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1199,
+      "aliases": [
+        "cheese pizza",
+        "plain pizza",
+        "pizza",
+        "pie",
+        "build your own"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese"
+      ],
+      "addon_ids": [
+        "pepperoni",
+        "sausage",
+        "ham",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "red_onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "pepperoni_pizza",
+      "name": "Pepperoni Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1449,
+      "aliases": [
+        "pepperoni",
+        "pep",
+        "roni"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese",
+        "pepperoni"
+      ],
+      "addon_ids": [
+        "sausage",
+        "ham",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "red_onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "margherita_pizza",
+      "name": "Margherita Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1299,
+      "aliases": [
+        "margherita",
+        "margarita",
+        "marg"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "mozzarella",
+        "basil",
+        "olive_oil"
+      ],
+      "addon_ids": [
+        "pepperoni",
+        "sausage",
+        "ham",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "red_onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "garlic",
+        "cheese",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "hawaiian_pizza",
+      "name": "Hawaiian Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1499,
+      "aliases": [
+        "hawaiian",
+        "pineapple pizza"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese",
+        "ham",
+        "pineapple"
+      ],
+      "addon_ids": [
+        "pepperoni",
+        "sausage",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "red_onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "supreme_pizza",
+      "name": "Supreme Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1699,
+      "aliases": [
+        "supreme"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese",
+        "pepperoni",
+        "sausage",
+        "green_peppers",
+        "onions",
+        "olives",
+        "mushrooms"
+      ],
+      "addon_ids": [
+        "ham",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "red_onions",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "veggie_pizza",
+      "name": "Veggie Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1549,
+      "aliases": [
+        "veggie",
+        "vegetarian",
+        "veggie pizza"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese",
+        "green_peppers",
+        "onions",
+        "mushrooms",
+        "olives",
+        "tomatoes"
+      ],
+      "addon_ids": [
+        "pepperoni",
+        "sausage",
+        "ham",
+        "bacon",
+        "beef",
+        "grilled_chicken",
+        "anchovies",
+        "red_onions",
+        "jalapenos",
+        "pineapple",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "meat_lovers_pizza",
+      "name": "Meat Lovers Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1749,
+      "aliases": [
+        "meat lovers",
+        "meat lover",
+        "all meat",
+        "big meat"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "tomato_sauce",
+        "cheese",
+        "pepperoni",
+        "sausage",
+        "ham",
+        "bacon",
+        "beef"
+      ],
+      "addon_ids": [
+        "grilled_chicken",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "red_onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "bbq_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "bbq_chicken_pizza",
+      "name": "BBQ Chicken Pizza",
+      "category": "pizzas",
+      "base_price_cents": 1649,
+      "aliases": [
+        "bbq chicken",
+        "barbecue chicken"
+      ],
+      "variants": [
+        {
+          "id": "personal",
+          "name": "Personal 8-inch",
+          "price_delta_cents": -500,
+          "aliases": [
+            "personal",
+            "personal size",
+            "8 inch"
+          ]
+        },
+        {
+          "id": "small",
+          "name": "Small 10-inch",
+          "price_delta_cents": -300,
+          "aliases": [
+            "small",
+            "10 inch"
+          ]
+        },
+        {
+          "id": "medium",
+          "name": "Medium 12-inch",
+          "price_delta_cents": 0,
+          "aliases": [
+            "medium",
+            "regular",
+            "12 inch"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large 14-inch",
+          "price_delta_cents": 400,
+          "aliases": [
+            "large",
+            "14 inch",
+            "big"
+          ]
+        },
+        {
+          "id": "extra_large",
+          "name": "Extra large 16-inch",
+          "price_delta_cents": 700,
+          "aliases": [
+            "extra large",
+            "xl",
+            "16 inch"
+          ]
+        }
+      ],
+      "ingredient_ids": [
+        "bbq_sauce",
+        "cheese",
+        "grilled_chicken",
+        "red_onions"
+      ],
+      "addon_ids": [
+        "pepperoni",
+        "sausage",
+        "ham",
+        "bacon",
+        "beef",
+        "anchovies",
+        "mushrooms",
+        "onions",
+        "green_peppers",
+        "olives",
+        "jalapenos",
+        "pineapple",
+        "tomatoes",
+        "spinach",
+        "banana_peppers",
+        "basil",
+        "garlic",
+        "mozzarella",
+        "feta_cheese",
+        "parmesan",
+        "tomato_sauce",
+        "olive_oil",
+        "crust_thin",
+        "crust_thick",
+        "crust_stuffed",
+        "crust_gluten_free"
+      ],
+      "splittable": true
+    },
+    {
+      "id": "garlic_knots",
+      "name": "Garlic Knots",
+      "category": "sides",
+      "base_price_cents": 599,
+      "aliases": [
+        "knots",
+        "garlic knot"
+      ]
+    },
+    {
+      "id": "breadsticks",
+      "name": "Breadsticks",
+      "category": "sides",
+      "base_price_cents": 499,
+      "aliases": [
+        "bread sticks"
+      ]
+    },
+    {
+      "id": "coke",
+      "name": "Coke",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [
+        "coca cola",
+        "cola"
+      ],
+      "variants": [
+        {
+          "id": "can",
+          "name": "Can 12 oz",
+          "price_delta_cents": 0,
+          "aliases": [
+            "can",
+            "12 oz"
+          ]
+        },
+        {
+          "id": "bottle_20oz",
+          "name": "Bottle 20 oz",
+          "price_delta_cents": 100,
+          "aliases": [
+            "bottle",
+            "20 oz"
+          ]
+        },
+        {
+          "id": "two_liter",
+          "name": "2-liter bottle",
+          "price_delta_cents": 250,
+          "aliases": [
+            "2 liter",
+            "two liter",
+            "2l"
+          ]
+        }
+      ],
+      "default_variant_id": "can"
+    },
+    {
+      "id": "diet_coke",
+      "name": "Diet Coke",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [],
+      "variants": [
+        {
+          "id": "can",
+          "name": "Can 12 oz",
+          "price_delta_cents": 0,
+          "aliases": [
+            "can",
+            "12 oz"
+          ]
+        },
+        {
+          "id": "bottle_20oz",
+          "name": "Bottle 20 oz",
+          "price_delta_cents": 100,
+          "aliases": [
+            "bottle",
+            "20 oz"
+          ]
+        },
+        {
+          "id": "two_liter",
+          "name": "2-liter bottle",
+          "price_delta_cents": 250,
+          "aliases": [
+            "2 liter",
+            "two liter",
+            "2l"
+          ]
+        }
+      ],
+      "default_variant_id": "can"
+    },
+    {
+      "id": "sprite",
+      "name": "Sprite",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [],
+      "variants": [
+        {
+          "id": "can",
+          "name": "Can 12 oz",
+          "price_delta_cents": 0,
+          "aliases": [
+            "can",
+            "12 oz"
+          ]
+        },
+        {
+          "id": "bottle_20oz",
+          "name": "Bottle 20 oz",
+          "price_delta_cents": 100,
+          "aliases": [
+            "bottle",
+            "20 oz"
+          ]
+        },
+        {
+          "id": "two_liter",
+          "name": "2-liter bottle",
+          "price_delta_cents": 250,
+          "aliases": [
+            "2 liter",
+            "two liter",
+            "2l"
+          ]
+        }
+      ],
+      "default_variant_id": "can"
+    },
+    {
+      "id": "dr_pepper",
+      "name": "Dr Pepper",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [
+        "doctor pepper",
+        "dr. pepper"
+      ],
+      "variants": [
+        {
+          "id": "can",
+          "name": "Can 12 oz",
+          "price_delta_cents": 0,
+          "aliases": [
+            "can",
+            "12 oz"
+          ]
+        },
+        {
+          "id": "bottle_20oz",
+          "name": "Bottle 20 oz",
+          "price_delta_cents": 100,
+          "aliases": [
+            "bottle",
+            "20 oz"
+          ]
+        },
+        {
+          "id": "two_liter",
+          "name": "2-liter bottle",
+          "price_delta_cents": 250,
+          "aliases": [
+            "2 liter",
+            "two liter",
+            "2l"
+          ]
+        }
+      ],
+      "default_variant_id": "can"
+    },
+    {
+      "id": "iced_tea",
+      "name": "Iced Tea",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [
+        "ice tea"
+      ],
+      "variants": [
+        {
+          "id": "can",
+          "name": "Can 12 oz",
+          "price_delta_cents": 0,
+          "aliases": [
+            "can",
+            "12 oz"
+          ]
+        },
+        {
+          "id": "bottle_20oz",
+          "name": "Bottle 20 oz",
+          "price_delta_cents": 100,
+          "aliases": [
+            "bottle",
+            "20 oz"
+          ]
+        }
+      ],
+      "default_variant_id": "can"
+    },
+    {
+      "id": "water",
+      "name": "Bottled Water",
+      "category": "drinks",
+      "base_price_cents": 199,
+      "aliases": [
+        "water"
+      ]
+    }
+  ]
+}

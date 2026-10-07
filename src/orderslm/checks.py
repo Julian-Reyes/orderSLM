@@ -10,8 +10,8 @@ import re
 from dataclasses import dataclass
 
 from orderslm.schema.conversation import Conversation
-from orderslm.schema.extraction import ExtractionOutput, Modification
-from orderslm.schema.menu import MenuCatalog, ModifierKind
+from orderslm.schema.extraction import ExtractionOutput, Modification, ModificationKind
+from orderslm.schema.menu import MenuCatalog
 
 
 @dataclass(frozen=True)
@@ -43,19 +43,23 @@ def check_evidence(output: ExtractionOutput, conversation: Conversation) -> list
 def _check_mods(menu: MenuCatalog, item_id: str, mods: list[Modification], path: str) -> list[Issue]:
     issues: list[Issue] = []
     item = menu.item(item_id)
-    allowed = set(item.modifier_ids) if item else set()
+    allowed = item.allowed_modifier_ids if item else set()
     for mod in mods:
         for mid in filter(None, (mod.modifier_id, mod.replacement_modifier_id)):
             if menu.modifier(mid) is None:
                 issues.append(Issue("UNKNOWN_MODIFIER", path, f"{mid!r} is not in the catalog"))
             elif mid not in allowed:
                 issues.append(Issue("MODIFIER_NOT_ALLOWED", path, f"{mid!r} is not allowed on {item_id!r}"))
-        if mod.modifier_id and (m := menu.modifier(mod.modifier_id)):
-            expected = {"add": ModifierKind.add, "remove": ModifierKind.remove}.get(mod.kind.value)
-            if expected is not None and m.kind is not expected:
-                issues.append(
-                    Issue("MODIFIER_KIND", path, f"{mod.modifier_id!r} is a {m.kind.value} modifier")
-                )
+    # At most one choice per exclusive group (one crust, one milk), counting what is added.
+    chosen: dict[str, list[str]] = {}
+    for mod in mods:
+        added = mod.replacement_modifier_id if mod.kind is ModificationKind.substitute else mod.modifier_id
+        if mod.kind is not ModificationKind.remove and added and (m := menu.modifier(added)):
+            if m.group in menu.exclusive_groups:
+                chosen.setdefault(m.group, []).append(added)
+    for group, ids in chosen.items():
+        if len(ids) > 1:
+            issues.append(Issue("EXCLUSIVE_GROUP_CONFLICT", path, f"more than one {group}: {ids}"))
     return issues
 
 

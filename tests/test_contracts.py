@@ -80,9 +80,8 @@ def test_test_split_is_sealed_by_default(monkeypatch):
 
 
 def test_name_required_for_pickup_is_an_optional_menu_setting(menus):
-    assert all(
-        m.name_required_for_pickup is False for m in menus.values()
-    )  # default; M1 enables it for one business
+    required = [b for b, m in menus.items() if m.name_required_for_pickup]
+    assert required == ["morning-crumb"]  # exactly one business, so missing-name clarifications get tested
     data = menus["corner-patty"].model_dump(mode="json") | {"name_required_for_pickup": True}
     assert type(menus["corner-patty"]).model_validate(data).name_required_for_pickup
 

@@ -22,7 +22,8 @@ define not_yet
 	@echo "make $@: not implemented yet (milestone $(1)). See PROGRESS.md." >&2; exit 2
 endef
 
-menus:            ; $(call not_yet,1)
+menus:
+	$(RUN) python -m orderslm.menus
 annotate:         ; $(call not_yet,2)
 teacher-bakeoff:  ; $(call not_yet,3)
 synth:            ; $(call not_yet,4)

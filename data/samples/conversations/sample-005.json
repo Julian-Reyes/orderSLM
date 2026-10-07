@@ -52,7 +52,7 @@
   ],
   "style": "rapid_fire",
   "gold_extraction": {
-    "schema_version": "extraction@0.1",
+    "schema_version": "extraction@0.2",
     "items": [
       {
         "line_id": "L1",
@@ -65,13 +65,13 @@
         ],
         "halves": [
           {
-            "menu_item_id": "pepperoni"
+            "menu_item_id": "pepperoni_pizza"
           },
           {
-            "menu_item_id": "hawaiian"
+            "menu_item_id": "hawaiian_pizza"
           }
         ],
-        "variant_id": "16in"
+        "variant_id": "large"
       },
       {
         "line_id": "L2",
@@ -218,5 +218,5 @@
     }
   ],
   "annotator": "claude-m0-sample",
-  "annotation_notes": "'large' maps to the 16in variant by name. 'make it 2' is a quantity correction on L2, not a new line. 'ring the side door' is a delivery instruction (note), not part of the address."
+  "annotation_notes": "'large' maps to the large variant by alias. 'make it 2' is a quantity correction on L2, not a new line. 'ring the side door' is a delivery instruction (note), not part of the address."
 }

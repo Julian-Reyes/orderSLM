@@ -1,0 +1,163 @@
+{
+  "conversation": {
+    "id": "sample-012",
+    "business_id": "halfmoon-pizza",
+    "language": "en",
+    "split": "sample",
+    "source": "human",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a medium pepperoni pizza on thin crust, light on the sauce and extra cheese",
+        "sent_at": "2026-10-07T18:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "and two cans of diet coke",
+        "sent_at": "2026-10-07T18:40:09-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "delivery to 410 Birch Ave, paying card",
+        "sent_at": "2026-10-07T18:40:29-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "schema_version": "extraction@0.2",
+    "items": [
+      {
+        "line_id": "L1",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium pepperoni pizza"
+          }
+        ],
+        "menu_item_id": "pepperoni_pizza",
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_thin",
+            "raw_text": "thin crust"
+          },
+          {
+            "kind": "add",
+            "modifier_id": "tomato_sauce",
+            "raw_text": "light on the sauce",
+            "amount": "light"
+          },
+          {
+            "kind": "add",
+            "modifier_id": "cheese",
+            "raw_text": "extra cheese",
+            "amount": "extra"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "two cans of diet coke"
+          }
+        ],
+        "menu_item_id": "diet_coke",
+        "variant_id": "can"
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "delivery to 410 Birch Ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Birch Ave",
+      "number": "410",
+      "raw_text": "410 Birch Ave",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "410 Birch Ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "pending"
+    },
+    "notes": [],
+    "missing_or_ambiguous": [],
+    "clarification_question": null
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "schema_version": "router@0.1",
+        "primary": "PLACE_ORDER",
+        "urgency": "normal",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": false
+        }
+      }
+    }
+  ],
+  "annotator": "claude-m1-sample",
+  "annotation_notes": "'light on the sauce' / 'extra cheese' adjust included ingredients: kind add with an amount. Thin crust is an add-on from the exclusive crust group."
+}

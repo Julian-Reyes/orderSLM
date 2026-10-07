@@ -9,10 +9,12 @@ from pydantic import BaseModel, ConfigDict, Field
 
 # Bump a version whenever its contract changes in a way that affects saved data,
 # prompts, or grading. Every run logs these (spec §19).
-EXTRACTION_SCHEMA_VERSION = "extraction@0.1"
+EXTRACTION_SCHEMA_VERSION = "extraction@0.2"  # 0.2: Modification.amount
 ROUTER_SCHEMA_VERSION = "router@0.1"
 CONVERSATION_SCHEMA_VERSION = "conversation@0.1"
-MENU_SCHEMA_VERSION = "menu@0.2"  # 0.2: name_required_for_pickup
+MENU_SCHEMA_VERSION = (
+    "menu@0.3"  # 0.2: name_required_for_pickup; 0.3: ingredients/add-ons, aliases, exclusive groups
+)
 TAXONOMY_VERSION = "taxonomy@0.1"
 
 ID_PATTERN = r"^[a-z0-9][a-z0-9_-]*$"

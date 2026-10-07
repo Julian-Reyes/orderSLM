@@ -6,12 +6,11 @@ from orderslm.checks import check_all, check_catalog, check_evidence
 from orderslm.schema import Role, Scenario, Split
 from orderslm.schema.extraction import ExtractionOutput
 
-from .conftest import MENU_FILES, SAMPLE_FILES
+from .conftest import SAMPLE_FILES
 
 
 def test_files_exist():
-    assert len(SAMPLE_FILES) >= 10
-    assert len(MENU_FILES) >= 2
+    assert len(SAMPLE_FILES) >= 12
 
 
 def test_every_sample_is_grounded_in_its_conversation_and_menu(samples, menus):
@@ -115,13 +114,19 @@ def test_check_quote_matching_ignores_case_and_spacing(sample_by_id):
             ),
             "MODIFIER_NOT_ALLOWED",
         ),
-        (lambda o: setattr(o.items[1].modifications[0], "modifier_id", "extra_cheese"), "MODIFIER_KIND"),
     ],
 )
 def test_check_catches_catalog_errors(sample_by_id, menus, change, code):
     out, _ = _gold(sample_by_id, "sample-001")
     change(out)
     assert code in [i.code for i in check_catalog(out, menus["corner-patty"])]
+
+
+def test_check_catches_two_choices_from_an_exclusive_group(sample_by_id, menus):
+    out, _ = _gold(sample_by_id, "sample-012")
+    thin = out.items[0].modifications[0]
+    out.items[0].modifications.append(thin.model_copy(update={"modifier_id": "crust_stuffed"}))
+    assert [i.code for i in check_catalog(out, menus["halfmoon-pizza"])] == ["EXCLUSIVE_GROUP_CONFLICT"]
 
 
 def test_check_catches_bad_combo_choice(sample_by_id, menus):

@@ -1,10 +1,11 @@
 """Menu catalogs: the only source of item ids and prices.
 
-M0 defines the contract; M1 creates the three business menus and the held-out menu.
+menu@0.3: modifiers are ingredients/add-ons, not add/remove kinds. Each item lists
+the modifiers it includes (`ingredient_ids`: removable, adjustable to extra/light)
+and those a customer may add (`addon_ids`). Pricing rules: docs/PRICING.md.
 """
 
 from datetime import time
-from enum import StrEnum
 
 from pydantic import Field, model_validator
 
@@ -18,23 +19,22 @@ class Variant(Strict):
 
     id: str = Field(pattern=ID_PATTERN)
     name: str
+    aliases: list[str] = Field(default_factory=list, description="'large', '2 liter', 'lunch size'")
     price_delta_cents: int = 0  # may be negative (a small size)
 
 
-class ModifierKind(StrEnum):
-    add = "add"  # extra bacon (+ price)
-    remove = "remove"  # no onions (free)
-
-
 class Modifier(Strict):
+    """An ingredient or add-on. Removing is free; adding costs price_cents (see docs/PRICING.md)."""
+
     id: str = Field(pattern=ID_PATTERN)
     name: str
-    kind: ModifierKind
+    aliases: list[str] = Field(default_factory=list)
+    group: str = Field(default="general", pattern=ID_PATTERN, description="topping, sauce, crust, milk, ...")
     price_cents: Cents = 0
 
 
 class ComboSlot(Strict):
-    """One choice inside a combo, e.g. side: fries | onion rings."""
+    """One choice inside a combo, e.g. side: fries | onion rings. Choices are included in the combo price."""
 
     id: str = Field(pattern=ID_PATTERN)
     name: str
@@ -48,8 +48,11 @@ class MenuItem(Strict):
     aliases: list[str] = Field(default_factory=list, description="informal names customers use")
     base_price_cents: Cents
     variants: list[Variant] = Field(default_factory=list)
-    default_variant_id: str | None = None
-    modifier_ids: list[str] = Field(default_factory=list, description="modifiers allowed on this item")
+    default_variant_id: str | None = Field(
+        default=None, description="used when no variant is stated; null + variants = customer must choose"
+    )
+    ingredient_ids: list[str] = Field(default_factory=list, description="included by default")
+    addon_ids: list[str] = Field(default_factory=list, description="may be added for a price")
     splittable: bool = Field(default=False, description="half-and-half allowed (pizza)")
     combo_slots: list[ComboSlot] = Field(default_factory=list)
     available: bool = True
@@ -61,7 +64,17 @@ class MenuItem(Strict):
             raise ValueError(f"{self.id}: duplicate variant ids")
         if self.default_variant_id is not None and self.default_variant_id not in ids:
             raise ValueError(f"{self.id}: default_variant_id {self.default_variant_id!r} is not a variant")
+        both = set(self.ingredient_ids) & set(self.addon_ids)
+        if both:
+            raise ValueError(f"{self.id}: {sorted(both)} listed as both ingredient and add-on")
         return self
+
+    @property
+    def allowed_modifier_ids(self) -> set[str]:
+        return set(self.ingredient_ids) | set(self.addon_ids)
+
+    def variant(self, variant_id: str) -> Variant | None:
+        return next((v for v in self.variants if v.id == variant_id), None)
 
 
 class DeliveryPolicy(Strict):
@@ -84,6 +97,9 @@ class MenuCatalog(Strict):
         default=False,
         description="pickup orders without a customer name get a customer_name/missing clarification",
     )
+    exclusive_groups: list[str] = Field(
+        default_factory=list, description="modifier groups where an item takes at most one (crust, milk)"
+    )
     modifiers: list[Modifier] = Field(default_factory=list)
     items: list[MenuItem] = Field(min_length=1)
 
@@ -96,13 +112,16 @@ class MenuCatalog(Strict):
             if dupes:
                 raise ValueError(f"duplicate {name} ids: {sorted(dupes)}")
         for item in self.items:
-            unknown = set(item.modifier_ids) - set(mod_ids)
+            unknown = item.allowed_modifier_ids - set(mod_ids)
             if unknown:
                 raise ValueError(f"{item.id}: unknown modifier ids {sorted(unknown)}")
             for slot in item.combo_slots:
                 missing = set(slot.choices) - set(item_ids)
                 if missing:
                     raise ValueError(f"{item.id}.{slot.id}: unknown choice ids {sorted(missing)}")
+        groups = {m.group for m in self.modifiers}
+        if unknown_groups := set(self.exclusive_groups) - groups:
+            raise ValueError(f"exclusive_groups not used by any modifier: {sorted(unknown_groups)}")
         return self
 
     def item(self, item_id: str) -> MenuItem | None:

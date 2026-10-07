@@ -19,6 +19,15 @@ def test_taxonomy_doc_has_urgency_and_reference_descriptions_verbatim():
 
 
 def test_required_docs_exist():
-    for name in ["SCHEMA", "TAXONOMY", "ARCHITECTURE", "ANNOTATION_GUIDE", "COSTS", "AGENTDESK_REUSE"]:
+    for name in [
+        "SCHEMA",
+        "TAXONOMY",
+        "ARCHITECTURE",
+        "ANNOTATION_GUIDE",
+        "COSTS",
+        "AGENTDESK_REUSE",
+        "PRICING",
+        "MENUS",
+    ]:
         assert (ROOT / "docs" / f"{name}.md").stat().st_size > 500, name
     assert (ROOT / "PROGRESS.md").exists()

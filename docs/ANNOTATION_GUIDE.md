@@ -38,9 +38,17 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
 - `variant_id`: only if stated. If the item has a `default_variant_id`, an unstated size is fine (no
   missing entry). If it has variants and no default (milkshake flavor, pizza size), add `item_variant / missing`.
 - Quantity unclear ("some wings"): `quantity: null` + `item_quantity / ambiguous`.
-- Modifications: `remove`/`add` with the catalog `modifier_id`; `substitute` uses `modifier_id` (removed)
-  + `replacement_modifier_id` (added). Requests not in the catalog ("extra crispy") → `modifier_id: null`
-  with `raw_text`; add `item_modification / off_menu` only if the business would need to answer it.
+- Modifications use the catalog `modifier_id` (an ingredient or add-on of that item):
+  - "no onions", "hold the pickles" → `remove`.
+  - "add bacon", "with mushrooms" → `add` (amount `normal`).
+  - "extra cheese", "lots of", "heavy on" → `add` + `extra`; "light on the sauce", "just a little" → `add` + `light`.
+    This applies whether or not the ingredient is already included.
+  - "oat milk instead of whole", "mayo instead of ketchup" → `substitute`: `modifier_id` is the one removed,
+    `replacement_modifier_id` the one added. "w oat milk" on a latte (no "instead") is also a substitute of the
+    included milk.
+  - Crust choices ("thin crust", "deep dish") are `add` of a crust modifier; only one crust per pizza.
+  - Requests not in the catalog ("extra crispy") → `modifier_id: null` with `raw_text`; add
+    `item_modification / off_menu` only if the business would need to answer it.
 - Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`.
 - Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`.
 

@@ -28,7 +28,7 @@ from orderslm.schema.routing import (
     Urgency,
 )
 
-ROUTER_PROMPT_VERSION = f"router-prompt@0.1+{TAXONOMY_VERSION}"
+ROUTER_PROMPT_VERSION = f"router-prompt@0.2+{TAXONOMY_VERSION}"  # 0.2: whitespace collapsed per message
 NO_SECONDARY = "NONE"
 CONTEXT_MESSAGES = 6  # earlier messages shown with the one being routed
 
@@ -89,9 +89,43 @@ def render_input(ctx: RouterContext) -> str:
     ]
     if earlier:
         lines.append("Earlier messages:")
-        lines += [f"{m.role.value}: {m.text}" for m in earlier]
-    lines.append(f"Latest customer message: {target.text}")
+        lines += [f"{m.role.value}: {_one_line(m.text)}" for m in earlier]
+    lines.append(f"{LATEST} {_one_line(target.text)}")
     return "\n".join(lines)
+
+
+def _one_line(text: str) -> str:
+    return " ".join(text.split())
+
+
+LATEST = "Latest customer message:"
+
+
+@dataclass(frozen=True)
+class ParsedInput:
+    """render_input's text read back, for local providers (rules) that only receive the DecisionRequest."""
+
+    has_draft: bool
+    has_placed_order: bool
+    earlier: list[tuple[str, str]]  # (role, text)
+    latest: str
+
+
+def parse_input(text: str) -> ParsedInput:
+    lines = text.split("\n")
+    if not (lines[0].startswith("Order in progress:") and lines[-1].startswith(LATEST)):
+        raise ValueError("not a router input rendered by render_input")
+    earlier = []
+    for line in lines[2:-1]:
+        role, sep, body = line.partition(": ")
+        if sep and role in ("customer", "business"):
+            earlier.append((role, body))
+    return ParsedInput(
+        has_draft=lines[0].endswith("yes."),
+        has_placed_order=lines[1].endswith("yes."),
+        earlier=earlier,
+        latest=lines[-1].removeprefix(LATEST).strip(),
+    )
 
 
 def build_router_request(ctx: RouterContext) -> DecisionRequest:

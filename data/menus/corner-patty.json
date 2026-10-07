@@ -1,0 +1,352 @@
+{
+  "business_id": "corner-patty",
+  "name": "Corner Patty",
+  "currency": "USD",
+  "timezone": "America/New_York",
+  "opens_at": "11:00",
+  "closes_at": "22:00",
+  "delivery": {
+    "available": true,
+    "fee_cents": 399,
+    "min_order_cents": 1500
+  },
+  "accepts_payment": [
+    "card",
+    "cash"
+  ],
+  "held_out": false,
+  "name_required_for_pickup": false,
+  "exclusive_groups": [],
+  "modifiers": [
+    {
+      "id": "cheese",
+      "name": "American cheese",
+      "group": "cheese",
+      "price_cents": 100,
+      "aliases": [
+        "cheese",
+        "american"
+      ]
+    },
+    {
+      "id": "lettuce",
+      "name": "Lettuce",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": []
+    },
+    {
+      "id": "tomato",
+      "name": "Tomato",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": [
+        "tomatoes"
+      ]
+    },
+    {
+      "id": "onion",
+      "name": "Onions",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": [
+        "onions"
+      ]
+    },
+    {
+      "id": "pickle",
+      "name": "Pickles",
+      "group": "veg",
+      "price_cents": 50,
+      "aliases": [
+        "pickles"
+      ]
+    },
+    {
+      "id": "jalapeno",
+      "name": "Jalapeños",
+      "group": "veg",
+      "price_cents": 75,
+      "aliases": [
+        "jalapenos",
+        "jalapeño",
+        "jalapeños"
+      ]
+    },
+    {
+      "id": "avocado",
+      "name": "Avocado",
+      "group": "veg",
+      "price_cents": 150,
+      "aliases": [
+        "avo"
+      ]
+    },
+    {
+      "id": "bacon",
+      "name": "Bacon",
+      "group": "meat",
+      "price_cents": 200,
+      "aliases": []
+    },
+    {
+      "id": "ketchup",
+      "name": "Ketchup",
+      "group": "sauce",
+      "price_cents": 0,
+      "aliases": []
+    },
+    {
+      "id": "mustard",
+      "name": "Mustard",
+      "group": "sauce",
+      "price_cents": 0,
+      "aliases": []
+    },
+    {
+      "id": "mayo",
+      "name": "Mayo",
+      "group": "sauce",
+      "price_cents": 0,
+      "aliases": [
+        "mayonnaise"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "cheeseburger",
+      "name": "Cheeseburger",
+      "category": "burgers",
+      "base_price_cents": 899,
+      "aliases": [
+        "cheese burger",
+        "cheezburger",
+        "cb"
+      ],
+      "variants": [
+        {
+          "id": "single",
+          "name": "Single patty",
+          "price_delta_cents": 0,
+          "aliases": []
+        },
+        {
+          "id": "double",
+          "name": "Double patty",
+          "price_delta_cents": 300,
+          "aliases": [
+            "double patty"
+          ]
+        }
+      ],
+      "default_variant_id": "single",
+      "ingredient_ids": [
+        "cheese",
+        "lettuce",
+        "tomato",
+        "onion",
+        "pickle",
+        "ketchup"
+      ],
+      "addon_ids": [
+        "bacon",
+        "jalapeno",
+        "avocado",
+        "mustard",
+        "mayo"
+      ]
+    },
+    {
+      "id": "bacon_burger",
+      "name": "Bacon Burger",
+      "category": "burgers",
+      "base_price_cents": 1099,
+      "aliases": [
+        "bacon cheeseburger"
+      ],
+      "ingredient_ids": [
+        "cheese",
+        "lettuce",
+        "tomato",
+        "onion",
+        "pickle",
+        "ketchup",
+        "bacon"
+      ],
+      "addon_ids": [
+        "jalapeno",
+        "avocado",
+        "mustard",
+        "mayo"
+      ]
+    },
+    {
+      "id": "veggie_burger",
+      "name": "Veggie Burger",
+      "category": "burgers",
+      "base_price_cents": 999,
+      "aliases": [
+        "veggie",
+        "plant burger"
+      ],
+      "ingredient_ids": [
+        "lettuce",
+        "tomato",
+        "onion",
+        "pickle",
+        "mayo"
+      ],
+      "addon_ids": [
+        "cheese",
+        "bacon",
+        "jalapeno",
+        "avocado",
+        "ketchup",
+        "mustard"
+      ]
+    },
+    {
+      "id": "fries",
+      "name": "Fries",
+      "category": "sides",
+      "base_price_cents": 349,
+      "aliases": [
+        "french fries",
+        "fry"
+      ],
+      "variants": [
+        {
+          "id": "regular",
+          "name": "Regular",
+          "price_delta_cents": 0,
+          "aliases": [
+            "regular",
+            "small"
+          ]
+        },
+        {
+          "id": "large",
+          "name": "Large",
+          "price_delta_cents": 150,
+          "aliases": [
+            "large",
+            "big"
+          ]
+        }
+      ],
+      "default_variant_id": "regular"
+    },
+    {
+      "id": "onion_rings",
+      "name": "Onion Rings",
+      "category": "sides",
+      "base_price_cents": 449,
+      "aliases": [
+        "rings"
+      ]
+    },
+    {
+      "id": "coke",
+      "name": "Coke",
+      "category": "drinks",
+      "base_price_cents": 249,
+      "aliases": [
+        "coca cola",
+        "coca-cola",
+        "cola"
+      ]
+    },
+    {
+      "id": "sprite",
+      "name": "Sprite",
+      "category": "drinks",
+      "base_price_cents": 249,
+      "aliases": []
+    },
+    {
+      "id": "lemonade",
+      "name": "Lemonade",
+      "category": "drinks",
+      "base_price_cents": 299,
+      "aliases": []
+    },
+    {
+      "id": "milkshake",
+      "name": "Milkshake",
+      "category": "drinks",
+      "base_price_cents": 549,
+      "aliases": [
+        "shake"
+      ],
+      "variants": [
+        {
+          "id": "vanilla",
+          "name": "Vanilla",
+          "price_delta_cents": 0,
+          "aliases": []
+        },
+        {
+          "id": "chocolate",
+          "name": "Chocolate",
+          "price_delta_cents": 0,
+          "aliases": [
+            "choc"
+          ]
+        },
+        {
+          "id": "strawberry",
+          "name": "Strawberry",
+          "price_delta_cents": 0,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "cheeseburger_combo",
+      "name": "Cheeseburger Combo",
+      "category": "combos",
+      "base_price_cents": 1299,
+      "aliases": [
+        "combo",
+        "cb combo",
+        "#1",
+        "number 1"
+      ],
+      "ingredient_ids": [
+        "cheese",
+        "lettuce",
+        "tomato",
+        "onion",
+        "pickle",
+        "ketchup"
+      ],
+      "addon_ids": [
+        "bacon",
+        "jalapeno",
+        "avocado",
+        "mustard",
+        "mayo"
+      ],
+      "combo_slots": [
+        {
+          "id": "side",
+          "name": "Side",
+          "choices": [
+            "fries",
+            "onion_rings"
+          ]
+        },
+        {
+          "id": "drink",
+          "name": "Drink",
+          "choices": [
+            "coke",
+            "sprite",
+            "lemonade"
+          ]
+        }
+      ]
+    }
+  ]
+}
