@@ -8,13 +8,14 @@ from enum import StrEnum
 
 from pydantic import Field, model_validator
 
-from .common import Strict
+from .common import ID_PATTERN, Strict
 from .conversation import Conversation, Role
 from .extraction import ExtractionOutput
 from .routing import MessageRouting
 
 
 class Scenario(StrEnum):
+    simple_order = "simple_order"
     multi_message_order = "multi_message_order"
     correction = "correction"
     correction_after_confirmation = "correction_after_confirmation"
@@ -26,12 +27,17 @@ class Scenario(StrEnum):
     contextual_yes = "contextual_yes"
     half_and_half = "half_and_half"
     combo = "combo"
+    menu_question = "menu_question"
+    delivery_question = "delivery_question"
+    payment_question = "payment_question"
     status_question = "status_question"
     order_problem = "order_problem"
+    refund_request = "refund_request"
     payment_claim = "payment_claim"
     human_request = "human_request"
     small_talk = "small_talk"
     out_of_scope = "out_of_scope"
+    unclear_message = "unclear_message"
 
 
 class WritingStyle(StrEnum):
@@ -51,6 +57,9 @@ class AnnotatedConversation(Strict):
     )
     gold_routing: list[MessageRouting]
     annotator: str = Field(min_length=1)
+    card_id: str | None = Field(
+        default=None, pattern=ID_PATTERN, description="scenario card it was written from (Source A)"
+    )
     annotation_notes: str | None = None
 
     @model_validator(mode="after")
@@ -61,6 +70,8 @@ class AnnotatedConversation(Strict):
             raise ValueError(
                 f"gold_routing must cover each customer message once, in order: {customer}, got {routed}"
             )
+        if (self.conversation.source.value == "claude_written") != (self.card_id is not None):
+            raise ValueError("card_id is required for claude_written conversations and only for them")
         roles = {m.index: m.role for m in self.conversation.messages}
         if self.gold_extraction is not None:
             for path, ev in self.gold_extraction.iter_evidence():

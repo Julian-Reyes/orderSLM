@@ -1,6 +1,7 @@
 # Annotation guide (V1, English)
 
-For writing and labeling the human dev and test sets (M2). Format: `AnnotatedConversation`
+For writing, labeling and reviewing the dev and test sets (M2): Source A (Claude-written from scenario cards,
+reviewed by Julian) and Source C (optional, Julian-written); see docs/SPLITS.md. Format: `AnnotatedConversation`
 (docs/SCHEMA.md); worked examples: `data/samples/conversations/`. Labels must pass `make test`-style
 validation and the grounding checks before a conversation is accepted.
 
@@ -103,8 +104,9 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
    checks and compares missing info with the rules on every edit, and won't save until they pass.
 2. Write `annotation_notes` for every judgment call; recurring ones become rules in this guide (bump the
    date below and note the change in PROGRESS.md).
-3. **Self-consistency:** a week after labeling the test set, relabel 30 test conversations blind (tool hides
-   the earlier labels). Report agreement per field and per router label.
+3. **Review (Source A):** Julian reviews all of dev and at least 25% of test with "Save as reviewed"; every review
+   is logged and the correction rate is reported. **Self-consistency** (a blind relabel a week later) is optional
+   and only for Source C.
 4. Disagreements found later: fix the gold, log the change (conversation id, field, old → new, reason).
    Don't change test gold after any model has been scored on it without recording why.
 

@@ -103,8 +103,12 @@ def create_app(clock: Clock | None = None) -> FastAPI:
 
     @app.get("/api/{split}/conversations")
     def list_conversations(split: str) -> list[dict]:
+        s = _split(split)
+        log = splits.review_log(s)
+        reviewed = {e["id"] for e in log}
+        corrected = {e["id"] for e in log if e["changed"]}
         out = []
-        for ac in splits.load_split(_split(split)):
+        for ac in splits.load_split(s):
             out.append(
                 {
                     "id": ac.conversation.id,
@@ -113,6 +117,10 @@ def create_app(clock: Clock | None = None) -> FastAPI:
                     "style": ac.style.value,
                     "messages": len(ac.conversation.messages),
                     "annotator": ac.annotator,
+                    "source": ac.conversation.source.value,
+                    "card_id": ac.card_id,
+                    "reviewed": ac.conversation.id in reviewed,
+                    "corrected": ac.conversation.id in corrected,
                 }
             )
         return out
@@ -121,7 +129,11 @@ def create_app(clock: Clock | None = None) -> FastAPI:
     def stats(split: str) -> dict:
         s = _split(split)
         convs = splits.load_split(s)
-        return {"stats": splits.stats(convs), "near_duplicates": splits.near_duplicates(convs)}
+        return {
+            "stats": splits.stats(convs),
+            "reviews": splits.review_stats(s, convs),
+            "near_duplicates": splits.near_duplicates(convs),
+        }
 
     @app.get("/api/{split}/conversations/{conv_id}")
     def get_conversation(split: str, conv_id: str) -> dict:
@@ -160,6 +172,11 @@ def create_app(clock: Clock | None = None) -> FastAPI:
             raise HTTPException(400, {"findings": _findings(findings)})
         if ac.conversation.id != conv_id:
             raise HTTPException(400, f"conversation.id {ac.conversation.id!r} doesn't match the URL")
+        if review := body.get("review"):
+            entry = splits.review(
+                ac, s, str(review.get("reviewer", "")), change_reason=body.get("change_reason"), clock=now
+            )
+            return {"saved": f"{conv_id}.json", "review": entry}
         path = splits.save(ac, s, change_reason=body.get("change_reason"), clock=now)
         return {"saved": path.name}
 
@@ -170,6 +187,10 @@ def create_app(clock: Clock | None = None) -> FastAPI:
         if lock is None:
             raise HTTPException(409, "the test split isn't locked yet")
         sc = lock["self_consistency"]
+        if sc is None:
+            raise HTTPException(
+                409, "no blind relabel scheduled (optional, Source C only: lock --relabel-human)"
+            )
         if now().date() < date.fromisoformat(sc["not_before"]):
             raise HTTPException(409, f"blind relabel opens on {sc['not_before']}")
         return sc["ids"], sc["not_before"]

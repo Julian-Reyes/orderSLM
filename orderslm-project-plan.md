@@ -1,6 +1,6 @@
 # OrderSLM: Food-Order Understanding, Decision Routing, and Distilled Small Models
 
-Updated October 7, 2026. This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, human-written evaluation, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
+Updated October 7, 2026 (evaluation data revised speed-first the same day, §7). This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, evaluation separate from training data, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
 
 ## 1. Goal
 
@@ -124,13 +124,18 @@ Keep each label description short (Julia-1 limits each option to 48 tokens). Wri
 ### Menus
 Create 3 fictional food businesses as catalog JSON (e.g. burger shop, pizzeria with half-and-half, café/bakery) with sizes, add-ons, combos, and prices. Create 1 additional **held-out menu** used only in testing, to measure generalization to an unseen business.
 
-### Human-written dev and test sets (essential)
-Synthetic data mostly measures how well a model imitates the teacher, so evaluation uses **human-written** conversations.
-- Julian writes conversations against the menus, including fast phone-style messages. Others may contribute with a simple form (a menu plus a scenario card).
-- Target 200–300 conversations total: **dev ~80** (used for the teacher and student bake-offs and prompt tuning) and **test ~200, sealed** (used only for final results).
-- Label each conversation with gold extraction output and router labels using the annotation tool.
-- Relabel 30 test conversations a week later, blind, to measure self-consistency.
-- Include tricky cases deliberately: two-request messages, corrections after confirmation, ambiguous references, off-menu items, missing info, context-dependent "yes".
+### Evaluation data (speed-first; revised October 7, 2026)
+Synthetic training data mostly measures how well a model imitates the teacher, so evaluation uses separate, reviewed data from three sources. **Every result is reported per source.**
+
+- **Source A: Claude-written chats (~250: dev ~80, test ~170).**
+  1. First generate **scenario cards** covering every router label, every menu (the held-out menu only in test), writing styles (typos, abbreviations, emoji, multi-message bursts, ALL CAPS), and the tricky cases: two-request messages, corrections (including after confirmation), ambiguous references ("one of them", "the usual"), off-menu items, missing info, context-dependent "yes".
+  2. Claude writes one conversation per card with gold extraction and router labels, validated by the schema and the grounding checks.
+  3. Dev/test are split **by scenario card**, so no near-duplicates cross splits (also checked automatically). Source A is **evaluation data only, never training data**: the cards and conversations never feed synthetic generation, prompts' few-shot examples (except dev for prompt tuning), or training.
+  4. Julian reviews in the annotation tool: **all of dev, and a spot-check of at least 25% of test**. Every review is logged (changed or not), and the **correction rate** is reported.
+- **Source B: PIZZA.** The 199 converted orders from the PIZZA test split (amazon-science/pizza-semantic-parsing-dataset, CC-BY-NC-4.0; docs/PIZZA.md) are the external **human-written** test set, scored on items only. Never committed or redistributed.
+- **Source C (optional): Julian-written.** Julian may later write ~30 conversations as a small human-written test slice. A blind relabel a week later is optional, for this source only.
+- The test sets (A test, B, C) are **sealed**: used only for final results. Dev (A dev) is used for the teacher and student bake-offs and prompt tuning.
+- Limitation to report: Source A shares one author (Claude), so it may favor models whose phrasing resembles it; Source B and C are the human-written checks. The synthetic-training generator is a different model from Source A's author.
 
 ### Synthetic training data
 - A cheap model generates conversations from combinations of (menu × customer persona × scenario × writing style). Control diversity with explicit attributes, deduplicate near-duplicates, and log the distribution.
@@ -156,7 +161,7 @@ Synthetic data mostly measures how well a model imitates the teacher, so evaluat
 | *Optional:* `gemini-3.8-flash` | $0.75 / $3.75 (promo until Dec 31, 2026) | Batch: $0.375 / $1.875 | Newest Gemini Flash; include only if budget allows |
 
 **Method:**
-1. Run the ~40 labeled dev conversations through every candidate with the identical prompt and schema.
+1. Run ~40 dev conversations (Source A dev) through every candidate with the identical prompt and schema.
 2. Score order exact match, item-level F1, correction handling, JSON validity, hallucinations, and cost per 1,000 orders.
 3. **Selection rule:** the cheapest candidate within 3 percentage points of the best on item-level F1. Plot accuracy vs. cost for all candidates.
 4. Record model versions, prompts, token usage, and actual cost.
@@ -182,7 +187,7 @@ Cost: $0 (local).
 
 ## 10. Experiment 3: Distillation
 
-For each chosen student, evaluate on the sealed test set:
+For each chosen student, evaluate on the sealed test sets, reported per source (A test, B PIZZA, C if written):
 
 | Condition | What it is |
 |---|---|
@@ -235,7 +240,9 @@ All three accept a state/input, named questions, and choice/score/boolean questi
 
 Expected cost: cents for OpenAI Decisions; Jev depends on its input price (check before running).
 
-## 12. Evaluation (all on the sealed test set unless noted)
+## 12. Evaluation (all on the sealed test sets unless noted, reported per source)
+
+- Every metric is reported separately for Source A (Claude-written test), Source B (PIZZA, items only), and Source C (Julian-written, if any), never only pooled.
 
 - Order exact match (everything correct).
 - Item-level F1: an item counts as correct only if menu item + quantity + size + modifications all match. Also per-component accuracy.
@@ -314,8 +321,8 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 ## 17. Deliverables
 
 - Reproducible repo with a `Makefile`: `make menus`, `make annotate`, `make teacher-bakeoff`, `make synth`, `make label`, `make student-bakeoff`, `make train`, `make eval`, `make router-bench`, `make demo`.
-- Hugging Face release: LoRA adapters + quantized models, model cards, the menus, and the human-written test set (only data Julian and consenting writers created).
-- `REPORT.md`: problem, data strategy (synthetic training vs. human test), the four experiments with results tables and charts, error analysis, cost comparison, limitations.
+- Hugging Face release: LoRA adapters + quantized models, model cards, the menus, and the Source A (and C, if written) evaluation sets. Never PIZZA data (CC-BY-NC, no redistribution).
+- `REPORT.md`: problem, data strategy (synthetic training vs. evaluation Sources A/B/C, review correction rate), the four experiments with results tables and charts, error analysis, cost comparison, limitations.
 - Tests: schema validation, deterministic pricing, menu matching, evidence checking, order-state logic, metrics.
 
 ## 18. Milestones (V1)
@@ -324,7 +331,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 |---|---|---|
 | 0 | AgentDesk inspection; repo layout; `SCHEMA.md`, `TAXONOMY.md`, `ARCHITECTURE.md`, `ANNOTATION_GUIDE.md`; provider/tool interfaces with mocks; `PROGRESS.md` | Versioned contracts, sample conversations, reuse doc with file paths, passing schema tests |
 | 1 | Menus (3 + 1 held-out), pricing engine, order state logic, rules baselines (extraction + routing) | Deterministic tests pass; no model needed |
-| 2 | Annotation tool; Julian writes and labels dev + test sets; test set sealed | Locked split with counts per label and scenario; self-consistency sample scheduled |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev + test (Source A); Julian's review | Locked split with counts per source, label, menu, style and scenario; all dev + ≥25% of test reviewed, correction rate logged; 199 PIZZA cases |
 | 3 | Teacher bake-off | Results table + accuracy-vs-cost chart; teacher chosen by the stated rule; actual cost logged |
 | 4 | Synthetic generation: 200-conversation pilot → audit → 1–2k bulk, labeled by the winning teacher | Data audit, distribution log, drop rate, actual cost |
 | 5 | Student bake-off (zero-shot, local) | License/tooling checks; results table; students chosen |

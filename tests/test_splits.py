@@ -10,12 +10,13 @@ import re
 import pytest
 
 from orderslm import paths
-from orderslm.data import splits
+from orderslm.data import cards, splits
 from orderslm.domain.clock import fixed_clock
 from orderslm.paths import ROOT, SAMPLES, UNSEAL_ENV, SealedSplitError
 from orderslm.schema.annotation import AnnotatedConversation
-from orderslm.schema.conversation import Split
+from orderslm.schema.conversation import Source, Split
 from orderslm.schema.extraction import FieldRef, MissingInfo, MissingReason
+from orderslm.schema.routing import RouterLabel
 
 
 def sample(n: int, split: Split, new_id: str | None = None) -> AnnotatedConversation:
@@ -144,7 +145,7 @@ def fill_test(n_range=range(1, 13)) -> None:
         splits.save(sample(n, Split.test), Split.test, clock=CLOCK)
 
 
-def test_lock_records_hashes_counts_and_schedules_the_blind_relabel(dirs):
+def test_lock_records_hashes_and_counts_and_no_relabel_by_default(dirs):
     _, test = dirs
     fill_test()
     record = splits.lock(clock=CLOCK)
@@ -152,7 +153,16 @@ def test_lock_records_hashes_counts_and_schedules_the_blind_relabel(dirs):
     assert on_disk == record
     assert len(record["files"]) == 12
     assert record["counts"]["test"]["conversations"] == 12
+    assert record["counts"]["test"]["by_source"] == {"human": 12}
+    assert record["self_consistency"] is None
+    assert splits.verify() == []
+
+
+def test_optional_blind_relabel_is_for_human_written_conversations_only(dirs):
+    fill_test()
+    record = splits.lock(clock=CLOCK, relabel_human=True)
     sc = record["self_consistency"]
+    assert sc["source"] == "human"
     assert sc["ids"] == sorted(sc["ids"]) and len(sc["ids"]) == 12  # min(30, 12)
     assert sc["not_before"] == "2026-10-27" and sc["blind"]
     assert splits.verify() == []
@@ -160,9 +170,9 @@ def test_lock_records_hashes_counts_and_schedules_the_blind_relabel(dirs):
 
 def test_relabel_sample_is_fixed_by_seed(dirs):
     fill_test()
-    first = splits.lock(clock=CLOCK)["self_consistency"]["ids"]
+    first = splits.lock(clock=CLOCK, relabel_human=True)["self_consistency"]["ids"]
     (paths._TEST / splits.LOCK_FILE).unlink()
-    assert splits.lock(clock=CLOCK)["self_consistency"]["ids"] == first
+    assert splits.lock(clock=CLOCK, relabel_human=True)["self_consistency"]["ids"] == first
 
 
 def test_lock_refuses_twice_and_refuses_duplicates_across_splits(dirs):
@@ -200,11 +210,101 @@ def test_verify_catches_an_unlogged_edit(dirs):
     assert splits.verify() == ["changed without a logged reason: test-002.json"]
 
 
+# ---- Source A: Claude-written conversations follow a scenario card and are reviewed
+
+
+def card_for(ac: AnnotatedConversation, split: Split, card_id: str) -> cards.ScenarioCard:
+    labels = sorted({r.decision.primary for r in ac.gold_routing})
+    return cards.ScenarioCard(
+        id=card_id,
+        split=split,
+        business_id=ac.conversation.business_id,
+        situation="simple_order",
+        expected_labels=labels,
+        scenarios=ac.scenarios,
+        style=ac.style,
+        features=[],
+        fulfillment="delivery",
+        customer_messages=len(ac.conversation.customer_indices()),
+        persona="test",
+        brief="test card",
+    )
+
+
+def source_a(n: int, split: Split) -> tuple[AnnotatedConversation, cards.ScenarioCard]:
+    card_id = f"a-{split.value}-{n:03d}"
+    ac = sample(n, split, new_id=card_id)
+    conv = ac.conversation.model_copy(update={"source": Source.claude_written})
+    ac = ac.model_copy(update={"conversation": conv, "card_id": card_id, "annotator": "claude-opus-5-5"})
+    return ac, card_for(ac, split, card_id)
+
+
+def write_source_a(split: Split, numbers) -> list[AnnotatedConversation]:
+    pairs = [source_a(n, split) for n in numbers]
+    existing = cards.load(split)
+    cards.write({split: existing + [c for _, c in pairs]}, force=True)
+    for ac, _ in pairs:
+        splits.save(ac, split, clock=CLOCK)
+    return [ac for ac, _ in pairs]
+
+
+def test_claude_written_needs_a_card_id():
+    ac = sample(1, Split.dev)
+    conv = ac.conversation.model_copy(update={"source": Source.claude_written})
+    with pytest.raises(ValueError, match="card_id"):
+        AnnotatedConversation.model_validate(ac.model_copy(update={"conversation": conv}).model_dump())
+
+
+def test_source_a_must_follow_its_card(dirs):
+    ac, card = source_a(12, Split.dev)
+    assert [f.code for f in splits.validate(ac, Split.dev)] == ["UNKNOWN_CARD"]
+    cards.write(
+        {Split.dev: [card.model_copy(update={"expected_labels": [RouterLabel.CANCEL_ORDER]})]}, force=True
+    )
+    assert "CARD_LABELS_MISSING" in [f.code for f in splits.validate(ac, Split.dev)]
+    cards.write({Split.dev: [card]}, force=True)
+    assert [f for f in splits.validate(ac, Split.dev) if f.blocking] == []
+
+
+def test_reviews_are_logged_with_the_correction_rate(dirs):
+    a, b, c = write_source_a(Split.dev, (1, 5, 12))
+    splits.review(a, Split.dev, "julian", clock=CLOCK)  # unchanged
+    fixed = b.model_copy(update={"annotation_notes": "fixed a label"})
+    entry = splits.review(fixed, Split.dev, "julian", clock=CLOCK)
+    assert entry["changed"] and entry["reviewer"] == "julian"
+    rv = splits.review_stats(Split.dev, splits.load_split(Split.dev))
+    assert rv == {
+        "source_a": 3,
+        "reviewed": 2,
+        "reviewed_share": 0.667,
+        "corrected": 1,
+        "correction_rate": 0.5,
+    }
+    with pytest.raises(splits.SplitError, match="saved conversation"):
+        splits.review(source_a(2, Split.dev)[0], Split.dev, "julian")
+
+
+def test_lock_needs_all_dev_and_a_quarter_of_test_reviewed(dirs):
+    dev = write_source_a(Split.dev, (1, 2))
+    test = write_source_a(Split.test, (5, 6, 7, 8, 9))
+    with pytest.raises(splits.SplitError, match="dev review incomplete: 0/2"):
+        splits.lock(clock=CLOCK)
+    for ac in dev:
+        splits.review(ac, Split.dev, "julian", clock=CLOCK)
+    with pytest.raises(splits.SplitError, match="test spot-check below 25%: 0/5"):
+        splits.lock(clock=CLOCK)
+    splits.review(test[0], Split.test, "julian", clock=CLOCK)
+    splits.review(test[1], Split.test, "julian", clock=CLOCK)
+    record = splits.lock(clock=CLOCK)
+    assert record["reviews"]["test"]["reviewed"] == 2 and record["reviews"]["dev"]["correction_rate"] == 0.0
+    assert record["counts"]["test"]["by_source"] == {"claude_written": 5}
+
+
 # ---- guards: the sealed split, the held-out menu and the PIZZA benchmark stay out of other code paths
 
 ALLOWED = {  # regex -> the only modules that may contain it
     r"\btest_split_dir\b": {"paths.py", "data/splits.py"},
-    r"include_held_out=True": {"menus.py", "data/splits.py", "app/main.py"},  # app: test split only
+    r"include_held_out=True": {"menus.py", "data/splits.py", "data/cards.py", "app/main.py"},  # test only
     r"\bUNSEAL_ENV\b": {"paths.py", "data/pizza.py"},
     r"\bload_cases\b": {"data/pizza.py"},
     r"(?<![A-Z_])_TEST\b": {"paths.py"},

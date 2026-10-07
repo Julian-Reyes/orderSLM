@@ -18,6 +18,7 @@ Spec: orderslm-project-plan.md (authoritative). Status: PROGRESS.md. Read PROGRE
 - No real customer chats anywhere in the repo or training data.
 - Never commit third-party datasets (PIZZA is CC-BY-NC-4.0, no redistribution): only download + conversion scripts; data lives in gitignored `data/external/`.
 - Samples (`split: sample`) may be few-shot examples in prompts but never appear in any evaluation.
+- Source A (Claude-written eval chats and their scenario cards) is evaluation data only: never synthetic-generation input or training data. Report every result per source (A, B PIZZA, C).
 
 ## Conventions
 - Python 3.12, Pydantic v2, `uv`. All backend/ML/eval code is Python.

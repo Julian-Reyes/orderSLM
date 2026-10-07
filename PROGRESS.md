@@ -10,7 +10,7 @@ _Last updated 2026-10-07._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool (FastAPI + Vite/Preact); PIZZA conversion script; dev + sealed test sets | 🟡 Tooling done 2026-10-07; waiting on Julian's dev/test conversations, then lock |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 250 scenario cards generated (branch `m2-eval-data`); conversations next |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling | Not started |
 | 5 | Student bake-off | Not started |
@@ -132,11 +132,10 @@ checks, sealed-test guard, 10 annotated samples, docs (SCHEMA, TAXONOMY, ARCHITE
 COSTS). Environment: uv 0.12.23 from its GitHub release (sha256 verified) in `~/.local/bin`, managing
 Python 3.12; `brew install uv` was stopped because it was compiling cmake from source.
 
-## M2 (branch `milestone-2`): tooling done, data pending
+## M2: tooling (merged to main 2026-10-07)
 
-Acceptance (spec §18): "locked split with counts per label and scenario; self-consistency sample scheduled".
-All the tooling is in place and tested; the conversations themselves are Julian's part. M2 closes with
-`make lock-test` once dev (~80) and test (~200) are written and labeled.
+Acceptance (spec §18, revised): locked split with counts per source, label, menu, style and scenario; all dev +
+≥25% of test reviewed, correction rate logged; 199 PIZZA cases.
 
 - **PIZZA benchmark** (`make pizza`, docs/PIZZA.md): test split pinned to commit `814d6d0`, sha256 in
   `data/external/pizza/MANIFEST.json`; 200 of 1,357 orders sampled with seed 20261007 (never filtered).
@@ -164,16 +163,33 @@ All the tooling is in place and tested; the conversations themselves are Julian'
   CC-BY-4.0 (caniuse-lite data), both build-time only; the shipped bundle contains only Preact (MIT).
 - **Checks:** `make check` 273 passed; `npm run build` (tsc + vite) clean. Spend: $0.
 
+### Decisions (Julian, 2026-10-07, M2 review)
+
+1. **Evaluation data is speed-first** (spec §7 rewritten): Source A = Claude-written from scenario cards (dev ~80,
+   test ~170), reviewed by Julian (all dev, ≥25% test, correction rate logged); Source B = the 199 PIZZA cases
+   (external human-written test set); Source C = optional ~30 Julian-written. Week-later blind relabel dropped
+   (optional, Source C only). Every result reported per source.
+2. PIZZA drink sizes stay separate options. 3. "No extra cheese" = no change. 4. No `httpx2` for now.
+5. Fonts decided in M8. 6. M2 tooling merged into main; conversations on branch `m2-eval-data`.
+7. Only `main` lives on GitHub; local `milestone-0`/`milestone-1` deleted (fully merged).
+
+## M2: evaluation data (branch `m2-eval-data`)
+
+- **Contracts:** `conversation@0.3`: `Source.claude_written`; `AnnotatedConversation.card_id` (required exactly
+  for claude_written); new `Scenario` tags `simple_order`, `menu_question`, `delivery_question`,
+  `payment_question`, `refund_request`, `unclear_message`.
+- **Scenario cards** (`orderslm.data.cards`, docs/SPLITS.md): 80 dev (`data/dev/cards.jsonl`) + 170 test (sealed
+  `data/test/cards.jsonl`), seed 20261007; 23 situations with fixed per-split quotas; every router label, style,
+  feature and tricky case in both splits; held-out menu only in test (tested).
+- **Splits:** dev/test accept Source A and C; Source A must follow its card; `review()` + `REVIEWS.jsonl` +
+  correction rate; `lock` requires all dev and ≥25% test reviewed, records per-source counts and review stats,
+  relabel only with `--relabel-human`. API/tool: "Save as reviewed", review badges, review stats.
+- **Checks:** `make check` 286 passed; web `tsc` + build clean.
+- **Next:** write one conversation per card (dev first), validated by the tool's checks; then Julian reviews.
+
 ### Open for Julian (M2)
 
-1. **Write and label** dev ~80 and test ~200 (`make annotate`, `make annotate-test`), then `make lock-test`.
-   The blind relabel opens a week after the lock.
-2. **PIZZA drink variants** (M1 review, item 2): `report.json` → `drink_variant_examples` (`regular`, `small`,
-   `medium`, `large`, `can`, `2_liter`). Variants are kept lossless; say if you want a different mapping.
-3. **"No extra cheese"** converts to no modification (the default amount); 15 cases. Alternative: drop such
-   orders from scoring. Recommend keeping the current rule.
-4. **Starlette 1.7 deprecation warning:** its test client wants `httpx2` instead of `httpx`. Works today;
-   switching is a new dev dependency, so not done without your OK.
-5. **Fonts:** Space Grotesk / JetBrains Mono are named first in the CSS stacks but not bundled (that needs
-   either `@fontsource/*` packages or a Google Fonts request). Fine for the local tool; decide before M8.
-6. GitHub: only `main` showed on origin when I checked; `milestone-0`/`milestone-1` may not have been pushed.
+1. Review the scenario-card summary (counts per label, menu, style, tricky case) before conversations are written.
+2. Rare labels have 2 dev / 4–5 test cards each (HUMAN_REQUEST, ORDER_PROBLEM, ORDER_STATUS, OUT_OF_SCOPE,
+   PAYMENT_CLAIM, REFUND_REQUEST, UNKNOWN), so per-label test metrics for them will be noisy.
+3. Push `main` (4 commits ahead of origin) when you want; `milestone-2` is merged and can be deleted locally.

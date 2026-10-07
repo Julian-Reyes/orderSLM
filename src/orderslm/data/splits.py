@@ -27,11 +27,14 @@ from orderslm.domain.clock import Clock, system_clock
 from orderslm.menus import load_menus
 from orderslm.paths import DEV, test_split_dir
 from orderslm.schema.annotation import AnnotatedConversation
-from orderslm.schema.conversation import Role, Split
+from orderslm.schema.conversation import Role, Source, Split
 from orderslm.schema.routing import ORDER_LABELS
 
 EDITABLE = (Split.dev, Split.test)
+EVAL_SOURCES = (Source.claude_written, Source.human)
 LOCK_FILE = "LOCK.json"
+REVIEWS_FILE = "REVIEWS.jsonl"
+TEST_REVIEW_SHARE = 0.25  # Julian spot-checks at least this share of Source A test; all of dev
 CHANGES_FILE = "CHANGES.jsonl"
 RELABEL_DIR = "relabel"
 RELABEL_COUNT = 30
@@ -74,8 +77,12 @@ def validate(ac: AnnotatedConversation, split: Split) -> list[Finding]:
         out.append(
             Finding("WRONG_SPLIT", f"conversation.split is {conv.split.value}, saving to {split.value}")
         )
-    if conv.source.value != "human":
-        out.append(Finding("NOT_HUMAN", "dev and test conversations are human-written"))
+    if conv.source not in EVAL_SOURCES:
+        out.append(
+            Finding("WRONG_SOURCE", "dev/test are Claude-written (Source A) or human-written (Source C)")
+        )
+    if conv.source is Source.claude_written:
+        out += _check_card(ac, split)
     menus = load_menus(include_held_out=True)
     menu = menus.get(conv.business_id)
     if menu is None:
@@ -109,6 +116,30 @@ def validate(ac: AnnotatedConversation, split: Split) -> list[Finding]:
                 "GOLD_WITHOUT_ORDER_LABEL", "gold_extraction is set but no message has an order label", False
             )
         )
+    return out
+
+
+def _check_card(ac: AnnotatedConversation, split: Split) -> list[Finding]:
+    """Source A: the conversation must follow its scenario card (one conversation per card)."""
+    from .cards import load as load_cards  # cards imports this module
+
+    card = next((c for c in load_cards(split) if c.id == ac.card_id), None)
+    if card is None:
+        return [Finding("UNKNOWN_CARD", f"no {split.value} scenario card {ac.card_id!r}")]
+    out: list[Finding] = []
+    if ac.conversation.id != card.id:
+        out.append(Finding("CARD_ID_MISMATCH", f"conversation id must be the card id {card.id!r}"))
+    if ac.conversation.business_id != card.business_id:
+        out.append(Finding("CARD_BUSINESS_MISMATCH", f"card {card.id} is for {card.business_id}"))
+    routed = {lab for r in ac.gold_routing for lab in (r.decision.primary, r.decision.secondary) if lab}
+    if missing := [lab.value for lab in card.expected_labels if lab not in routed]:
+        out.append(Finding("CARD_LABELS_MISSING", f"card {card.id} expects labels {missing}"))
+    if missing_tags := [t.value for t in card.scenarios if t not in ac.scenarios]:
+        out.append(
+            Finding("CARD_SCENARIOS_MISSING", f"card {card.id} expects scenarios {missing_tags}", False)
+        )
+    if ac.style is not card.style:
+        out.append(Finding("CARD_STYLE_DIFFERS", f"card {card.id} asks for style {card.style.value}", False))
     return out
 
 
@@ -170,6 +201,58 @@ def save(
     return path
 
 
+def review(
+    ac: AnnotatedConversation,
+    split: Split,
+    reviewer: str,
+    *,
+    change_reason: str | None = None,
+    clock: Clock | None = None,
+) -> dict:
+    """Julian's review of a saved conversation: saves his version (edited or not) and logs whether the
+    gold changed, for the correction rate (spec §7)."""
+    if not reviewer.strip():
+        raise SplitError("a review needs the reviewer's name")
+    root = split_dir(split)
+    path = root / f"{ac.conversation.id}.json"
+    if not path.exists():
+        raise SplitError("only a saved conversation can be reviewed")
+    before = path.read_text()
+    save(ac, split, change_reason=change_reason, clock=clock)
+    after = path.read_text()
+    entry = {
+        "id": ac.conversation.id,
+        "reviewer": reviewer,
+        "at": (clock or system_clock())().isoformat(),
+        "changed": before != after,
+        "sha256_before": _sha(before),
+        "sha256_after": _sha(after),
+    }
+    with (root / REVIEWS_FILE).open("a") as f:
+        f.write(json.dumps(entry) + "\n")
+    return entry
+
+
+def review_log(split: Split) -> list[dict]:
+    path = split_dir(split) / REVIEWS_FILE
+    return [json.loads(x) for x in path.read_text().splitlines() if x.strip()] if path.exists() else []
+
+
+def review_stats(split: Split, convs: list[AnnotatedConversation]) -> dict:
+    """Per Source A conversation: reviewed at least once; corrected = any review changed it."""
+    ids = {ac.conversation.id for ac in convs if ac.conversation.source is Source.claude_written}
+    log = [e for e in review_log(split) if e["id"] in ids]
+    reviewed = {e["id"] for e in log}
+    corrected = {e["id"] for e in log if e["changed"]}
+    return {
+        "source_a": len(ids),
+        "reviewed": len(reviewed),
+        "reviewed_share": round(len(reviewed) / len(ids), 3) if ids else 0.0,
+        "corrected": len(corrected),
+        "correction_rate": round(len(corrected) / len(reviewed), 3) if reviewed else None,
+    }
+
+
 def conversation_files(root: Path) -> list[Path]:
     return sorted(p for p in root.glob("*.json") if p.name != LOCK_FILE)
 
@@ -208,6 +291,7 @@ def stats(convs: list[AnnotatedConversation]) -> dict:
     customer_msgs = [len(ac.conversation.customer_indices()) for ac in convs]
     return {
         "conversations": len(convs),
+        "by_source": dict(sorted(Counter(ac.conversation.source.value for ac in convs).items())),
         "customer_messages": sum(customer_msgs),
         "by_business": dict(sorted(Counter(ac.conversation.business_id for ac in convs).items())),
         "held_out_menu": sum(menus[ac.conversation.business_id].held_out for ac in convs),
@@ -252,8 +336,10 @@ def near_duplicates(
 # ---------------------------------------------------------------- lock
 
 
-def lock(clock: Clock | None = None, seed: int = RELABEL_SEED) -> dict:
-    """Seal the test split: file hashes, counts, cross-split dedup, and the blind relabel sample.
+def lock(clock: Clock | None = None, *, relabel_human: bool = False, seed: int = RELABEL_SEED) -> dict:
+    """Seal the test split: file hashes, counts, cross-split dedup, review coverage and correction rate.
+    Needs every Source A dev conversation reviewed and >= 25% of Source A test. A blind relabel is
+    scheduled only on request, and only for human-written (Source C) test conversations.
     Refuses if already locked or if any check fails. Needs ORDERSLM_UNSEAL_TEST."""
     root = split_dir(Split.test)
     if (root / LOCK_FILE).exists():
@@ -270,22 +356,34 @@ def lock(clock: Clock | None = None, seed: int = RELABEL_SEED) -> dict:
     ]
     dupes = near_duplicates(test) + near_duplicates(test, dev)
     problems += [f"near-duplicate {x} ~ {y} ({s})" for x, y, s in dupes]
+    reviews = {"dev": review_stats(Split.dev, dev), "test": review_stats(Split.test, test)}
+    if reviews["dev"]["reviewed"] < reviews["dev"]["source_a"]:
+        problems.append(f"dev review incomplete: {reviews['dev']['reviewed']}/{reviews['dev']['source_a']}")
+    if reviews["test"]["source_a"] and reviews["test"]["reviewed_share"] < TEST_REVIEW_SHARE:
+        problems.append(
+            f"test spot-check below {TEST_REVIEW_SHARE:.0%}: {reviews['test']['reviewed']}/{reviews['test']['source_a']}"
+        )
     if problems:
         raise SplitError("can't lock: " + "; ".join(problems))
     now = (clock or system_clock())()
-    ids = sorted(ac.conversation.id for ac in test)
-    relabel = sorted(random.Random(seed).sample(ids, min(RELABEL_COUNT, len(ids))))
     record = {
         "locked_at": now.isoformat(),
         "files": {p.name: _sha(p.read_bytes()) for p in conversation_files(root)},
         "counts": {"test": stats(test), "dev": stats(dev)},
-        "self_consistency": {
-            "ids": relabel,
+        "reviews": reviews,
+        "self_consistency": None,
+    }
+    human = sorted(ac.conversation.id for ac in test if ac.conversation.source is Source.human)
+    if relabel_human:
+        if not human:
+            raise SplitError("no human-written (Source C) test conversations to relabel")
+        record["self_consistency"] = {
+            "ids": sorted(random.Random(seed).sample(human, min(RELABEL_COUNT, len(human)))),
             "seed": seed,
             "not_before": (now + RELABEL_AFTER).date().isoformat(),
             "blind": True,
-        },
-    }
+            "source": "human",
+        }
     record["sha256_all"] = _sha(json.dumps(record["files"], sort_keys=True))
     (root / LOCK_FILE).write_text(json.dumps(record, indent=2) + "\n")
     return record
@@ -316,7 +414,8 @@ def main(argv: list[str] | None = None) -> None:
     s = sub.add_parser("stats", help="counts per label, scenario, business, style")
     s.add_argument("split", choices=[x.value for x in EDITABLE])
     sub.add_parser("dupes", help="near-duplicates within dev (and dev vs test if unsealed)")
-    sub.add_parser("lock", help="seal the test split (needs ORDERSLM_UNSEAL_TEST)")
+    lk = sub.add_parser("lock", help="seal the test split (needs ORDERSLM_UNSEAL_TEST)")
+    lk.add_argument("--relabel-human", action="store_true", help="schedule a blind relabel of Source C")
     sub.add_parser("verify", help="check test files against LOCK.json")
     args = ap.parse_args(argv)
     if args.cmd == "stats":
@@ -325,10 +424,14 @@ def main(argv: list[str] | None = None) -> None:
         for x, y, score in near_duplicates(load_split(Split.dev)):
             print(f"{score:.3f}  {x}  {y}")
     elif args.cmd == "lock":
-        r = lock()
-        sc = r["self_consistency"]
+        r = lock(relabel_human=args.relabel_human)
         print(f"locked {len(r['files'])} test conversations; sha256 {r['sha256_all'][:16]}")
-        print(f"blind relabel: {len(sc['ids'])} conversations, not before {sc['not_before']}")
+        for split, rv in r["reviews"].items():
+            print(
+                f"{split} review: {rv['reviewed']}/{rv['source_a']} reviewed, correction rate {rv['correction_rate']}"
+            )
+        if sc := r["self_consistency"]:
+            print(f"blind relabel (Source C): {len(sc['ids'])} conversations, not before {sc['not_before']}")
     elif args.cmd == "verify":
         problems = verify()
         print("\n".join(problems) or "test split matches LOCK.json")

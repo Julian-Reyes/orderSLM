@@ -217,6 +217,15 @@ export function App() {
                   <div class="muted small">
                     {r.business_id} · {r.messages} msg · {r.style}
                   </div>
+                  <div class="small">
+                    {r.source === "claude_written" ? (
+                      <span class={r.reviewed ? (r.corrected ? "badge warn" : "badge ok") : "badge"}>
+                        {r.reviewed ? (r.corrected ? "reviewed · corrected" : "reviewed") : "needs review"}
+                      </span>
+                    ) : (
+                      <span class="badge">{r.source}</span>
+                    )}
+                  </div>
                   <div class="chips">
                     {r.scenarios.map((s) => (
                       <span class="chip">{s}</span>
@@ -235,10 +244,13 @@ export function App() {
               menus={menus}
               initial={current}
               locked={split === "test" && meta.test_locked}
-              save={async (a, reason) => {
-                const r = await api.save(split, a, reason);
+              reviewer={rows.some((r) => r.id === current.conversation.id) ? annotator : undefined}
+              save={async (a, reason, reviewer) => {
+                const r = await api.save(split, a, reason, reviewer);
                 store.set(`orderslm:draft:${split}:${a.conversation.id}`, null);
-                setNotice(`Saved ${r.saved}`);
+                setNotice(
+                  r.review ? `Reviewed ${r.saved}: ${r.review.changed ? "corrected" : "no change"}` : `Saved ${r.saved}`,
+                );
                 refresh();
               }}
               onError={setError}
@@ -261,11 +273,12 @@ interface EditorProps {
   initial: Annotated;
   locked: boolean;
   blindConversation?: boolean; // relabel: messages are read-only
-  save: (a: Annotated, changeReason?: string) => Promise<void>;
+  reviewer?: string; // set for saved conversations: enables "Save as reviewed"
+  save: (a: Annotated, changeReason?: string, reviewer?: string) => Promise<void>;
   onError: (e: string) => void;
 }
 
-function Editor({ split, meta, menus, initial, locked, blindConversation, save, onError }: EditorProps) {
+function Editor({ split, meta, menus, initial, locked, blindConversation, reviewer, save, onError }: EditorProps) {
   const [a, setA] = useState<Annotated>(initial);
   const [goldText, setGoldText] = useState(() => JSON.stringify(initial.gold_extraction, null, 2));
   const [goldError, setGoldError] = useState<string | null>(null);
@@ -337,10 +350,10 @@ function Editor({ split, meta, menus, initial, locked, blindConversation, save, 
     if (quote.trim()) setEvidence({ message_index: index, quote });
   };
 
-  const doSave = async () => {
+  const doSave = async (asReviewer?: string) => {
     setSaving(true);
     try {
-      await save(a, locked ? reason : undefined);
+      await save(a, locked ? reason : undefined, asReviewer);
     } catch (e) {
       onError((e as Error).message);
     } finally {
@@ -577,9 +590,28 @@ function Editor({ split, meta, menus, initial, locked, blindConversation, save, 
           {locked && !blindConversation && (
             <input class="grow" placeholder="reason for changing locked gold (logged)" value={reason} onInput={(e) => setReason(e.currentTarget.value)} />
           )}
-          <button class="primary" disabled={saving || !check?.valid || !!goldError || (locked && !blindConversation && !reason.trim())} onClick={doSave}>
-            {saving ? "Saving…" : "Save"}
-          </button>
+          {(() => {
+            const blocked = saving || !check?.valid || !!goldError || (locked && !blindConversation && !reason.trim());
+            return (
+              <>
+                {reviewer && (
+                  <button disabled={blocked} onClick={() => doSave()}>
+                    {saving ? "Saving…" : "Save"}
+                  </button>
+                )}
+                {reviewer && a.conversation.source === "claude_written" && (
+                  <button class="primary" disabled={blocked} title="logs the review; edits count as a correction" onClick={() => doSave(reviewer)}>
+                    Save as reviewed ({reviewer})
+                  </button>
+                )}
+                {!reviewer && (
+                  <button class="primary" disabled={blocked} onClick={() => doSave()}>
+                    {saving ? "Saving…" : "Save new"}
+                  </button>
+                )}
+              </>
+            );
+          })()}
         </div>
       </section>
     </main>
@@ -693,14 +725,14 @@ function CheckPanel({ check }: { check: CheckResult | null }) {
 // ---------------------------------------------------------------- stats and relabel
 
 function Stats({ split }: { split: string }) {
-  const [data, setData] = useState<{ stats: Json; near_duplicates: [string, string, number][] } | null>(null);
+  const [data, setData] = useState<{ stats: Json; reviews: Json; near_duplicates: [string, string, number][] } | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => {
     api.stats(split).then(setData).catch((e) => setErr(e.message));
   }, [split]);
   if (err) return <main class="pad err">{err}</main>;
   if (!data) return <main class="pad muted">Loading…</main>;
-  const s = data.stats as Record<string, Json>;
+  const s: Record<string, Json> = { ...(data.stats as Record<string, Json>), review: data.reviews };
   return (
     <main class="pad stats">
       <h2>

@@ -60,7 +60,7 @@ orderslm/
 │   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
-│   ├── data/                     splits.py (dev/test storage, lock), pizza.py + sexp.py (PIZZA benchmark); (M4) synthetic generation
+│   ├── data/                     splits.py (dev/test storage, review, lock), cards.py (Source A scenario cards), pizza.py + sexp.py (PIZZA); (M4) synthetic
 │   ├── eval/                     (M3) metrics.py, stats.py, estimate.py, store.py, report.py, judge_agreement.py
 │   ├── train/                    (M6) LoRA configs and scripts (run on Colab/Kaggle)
 │   ├── tracing.py                (M6/M8) step traces to JSONL/SQLite
@@ -68,8 +68,8 @@ orderslm/
 ├── data/
 │   ├── samples/                  conversations/: annotated examples (split "sample": few-shot only, never evaluated)
 │   ├── menus/                    3 business menus, held_out/ (1 test-only menu)
-│   ├── dev/                      (M2) ~80 human-written, labeled
-│   ├── test/                     (M2) ~200 human-written, SEALED (paths.test_split_dir guard)
+│   ├── dev/                      (M2) Source A dev: ~80 Claude-written from cards.jsonl, reviewed
+│   ├── test/                     (M2) Source A test ~170 (+ optional Source C), SEALED (paths.test_split_dir guard)
 │   ├── synthetic/                (M4) pilot + bulk, with distribution logs
 │   └── external/                 (M2) third-party downloads, gitignored, never committed (PIZZA: CC-BY-NC-4.0)
 ├── runs/                         (M3) committed eval outputs: manifest + raw outputs + metrics + report
@@ -132,7 +132,7 @@ milestones exit with an error today. Anything that spends money prints an estima
 | 1 | `make test` | Pricing, matching, order-state, rules-baseline tests. |
 | 2 ✅ | `make pizza` | Download the PIZZA test split pinned to a commit, sample 200 orders (fixed seed), generate the PIZZA benchmark catalog, convert (docs/PIZZA.md). Everything under the gitignored `data/external/pizza/`; only the script is committed (CC-BY-NC-4.0). |
 | 2 ✅ | `make annotate` / `make annotate-test` | Local annotation tool on 127.0.0.1:8765 (FastAPI + Vite/Preact); validates on every edit, blind relabel tab (docs/SPLITS.md). |
-| 2 ✅ | `make lock-test` / `make verify-test` / `make split-stats` | Seal the test split: hashes, counts per label/scenario, dedup, 30-conversation blind relabel scheduled (docs/SPLITS.md). |
+| 2 ✅ | `make lock-test` / `make verify-test` / `make split-stats` | Seal the test split: hashes, counts per source/label/scenario, dedup, review coverage + correction rate (docs/SPLITS.md). |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |
 | 4 | `make synth ARGS="--pilot 200"` | Generate pilot conversations (generator model ≠ teacher), dedup, distribution log. |
 | 4 | `make label ARGS="--pilot"` / `make label` | Teacher labels (batch API where available), consistency checks, drop-rate log, actual cost. |

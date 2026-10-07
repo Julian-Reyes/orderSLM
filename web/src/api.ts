@@ -61,9 +61,21 @@ export interface Annotated {
   gold_extraction: Json;
   gold_routing: { message_index: number; decision: Decision }[];
   annotator: string;
+  card_id?: string | null;
   annotation_notes?: string | null;
 }
-export interface Row { id: string; business_id: string; scenarios: string[]; style: string; messages: number; annotator: string }
+export interface Row {
+  id: string;
+  business_id: string;
+  scenarios: string[];
+  style: string;
+  messages: number;
+  annotator: string;
+  source: string;
+  card_id: string | null;
+  reviewed: boolean;
+  corrected: boolean;
+}
 export interface Finding { code: string; message: string; blocking: boolean }
 export interface CheckResult {
   valid: boolean;
@@ -93,9 +105,14 @@ export const api = {
   list: (split: string) => call<Row[]>("GET", `/api/${split}/conversations`),
   get: (split: string, id: string) => call<Annotated>("GET", `/api/${split}/conversations/${id}`),
   check: (split: string, a: Annotated) => call<CheckResult>("POST", `/api/${split}/check`, a),
-  save: (split: string, a: Annotated, change_reason?: string) =>
-    call<{ saved: string }>("PUT", `/api/${split}/conversations/${a.conversation.id}`, { annotated: a, change_reason }),
-  stats: (split: string) => call<{ stats: Json; near_duplicates: [string, string, number][] }>("GET", `/api/${split}/stats`),
+  save: (split: string, a: Annotated, change_reason?: string, reviewer?: string) =>
+    call<{ saved: string; review?: { changed: boolean } }>("PUT", `/api/${split}/conversations/${a.conversation.id}`, {
+      annotated: a,
+      change_reason,
+      review: reviewer ? { reviewer } : undefined,
+    }),
+  stats: (split: string) =>
+    call<{ stats: Json; reviews: Json; near_duplicates: [string, string, number][] }>("GET", `/api/${split}/stats`),
   relabelList: () => call<{ ids: string[]; not_before: string; done: string[] }>("GET", "/api/relabel"),
   relabelGet: (id: string) => call<{ conversation: Conversation }>("GET", `/api/relabel/${id}`),
   relabelSave: (a: Annotated) =>

@@ -90,14 +90,23 @@ def test_ids_in_urls_are_validated(dirs):
     assert client().get("/api/dev/conversations/LOCK").status_code == 400
 
 
-def test_blind_relabel_waits_a_week_and_never_sends_gold(dirs, monkeypatch):
+def test_no_relabel_unless_scheduled(dirs, monkeypatch):
+    monkeypatch.setenv(UNSEAL_ENV, "annotate test")
+    c = client()
+    c.put("/api/test/conversations/test-001", json={"annotated": sample_json(1, "test")})
+    splits.lock(clock=fixed_clock())
+    r = client("2027-01-01T00:00:00+00:00").get("/api/relabel")
+    assert r.status_code == 409 and "no blind relabel" in r.text
+
+
+def test_optional_human_relabel_waits_a_week_and_never_sends_gold(dirs, monkeypatch):
     monkeypatch.setenv(UNSEAL_ENV, "annotate test")
     c = client()
     for n in range(1, 6):
         assert c.put(
             f"/api/test/conversations/test-{n:03d}", json={"annotated": sample_json(n, "test")}
         ).is_success
-    splits.lock(clock=fixed_clock("2026-10-20T15:00:00+00:00"))
+    splits.lock(clock=fixed_clock("2026-10-20T15:00:00+00:00"), relabel_human=True)
     assert c.get("/api/relabel").status_code == 409  # opens 2026-10-27
     later = client("2026-10-27T09:00:00+00:00")
     listing = later.get("/api/relabel").json()

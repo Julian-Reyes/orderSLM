@@ -24,8 +24,13 @@ class Split(StrEnum):
 
 
 class Source(StrEnum):
-    human = "human"
-    synthetic = "synthetic"
+    """Who wrote the conversation. Every result is reported per evaluation source (spec §7)."""
+
+    human = "human"  # Source C (Julian) and PIZZA (Source B, split "benchmark")
+    claude_written = (
+        "claude_written"  # Source A: evaluation-only, written from a scenario card, reviewed by Julian
+    )
+    synthetic = "synthetic"  # training data (M4)
 
 
 class Message(Strict):
