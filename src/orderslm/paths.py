@@ -15,6 +15,7 @@ SAMPLES = DATA / "samples"
 MENUS = DATA / "menus"  # M1
 DEV = DATA / "dev"  # M2
 _TEST = DATA / "test"  # M2, sealed
+EXTERNAL = DATA / "external"  # third-party downloads + anything derived from them, gitignored
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)
 
 UNSEAL_ENV = "ORDERSLM_UNSEAL_TEST"

@@ -20,6 +20,7 @@ class Split(StrEnum):
     dev = "dev"
     test = "test"
     synthetic = "synthetic"
+    benchmark = "benchmark"  # third-party eval set (PIZZA), data/external only; evaluation-only
 
 
 class Source(StrEnum):

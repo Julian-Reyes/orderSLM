@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 # prompts, or grading. Every run logs these (spec §19).
 EXTRACTION_SCHEMA_VERSION = "extraction@0.2"  # 0.2: Modification.amount
 ROUTER_SCHEMA_VERSION = "router@0.1"
-CONVERSATION_SCHEMA_VERSION = "conversation@0.1"
+CONVERSATION_SCHEMA_VERSION = "conversation@0.2"  # 0.2: Split.benchmark
 MENU_SCHEMA_VERSION = (
     "menu@0.3"  # 0.2: name_required_for_pickup; 0.3: ingredients/add-ons, aliases, exclusive groups
 )

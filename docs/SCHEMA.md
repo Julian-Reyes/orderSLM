@@ -8,7 +8,7 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 | Extraction output (model proposal) | `extraction@0.2` | `schema/extraction.py` |
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
-| Conversation | `conversation@0.1` | `schema/conversation.py` |
+| Conversation | `conversation@0.2` | `schema/conversation.py` |
 | Menu catalog | `menu@0.3` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
