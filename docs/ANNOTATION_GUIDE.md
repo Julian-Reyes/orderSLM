@@ -57,14 +57,16 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   Delivery instructions ("ring the side door") go in `notes`, not the address.
 - Payment: `card`, `cash`, `other`, `unknown`. "change for a 50" → `change_for_cents: 5000`.
   "I already paid" → `customer_claims_paid: true` (a claim; staff verify it). Unknown payment → `payment_method / missing`.
-- Customer name: only when the customer gives it. Not required in V1 (don't add it to missing).
+- Customer name: only when the customer gives it. Optional, except for pickup orders at a business with
+  `name_required_for_pickup: true` (menu setting): there a missing name is `customer_name / missing`.
 - `customer_decision`: `confirmed` only when the customer agrees to a summary of the **current** order.
   A change after confirming resets it to `pending` (the new order needs a new yes).
 
 ### What counts as missing (V1)
 Missing (add to `missing_or_ambiguous`): no items; off-menu or ambiguous item; quantity unclear; required
 variant or combo choice not stated; fulfillment method unknown; delivery without address; payment unknown;
-an ambiguous time. Not missing: name, time when not mentioned, size when a default exists.
+an ambiguous time; no name on a pickup order when the business requires one. Not missing: name otherwise,
+time when not mentioned, size when a default exists.
 
 ### Clarification question
 One natural question covering **everything** in `missing_or_ambiguous`, in the conversation's language,

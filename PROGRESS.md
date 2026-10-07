@@ -66,7 +66,8 @@ tests/  __init__.py conftest.py test_extraction_schema.py test_samples.py test_t
 
 ## Checks run
 
-- `make check` → `ruff check` clean, `ruff format --check` clean, **pytest: 100 passed**.
+- `make check` → `ruff check` clean, `ruff format --check` clean, **pytest: 102 passed** (after recording
+  the decisions below; 100 at the M0 commit).
 - Toolchain: Python 3.12.15 (uv-managed), pydantic 2.13.5, pytest 9.1.1, ruff 0.16.10, uv 0.12.23.
 - Tests cover: schema rules (identity, slots, evidence, clarification, pickup/address, cash change,
   cancellation), no price fields + extra-field rejection on every contract, language-neutral enum codes,
@@ -82,23 +83,24 @@ tests/  __init__.py conftest.py test_extraction_schema.py test_samples.py test_t
   (sha256 verified) to `~/.local/bin`; it manages Python 3.12 and the project venv (`.venv`).
 - `requires-python >=3.12` (Julia-1 needs ≥ 3.11; 3.12 for `type` aliases).
 
-## Open questions (for Julian)
+## Decisions (Julian, 2026-10-07, answers to the M0 open questions)
 
-1. **Snapshot vs. patch.** The spec says the extractor outputs an "order patch". M0's contract has the
-   model output the full order snapshot; code computes the patch by diffing against the draft (easier for
-   small models, exact-match gradable, can't be mis-applied). OK, or should the model emit patch ops?
-2. **Sample menus.** Reuse Corner Patty (burgers) and Halfmoon Pizza as 2 of the 3 M1 business menus
-   (plus a café/bakery and a held-out menu), or start fresh?
-3. **Customer name.** Treated as optional in V1 (never "missing"). Should any business require it for pickup?
-4. **Samples were written by Claude**, not Julian. They're labeled `split: sample` and are examples only.
-   Fine to use them as few-shot examples in prompts later (they're not dev/test)?
-5. **Sealed ≠ secret.** The test set will be committed (and released on Hugging Face per spec §17);
-   "sealed" is enforced in code (guard + M2 grep test), not by hiding files. Agreed?
-6. **Frontend stack (M8):** Vite + Preact + TypeScript, FastAPI backend. New dependencies, to confirm
-   when M8 starts. Proposed design (paper-ticket "order counter", mustard/cobalt/ink, Space Grotesk +
-   JetBrains Mono) is in docs/ARCHITECTURE.md.
-7. **Prices** in the spec were not re-verified in M0 (no integration yet); each will be checked against the
-   official page before its first paid run (docs/COSTS.md).
+1. **Snapshot output approved:** the model outputs the full order; code derives the patch.
+2. **Menus:** Corner Patty and Halfmoon Pizza become 2 of the 3 real menus. The pizzeria menu must cover
+   the toppings, sizes and drinks used in the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset)
+   so it can be converted in M2. The held-out menu must be new.
+3. **Customer name** stays optional in the schema. Added the per-business setting
+   `name_required_for_pickup` (menu schema `menu@0.2`, default false, tested); M1 enables it for one business
+   so missing-name clarifications get tested. Annotation guide and SCHEMA.md updated.
+4. **Samples** may be few-shot examples but never appear in any evaluation (rule in CLAUDE.md; the M3 eval
+   loader must reject `split: sample`, with a test).
+5. **Test sets are committed**, sealing is enforced in code. **Exception: PIZZA data is never committed**
+   (CC-BY-NC-4.0, no redistribution): only a download + conversion script. `data/external/` is gitignored
+   and a test fails if anything under it is tracked. The license will be checked against the dataset's own
+   LICENSE file when the script is written (M2).
+6. **Frontend stack approved** (Vite + Preact + TypeScript, FastAPI). Set up in **M2** for the
+   annotation/review tool, not M8. ARCHITECTURE.md and AGENTDESK_REUSE.md updated.
+7. **Prices** are re-verified against each provider's official page before its first paid run.
 
 ## Next: Milestone 1
 
@@ -107,3 +109,9 @@ Menus (3 businesses incl. a pizzeria with half-and-half and a café/bakery, + 1 
 rule, delivery fee/minimum) → `Quote`; `core/state.py` order transitions; `core/diff.py` snapshot → patch;
 `core/replies.py` templates from verified results; rules baselines (regex + fuzzy menu matching extractor,
 keyword router) implementing the M0 interfaces; deterministic tests. No model, no spend.
+Also from the decisions: the pizzeria menu covers the PIZZA dataset's toppings, sizes and drinks (to be
+checked against the dataset's vocabulary; reading it for this is fine, committing it is not); a new held-out
+menu; `name_required_for_pickup` enabled for one business.
+
+**M2 additions:** PIZZA download + conversion script (data stays in `data/external/`); FastAPI + Vite/Preact
+set up for the annotation/review tool.

@@ -9,7 +9,7 @@ Code is the source of truth: `src/shoproute/schema/`. This page explains the des
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
 | Conversation | `conversation@0.1` | `schema/conversation.py` |
-| Menu catalog | `menu@0.1` | `schema/menu.py` |
+| Menu catalog | `menu@0.2` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
 
@@ -130,11 +130,12 @@ staff/payment systems), `HandoffTicket`, and `ToolOk[T] | ToolErr` (`error.code`
 Order statuses: `draft → awaiting_confirmation → new → preparing → ready → completed`, or `cancelled`.
 Allowed transitions are implemented in M1.
 
-## Menu catalog (`menu@0.1`)
+## Menu catalog (`menu@0.2`)
 
 Business id, currency, timezone, hours, delivery policy (`fee_cents`, `min_order_cents`), modifiers
 (`add` with price, `remove` free), items with aliases, base price, variants (price deltas, optional default),
-allowed modifiers, `splittable`, combo slots. `held_out: true` marks the test-only menu. References are
+allowed modifiers, `splittable`, combo slots. `held_out: true` marks the test-only menu.
+`name_required_for_pickup` (added in 0.2) makes a missing name on a pickup order a `customer_name / missing` entry. References are
 validated (unknown modifier or combo choice ids fail). Samples: `data/samples/menus/`.
 
 ## Annotated conversation

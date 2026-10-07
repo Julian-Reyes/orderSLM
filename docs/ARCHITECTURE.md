@@ -59,19 +59,20 @@ shoproute/
 │   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
-│   ├── data/                     (M2/M4) loaders, split builder, synthetic generation, dedup
+│   ├── data/                     (M2/M4) loaders, split builder, PIZZA download + conversion, synthetic generation, dedup
 │   ├── eval/                     (M3) metrics.py, stats.py, estimate.py, store.py, report.py, judge_agreement.py
 │   ├── train/                    (M6) LoRA configs and scripts (run on Colab/Kaggle)
 │   ├── tracing.py                (M6/M8) step traces to JSONL/SQLite
-│   └── app/                      (M8) FastAPI demo API: chat simulator, tickets, comparison
+│   └── app/                      (M2) FastAPI app: annotation API first; chat simulator, tickets, comparison in M8
 ├── data/
 │   ├── samples/                  M0 examples: menus/ + conversations/ (split "sample", never scored)
 │   ├── menus/                    (M1) 3 business menus + 1 held-out menu
 │   ├── dev/                      (M2) ~80 human-written, labeled
 │   ├── test/                     (M2) ~200 human-written, SEALED (paths.test_split_dir guard)
-│   └── synthetic/                (M4) pilot + bulk, with distribution logs
+│   ├── synthetic/                (M4) pilot + bulk, with distribution logs
+│   └── external/                 (M2) third-party downloads, gitignored, never committed (PIZZA: CC-BY-NC-4.0)
 ├── runs/                         (M3) committed eval outputs: manifest + raw outputs + metrics + report
-├── web/                          (M8) frontend
+├── web/                          (M2) frontend: annotation/review tool first, demo pages in M8
 ├── docs/
 └── tests/
 ```
@@ -91,7 +92,10 @@ live ticket store. No Postgres.
 Every model-backed extractor parses through `parse_model_output`, which never raises: invalid JSON is kept
 as `raw_text` + `error`, so JSON-validity rates come from saved outputs.
 
-## Frontend (M8): own visual design
+## Frontend (approved; set up in M2): own visual design
+
+The annotation/review tool is needed in M2, so the frontend (Vite + Preact + TypeScript) and FastAPI
+app are set up then; the demo pages (chat simulator, ticket board, comparison, results) follow in M8.
 
 Lightweight: **Vite + Preact + TypeScript**, plain CSS with custom properties, no component library.
 Served as a static build (GitHub Pages) reading exported JSON, plus a local "live" mode against the FastAPI
@@ -125,7 +129,8 @@ milestones exit with an error today. Anything that spends money prints an estima
 |---|---|---|
 | 1 | `make menus` | Validate `data/menus/*.json` (3 + held-out), print item/variant/modifier counts. |
 | 1 | `make test` | Pricing, matching, order-state, rules-baseline tests. |
-| 2 | `make annotate` | Local annotation tool (writes AnnotatedConversation JSON; blind relabel mode for the 30-conversation self-consistency check). |
+| 2 | `uv run python -m shoproute.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) and convert it to AnnotatedConversation drafts against the pizzeria menu. Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
+| 2 | `make annotate` | Local annotation tool (FastAPI + Vite/Preact) (writes AnnotatedConversation JSON; blind relabel mode for the 30-conversation self-consistency check). |
 | 2 | `uv run python -m shoproute.data.split --seal` | Lock dev/test, write counts per label/scenario, record test-file hashes. |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |
 | 4 | `make synth ARGS="--pilot 200"` | Generate pilot conversations (generator model ≠ teacher), dedup, distribution log. |
@@ -134,4 +139,4 @@ milestones exit with an error today. Anything that spends money prints an estima
 | 6 | `make train` | Prints/exports the Colab/Kaggle notebook + config; training runs there (LoRA; QLoRA only if needed). |
 | 6 | `make eval ARGS="--split test"` | Requires `SHOPROUTE_UNSEAL_TEST=<reason>`; zero-shot vs few-shot vs fine-tuned vs teacher vs rules. |
 | 7 | `make router-bench` | Rules vs Julia-1 vs Jev vs OpenAI Decisions; 3 repeats, option-order shuffles, latency, cost. |
-| 8 | `make demo` | FastAPI app + Vite dev server; `make site` exports the static results site. |
+| 8 | `make demo` | Demo pages on the M2 FastAPI app + Vite frontend; `make site` exports the static results site. |

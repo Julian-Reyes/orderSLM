@@ -9,6 +9,9 @@ __pycache__/
 # Record/replay cache of provider responses (M3+). Large and regenerable; eval outputs in runs/ are committed.
 .llm-cache/
 
+# Third-party datasets (e.g. PIZZA, CC-BY-NC-4.0: no redistribution). Only download/convert scripts are committed.
+data/external/
+
 # Model weights, adapters and quantized files (M5+) go to Hugging Face, not git.
 models/
 *.gguf

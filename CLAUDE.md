@@ -16,6 +16,8 @@ Spec: shoproute-project-plan.md (authoritative). Status: PROGRESS.md. Read PROGR
 - The test split is sealed: only `shoproute.paths.test_split_dir()` reaches it, and only with SHOPROUTE_UNSEAL_TEST set for a final eval. Never train, tune prompts or generate data from it.
 - Every reported number comes from saved, reproducible outputs in `runs/`. Log provider, model, prompt version and data version for every run, and actual cost in docs/COSTS.md.
 - No real customer chats anywhere in the repo or training data.
+- Never commit third-party datasets (PIZZA is CC-BY-NC-4.0, no redistribution): only download + conversion scripts; data lives in gitignored `data/external/`.
+- Samples (`split: sample`) may be few-shot examples in prompts but never appear in any evaluation.
 
 ## Conventions
 - Python 3.12, Pydantic v2, `uv`. All backend/ML/eval code is Python.

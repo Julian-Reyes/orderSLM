@@ -80,6 +80,10 @@ class MenuCatalog(Strict):
     delivery: DeliveryPolicy
     accepts_payment: list[str] = Field(default_factory=lambda: ["card", "cash"])
     held_out: bool = Field(default=False, description="true only for the test-only generalization menu")
+    name_required_for_pickup: bool = Field(
+        default=False,
+        description="pickup orders without a customer name get a customer_name/missing clarification",
+    )
     modifiers: list[Modifier] = Field(default_factory=list)
     items: list[MenuItem] = Field(min_length=1)
 

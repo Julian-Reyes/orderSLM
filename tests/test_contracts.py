@@ -77,3 +77,24 @@ def test_test_split_is_sealed_by_default(monkeypatch):
         test_split_dir()
     monkeypatch.setenv(UNSEAL_ENV, "final-eval test")
     assert test_split_dir().name == "test"
+
+
+def test_name_required_for_pickup_is_an_optional_menu_setting(menus):
+    assert all(
+        m.name_required_for_pickup is False for m in menus.values()
+    )  # default; M1 enables it for one business
+    data = menus["corner-patty"].model_dump(mode="json") | {"name_required_for_pickup": True}
+    assert type(menus["corner-patty"]).model_validate(data).name_required_for_pickup
+
+
+def test_no_third_party_dataset_is_tracked_by_git():
+    """PIZZA is CC-BY-NC-4.0 (no redistribution): only scripts may be committed, never data/external/."""
+    import subprocess
+
+    from shoproute.paths import ROOT
+
+    tracked = subprocess.run(
+        ["git", "ls-files", "data/external"], cwd=ROOT, capture_output=True, text=True, check=True
+    ).stdout
+    assert tracked == ""
+    assert "data/external/" in (ROOT / ".gitignore").read_text()

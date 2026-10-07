@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 EXTRACTION_SCHEMA_VERSION = "extraction@0.1"
 ROUTER_SCHEMA_VERSION = "router@0.1"
 CONVERSATION_SCHEMA_VERSION = "conversation@0.1"
-MENU_SCHEMA_VERSION = "menu@0.1"
+MENU_SCHEMA_VERSION = "menu@0.2"  # 0.2: name_required_for_pickup
 TAXONOMY_VERSION = "taxonomy@0.1"
 
 ID_PATTERN = r"^[a-z0-9][a-z0-9_-]*$"
