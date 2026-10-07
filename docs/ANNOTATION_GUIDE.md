@@ -99,7 +99,8 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 
 ## 4. Quality process
 
-1. Label with the annotation tool (M2); it validates the schema and runs the grounding checks on save.
+1. Label with the annotation tool (`make annotate`, docs/SPLITS.md); it validates the schema, runs the grounding
+   checks and compares missing info with the rules on every edit, and won't save until they pass.
 2. Write `annotation_notes` for every judgment call; recurring ones become rules in this guide (bump the
    date below and note the change in PROGRESS.md).
 3. **Self-consistency:** a week after labeling the test set, relabel 30 test conversations blind (tool hides

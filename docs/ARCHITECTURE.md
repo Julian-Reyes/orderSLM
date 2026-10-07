@@ -60,11 +60,11 @@ orderslm/
 │   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
-│   ├── data/                     (M2/M4) loaders, split builder, PIZZA download + conversion, synthetic generation, dedup
+│   ├── data/                     splits.py (dev/test storage, lock), pizza.py + sexp.py (PIZZA benchmark); (M4) synthetic generation
 │   ├── eval/                     (M3) metrics.py, stats.py, estimate.py, store.py, report.py, judge_agreement.py
 │   ├── train/                    (M6) LoRA configs and scripts (run on Colab/Kaggle)
 │   ├── tracing.py                (M6/M8) step traces to JSONL/SQLite
-│   └── app/                      (M2) FastAPI app: annotation API first; chat simulator, tickets, comparison in M8
+│   └── app/                      main.py: FastAPI annotation API (M2); chat simulator, tickets, comparison in M8
 ├── data/
 │   ├── samples/                  conversations/: annotated examples (split "sample": few-shot only, never evaluated)
 │   ├── menus/                    3 business menus, held_out/ (1 test-only menu)
@@ -73,7 +73,7 @@ orderslm/
 │   ├── synthetic/                (M4) pilot + bulk, with distribution logs
 │   └── external/                 (M2) third-party downloads, gitignored, never committed (PIZZA: CC-BY-NC-4.0)
 ├── runs/                         (M3) committed eval outputs: manifest + raw outputs + metrics + report
-├── web/                          (M2) frontend: annotation/review tool first, demo pages in M8
+├── web/                          Vite + Preact + TS: annotation tool (M2), demo pages in M8; `make web` builds web/dist
 ├── docs/
 └── tests/
 ```
@@ -130,9 +130,9 @@ milestones exit with an error today. Anything that spends money prints an estima
 |---|---|---|
 | 1 | `make menus` | Validate `data/menus/*.json` (3 + held-out), print item/variant/modifier counts. |
 | 1 | `make test` | Pricing, matching, order-state, rules-baseline tests. |
-| 2 | `uv run python -m orderslm.data.pizza --download --convert` | Download the PIZZA dataset (amazon-science/pizza-semantic-parsing-dataset) into `data/external/` (gitignored) sample the PIZZA test orders (fixed seed), generate the PIZZA benchmark catalog from them, and convert them against that catalog (all under `data/external/`). Data is never committed (CC-BY-NC-4.0, no redistribution); only the script is. |
-| 2 | `make annotate` | Local annotation tool (FastAPI + Vite/Preact) (writes AnnotatedConversation JSON; blind relabel mode for the 30-conversation self-consistency check). |
-| 2 | `uv run python -m orderslm.data.split --seal` | Lock dev/test, write counts per label/scenario, record test-file hashes. |
+| 2 ✅ | `make pizza` | Download the PIZZA test split pinned to a commit, sample 200 orders (fixed seed), generate the PIZZA benchmark catalog, convert (docs/PIZZA.md). Everything under the gitignored `data/external/pizza/`; only the script is committed (CC-BY-NC-4.0). |
+| 2 ✅ | `make annotate` / `make annotate-test` | Local annotation tool on 127.0.0.1:8765 (FastAPI + Vite/Preact); validates on every edit, blind relabel tab (docs/SPLITS.md). |
+| 2 ✅ | `make lock-test` / `make verify-test` / `make split-stats` | Seal the test split: hashes, counts per label/scenario, dedup, 30-conversation blind relabel scheduled (docs/SPLITS.md). |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |
 | 4 | `make synth ARGS="--pilot 200"` | Generate pilot conversations (generator model ≠ teacher), dedup, distribution log. |
 | 4 | `make label ARGS="--pilot"` / `make label` | Teacher labels (batch API where available), consistency checks, drop-rate log, actual cost. |

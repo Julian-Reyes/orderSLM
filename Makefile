@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate teacher-bakeoff synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test teacher-bakeoff synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -24,7 +24,26 @@ endef
 
 menus:
 	$(RUN) python -m orderslm.menus
-annotate:         ; $(call not_yet,2)
+# Annotation tool on http://127.0.0.1:8765 (local only). annotate-test also opens the sealed test split.
+web:
+	cd web && npm ci --no-audit --no-fund && npm run build
+annotate: web
+	$(RUN) uvicorn orderslm.app.main:app --host 127.0.0.1 --port 8765
+annotate-test: web
+	ORDERSLM_UNSEAL_TEST="annotate test split" $(RUN) uvicorn orderslm.app.main:app --host 127.0.0.1 --port 8765
+annotate-api:  # API only, for `cd web && npm run dev` (hot reload on :5173)
+	$(RUN) uvicorn orderslm.app.main:app --host 127.0.0.1 --port 8765 --reload
+
+# PIZZA benchmark (docs/PIZZA.md): everything lands in the gitignored data/external/pizza/.
+pizza:
+	$(RUN) python -m orderslm.data.pizza --download --convert
+
+split-stats:
+	$(RUN) python -m orderslm.data.splits stats dev
+lock-test:
+	ORDERSLM_UNSEAL_TEST="lock M2" $(RUN) python -m orderslm.data.splits lock
+verify-test:
+	ORDERSLM_UNSEAL_TEST="verify lock" $(RUN) python -m orderslm.data.splits verify
 teacher-bakeoff:  ; $(call not_yet,3)
 synth:            ; $(call not_yet,4)
 label:            ; $(call not_yet,4)

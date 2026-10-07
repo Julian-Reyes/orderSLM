@@ -10,7 +10,7 @@ _Last updated 2026-10-07._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool (FastAPI + Vite/Preact); PIZZA conversion script; dev + sealed test sets | Next |
+| 2 | Annotation tool (FastAPI + Vite/Preact); PIZZA conversion script; dev + sealed test sets | 🟡 Tooling done 2026-10-07; waiting on Julian's dev/test conversations, then lock |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling | Not started |
 | 5 | Student bake-off | Not started |
@@ -132,19 +132,48 @@ checks, sealed-test guard, 10 annotated samples, docs (SCHEMA, TAXONOMY, ARCHITE
 COSTS). Environment: uv 0.12.23 from its GitHub release (sha256 verified) in `~/.local/bin`, managing
 Python 3.12; `brew install uv` was stopped because it was compiling cmake from source.
 
-## Next: Milestone 2
+## M2 (branch `milestone-2`): tooling done, data pending
 
-- **Frontend + API setup:** FastAPI app (`src/orderslm/app/`) and Vite + Preact + TypeScript (`web/`) with
-  OrderSLM's own design (docs/ARCHITECTURE.md). New dependencies (fastapi, uvicorn, Node toolchain): will
-  confirm versions before adding.
-- **Annotation/review tool** (`make annotate`): write a conversation against a menu, label gold extraction
-  and routing, validate + grounding-check on save, show the rule-derived missing info and the priced quote;
-  blind relabel mode for the 30-conversation self-consistency check.
-- **PIZZA script:** download into `data/external/` (gitignored); sample ~200 test orders (fixed seed);
-  generate the PIZZA benchmark catalog (entities the sample mentions + distractors to ~30–40 toppings) and
-  the coverage map there; report entity counts the sample uses; convert the orders against that catalog
-  and report unmappable cases. Review drink-size mappings with Julian on real examples.
-  Decide with Julian how converted PIZZA data is used (it's single-utterance, so likely extraction-only).
-- **Splits:** dev ~80 / test ~200 (sealed), counts per label and scenario, test-file hashes recorded;
-  self-consistency sample scheduled. Julian writes and labels; the tool and checks are my part.
-- Guards: tests that synthetic/training code paths can't reach `data/test/` or the held-out menu.
+Acceptance (spec §18): "locked split with counts per label and scenario; self-consistency sample scheduled".
+All the tooling is in place and tested; the conversations themselves are Julian's part. M2 closes with
+`make lock-test` once dev (~80) and test (~200) are written and labeled.
+
+- **PIZZA benchmark** (`make pizza`, docs/PIZZA.md): test split pinned to commit `814d6d0`, sha256 in
+  `data/external/pizza/MANIFEST.json`; 200 of 1,357 orders sampled with seed 20261007 (never filtered).
+  Entities the sample uses: **29 toppings, 7 recipe styles, 4 crusts, 6 pizza sizes, 10 drinks, 6 drink
+  variants, 2 topping amounts**; distractors bring toppings to 35. **199/200 converted**; 1 reported
+  (row 784: two crusts + a recipe, wording ambiguous against the parse). 10 orders had one word missing from
+  the dataset's own catalog and took its value from the EXR parse; 15 "no extra cheese" kept the default amount.
+  Everything (catalog, cases, coverage map, report with drink-variant examples) is under `data/external/`.
+- **Splits** (`orderslm.data.splits`, docs/SPLITS.md): save/load with the tool's checks; stats; near-duplicate
+  check; `lock` (hashes, counts, 30-conversation blind relabel from lock + 7 days); after the lock, gold changes
+  need a logged reason (`CHANGES.jsonl`) and `verify` catches unlogged edits.
+- **Annotation API** (`orderslm.app.main`): menus, list/get/save, a check endpoint (findings, derived missing
+  info, template question, deterministic quote), stats, blind relabel (never sends earlier labels). The test
+  split answers 403 unless the server process has `ORDERSLM_UNSEAL_TEST` (`make annotate-test`).
+- **Frontend** (`web/`, Vite 8.3.3 + Preact 10.29.8 + TypeScript 7.0.2 + @preact/preset-vite 2.10.6): conversation
+  editor (messages, roles, timestamps in the menu's timezone, scenarios, style, notes), routing table, gold
+  JSON editor with evidence-from-selection, "+ item line" from the menu, "fill missing info from the rules",
+  live check panel with the quote, stats tab, blind relabel tab, menu reference. Follows the documented
+  "order counter" palette. Checked with headless Chrome screenshots on two samples (light and dark).
+- **Contract:** `conversation@0.2` adds `Split.benchmark` (PIZZA cases).
+- **Guards:** a test allowlists the only modules that may mention `test_split_dir`, `include_held_out=True`,
+  `UNSEAL_ENV`, `load_cases` or `_TEST`; the PIZZA benchmark's `load_cases()` is sealed like the test split.
+- **Dependencies added (approved):** fastapi 0.142.2, uvicorn 0.54.0, httpx 0.28.1 (dev); npm packages above
+  (`web/package-lock.json`). Transitive npm licenses: MIT/ISC/BSD/Apache, plus MPL-2.0 (lightningcss) and
+  CC-BY-4.0 (caniuse-lite data), both build-time only; the shipped bundle contains only Preact (MIT).
+- **Checks:** `make check` 273 passed; `npm run build` (tsc + vite) clean. Spend: $0.
+
+### Open for Julian (M2)
+
+1. **Write and label** dev ~80 and test ~200 (`make annotate`, `make annotate-test`), then `make lock-test`.
+   The blind relabel opens a week after the lock.
+2. **PIZZA drink variants** (M1 review, item 2): `report.json` → `drink_variant_examples` (`regular`, `small`,
+   `medium`, `large`, `can`, `2_liter`). Variants are kept lossless; say if you want a different mapping.
+3. **"No extra cheese"** converts to no modification (the default amount); 15 cases. Alternative: drop such
+   orders from scoring. Recommend keeping the current rule.
+4. **Starlette 1.7 deprecation warning:** its test client wants `httpx2` instead of `httpx`. Works today;
+   switching is a new dev dependency, so not done without your OK.
+5. **Fonts:** Space Grotesk / JetBrains Mono are named first in the CSS stacks but not bundled (that needs
+   either `@fontsource/*` packages or a Google Fonts request). Fine for the local tool; decide before M8.
+6. GitHub: only `main` showed on origin when I checked; `milestone-0`/`milestone-1` may not have been pushed.
