@@ -31,6 +31,9 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
 - Removing an item: it disappears from `items`. Cancelling the whole order: keep the items as they were,
   set `customer_decision` to `cancelled`, leave `missing_or_ambiguous` empty.
 - `line_id`s: `L1`, `L2`, … in order of first mention; keep the number of a line that survives a correction.
+- A vague item the customer resolves later ("the usual", then "a cheeseburger and fries"): the vague line is
+  dropped and the resolved items get new line ids. One never resolved stays `unmatched_text` +
+  `item_menu_match / ambiguous`.
 - Off-menu ("chicken sandwiches" at a burger place): `unmatched_text` as written, the stated quantity,
   and a `missing_or_ambiguous` entry `item_menu_match / off_menu`. Don't map it to the closest item.
 - Informal names map to the menu when unambiguous (aliases: "shake" → `milkshake`, "large" → the large
@@ -54,8 +57,11 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   - Crust choices ("thin crust", "deep dish") are `add` of a crust modifier; only one crust per pizza.
   - A topping or add-on the menu doesn't offer ("artichoke hearts") → `modifier_id: null`, `not_on_menu: true`,
     and `item_modification / off_menu`. It is never priced or summarized until the customer resolves it.
-  - Kitchen requests the business can simply do ("extra crispy", "warm", "cut in squares") → `modifier_id: null`
-    with `raw_text`, `not_on_menu` false, nothing missing.
+  - Kitchen requests the business can simply do ("extra crispy", "warm", "cut in squares") → `modifier_id: null`,
+    `kitchen_note: true`, nothing missing. They should be on the menu's `accepted_kitchen_requests`; one that isn't
+    is treated as unverified by the rules (`item_modification / ambiguous`), so either add it to the menu or ask.
+  - **Every request with no menu id is explicitly `not_on_menu` or `kitchen_note`**; the tool won't save one that
+    is neither (`UNCLASSIFIED_REQUEST`).
 - Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`.
 - Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`.
 
@@ -72,6 +78,10 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   Delivery instructions ("ring the side door") go in `notes`, not the address.
 - Payment: `card`, `cash`, `other`, `unknown`. "change for a 50" → `change_for_cents: 5000`.
   "I already paid" → `customer_claims_paid: true` (a claim; staff verify it). Unknown payment → `payment_method / missing`.
+  A claim during an order: `PLACE_ORDER` + secondary `PAYMENT_CLAIM` in the same message as the items, or primary
+  `PAYMENT_CLAIM` in its own message; method stays `unknown` unless stated, and payment isn't asked again. The
+  summary says "You mentioned you've already paid, and the restaurant will confirm it"; the ticket says "Payment:
+  customer says paid, not verified".
 - Customer name: only when the customer gives it. Optional, except for pickup orders at a business with
   `name_required_for_pickup: true` (menu setting): there a missing name is `customer_name / missing`.
 - `customer_decision`: `confirmed` only when the customer agrees to a summary of the **current** order **and
@@ -105,6 +115,7 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 - Frustration alone is not urgency.
 - `refers_to: draft` for messages building the current order (including the first one);
   `placed_order` after the order was confirmed/sent; `none` for greetings or questions with no order.
+- A menu question in the middle of an order is `refers_to: draft`; before any order, `none`.
 - Any change after the customer confirmed, **including adding an item**, is `MODIFY_ORDER` about the
   `placed_order`; `time_sensitive` when it changes what the kitchen makes.
 

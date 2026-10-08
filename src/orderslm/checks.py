@@ -111,5 +111,23 @@ def check_catalog(output: ExtractionOutput, menu: MenuCatalog) -> list[Issue]:
     return issues
 
 
+def check_requests(output: ExtractionOutput) -> list[Issue]:
+    """Every request with no catalog id must say what it is: not_on_menu or kitchen_note (extraction@0.4).
+    Blocking for gold labels; a model output that leaves it open is handled at runtime (core/requests.py)."""
+    issues: list[Issue] = []
+    for item in output.items:
+        mods = [m for h in item.halves for m in h.modifications] if item.halves else item.modifications
+        for mod in mods:
+            if mod.unclassified:
+                issues.append(
+                    Issue(
+                        "UNCLASSIFIED_REQUEST",
+                        f"items[{item.line_id}]",
+                        f"{mod.raw_text!r} has no menu id: mark it not_on_menu or kitchen_note",
+                    )
+                )
+    return issues
+
+
 def check_all(output: ExtractionOutput, conversation: Conversation, menu: MenuCatalog) -> list[Issue]:
-    return check_evidence(output, conversation) + check_catalog(output, menu)
+    return check_evidence(output, conversation) + check_catalog(output, menu) + check_requests(output)

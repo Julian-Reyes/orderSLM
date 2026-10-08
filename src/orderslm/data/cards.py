@@ -326,6 +326,14 @@ SUPPLEMENT: dict[str, tuple[int, int]] = {
 SUPPLEMENT_SEED = f"{SEED}-supplement-2026-10-08"
 
 
+# Cards corrected after review so they match the conversation written from them. Applied after
+# generation, so nothing else about any card (or the RNG) changes.
+CARD_FIXES: dict[str, dict] = {
+    # Julian, 2026-10-08: the variant (pickup -> delivery) wins over the sampled "unstated".
+    "a-dev-020": {"fulfillment": "delivery"},
+}
+
+
 def quota(name: str, split: Split) -> int:
     """Total cards per situation and split, over both batches."""
     k = split is Split.test
@@ -412,7 +420,10 @@ def generate(seed: int = SEED) -> dict[Split, list[ScenarioCard]]:
             out[split] += _cards(
                 split, jobs, rng, menus, used[split], variant_used[split], len(out[split]), spread
             )
-    return out
+    return {
+        split: [c.model_copy(update=CARD_FIXES[c.id]) if c.id in CARD_FIXES else c for c in cs]
+        for split, cs in out.items()
+    }
 
 
 def _cards(

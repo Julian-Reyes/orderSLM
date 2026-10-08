@@ -26,13 +26,13 @@
       {
         "index": 3,
         "role": "business",
-        "text": "Got it: 2 Cheeseburgers and 1 chocolate Milkshake, $23.47, paying cash. Is that right?",
+        "text": "Is this for pickup or delivery?",
         "sent_at": "2026-10-01T14:11:15-04:00"
       },
       {
         "index": 4,
         "role": "customer",
-        "text": "👍",
+        "text": "👍 SOUNDS GOOD",
         "sent_at": "2026-10-01T14:11:45-04:00"
       }
     ]
@@ -93,7 +93,7 @@
       "evidence": [
         {
           "message_index": 4,
-          "quote": "👍"
+          "quote": "👍 SOUNDS GOOD"
         }
       ]
     },
@@ -145,5 +145,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-032",
-  "annotation_notes": "The 👍 agrees to the summary, but pickup/delivery was never chosen, so the order isn't complete: the decision stays pending with agreed_while_incomplete, and the missing method is asked next (guide: confirmed only when nothing is missing)."
+  "annotation_notes": "The bot asks the missing question (no summary while anything is missing). The customer agrees without answering it: CONFIRM_ORDER as intent, but the order isn't complete, so the decision stays pending with agreed_while_incomplete and pickup/delivery is still missing (guide: confirmed only when nothing is missing)."
 }

@@ -73,8 +73,12 @@ class Modification(Strict):
     not_on_menu: bool = Field(
         default=False,
         description="the customer asked for an ingredient/add-on the menu doesn't offer ('artichoke hearts'): "
-        "never priced, listed as item_modification/off_menu. Kitchen requests the business can just do "
-        "('warm', 'extra crispy') stay false: a note with no modifier_id (extraction@0.3)",
+        "never priced, listed as item_modification/off_menu (extraction@0.3)",
+    )
+    kitchen_note: bool = Field(
+        default=False,
+        description="a preparation request the kitchen can just do ('warm', 'well done', 'sauce on the side'): "
+        "free, printed on the ticket. Code checks it against the menu's accepted_kitchen_requests (extraction@0.4)",
     )
 
     @model_validator(mode="after")
@@ -83,11 +87,12 @@ class Modification(Strict):
             raise ValueError("replacement_modifier_id is only for kind 'substitute'")
         if self.amount is not Amount.normal and self.kind is not ModificationKind.add:
             raise ValueError("amount extra/light is only for kind 'add'")
-        if self.not_on_menu:
-            if self.kind is ModificationKind.remove:
-                raise ValueError("not_on_menu is for something requested (add/substitute), not a removal")
-            if self.added_id is not None:
-                raise ValueError("not_on_menu: the requested option has no catalog id")
+        if self.not_on_menu and self.kitchen_note:
+            raise ValueError("a request is either not_on_menu or a kitchen_note, not both")
+        if self.not_on_menu and self.kind is ModificationKind.remove:
+            raise ValueError("not_on_menu is for something requested (add/substitute), not a removal")
+        if (self.not_on_menu or self.kitchen_note) and self.catalog_id is not None:
+            raise ValueError("not_on_menu/kitchen_note only for a request with no catalog id")
         return self
 
     @property
@@ -96,6 +101,17 @@ class Modification(Strict):
         if self.kind is ModificationKind.remove:
             return None
         return self.replacement_modifier_id if self.kind is ModificationKind.substitute else self.modifier_id
+
+    @property
+    def catalog_id(self) -> str | None:
+        """The catalog option the customer named: removed, added or substituted in."""
+        return self.modifier_id if self.kind is ModificationKind.remove else self.added_id
+
+    @property
+    def unclassified(self) -> bool:
+        """A request with no catalog id that is neither not_on_menu nor kitchen_note. Gold may never have one
+        (checks.UNCLASSIFIED_REQUEST); at runtime the code treats it as unverified and asks (core/requests.py)."""
+        return self.catalog_id is None and not (self.not_on_menu or self.kitchen_note)
 
 
 class HalfSelection(Strict):
@@ -347,7 +363,7 @@ class MissingInfo(Strict):
 
 
 class ExtractionOutput(Strict):
-    schema_version: Literal["extraction@0.3"] = EXTRACTION_SCHEMA_VERSION
+    schema_version: Literal["extraction@0.4"] = EXTRACTION_SCHEMA_VERSION
     items: list[ItemProposal] = Field(default_factory=list)
     fulfillment: Fulfillment
     address: Address

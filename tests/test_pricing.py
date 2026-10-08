@@ -71,7 +71,8 @@ def test_required_variant_is_never_guessed():
         ([("add", "cheese", "extra")], 899 + 100),  # extra of an included ingredient = one more portion
         ([("add", "cheese", "light")], 899),  # light on an included ingredient is free
         ([("add", "cheese")], 899),  # "with cheese" on a cheeseburger: already included
-        ([("add", None)], 899),  # off-menu request ("extra crispy"): a note, not priced
+        # an accepted kitchen request ("well done"): a free note (unverified ones: test_kitchen_requests.py)
+        ([{"kind": "add", "modifier_id": None, "raw_text": "well done", "kitchen_note": True}], 899),
     ],
 )
 def test_modifier_pricing(mods, expected):

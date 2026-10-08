@@ -1,6 +1,6 @@
 # Menus
 
-Fictional businesses, `menu@0.4` JSON in `data/menus/`. Run `make menus` to validate them and print each
+Fictional businesses, `menu@0.5` JSON in `data/menus/`. Run `make menus` to validate them and print each
 menu's content hash (`menu_version`), which every quote and run records.
 
 | Business | File | Cuisine / tests | Hours (local) | Delivery | Name for pickup |
@@ -9,6 +9,16 @@ menu's content hash (`menu_version`), which every quote and run records.
 | Halfmoon Pizza | `halfmoon-pizza.json` | pizzas: 8 pizzas × 5 sizes (no default), 23 toppings, 3 sauces, 4 crusts (exclusive), half-and-half, 2 sides, 6 drinks (sodas: can / 20 oz / 2-liter) | 12:00–23:00 Chicago | $2.99, min $12 | optional |
 | Morning Crumb Café | `morning-crumb.json` | café/bakery: drink sizes without defaults, milk substitution (exclusive), extra shots, pastry flavors, a combo whose choices need a size | 07:00–15:00 Los Angeles | **none** (pickup only) | **required** |
 | Lucky Lime Taqueria | `held_out/lucky-lime.json` | **held-out, tests only**: proteins as required variants, tortilla choice (exclusive), a combo with two taco slots that each need a protein | 10:30–21:30 Denver | $3.49, min $20 | optional |
+
+Each menu lists its **accepted kitchen requests** (menu@0.5): preparation requests the kitchen always does,
+free, printed on the ticket (core/requests.py matches them before anything else):
+
+| Business | Accepted kitchen requests (categories) |
+|---|---|
+| Corner Patty | well done, cut in half, sauce on the side (burgers, combos); extra crispy, no salt (sides, combos); no ice (drinks, combos) |
+| Halfmoon Pizza | well done / extra crispy, cut in squares, uncut (pizzas); sauce on the side (pizzas, sides); warm (sides) |
+| Morning Crumb Café | warm / toasted (pastries, sandwiches, combos); cut in half (pastries, sandwiches); extra hot, room for milk, extra foam (coffee, combos) |
+| Lucky Lime Taqueria | well done, salsa on the side (tacos, burritos, mains, combos); cut in half (burritos); extra crispy (mains, sides); no ice (drinks) |
 
 Halfmoon's pizza sizes (menu@0.4, reply layer only; the extractor never sees them):
 

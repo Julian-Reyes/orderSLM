@@ -9,6 +9,8 @@ Strings are keyed by language so pt-BR can be added without touching the logic.
 import re
 from datetime import time
 
+from orderslm.core.missing import required_missing
+from orderslm.core.requests import UNRESOLVED, RequestStatus, line_requests, request_status
 from orderslm.domain.money import format_cents
 from orderslm.schema.extraction import (
     Amount,
@@ -24,7 +26,9 @@ from orderslm.schema.extraction import (
     TimeKind,
 )
 from orderslm.schema.menu import MenuCatalog
-from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote, ToolErr
+from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote, ToolErr, ToolResult
+
+SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
 REPLIES_VERSION = "replies@0.1"
 
@@ -41,6 +45,7 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "pay_cash_change": ", paying cash (change for {change})",
         "pay_card": ", paying by card",
         "pay_other": "",
+        "pay_claimed": ". You mentioned you've already paid, and the restaurant will confirm it",
         "remove": "no {name}",
         "add": "add {name}",
         "add_included": "{name}",
@@ -55,6 +60,7 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_variant": "which {name} would you like ({options})",
         "q_variant_not_on_menu": "We don't have a {text} for the {name}; we have {options}. Which would you like?",
         "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it without, or something else?",
+        "q_option_unverified": "Just checking, we may not be able to do {text} on the {name}. Want it without, or keep it as a note for the kitchen?",
         "q_combo": "what would you like with the {name} ({options})",
         "q_method": "is this for pickup or delivery",
         "q_time": "what time would you like it",
@@ -147,7 +153,7 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
         if variant:
             details.append(variant.name)
         for it, half in zip(items, line.halves, strict=True):
-            shown = [m for m in half.modifications if not m.not_on_menu]
+            shown = [m for m in half.modifications if request_status(menu, it, m) in SHOWN]
             mods = [_mod_text(menu, it.ingredient_ids, m, lang) for m in shown] if it else []
             details.append(
                 T["half"].format(name=it.name.removesuffix(" Pizza") if it else half.menu_item_id)
@@ -161,7 +167,7 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
         details += [
             _mod_text(menu, item.ingredient_ids if item else [], m, lang)
             for m in line.modifications
-            if not m.not_on_menu  # never shown in a summary until the customer resolves it
+            if request_status(menu, item, m) in SHOWN  # unresolved requests are never shown
         ]
         for sel in line.combo_selections:
             choice = menu.item(sel.menu_item_id)
@@ -180,7 +186,10 @@ def _when(proposal: ExtractionOutput, lang: str) -> str:
 
 
 def summary(menu: MenuCatalog, quote: Quote, proposal: ExtractionOutput, lang: str = "en") -> str:
-    """The confirmation question. Every amount comes from the Quote."""
+    """The confirmation question. Every amount comes from the Quote. Never sent while anything is missing:
+    use next_reply(), which asks the missing question first."""
+    if required_missing(proposal, menu) or proposal.missing_or_ambiguous:
+        raise ValueError("summary: something is still missing; ask for it first (next_reply)")
     T = _t(lang)
     items = ", ".join(_line_text(menu, proposal, ql.line_id, lang) for ql in quote.lines)
     method = proposal.fulfillment.method
@@ -195,6 +204,8 @@ def summary(menu: MenuCatalog, quote: Quote, proposal: ExtractionOutput, lang: s
         payment = T["pay_cash_change"].format(change=format_cents(pay.change_for_cents))
     else:
         payment = T[{"cash": "pay_cash", "card": "pay_card"}.get(pay.method.value, "pay_other")]
+    if pay.customer_claims_paid:  # a claim, never stated as a confirmed payment
+        payment += T["pay_claimed"]
     fee = T["fee"].format(fee=format_cents(quote.delivery_fee_cents)) if quote.delivery_fee_cents else ""
     text = T["summary"].format(
         items=items, fulfillment=fulfillment, total=format_cents(quote.total_cents), fee=fee, payment=payment
@@ -237,13 +248,14 @@ def template_question(
             else:
                 questions.append(T["q_variant"].format(name=item.name.lower(), options=options))
         elif m.field is FieldRef.item_modification and item and line:
-            for mod in line.all_modifications():
-                if mod.not_on_menu:
-                    statements.append(
-                        T["q_option_not_on_menu"].format(
-                            text=_option_text(mod.raw_text), name=item.name.lower()
-                        )
+            for _, mod, status in line_requests(menu, line):
+                if status in UNRESOLVED:
+                    key = (
+                        "q_option_not_on_menu"
+                        if status is RequestStatus.not_on_menu
+                        else "q_option_unverified"
                     )
+                    statements.append(T[key].format(text=_option_text(mod.raw_text), name=item.name.lower()))
         elif m.field is FieldRef.combo_choice and item:
             picked = {s.slot_id for s in line.combo_selections} if line else set()
             for slot in item.combo_slots:
@@ -282,6 +294,18 @@ def clarification(
     if q and not MONEY_IN_TEXT.search(q):
         return q, "model"
     return template_question(missing, proposal, menu, lang), "template"
+
+
+def next_reply(
+    menu: MenuCatalog, proposal: ExtractionOutput, quote: ToolResult[Quote], lang: str = "en"
+) -> tuple[str, str]:
+    """(text, kind): the missing-info question first; a summary only for a complete, priced order."""
+    missing = required_missing(proposal, menu)
+    if missing:
+        return clarification(proposal, menu, missing, lang)[0], "question"
+    if isinstance(quote, ToolErr):
+        return pricing_problem(quote, menu, lang), "pricing_problem"
+    return summary(menu, quote.data, proposal, lang), "summary"
 
 
 def pricing_problem(err: ToolErr, menu: MenuCatalog, lang: str = "en") -> str:

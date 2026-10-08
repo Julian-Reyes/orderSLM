@@ -5,11 +5,11 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 
 | Contract | Version | File |
 |---|---|---|
-| Extraction output (model proposal) | `extraction@0.3` | `schema/extraction.py` |
+| Extraction output (model proposal) | `extraction@0.4` | `schema/extraction.py` |
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
 | Conversation | `conversation@0.4` | `schema/conversation.py` |
-| Menu catalog | `menu@0.4` | `schema/menu.py` |
+| Menu catalog | `menu@0.5` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
 
@@ -30,7 +30,7 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 6. **Evidence for everything stated.** Each item and each provided field cites `{message_index, quote}`;
    `orderslm.checks` verifies the quote is in that message (case/whitespace-insensitive) and every id is in the menu.
 
-## Extraction output (`extraction@0.3`)
+## Extraction output (`extraction@0.4`)
 
 0.2 (M1) added `Modification.amount` (`normal | extra | light`), needed for "extra cheese" / "light on the
 sauce" and for the PIZZA dataset's EXTRA/LIGHT qualifiers.
@@ -39,7 +39,14 @@ sauce" and for the PIZZA dataset's EXTRA/LIGHT qualifiers.
 - `Modification.not_on_menu`: an ingredient/add-on the menu doesn't offer ("artichoke hearts"). No
   `modifier_id` (for a substitute, no `replacement_modifier_id`); listed as `item_modification / off_menu`; never
   priced (`OPTION_NOT_ON_MENU`) and never shown in a summary until the customer drops it or picks another.
-  Kitchen requests the business can just do ("warm", "extra crispy") are not flagged: no `modifier_id`, free.
+
+0.4 (2026-10-08): `Modification.kitchen_note`. Every request with no menu id must say what it is:
+`not_on_menu` or `kitchen_note` (never both). Gold that leaves it open fails the check
+(`UNCLASSIFIED_REQUEST`, `checks.check_requests`). A model output may leave it open (it still parses); the code
+then decides (`core/requests.py`): a match in the menu's `accepted_kitchen_requests` is a free kitchen note whatever
+the model said; else `not_on_menu` is "we don't have X" (`item_modification / off_menu`); anything else, including
+a `kitchen_note` the menu doesn't list, is **unverified**: `item_modification / ambiguous`, never priced
+(`REQUEST_UNVERIFIED`), asked softly ("Just checking, we may not be able to do X…"), never on the ticket.
 - `ItemProposal.unmatched_variant_text`: a size/flavor the item doesn't have ("party size"), as written. The item
   stays on the menu, `variant_id` stays null, and `item_variant / missing` is listed even if the item has a
   default size. A clarification ("we have S/M/L"), not a rejection.
@@ -59,7 +66,7 @@ see PROGRESS.md open question 1.)
 
 ```jsonc
 {
-  "schema_version": "extraction@0.3",
+  "schema_version": "extraction@0.4",
   "items": [{
     "line_id": "L2",                      // stable within the conversation
     "menu_item_id": "cheeseburger",       // exactly one of menu_item_id | unmatched_text | halves
@@ -69,7 +76,7 @@ see PROGRESS.md open question 1.)
     "variant_id": null,                   // null = not stated (catalog default applies if any)
     "unmatched_variant_text": null,       // a size the item doesn't have, as written ("party size")
     "modifications": [{"kind": "remove", "modifier_id": "onion", "amount": "normal", "raw_text": "no onions",
-                       "not_on_menu": false}], // true: an option the menu doesn't offer
+                       "not_on_menu": false, "kitchen_note": false}], // no menu id: exactly one is true
     "combo_selections": [],               // [{slot_id, menu_item_id, variant_id?}]
     "notes": null,
     "evidence": [{"message_index": 0, "quote": "2 cheeseburgers"},
@@ -160,6 +167,9 @@ Allowed transitions: `core/state.py` (customer changes to a placed order go to s
 
 Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents`, `min_order_cents`),
 `name_required_for_pickup` (0.2), `exclusive_groups` (0.3), modifiers, and items.
+- **Accepted kitchen requests** (0.5): `accepted_kitchen_requests: [{id, name, aliases, categories}]`, the
+  preparation requests the business always does ("well done", "cut in squares", "warm"), optionally limited to item
+  categories. Matched on whole words before anything else (core/requests.py). Visible to the extractor.
 - **Size facts** (0.4): pizza variants carry `diameter_cm` and `slices`, **for the reply layer only** ("a large
   is 36 cm, 10 slices"). The extractor gets `MenuCatalog.extractor_view()`, which drops them, and
   `ExtractionRequest` rejects a menu that still has them, so a model can never turn "feeds 10 people" into a

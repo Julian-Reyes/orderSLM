@@ -8,6 +8,7 @@ every problem, so the reply layer asks instead of quoting a wrong total.
 from dataclasses import dataclass
 
 from orderslm.checks import check_catalog
+from orderslm.core.requests import RequestStatus, line_requests
 from orderslm.menus import menu_version
 from orderslm.schema.extraction import (
     Amount,
@@ -76,9 +77,16 @@ def _price_line(menu: MenuCatalog, line: ItemProposal, issues: list[PricingIssue
     if line.quantity is None:
         issues.append(PricingIssue("UNCLEAR_QUANTITY", lid, "quantity not clear"))
         return None
-    if off := [m.raw_text for m in line.all_modifications() if m.not_on_menu]:
+    requests = line_requests(menu, line)
+    if off := [m.raw_text for _, m, s in requests if s is RequestStatus.not_on_menu]:
         # Never priced: the customer has to drop it or pick something else first.
         issues.append(PricingIssue("OPTION_NOT_ON_MENU", lid, f"not on the menu: {', '.join(off)}"))
+        return None
+    if unsure := [m.raw_text for _, m, s in requests if s is RequestStatus.unverified]:
+        # Not on the menu's accepted kitchen requests and not flagged: ask before it reaches the ticket.
+        issues.append(
+            PricingIssue("REQUEST_UNVERIFIED", lid, f"check with the customer: {', '.join(unsure)}")
+        )
         return None
 
     if line.halves is not None:

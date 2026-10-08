@@ -22,7 +22,8 @@ customer message(s) + conversation context + draft order state
         │
         └─ other label ──► BusinessTools: lookup_order / order_status / request_handoff → ToolOk | ToolErr
                                     ▼
-             Reply layer (M1/M8): templates filled only from verified results;
+             Reply layer (M1/M8): templates filled only from verified results; next_reply asks the
+             missing question first and sends a summary only for a complete, priced order;
              pending vs. confirmed shown explicitly; clarification_question when something is missing
                                     ▼
                          chat reply + business order ticket
@@ -66,7 +67,8 @@ orderslm/
 │   ├── router.py                 DecisionRequest builder + response parser
 │   ├── checks.py                 evidence + catalog grounding checks
 │   ├── paths.py                  data locations, sealed test-split guard
-│   ├── core/                     pricing.py, missing.py, diff.py, state.py, replies.py, matching.py
+│   ├── core/                     pricing.py, missing.py, diff.py, state.py, replies.py, matching.py,
+│   │                             requests.py (requests with no menu id), ticket.py (business ticket)
 │   ├── baselines/                rules_extractor.py (regex + menu matching), rules_router.py (keywords)
 │   ├── menus.py                  load_menus (held-out excluded by default), menu_version
 │   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py

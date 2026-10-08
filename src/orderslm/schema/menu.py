@@ -7,6 +7,10 @@ and those a customer may add (`addon_ids`). Pricing rules: docs/PRICING.md.
 menu@0.4: pizza sizes carry `diameter_cm` and `slices` for the reply layer only. The extractor gets
 `MenuCatalog.extractor_view()`, which drops them, so it can never turn "feeds 10 people" into a
 quantity (ExtractionRequest rejects a menu that still has them).
+
+menu@0.5: `accepted_kitchen_requests` lists the preparation requests this business can always do
+("well done", "cut in squares", "warm"). Code matches a request with no catalog id against it first
+(core/requests.py); a match is a free kitchen note whatever the model said.
 """
 
 from datetime import time
@@ -41,6 +45,19 @@ class Modifier(Strict):
     aliases: list[str] = Field(default_factory=list)
     group: str = Field(default="general", pattern=ID_PATTERN, description="topping, sauce, crust, milk, ...")
     price_cents: Cents = 0
+
+
+class KitchenRequest(Strict):
+    """A preparation request the kitchen always accepts. Matched on whole words of the request text."""
+
+    id: str = Field(pattern=ID_PATTERN)
+    name: str = Field(description="as printed on the ticket, e.g. 'well done'")
+    aliases: list[str] = Field(
+        default_factory=list, description="other wordings: 'extra well', 'cooked through'"
+    )
+    categories: list[str] = Field(
+        default_factory=list, description="item categories it applies to; empty = all"
+    )
 
 
 class ComboSlot(Strict):
@@ -112,6 +129,9 @@ class MenuCatalog(Strict):
     )
     modifiers: list[Modifier] = Field(default_factory=list)
     items: list[MenuItem] = Field(min_length=1)
+    accepted_kitchen_requests: list[KitchenRequest] = Field(
+        default_factory=list, description="requests with no catalog id that are free kitchen notes (menu@0.5)"
+    )
 
     @model_validator(mode="after")
     def _references(self) -> "MenuCatalog":
@@ -129,6 +149,10 @@ class MenuCatalog(Strict):
                 missing = set(slot.choices) - set(item_ids)
                 if missing:
                     raise ValueError(f"{item.id}.{slot.id}: unknown choice ids {sorted(missing)}")
+        categories = {i.category for i in self.items}
+        for kr in self.accepted_kitchen_requests:
+            if unknown_cats := set(kr.categories) - categories:
+                raise ValueError(f"kitchen request {kr.id}: unknown categories {sorted(unknown_cats)}")
         groups = {m.group for m in self.modifiers}
         if unknown_groups := set(self.exclusive_groups) - groups:
             raise ValueError(f"exclusive_groups not used by any modifier: {sorted(unknown_groups)}")

@@ -5,6 +5,7 @@ the text (e.g. whether "a burger" is ambiguous rather than off-menu) are the
 extractor's job; here an unmatched item is always reported as off_menu.
 """
 
+from orderslm.core.requests import RequestStatus, line_requests
 from orderslm.schema.extraction import (
     DecisionState,
     ExtractionOutput,
@@ -45,8 +46,11 @@ def required_missing(output: ExtractionOutput, menu: MenuCatalog) -> list[Missin
             menu.item(base_id or ""), line.variant_id
         ):
             add(FieldRef.item_variant, MissingReason.missing, lid)
-        if any(m.not_on_menu for m in line.all_modifications()):
+        statuses = {s for _, _, s in line_requests(menu, line)}
+        if RequestStatus.not_on_menu in statuses:  # "we don't have X"
             add(FieldRef.item_modification, MissingReason.off_menu, lid)
+        elif RequestStatus.unverified in statuses:  # "we may not be able to do X" (core/requests.py)
+            add(FieldRef.item_modification, MissingReason.ambiguous, lid)
         item = menu.item(line.menu_item_id or "")
         if item is not None and item.combo_slots:
             picked = {s.slot_id: s for s in line.combo_selections}

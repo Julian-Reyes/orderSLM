@@ -410,7 +410,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 | 7 | Decision providers: router benchmark + cross-check with the student's intent (§11a), order checker (b), item chooser pilot (c, optional), menu narrowing incl. mega menu (e); architecture comparison A/B/C | Verified API contracts, per-label metrics with CIs, stability, latency and cost results; disagreement log; break-even router latency |
 | 8 | Demo, report, Hugging Face release | Working demo; every number traceable to saved outputs |
 
-**V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration; fine-tuning Julia-1 on teacher-labeled router data, reported separately as "off-the-shelf vs. fine-tuned" (first check that a fine-tuning path exists, §11).
+**V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration; automatic payment verification (e.g. a Pix provider's payment notification marks the order paid; until then a customer's "I already paid" stays an unverified claim on the ticket); fine-tuning Julia-1 on teacher-labeled router data, reported separately as "off-the-shelf vs. fine-tuned" (first check that a fine-tuning path exists, §11).
 
 ## 19. Working rules
 

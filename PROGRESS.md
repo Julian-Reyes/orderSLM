@@ -254,7 +254,30 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   (frozen 80 + 170 and all 91 + 199).
 - **Checks:** `make check` 312 passed (19 new tests in `tests/test_options_and_completeness.py`); dev: 0 findings.
 
-**Judgment calls to check in review** (rulings above settle 1, 2, 4 and 5; the rest are still open):
+### Second round of rulings (Julian, 2026-10-08), before review
+
+- **`extraction@0.4`:** `Modification.kitchen_note`. Every request with no menu id is explicitly `not_on_menu` or
+  `kitchen_note`; gold that is neither fails (`UNCLASSIFIED_REQUEST`). Re-check of all 91 dev files + 12 samples
+  flagged **only a-dev-074** ("warm"), now a kitchen note.
+- **`menu@0.5`:** `accepted_kitchen_requests` on every menu (docs/MENUS.md). `core/requests.py` matches them first
+  (a match is a free kitchen note whatever the model said); `not_on_menu` is told firmly; anything else is
+  unverified: `item_modification / ambiguous`, never priced (`REQUEST_UNVERIFIED`), asked "Just checking, we may not
+  be able to do X on the Y. Want it without, or keep it as a note for the kitchen?", never on the ticket.
+- **Reply layer:** `next_reply` asks the missing question first; `summary()` refuses while anything is missing.
+  a-dev-032 rewritten: the bot asks "Is this for pickup or delivery?", the customer replies "👍 SOUNDS GOOD"
+  without answering (CONFIRM_ORDER as intent; decision `pending` + `agreed_while_incomplete`).
+- **Payment claims:** the summary says "You mentioned you've already paid, and the restaurant will confirm it";
+  the new business ticket (`core/ticket.py`) prints "Payment: customer says paid, not verified" (only
+  `payment_confirmed`, set by staff/payment system, prints as paid). Automatic payment verification (e.g. Pix
+  notifications) added to the spec's V2 candidates.
+- **Card fix:** a-dev-020's card now says fulfillment `delivery` (`cards.CARD_FIXES`, applied after generation).
+- **Verified unchanged:** all 290 cards apart from that one field; every base price and size delta (menus only gained
+  lines); all gold prices except a-dev-034 (ruled earlier). a-dev-079's question now reads "We don't have **a**
+  party size…" (the template fix landed after that file's last save). Local PIZZA cases regenerated: 199 load, none
+  unclassified.
+
+**Judgment calls from the first draft** (all now ruled: 1, 2, 4, 5 in round one; 3, 6, 7, 8 in round two, and in
+the annotation guide):
 1. After the customer confirms, later messages refer to the `placed_order`; any change then (including adding an
    item) is `MODIFY_ORDER`, `time_sensitive` if it changes what the kitchen makes (023, 059, 067), `normal` for a
    payment switch (064). The decision resets to `pending`.
