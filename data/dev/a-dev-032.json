@@ -89,7 +89,7 @@
       "state": "not_mentioned"
     },
     "customer_decision": {
-      "state": "confirmed",
+      "agreed_while_incomplete": true,
       "evidence": [
         {
           "message_index": 4,
@@ -145,5 +145,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-032",
-  "annotation_notes": "The 👍 answers the business's confirmation question, so it confirms the items and payment. Pickup/delivery was never chosen, so it is still missing after the confirmation (card fulfillment: unstated)."
+  "annotation_notes": "The 👍 agrees to the summary, but pickup/delivery was never chosen, so the order isn't complete: the decision stays pending with agreed_while_incomplete, and the missing method is asked next (guide: confirmed only when nothing is missing)."
 }

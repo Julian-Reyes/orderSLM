@@ -7,7 +7,7 @@ validity rate and failure examples come from saved outputs.
 
 from typing import Protocol, runtime_checkable
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from orderslm.schema.common import Strict
 from orderslm.schema.conversation import Conversation
@@ -18,10 +18,18 @@ from .decision import Usage
 
 
 class ExtractionRequest(Strict):
-    menu: MenuCatalog
+    """Never carries the router's label (docs/ARCHITECTURE.md, design rules)."""
+
+    menu: MenuCatalog = Field(description="menu.extractor_view(): no reply-only size facts")
     conversation: Conversation
     draft: ExtractionOutput | None = Field(default=None, description="current draft order state, if any")
     prompt_version: str
+
+    @model_validator(mode="after")
+    def _extractor_menu(self) -> "ExtractionRequest":
+        if self.menu.has_reply_only_fields():
+            raise ValueError("pass menu.extractor_view(): diameter_cm/slices are for the reply layer only")
+        return self
 
 
 class ExtractionResult(Strict):

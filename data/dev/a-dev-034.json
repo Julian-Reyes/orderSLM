@@ -27,7 +27,8 @@
         "modifications": [
           {
             "kind": "add",
-            "raw_text": "with artichoke hearts"
+            "raw_text": "with artichoke hearts",
+            "not_on_menu": true
           }
         ],
         "evidence": [
@@ -75,7 +76,15 @@
     },
     "customer_name": {
       "state": "not_mentioned"
-    }
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have artichoke hearts for the supreme pizza. Would you like it without, or something else?"
   },
   "gold_routing": [
     {
@@ -90,5 +99,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-034",
-  "annotation_notes": "Artichoke hearts aren't a Halfmoon topping: the modification keeps modifier_id null with the raw text. The V1 missing-info rules have no entry for an off-menu modification, so nothing is listed as missing; the business has to tell the customer."
+  "annotation_notes": "Artichoke hearts aren't a Halfmoon topping: a modification with no modifier_id and not_on_menu, listed as item_modification/off_menu. The line can't be priced or summarized until the customer drops it or picks another topping."
 }

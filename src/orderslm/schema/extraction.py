@@ -70,6 +70,12 @@ class Modification(Strict):
     replacement_modifier_id: str | None = Field(default=None, pattern=ID_PATTERN)
     amount: Amount = Amount.normal
     raw_text: str = Field(min_length=1, description="the request as the customer wrote it")
+    not_on_menu: bool = Field(
+        default=False,
+        description="the customer asked for an ingredient/add-on the menu doesn't offer ('artichoke hearts'): "
+        "never priced, listed as item_modification/off_menu. Kitchen requests the business can just do "
+        "('warm', 'extra crispy') stay false: a note with no modifier_id (extraction@0.3)",
+    )
 
     @model_validator(mode="after")
     def _replacement(self) -> "Modification":
@@ -77,7 +83,19 @@ class Modification(Strict):
             raise ValueError("replacement_modifier_id is only for kind 'substitute'")
         if self.amount is not Amount.normal and self.kind is not ModificationKind.add:
             raise ValueError("amount extra/light is only for kind 'add'")
+        if self.not_on_menu:
+            if self.kind is ModificationKind.remove:
+                raise ValueError("not_on_menu is for something requested (add/substitute), not a removal")
+            if self.added_id is not None:
+                raise ValueError("not_on_menu: the requested option has no catalog id")
         return self
+
+    @property
+    def added_id(self) -> str | None:
+        """The catalog option this modification asks for (None for removals and off-menu requests)."""
+        if self.kind is ModificationKind.remove:
+            return None
+        return self.replacement_modifier_id if self.kind is ModificationKind.substitute else self.modifier_id
 
 
 class HalfSelection(Strict):
@@ -100,6 +118,12 @@ class ItemProposal(Strict):
     halves: list[HalfSelection] | None = Field(default=None, min_length=2, max_length=2)
     quantity: int | None = Field(ge=1, le=99, description="null = stated but unclear ('some wings')")
     variant_id: str | None = Field(default=None, pattern=ID_PATTERN, description="null = not stated")
+    unmatched_variant_text: str | None = Field(
+        default=None,
+        min_length=1,
+        description="a size/flavor the customer named that the item doesn't have ('party size'), as written; "
+        "variant_id stays null and item_variant is missing (extraction@0.3)",
+    )
     modifications: list[Modification] = Field(default_factory=list)
     combo_selections: list[ComboSelection] = Field(default_factory=list)
     notes: str | None = None
@@ -113,12 +137,17 @@ class ItemProposal(Strict):
                 f"{self.line_id}: exactly one of menu_item_id, unmatched_text, halves must be set (spec §4)"
             )
         if self.unmatched_text is not None and (
-            self.variant_id or self.modifications or self.combo_selections
+            self.variant_id or self.unmatched_variant_text or self.modifications or self.combo_selections
         ):
             raise ValueError(
                 f"{self.line_id}: an off-menu item can't have variant, modifications or combo picks"
             )
+        if self.unmatched_variant_text is not None and self.variant_id is not None:
+            raise ValueError(f"{self.line_id}: unmatched_variant_text only when variant_id is null")
         return self
+
+    def all_modifications(self) -> list[Modification]:
+        return [m for h in self.halves for m in h.modifications] if self.halves else list(self.modifications)
 
 
 # ---------------------------------------------------------------- order-level fields
@@ -240,14 +269,24 @@ class DecisionState(StrEnum):
 
 
 class CustomerDecision(Strict):
+    """`confirmed` means the order is complete enough for the kitchen: it is only allowed when nothing is
+    missing (checked on ExtractionOutput). A "yes" to a summary while something is still missing keeps the
+    state `pending` with `agreed_while_incomplete` (extraction@0.3)."""
+
     state: DecisionState = DecisionState.pending
+    agreed_while_incomplete: bool = Field(
+        default=False, description="the customer said yes to a summary, but something is still missing"
+    )
     evidence: list[Evidence] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def _evidence(self) -> "CustomerDecision":
-        if (self.state is DecisionState.pending) == bool(self.evidence):
+        if self.agreed_while_incomplete and self.state is not DecisionState.pending:
+            raise ValueError("customer_decision: agreed_while_incomplete only with state pending")
+        stated = self.state is not DecisionState.pending or self.agreed_while_incomplete
+        if stated != bool(self.evidence):
             raise ValueError(
-                "customer_decision: evidence required for confirmed/cancelled, forbidden for pending"
+                "customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise"
             )
         return self
 
@@ -308,7 +347,7 @@ class MissingInfo(Strict):
 
 
 class ExtractionOutput(Strict):
-    schema_version: Literal["extraction@0.2"] = EXTRACTION_SCHEMA_VERSION
+    schema_version: Literal["extraction@0.3"] = EXTRACTION_SCHEMA_VERSION
     items: list[ItemProposal] = Field(default_factory=list)
     fulfillment: Fulfillment
     address: Address
@@ -331,6 +370,10 @@ class ExtractionOutput(Strict):
                 raise ValueError(f"missing_or_ambiguous refers to unknown line {m.line_id}")
         if self.customer_decision.state is DecisionState.cancelled and self.missing_or_ambiguous:
             raise ValueError("a cancelled order has nothing left to clarify")
+        if self.customer_decision.state is DecisionState.confirmed and self.missing_or_ambiguous:
+            raise ValueError(
+                "confirmed only when nothing is missing; a yes with gaps is pending + agreed_while_incomplete"
+            )
         if bool(self.missing_or_ambiguous) != (self.clarification_question is not None):
             raise ValueError(
                 "clarification_question is required exactly when missing_or_ambiguous is non-empty"

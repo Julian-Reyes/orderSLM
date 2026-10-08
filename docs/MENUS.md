@@ -1,6 +1,6 @@
 # Menus
 
-Fictional businesses, `menu@0.3` JSON in `data/menus/`. Run `make menus` to validate them and print each
+Fictional businesses, `menu@0.4` JSON in `data/menus/`. Run `make menus` to validate them and print each
 menu's content hash (`menu_version`), which every quote and run records.
 
 | Business | File | Cuisine / tests | Hours (local) | Delivery | Name for pickup |
@@ -9,6 +9,16 @@ menu's content hash (`menu_version`), which every quote and run records.
 | Halfmoon Pizza | `halfmoon-pizza.json` | pizzas: 8 pizzas × 5 sizes (no default), 23 toppings, 3 sauces, 4 crusts (exclusive), half-and-half, 2 sides, 6 drinks (sodas: can / 20 oz / 2-liter) | 12:00–23:00 Chicago | $2.99, min $12 | optional |
 | Morning Crumb Café | `morning-crumb.json` | café/bakery: drink sizes without defaults, milk substitution (exclusive), extra shots, pastry flavors, a combo whose choices need a size | 07:00–15:00 Los Angeles | **none** (pickup only) | **required** |
 | Lucky Lime Taqueria | `held_out/lucky-lime.json` | **held-out, tests only**: proteins as required variants, tortilla choice (exclusive), a combo with two taco slots that each need a protein | 10:30–21:30 Denver | $3.49, min $20 | optional |
+
+Halfmoon's pizza sizes (menu@0.4, reply layer only; the extractor never sees them):
+
+| Size | Alias | Diameter | Slices |
+|---|---|---|---|
+| personal | 8 inch | 20 cm | 4 |
+| small | 10 inch | 25 cm | 6 |
+| medium | 12 inch | 30 cm | 8 |
+| large | 14 inch | 36 cm | 10 |
+| extra large | 16 inch | 41 cm | 12 |
 
 Corner Patty and Halfmoon Pizza started as the M0 sample menus (decision 2026-10-07). Morning Crumb and
 Lucky Lime are new. The opening hours are chosen so that a bare "at 7" means 7 pm at Corner Patty but

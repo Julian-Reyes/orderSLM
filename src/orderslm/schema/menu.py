@@ -3,6 +3,10 @@
 menu@0.3: modifiers are ingredients/add-ons, not add/remove kinds. Each item lists
 the modifiers it includes (`ingredient_ids`: removable, adjustable to extra/light)
 and those a customer may add (`addon_ids`). Pricing rules: docs/PRICING.md.
+
+menu@0.4: pizza sizes carry `diameter_cm` and `slices` for the reply layer only. The extractor gets
+`MenuCatalog.extractor_view()`, which drops them, so it can never turn "feeds 10 people" into a
+quantity (ExtractionRequest rejects a menu that still has them).
 """
 
 from datetime import time
@@ -21,6 +25,12 @@ class Variant(Strict):
     name: str
     aliases: list[str] = Field(default_factory=list, description="'large', '2 liter', 'lunch size'")
     price_delta_cents: int = 0  # may be negative (a small size)
+    diameter_cm: int | None = Field(default=None, ge=1, description="reply layer only (pizza sizes)")
+    slices: int | None = Field(default=None, ge=1, description="reply layer only (pizza sizes)")
+
+
+REPLY_ONLY_VARIANT_FIELDS = ("diameter_cm", "slices")
+"""Never shown to an extractor: see MenuCatalog.extractor_view()."""
 
 
 class Modifier(Strict):
@@ -126,6 +136,23 @@ class MenuCatalog(Strict):
 
     def item(self, item_id: str) -> MenuItem | None:
         return next((i for i in self.items if i.id == item_id), None)
+
+    def has_reply_only_fields(self) -> bool:
+        return any(
+            getattr(v, f) is not None
+            for i in self.items
+            for v in i.variants
+            for f in REPLY_ONLY_VARIANT_FIELDS
+        )
+
+    def extractor_view(self) -> "MenuCatalog":
+        """The menu as an extractor sees it: identical except the reply-only size facts are removed."""
+        clear = dict.fromkeys(REPLY_ONLY_VARIANT_FIELDS)
+        items = [
+            i.model_copy(update={"variants": [v.model_copy(update=clear) for v in i.variants]})
+            for i in self.items
+        ]
+        return self.model_copy(update={"items": items})
 
     def modifier(self, modifier_id: str) -> Modifier | None:
         return next((m for m in self.modifiers if m.id == modifier_id), None)

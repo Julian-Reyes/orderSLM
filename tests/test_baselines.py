@@ -48,7 +48,9 @@ def test_protocol_and_parse_path():
     assert isinstance(ext, OrderExtractor)
     convo = conversation((C, "2 cokes pls, pickup, cash"))
     res = ext.extract(
-        ExtractionRequest(menu=MENUS["corner-patty"], conversation=convo, prompt_version="rules")
+        ExtractionRequest(
+            menu=MENUS["corner-patty"].extractor_view(), conversation=convo, prompt_version="rules"
+        )
     )
     assert res.output is not None and res.error is None and res.extractor == "rules/extractor@0.1"
 

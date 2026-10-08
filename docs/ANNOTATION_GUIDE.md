@@ -38,6 +38,10 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   write `unmatched_text: "a burger"` and add `item_menu_match / ambiguous`.
 - `variant_id`: only if stated. If the item has a `default_variant_id`, an unstated size is fine (no
   missing entry). If it has variants and no default (milkshake flavor, pizza size), add `item_variant / missing`.
+- A size or flavor the item doesn't have ("party size pizza", "medium fries" where fries are regular/large): the
+  item **stays on the menu** (not `unmatched_text`), `variant_id: null`, the customer's words in
+  `unmatched_variant_text`, and `item_variant / missing` (even if a default exists). The business asks which size;
+  it doesn't reject the item.
 - Quantity unclear ("some wings"): `quantity: null` + `item_quantity / ambiguous`.
 - Modifications use the catalog `modifier_id` (an ingredient or add-on of that item):
   - "no onions", "hold the pickles" → `remove`.
@@ -48,8 +52,10 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
     `replacement_modifier_id` the one added. "w oat milk" on a latte (no "instead") is also a substitute of the
     included milk.
   - Crust choices ("thin crust", "deep dish") are `add` of a crust modifier; only one crust per pizza.
-  - Requests not in the catalog ("extra crispy") → `modifier_id: null` with `raw_text`; add
-    `item_modification / off_menu` only if the business would need to answer it.
+  - A topping or add-on the menu doesn't offer ("artichoke hearts") → `modifier_id: null`, `not_on_menu: true`,
+    and `item_modification / off_menu`. It is never priced or summarized until the customer resolves it.
+  - Kitchen requests the business can simply do ("extra crispy", "warm", "cut in squares") → `modifier_id: null`
+    with `raw_text`, `not_on_menu` false, nothing missing.
 - Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`.
 - Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`.
 
@@ -68,7 +74,9 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   "I already paid" → `customer_claims_paid: true` (a claim; staff verify it). Unknown payment → `payment_method / missing`.
 - Customer name: only when the customer gives it. Optional, except for pickup orders at a business with
   `name_required_for_pickup: true` (menu setting): there a missing name is `customer_name / missing`.
-- `customer_decision`: `confirmed` only when the customer agrees to a summary of the **current** order.
+- `customer_decision`: `confirmed` only when the customer agrees to a summary of the **current** order **and
+  nothing is missing** (a confirmed order must be complete enough to send to the kitchen). A yes while something is
+  still missing: `pending` + `agreed_while_incomplete: true`, citing the yes; the missing info is asked next.
   A change after confirming resets it to `pending` (the new order needs a new yes).
 
 ### What counts as missing (V1)
@@ -97,6 +105,8 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 - Frustration alone is not urgency.
 - `refers_to: draft` for messages building the current order (including the first one);
   `placed_order` after the order was confirmed/sent; `none` for greetings or questions with no order.
+- Any change after the customer confirmed, **including adding an item**, is `MODIFY_ORDER` about the
+  `placed_order`; `time_sensitive` when it changes what the kitchen makes.
 
 ## 4. Quality process
 
@@ -110,4 +120,4 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 4. Disagreements found later: fix the gold, log the change (conversation id, field, old → new, reason).
    Don't change test gold after any model has been scored on it without recording why.
 
-_Last updated 2026-10-07 (M0)._
+_Last updated 2026-10-08 (M2 dev review: confirmed = complete, sizes/options not on the menu, changes after confirming)._

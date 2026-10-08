@@ -38,6 +38,7 @@ message to the extractor.
 | First time giving time/address/payment for a draft | `PLACE_ORDER` | Still building the order. |
 | Changing time/address/payment already given | `MODIFY_ORDER` | Something stated is replaced. |
 | Removing one item ("no coke after all") | `MODIFY_ORDER` | `CANCEL_ORDER` is the whole order only. |
+| Any change after the customer confirmed, including adding an item | `MODIFY_ORDER` | It changes a placed order. |
 | "yes" / "yep" right after the business asks to confirm the order | `CONFIRM_ORDER` | Context-dependent yes. |
 | "yes" answering a different question ("want fries with that?" → "yes") | `PLACE_ORDER` | It adds an item. |
 | "where's my food, it's been an hour" | `ORDER_STATUS` | Asks where the order is. |

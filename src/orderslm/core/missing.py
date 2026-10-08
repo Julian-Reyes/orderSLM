@@ -40,8 +40,13 @@ def required_missing(output: ExtractionOutput, menu: MenuCatalog) -> list[Missin
         if line.quantity is None:
             add(FieldRef.item_quantity, MissingReason.ambiguous, lid)
         base_id = line.halves[0].menu_item_id if line.halves else line.menu_item_id
-        if _needs_variant(menu.item(base_id or ""), line.variant_id):
+        # A size the item doesn't have ("party size") is missing even when the item has a default size.
+        if line.unmatched_variant_text is not None or _needs_variant(
+            menu.item(base_id or ""), line.variant_id
+        ):
             add(FieldRef.item_variant, MissingReason.missing, lid)
+        if any(m.not_on_menu for m in line.all_modifications()):
+            add(FieldRef.item_modification, MissingReason.off_menu, lid)
         item = menu.item(line.menu_item_id or "")
         if item is not None and item.combo_slots:
             picked = {s.slot_id: s for s in line.combo_selections}

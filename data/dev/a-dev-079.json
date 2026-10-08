@@ -42,6 +42,7 @@
         "line_id": "L1",
         "menu_item_id": "pepperoni_pizza",
         "quantity": 2,
+        "unmatched_variant_text": "PARTY SIZE",
         "evidence": [
           {
             "message_index": 0,
@@ -101,11 +102,11 @@
     "missing_or_ambiguous": [
       {
         "field": "item_variant",
-        "reason": "off_menu",
+        "reason": "missing",
         "line_id": "L1"
       }
     ],
-    "clarification_question": "We don't have a party size. Would you like the 2 pepperoni pizzas in extra large (16 inch), or another size?"
+    "clarification_question": "We don't have party size for the pepperoni pizza; we have personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch. Which would you like?"
   },
   "gold_routing": [
     {
@@ -138,5 +139,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-079",
-  "annotation_notes": "'PARTY SIZE' is a size that doesn't exist: the pepperoni pizza stays on the menu with no variant, and the missing size is marked off_menu. The customer never picks a real size."
+  "annotation_notes": "'PARTY SIZE' is a size the pizza doesn't have: the pepperoni pizza stays an on-menu item, variant_id null, the customer's wording in unmatched_variant_text, and item_variant/missing (a clarification, not a rejection). The customer never picks a real size."
 }

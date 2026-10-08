@@ -45,7 +45,11 @@ def modifier_price(menu: MenuCatalog, item: MenuItem, mod: Modification) -> int:
     return m.price_cents * (2 if mod.amount is Amount.extra else 1)
 
 
-def _variant_issue(item: MenuItem, variant_id: str | None, line_id: str) -> PricingIssue | None:
+def _variant_issue(
+    item: MenuItem, variant_id: str | None, line_id: str, unmatched: str | None = None
+) -> PricingIssue | None:
+    if unmatched is not None:  # never fall back to the default size for a size the item doesn't have
+        return PricingIssue("MISSING_VARIANT", line_id, f"{item.name} has no {unmatched!r}; choose a size")
     if variant_id is None and item.variants and item.default_variant_id is None:
         names = ", ".join(v.name for v in item.variants)
         return PricingIssue("MISSING_VARIANT", line_id, f"{item.name} needs a choice: {names}")
@@ -72,12 +76,18 @@ def _price_line(menu: MenuCatalog, line: ItemProposal, issues: list[PricingIssue
     if line.quantity is None:
         issues.append(PricingIssue("UNCLEAR_QUANTITY", lid, "quantity not clear"))
         return None
+    if off := [m.raw_text for m in line.all_modifications() if m.not_on_menu]:
+        # Never priced: the customer has to drop it or pick something else first.
+        issues.append(PricingIssue("OPTION_NOT_ON_MENU", lid, f"not on the menu: {', '.join(off)}"))
+        return None
 
     if line.halves is not None:
         halves = [menu.item(h.menu_item_id) for h in line.halves]
         if any(h is None for h in halves):
             return None  # reported by check_catalog
-        if (issue := _variant_issue(halves[0], line.variant_id, lid)) is not None:
+        if (
+            issue := _variant_issue(halves[0], line.variant_id, lid, line.unmatched_variant_text)
+        ) is not None:
             issues.append(issue)
             return None
         # The pizza costs as much as its more expensive half; each half's add-ons cost half, rounded up.
@@ -109,7 +119,7 @@ def _price_line(menu: MenuCatalog, line: ItemProposal, issues: list[PricingIssue
     if not item.available:
         issues.append(PricingIssue("UNAVAILABLE", lid, f"{item.name} is not available right now"))
         return None
-    if (issue := _variant_issue(item, line.variant_id, lid)) is not None:
+    if (issue := _variant_issue(item, line.variant_id, lid, line.unmatched_variant_text)) is not None:
         issues.append(issue)
         return None
     unit = item.base_price_cents + _variant_delta(item, line.variant_id)

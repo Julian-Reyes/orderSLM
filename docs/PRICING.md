@@ -15,6 +15,8 @@ guesses: no default for a required size, no closest match for an off-menu item.
 | Variant stated | its `price_delta_cents` (may be negative) |
 | Variant not stated, item has a default | the default's delta |
 | Variant not stated, no default | **error** `MISSING_VARIANT` |
+| A size the item doesn't have (`unmatched_variant_text`) | **error** `MISSING_VARIANT`, even if a default exists |
+| An option the menu doesn't offer (`not_on_menu`) | **error** `OPTION_NOT_ON_MENU`: the line is never priced |
 | `remove` a modifier | free |
 | `add` an add-on (not included) | `price_cents` |
 | `add` + `extra`, not included | 2 × `price_cents` (a double portion) |
@@ -22,7 +24,7 @@ guesses: no default for a required size, no closest match for an off-menu item.
 | `add` / `add` + `light`, already included | free |
 | `add` + `light`, not included | `price_cents` |
 | `substitute` A → B | as adding B (free if B is included); removing A is free |
-| Modification with no catalog id ("extra crispy") | free (a kitchen note) |
+| Kitchen request with no catalog id ("extra crispy", "warm"), not flagged | free (a kitchen note) |
 | Combo | combo base price; slot choices included; a chosen size adds that size's delta |
 | Half-and-half | the dearer half's base + size delta, plus each half's modifier prices at **half, rounded up** to the cent |
 
@@ -42,6 +44,7 @@ guesses: no default for a required size, no closest match for an off-menu item.
 | `UNCLEAR_QUANTITY` | `quantity: null` |
 | `MISSING_VARIANT` | required size/flavor not stated (also inside a combo choice) |
 | `MISSING_COMBO_CHOICE` | a combo slot not chosen |
+| `OPTION_NOT_ON_MENU` | a requested topping/add-on the menu doesn't offer (`not_on_menu`), until the customer resolves it |
 | `UNKNOWN_ITEM`, `UNKNOWN_VARIANT`, `UNKNOWN_MODIFIER`, `UNKNOWN_COMBO_SLOT`, `INVALID_COMBO_CHOICE`, `NOT_SPLITTABLE`, `MODIFIER_NOT_ALLOWED` | ids that don't exist or don't apply (from `checks.check_catalog`) |
 | `EXCLUSIVE_GROUP_CONFLICT` | two choices from one exclusive group (two crusts) |
 | `UNAVAILABLE` | item marked `available: false` |

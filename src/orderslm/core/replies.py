@@ -53,6 +53,8 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_ambiguous_item": "which one do you mean by “{text}”",
         "q_quantity": "how many {name} would you like",
         "q_variant": "which {name} would you like ({options})",
+        "q_variant_not_on_menu": "We don't have a {text} for the {name}; we have {options}. Which would you like?",
+        "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it without, or something else?",
         "q_combo": "what would you like with the {name} ({options})",
         "q_method": "is this for pickup or delivery",
         "q_time": "what time would you like it",
@@ -97,6 +99,17 @@ def _join(parts: list[str], lang: str, word: str = "and", comma: bool = True) ->
     return ", ".join(parts[:-1]) + sep + _t(lang)[word] + " " + parts[-1]
 
 
+_REQUEST_WORDS = re.compile(r"^(?:with|w/?|add|extra|plus|and|\+|some|a|an)\s+", re.IGNORECASE)
+
+
+def _option_text(raw: str) -> str:
+    """'with artichoke hearts' -> 'artichoke hearts' (the customer's words, minus request words)."""
+    text = raw.strip()
+    while (m := _REQUEST_WORDS.match(text)) and m.end() < len(text):
+        text = text[m.end() :]
+    return text.lower()
+
+
 def _format_time(hhmm: str) -> str:
     t = time.fromisoformat(hhmm)
     return f"{(t.hour % 12) or 12}:{t.minute:02d} {'AM' if t.hour < 12 else 'PM'}"
@@ -109,8 +122,8 @@ def _mod_text(menu: MenuCatalog, ingredient_ids: list[str], mod: Modification, l
         m = menu.modifier(mid) if mid else None
         return m.name.lower() if m else mod.raw_text
 
-    if mod.modifier_id is None:
-        return mod.raw_text
+    if mod.modifier_id is None and mod.kind is not ModificationKind.substitute:
+        return mod.raw_text  # a kitchen request ("warm"); not_on_menu options never get here (no Quote)
     if mod.kind is ModificationKind.remove:
         return T["remove"].format(name=name(mod.modifier_id))
     if mod.kind is ModificationKind.substitute:
@@ -134,7 +147,8 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
         if variant:
             details.append(variant.name)
         for it, half in zip(items, line.halves, strict=True):
-            mods = [_mod_text(menu, it.ingredient_ids, m, lang) for m in half.modifications] if it else []
+            shown = [m for m in half.modifications if not m.not_on_menu]
+            mods = [_mod_text(menu, it.ingredient_ids, m, lang) for m in shown] if it else []
             details.append(
                 T["half"].format(name=it.name.removesuffix(" Pizza") if it else half.menu_item_id)
                 + "".join(f" {m}" for m in mods)
@@ -144,7 +158,11 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
         title = item.name if item else (line.unmatched_text or "")
         if item and line.variant_id and (v := item.variant(line.variant_id)):
             details.append(v.name)
-        details += [_mod_text(menu, item.ingredient_ids if item else [], m, lang) for m in line.modifications]
+        details += [
+            _mod_text(menu, item.ingredient_ids if item else [], m, lang)
+            for m in line.modifications
+            if not m.not_on_menu  # never shown in a summary until the customer resolves it
+        ]
         for sel in line.combo_selections:
             choice = menu.item(sel.menu_item_id)
             details.append(choice.name if choice else sel.menu_item_id)
@@ -210,7 +228,22 @@ def template_question(
             questions.append(T["q_quantity"].format(name=item.name.lower()))
         elif m.field is FieldRef.item_variant and item:
             options = _join([v.name.lower() for v in item.variants], lang, "or", comma=False)
-            questions.append(T["q_variant"].format(name=item.name.lower(), options=options))
+            if line and line.unmatched_variant_text:
+                statements.append(
+                    T["q_variant_not_on_menu"].format(
+                        text=line.unmatched_variant_text.lower(), name=item.name.lower(), options=options
+                    )
+                )
+            else:
+                questions.append(T["q_variant"].format(name=item.name.lower(), options=options))
+        elif m.field is FieldRef.item_modification and item and line:
+            for mod in line.all_modifications():
+                if mod.not_on_menu:
+                    statements.append(
+                        T["q_option_not_on_menu"].format(
+                            text=_option_text(mod.raw_text), name=item.name.lower()
+                        )
+                    )
         elif m.field is FieldRef.combo_choice and item:
             picked = {s.slot_id for s in line.combo_selections} if line else set()
             for slot in item.combo_slots:

@@ -235,7 +235,27 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   sizes, 1 unclear quantity, 1 missing combo choice). Every total in a business message comes from the pricing engine.
 - Authoring helper kept outside the repo (scratchpad); the JSON files are the source of truth.
 
-**Judgment calls to check in review** (not yet in the annotation guide; I'll add the ones you agree with):
+### Dev review rulings (Julian, 2026-10-08), applied before any test conversation exists
+
+- **Contracts:** `extraction@0.3` (`Modification.not_on_menu`, `ItemProposal.unmatched_variant_text`,
+  `CustomerDecision.agreed_while_incomplete`; `confirmed` only when nothing is missing) and `menu@0.4`
+  (`Variant.diameter_cm`/`slices`). Samples and dev files migrated (version string only); the local PIZZA
+  cases were regenerated and are identical apart from the new default fields.
+- **Rulings:** (1) any change after confirming is `MODIFY_ORDER`; (2) `confirmed` only when the order is complete,
+  a yes with gaps is `pending` + `agreed_while_incomplete` (a-dev-032 updated); (3) a size the item doesn't have
+  keeps the item on the menu, `item_variant / missing`, the wording kept in `unmatched_variant_text` (a-dev-079);
+  (4) an option the menu doesn't offer is `not_on_menu`, `item_modification / off_menu`, never priced
+  (`OPTION_NOT_ON_MENU`) or summarized, with a reply "We don't have X for the Y. Would you like it without, or
+  something else?" (a-dev-034); kitchen requests ("warm") stay free notes. All in the annotation guide, SCHEMA,
+  PRICING, TAXONOMY.
+- **Pizza sizes:** Halfmoon's 40 pizza variants have `diameter_cm` and `slices` (20/25/30/36/41 cm, 4/6/8/10/12
+  slices), reply layer only: `ExtractionRequest` rejects a menu that still has them; extractors get
+  `menu.extractor_view()`. Verified unchanged: every base price and size delta, all 74 gold order prices except
+  a-dev-034 (was $26.98 with the artichoke silently ignored; now `OPTION_NOT_ON_MENU`, as ruled), and every card
+  (frozen 80 + 170 and all 91 + 199).
+- **Checks:** `make check` 312 passed (19 new tests in `tests/test_options_and_completeness.py`); dev: 0 findings.
+
+**Judgment calls to check in review** (rulings above settle 1, 2, 4 and 5; the rest are still open):
 1. After the customer confirms, later messages refer to the `placed_order`; any change then (including adding an
    item) is `MODIFY_ORDER`, `time_sensitive` if it changes what the kitchen makes (023, 059, 067), `normal` for a
    payment switch (064). The decision resets to `pending`.

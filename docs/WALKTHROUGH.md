@@ -333,7 +333,7 @@ needed, and why the metrics look at fields as well as items.
 | **Near-duplicate** | Two conversations whose customer words overlap ≥ 80% (token-set Jaccard). Blocked across splits. |
 | **PIZZA, EXR, TOP** | PIZZA = Amazon's public pizza-order dataset (CC-BY-NC-4.0). EXR = its canonical parse ("what was ordered"); TOP = its word-level parse ("which words meant it"). |
 | **Benchmark catalog** | The menu generated for PIZZA evaluation only (in `data/external/`), separate from Halfmoon. |
-| **Contract / version** | A Pydantic model that is part of the interface (e.g. `extraction@0.2`, `conversation@0.4`). Bumped whenever the shape changes; every run logs it. |
+| **Contract / version** | A Pydantic model that is part of the interface (e.g. `extraction@0.3`, `conversation@0.4`). Bumped whenever the shape changes; every run logs it. |
 | **`ToolOk` / `ToolErr`** | How tools return results: business outcomes ("size missing") are values, never exceptions. |
 | **Cents** | All money is integer cents (`domain/money.py`), so there are no floating-point rounding errors. |
 | **Injected clock** | Code gets "now" from a `Clock` argument, so tests can fix the time. |

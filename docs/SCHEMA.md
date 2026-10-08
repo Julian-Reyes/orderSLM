@@ -5,11 +5,11 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 
 | Contract | Version | File |
 |---|---|---|
-| Extraction output (model proposal) | `extraction@0.2` | `schema/extraction.py` |
+| Extraction output (model proposal) | `extraction@0.3` | `schema/extraction.py` |
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
 | Conversation | `conversation@0.4` | `schema/conversation.py` |
-| Menu catalog | `menu@0.3` | `schema/menu.py` |
+| Menu catalog | `menu@0.4` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
 
@@ -30,13 +30,26 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 6. **Evidence for everything stated.** Each item and each provided field cites `{message_index, quote}`;
    `orderslm.checks` verifies the quote is in that message (case/whitespace-insensitive) and every id is in the menu.
 
-## Extraction output (`extraction@0.2`)
+## Extraction output (`extraction@0.3`)
 
 0.2 (M1) added `Modification.amount` (`normal | extra | light`), needed for "extra cheese" / "light on the
 sauce" and for the PIZZA dataset's EXTRA/LIGHT qualifiers.
 
-**Input** (`ExtractionRequest`): menu catalog + conversation (customer and business messages, timestamped)
-+ current draft (`ExtractionOutput | null`) + prompt version.
+0.3 (M2 dev review, 2026-10-08):
+- `Modification.not_on_menu`: an ingredient/add-on the menu doesn't offer ("artichoke hearts"). No
+  `modifier_id` (for a substitute, no `replacement_modifier_id`); listed as `item_modification / off_menu`; never
+  priced (`OPTION_NOT_ON_MENU`) and never shown in a summary until the customer drops it or picks another.
+  Kitchen requests the business can just do ("warm", "extra crispy") are not flagged: no `modifier_id`, free.
+- `ItemProposal.unmatched_variant_text`: a size/flavor the item doesn't have ("party size"), as written. The item
+  stays on the menu, `variant_id` stays null, and `item_variant / missing` is listed even if the item has a
+  default size. A clarification ("we have S/M/L"), not a rejection.
+- `CustomerDecision.agreed_while_incomplete`: `confirmed` is allowed only when nothing is missing (the order is
+  complete enough for the kitchen). A "yes" to a summary while something is still missing keeps `pending`, sets
+  this flag, and cites the yes.
+
+**Input** (`ExtractionRequest`): menu catalog (`menu.extractor_view()`: no reply-only size facts) + conversation
+(customer and business messages, timestamped) + current draft (`ExtractionOutput | null`) + prompt version.
+Never the router's label (docs/ARCHITECTURE.md, design rules).
 
 **Output: a full snapshot**, not a diff. The model states what the order *is* now, after all corrections.
 The patch shown to the business ("changed: coke → sprite") is computed in code by comparing the snapshot
@@ -46,7 +59,7 @@ see PROGRESS.md open question 1.)
 
 ```jsonc
 {
-  "schema_version": "extraction@0.2",
+  "schema_version": "extraction@0.3",
   "items": [{
     "line_id": "L2",                      // stable within the conversation
     "menu_item_id": "cheeseburger",       // exactly one of menu_item_id | unmatched_text | halves
@@ -54,7 +67,9 @@ see PROGRESS.md open question 1.)
     "halves": null,                       // half-and-half: two {menu_item_id, modifications}
     "quantity": 1,                        // 1-99, or null if stated but unclear ("some wings")
     "variant_id": null,                   // null = not stated (catalog default applies if any)
-    "modifications": [{"kind": "remove", "modifier_id": "onion", "amount": "normal", "raw_text": "no onions"}],
+    "unmatched_variant_text": null,       // a size the item doesn't have, as written ("party size")
+    "modifications": [{"kind": "remove", "modifier_id": "onion", "amount": "normal", "raw_text": "no onions",
+                       "not_on_menu": false}], // true: an option the menu doesn't offer
     "combo_selections": [],               // [{slot_id, menu_item_id, variant_id?}]
     "notes": null,
     "evidence": [{"message_index": 0, "quote": "2 cheeseburgers"},
@@ -69,7 +84,8 @@ see PROGRESS.md open question 1.)
   "address": {"state": "not_applicable"}, // street, number, unit, reference, raw_text when provided
   "payment": {"method": "cash", "change_for_cents": null, "customer_claims_paid": false, "evidence": [...]},
   "customer_name": {"state": "not_mentioned"},
-  "customer_decision": {"state": "pending"},   // pending | confirmed | cancelled (+ evidence)
+  "customer_decision": {"state": "pending", "agreed_while_incomplete": false},
+                                           // pending | confirmed (only when nothing is missing) | cancelled
   "notes": [],                             // [{text, evidence}] e.g. "ring the side door"
   "missing_or_ambiguous": [],              // [{field, reason, line_id?}]
   "clarification_question": null           // required iff missing_or_ambiguous is non-empty
@@ -93,7 +109,10 @@ required for every non-`unknown` value.
 - Item identity: exactly one of `menu_item_id`, `unmatched_text`, `halves`; off-menu items can't have
   variants/modifications and must appear in `missing_or_ambiguous` as `item_menu_match`.
 - `line_id`s unique; item-level missing entries must reference an existing line.
-- `clarification_question` present **iff** `missing_or_ambiguous` is non-empty; a cancelled order has nothing to clarify.
+- `clarification_question` present **iff** `missing_or_ambiguous` is non-empty; a cancelled order has nothing to clarify;
+  a confirmed order has nothing missing (`agreed_while_incomplete` only with `pending`, with evidence).
+- `not_on_menu` only on add/substitute with no catalog id for the requested option; `unmatched_variant_text`
+  only when `variant_id` is null (and never on an off-menu item).
 - Pickup ⇒ address `not_applicable`; delivery/unknown ⇒ address is not `not_applicable`.
 - `normalized_local` is strict `HH:MM`, only for `provided` + `clock_time`.
 - `change_for_cents` only for cash. `customer_claims_paid` records a claim; there is no "paid" field in model output.
@@ -137,10 +156,14 @@ staff/payment systems), `HandoffTicket`, and `ToolOk[T] | ToolErr` (`error.code`
 Order statuses: `draft → awaiting_confirmation → new → preparing → ready → completed`, or `cancelled`.
 Allowed transitions: `core/state.py` (customer changes to a placed order go to staff).
 
-## Menu catalog (`menu@0.3`)
+## Menu catalog (`menu@0.4`)
 
 Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents`, `min_order_cents`),
 `name_required_for_pickup` (0.2), `exclusive_groups` (0.3), modifiers, and items.
+- **Size facts** (0.4): pizza variants carry `diameter_cm` and `slices`, **for the reply layer only** ("a large
+  is 36 cm, 10 slices"). The extractor gets `MenuCatalog.extractor_view()`, which drops them, and
+  `ExtractionRequest` rejects a menu that still has them, so a model can never turn "feeds 10 people" into a
+  quantity. They don't affect any price (tested).
 - **Modifiers** (0.3) are ingredients/add-ons with a `group` (topping, sauce, crust, milk…), `aliases` and a
   `price_cents` for adding one portion. They no longer have an add/remove kind.
 - **Items**: aliases, base price, variants (price delta, aliases, optional default), `ingredient_ids`

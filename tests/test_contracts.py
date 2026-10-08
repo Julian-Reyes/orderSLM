@@ -23,7 +23,9 @@ def request_for(menus, sample_by_id):
     def make(cid: str) -> ExtractionRequest:
         s = sample_by_id[cid]
         return ExtractionRequest(
-            menu=menus[s.conversation.business_id], conversation=s.conversation, prompt_version="test"
+            menu=menus[s.conversation.business_id].extractor_view(),
+            conversation=s.conversation,
+            prompt_version="test",
         )
 
     return make
