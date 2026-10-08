@@ -212,7 +212,13 @@ export function App() {
             </button>
             <ul class="list">
               {rows.map((r) => (
-                <li class={current?.conversation.id === r.id ? "on" : ""} onClick={() => open(r.id)}>
+                <li
+                  class={current?.conversation.id === r.id ? "on" : ""}
+                  ref={(el) => {
+                    if (el && current?.conversation.id === r.id) el.scrollIntoView({ block: "nearest" });
+                  }}
+                  onClick={() => open(r.id)}
+                >
                   <div class="id">{r.id}</div>
                   <div class="muted small">
                     {r.business_id} · {r.messages} msg · {r.style}
