@@ -1,6 +1,6 @@
 # OrderSLM: Food-Order Understanding, Decision Routing, and Distilled Small Models
 
-Updated October 7, 2026 (evaluation data revised speed-first the same day, §7). This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, evaluation separate from training data, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
+Updated October 7, 2026 (evaluation data revised speed-first the same day, §7). Updated October 8, 2026: test-set contamination rule (§12), student intent output (§3, §4, §10), five roles for the decision providers and the architecture comparison (§11). This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, evaluation separate from training data, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
 
 ## 1. Goal
 
@@ -18,7 +18,7 @@ It is an ML portfolio project built around four measured comparisons:
 1. **Teacher bake-off:** which cheap frontier model labels training data best per dollar?
 2. **Student bake-off:** which small open model is the best starting point?
 3. **Distillation:** how close does a LoRA-trained small model get to the teacher, and what does it save in cost, speed, and privacy?
-4. **Router benchmark:** which decision provider (Julia-1, Jev, OpenAI Decisions) best identifies what the customer wants?
+4. **Decision providers and router benchmark:** which decision provider (Julia-1, Jev, OpenAI Decisions) best identifies what the customer wants, how well they work as independent checkers next to the extractor, and whether a separate router is worth having at all. The question throughout: do decision providers approach LLM-level quality at a fraction of the cost and time?
 
 Every model choice in the project is backed by a saved, reproducible comparison.
 
@@ -58,12 +58,16 @@ customer message(s) + conversation context + draft order state
 | Component | Responsibility |
 |---|---|
 | Router | Primary label, optional secondary label, urgency, context flags |
-| Student (extractor) | Items, quantities, sizes, modifications, fulfillment, time, address, payment, evidence, order patches |
+| Student (extractor) | Items, quantities, sizes, modifications, fulfillment, time, address, payment, evidence, order patches, and its own **intent** label for the message |
 | Deterministic core | Menu matching, prices, totals, valid state transitions. **Prices and totals are never produced by a model.** |
 | Mocked tools | Order lookup, order status, staff handoff queue |
 | Reply layer | Templates filled from verified results; clear pending vs. confirmed status |
 
 Customer claims are not facts: "I already paid" records a payment claim, not a confirmed payment.
+
+**Design rules (October 8, 2026):**
+- **The extractor's input never includes the router's label.** The router only decides whether the extractor is called (docs/ARCHITECTURE.md).
+- **The student also outputs an intent** (one of the 15 router labels) alongside the order (M4, M6). Because it never sees the router's label, its intent is a genuine second opinion: router and student can cross-check each other (a router that mislabels an order as a non-order would otherwise skip the extractor and lose items), and an extractor-only architecture becomes possible. M7 measures whether a separate router is worth having (§11).
 
 ## 4. Extraction task (student and teacher)
 
@@ -78,6 +82,7 @@ Customer claims are not facts: "I already paid" records a payment claim, not a c
 - `customer_name`, general notes.
 - `missing_or_ambiguous[]`: fields needing clarification.
 - `clarification_question`: one natural question covering what's missing.
+- `intent`: the router label (§5) of the latest customer message, decided independently of the router. **Required** for the trained student (added to the contract in M4; the M3 teacher bake-off schema is unchanged).
 - `evidence`: for each item and field, the message index and quoted text it came from.
 
 Corrections and cancellations ("actually", "nvm", "swap X for Y", "remove the coke") must update the order correctly across messages. Keep unknown values distinct from absent or not applicable.
@@ -141,11 +146,15 @@ Synthetic training data mostly measures how well a model imitates the teacher, s
 - A cheap model generates conversations from combinations of (menu × customer persona × scenario × writing style). Control diversity with explicit attributes, deduplicate near-duplicates, and log the distribution.
 - Prefer a **different model for generation than for labeling**, to reduce the teacher agreeing with its own phrasing.
 - Start with a **200-conversation pilot**, audit it by hand, then scale to **1,000–2,000** conversations.
+- The teacher labels each customer message's **router intent** (the 15 labels) along with the order, so the student can learn to output both (§4).
+- **Mega-menu conversations:** ~20% extra conversations on the combined food-court menu (§11e), teacher-labeled, for the mixed 2B student only.
+- **Training-label audit:** before training, the decision providers check the teacher's labels (intent and order); disagreements are reviewed or dropped (§11d).
 - The winning teacher labels them with structured output + evidence (batch API where available, cached system prompt).
 - Automatic consistency checks: evidence quotes exist in the conversation, item IDs exist in the catalog, JSON validates. Drop failures and log the drop rate.
 
 ### Rules
 - Never train on test conversations or anything derived from them. Deduplicate across splits.
+- **Test-set contamination rule** (§12): test results that led to a fix are reported as "used for fixes", never as clean held-out results.
 - **Privacy:** no real customer chats in the repo or training data.
 - **Terms:** before bulk labeling, check each provider's terms on using outputs to train models, and record the conclusion in `docs/TERMS.md`.
 
@@ -201,6 +210,8 @@ For each chosen student, evaluate on the sealed test sets, reported per source (
 - Use **LoRA**. Use QLoRA only if a model doesn't fit in available memory; record which was used.
 - Same training data, schema, prompt format, and comparable tuning budget for every student. Document any differences.
 - Training on teacher outputs is output-level distillation implemented through supervised fine-tuning.
+- **The student outputs an `intent` field alongside the order** (required, not optional; §3, §4). Intent accuracy is scored against the reviewed gold labels like every router (§11a).
+- **Menu-narrowing training experiment (2B student only, §11e):** a single-menu student (per-restaurant conversations only) vs. a mixed student (the same data + ~20% mega-menu conversations).
 - Optional: constrained decoding (JSON-schema-guided generation with menu-constrained item IDs), reported with and without.
 - Optional: one full fine-tune of the 0.8B model to compare against LoRA.
 - Optional: learning curve over training-set size (250 / 500 / 1,000 / 2,000).
@@ -217,7 +228,7 @@ For each chosen student, evaluate on the sealed test sets, reported per source (
 
 The teacher candidates are very cheap per order, so do not overstate per-order savings at small volume; present the cost, speed, and privacy results together.
 
-## 11. Experiment 4: Router benchmark
+## 11. Experiment 4: Decision providers and router benchmark
 
 **Providers** (verified October 7, 2026 from official docs):
 
@@ -232,13 +243,66 @@ All three accept a state/input, named questions, and choice/score/boolean questi
 
 **Rules:**
 - Identical messages, context, and label descriptions for every provider. Keep extraction fixed when comparing routers.
-- Do not fine-tune Julia-1 (its training pipeline isn't published, and it is not a generative model).
+- Do not fine-tune Julia-1 in V1 (its training pipeline isn't published, and it is not a generative model). Fine-tuning it is a V2 candidate (§18).
 - Treat provider confidence scores as provider-specific; do not compare them directly without calibration on dev data.
-- Optional: have the teacher also label router decisions and train a student to route, adding it as one more row.
+- The student's own intent output (§4) is one more row in every routing comparison.
 
-**Metrics:** macro-F1, per-label precision/recall, confusion matrix, secondary-label recall, `UNKNOWN` handling (abstain vs. confident wrong guess), stability across 3 repeated runs, sensitivity to option order, latency (p50/p95), cost per 1,000 messages.
+### Five roles for the decision providers (October 8, 2026)
 
-Expected cost: cents for OpenAI Decisions; Jev depends on its input price (check before running).
+The extractor reads the whole message anyway, so routing alone may add little (its main benefits are skipping the extractor on non-order messages and handling non-order intents). These roles give the decision providers jobs the extractor doesn't already do, so they are useful as **independent checkers**, while the router benchmark still measures how well each one categorizes.
+
+- **Primary roles:** the order checker (b) and the training-label auditor (d). **Supporting roles:** router (a), menu narrowing (e), item chooser (c, optional).
+- Each role is **tuned on dev and scored once on test**, with **identical wording for every provider**. Where an LLM could do the same job, also compare against the **teacher LLM** (the bake-off winner), so the key question is answered throughout: do decision providers approach LLM-level quality at a fraction of the cost and time?
+
+**a) Router benchmark + cross-check (M7).**
+- Routers compared on every test message: rules baseline, Julia-1, Jev, OpenAI Decisions, the student's intent output, and the teacher LLM. Report accuracy, latency p50/p95 and cost per 1,000 messages for each.
+- The router and the student label **independently**: the student never receives the router's label as input (§3 design rule), so its intent is a genuine second opinion, not a copy. That independence is what makes the cross-check meaningful.
+- Cross-check: if router and student agree, proceed. If they disagree, run the extractor anyway; if still unclear, ask a clarifying question or flag staff. Log every disagreement and report how many router misses the student caught, and vice versa.
+- Product behavior: follow the router when it's confident; when it's unsure, also run the student and cross-check. Calibrate the "unsure" threshold on dev. During testing, run every router and the student on every message.
+- Label descriptions may be improved using dev mistakes, applied identically to all providers.
+- When reading results: the student learned intents from the teacher's labels, so it may share the teacher's mistakes. Everything is scored against the reviewed gold labels.
+
+**b) Order checker (primary, M6/M7).**
+- After extraction, a yes/no check: "Does this order match what the customer asked for?" Input: the conversation plus the extracted order written out in plain text.
+- Flagged orders go to staff review instead of straight to the kitchen.
+- Compare each provider against the teacher LLM doing the same check.
+- Measure on the test set: catch rate (% of wrong extractions flagged), false-alarm rate (% of correct extractions flagged), latency, and cost per 1,000 checks.
+
+**c) Item chooser (optional, M7).**
+- Runs only for items the extractor marked unmatched.
+- Code builds a shortlist of ≤20 menu items with descriptions (fuzzy matching or same category); the provider picks one or "none"; the bot confirms with the customer ("Did you mean the Diablo Burger?").
+- Pilot on dev off-menu and vague-reference cases first, comparing: (i) asking the customer with the fuzzy matcher's top 3, (ii) the student's own guess, (iii) each provider choosing.
+- Keep it in the product only if it clearly beats (i) and (ii). Report the result either way.
+
+**d) Training-label auditor (primary, M4).**
+- Before training, the providers check the teacher's labels (intent and order) on the training set; disagreements are flagged for review or dropped.
+- Compare against the teacher LLM (or a stronger LLM) doing the same audit.
+- Report flag rate, precision on a hand-checked sample of flags, latency, and cost per 1,000 checks.
+
+**e) Menu narrowing (required, M7).**
+- Before extraction, each provider answers yes/no per menu category ("Does this conversation involve burgers? pizza? drinks? sides?…"), and the extractor receives only the relevant sections. If an item can't be matched, retry with the full menu, so a miss costs time, not correctness.
+- **Mega-menu condition:** combine the three menus into one food-court-style menu (~80–100 items); also run it on the PIZZA benchmark catalog.
+- Narrowing methods compared: rules baseline (keyword match on category names), Julia-1, Jev, OpenAI Decisions.
+- Test conversations must include **implicit category mentions** (synonyms like "pop"/"something fizzy", item names without category words, vague requests like "something sweet"); Source A cards include them (scenario tag `implicit_category`). Report narrowing accuracy separately for explicit vs. implicit mentions.
+- **Training experiment (2B student only):** train (1) a single-menu student on per-restaurant conversations only and (2) a mixed student on the same data plus ~20% mega-menu conversations (teacher-labeled in M4). Test both on: single menu, mega menu full, and mega menu narrowed. Report whether big-menu training alone closes the gap and how much narrowing helps each version.
+- Measure: prompt tokens, latency p50/p95, extraction accuracy, retry rate, and how often narrowing dropped a needed category.
+
+### Architecture comparison (M7)
+
+Compare on the test set:
+
+| | Architecture |
+|---|---|
+| A | Router, then extractor (extractor only for order labels) |
+| B | Extractor only (the student outputs intent + order for every message) |
+| C | Router and extractor in parallel |
+
+- **Method:** run the extractor once on every test message (this is B) and each router once on every test message, then compose A from those results. Time each component separately and compute composed latency; confirm with a small live run of each architecture.
+- **Report:** routing accuracy, extraction accuracy, latency p50/p95 per message and per conversation, cost per 1,000 messages, the share of messages where the extractor was skipped, and the break-even router latency for the test set's message mix.
+
+**Metrics (routing):** macro-F1, per-label precision/recall **with confidence intervals** (labels with few test examples are noisy, and the report says so), confusion matrix, secondary-label recall, `UNKNOWN` handling (abstain vs. confident wrong guess), stability across 3 repeated runs, sensitivity to option order, latency (p50/p95), cost per 1,000 messages.
+
+Expected cost: cents for OpenAI Decisions; Jev depends on its input price (check before running). The teacher-LLM comparisons in roles a–e add API cost: estimate each before running and ask first if over $2.
 
 ## 12. Evaluation (all on the sealed test sets unless noted, reported per source)
 
@@ -256,7 +320,13 @@ Expected cost: cents for OpenAI Decisions; Jev depends on its input price (check
 - Latency (p50/p95) and peak memory, on GPU and on CPU/Apple Silicon with the quantized model.
 - Slices by writing style, business, and conversation length.
 - `docs/ERROR_ANALYSIS.md` with categorized failures and examples.
+- Per-label scores (router and intent) with confidence intervals; labels with few test examples are marked as noisy.
 - **Every reported number must come from committed eval outputs. No fabricated or estimated results in tables.**
+
+### Test-set contamination rule (October 8, 2026)
+- If a test-set run reveals a problem that we then fix, those test results are reported as **"used for fixes"**, not as clean held-out results.
+- The fix is measured on **fresh unseen data**: new PIZZA orders from the ~1,150 not yet sampled, or a newly generated Claude-written test batch (new scenario cards, written and reviewed the same way).
+- Lessons from test failures are added to dev as new cases (never by copying test conversations).
 
 ## 13. Hardware and tooling
 
@@ -275,6 +345,7 @@ Total budget: **$5–10 USD**.
 | Teacher bake-off | < $1 |
 | Synthetic generation + bulk labeling (1–2k conversations) | $1–4 |
 | Router benchmark (Jev, OpenAI Decisions) | < $1 (confirm Jev pricing) |
+| Decision-provider roles + teacher-LLM comparisons (M4 audit, M6/M7 checks) | Estimate before running; ask if > $2 |
 | Training compute | $0 (free GPUs); ask before renting |
 | Buffer | remainder |
 
@@ -333,13 +404,13 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 | 1 | Menus (3 + 1 held-out), pricing engine, order state logic, rules baselines (extraction + routing) | Deterministic tests pass; no model needed |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev + test (Source A); Julian's review | Locked split with counts per source, label, menu, style and scenario; all dev + ≥25% of test reviewed, correction rate logged; 199 PIZZA cases |
 | 3 | Teacher bake-off | Results table + accuracy-vs-cost chart; teacher chosen by the stated rule; actual cost logged |
-| 4 | Synthetic generation: 200-conversation pilot → audit → 1–2k bulk, labeled by the winning teacher | Data audit, distribution log, drop rate, actual cost |
+| 4 | Synthetic generation: 200-conversation pilot → audit → 1–2k bulk, labeled by the winning teacher (order **and** router intents); ~20% mega-menu conversations for the mixed student; training-label audit by the decision providers (§11d) | Data audit, distribution log, drop rate, audit flag rate + precision, actual cost |
 | 5 | Student bake-off (zero-shot, local) | License/tooling checks; results table; students chosen |
-| 6 | LoRA training; zero-shot vs. few-shot vs. fine-tuned vs. teacher on the test set; error analysis | Reproducible training configs and eval outputs |
-| 7 | Router benchmark: rules vs. Julia-1 vs. Jev vs. OpenAI Decisions | Verified API contracts, per-label metrics, stability and cost results |
+| 6 | LoRA training (student outputs intent + order); zero-shot vs. few-shot vs. fine-tuned vs. teacher on the test set; single-menu vs. mixed 2B student; order checker (§11b); error analysis | Reproducible training configs and eval outputs; intent accuracy |
+| 7 | Decision providers: router benchmark + cross-check with the student's intent (§11a), order checker (b), item chooser pilot (c, optional), menu narrowing incl. mega menu (e); architecture comparison A/B/C | Verified API contracts, per-label metrics with CIs, stability, latency and cost results; disagreement log; break-even router latency |
 | 8 | Demo, report, Hugging Face release | Working demo; every number traceable to saved outputs |
 
-**V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration.
+**V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration; fine-tuning Julia-1 on teacher-labeled router data, reported separately as "off-the-shelf vs. fine-tuned" (first check that a fine-tuning path exists, §11).
 
 ## 19. Working rules
 
@@ -347,3 +418,4 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 - Ask before spending over $2, adding major dependencies, or downloading large models.
 - Verify provider and model contracts, licenses, and prices against primary sources before integrating. Do not invent APIs, capabilities, confidence values, or results.
 - Keep the sealed test set isolated. Log provider, model version, prompt version, and data version for every run.
+- Test results that led to a fix are reported as "used for fixes"; the fix is measured on fresh unseen data (§12).

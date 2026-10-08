@@ -30,6 +30,18 @@ customer message(s) + conversation context + draft order state
 
 Customer claims are recorded as claims (`customer_claims_paid`), never as facts (`OrderRecord.payment_confirmed`).
 
+## Design rules
+
+- **The extractor's input never includes the router's label.** The router only decides whether the extractor
+  is called. `ExtractionRequest` (menu, conversation, draft, prompt version) has no routing field, and must not
+  get one.
+- **The student outputs an intent** (one of the 15 router labels) alongside the order (planned: M4 contract,
+  M6 training). Since it never sees the router's label, its intent is an independent second opinion: router and
+  student cross-check each other (spec §11a).
+- **Architectures compared in M7** (spec §11): A) router, then extractor (the flow above); B) extractor only
+  (the student's intent replaces the router); C) router and extractor in parallel. The decision providers also
+  act as order checker, training-label auditor, menu narrowing and (optional) item chooser (spec §11 b–e).
+
 ## Repository layout
 
 Directories marked *(Mx)* are created in that milestone; everything else exists now.

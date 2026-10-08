@@ -24,6 +24,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | Teacher bake-off (~40 dev conversations × 3–4 models) | 3 | < $1 | Priced pilot first; preflight estimate from measured tokens. |
 | Synthetic generation + bulk labeling (1–2k conversations) | 4 | $1–4 | 200-conversation pilot first; batch APIs where available. Ask if > $2. |
 | Router benchmark (Jev, OpenAI Decisions) | 7 | < $1 | Jev input price not in its docs (spec §11): confirm before running. |
+| Decision-provider roles + teacher-LLM comparisons (label audit, order checker, narrowing) | 4, 6, 7 | estimate first | Spec §11 b–e; ask before any single spend over $2. |
 | Training compute | 6 | $0 | Free Colab/Kaggle GPUs; ask before renting anything. |
 | Buffer | — | remainder | |
 

@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-07._
+_Last updated 2026-10-08._
 
 ## Milestones
 
@@ -12,14 +12,34 @@ _Last updated 2026-10-07._
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 250 scenario cards generated (branch `m2-eval-data`); conversations next |
 | 3 | Teacher bake-off | Not started |
-| 4 | Synthetic generation + labeling | Not started |
+| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
-| 6 | LoRA training + distillation eval | Not started |
-| 7 | Router benchmark | Not started |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
+| 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
 **Spend to date: $0.00** (docs/COSTS.md). No API calls, model downloads, training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
+
+## Plan updates (Julian, 2026-10-08)
+
+Recorded in the spec (§3, §4, §7, §10, §11, §12, §14, §18, §19), CLAUDE.md and docs/ARCHITECTURE.md. Nothing built
+for M4/M6/M7 yet.
+
+1. **Test-set contamination rule** (spec §12, CLAUDE.md): test results that led to a fix are reported as "used for
+   fixes"; the fix is measured on fresh unseen data (unused PIZZA orders, ~1,150 left, or a new Claude-written test
+   batch); lessons go into dev as new cases.
+2. **Student outputs an intent** (required; M4 teacher labels the 15 router intents with the order, M6 trains it).
+   Design rule (ARCHITECTURE.md): the extractor's input never includes the router's label, so the student's intent
+   is an independent second opinion. `ExtractionRequest` already has no routing field.
+3. **Five roles for the decision providers** (spec §11): primary: (b) order checker (M6/M7), (d) training-label
+   auditor (M4); supporting: (a) router benchmark + router/student cross-check (M7), (e) menu narrowing incl. a
+   ~80–100-item mega menu and a single-menu vs. mixed 2B student (M7, required), (c) item chooser (M7, optional
+   pilot). Each tuned on dev, scored once on test, identical wording for every provider, compared with the teacher LLM.
+4. **Architecture comparison** (M7): A router → extractor, B extractor only, C in parallel; composed from per-component
+   runs, confirmed by a small live run; reports break-even router latency.
+5. **Rare labels:** per-label scores with confidence intervals and a noise note.
+6. **V2 candidate:** fine-tuning Julia-1 on teacher-labeled router data ("off-the-shelf vs. fine-tuned").
 
 ## Rename (2026-10-07)
 

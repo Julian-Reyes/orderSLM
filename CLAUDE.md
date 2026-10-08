@@ -14,6 +14,7 @@ Spec: orderslm-project-plan.md (authoritative). Status: PROGRESS.md. Read PROGRE
 - Model proposals (schema/extraction.py) and verified results (schema/order.py, tool results) stay separate. The reply layer states only verified facts.
 - Customer claims are not facts: "I already paid" is `customer_claims_paid`, never a confirmed payment.
 - The test split is sealed: only `orderslm.paths.test_split_dir()` reaches it, and only with ORDERSLM_UNSEAL_TEST set for a final eval. Never train, tune prompts or generate data from it.
+- Test-set contamination: if a test run reveals a problem we then fix, those results are reported as "used for fixes", not clean held-out results. Measure the fix on fresh unseen data (unused PIZZA orders or a new Claude-written test batch); add the lesson to dev as new cases.
 - Every reported number comes from saved, reproducible outputs in `runs/`. Log provider, model, prompt version and data version for every run, and actual cost in docs/COSTS.md.
 - No real customer chats anywhere in the repo or training data.
 - Never commit third-party datasets (PIZZA is CC-BY-NC-4.0, no redistribution): only download + conversion scripts; data lives in gitignored `data/external/`.

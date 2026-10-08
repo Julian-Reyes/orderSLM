@@ -6,7 +6,9 @@ model choice along the way:
 1. **Teacher bake-off**: which cheap frontier model labels training data best per dollar.
 2. **Student bake-off**: which small open model is the best starting point.
 3. **Distillation**: how close a LoRA-trained small model gets to the teacher, and what it saves.
-4. **Router benchmark**: Julia-1 vs. Jev vs. OpenAI Decisions (plus a rules baseline) as message routers.
+4. **Decision providers and router benchmark**: Julia-1 vs. Jev vs. OpenAI Decisions (plus a rules baseline, the
+   student's own intent output and the teacher LLM) as routers and as independent checkers (order checker,
+   training-label audit, menu narrowing), and whether a separate router is worth having at all.
 
 English first; the schema is language-neutral so Brazilian Portuguese can follow. Prices and totals are
 always computed in code, never by a model.
