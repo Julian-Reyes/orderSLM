@@ -215,9 +215,8 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   held-out menu **50/199 = 25.1%** of test.
 - **Contract:** `conversation@0.4` adds `Scenario.implicit_category`.
 - `cards generate --split dev|test`; dev cards regenerated (`data/dev/cards.jsonl`, 91; a test checks the file
-  matches the generator). **The sealed test card file still has the old 170 cards** until it is regenerated with
-  `ORDERSLM_UNSEAL_TEST=... cards generate --split test --force` (the session's tool permissions blocked setting
-  the unseal variable, so Julian runs it).
+  matches the generator). Julian regenerated the sealed test cards on 2026-10-08 (`cards generate --split test --force`): 199 cards, the
+  first 170 lines unchanged, 29 appended.
 - **Checks:** `make check` 293 passed.
 
 ### Dev conversations (Source A, 2026-10-08): written, not yet reviewed
@@ -276,8 +275,7 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
 
 1. **Review the 91 dev conversations** in the tool (`make annotate`, "Save as reviewed"). Anything you change, I
    apply to the guide/conventions before writing the test conversations.
-2. Regenerate the sealed test cards (command above) before the test conversations are written.
-3. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
-4. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
+2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
+3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
-5. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
+4. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
