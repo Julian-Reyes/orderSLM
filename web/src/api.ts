@@ -83,6 +83,7 @@ export interface CheckResult {
   derived_missing?: { field: string; reason: string; line_id: string | null }[];
   template_question?: string | null;
   pricing?: Json;
+  gold_plain?: string[]; // the gold extraction in plain English (core/describe.py), read-only
 }
 
 async function call<T>(method: string, url: string, body?: unknown): Promise<T> {

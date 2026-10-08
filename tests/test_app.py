@@ -131,3 +131,11 @@ def test_after_lock_edits_need_a_reason(dirs, monkeypatch):
     )
     assert ok.is_success
     assert splits.load_split(Split.test)[0].annotation_notes == "clarified"
+
+
+def test_check_returns_the_gold_in_plain_english(dirs):
+    r = client().post("/api/dev/check", json=sample_json(5, "dev")).json()
+    plain = r["gold_plain"]
+    assert plain[0] == "ITEMS"
+    assert plain[1].startswith("L1  1 × Pizza, Large 14-inch: half Pepperoni Pizza / half Hawaiian Pizza")
+    assert "Note: ring the side door   ← #4 “ring the side door”" in plain

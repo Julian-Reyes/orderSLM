@@ -286,6 +286,7 @@ function Editor({ split, meta, menus, initial, locked, blindConversation, review
   const [evidence, setEvidence] = useState<Evidence | null>(null);
   const [reason, setReason] = useState("");
   const [saving, setSaving] = useState(false);
+  const [goldView, setGoldView] = useState<"plain" | "json">(() => (store.get("orderslm:goldView") === "json" ? "json" : "plain"));
   const timer = useRef<number | undefined>(undefined);
   const menu = menus[a.conversation.business_id]?.menu;
   const draftKey = `orderslm:draft:${split}:${a.conversation.id}`;
@@ -554,6 +555,16 @@ function Editor({ split, meta, menus, initial, locked, blindConversation, review
 
         <h2>
           Gold extraction{" "}
+          <span class="toggle">
+            {(["plain", "json"] as const).map((v) => (
+              <button
+                class={goldView === v ? "tab on" : "tab"}
+                onClick={() => (setGoldView(v), store.set("orderslm:goldView", v))}
+              >
+                {v === "plain" ? "Plain English" : "JSON"}
+              </button>
+            ))}
+          </span>{" "}
           <label class="inline small">
             <input type="checkbox" checked={gold === null} onChange={(e) => setGold(e.currentTarget.checked ? null : emptyGold())} />{" "}
             no order (null)
@@ -581,7 +592,22 @@ function Editor({ split, meta, menus, initial, locked, blindConversation, review
             </div>
           </>
         )}
-        <textarea class={goldError ? "json bad" : "json"} rows={22} spellcheck={false} value={goldText} onInput={(e) => onGoldText(e.currentTarget.value)} />
+        {goldView === "plain" ? (
+          <div class="plain">
+            {gold === null ? (
+              <div class="muted">No order in this conversation (gold is null).</div>
+            ) : check?.gold_plain ? (
+              check.gold_plain.map((line) =>
+                line === "" ? <div class="gap" /> : /^[A-Z ]+$/.test(line) ? <div class="head">{line}</div> : <div>{line}</div>,
+              )
+            ) : (
+              <div class="muted">{goldError ? "Fix the JSON first (switch to JSON)." : "checking…"}</div>
+            )}
+            <div class="muted small hint">Read-only. Switch to JSON to edit; this view updates as you edit.</div>
+          </div>
+        ) : (
+          <textarea class={goldError ? "json bad" : "json"} rows={22} spellcheck={false} value={goldText} onInput={(e) => onGoldText(e.currentTarget.value)} />
+        )}
         {goldError && <div class="err small">JSON: {goldError}</div>}
 
         <CheckPanel check={check} />

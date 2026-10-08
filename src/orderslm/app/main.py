@@ -16,6 +16,7 @@ from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from orderslm.core.describe import describe_gold
 from orderslm.core.missing import required_missing
 from orderslm.core.pricing import DeterministicPricing
 from orderslm.core.replies import template_question
@@ -162,6 +163,7 @@ def create_app(clock: Clock | None = None) -> FastAPI:
             )
             quote = DeterministicPricing().quote(menu, ac.gold_extraction)
             result["pricing"] = quote.model_dump(mode="json")
+            result["gold_plain"] = describe_gold(ac.gold_extraction, menu)
         return result
 
     @app.put("/api/{split}/conversations/{conv_id}")
