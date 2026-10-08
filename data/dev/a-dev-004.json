@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-dev-004",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI CAN I GET A LARGE VEGGIE PIZZA ON GLUTEN FREE CRUST",
+        "sent_at": "2026-09-29T19:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "AND GARLIC KNOTS",
+        "sent_at": "2026-09-29T19:40:10-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "DELIVERY TO 77 BIRCH ST",
+        "sent_at": "2026-09-29T19:40:30-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: a large Veggie Pizza on gluten-free crust and Garlic Knots, delivery to 77 Birch St. How would you like to pay?",
+        "sent_at": "2026-09-29T19:41:10-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ACTUALLY NEVERMIND CANCEL THE WHOLE THING, I'LL JUST COOK TONIGHT",
+        "sent_at": "2026-09-29T19:42:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "GLUTEN FREE CRUST"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "LARGE VEGGIE PIZZA ON GLUTEN FREE CRUST"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "GARLIC KNOTS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "DELIVERY TO 77 BIRCH ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "BIRCH ST",
+      "number": "77",
+      "raw_text": "77 BIRCH ST",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "77 BIRCH ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "CANCEL THE WHOLE THING"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-004",
+  "annotation_notes": "Cancelled orders keep their items; nothing left to clarify (payment never given)."
+}

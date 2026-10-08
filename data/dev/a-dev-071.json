@@ -1,0 +1,227 @@
+{
+  "conversation": {
+    "id": "a-dev-071",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi!",
+        "sent_at": "2026-09-28T19:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "first time here, visiting from out of town",
+        "sent_at": "2026-09-28T19:10:05-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "can i get a medium margherita",
+        "sent_at": "2026-09-28T19:10:13-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n a personal pepperoni",
+        "sent_at": "2026-09-28T19:10:18-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "w extra cheese on that one",
+        "sent_at": "2026-09-28T19:10:24-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "and breadsticks",
+        "sent_at": "2026-09-28T19:10:31-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "pickup at 7:30",
+        "sent_at": "2026-09-28T19:10:41-05:00"
+      },
+      {
+        "index": 7,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-09-28T19:10:45-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "personal",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cheese",
+            "amount": "extra",
+            "raw_text": "extra cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a personal pepperoni"
+          },
+          {
+            "message_index": 4,
+            "quote": "extra cheese on that one"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "breadsticks",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 6,
+          "quote": "pickup at 7:30"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7:30",
+        "normalized_local": "19:30",
+        "evidence": [
+          {
+            "message_index": 6,
+            "quote": "at 7:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 7,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 7,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-071",
+  "annotation_notes": "'that one' right after the pepperoni refers to it. Extra cheese on a pizza that includes cheese: add + extra."
+}

@@ -1,0 +1,182 @@
+{
+  "conversation": {
+    "id": "a-dev-007",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 3 cheeseburgers and 2 large fries for the fam 🍔🍟",
+        "sent_at": "2026-10-01T18:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "is the veggie burger vegan? 🌱",
+        "sent_at": "2026-10-01T18:05:15-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "The patty is plant-based, but it comes with mayo. We can make it with no mayo.",
+        "sent_at": "2026-10-01T18:05:55-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok add one of those no mayo 👍 delivery to 25 Cedar Ln, card 💳",
+        "sent_at": "2026-10-01T18:06:35-04:00"
+      },
+      {
+        "index": 4,
+        "role": "business",
+        "text": "Got it: 3 Cheeseburgers, 2 large Fries, 1 Veggie Burger (no mayo). Delivery to 25 Cedar Ln. Total $50.93 (incl. $3.99 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-01T18:07:15-04:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "correct ✅",
+        "sent_at": "2026-10-01T18:07:35-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes",
+    "menu_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "mayo",
+            "raw_text": "no mayo"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "add one of those no mayo"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "delivery to 25 Cedar Ln"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Cedar Ln",
+      "number": "25",
+      "raw_text": "25 Cedar Ln",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "25 Cedar Ln"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "correct"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-007",
+  "annotation_notes": "'one of those' refers to the veggie burger just asked about (resolved by context). Mid-order menu question: refers_to draft."
+}

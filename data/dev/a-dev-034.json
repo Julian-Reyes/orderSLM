@@ -1,0 +1,94 @@
+{
+  "conversation": {
+    "id": "a-dev-034",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Can I get a large supreme with artichoke hearts and an order of garlic knotts for pick up? Paying by card.",
+        "sent_at": "2026-10-02T22:10:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "with artichoke hearts"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large supreme with artichoke hearts"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an order of garlic knotts"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pick up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-034",
+  "annotation_notes": "Artichoke hearts aren't a Halfmoon topping: the modification keeps modifier_id null with the raw text. The V1 missing-info rules have no entry for an off-menu modification, so nothing is listed as missing; the business has to tell the customer."
+}

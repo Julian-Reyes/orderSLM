@@ -1,0 +1,36 @@
+{
+  "conversation": {
+    "id": "a-dev-090",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "this bot keeps getting my order wrong, i said NO cheese like 3 times. let me talk to a real person pls",
+        "sent_at": "2026-10-08T13:20:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "draft",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-090",
+  "annotation_notes": "Frustration with the bot, no new order details: HUMAN_REQUEST only (urgency normal). Refers to the order the customer is trying to place (draft)."
+}

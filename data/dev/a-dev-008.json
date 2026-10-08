@@ -1,0 +1,165 @@
+{
+  "conversation": {
+    "id": "a-dev-008",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "good morning, hope ur having a lovely day",
+        "sent_at": "2026-10-01T08:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Good morning! Thank you, you too. What can we get started for you?",
+        "sent_at": "2026-10-01T08:40:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "i'd like a medium cappuccino w almond milk pls",
+        "sent_at": "2026-10-01T08:41:30-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "and a banana nut muffin, thx so much",
+        "sent_at": "2026-10-01T08:42:00-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "i'll pick it up at 9, name is Ruth. i'll pay w card when i get there",
+        "sent_at": "2026-10-01T08:42:40-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "almond_milk",
+            "raw_text": "w almond milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium cappuccino w almond milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "banana_nut",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a banana nut muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pick it up at 9"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9",
+        "normalized_local": "09:00",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "at 9"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay w card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ruth",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "name is Ruth"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-008",
+  "annotation_notes": "'w almond milk' on a cappuccino substitutes the included whole milk (guide). 'at 9' is 09:00: the café is open 07-15."
+}

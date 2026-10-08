@@ -1,0 +1,177 @@
+{
+  "conversation": {
+    "id": "a-dev-013",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like to place an order for pickup.",
+        "sent_at": "2026-10-03T17:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "One large pepperoni pizza.",
+        "sent_at": "2026-10-03T17:05:15-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "And a medium cheese pizza for the kids, thin crust please.",
+        "sent_at": "2026-10-03T17:05:35-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Also a 2 liter of Sprite.",
+        "sent_at": "2026-10-03T17:05:50-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "We'll pick it up at 6:30. I'll pay with card.",
+        "sent_at": "2026-10-03T17:06:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "One large pepperoni pizza"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_thin",
+            "raw_text": "thin crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium cheese pizza for the kids, thin crust"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a 2 liter of Sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 6:30",
+        "normalized_local": "18:30",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "at 6:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-013",
+  "annotation_notes": "'at 6:30' is 18:30: Halfmoon is open 12-23."
+}

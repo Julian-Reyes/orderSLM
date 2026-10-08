@@ -1,0 +1,36 @@
+{
+  "conversation": {
+    "id": "a-dev-055",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "its been over an hour since i ordered n still no pizza, where is it??",
+        "sent_at": "2026-10-01T20:40:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-055",
+  "annotation_notes": "An overdue order is time_sensitive (the delay matters, not the tone)."
+}

@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-dev-091",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get something warm to drink 🥶 nothing w coffee tho",
+        "sent_at": "2026-10-08T07:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Our only non-coffee hot drink is hot chocolate. Want one?",
+        "sent_at": "2026-10-08T07:40:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "yesss a large one 🙌",
+        "sent_at": "2026-10-08T07:41:00-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "+ a chocolate croissant 🥐 pickup in 15, name Zoe, cash",
+        "sent_at": "2026-10-08T07:41:10-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "something warm to drink"
+          },
+          {
+            "message_index": 2,
+            "quote": "a large one"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a chocolate croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup in 15"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 15",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "in 15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Zoe",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "name Zoe"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-091",
+  "annotation_notes": "Implicit category: 'something warm to drink, nothing w coffee' is settled as a hot chocolate with the business's help. 'yesss' answers a different question than a confirmation, so it adds the item (PLACE_ORDER)."
+}

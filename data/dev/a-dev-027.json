@@ -1,0 +1,107 @@
+{
+  "conversation": {
+    "id": "a-dev-027",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good evening! 😊",
+        "sent_at": "2026-09-28T18:45:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "May I please have a pizza half margherita, half veggie 🍕 for pickup, I'll pay by card 💳",
+        "sent_at": "2026-09-28T18:45:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half",
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "margherita_pizza"
+          },
+          {
+            "menu_item_id": "veggie_pizza"
+          }
+        ],
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a pizza half margherita, half veggie"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "Which pizza would you like (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-027"
+}

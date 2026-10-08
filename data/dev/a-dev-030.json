@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-030",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "how much r the muffins",
+        "sent_at": "2026-09-30T07:35:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Muffins are $3.25 each: blueberry, chocolate chip or banana nut.",
+        "sent_at": "2026-09-30T07:35:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "k n the bagels?",
+        "sent_at": "2026-09-30T07:36:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-030"
+}

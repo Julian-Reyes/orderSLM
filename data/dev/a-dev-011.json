@@ -1,0 +1,89 @@
+{
+  "conversation": {
+    "id": "a-dev-011",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "lemme get a numbr 1 combo w fries, payin cash",
+        "sent_at": "2026-10-02T21:41:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo",
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "numbr 1 combo w fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "payin cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "combo_choice",
+        "reason": "missing",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What would you like with the cheeseburger combo (Coke, Sprite or Lemonade), and is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-011",
+  "annotation_notes": "'number 1' is a combo alias (typo 'numbr'). The drink choice is missing; pickup/delivery not stated."
+}

@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-dev-073",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a large supreme and an order of breadsticks delivered to 450 Grant Street, apartment 12.",
+        "sent_at": "2026-09-30T21:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can it come at 10? Paying by card.",
+        "sent_at": "2026-09-30T21:05:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Actually, could you make it 10:30 instead? I'm getting home later than I thought.",
+        "sent_at": "2026-09-30T21:06:25-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Thanks!",
+        "sent_at": "2026-09-30T21:06:45-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large supreme"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breadsticks",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an order of breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 450 Grant Street"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 10:30",
+        "normalized_local": "22:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "make it 10:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Grant Street",
+      "number": "450",
+      "unit": "apartment 12",
+      "raw_text": "450 Grant Street, apartment 12",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "450 Grant Street, apartment 12"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-073",
+  "annotation_notes": "10 and 10:30 are evening times (open 12-23). A time change is time_sensitive per the rubric."
+}

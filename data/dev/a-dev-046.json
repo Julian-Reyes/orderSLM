@@ -1,0 +1,129 @@
+{
+  "conversation": {
+    "id": "a-dev-046",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "cn i get a pepperoni pizza",
+        "sent_at": "2026-10-06T18:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a hawaiian",
+        "sent_at": "2026-10-06T18:00:04-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup, card",
+        "sent_at": "2026-10-06T18:00:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a pepperoni pizza"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a hawaiian"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      },
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "What size would you like for the pepperoni and the Hawaiian: personal, small, medium, large or extra large?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-046"
+}

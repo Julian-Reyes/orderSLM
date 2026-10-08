@@ -1,0 +1,208 @@
+{
+  "conversation": {
+    "id": "a-dev-083",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiii",
+        "sent_at": "2026-10-06T08:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "lemme get a large cap",
+        "sent_at": "2026-10-06T08:30:06-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "a bluebery, an everything w schmear n a chocolate",
+        "sent_at": "2026-10-06T08:30:14-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Do you mean a chocolate croissant or a hot chocolate?",
+        "sent_at": "2026-10-06T08:30:54-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "the croissant",
+        "sent_at": "2026-10-06T08:31:09-07:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "pickup at 9:15 name Kai, card",
+        "sent_at": "2026-10-06T08:31:15-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category",
+    "small_talk",
+    "multi_message_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large cap"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a bluebery"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w schmear"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "an everything w schmear"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a chocolate"
+          },
+          {
+            "message_index": 4,
+            "quote": "the croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "pickup at 9:15"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9:15",
+        "normalized_local": "09:15",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "at 9:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Kai",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "name Kai"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-083",
+  "annotation_notes": "Implicit categories: 'cap' = cappuccino (alias), 'a bluebery' = the blueberry muffin (the only blueberry item), 'an everything' = everything bagel, 'schmear' = cream cheese. 'a chocolate' fits a croissant, a muffin or a hot chocolate; the customer settles it ('the croissant')."
+}

@@ -1,0 +1,155 @@
+{
+  "conversation": {
+    "id": "a-dev-002",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a cb combo w onion rings n a lemonade, no cheese on the burger pls im lactose intolerant",
+        "sent_at": "2026-09-28T18:22:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "plus a sprite. deliver to 412 maple ave",
+        "sent_at": "2026-09-28T18:22:20-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "payin cash, change for a 20",
+        "sent_at": "2026-09-28T18:22:35-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "cheese",
+            "raw_text": "no cheese"
+          }
+        ],
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "onion_rings"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "lemonade"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "cb combo w onion rings n a lemonade"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "plus a sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 412 maple ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "maple ave",
+      "number": "412",
+      "raw_text": "412 maple ave",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "412 maple ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "change_for_cents": 2000,
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "payin cash, change for a 20"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "notes": [
+      {
+        "text": "customer is lactose intolerant",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "im lactose intolerant"
+          }
+        ]
+      }
+    ]
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-002",
+  "annotation_notes": "'cb combo' is a combo alias. The lactose note is kept as an order note; the cheese removal is the actionable part."
+}

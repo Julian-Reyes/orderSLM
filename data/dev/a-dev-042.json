@@ -1,0 +1,92 @@
+{
+  "conversation": {
+    "id": "a-dev-042",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, id like a medium margherita and a bottle of diet coke please, paying cash. is the margherita made w fresh mozzarella?",
+        "sent_at": "2026-10-05T18:30:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "two_requests"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "diet_coke",
+        "quantity": 1,
+        "variant_id": "bottle_20oz",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bottle of diet coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-042",
+  "annotation_notes": "One message orders and asks a menu question: PLACE_ORDER + secondary MENU_QUESTION. 'a bottle' is the 20 oz variant (alias 'bottle')."
+}

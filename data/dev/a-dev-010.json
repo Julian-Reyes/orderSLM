@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-dev-010",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "wiat do u hav xl lattes now",
+        "sent_at": "2026-10-02T11:02:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "or still just s m l",
+        "sent_at": "2026-10-02T11:02:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-010"
+}

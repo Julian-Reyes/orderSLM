@@ -1,0 +1,100 @@
+{
+  "conversation": {
+    "id": "a-dev-054",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "good morning, could i get 2 small cappuccinos pls. also do u take card?",
+        "sent_at": "2026-09-30T08:50:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Good morning! Yes, card or cash.",
+        "sent_at": "2026-09-30T08:50:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "lovely, card then, thank you",
+        "sent_at": "2026-09-30T08:51:10-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 2,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 small cappuccinos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card then"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-054",
+  "annotation_notes": "Payment is chosen after the business answers the question. Pickup is never said (card fulfillment: unstated)."
+}

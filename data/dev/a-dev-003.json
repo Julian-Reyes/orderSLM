@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-dev-003",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "good morning ☀️😴",
+        "sent_at": "2026-09-29T07:10:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Morning! What can we get you?",
+        "sent_at": "2026-09-29T07:10:20-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "can I get the coffee & pastry deal w a large latte and a chocolate croissant 🥐",
+        "sent_at": "2026-09-29T07:10:32-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup in 10 min, name's Marcus 🙏 paying card",
+        "sent_at": "2026-09-29T07:10:57-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "coffee_pastry_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "drink",
+            "menu_item_id": "latte",
+            "variant_id": "large"
+          },
+          {
+            "slot_id": "pastry",
+            "menu_item_id": "croissant",
+            "variant_id": "chocolate"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "coffee & pastry deal w a large latte and a chocolate croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup in 10 min"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 10 min",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "in 10 min"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Marcus",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "name's Marcus"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-003",
+  "annotation_notes": "Upsized choice: the combo's latte is large (variant on the combo selection). Pickup within ~15 min is time_sensitive per the urgency rubric."
+}

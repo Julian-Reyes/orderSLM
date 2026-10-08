@@ -1,0 +1,135 @@
+{
+  "conversation": {
+    "id": "a-dev-078",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "YO CAN I GET A LARGE PEPPERONI W EXTRA CHEESE",
+        "sent_at": "2026-10-04T16:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "AND 2 CANS OF COKE",
+        "sent_at": "2026-10-04T16:15:08-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "PICKUP IN 20 MIN, CASH",
+        "sent_at": "2026-10-04T16:15:18-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cheese",
+            "amount": "extra",
+            "raw_text": "EXTRA CHEESE"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A LARGE PEPPERONI W EXTRA CHEESE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 CANS OF COKE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "PICKUP IN 20 MIN"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "IN 20 MIN",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "IN 20 MIN"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-078",
+  "annotation_notes": "Pickup in 20 minutes is beyond the ~15-minute time_sensitive threshold: normal."
+}

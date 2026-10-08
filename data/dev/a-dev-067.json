@@ -1,0 +1,181 @@
+{
+  "conversation": {
+    "id": "a-dev-067",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi um can i get a cheeseburger",
+        "sent_at": "2026-10-07T19:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n regular fries n a lemonade",
+        "sent_at": "2026-10-07T19:10:06-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 16 hill st, card",
+        "sent_at": "2026-10-07T19:10:14-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 Cheeseburger, 1 Fries, 1 Lemonade. Delivery to 16 hill st. Total $19.46 (incl. $3.99 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-07T19:10:54-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yes",
+        "sent_at": "2026-10-07T19:11:09-04:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "sry can the burger be a double",
+        "sent_at": "2026-10-07T19:11:19-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger"
+          },
+          {
+            "message_index": 5,
+            "quote": "the burger be a double"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "regular",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "regular fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 16 hill st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "hill st",
+      "number": "16",
+      "raw_text": "16 hill st",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "16 hill st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-067",
+  "annotation_notes": "Size change after confirmation: MODIFY_ORDER on the placed order (time_sensitive); decision back to pending."
+}

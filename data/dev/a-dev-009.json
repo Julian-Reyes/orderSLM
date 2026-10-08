@@ -1,0 +1,57 @@
+{
+  "conversation": {
+    "id": "a-dev-009",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I placed a delivery order about 40 minutes ago for a birthday party. Could you tell me when it will arrive?",
+        "sent_at": "2026-10-02T17:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry for the wait! What name is the order under?",
+        "sent_at": "2026-10-02T17:20:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "It's under Okafor. The party starts at 6, so we really need it by then.",
+        "sent_at": "2026-10-02T17:21:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-009",
+  "annotation_notes": "No order is built in this chat: gold_extraction is null. The 6 o'clock deadline makes the second message time_sensitive."
+}

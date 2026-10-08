@@ -1,0 +1,135 @@
+{
+  "conversation": {
+    "id": "a-dev-022",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey! double cheeseburger no onions + large fries 🍔🍟",
+        "sent_at": "2026-10-06T19:02:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver to 58 Linden St apt 2 🏠",
+        "sent_at": "2026-10-06T19:02:12-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "cash 💵",
+        "sent_at": "2026-10-06T19:02:18-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "no onions"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "double cheeseburger no onions"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 58 Linden St apt 2"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Linden St",
+      "number": "58",
+      "unit": "2",
+      "raw_text": "58 Linden St apt 2",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "58 Linden St apt 2"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-022"
+}

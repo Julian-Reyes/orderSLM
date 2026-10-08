@@ -1,0 +1,146 @@
+{
+  "conversation": {
+    "id": "a-dev-066",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a bacon burger with jalapenos.",
+        "sent_at": "2026-10-07T21:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Plus large fries and a vanilla shake.",
+        "sent_at": "2026-10-07T21:05:20-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I'll pick up at 9:45 and pay cash.",
+        "sent_at": "2026-10-07T21:05:40-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "jalapeno",
+            "raw_text": "with jalapenos"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger with jalapenos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a vanilla shake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pick up at 9:45"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9:45",
+        "normalized_local": "21:45",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 9:45"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-066",
+  "annotation_notes": "'at 9:45' is 21:45 (open 11-22)."
+}

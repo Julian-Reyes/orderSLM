@@ -1,0 +1,111 @@
+{
+  "conversation": {
+    "id": "a-dev-024",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Can I get a large pizza, half Hawaiian and half BBQ chicken?",
+        "sent_at": "2026-10-07T20:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Also two cans of Dr Pepper. I'll pay cash.",
+        "sent_at": "2026-10-07T20:20:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "hawaiian_pizza"
+          },
+          {
+            "menu_item_id": "bbq_chicken_pizza"
+          }
+        ],
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large pizza, half Hawaiian and half BBQ chicken"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "dr_pepper",
+        "quantity": 2,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "two cans of Dr Pepper"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-024"
+}

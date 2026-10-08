@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-001",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey is this the bakery on 5th that does the custom bday cakes? need one for sat",
+        "sent_at": "2026-09-28T10:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Hi! This is Morning Crumb Café. We don't make custom cakes, sorry, and we're not the bakery on 5th.",
+        "sent_at": "2026-09-28T10:05:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh my bad wrong numbr lol do u kno their # by any chance",
+        "sent_at": "2026-09-28T10:05:52-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-001"
+}

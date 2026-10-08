@@ -10,7 +10,7 @@ _Last updated 2026-10-08._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); dev conversations next |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); **91 dev conversations written, awaiting Julian's review** |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
@@ -220,10 +220,44 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   the unseal variable, so Julian runs it).
 - **Checks:** `make check` 293 passed.
 
+### Dev conversations (Source A, 2026-10-08): written, not yet reviewed
+
+- **91 conversations**, one per dev card (`data/dev/a-dev-001.json` … `a-dev-091.json`), `annotator`
+  "claude-opus-5.5 (Source A)", each with `annotation_notes` for its judgment calls. Saved through `splits.save`
+  (the annotation tool's checks); re-checked from disk and through the API: **0 findings** (no warnings either),
+  no near-duplicates within dev.
+- **Counts:** 266 customer messages; 30 Corner Patty / 31 Halfmoon / 30 Morning Crumb; styles clean 18, texting 27,
+  rapid_fire 18, emoji 16, shouty 12; 64 with an order, 27 without (status, problems, refunds, questions, small talk).
+  Primary labels: PLACE_ORDER 160, SMALL_TALK 26, MENU_QUESTION 16, MODIFY_ORDER 15, CONFIRM_ORDER 8,
+  ORDER_PROBLEM 8, OUT_OF_SCOPE 5, CANCEL_ORDER 4, DELIVERY_QUESTION 4, HUMAN_REQUEST 4, ORDER_STATUS 4,
+  REFUND_REQUEST 4, PAYMENT_QUESTION 3, UNKNOWN 3, PAYMENT_CLAIM 2 (+1 as secondary).
+- **Pricing:** 54 gold orders price cleanly; the other 10 fail on purpose (4 off-menu/ambiguous items, 4 missing
+  sizes, 1 unclear quantity, 1 missing combo choice). Every total in a business message comes from the pricing engine.
+- Authoring helper kept outside the repo (scratchpad); the JSON files are the source of truth.
+
+**Judgment calls to check in review** (not yet in the annotation guide; I'll add the ones you agree with):
+1. After the customer confirms, later messages refer to the `placed_order`; any change then (including adding an
+   item) is `MODIFY_ORDER`, `time_sensitive` if it changes what the kitchen makes (023, 059, 067), `normal` for a
+   payment switch (064). The decision resets to `pending`.
+2. A confirmation can leave things missing: a-dev-032 confirms items + payment, but pickup/delivery was never chosen
+   (the card said "unstated").
+3. A vague item that is later resolved ("the usual", "the same as last time") is dropped and the resolved items get
+   new line ids (038, 040); one that is never resolved stays as `unmatched_text` + `ambiguous` (016, 038).
+4. A size that doesn't exist ("party size", 079): menu item kept, no variant, `item_variant` with reason `off_menu`.
+5. An off-menu topping ("artichoke hearts", 034) or kitchen request ("warm", 074) is a modification with no
+   `modifier_id`; the V1 missing-info rules list nothing for it.
+6. Menu questions mid-order are `refers_to: draft`; before any order, `none`. A customer's "yes" to "Want one?" adds the
+   item (`PLACE_ORDER`, 091), per the taxonomy's boundary rule.
+7. a-dev-020's card said fulfillment "unstated" but its variant is "pickup → delivery"; the variant won.
+8. Payment claims during an order: `PLACE_ORDER` + secondary `PAYMENT_CLAIM` (072) or primary `PAYMENT_CLAIM` (089);
+   method stays `unknown`, `customer_claims_paid: true`, so payment isn't asked again.
+
 ### Open for Julian (M2)
 
-1. Regenerate the sealed test cards (command above) before the test conversations are written.
-2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
-3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
+1. **Review the 91 dev conversations** in the tool (`make annotate`, "Save as reviewed"). Anything you change, I
+   apply to the guide/conventions before writing the test conversations.
+2. Regenerate the sealed test cards (command above) before the test conversations are written.
+3. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
+4. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
-4. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
+5. Push `main` when you want; `milestone-2` is merged and can be deleted locally.

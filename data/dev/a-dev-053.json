@@ -1,0 +1,80 @@
+{
+  "conversation": {
+    "id": "a-dev-053",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi i got charged twice for my order last nite, can i get one of those refunded",
+        "sent_at": "2026-09-30T10:15:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! What name was the order under? We'll check with the manager.",
+        "sent_at": "2026-09-30T10:15:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Kim. it was the veggie burger + fries, $13.48 both times",
+        "sent_at": "2026-09-30T10:16:20-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks Kim, I've sent this to the manager to check the charges. You'll hear back today.",
+        "sent_at": "2026-09-30T10:17:00-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok thx",
+        "sent_at": "2026-09-30T10:17:20-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-053",
+  "annotation_notes": "A double charge is a payment dispute: needs_staff_now per the urgency rubric. Message 2 supplies details for the refund request, so it keeps that label. $13.48 is the real price of a Veggie Burger + regular Fries."
+}

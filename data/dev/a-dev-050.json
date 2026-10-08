@@ -1,0 +1,164 @@
+{
+  "conversation": {
+    "id": "a-dev-050",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! Can I get a medium latte with caramel? Also, do you have any vegan pastries?",
+        "sent_at": "2026-10-07T12:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Our bagels are vegan without cream cheese or butter: plain, everything, sesame or cinnamon raisin.",
+        "sent_at": "2026-10-07T12:40:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Great, a cinnamon raisin bagel then.",
+        "sent_at": "2026-10-07T12:41:10-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "I'll pick it up at 2:30.",
+        "sent_at": "2026-10-07T12:41:25-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Name's Jordan, paying by card.",
+        "sent_at": "2026-10-07T12:41:35-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "caramel_syrup",
+            "raw_text": "with caramel"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium latte with caramel"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "cinnamon_raisin",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a cinnamon raisin bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pick it up at 2:30"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 2:30",
+        "normalized_local": "14:30",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 2:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Jordan",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "Name's Jordan"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-050",
+  "annotation_notes": "'at 2:30' is 14:30 (the café is open 07-15)."
+}

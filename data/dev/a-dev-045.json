@@ -1,0 +1,111 @@
+{
+  "conversation": {
+    "id": "a-dev-045",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HELLO!",
+        "sent_at": "2026-10-06T13:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "CAN I GET SOME GARLIC KNOTS AND A LARGE CHEESE PIZZA FOR PICKUP, CASH",
+        "sent_at": "2026-10-06T13:10:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "garlic_knots",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "SOME GARLIC KNOTS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A LARGE CHEESE PIZZA"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "How many garlic knots would you like?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-045"
+}

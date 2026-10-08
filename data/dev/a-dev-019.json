@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-dev-019",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello! Could I get a small americano, a sesame bagel with butter, and a chocolate chip muffin for pickup at 10:30? My name is Lena and I'll pay by card.",
+        "sent_at": "2026-10-05T09:55:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Actually, please remove the muffin. Just the coffee and the bagel.",
+        "sent_at": "2026-10-05T09:55:40-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a small americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "butter",
+            "raw_text": "with butter"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a sesame bagel with butter"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup at 10:30"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 10:30",
+        "normalized_local": "10:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 10:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Lena",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "My name is Lena"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-019",
+  "annotation_notes": "The removed muffin (was L3) disappears from items."
+}

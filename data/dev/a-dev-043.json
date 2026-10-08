@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-dev-043",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi there",
+        "sent_at": "2026-10-05T19:15:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i'd like 2 bacon burgers",
+        "sent_at": "2026-10-05T19:15:05-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "and 1 large fries pls",
+        "sent_at": "2026-10-05T19:15:11-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "delivery to 9 Willow Ct",
+        "sent_at": "2026-10-05T19:15:21-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card, thank u",
+        "sent_at": "2026-10-05T19:15:26-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "delivery to 9 Willow Ct"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Willow Ct",
+      "number": "9",
+      "raw_text": "9 Willow Ct",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "9 Willow Ct"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-043"
+}

@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-052",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hey everyone, just saying hi! Hope it's a good night at the shop.",
+        "sent_at": "2026-09-29T20:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thanks! It's busy but good. Let us know if you want anything.",
+        "sent_at": "2026-09-29T20:05:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Will do, have a good one!",
+        "sent_at": "2026-09-29T20:06:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-052"
+}

@@ -1,0 +1,146 @@
+{
+  "conversation": {
+    "id": "a-dev-028",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a large latte w oat milk, im dairy free",
+        "sent_at": "2026-09-29T08:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "and a plain bagel w avocado",
+        "sent_at": "2026-09-29T08:20:10-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-09-29T08:20:18-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "w oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large latte w oat milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "w avocado"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a plain bagel w avocado"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "notes": [
+      {
+        "text": "customer is dairy free",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "im dairy free"
+          }
+        ]
+      }
+    ],
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-028",
+  "annotation_notes": "Pickup is never said, so the method is unknown (card fulfillment: unstated)."
+}

@@ -1,0 +1,57 @@
+{
+  "conversation": {
+    "id": "a-dev-056",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! I ordered a latte + croissant for pickup a few min ago, name's Priya 😊 already paid when I called it in 💳✅",
+        "sent_at": "2026-10-02T07:45:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thanks Priya! We'll check the payment when you pick up.",
+        "sent_at": "2026-10-02T07:45:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "perfect see u soon 🙏",
+        "sent_at": "2026-10-02T07:46:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-056",
+  "annotation_notes": "The order was placed earlier (outside this chat) and nothing is ordered here: gold_extraction is null. The payment stays a claim for staff to verify."
+}

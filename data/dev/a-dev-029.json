@@ -1,0 +1,136 @@
+{
+  "conversation": {
+    "id": "a-dev-029",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good afternoon, I would like to order a veggie burger with avacado please.",
+        "sent_at": "2026-09-29T14:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Also an order of onion rings and a lemonaid.",
+        "sent_at": "2026-09-29T14:05:30-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I will pay with my credit card. Thank you kindly.",
+        "sent_at": "2026-09-29T14:05:55-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "with avacado"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a veggie burger with avacado"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an order of onion rings"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lemonaid"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay with my credit card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-029",
+  "annotation_notes": "Typos 'avacado' and 'lemonaid' map to avocado and lemonade."
+}

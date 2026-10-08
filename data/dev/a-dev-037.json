@@ -1,0 +1,57 @@
+{
+  "conversation": {
+    "id": "a-dev-037",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "ok so the uhh 🤔 w tht",
+        "sent_at": "2026-10-03T12:33:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, we didn't catch that! What can we get you?",
+        "sent_at": "2026-10-03T12:33:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "nvm 🙈 wrong chat",
+        "sent_at": "2026-10-03T12:34:20-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "unclear"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-037",
+  "annotation_notes": "No order exists, so 'nvm' is not a cancellation."
+}

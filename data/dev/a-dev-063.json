@@ -1,0 +1,125 @@
+{
+  "conversation": {
+    "id": "a-dev-063",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "4 cheeseburgers 2 no onion, 4 fries n 4 lemonades, deliver to 77 elm st, cash pls",
+        "sent_at": "2026-10-05T18:20:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "no onion"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers 2 no onion"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "lemonade",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 lemonades"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "deliver to 77 elm st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elm st",
+      "number": "77",
+      "raw_text": "77 elm st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 elm st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-063",
+  "annotation_notes": "'4 cheeseburgers 2 no onion' is two lines of 2."
+}

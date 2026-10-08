@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-dev-085",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "lg pepperoni to 300 university dr, n do u have anything sweet?",
+        "sent_at": "2026-10-07T22:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "No desserts, sorry! For something sweet we have Coke, Sprite, Dr Pepper and iced tea.",
+        "sent_at": "2026-10-07T22:05:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a 2 liter dr pepper then. n smth to snack on, wat do u recommend",
+        "sent_at": "2026-10-07T22:06:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Garlic knots are the favorite!",
+        "sent_at": "2026-10-07T22:06:50-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "garlic knots it is, card",
+        "sent_at": "2026-10-07T22:07:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category",
+    "two_requests",
+    "menu_question"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "lg pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "dr_pepper",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a 2 liter dr pepper"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "smth to snack on"
+          },
+          {
+            "message_index": 4,
+            "quote": "garlic knots it is"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "to 300 university dr"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "university dr",
+      "number": "300",
+      "raw_text": "300 university dr",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "300 university dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-085",
+  "annotation_notes": "Implicit categories: 'anything sweet' (no desserts; settled as a drink) and 'smth to snack on' (sides; settled as garlic knots with the business's help)."
+}

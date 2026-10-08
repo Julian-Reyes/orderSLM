@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-dev-070",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I picked up my order this morning under Evelyn and it was completely wrong. I ordered a latte and got a cappuccino, and the bagel was the wrong kind.",
+        "sent_at": "2026-10-08T11:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm so sorry, Evelyn! Would you like us to remake it, or would you prefer a refund?",
+        "sent_at": "2026-10-08T11:30:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I would like my money back, please.",
+        "sent_at": "2026-10-08T11:31:20-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request",
+    "order_problem"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-070"
+}

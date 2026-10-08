@@ -1,0 +1,58 @@
+{
+  "conversation": {
+    "id": "a-dev-021",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'm organizing a dorm event next Friday and need about 30 large pizzas. Can I talk to a manager about a catering order?",
+        "sent_at": "2026-10-06T21:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Happy to help! I'll have our manager reach out about catering. Is this chat the best way to reach you?",
+        "sent_at": "2026-10-06T21:15:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Yes, please have them message me here. Thanks!",
+        "sent_at": "2026-10-06T21:16:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-021",
+  "annotation_notes": "A catering inquiry handed to a person; no order is built in the chat, so gold_extraction is null."
+}

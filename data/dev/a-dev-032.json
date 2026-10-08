@@ -1,0 +1,149 @@
+{
+  "conversation": {
+    "id": "a-dev-032",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD AFTERNOON. I WOULD LIKE TWO CHEESEBURGERS PLEASE",
+        "sent_at": "2026-10-01T14:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "AND ONE CHOCLATE MILKSHAKE",
+        "sent_at": "2026-10-01T14:10:20-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I WILL PAY CASH",
+        "sent_at": "2026-10-01T14:10:35-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 2 Cheeseburgers and 1 chocolate Milkshake, $23.47, paying cash. Is that right?",
+        "sent_at": "2026-10-01T14:11:15-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-10-01T14:11:45-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "TWO CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "ONE CHOCLATE MILKSHAKE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "PAY CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "👍"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-032",
+  "annotation_notes": "The 👍 answers the business's confirmation question, so it confirms the items and payment. Pickup/delivery was never chosen, so it is still missing after the confirmation (card fulfillment: unstated)."
+}

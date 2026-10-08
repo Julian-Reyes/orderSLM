@@ -1,0 +1,142 @@
+{
+  "conversation": {
+    "id": "a-dev-079",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "CAN I GET 2 PARTY SIZE PEPPERONI PIZZAS AND 2 XL CHEESE FOR DELIVERY",
+        "sent_at": "2026-10-04T17:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "WAIT HOW BIG IS THE XL",
+        "sent_at": "2026-10-04T17:30:10-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "The extra large is 16 inches. We don't have a party size; extra large is our biggest.",
+        "sent_at": "2026-10-04T17:30:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "OK DELIVER TO 5 ASPEN DR, CARD",
+        "sent_at": "2026-10-04T17:31:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu",
+    "menu_question"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 PARTY SIZE PEPPERONI PIZZAS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 XL CHEESE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "FOR DELIVERY"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ASPEN DR",
+      "number": "5",
+      "raw_text": "5 ASPEN DR",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "5 ASPEN DR"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have a party size. Would you like the 2 pepperoni pizzas in extra large (16 inch), or another size?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-079",
+  "annotation_notes": "'PARTY SIZE' is a size that doesn't exist: the pepperoni pizza stays on the menu with no variant, and the missing size is marked off_menu. The customer never picks a real size."
+}

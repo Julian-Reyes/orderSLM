@@ -1,0 +1,107 @@
+{
+  "conversation": {
+    "id": "a-dev-072",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiii 😊",
+        "sent_at": "2026-09-29T12:25:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "1 veggie burger no mayo for pickup, I already paid through the app 📱✅",
+        "sent_at": "2026-09-29T12:25:10-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Thanks! We'll check the payment when you pick up.",
+        "sent_at": "2026-09-29T12:25:50-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "mayo",
+            "raw_text": "no mayo"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 veggie burger no mayo"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I already paid through the app"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-072",
+  "annotation_notes": "The payment is a claim (customer_claims_paid), never a verified payment; method unknown. A claim means payment isn't asked again."
+}

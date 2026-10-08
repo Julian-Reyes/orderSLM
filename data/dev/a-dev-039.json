@@ -1,0 +1,151 @@
+{
+  "conversation": {
+    "id": "a-dev-039",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI CAN I GET A MEDIUM AMERICANO WITH ALMOND MILK, I DON'T DO DAIRY, AND A PLAIN BAGEL WITH AVOCADO FOR PICKUP. NAME IS DEV, CARD",
+        "sent_at": "2026-10-04T09:25:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 1 medium Americano with almond milk, 1 plain Bagel with avocado. Pickup as soon as possible for Dev. Total $8.70, paying by card. Is that right?",
+        "sent_at": "2026-10-04T09:25:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "YEP THATS IT",
+        "sent_at": "2026-10-04T09:26:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "almond_milk",
+            "raw_text": "WITH ALMOND MILK"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A MEDIUM AMERICANO WITH ALMOND MILK"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "WITH AVOCADO"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A PLAIN BAGEL WITH AVOCADO"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "DEV",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "NAME IS DEV"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "YEP THATS IT"
+        }
+      ]
+    },
+    "notes": [
+      {
+        "text": "customer doesn't do dairy",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "I DON'T DO DAIRY"
+          }
+        ]
+      }
+    ]
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-039",
+  "annotation_notes": "Almond milk on an americano is an add (no milk is included). No time given: not mentioned means ASAP."
+}

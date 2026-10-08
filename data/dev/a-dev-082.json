@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-082",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Random question, but who invented the cheeseburger?",
+        "sent_at": "2026-10-06T15:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Ha, good question! We're not sure, but we make a great one.",
+        "sent_at": "2026-10-06T15:40:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Lol fair. Also what's the capital of Australia? It's for a bet.",
+        "sent_at": "2026-10-06T15:41:10-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-082"
+}

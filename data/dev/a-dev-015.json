@@ -1,0 +1,196 @@
+{
+  "conversation": {
+    "id": "a-dev-015",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "heyy",
+        "sent_at": "2026-10-04T07:06:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a large drip coffee",
+        "sent_at": "2026-10-04T07:06:08-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "w hazelnut syrup",
+        "sent_at": "2026-10-04T07:06:14-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "and an everything bagel w cream cheese",
+        "sent_at": "2026-10-04T07:06:29-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh and a plain croissant too",
+        "sent_at": "2026-10-04T07:06:41-07:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-04T07:06:51-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "hazelnut_syrup",
+            "raw_text": "w hazelnut syrup"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large drip coffee"
+          },
+          {
+            "message_index": 2,
+            "quote": "w hazelnut syrup"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "an everything bagel w cream cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "a plain croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-015",
+  "annotation_notes": "'w hazelnut syrup' adds to the coffee from the previous message (PLACE_ORDER: still adding details). Pickup is never said, so the method stays unknown even though the café is pickup-only."
+}

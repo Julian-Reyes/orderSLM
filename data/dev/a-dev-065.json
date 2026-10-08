@@ -1,0 +1,153 @@
+{
+  "conversation": {
+    "id": "a-dev-065",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "CAN I GET A MEDIUM DRIP COFFE AND A BLUBERRY MUFFIN",
+        "sent_at": "2026-10-06T08:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "PICKUP AT 8:45 FOR ANA",
+        "sent_at": "2026-10-06T08:20:15-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ACTUALLY MAKE IT 2 MUFFINS",
+        "sent_at": "2026-10-06T08:20:35-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "CARD",
+        "sent_at": "2026-10-06T08:20:40-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A MEDIUM DRIP COFFE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 2,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A BLUBERRY MUFFIN"
+          },
+          {
+            "message_index": 2,
+            "quote": "MAKE IT 2 MUFFINS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "PICKUP AT 8:45"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 8:45",
+        "normalized_local": "08:45",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "AT 8:45"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "ANA",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "FOR ANA"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-065"
+}

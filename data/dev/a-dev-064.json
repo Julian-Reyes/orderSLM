@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-dev-064",
+    "business_id": "halfmoon-pizza",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo can i get a medium pepperoni n a coke 🍕🥤",
+        "sent_at": "2026-10-06T16:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "paying cash 💵",
+        "sent_at": "2026-10-06T16:50:10-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 medium Pepperoni Pizza and 1 Coke (can), $16.48, paying cash. Is that right?",
+        "sent_at": "2026-10-06T16:50:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ye 👍",
+        "sent_at": "2026-10-06T16:51:10-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "wait can i do card instead 💳",
+        "sent_at": "2026-10-06T16:51:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card instead"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-064",
+  "annotation_notes": "Switching payment after confirming resets the decision to pending. A payment-method switch doesn't change what the kitchen makes, so urgency stays normal. Pickup/delivery never chosen (card: unstated)."
+}

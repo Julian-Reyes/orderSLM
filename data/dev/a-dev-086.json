@@ -1,0 +1,41 @@
+{
+  "conversation": {
+    "id": "a-dev-086",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "4417",
+        "sent_at": "2026-10-07T10:10:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Hi! Could you tell us what that number is for?",
+        "sent_at": "2026-10-07T10:10:40-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "unclear"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-086",
+  "annotation_notes": "A bare number with no context could be an order number, a code or a typo: UNKNOWN. (All caps doesn't apply to digits; card style kept.)"
+}

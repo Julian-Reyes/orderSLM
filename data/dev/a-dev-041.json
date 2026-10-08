@@ -1,0 +1,138 @@
+{
+  "conversation": {
+    "id": "a-dev-041",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do u have gluten free muffins",
+        "sent_at": "2026-10-05T07:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, no gluten-free muffins right now. We have blueberry, chocolate chip and banana nut.",
+        "sent_at": "2026-10-05T07:30:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok np. 6 bluebery muffins n 6 choc chip, n 4 large drip coffees",
+        "sent_at": "2026-10-05T07:31:20-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-05T07:31:30-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "menu_question"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "6 bluebery muffins"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "6 choc chip"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "drip_coffee",
+        "quantity": 4,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "4 large drip coffees"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-041"
+}

@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-018",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i pay online or like venmo b4 i come get my food",
+        "sent_at": "2026-10-05T12:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We take card or cash when you pick up or at the door. No online payments or Venmo, sorry!",
+        "sent_at": "2026-10-05T12:10:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok cool so card at pickup works?",
+        "sent_at": "2026-10-05T12:11:10-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-018"
+}

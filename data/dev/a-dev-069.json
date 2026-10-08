@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-dev-069",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, what time do you open in the morning? I get off work at 6:30.",
+        "sent_at": "2026-10-08T05:50:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We open at 7:00 am and close at 3:00 pm every day.",
+        "sent_at": "2026-10-08T05:50:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Great, are you open on Sundys too?",
+        "sent_at": "2026-10-08T05:51:10-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "delivery_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-069"
+}

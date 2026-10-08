@@ -1,0 +1,80 @@
+{
+  "conversation": {
+    "id": "a-dev-076",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi do ur pastries have tree nuts or r they made near them? coworker has a severe allergy",
+        "sent_at": "2026-10-03T10:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Our almond croissant and banana nut muffin have nuts, and everything is baked in the same kitchen.",
+        "sent_at": "2026-10-03T10:40:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok thats what i was worried abt. can i talk to someone who knows the recipes? need to be 100% sure",
+        "sent_at": "2026-10-03T10:41:20-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Of course, I'll have our baker message you here.",
+        "sent_at": "2026-10-03T10:42:00-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "thx appreciate it",
+        "sent_at": "2026-10-03T10:42:20-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request",
+    "menu_question",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-076",
+  "annotation_notes": "An allergy question, not a reaction: urgency normal."
+}

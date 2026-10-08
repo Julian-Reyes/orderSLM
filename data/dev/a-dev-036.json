@@ -1,0 +1,34 @@
+{
+  "conversation": {
+    "id": "a-dev-036",
+    "business_id": "morning-crumb",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I've never ordered from you before. If I order ahead, can I pay by card when I pick it up, or do I need to pay first?",
+        "sent_at": "2026-10-03T08:15:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-036"
+}

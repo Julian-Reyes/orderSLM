@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-dev-040",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey hey 👋",
+        "sent_at": "2026-10-04T17:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can I get the usual 😎",
+        "sent_at": "2026-10-04T17:40:06-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Hi! We can't look up past orders here, sorry. What's your usual?",
+        "sent_at": "2026-10-04T17:40:46-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "lol fair 😅 cheeseburger + fries + a coke",
+        "sent_at": "2026-10-04T17:41:16-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh and make the fries large 🍟",
+        "sent_at": "2026-10-04T17:41:31-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "cheeseburger"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "fries"
+          },
+          {
+            "message_index": 4,
+            "quote": "make the fries large"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-040",
+  "annotation_notes": "'the usual' (L1) is resolved by the customer's next message and dropped; the resolved items get new lines. Pickup/delivery and payment are still missing."
+}

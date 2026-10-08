@@ -1,0 +1,121 @@
+{
+  "conversation": {
+    "id": "a-dev-080",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a bacon burger n lg fries for pickup in 15",
+        "sent_at": "2026-10-05T17:55:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure! Card or cash?",
+        "sent_at": "2026-10-05T17:55:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actually nvm cancel, my gf already ordered us thai lol",
+        "sent_at": "2026-10-05T17:56:25-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "lg fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup in 15"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 15",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "in 15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "nvm cancel"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-080",
+  "annotation_notes": "Pickup in 15 minutes: time_sensitive."
+}

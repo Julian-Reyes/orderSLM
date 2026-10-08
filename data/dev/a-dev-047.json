@@ -1,0 +1,78 @@
+{
+  "conversation": {
+    "id": "a-dev-047",
+    "business_id": "corner-patty",
+    "split": "dev",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, my delivery just got here and the burgers and fries are completely cold.",
+        "sent_at": "2026-10-07T21:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm really sorry about that! What name is the order under?",
+        "sent_at": "2026-10-07T21:40:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "It's under Patel. This is the second time this week.",
+        "sent_at": "2026-10-07T21:41:20-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thank you. I've passed this to the manager, who will reply here shortly.",
+        "sent_at": "2026-10-07T21:42:00-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Okay, thank you.",
+        "sent_at": "2026-10-07T21:42:30-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-dev-047",
+  "annotation_notes": "Frustration ('second time this week') doesn't raise urgency. The closing thanks is SMALL_TALK about the placed order."
+}
