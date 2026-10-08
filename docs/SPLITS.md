@@ -4,7 +4,7 @@ Evaluation data comes from three sources (spec §7), and **every result is repor
 
 | Source | What | Where | Size |
 |---|---|---|---|
-| A | Claude-written chats from scenario cards (`source: claude_written`), reviewed by Julian | `data/dev/`, `data/test/` | dev ~80, test ~170 |
+| A | Claude-written chats from scenario cards (`source: claude_written`), reviewed by Julian | `data/dev/`, `data/test/` | dev 91, test 199 |
 | B | PIZZA test orders, converted (`split: benchmark`); human-written, items only | `data/external/pizza/` (never committed) | 199 |
 | C | Optional: Julian-written (`source: human`) | `data/test/` | ~30 |
 
@@ -16,10 +16,17 @@ examples (other than dev for prompt tuning) or training. One `AnnotatedConversat
 
 ```
 uv run python -m orderslm.data.cards summary --split dev
-ORDERSLM_UNSEAL_TEST="author Source A cards" uv run python -m orderslm.data.cards generate
+uv run python -m orderslm.data.cards generate --split dev --force
+ORDERSLM_UNSEAL_TEST="author Source A cards" uv run python -m orderslm.data.cards generate --split test --force
 ```
 
-80 dev + 170 test cards (`data/dev/cards.jsonl`, sealed `data/test/cards.jsonl`), seed 20261007. Each card fixes
+91 dev + 199 test cards (`data/dev/cards.jsonl`, sealed `data/test/cards.jsonl`): a first batch of 80 + 170
+(seed 20261007) and a supplement of 11 + 29 from Julian's card review (2026-10-08), appended with its own RNG
+stream so the first-batch cards never change (tested). The supplement adds 1 dev + 3 test cards for each rare
+label (HUMAN_REQUEST, ORDER_PROBLEM, ORDER_STATUS, PAYMENT_CLAIM, OUT_OF_SCOPE, REFUND_REQUEST, UNKNOWN: now
+3 dev / 7–8 test each) and 4 dev + 8 test `implicit_category` cards (a drink by a casual word, items named
+without their category, a vague "something sweet"), spread over the menus, for the menu-narrowing evaluation
+(spec §11e). The held-out menu stays at ~25% of test (50 of 199). Each card fixes
 the business, situation (+ variant), the router labels the conversation must contain, scenario tags, writing
 style and features (typos, abbreviations, emoji, bursts, ALL CAPS), fulfillment, a target number of customer
 messages, a persona and a brief. Coverage is by construction: fixed per-split quotas for 23 situations cover

@@ -24,9 +24,20 @@ def generated():
     return cards.generate()
 
 
+RARE = {
+    RouterLabel.HUMAN_REQUEST,
+    RouterLabel.ORDER_PROBLEM,
+    RouterLabel.ORDER_STATUS,
+    RouterLabel.PAYMENT_CLAIM,
+    RouterLabel.OUT_OF_SCOPE,
+    RouterLabel.REFUND_REQUEST,
+    RouterLabel.UNKNOWN,
+}
+
+
 def test_split_sizes(generated):
-    assert len(generated[Split.dev]) == 80
-    assert len(generated[Split.test]) == 170
+    assert len(generated[Split.dev]) == 91  # 80 + supplement 11
+    assert len(generated[Split.test]) == 199  # 170 + supplement 29
     ids = [c.id for split in generated.values() for c in split]
     assert len(ids) == len(set(ids))
     assert all(c.split is split for split, cs in generated.items() for c in cs)
@@ -40,8 +51,48 @@ def test_every_router_label_style_feature_and_tricky_case_in_each_split(generate
     assert {c.style for c in cs} == set(WritingStyle)
     assert {f for c in cs for f in c.features} == set(cards.Feature)
     assert TRICKY <= {s for c in cs for s in c.scenarios}
-    for name, sit in cards.SITUATIONS.items():
-        assert sum(c.situation == name for c in cs) == sit.counts[split is Split.test], name
+    for name in cards.SITUATIONS:
+        assert sum(c.situation == name for c in cs) == cards.quota(name, split), name
+
+
+@pytest.mark.parametrize(("split", "minimum"), [(Split.dev, 3), (Split.test, 7)])
+def test_rare_labels_have_enough_cards(generated, split, minimum):
+    labels = [lab for c in generated[split] for lab in c.expected_labels]
+    for lab in RARE:
+        assert labels.count(lab) >= minimum, lab
+
+
+@pytest.mark.parametrize(("split", "menus"), [(Split.dev, 3), (Split.test, 4)])
+def test_implicit_category_cards_spread_across_menus(generated, split, menus):
+    implicit = [c for c in generated[split] if c.situation == "implicit_category"]
+    assert all(Scenario.implicit_category in c.scenarios for c in implicit)
+    assert len({c.business_id for c in implicit}) == menus
+
+
+def test_held_out_menu_is_about_a_quarter_of_test(generated):
+    test = generated[Split.test]
+    share = sum(c.business_id == "lucky-lime" for c in test) / len(test)
+    assert 0.23 <= share <= 0.27
+
+
+def test_supplement_appends_without_changing_earlier_cards(generated):
+    """The second batch has its own RNG stream: the first-batch cards are exactly what a generator
+    without the supplement produces, so reviewed cards never change."""
+    original = dict(cards.SUPPLEMENT)
+    try:
+        cards.SUPPLEMENT.clear()
+        first = cards.generate()
+    finally:
+        cards.SUPPLEMENT.update(original)
+    for split, cs in first.items():
+        assert generated[split][: len(cs)] == cs
+        assert [c.id for c in generated[split]] == [
+            f"a-{split.value}-{n:03d}" for n in range(1, len(generated[split]) + 1)
+        ]
+
+
+def test_committed_dev_cards_match_the_generator(generated):
+    assert cards.load(Split.dev) == generated[Split.dev]
 
 
 def test_menus_held_out_only_in_test(generated):
@@ -71,4 +122,4 @@ def test_generation_is_reproducible(generated):
 
 def test_summary_counts(generated):
     s = cards.summary(generated[Split.dev])
-    assert s["cards"] == 80 and sum(s["menus"].values()) == 80 and sum(s["styles"].values()) == 80
+    assert s["cards"] == 91 and sum(s["menus"].values()) == 91 and sum(s["styles"].values()) == 91

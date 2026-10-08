@@ -80,8 +80,8 @@ orderslm/
 ├── data/
 │   ├── samples/                  conversations/: annotated examples (split "sample": few-shot only, never evaluated)
 │   ├── menus/                    3 business menus, held_out/ (1 test-only menu)
-│   ├── dev/                      (M2) Source A dev: ~80 Claude-written from cards.jsonl, reviewed
-│   ├── test/                     (M2) Source A test ~170 (+ optional Source C), SEALED (paths.test_split_dir guard)
+│   ├── dev/                      (M2) Source A dev: 91 Claude-written from cards.jsonl, reviewed
+│   ├── test/                     (M2) Source A test 199 (+ optional Source C), SEALED (paths.test_split_dir guard)
 │   ├── synthetic/                (M4) pilot + bulk, with distribution logs
 │   └── external/                 (M2) third-party downloads, gitignored, never committed (PIZZA: CC-BY-NC-4.0)
 ├── runs/                         (M3) committed eval outputs: manifest + raw outputs + metrics + report

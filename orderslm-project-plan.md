@@ -132,8 +132,8 @@ Create 3 fictional food businesses as catalog JSON (e.g. burger shop, pizzeria w
 ### Evaluation data (speed-first; revised October 7, 2026)
 Synthetic training data mostly measures how well a model imitates the teacher, so evaluation uses separate, reviewed data from three sources. **Every result is reported per source.**
 
-- **Source A: Claude-written chats (~250: dev ~80, test ~170).**
-  1. First generate **scenario cards** covering every router label, every menu (the held-out menu only in test), writing styles (typos, abbreviations, emoji, multi-message bursts, ALL CAPS), and the tricky cases: two-request messages, corrections (including after confirmation), ambiguous references ("one of them", "the usual"), off-menu items, missing info, context-dependent "yes".
+- **Source A: Claude-written chats (290: dev 91, test 199).** (80 + 170 at first; Julian's card review on October 8, 2026 added 3 test + 1 dev card per rare label and implicit category mentions, §11e; held-out menu ~25% of test.)
+  1. First generate **scenario cards** covering every router label, every menu (the held-out menu only in test), writing styles (typos, abbreviations, emoji, multi-message bursts, ALL CAPS), and the tricky cases: two-request messages, corrections (including after confirmation), ambiguous references ("one of them", "the usual"), off-menu items, missing info, context-dependent "yes", and implicit category mentions ("pop", item names without category words, "something sweet").
   2. Claude writes one conversation per card with gold extraction and router labels, validated by the schema and the grounding checks.
   3. Dev/test are split **by scenario card**, so no near-duplicates cross splits (also checked automatically). Source A is **evaluation data only, never training data**: the cards and conversations never feed synthetic generation, prompts' few-shot examples (except dev for prompt tuning), or training.
   4. Julian reviews in the annotation tool: **all of dev, and a spot-check of at least 25% of test**. Every review is logged (changed or not), and the **correction rate** is reported.

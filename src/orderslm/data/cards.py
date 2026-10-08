@@ -7,6 +7,8 @@ conversation never shares a card (or its situation instance) with a dev one.
 
 Coverage is by construction (fixed per-split quotas per situation); everything else (style,
 persona, variants, fulfillment, business within what the situation allows) comes from a seeded RNG.
+Cards added after the first review (SUPPLEMENT) are appended with their own RNG stream, so earlier
+cards never change.
 Dev cards: data/dev/cards.jsonl. Test cards: data/test/cards.jsonl (sealed like the test split).
 
     uv run python -m orderslm.data.cards summary            # dev only
@@ -70,7 +72,7 @@ class ScenarioCard(Strict):
 class Situation:
     labels: tuple[RouterLabel, ...]
     scenarios: tuple[Scenario, ...]
-    counts: tuple[int, int]  # (dev, test)
+    counts: tuple[int, int]  # (dev, test) in the first batch; SUPPLEMENT adds more
     brief: str  # may use {variant}
     messages: tuple[int, int]  # customer message range
     order: bool = True  # builds an order (so fulfillment applies)
@@ -285,6 +287,19 @@ SITUATIONS: dict[str, Situation] = {
         order=False,
         variants=("a job application", "a different business", "general trivia"),
     ),
+    "implicit_category": Situation(
+        (L.PLACE_ORDER,),
+        (S.implicit_category,),
+        (0, 0),
+        "Orders without naming the menu category: {variant}. Gold maps each mention to the item it means, "
+        "or marks it ambiguous if the chat never settles it.",
+        (2, 4),
+        variants=(
+            "a drink by a casual word instead of its name ('pop', 'something fizzy', 'something warm')",
+            "items by name only, without category words",
+            "a vague request like 'something sweet' or 'something to snack on', settled with the business's help",
+        ),
+    ),
     "unclear": Situation(
         (L.UNKNOWN,),
         (S.unclear_message,),
@@ -295,6 +310,27 @@ SITUATIONS: dict[str, Situation] = {
         variants=("a stray character", "a garbled message", "an unexplained number"),
     ),
 }
+
+# Second batch (Julian's card review, 2026-10-08): +1 dev / +3 test for each rare label, and implicit
+# category mentions for the menu-narrowing evaluation (spec §11e). Appended after the first batch.
+SUPPLEMENT: dict[str, tuple[int, int]] = {
+    "human_request": (1, 3),
+    "order_problem": (1, 3),
+    "status_question": (1, 3),
+    "payment_claim": (1, 3),
+    "out_of_scope": (1, 3),
+    "refund_request": (1, 3),
+    "unclear": (1, 3),
+    "implicit_category": (4, 8),
+}
+SUPPLEMENT_SEED = f"{SEED}-supplement-2026-10-08"
+
+
+def quota(name: str, split: Split) -> int:
+    """Total cards per situation and split, over both batches."""
+    k = split is Split.test
+    return SITUATIONS[name].counts[k] + SUPPLEMENT.get(name, (0, 0))[k]
+
 
 SECOND_REQUEST = {
     "menu question": L.MENU_QUESTION,
@@ -359,76 +395,99 @@ def _styles(n: int, rng: random.Random) -> list[WritingStyle]:
 
 
 def generate(seed: int = SEED) -> dict[Split, list[ScenarioCard]]:
-    rng = random.Random(seed)
     menus = load_menus(include_held_out=True)
-    out: dict[Split, list[ScenarioCard]] = {}
-    for k, split in enumerate((Split.dev, Split.test)):
-        allowed = sorted(b for b, m in menus.items() if split is Split.test or not m.held_out)
-        jobs = [name for name, sit in SITUATIONS.items() for _ in range(sit.counts[k])]
-        rng.shuffle(jobs)
-        styles = _styles(len(jobs), rng)
-        used: Counter = Counter()
-        variant_used: Counter = Counter()
-        cards: list[ScenarioCard] = []
-        for n, (name, style) in enumerate(zip(jobs, styles, strict=True), start=1):
-            sit = SITUATIONS[name]
-            options = [b for b in (sit.businesses or allowed) if b in allowed]
-            least = min(used[b] for b in options)
-            business = rng.choice([b for b in options if used[b] == least])
-            used[business] += 1
-            variant = None
-            if sit.variants:  # rotate variants evenly within a situation
-                least_v = min(variant_used[(name, v)] for v in sit.variants)
-                variant = rng.choice([v for v in sit.variants if variant_used[(name, v)] == least_v])
-                variant_used[(name, variant)] += 1
-            labels, scenarios, brief = (
-                list(sit.labels),
-                list(sit.scenarios),
-                sit.brief.format(variant=variant),
+    out: dict[Split, list[ScenarioCard]] = {Split.dev: [], Split.test: []}
+    used: dict[Split, Counter] = {s: Counter() for s in out}  # balance businesses across batches
+    variant_used: dict[Split, Counter] = {s: Counter() for s in out}
+    # The supplement also spreads each situation over the menus (the first batch only balanced totals;
+    # changing that would change its cards).
+    batches = (
+        (random.Random(seed), {name: sit.counts for name, sit in SITUATIONS.items()}, False),
+        (random.Random(SUPPLEMENT_SEED.replace(str(SEED), str(seed))), SUPPLEMENT, True),
+    )
+    for rng, quotas, spread in batches:
+        for k, split in enumerate((Split.dev, Split.test)):
+            jobs = [name for name, counts in quotas.items() for _ in range(counts[k])]
+            rng.shuffle(jobs)
+            out[split] += _cards(
+                split, jobs, rng, menus, used[split], variant_used[split], len(out[split]), spread
             )
-            if variant in SECOND_REQUEST:  # two_requests: the question is the message's secondary label
-                labels.append(SECOND_REQUEST[variant])
-            if sit.order and rng.random() < EXTRA_RATE:
-                extra = rng.choice(sorted(EXTRAS))
-                x_labels, x_scen, x_brief = EXTRAS[extra]
-                labels += [lab for lab in x_labels if lab not in labels]
-                scenarios += [s for s in x_scen if s not in scenarios]
-                brief += " " + x_brief
-            menu = menus[business]
-            if not sit.order:
-                fulfillment = "not_applicable"
-            elif name == "missing_info" and variant == "no pickup/delivery":
-                fulfillment = "unstated"
-            elif name == "missing_info" and variant == "delivery without an address":
-                fulfillment = "delivery" if menu.delivery.available else "pickup"
-            elif not menu.delivery.available:
-                fulfillment = rng.choice(["pickup", "pickup", "unstated"])
-            else:
-                fulfillment = rng.choice(["delivery", "delivery", "pickup", "pickup", "unstated"])
-            if business == "morning-crumb" and fulfillment == "pickup":
-                brief += " (Pickup needs a name here.)"
-            lo, hi = sit.messages
-            if style is WritingStyle.rapid_fire:
-                lo, hi = lo + 1, hi + 2
-            cards.append(
-                ScenarioCard(
-                    id=f"a-{split.value}-{n:03d}",
-                    split=split,
-                    business_id=business,
-                    situation=name,
-                    variant=variant,
-                    expected_labels=labels,
-                    scenarios=scenarios,
-                    style=style,
-                    features=_features(style, rng),
-                    fulfillment=fulfillment,
-                    customer_messages=rng.randint(lo, hi),
-                    persona=rng.choice(PERSONAS),
-                    brief=brief,
-                )
-            )
-        out[split] = cards
     return out
+
+
+def _cards(
+    split: Split,
+    jobs: list[str],
+    rng: random.Random,
+    menus: dict,
+    used: Counter,
+    variant_used: Counter,
+    numbered_from: int,
+    spread: bool,
+) -> list[ScenarioCard]:
+    allowed = sorted(b for b, m in menus.items() if split is Split.test or not m.held_out)
+    styles = _styles(len(jobs), rng)
+    cards: list[ScenarioCard] = []
+    for n, (name, style) in enumerate(zip(jobs, styles, strict=True), start=numbered_from + 1):
+        sit = SITUATIONS[name]
+        options = [b for b in (sit.businesses or allowed) if b in allowed]
+        load = {b: ((used[(name, b)],) if spread else ()) + (used[b],) for b in options}
+        least = min(load.values())
+        business = rng.choice([b for b in options if load[b] == least])
+        used[business] += 1
+        used[(name, business)] += 1
+        variant = None
+        if sit.variants:  # rotate variants evenly within a situation
+            least_v = min(variant_used[(name, v)] for v in sit.variants)
+            variant = rng.choice([v for v in sit.variants if variant_used[(name, v)] == least_v])
+            variant_used[(name, variant)] += 1
+        labels, scenarios, brief = (
+            list(sit.labels),
+            list(sit.scenarios),
+            sit.brief.format(variant=variant),
+        )
+        if variant in SECOND_REQUEST:  # two_requests: the question is the message's secondary label
+            labels.append(SECOND_REQUEST[variant])
+        if sit.order and rng.random() < EXTRA_RATE:
+            extra = rng.choice(sorted(EXTRAS))
+            x_labels, x_scen, x_brief = EXTRAS[extra]
+            labels += [lab for lab in x_labels if lab not in labels]
+            scenarios += [s for s in x_scen if s not in scenarios]
+            brief += " " + x_brief
+        menu = menus[business]
+        if not sit.order:
+            fulfillment = "not_applicable"
+        elif name == "missing_info" and variant == "no pickup/delivery":
+            fulfillment = "unstated"
+        elif name == "missing_info" and variant == "delivery without an address":
+            fulfillment = "delivery" if menu.delivery.available else "pickup"
+        elif not menu.delivery.available:
+            fulfillment = rng.choice(["pickup", "pickup", "unstated"])
+        else:
+            fulfillment = rng.choice(["delivery", "delivery", "pickup", "pickup", "unstated"])
+        if business == "morning-crumb" and fulfillment == "pickup":
+            brief += " (Pickup needs a name here.)"
+        lo, hi = sit.messages
+        if style is WritingStyle.rapid_fire:
+            lo, hi = lo + 1, hi + 2
+        cards.append(
+            ScenarioCard(
+                id=f"a-{split.value}-{n:03d}",
+                split=split,
+                business_id=business,
+                situation=name,
+                variant=variant,
+                expected_labels=labels,
+                scenarios=scenarios,
+                style=style,
+                features=_features(style, rng),
+                fulfillment=fulfillment,
+                customer_messages=rng.randint(lo, hi),
+                persona=rng.choice(PERSONAS),
+                brief=brief,
+            )
+        )
+    return cards
 
 
 # ---------------------------------------------------------------- storage and summary
@@ -474,16 +533,18 @@ def summary(cards: list[ScenarioCard]) -> dict:
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
-    g = sub.add_parser("generate", help="write dev + test cards (needs ORDERSLM_UNSEAL_TEST)")
+    g = sub.add_parser("generate", help="write dev + test cards (test needs ORDERSLM_UNSEAL_TEST)")
     g.add_argument("--force", action="store_true")
+    g.add_argument("--split", choices=["dev", "test"], action="append", help="default: both")
     s = sub.add_parser("summary")
     s.add_argument("--split", choices=["dev", "test"], action="append")
     args = ap.parse_args(argv)
     if args.cmd == "generate":
-        write(generate(), force=args.force)
+        chosen = {Split(x) for x in (args.split or ["dev", "test"])}
+        write({s: cs for s, cs in generate().items() if s in chosen}, force=args.force)
     for split in (
         [Split(x) for x in (args.split or ["dev", "test"])]
-        if args.cmd == "summary"
+        if args.cmd == "summary" or args.split
         else (Split.dev, Split.test)
     ):
         print(f"== {split.value}")

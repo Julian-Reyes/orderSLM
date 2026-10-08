@@ -38,6 +38,7 @@ class Scenario(StrEnum):
     small_talk = "small_talk"
     out_of_scope = "out_of_scope"
     unclear_message = "unclear_message"
+    implicit_category = "implicit_category"  # items/categories named implicitly ("pop", "something sweet")
 
 
 class WritingStyle(StrEnum):

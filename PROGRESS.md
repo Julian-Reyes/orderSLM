@@ -10,7 +10,7 @@ _Last updated 2026-10-08._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 250 scenario cards generated (branch `m2-eval-data`); conversations next |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); dev conversations next |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
@@ -205,11 +205,25 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   correction rate; `lock` requires all dev and ≥25% test reviewed, records per-source counts and review stats,
   relabel only with `--relabel-human`. API/tool: "Save as reviewed", review badges, review stats.
 - **Checks:** `make check` 286 passed; web `tsc` + build clean.
-- **Next:** write one conversation per card (dev first), validated by the tool's checks; then Julian reviews.
+
+### Card review (Julian, 2026-10-08): approved with changes
+
+- **Supplement batch** appended (own RNG stream `20261007-supplement-2026-10-08`; the first 80 + 170 cards are
+  unchanged, tested): +1 dev / +3 test per rare label (HUMAN_REQUEST, ORDER_PROBLEM, ORDER_STATUS, PAYMENT_CLAIM,
+  OUT_OF_SCOPE, REFUND_REQUEST, UNKNOWN → 3 dev / 7–8 test each) and a new `implicit_category` situation (4 dev,
+  8 test, spread over every menu) for the menu-narrowing evaluation (spec §11e). Totals: **91 dev, 199 test**;
+  held-out menu **50/199 = 25.1%** of test.
+- **Contract:** `conversation@0.4` adds `Scenario.implicit_category`.
+- `cards generate --split dev|test`; dev cards regenerated (`data/dev/cards.jsonl`, 91; a test checks the file
+  matches the generator). **The sealed test card file still has the old 170 cards** until it is regenerated with
+  `ORDERSLM_UNSEAL_TEST=... cards generate --split test --force` (the session's tool permissions blocked setting
+  the unseal variable, so Julian runs it).
+- **Checks:** `make check` 293 passed.
 
 ### Open for Julian (M2)
 
-1. Review the scenario-card summary (counts per label, menu, style, tricky case) before conversations are written.
-2. Rare labels have 2 dev / 4–5 test cards each (HUMAN_REQUEST, ORDER_PROBLEM, ORDER_STATUS, OUT_OF_SCOPE,
-   PAYMENT_CLAIM, REFUND_REQUEST, UNKNOWN), so per-label test metrics for them will be noisy.
-3. Push `main` (4 commits ahead of origin) when you want; `milestone-2` is merged and can be deleted locally.
+1. Regenerate the sealed test cards (command above) before the test conversations are written.
+2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
+3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
+   items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
+4. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
