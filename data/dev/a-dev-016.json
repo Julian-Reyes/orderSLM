@@ -182,6 +182,7 @@
       "message_index": 5,
       "decision": {
         "primary": "PLACE_ORDER",
+        "urgency": "time_sensitive",
         "flags": {
           "refers_to": "draft"
         }
@@ -190,5 +191,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-016",
-  "annotation_notes": "'THAT ONE' follows a list of eight pastries and can't be resolved: unmatched_text + item_menu_match/ambiguous. 'AT 8' is 08:00 (open 07-15)."
+  "annotation_notes": "'THAT ONE' follows a list of eight pastries and can't be resolved: unmatched_text + item_menu_match/ambiguous. 'AT 8' is 08:00 (open 07-15), about 10 minutes after the message: pickup within ~15 min is time_sensitive."
 }

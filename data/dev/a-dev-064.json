@@ -8,7 +8,7 @@
       {
         "index": 0,
         "role": "customer",
-        "text": "yo can i get a medium pepperoni n a coke 🍕🥤",
+        "text": "yo can i get a medium pepperoni n a coke for pickup 🍕🥤",
         "sent_at": "2026-10-06T16:50:00-05:00"
       },
       {
@@ -20,7 +20,7 @@
       {
         "index": 2,
         "role": "business",
-        "text": "Got it: 1 medium Pepperoni Pizza and 1 Coke (can), $16.48, paying cash. Is that right?",
+        "text": "Got it: 1 Pepperoni Pizza (Medium 12-inch), 1 Coke. Pickup as soon as possible. Total $16.48, paying cash. Is that right?",
         "sent_at": "2026-10-06T16:50:50-05:00"
       },
       {
@@ -69,13 +69,19 @@
       }
     ],
     "fulfillment": {
-      "method": "unknown",
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
       "requested_time": {
         "state": "not_mentioned"
       }
     },
     "address": {
-      "state": "not_mentioned"
+      "state": "not_applicable"
     },
     "payment": {
       "method": "card",
@@ -88,14 +94,7 @@
     },
     "customer_name": {
       "state": "not_mentioned"
-    },
-    "missing_or_ambiguous": [
-      {
-        "field": "fulfillment_method",
-        "reason": "missing"
-      }
-    ],
-    "clarification_question": "Is this for pickup or delivery?"
+    }
   },
   "gold_routing": [
     {
@@ -137,5 +136,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-064",
-  "annotation_notes": "Switching payment after confirming resets the decision to pending. A payment-method switch doesn't change what the kitchen makes, so urgency stays normal. Pickup/delivery never chosen (card: unstated)."
+  "annotation_notes": "Switching payment after confirming resets the decision to pending. A payment switch doesn't change the food, time or address, so urgency stays normal."
 }

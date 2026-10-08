@@ -334,6 +334,21 @@ CARD_FIXES: dict[str, dict] = {
 }
 
 
+# Situations whose conversation needs a complete order (a summary, then a yes): pickup/delivery must be stated,
+# because no summary is sent while anything is missing (Julian, 2026-10-08). A sampled "unstated" is replaced
+# after generation from its own per-card RNG, so no other field of any card changes.
+NEEDS_STATED_FULFILLMENT = frozenset({"simple_order", "contextual_yes", "correction_after_confirmation"})
+
+
+def _stated_fulfillment(card: ScenarioCard, menus: dict, seed: int) -> ScenarioCard:
+    if card.situation not in NEEDS_STATED_FULFILLMENT or card.fulfillment != "unstated":
+        return card
+    options = ["delivery", "pickup"] if menus[card.business_id].delivery.available else ["pickup"]
+    return card.model_copy(
+        update={"fulfillment": random.Random(f"{seed}-{card.id}-fulfillment").choice(options)}
+    )
+
+
 def quota(name: str, split: Split) -> int:
     """Total cards per situation and split, over both batches."""
     k = split is Split.test
@@ -421,7 +436,12 @@ def generate(seed: int = SEED) -> dict[Split, list[ScenarioCard]]:
                 split, jobs, rng, menus, used[split], variant_used[split], len(out[split]), spread
             )
     return {
-        split: [c.model_copy(update=CARD_FIXES[c.id]) if c.id in CARD_FIXES else c for c in cs]
+        split: [
+            c.model_copy(update=CARD_FIXES[c.id])
+            if c.id in CARD_FIXES
+            else _stated_fulfillment(c, menus, seed)
+            for c in cs
+        ]
         for split, cs in out.items()
     }
 

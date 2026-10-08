@@ -73,7 +73,7 @@
       "requested_time": {
         "state": "provided",
         "kind": "clock_time",
-        "raw_text": "at 10:30",
+        "raw_text": "10:30",
         "normalized_local": "22:30",
         "evidence": [
           {
@@ -132,7 +132,6 @@
       "message_index": 2,
       "decision": {
         "primary": "MODIFY_ORDER",
-        "urgency": "time_sensitive",
         "flags": {
           "refers_to": "draft"
         }
@@ -150,5 +149,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-073",
-  "annotation_notes": "10 and 10:30 are evening times (open 12-23). A time change is time_sensitive per the rubric."
+  "annotation_notes": "10 and 10:30 are evening times (open 12-23). Changing the time of a draft is normal urgency (guide: only changes after confirming that affect the food, time or address are time_sensitive)."
 }

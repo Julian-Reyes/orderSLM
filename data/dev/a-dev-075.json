@@ -44,7 +44,7 @@
       {
         "index": 6,
         "role": "customer",
-        "text": "cash, gonna pay w a 100",
+        "text": "cash, gonna pay w 2 hundreds",
         "sent_at": "2026-10-02T17:00:37-04:00"
       }
     ]
@@ -145,11 +145,11 @@
     },
     "payment": {
       "method": "cash",
-      "change_for_cents": 10000,
+      "change_for_cents": 20000,
       "evidence": [
         {
           "message_index": 6,
-          "quote": "cash, gonna pay w a 100"
+          "quote": "cash, gonna pay w 2 hundreds"
         }
       ]
     },
@@ -231,5 +231,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-075",
-  "annotation_notes": "'2 veggie' at a burger shop is the Veggie Burger (alias). 'pay w a 100' is change for $100. Pickup/delivery never stated."
+  "annotation_notes": "'2 veggie' at a burger shop is the Veggie Burger (alias). 'pay w 2 hundreds' is change for $200 (the order is about $170). Pickup/delivery never stated."
 }

@@ -26,7 +26,7 @@
       {
         "index": 3,
         "role": "customer",
-        "text": "cash",
+        "text": "pickup at 10 for Dana, cash",
         "sent_at": "2026-10-05T07:31:30-07:00"
       }
     ]
@@ -76,13 +76,28 @@
       }
     ],
     "fulfillment": {
-      "method": "unknown",
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup at 10"
+        }
+      ],
       "requested_time": {
-        "state": "not_mentioned"
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 10",
+        "normalized_local": "10:00",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 10"
+          }
+        ]
       }
     },
     "address": {
-      "state": "not_mentioned"
+      "state": "not_applicable"
     },
     "payment": {
       "method": "cash",
@@ -94,15 +109,15 @@
       ]
     },
     "customer_name": {
-      "state": "not_mentioned"
-    },
-    "missing_or_ambiguous": [
-      {
-        "field": "fulfillment_method",
-        "reason": "missing"
-      }
-    ],
-    "clarification_question": "Is this for pickup or delivery?"
+      "state": "provided",
+      "value": "Dana",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "for Dana"
+        }
+      ]
+    }
   },
   "gold_routing": [
     {
@@ -134,5 +149,6 @@
     }
   ],
   "annotator": "claude-opus-5.5 (Source A)",
-  "card_id": "a-dev-041"
+  "card_id": "a-dev-041",
+  "annotation_notes": "'at 10' is 10:00 (open 07-15)."
 }

@@ -17,6 +17,7 @@ from orderslm.schema.extraction import (
     ItemProposal,
     Modification,
     ModificationKind,
+    PaymentMethod,
 )
 from orderslm.schema.menu import MenuCatalog, MenuItem
 from orderslm.schema.order import Quote, QuoteLine, ToolErr, ToolError, ToolOk, ToolResult
@@ -208,6 +209,20 @@ class DeterministicPricing:
                     min_order_cents=menu.delivery.min_order_cents,
                 )
             fee = menu.delivery.fee_cents
+        pay = proposal.payment
+        if pay.method is PaymentMethod.cash and pay.change_for_cents is not None:
+            if pay.change_for_cents < subtotal + fee:  # "change for a 100" on a $170 order
+                return _err(
+                    [
+                        PricingIssue(
+                            "CASH_BELOW_TOTAL",
+                            None,
+                            "the cash the customer will pay with is less than the total",
+                        )
+                    ],
+                    change_for_cents=pay.change_for_cents,
+                    total_cents=subtotal + fee,
+                )
         quote = Quote(
             business_id=menu.business_id,
             currency=menu.currency,

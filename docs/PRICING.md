@@ -46,6 +46,7 @@ guesses: no default for a required size, no closest match for an off-menu item.
 | `MISSING_VARIANT` | required size/flavor not stated (also inside a combo choice) |
 | `MISSING_COMBO_CHOICE` | a combo slot not chosen |
 | `OPTION_NOT_ON_MENU` | a requested topping/add-on the menu doesn't offer (`not_on_menu`), until the customer resolves it |
+| `CASH_BELOW_TOTAL` | cash with `change_for_cents` smaller than the total ("pay w a 100" on a $170 order); `details` has both amounts; the reply asks for a larger bill or card |
 | `REQUEST_UNVERIFIED` | a request with no menu id the menu doesn't list as an accepted kitchen request (core/requests.py) |
 | `UNKNOWN_ITEM`, `UNKNOWN_VARIANT`, `UNKNOWN_MODIFIER`, `UNKNOWN_COMBO_SLOT`, `INVALID_COMBO_CHOICE`, `NOT_SPLITTABLE`, `MODIFIER_NOT_ALLOWED` | ids that don't exist or don't apply (from `checks.check_catalog`) |
 | `EXCLUSIVE_GROUP_CONFLICT` | two choices from one exclusive group (two crusts) |

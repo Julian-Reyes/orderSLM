@@ -180,7 +180,7 @@
     {
       "message_index": 2,
       "decision": {
-        "primary": "MODIFY_ORDER",
+        "primary": "PLACE_ORDER",
         "flags": {
           "refers_to": "draft"
         }
@@ -208,6 +208,7 @@
       "message_index": 5,
       "decision": {
         "primary": "MODIFY_ORDER",
+        "secondary": "PLACE_ORDER",
         "flags": {
           "refers_to": "draft"
         }
@@ -216,5 +217,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-020",
-  "annotation_notes": "'2 no pickles' splits the 4 cheeseburgers into 2 + 2 (MODIFY_ORDER). The 12:30 time carries over to delivery."
+  "annotation_notes": "'2 no pickles' adds a detail to the burgers just ordered (PLACE_ORDER: nothing stated is replaced) and splits them into 2 + 2. The last message changes pickup to delivery and gives the first payment: MODIFY_ORDER + secondary PLACE_ORDER. The 12:30 time carries over to delivery."
 }

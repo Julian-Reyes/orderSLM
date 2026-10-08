@@ -276,6 +276,30 @@ Acceptance (spec §18, revised): locked split with counts per source, label, men
   party size…" (the template fix landed after that file's last save). Local PIZZA cases regenerated: 199 load, none
   unclassified.
 
+### Independent audit + third round of rulings (2026-10-08)
+
+A fresh agent (no prior view of the conversations) audited all 91 dev files read-only: 68 had no finding.
+Julian's rulings, all applied:
+- **Strict kitchen notes** accepted for V1; `requests.request_counts` gives the unverified-fallback rate per run
+  (spec §12 metric).
+- **Definite errors fixed:** 016 (pickup in ~10 min → time_sensitive), 032 (the 👍 that doesn't answer "pickup or
+  delivery?" is UNKNOWN; the customer then chooses delivery and confirms a real summary), 064 (pickup stated, so the
+  summary is legitimate), 073 (raw_text "10:30"; draft time change → normal), 075 ("pay w 2 hundreds").
+- **Code:** cash smaller than the total → `CASH_BELOW_TOTAL` with a reply; pickup-only businesses ask "Is this for
+  pickup, and can I get a name for the order?" (the name rule applies when the method can only be pickup);
+  half-and-half without a size asks "What size would you like for the pizza (…)?".
+- **Card generator:** `simple_order`, `contextual_yes`, `correction_after_confirmation` always state pickup or
+  delivery (5 dev, 11 test cards; only that field changed, verified). Dev conversations 028, 041, 042 now state it.
+  Morning Crumb cards switched to pickup don't get the brief's name hint (that would change a second field); the
+  validation rules still require the name.
+- **Conventions 1–8** in the annotation guide (detail on an item just stated = PLACE_ORDER; urgency of changes;
+  disputed charges; MODIFY + secondary PLACE; refers_to for UNKNOWN and absent orders; pickup-only; payment
+  claims; resets, carried-over time, "to <address>", topping-only halves, no allergen claims). Applied to 005, 020,
+  037, 038, 050, 072, 076, 086, 088, 090. Low-priority fixes: 002 evidence, 042 tag, 053/069 timestamps.
+- **Verified:** prices and size deltas unchanged; gold prices differ from the morning snapshot only for 034 (ruled)
+  and 032/042 (now delivery: + fee). 91 dev files: 0 findings, 0 warnings, no near-duplicates. `make check` 335 passed.
+- **Sealed test cards need regenerating** (11 cards now state pickup/delivery).
+
 **Judgment calls from the first draft** (all now ruled: 1, 2, 4, 5 in round one; 3, 6, 7, 8 in round two, and in
 the annotation guide):
 1. After the customer confirms, later messages refer to the `placed_order`; any change then (including adding an
@@ -296,6 +320,7 @@ the annotation guide):
 
 ### Open for Julian (M2)
 
+1. **Regenerate the sealed test cards** (`! ORDERSLM_UNSEAL_TEST="author Source A cards" uv run python -m orderslm.data.cards generate --split test --force`).
 1. **Review the 91 dev conversations** in the tool (`make annotate`, "Save as reviewed"). Anything you change, I
    apply to the guide/conventions before writing the test conversations.
 2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).

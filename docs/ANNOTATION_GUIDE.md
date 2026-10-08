@@ -14,7 +14,10 @@ validation and the grounding checks before a conversation is accepted.
 - Include tricky cases on purpose: two requests in one message, corrections (also after confirmation),
   off-menu items, missing info, context-dependent "yes", chit-chat or a complaint mid-order.
 - Business messages are optional. When you write one, prices in it must be the real menu prices
-  (they are just text; gold never uses them).
+  (they are just text; gold never uses them). Write them as the system would behave: no confirmation summary
+  while anything is missing (ask the missing question first), replies within opening hours, nothing that
+  contradicts the menu (e.g. accepting a payment channel the business doesn't take), and **no allergen or
+  dietary claims** the menu can't back up (the menus have no allergen data: say it can't be confirmed here).
 - Tag every conversation with its `scenarios` and one `style` (`clean`, `texting`, `rapid_fire`, `shouty`, `emoji`).
 - Test conversations: write them, label them, and don't look at them again. They are sealed after M2.
 
@@ -63,11 +66,16 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   - **Every request with no menu id is explicitly `not_on_menu` or `kitchen_note`**; the tool won't save one that
     is neither (`UNCLASSIFIED_REQUEST`).
 - Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`.
-- Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`.
+- Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`. A half named by a
+  recipe ("half hawaiian") is that pizza; a half named only by toppings ("half mushroom n olives") is
+  `cheese_pizza` with those toppings added.
 
 ### Fulfillment, time, address, payment, name
 - `method`: `pickup`/`delivery` only when the customer chooses it. "do you deliver to Oak St?" is a
-  question, not a choice → `unknown`.
+  question, not a choice → `unknown`. An order sent "to <address>" ("lg pepperoni to 300 university dr") is a
+  choice of delivery. At a pickup-only business an unstated method is still `unknown` and missing; the question is
+  "Is this for pickup…?" and, where the business requires a name for pickup, the name is missing too.
+- Changing pickup ↔ delivery keeps the requested time unless the customer changes it too.
 - Time: `provided` with `kind` (`asap`, `clock_time`, `relative`) and `raw_text` as written. Fill
   `normalized_local` (HH:MM, business's timezone) only for clock times that are unambiguous given opening
   hours ("at 7" at a place open 11–22 → `19:00`). "around 7 or 8" → `ambiguous` + `requested_time / ambiguous`.
@@ -77,7 +85,10 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   address → `address / missing`. An address stated in a question still counts as `provided`.
   Delivery instructions ("ring the side door") go in `notes`, not the address.
 - Payment: `card`, `cash`, `other`, `unknown`. "change for a 50" → `change_for_cents: 5000`.
-  "I already paid" → `customer_claims_paid: true` (a claim; staff verify it). Unknown payment → `payment_method / missing`.
+  "I already paid" → `customer_claims_paid: true` (a claim; staff verify it), method `unknown` unless the customer
+  states one (a channel like "when I called" is not a method). Unknown payment → `payment_method / missing`.
+  Cash with a bill smaller than the total ("pay w a 100" on a $170 order) can't be right: the code flags it
+  (`CASH_BELOW_TOTAL`), so don't write it unless that is the point of the conversation.
   A claim during an order: `PLACE_ORDER` + secondary `PAYMENT_CLAIM` in the same message as the items, or primary
   `PAYMENT_CLAIM` in its own message; method stays `unknown` unless stated, and payment isn't asked again. The
   summary says "You mentioned you've already paid, and the restaurant will confirm it"; the ticket says "Payment:
@@ -87,7 +98,8 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
 - `customer_decision`: `confirmed` only when the customer agrees to a summary of the **current** order **and
   nothing is missing** (a confirmed order must be complete enough to send to the kitchen). A yes while something is
   still missing: `pending` + `agreed_while_incomplete: true`, citing the yes; the missing info is asked next.
-  A change after confirming resets it to `pending` (the new order needs a new yes).
+  A change after confirming resets it to `pending` (the new order needs a new yes), and any change resets
+  `agreed_while_incomplete` too.
 
 ### What counts as missing (V1)
 Missing (add to `missing_or_ambiguous`): no items; off-menu or ambiguous item; quantity unclear; required
@@ -111,13 +123,23 @@ Never cite a business message: gold must come from what the customer said.
 Label each customer message in order, using the context before it (not after). Use docs/TAXONOMY.md:
 primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key rules:
 - Small talk never wins over a real request.
-- "yes" is `CONFIRM_ORDER` only right after the business asks to confirm the order.
-- Frustration alone is not urgency.
+- "yes" is `CONFIRM_ORDER` only right after the business asks to confirm the order. A "👍"/"sounds good" that
+  answers a different question without answering it ("pickup or delivery?" → "👍 sounds good") is `UNKNOWN`.
+- Adding a detail to an item just stated ("4 cheeseburgers" → "2 no pickles", "w hazelnut syrup") is
+  `PLACE_ORDER`: nothing stated is replaced. `MODIFY_ORDER` is for replacing or removing something stated.
+- One message that changes something and also gives a first detail ("make it a medium. pickup, card"):
+  `MODIFY_ORDER` + secondary `PLACE_ORDER`.
+- Frustration alone is not urgency. Urgency of changes: changes to a draft are `normal`; after confirming,
+  a change to the food, time or address is `time_sensitive`, a payment switch `normal`. A pickup within ~15
+  minutes of the message is `time_sensitive`. A charge for an order that never arrived, like a double charge, is a
+  disputed payment: `needs_staff_now`.
 - `refers_to: draft` for messages building the current order (including the first one);
   `placed_order` after the order was confirmed/sent; `none` for greetings or questions with no order.
-- A menu question in the middle of an order is `refers_to: draft`; before any order, `none`.
+- A menu question in the middle of an order is `refers_to: draft`; before any order, `none`. An `UNKNOWN`
+  message with no order in the chat is `none`; a message about an order that isn't in this chat (and isn't
+  clearly placed) is `unclear`.
 - Any change after the customer confirmed, **including adding an item**, is `MODIFY_ORDER` about the
-  `placed_order`; `time_sensitive` when it changes what the kitchen makes.
+  `placed_order` (urgency as above).
 
 ## 4. Quality process
 

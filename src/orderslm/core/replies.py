@@ -63,6 +63,8 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_option_unverified": "Just checking, we may not be able to do {text} on the {name}. Want it without, or keep it as a note for the kitchen?",
         "q_combo": "what would you like with the {name} ({options})",
         "q_method": "is this for pickup or delivery",
+        "q_method_pickup_only": "is this for pickup",
+        "q_size": "what size would you like for the {name} ({options})",
         "q_time": "what time would you like it",
         "q_address": "what's the delivery address",
         "q_payment": "will you pay by card or cash",
@@ -81,6 +83,7 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "payment_claim": "Thanks! A staff member will check the payment and confirm it. Until then it shows as pending.",
         "cancelled": "No problem, I've cancelled the order.",
         "needs_staff": "Your order is already with the kitchen, so I've asked a staff member to help with that change.",
+        "cash_below_total": "You mentioned paying with {cash}, but the total is {total}. Could you bring a larger bill, or pay by card?",
         "below_minimum": "Delivery needs a minimum order of {minimum}; your order is {subtotal} so far. Want to add something or switch to pickup?",
         "no_delivery": "Sorry, {business} is pickup only. Would pickup work for you?",
         "unavailable": "Sorry, {detail}. Would you like something else?",
@@ -245,6 +248,8 @@ def template_question(
                         text=line.unmatched_variant_text.lower(), name=item.name.lower(), options=options
                     )
                 )
+            elif line and line.halves:  # half-and-half: the pizza is known, only the size is missing
+                questions.append(T["q_size"].format(name=item.name.lower(), options=options))
             else:
                 questions.append(T["q_variant"].format(name=item.name.lower(), options=options))
         elif m.field is FieldRef.item_modification and item and line:
@@ -267,7 +272,7 @@ def template_question(
                         )
                     )
         elif m.field is FieldRef.fulfillment_method:
-            questions.append(T["q_method"])
+            questions.append(T["q_method"] if menu.delivery.available else T["q_method_pickup_only"])
         elif m.field is FieldRef.requested_time:
             questions.append(T["q_time"])
         elif m.field is FieldRef.address:
@@ -311,6 +316,11 @@ def next_reply(
 def pricing_problem(err: ToolErr, menu: MenuCatalog, lang: str = "en") -> str:
     T = _t(lang)
     code, details = err.error.code, err.error.details or {}
+    if code == "CASH_BELOW_TOTAL":
+        return T["cash_below_total"].format(
+            cash=format_cents(int(details["change_for_cents"])),
+            total=format_cents(int(details["total_cents"])),
+        )
     if code == "BELOW_DELIVERY_MINIMUM":
         return T["below_minimum"].format(
             minimum=format_cents(int(details["min_order_cents"])),

@@ -72,10 +72,10 @@ def required_missing(output: ExtractionOutput, menu: MenuCatalog) -> list[Missin
         add(FieldRef.address, reason)
     if output.payment.method is PaymentMethod.unknown and not output.payment.customer_claims_paid:
         add(FieldRef.payment_method, MissingReason.missing)
-    if (
-        method is FulfillmentMethod.pickup
-        and menu.name_required_for_pickup
-        and output.customer_name.state is not SlotState.provided
-    ):
+    # At a pickup-only business an unstated method can only become pickup, so its name rule applies already.
+    pickup = method is FulfillmentMethod.pickup or (
+        method is FulfillmentMethod.unknown and not menu.delivery.available
+    )
+    if pickup and menu.name_required_for_pickup and output.customer_name.state is not SlotState.provided:
         add(FieldRef.customer_name, MissingReason.missing)
     return out

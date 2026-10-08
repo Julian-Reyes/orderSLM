@@ -34,6 +34,30 @@
         "role": "customer",
         "text": "👍 SOUNDS GOOD",
         "sent_at": "2026-10-01T14:11:45-04:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Sorry, I just need to know: pickup or delivery?",
+        "sent_at": "2026-10-01T14:12:25-04:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "OH SORRY. DELIVERY TO 9 MAPLE COURT PLEASE",
+        "sent_at": "2026-10-01T14:13:05-04:00"
+      },
+      {
+        "index": 7,
+        "role": "business",
+        "text": "Got it: 2 Cheeseburgers, 1 Milkshake (chocolate). Delivery to 9 MAPLE COURT. Total $27.46 (incl. $3.99 delivery), paying cash. Is that right?",
+        "sent_at": "2026-10-01T14:13:45-04:00"
+      },
+      {
+        "index": 8,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-10-01T14:14:10-04:00"
       }
     ]
   },
@@ -68,13 +92,28 @@
       }
     ],
     "fulfillment": {
-      "method": "unknown",
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 6,
+          "quote": "DELIVERY TO 9 MAPLE COURT"
+        }
+      ],
       "requested_time": {
         "state": "not_mentioned"
       }
     },
     "address": {
-      "state": "not_mentioned"
+      "state": "provided",
+      "street": "MAPLE COURT",
+      "number": "9",
+      "raw_text": "9 MAPLE COURT",
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "9 MAPLE COURT"
+        }
+      ]
     },
     "payment": {
       "method": "cash",
@@ -89,21 +128,14 @@
       "state": "not_mentioned"
     },
     "customer_decision": {
-      "agreed_while_incomplete": true,
+      "state": "confirmed",
       "evidence": [
         {
-          "message_index": 4,
-          "quote": "👍 SOUNDS GOOD"
+          "message_index": 8,
+          "quote": "👍"
         }
       ]
-    },
-    "missing_or_ambiguous": [
-      {
-        "field": "fulfillment_method",
-        "reason": "missing"
-      }
-    ],
-    "clarification_question": "Is this for pickup or delivery?"
+    }
   },
   "gold_routing": [
     {
@@ -136,6 +168,24 @@
     {
       "message_index": 4,
       "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 8,
+      "decision": {
         "primary": "CONFIRM_ORDER",
         "flags": {
           "refers_to": "draft"
@@ -145,5 +195,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-032",
-  "annotation_notes": "The bot asks the missing question (no summary while anything is missing). The customer agrees without answering it: CONFIRM_ORDER as intent, but the order isn't complete, so the decision stays pending with agreed_while_incomplete and pickup/delivery is still missing (guide: confirmed only when nothing is missing)."
+  "annotation_notes": "'👍 SOUNDS GOOD' answers 'pickup or delivery?' without choosing: UNKNOWN (it is not a confirmation; no summary had been sent). The bare 👍 after the summary is the contextual yes: CONFIRM_ORDER, and the order is complete, so confirmed."
 }

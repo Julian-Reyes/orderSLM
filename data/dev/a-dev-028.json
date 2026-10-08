@@ -20,7 +20,7 @@
       {
         "index": 2,
         "role": "customer",
-        "text": "card",
+        "text": "pickup at 9:30, name's Mia, card",
         "sent_at": "2026-09-29T08:20:18-07:00"
       }
     ]
@@ -72,13 +72,28 @@
       }
     ],
     "fulfillment": {
-      "method": "unknown",
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup at 9:30"
+        }
+      ],
       "requested_time": {
-        "state": "not_mentioned"
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9:30",
+        "normalized_local": "09:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 9:30"
+          }
+        ]
       }
     },
     "address": {
-      "state": "not_mentioned"
+      "state": "not_applicable"
     },
     "payment": {
       "method": "card",
@@ -90,7 +105,14 @@
       ]
     },
     "customer_name": {
-      "state": "not_mentioned"
+      "state": "provided",
+      "value": "Mia",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "name's Mia"
+        }
+      ]
     },
     "notes": [
       {
@@ -102,14 +124,7 @@
           }
         ]
       }
-    ],
-    "missing_or_ambiguous": [
-      {
-        "field": "fulfillment_method",
-        "reason": "missing"
-      }
-    ],
-    "clarification_question": "Is this for pickup or delivery?"
+    ]
   },
   "gold_routing": [
     {
@@ -142,5 +157,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A)",
   "card_id": "a-dev-028",
-  "annotation_notes": "Pickup is never said, so the method is unknown (card fulfillment: unstated)."
+  "annotation_notes": "'at 9:30' is 09:30 (open 07-15)."
 }

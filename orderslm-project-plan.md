@@ -314,6 +314,7 @@ Expected cost: cents for OpenAI Decisions; Jev depends on its input price (check
 - Correction handling accuracy on conversations with corrections or cancellations.
 - Clarification detection: precision/recall of `missing_or_ambiguous`, plus a rubric rating of `clarification_question` (an LLM judge is allowed only if validated against Julian's ratings on 50 samples).
 - Hallucination rate: items or values not supported by the conversation.
+- Unverified-request fallback rate: how often the code had to ask "Just checking, we may not be able to do X…" because an output left a request with no menu id unclassified, or called something a kitchen note that the menu doesn't accept (`core/requests.request_counts`, logged per run).
 - JSON validity rate.
 - Generalization: results on the held-out menu reported separately.
 - Cost per 1,000 orders and per successful workflow, including retries and fallbacks.

@@ -101,7 +101,7 @@ def test_half_and_half_and_missing_size():
     )
     assert items(out) == [(("pepperoni_pizza", "hawaiian_pizza"), 1, None, ()), ("garlic_knots", 2, None, ())]
     assert [(m.field.value, m.line_id) for m in out.missing_or_ambiguous][0] == ("item_variant", "L1")
-    assert out.clarification_question.startswith("Which pizza would you like (personal 8-inch")
+    assert out.clarification_question.startswith("What size would you like for the pizza (personal 8-inch")
 
 
 def test_combo_choices_and_contextual_yes():

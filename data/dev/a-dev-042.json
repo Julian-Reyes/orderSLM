@@ -8,14 +8,15 @@
       {
         "index": 0,
         "role": "customer",
-        "text": "hello, id like a medium margherita and a bottle of diet coke please, paying cash. is the margherita made w fresh mozzarella?",
+        "text": "hello, id like a medium margherita and a bottle of diet coke delivered to 12 oak st please, paying cash. is the margherita made w fresh mozzarella?",
         "sent_at": "2026-10-05T18:30:00-05:00"
       }
     ]
   },
   "scenarios": [
     "simple_order",
-    "two_requests"
+    "two_requests",
+    "menu_question"
   ],
   "style": "texting",
   "gold_extraction": {
@@ -46,13 +47,28 @@
       }
     ],
     "fulfillment": {
-      "method": "unknown",
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 12 oak st"
+        }
+      ],
       "requested_time": {
         "state": "not_mentioned"
       }
     },
     "address": {
-      "state": "not_mentioned"
+      "state": "provided",
+      "street": "oak st",
+      "number": "12",
+      "raw_text": "12 oak st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "12 oak st"
+        }
+      ]
     },
     "payment": {
       "method": "cash",
@@ -65,14 +81,7 @@
     },
     "customer_name": {
       "state": "not_mentioned"
-    },
-    "missing_or_ambiguous": [
-      {
-        "field": "fulfillment_method",
-        "reason": "missing"
-      }
-    ],
-    "clarification_question": "Is this for pickup or delivery?"
+    }
   },
   "gold_routing": [
     {

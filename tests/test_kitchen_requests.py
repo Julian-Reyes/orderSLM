@@ -168,3 +168,61 @@ def test_ticket_flags_a_claimed_payment_for_staff():
 def test_ticket_payment_lines():
     o = order(line("L1", "cheeseburger"), payment="cash")
     assert ticket_lines(CP, P.quote(CP, o).data, o)[-2:] == ["Total: $8.99", "Payment: cash"]
+
+
+# ---------------------------------------------------------------- audit fixes (2026-10-08)
+
+MC = load_menu("morning-crumb")
+
+
+def test_fallback_questions_are_counted_for_evals():
+    from orderslm.core.requests import request_counts
+
+    outputs = [
+        order(line("L1", "cheeseburger", mods=[req("with truffle oil")])),  # fallback
+        order(line("L1", "cheeseburger", mods=[req("well done", kitchen_note=True)])),
+        order(line("L1", "cheeseburger", mods=[("remove", "onion")])),
+    ]
+    counts = request_counts(CP, outputs)
+    assert counts["fallback_questions"] == 1
+    assert (counts["unverified"], counts["kitchen_note"], counts["catalog"], counts["not_on_menu"]) == (
+        1,
+        1,
+        1,
+        0,
+    )
+
+
+def test_cash_below_the_total_is_a_payment_problem():
+    o = order(line("L1", "cheeseburger", qty=12), payment="cash")  # 12 x $8.99 = $107.88
+    o.payment.change_for_cents = 10000
+    r = P.quote(CP, o)
+    assert not r.ok and r.error.code == "CASH_BELOW_TOTAL"
+    text, kind = next_reply(CP, o, r)
+    assert kind == "pricing_problem"
+    assert (
+        text
+        == "You mentioned paying with $100.00, but the total is $107.88. Could you bring a larger bill, or pay by card?"
+    )
+    o.payment.change_for_cents = 20000
+    assert P.quote(CP, o).ok
+
+
+def test_pickup_only_business_asks_pickup_and_name():
+    o = gold(MC, line("L1", "drip_coffee"), method="unknown")
+    assert [m.field.value for m in o.missing_or_ambiguous] == ["fulfillment_method", "customer_name"]
+    assert next_reply(MC, o, P.quote(MC, o))[0] == "Is this for pickup, and can I get a name for the order?"
+
+
+def test_half_and_half_without_a_size_asks_for_the_size():
+    o = gold(HM, line("L1", halves=["margherita_pizza", "veggie_pizza"]))
+    assert o.clarification_question.startswith("What size would you like for the pizza (personal 8-inch,")
+
+
+def test_confirmation_cards_always_state_pickup_or_delivery():
+    from orderslm.data import cards
+
+    for cs in cards.generate().values():
+        for c in cs:
+            if c.situation in cards.NEEDS_STATED_FULFILLMENT:
+                assert c.fulfillment in ("pickup", "delivery"), c.id

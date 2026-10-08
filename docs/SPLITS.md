@@ -26,7 +26,13 @@ stream so the first-batch cards never change (tested). The supplement adds 1 dev
 label (HUMAN_REQUEST, ORDER_PROBLEM, ORDER_STATUS, PAYMENT_CLAIM, OUT_OF_SCOPE, REFUND_REQUEST, UNKNOWN: now
 3 dev / 7–8 test each) and 4 dev + 8 test `implicit_category` cards (a drink by a casual word, items named
 without their category, a vague "something sweet"), spread over the menus, for the menu-narrowing evaluation
-(spec §11e). The held-out menu stays at ~25% of test (50 of 199). Each card fixes
+(spec §11e). The held-out menu stays at ~25% of test (50 of 199).
+
+Situations whose conversation needs a complete order (`simple_order`, `contextual_yes`,
+`correction_after_confirmation`) always state pickup or delivery (2026-10-08): no summary is sent while anything is
+missing, so "unstated" made those cards impossible to follow. A sampled "unstated" is replaced after generation from
+a per-card RNG (5 dev, 11 test cards; only that field changes, tested). Single-card corrections are in
+`cards.CARD_FIXES` (a-dev-020). Each card fixes
 the business, situation (+ variant), the router labels the conversation must contain, scenario tags, writing
 style and features (typos, abbreviations, emoji, bursts, ALL CAPS), fulfillment, a target number of customer
 messages, a persona and a brief. Coverage is by construction: fixed per-split quotas for 23 situations cover

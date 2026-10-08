@@ -14,7 +14,7 @@ core/ticket.py (what is shown).
 import re
 from enum import StrEnum
 
-from orderslm.schema.extraction import ItemProposal, Modification
+from orderslm.schema.extraction import ExtractionOutput, ItemProposal, Modification
 from orderslm.schema.menu import KitchenRequest, MenuCatalog, MenuItem
 
 REQUESTS_VERSION = "requests@0.1"
@@ -65,3 +65,16 @@ def line_requests(
 
 
 UNRESOLVED = {RequestStatus.not_on_menu, RequestStatus.unverified}
+
+
+def request_counts(menu: MenuCatalog, proposals: list[ExtractionOutput]) -> dict[str, int]:
+    """How often each status occurs across outputs: the eval runs log this, so the rate at which the
+    unverified fallback question fires ("Just checking, we may not be able to do X…") is measured.
+    `fallback_questions` counts outputs that trigger at least one."""
+    counts = dict.fromkeys([s.value for s in RequestStatus] + ["fallback_questions"], 0)
+    for p in proposals:
+        statuses = [s for line in p.items for _, _, s in line_requests(menu, line)]
+        for s in statuses:
+            counts[s.value] += 1
+        counts["fallback_questions"] += RequestStatus.unverified in statuses
+    return counts
