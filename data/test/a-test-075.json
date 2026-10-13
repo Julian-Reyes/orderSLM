@@ -1,0 +1,98 @@
+{
+  "conversation": {
+    "id": "a-test-075",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "MY ORDER JUST GOT HERE AN HOUR LATE, IT WAS SUPOSED TO COME AT 7",
+        "sent_at": "2026-10-11T20:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm so sorry about that! What name is the order under?",
+        "sent_at": "2026-10-11T20:20:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "NGUYEN. I ORDER HERE EVERY WEEK AND THIS NEVER HAPPENS",
+        "sent_at": "2026-10-11T20:21:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks, I've passed this to the manager and they'll follow up with you.",
+        "sent_at": "2026-10-11T20:21:45-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "OK BUT WHAT ARE YOU GOING TO DO ABOUT IT",
+        "sent_at": "2026-10-11T20:22:10-04:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "The manager will message you shortly about making it right.",
+        "sent_at": "2026-10-11T20:22:50-04:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "FINE. THANKS",
+        "sent_at": "2026-10-11T20:23:15-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-075",
+  "annotation_notes": "The order has arrived, so the lateness is a complaint about a received order (ORDER_PROBLEM), not a status question, and no longer time pressure. No refund is asked. The order isn't in this chat."
+}

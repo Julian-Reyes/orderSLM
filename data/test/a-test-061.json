@@ -1,0 +1,112 @@
+{
+  "conversation": {
+    "id": "a-test-061",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "heyy good afternoon",
+        "sent_at": "2026-10-11T14:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "cn i get a large americano n a choc chip muffin, pickup, name Jay, card",
+        "sent_at": "2026-10-11T14:30:20-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a choc chip muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Jay",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "name Jay"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-061",
+  "annotation_notes": "The card asks for one message with a greeting and an order, but small talk never takes a label next to a real request, so the greeting is its own message (two customer messages)."
+}

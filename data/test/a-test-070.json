@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-test-070",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a large pizza half mushroom n olive half sausage n green pepper, paying card",
+        "sent_at": "2026-10-11T18:20:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "cheese_pizza",
+            "modifications": [
+              {
+                "kind": "add",
+                "modifier_id": "mushrooms",
+                "raw_text": "mushroom"
+              },
+              {
+                "kind": "add",
+                "modifier_id": "olives",
+                "raw_text": "olive"
+              }
+            ]
+          },
+          {
+            "menu_item_id": "cheese_pizza",
+            "modifications": [
+              {
+                "kind": "add",
+                "modifier_id": "sausage",
+                "raw_text": "sausage"
+              },
+              {
+                "kind": "add",
+                "modifier_id": "green_peppers",
+                "raw_text": "green pepper"
+              }
+            ]
+          }
+        ],
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large pizza half mushroom n olive half sausage n green pepper"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-070",
+  "annotation_notes": "Halves named only by toppings are cheese pizzas with those toppings added. Pickup or delivery never said."
+}

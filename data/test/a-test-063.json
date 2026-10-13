@@ -1,0 +1,80 @@
+{
+  "conversation": {
+    "id": "a-test-063",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I ordered a delivery about an hour ago and it still hasn't come. Where is it?",
+        "sent_at": "2026-10-12T21:15:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about the wait! What name is the order under?",
+        "sent_at": "2026-10-12T21:15:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Kai. It was two bacon burgers and fries.",
+        "sent_at": "2026-10-12T21:16:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks Kai, I'm checking with the kitchen now.",
+        "sent_at": "2026-10-12T21:16:45-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Please hurry, I have class in 30 minutes.",
+        "sent_at": "2026-10-12T21:17:10-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-063",
+  "annotation_notes": "A late order the customer is still waiting for: ORDER_STATUS, time_sensitive (the delay matters now). The order isn't in this chat: gold_extraction is null."
+}

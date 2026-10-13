@@ -1,0 +1,161 @@
+{
+  "conversation": {
+    "id": "a-test-067",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "cb combo",
+        "sent_at": "2026-10-12T12:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "fries n coke",
+        "sent_at": "2026-10-12T12:40:03-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "no onion",
+        "sent_at": "2026-10-12T12:40:06-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup",
+        "sent_at": "2026-10-12T12:40:09-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-12T12:40:11-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "no onion"
+          }
+        ],
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "coke"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "cb combo"
+          },
+          {
+            "message_index": 1,
+            "quote": "fries n coke"
+          },
+          {
+            "message_index": 2,
+            "quote": "no onion"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-067",
+  "annotation_notes": "Each burst message adds a detail to the combo: PLACE_ORDER throughout."
+}

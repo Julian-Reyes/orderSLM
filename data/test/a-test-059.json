@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-059",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "whats on the bacon burger",
+        "sent_at": "2026-10-10T14:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It comes with cheese, lettuce, tomato, onion, pickles, ketchup and bacon.",
+        "sent_at": "2026-10-10T14:20:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "can u add mayo or is that extra",
+        "sent_at": "2026-10-10T14:21:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-059",
+  "annotation_notes": "Ingredient questions before any order; the business answers from the menu's ingredient list. Asking whether mayo can be added is a question, not an order."
+}

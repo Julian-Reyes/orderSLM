@@ -1,0 +1,65 @@
+{
+  "conversation": {
+    "id": "a-test-052",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "j",
+        "sent_at": "2026-10-10T09:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": ".",
+        "sent_at": "2026-10-10T09:40:02-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "sry pocket txt",
+        "sent_at": "2026-10-10T09:40:22-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-052",
+  "annotation_notes": "Stray characters with no order in the chat: UNKNOWN, refers_to none. The apology has no request: small talk."
+}

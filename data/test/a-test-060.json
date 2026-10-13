@@ -1,0 +1,57 @@
+{
+  "conversation": {
+    "id": "a-test-060",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, im planning a retirement party for about 60 ppl next saturday n would like to speak w someone about a catering order pls",
+        "sent_at": "2026-10-09T14:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Happy to help! I'll have our manager message you about catering.",
+        "sent_at": "2026-10-09T14:00:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "thank u very much, i look forward to hearing from them",
+        "sent_at": "2026-10-09T14:01:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-060",
+  "annotation_notes": "A catering inquiry for a person; no order is built in the chat."
+}

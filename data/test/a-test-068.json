@@ -1,0 +1,169 @@
+{
+  "conversation": {
+    "id": "a-test-068",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 large peperoni",
+        "sent_at": "2026-10-09T11:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "1 large meat lovers",
+        "sent_at": "2026-10-09T11:50:03-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 orders of garlic knots",
+        "sent_at": "2026-10-09T11:50:07-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup at 12:30",
+        "sent_at": "2026-10-09T11:50:10-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-09T11:50:12-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 large peperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "meat_lovers_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 large meat lovers"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 orders of garlic knots"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup at 12:30"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 12:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-068",
+  "annotation_notes": "Halfmoon opens at 12, so 12:30 is 12:30 pm (pickup ~40 minutes out: normal)."
+}

@@ -1,0 +1,68 @@
+{
+  "conversation": {
+    "id": "a-test-069",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey we got someone elses order",
+        "sent_at": "2026-10-10T19:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "we ordered 3 burritos n got a bag of tacos",
+        "sent_at": "2026-10-10T19:15:05-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "can we just get our money back",
+        "sent_at": "2026-10-10T19:15:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-069",
+  "annotation_notes": "Receiving someone else's order is a wrong delivery needing staff now (urgency rubric). The refund request follows from it. The order isn't in this chat."
+}

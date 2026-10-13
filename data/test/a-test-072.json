@@ -1,0 +1,133 @@
+{
+  "conversation": {
+    "id": "a-test-072",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get 2 cheeseburgers w bacon",
+        "sent_at": "2026-10-10T19:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 2 sprites",
+        "sent_at": "2026-10-10T19:20:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 19 oak hollow dr, paying cash",
+        "sent_at": "2026-10-10T19:20:50-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "bacon",
+            "raw_text": "w bacon"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 sprites"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 19 oak hollow dr"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "oak hollow dr",
+      "number": "19",
+      "raw_text": "19 oak hollow dr",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "19 oak hollow dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-072",
+  "annotation_notes": "'cheeseburgers w bacon' is cheeseburgers with bacon added, not bacon burgers."
+}

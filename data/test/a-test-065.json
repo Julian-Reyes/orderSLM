@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-test-065",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a taco plate, both carnitas, lime jarritos, pickup, card",
+        "sent_at": "2026-10-11T12:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 1 Two-Taco Plate (Taco, Taco, Chips & Salsa, Jarritos). Pickup as soon as possible. Total $13.99, paying by card. Is that right?",
+        "sent_at": "2026-10-11T12:15:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-10-11T12:16:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "oh n add a chips n guac pls",
+        "sent_at": "2026-10-11T12:16:30-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "two_taco_plate",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "taco_1",
+            "menu_item_id": "taco",
+            "variant_id": "carnitas"
+          },
+          {
+            "slot_id": "taco_2",
+            "menu_item_id": "taco",
+            "variant_id": "carnitas"
+          },
+          {
+            "slot_id": "side",
+            "menu_item_id": "chips_salsa"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "jarritos",
+            "variant_id": "lime"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a taco plate"
+          },
+          {
+            "message_index": 0,
+            "quote": "both carnitas"
+          },
+          {
+            "message_index": 0,
+            "quote": "lime jarritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_guac",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "add a chips n guac"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-065",
+  "annotation_notes": "Adding an item after the yes changes the placed order: MODIFY_ORDER, placed_order, time_sensitive; the decision resets to pending. The plate's side slot has one choice (chips & salsa), so it is filled with it."
+}

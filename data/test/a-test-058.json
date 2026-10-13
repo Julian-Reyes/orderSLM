@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-058",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo just had the carnitas burrito, sooo good thx",
+        "sent_at": "2026-10-12T21:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Glad you liked it!",
+        "sent_at": "2026-10-12T21:20:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "def gettin it agian next week",
+        "sent_at": "2026-10-12T21:21:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-058",
+  "annotation_notes": "Thanks and chit-chat only; 'getting it again next week' is not an order."
+}

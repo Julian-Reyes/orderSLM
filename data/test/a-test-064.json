@@ -1,0 +1,173 @@
+{
+  "conversation": {
+    "id": "a-test-064",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 asada tacos",
+        "sent_at": "2026-10-09T19:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 pastor tacos",
+        "sent_at": "2026-10-09T19:40:03-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "chips n guac",
+        "sent_at": "2026-10-09T19:40:06-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "a mandarin jarritos",
+        "sent_at": "2026-10-09T19:40:10-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-09T19:40:13-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 2,
+        "variant_id": "carne_asada",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 asada tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "taco",
+        "quantity": 2,
+        "variant_id": "al_pastor",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 pastor tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "chips_guac",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "chips n guac"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "jarritos",
+        "quantity": 1,
+        "variant_id": "mandarin",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a mandarin jarritos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-064",
+  "annotation_notes": "Two taco fillings are two lines. Pickup or delivery never said."
+}

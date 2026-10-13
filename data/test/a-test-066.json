@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-066",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi just picked up my order n the croissant is missing",
+        "sent_at": "2026-10-10T08:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can someone check pls, its under Mia",
+        "sent_at": "2026-10-10T08:05:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-066",
+  "annotation_notes": "A missing item in a received order. Asking someone to check is part of the same complaint, not a request for a person by itself."
+}

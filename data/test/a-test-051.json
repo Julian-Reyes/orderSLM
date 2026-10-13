@@ -1,0 +1,170 @@
+{
+  "conversation": {
+    "id": "a-test-051",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a cheeseburger n a regular fries",
+        "sent_at": "2026-10-09T21:25:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a vanilla shake",
+        "sent_at": "2026-10-09T21:25:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actualy make the fries large",
+        "sent_at": "2026-10-09T21:25:50-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n make the burger a double",
+        "sent_at": "2026-10-09T21:26:15-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "paying cash",
+        "sent_at": "2026-10-09T21:26:40-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger"
+          },
+          {
+            "message_index": 3,
+            "quote": "make the burger a double"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a regular fries"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the fries large"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a vanilla shake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-051",
+  "annotation_notes": "Both size changes replace stated sizes before any confirmation: MODIFY_ORDER, normal; each changed line cites both messages. Pickup or delivery never said."
+}

@@ -1,0 +1,156 @@
+{
+  "conversation": {
+    "id": "a-test-071",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "medium hot chocolate",
+        "sent_at": "2026-10-12T13:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a chocolate croissant",
+        "sent_at": "2026-10-12T13:30:03-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup, name Leo, cash",
+        "sent_at": "2026-10-12T13:30:07-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 Hot Chocolate (Medium 12 oz), 1 Croissant (Chocolate). Pickup as soon as possible. Total $8.20, paying cash. Is that right?",
+        "sent_at": "2026-10-12T13:30:47-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yep thats it",
+        "sent_at": "2026-10-12T13:31:12-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "medium hot chocolate"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a chocolate croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Leo",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "name Leo"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "yep thats it"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-071",
+  "annotation_notes": "'yep thats it' right after the summary of a complete order confirms it."
+}

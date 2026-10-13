@@ -1,0 +1,78 @@
+{
+  "conversation": {
+    "id": "a-test-062",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, my daughter has celiac disease. Is your gluten-free crust made in a separate area from the regular dough?",
+        "sent_at": "2026-10-10T16:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I can't confirm how it's prepared from here. Would you like a staff member to reach out?",
+        "sent_at": "2026-10-10T16:30:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Yes, please. I'd rather speak with someone directly before ordering.",
+        "sent_at": "2026-10-10T16:31:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Okay, a staff member will message you shortly.",
+        "sent_at": "2026-10-10T16:31:45-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Thank you so much.",
+        "sent_at": "2026-10-10T16:32:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-062",
+  "annotation_notes": "The preparation question is a menu question; the business makes no dietary claim and offers staff. Accepting that offer is a request for a person."
+}

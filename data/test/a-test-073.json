@@ -1,0 +1,96 @@
+{
+  "conversation": {
+    "id": "a-test-073",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Can I get two tacos and a quesadilla for pickup, paying cash? What fillings do the tacos come in?",
+        "sent_at": "2026-10-09T13:00:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "quesadilla",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a quesadilla"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "Which taco would you like (carne asada, al pastor, pollo, carnitas or veggie)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-073",
+  "annotation_notes": "Tacos need a filling (no default): item_variant/missing. The quesadilla defaults to cheese only."
+}

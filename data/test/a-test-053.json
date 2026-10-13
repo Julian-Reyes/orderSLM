@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-test-053",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HELLO! FIRST TIME ORDERING HERE",
+        "sent_at": "2026-10-11T13:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "CAN I GET A MEDIUM MARGHERITA, GARLIC KNOTS AND A DIET COKE FOR PICKUP, PAYING CARD",
+        "sent_at": "2026-10-11T13:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ACTUALY NO GARLIC KNOTS, JUST THE PIZZA AND DRINK",
+        "sent_at": "2026-10-11T13:10:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A MEDIUM MARGHERITA"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "diet_coke",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A DIET COKE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "PAYING CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-053",
+  "annotation_notes": "Removing the garlic knots (L2) drops the line; the others keep their ids (L1, L3). Diet Coke defaults to a can."
+}
