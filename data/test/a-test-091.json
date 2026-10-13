@@ -1,0 +1,165 @@
+{
+  "conversation": {
+    "id": "a-test-091",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi need 3 bec on croissants",
+        "sent_at": "2026-10-12T10:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 3 large drip coffees",
+        "sent_at": "2026-10-12T10:40:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n a choc chip muffin",
+        "sent_at": "2026-10-12T10:40:50-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "nvm skip the muffin",
+        "sent_at": "2026-10-12T10:41:15-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "pickup at 12, name Sam, card",
+        "sent_at": "2026-10-12T10:41:40-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 3,
+        "variant_id": "croissant",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 bec on croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "drip_coffee",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 large drip coffees"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pickup at 12"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12",
+        "normalized_local": "12:00",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "at 12"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sam",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "name Sam"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-091",
+  "annotation_notes": "'nvm skip the muffin' removes one item (MODIFY_ORDER), not the whole order. 'at 12' is noon."
+}

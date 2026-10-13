@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-test-092",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 pollo burritos n chips n salsa",
+        "sent_at": "2026-10-10T17:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver to the aspen inn, 300 main st, at 7",
+        "sent_at": "2026-10-10T17:30:05-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "wait make it 7:30",
+        "sent_at": "2026-10-10T17:30:09-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-10T17:30:12-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 pollo burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_salsa",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "chips n salsa"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to the aspen inn"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "7:30",
+        "normalized_local": "19:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "make it 7:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "main st",
+      "number": "300",
+      "reference": "the aspen inn",
+      "raw_text": "the aspen inn, 300 main st",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "the aspen inn, 300 main st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-092",
+  "annotation_notes": "'make it 7:30' replaces the stated time before confirming: MODIFY_ORDER, normal. Open 10:30-21:30, so 7:30 is 19:30."
+}

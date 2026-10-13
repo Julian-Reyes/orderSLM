@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-077",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i pay w card at the door when the driver comes",
+        "sent_at": "2026-10-10T18:45:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We take card or cash.",
+        "sent_at": "2026-10-10T18:45:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok cool, n can i add a tip on the card",
+        "sent_at": "2026-10-10T18:46:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-077",
+  "annotation_notes": "Payment questions before any order. The business states only the accepted methods; it makes no claim about paying at the door."
+}

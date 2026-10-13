@@ -1,0 +1,150 @@
+{
+  "conversation": {
+    "id": "a-test-079",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Can I get a medium pepperoni with extra cheese?",
+        "sent_at": "2026-10-12T18:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "And a small Hawaiian, no ham.",
+        "sent_at": "2026-10-12T18:30:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Deliver to 71 Willow St, I'll pay with card.",
+        "sent_at": "2026-10-12T18:30:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cheese",
+            "amount": "extra",
+            "raw_text": "with extra cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium pepperoni"
+          },
+          {
+            "message_index": 0,
+            "quote": "extra cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "ham",
+            "raw_text": "no ham"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a small Hawaiian"
+          },
+          {
+            "message_index": 1,
+            "quote": "no ham"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Deliver to 71 Willow St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Willow St",
+      "number": "71",
+      "raw_text": "71 Willow St",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "71 Willow St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "I'll pay with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-079"
+}

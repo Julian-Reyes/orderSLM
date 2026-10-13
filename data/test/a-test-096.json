@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-test-096",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! 😊 2 taco plates please: one with 2 pollo tacos and a pineapple jarritos, the other with 2 veggie tacos and a mexican coke 🌮🥤 deliver to 9 Cedar Ridge Rd, paying card 💳",
+        "sent_at": "2026-10-11T18:10:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "two_taco_plate",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "taco_1",
+            "menu_item_id": "taco",
+            "variant_id": "pollo"
+          },
+          {
+            "slot_id": "taco_2",
+            "menu_item_id": "taco",
+            "variant_id": "pollo"
+          },
+          {
+            "slot_id": "side",
+            "menu_item_id": "chips_salsa"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "jarritos",
+            "variant_id": "pineapple"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 taco plates"
+          },
+          {
+            "message_index": 0,
+            "quote": "one with 2 pollo tacos and a pineapple jarritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "two_taco_plate",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "taco_1",
+            "menu_item_id": "taco",
+            "variant_id": "veggie"
+          },
+          {
+            "slot_id": "taco_2",
+            "menu_item_id": "taco",
+            "variant_id": "veggie"
+          },
+          {
+            "slot_id": "side",
+            "menu_item_id": "chips_salsa"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "mexican_coke"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 taco plates"
+          },
+          {
+            "message_index": 0,
+            "quote": "the other with 2 veggie tacos and a mexican coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "deliver to 9 Cedar Ridge Rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Cedar Ridge Rd",
+      "number": "9",
+      "raw_text": "9 Cedar Ridge Rd",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "9 Cedar Ridge Rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-096",
+  "annotation_notes": "Two plates with different choices are two lines. The side slot has one choice (chips & salsa), so it is filled with it."
+}

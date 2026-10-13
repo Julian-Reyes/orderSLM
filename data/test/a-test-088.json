@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-test-088",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi there! 😊 Just checking on our delivery for the party, we ordered about 45 minutes ago 🎉",
+        "sent_at": "2026-10-10T18:50:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thanks for checking! What name is it under?",
+        "sent_at": "2026-10-10T18:50:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "It's under Alvarez 🙏",
+        "sent_at": "2026-10-10T18:51:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks! It's on its way.",
+        "sent_at": "2026-10-10T18:51:45-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Perfect, thank you so much! 🙌",
+        "sent_at": "2026-10-10T18:52:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-088",
+  "annotation_notes": "A polite check-in 45 minutes after ordering, with no sign of a missed deadline: normal. The order isn't in this chat."
+}

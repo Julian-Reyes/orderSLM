@@ -1,0 +1,140 @@
+{
+  "conversation": {
+    "id": "a-test-094",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello!",
+        "sent_at": "2026-10-12T15:15:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could I get a cheesburger with avocado and a large fries for pickup? I'll pay cash.",
+        "sent_at": "2026-10-12T15:15:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 Cheeseburger (add avocado), 1 Fries (Large). Pickup as soon as possible. Total $15.48, paying cash. Is that right?",
+        "sent_at": "2026-10-12T15:16:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Yes",
+        "sent_at": "2026-10-12T15:16:30-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "with avocado"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a cheesburger with avocado"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Yes"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-094"
+}

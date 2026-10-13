@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-test-078",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning! ☕ If I pay with cash, will you have change for a fifty dollar bill?",
+        "sent_at": "2026-10-11T08:10:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We take card or cash.",
+        "sent_at": "2026-10-11T08:10:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Wonderful, thank you dear 😊 And do you accept checks?",
+        "sent_at": "2026-10-11T08:11:05-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "We take card or cash only.",
+        "sent_at": "2026-10-11T08:11:45-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Understood, cash it is then. Have a lovely day! 🌸",
+        "sent_at": "2026-10-11T08:12:10-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-078",
+  "annotation_notes": "Payment questions with no order. 'cash it is then' has no order to attach to; the message closes the chat: small talk."
+}

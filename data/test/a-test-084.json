@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-084",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 👋 is this the sushi place on main st? 🍣",
+        "sent_at": "2026-10-09T12:30:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I can only help with orders at Corner Patty. Want to order something?",
+        "sent_at": "2026-10-09T12:30:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oops wrong number 😅 sorry!",
+        "sent_at": "2026-10-09T12:31:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-084",
+  "annotation_notes": "Asking for a different business is unrelated to ordering here. The apology is small talk."
+}

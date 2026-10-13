@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-100",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey just wanted to say thx, the burgers were a hit at the party last nite",
+        "sent_at": "2026-10-11T13:00:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "So glad to hear it! Thanks for ordering.",
+        "sent_at": "2026-10-11T13:00:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "def ordering agian for the next one",
+        "sent_at": "2026-10-11T13:01:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-100",
+  "annotation_notes": "Thanks only; 'ordering again for the next one' is not an order."
+}

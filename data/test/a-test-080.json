@@ -1,0 +1,114 @@
+{
+  "conversation": {
+    "id": "a-test-080",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I'd like two carne asada burritos and a large horchata delivered to 18 Spruce Court, please.",
+        "sent_at": "2026-10-09T18:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I already paid online through your website a few minutes ago, so it's all taken care of.",
+        "sent_at": "2026-10-09T18:00:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "carne_asada",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two carne asada burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "horchata",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large horchata"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 18 Spruce Court"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Spruce Court",
+      "number": "18",
+      "raw_text": "18 Spruce Court",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "18 Spruce Court"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I already paid online"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-080",
+  "annotation_notes": "A claim in its own message: primary PAYMENT_CLAIM. 'online through your website' is a channel, not a method: method unknown, customer_claims_paid true, so payment isn't asked again. The claim stays unverified."
+}

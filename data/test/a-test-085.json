@@ -1,0 +1,156 @@
+{
+  "conversation": {
+    "id": "a-test-085",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "double cheeseburger no pickles",
+        "sent_at": "2026-10-10T13:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "large fries n a lemonade, pickup, card",
+        "sent_at": "2026-10-10T13:05:04-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 Cheeseburger (Double patty, no pickles), 1 Fries (Large), 1 Lemonade. Pickup as soon as possible. Total $19.97, paying by card. Is that right?",
+        "sent_at": "2026-10-10T13:05:44-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok sounds good",
+        "sent_at": "2026-10-10T13:06:09-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "pickle",
+            "raw_text": "no pickles"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "double cheeseburger"
+          },
+          {
+            "message_index": 0,
+            "quote": "no pickles"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "ok sounds good"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-085",
+  "annotation_notes": "'ok sounds good' right after the summary of a complete order confirms it."
+}

@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-097",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey cn u do the thng w the stuff on the side lk b4",
+        "sent_at": "2026-10-12T14:45:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-097",
+  "annotation_notes": "Too unclear to interpret: no item, no earlier order in this chat. UNKNOWN, refers_to none."
+}

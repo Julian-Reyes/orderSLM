@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-test-089",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 BACON BURGERS AND 2 COKES TO 450 RIVERSIDE AVE",
+        "sent_at": "2026-10-11T12:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I ALREADY PAID ON VENMO, I CAN SEND A SCREENSHOT",
+        "sent_at": "2026-10-11T12:20:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "SO DONT CHARGE ME AGIAN",
+        "sent_at": "2026-10-11T12:20:50-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 BACON BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 COKES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "TO 450 RIVERSIDE AVE"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "RIVERSIDE AVE",
+      "number": "450",
+      "raw_text": "450 RIVERSIDE AVE",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "450 RIVERSIDE AVE"
+        }
+      ]
+    },
+    "payment": {
+      "method": "other",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I ALREADY PAID ON VENMO"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-089",
+  "annotation_notes": "Items sent 'TO <address>' choose delivery. Venmo is a stated method (other), not one Corner Patty takes; the claim (and the offered screenshot) stays unverified: customer_claims_paid true, never a confirmed payment."
+}

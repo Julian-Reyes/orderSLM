@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-076",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi how much is delivery to 4th st?",
+        "sent_at": "2026-10-09T09:15:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, we're pickup only.",
+        "sent_at": "2026-10-09T09:15:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh ok, wats ur adress then",
+        "sent_at": "2026-10-09T09:16:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "delivery_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-076",
+  "annotation_notes": "Delivery fee and where to pick up are both logistics: DELIVERY_QUESTION. No order."
+}

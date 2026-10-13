@@ -1,0 +1,163 @@
+{
+  "conversation": {
+    "id": "a-test-095",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get 10 lattes for a party, all medium",
+        "sent_at": "2026-10-09T09:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 10 croissants",
+        "sent_at": "2026-10-09T09:30:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup at 11, name Bea. how much is that?",
+        "sent_at": "2026-10-09T09:30:50-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Medium lattes are $4.75 each and croissants $3.75 each, so $85.00 for the lattes and croissants.",
+        "sent_at": "2026-10-09T09:31:30-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oof thats more than i thought, cancel it sry",
+        "sent_at": "2026-10-09T09:31:55-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 10,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "10 lattes"
+          },
+          {
+            "message_index": 0,
+            "quote": "all medium"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 10,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "10 croissants"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup at 11"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 11",
+        "normalized_local": "11:00",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 11"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Bea",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "name Bea"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cancel it"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-095",
+  "annotation_notes": "The prices in the business message are the real menu prices (10 x $4.75 + 10 x $3.75 = $85.00). Cancelled: items kept, nothing missing."
+}

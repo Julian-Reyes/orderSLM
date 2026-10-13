@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-082",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey i already paid for my order on the phone, can u make sure they dont charge me agian at pickup",
+        "sent_at": "2026-10-11T17:35:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thanks, I've noted it for staff to check.",
+        "sent_at": "2026-10-11T17:35:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok thx, its under Rafael",
+        "sent_at": "2026-10-11T17:36:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-082",
+  "annotation_notes": "A claim about an order placed by phone, not in this chat: no gold_extraction. The claim stays unverified. Message 2 adds the name for the same claim."
+}
