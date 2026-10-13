@@ -241,3 +241,9 @@ def test_method_question_names_an_address_the_customer_already_gave():
         " Also, will you pay by card or cash?"
     )
     assert ask() == "Is this for pickup or delivery, and will you pay by card or cash?"
+
+
+def test_summary_line_uses_the_plural_above_one():
+    proposal = order(line("L1", "veggie_burger", qty=2), line("L2", "onion_rings"))
+    assert _line_text(CP, proposal, "L1", "en") == "2 Veggie Burgers"
+    assert _line_text(CP, proposal, "L2", "en") == "1 Onion Rings"

@@ -30,7 +30,7 @@ from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.5"
+REPLIES_VERSION = "replies@0.6"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -193,6 +193,8 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
         for sel in line.combo_selections:
             choice = menu.item(sel.menu_item_id)
             details.append(choice.name if choice else sel.menu_item_id)
+    if line.quantity and line.quantity > 1:
+        title = PLURALS[lang](title)
     return f"{line.quantity} {title}" + (f" ({', '.join(details)})" if details else "")
 
 
