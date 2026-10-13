@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-test-161",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a carne asada burito n nachos, deliver to 15 pine st",
+        "sent_at": "2026-10-10T21:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "actually ill just pick it up",
+        "sent_at": "2026-10-10T21:00:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "paying cash",
+        "sent_at": "2026-10-10T21:00:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "be there in like 20 min",
+        "sent_at": "2026-10-10T21:01:15-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 1,
+        "variant_id": "carne_asada",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a carne asada burito"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "nachos",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "nachos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "ill just pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in like 20 min",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "in like 20 min"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-161",
+  "annotation_notes": "Switching to pickup replaces delivery (MODIFY_ORDER); the address no longer applies. Nachos default to regular. Pickup in ~20 minutes: normal."
+}

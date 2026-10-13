@@ -1,0 +1,103 @@
+{
+  "conversation": {
+    "id": "a-test-164",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "LARGE PEPPERONI AND GARLIC KNOTS",
+        "sent_at": "2026-10-11T16:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "PICKUP, PAYING CASH",
+        "sent_at": "2026-10-11T16:20:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "LARGE PEPPERONI"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "GARLIC KNOTS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "PAYING CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-164",
+  "annotation_notes": "'GARLIC KNOTS' with no number is one order."
+}

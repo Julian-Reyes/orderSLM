@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-170",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi ordered a pizza for pickup like 25 min ago",
+        "sent_at": "2026-10-10T19:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "how long til its redy?",
+        "sent_at": "2026-10-10T19:05:04-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-170",
+  "annotation_notes": "Both messages ask about an order placed outside this chat; no missed deadline mentioned: normal."
+}

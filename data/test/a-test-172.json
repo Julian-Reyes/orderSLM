@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-test-172",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI WE NEED 12 TACOS FOR A PARTY, ALL AL PASTOR",
+        "sent_at": "2026-10-09T16:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "AND SOMETHING FIZZY FOR THE KIDS, MAYBE 4",
+        "sent_at": "2026-10-09T16:10:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "We have Jarritos (mandarin, lime, tamarind or pineapple) and Mexican Coke. Which would you like?",
+        "sent_at": "2026-10-09T16:11:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "4 MANDARIN ONES THEN",
+        "sent_at": "2026-10-09T16:11:30-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "PICKUP AT 6, PAYING CARD",
+        "sent_at": "2026-10-09T16:11:55-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 12,
+        "variant_id": "al_pastor",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "12 TACOS"
+          },
+          {
+            "message_index": 0,
+            "quote": "ALL AL PASTOR"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "jarritos",
+        "quantity": 4,
+        "variant_id": "mandarin",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "SOMETHING FIZZY"
+          },
+          {
+            "message_index": 3,
+            "quote": "4 MANDARIN ONES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "PICKUP AT 6"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 6",
+        "normalized_local": "18:00",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "AT 6"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "PAYING CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-172",
+  "annotation_notes": "'something fizzy' names no drink; the customer settles it in message 3 (4 mandarin Jarritos), citing both. Open 10:30-21:30, so 'AT 6' is 18:00."
+}

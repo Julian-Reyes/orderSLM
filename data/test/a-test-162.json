@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-162",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, does the veggie burger have cheese on it? A coworker can't have dairy.",
+        "sent_at": "2026-10-09T11:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "The veggie burger comes with lettuce, tomato, onion, pickles and mayo; cheese is an add-on. I can't confirm allergens from here.",
+        "sent_at": "2026-10-09T11:40:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Okay, thanks. What comes on the cheeseburger?",
+        "sent_at": "2026-10-09T11:41:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-162",
+  "annotation_notes": "Ingredient questions answered from the menu's ingredient list; no allergen claim. No order yet."
+}

@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-158",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": ",",
+        "sent_at": "2026-10-12T11:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Oh dear, sorry, that was a mistake. My grandson set up this phone and I'm still learning.",
+        "sent_at": "2026-10-12T11:05:30-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-158",
+  "annotation_notes": "A stray character with no order in the chat: UNKNOWN. The apology has no request."
+}

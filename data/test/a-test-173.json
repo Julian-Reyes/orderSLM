@@ -1,0 +1,88 @@
+{
+  "conversation": {
+    "id": "a-test-173",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i talk to someone abt a catering order",
+        "sent_at": "2026-10-11T14:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "its like 40 coffees n pastries for friday mornin",
+        "sent_at": "2026-10-11T14:05:04-07:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Sure, I'll have our manager message you about catering.",
+        "sent_at": "2026-10-11T14:05:44-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "thx",
+        "sent_at": "2026-10-11T14:06:09-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ill keep my phone on",
+        "sent_at": "2026-10-11T14:06:12-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-173",
+  "annotation_notes": "A catering inquiry for a person; the details in message 1 belong to that request, not to an order built in the chat."
+}

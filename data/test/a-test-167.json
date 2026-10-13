@@ -1,0 +1,134 @@
+{
+  "conversation": {
+    "id": "a-test-167",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get 6 cheeseburgers and some onion rings for a party?",
+        "sent_at": "2026-10-10T15:15:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Deliver to 250 Oak Street, please.",
+        "sent_at": "2026-10-10T15:15:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "We'll pay cash.",
+        "sent_at": "2026-10-10T15:15:50-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 6,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "some onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Deliver to 250 Oak Street"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Oak Street",
+      "number": "250",
+      "raw_text": "250 Oak Street",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "250 Oak Street"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "We'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "How many orders of onion rings would you like?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-167",
+  "annotation_notes": "'some onion rings' is an unclear quantity; onion rings are sold by the order, so the question asks how many orders."
+}

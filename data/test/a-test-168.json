@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-test-168",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Can I get a carnitas burrito with sour cream?",
+        "sent_at": "2026-10-11T17:50:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "And two pollo tacos and chips and salsa.",
+        "sent_at": "2026-10-11T17:50:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Deliver to 902 Park Avenue, paying by card.",
+        "sent_at": "2026-10-11T17:50:50-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 1,
+        "variant_id": "carnitas",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "sour_cream",
+            "raw_text": "with sour cream"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a carnitas burrito"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "taco",
+        "quantity": 2,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "two pollo tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "chips_salsa",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "chips and salsa"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Deliver to 902 Park Avenue"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Park Avenue",
+      "number": "902",
+      "raw_text": "902 Park Avenue",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "902 Park Avenue"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-168"
+}

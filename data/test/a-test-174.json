@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-test-174",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "3",
+        "sent_at": "2026-10-12T13:25:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, I didn't catch that. What can I get you?",
+        "sent_at": "2026-10-12T13:25:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Sorry, I meant to text my sister.",
+        "sent_at": "2026-10-12T13:26:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-174"
+}

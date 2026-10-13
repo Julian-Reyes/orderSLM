@@ -1,0 +1,149 @@
+{
+  "conversation": {
+    "id": "a-test-163",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! 😊 Can I get a medium oat milk latte and a plain bagel with avocado? Pickup, name is Wren.",
+        "sent_at": "2026-10-10T08:30:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Paying with card 💳",
+        "sent_at": "2026-10-10T08:30:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Oh no, my partner already ordered from the place next door 🙈 please cancel mine!",
+        "sent_at": "2026-10-10T08:30:50-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium oat milk latte"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "with avocado"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a plain bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "Pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Paying with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Wren",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "name is Wren"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "please cancel mine"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-163"
+}

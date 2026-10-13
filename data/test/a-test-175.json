@@ -1,0 +1,113 @@
+{
+  "conversation": {
+    "id": "a-test-175",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning! ☀️",
+        "sent_at": "2026-10-10T07:35:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can I get 2 hot chocolates and 2 chocolate chip muffins for pickup, name is Rivera? I already paid on the phone 📞",
+        "sent_at": "2026-10-10T07:35:20-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 hot chocolates"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 2,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 chocolate chip muffins"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I already paid on the phone"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Rivera",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "name is Rivera"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-175",
+  "annotation_notes": "The card asks for one message, but small talk never takes a label next to a real request, so the greeting is its own message. 'on the phone' is a channel: method unknown, customer_claims_paid true, unverified. Hot chocolate defaults to medium."
+}

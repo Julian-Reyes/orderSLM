@@ -1,0 +1,153 @@
+{
+  "conversation": {
+    "id": "a-test-157",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "CAN WE GET AN XL PIZZA HALF SAUSAGE AND ONION, HALF MUSHROOM AND SPINACH",
+        "sent_at": "2026-10-10T18:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "DO YOU HAVE RANCH FOR DIPING",
+        "sent_at": "2026-10-10T18:20:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Sorry, we don't have ranch.",
+        "sent_at": "2026-10-10T18:21:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "OK NO WORRIES. DELIVER TO 88 PARKSIDE DR, CARD",
+        "sent_at": "2026-10-10T18:21:30-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "cheese_pizza",
+            "modifications": [
+              {
+                "kind": "add",
+                "modifier_id": "sausage",
+                "raw_text": "SAUSAGE"
+              },
+              {
+                "kind": "add",
+                "modifier_id": "onions",
+                "raw_text": "ONION"
+              }
+            ]
+          },
+          {
+            "menu_item_id": "cheese_pizza",
+            "modifications": [
+              {
+                "kind": "add",
+                "modifier_id": "mushrooms",
+                "raw_text": "MUSHROOM"
+              },
+              {
+                "kind": "add",
+                "modifier_id": "spinach",
+                "raw_text": "SPINACH"
+              }
+            ]
+          }
+        ],
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "AN XL PIZZA HALF SAUSAGE AND ONION, HALF MUSHROOM AND SPINACH"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "DELIVER TO 88 PARKSIDE DR"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "PARKSIDE DR",
+      "number": "88",
+      "raw_text": "88 PARKSIDE DR",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "88 PARKSIDE DR"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-157",
+  "annotation_notes": "Topping-only halves are cheese pizzas with those toppings. Ranch isn't on the menu and the customer drops it, so it is not in the order."
+}

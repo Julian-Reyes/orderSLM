@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-171",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo cn i gt th thng w th",
+        "sent_at": "2026-10-11T22:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "nvm",
+        "sent_at": "2026-10-11T22:10:15-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-171",
+  "annotation_notes": "Too garbled to know what's wanted, and there's no order in the chat: UNKNOWN. 'nvm' withdraws it."
+}

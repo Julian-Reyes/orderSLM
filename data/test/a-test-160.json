@@ -1,0 +1,168 @@
+{
+  "conversation": {
+    "id": "a-test-160",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 chicken burritos",
+        "sent_at": "2026-10-12T12:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "chips n salsa",
+        "sent_at": "2026-10-12T12:40:03-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "1 horchata",
+        "sent_at": "2026-10-12T12:40:06-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 60 ridge rd",
+        "sent_at": "2026-10-12T12:40:10-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-12T12:40:12-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 chicken burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_salsa",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "chips n salsa"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "horchata",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 horchata"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 60 ridge rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ridge rd",
+      "number": "60",
+      "raw_text": "60 ridge rd",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "60 ridge rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-160",
+  "annotation_notes": "Horchata defaults to small."
+}

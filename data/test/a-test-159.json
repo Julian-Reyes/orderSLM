@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-test-159",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "6 CHEESEBURGERS, 3 LARGE FRIES AND 6 COKES DELIVERED TO 33 MAPLE GROVE, PAYING CARD",
+        "sent_at": "2026-10-11T17:00:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 6 Cheeseburgers, 3 Fries (Large), 6 Cokes. Delivery to 33 MAPLE GROVE as soon as possible. Total $87.84 (incl. $3.99 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-11T17:00:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "YES",
+        "sent_at": "2026-10-11T17:01:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "OH AND ADD 2 VANILLA SHAKES",
+        "sent_at": "2026-10-11T17:01:30-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 6,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 LARGE FRIES"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": 6,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 COKES"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "milkshake",
+        "quantity": 2,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "2 VANILLA SHAKES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERED TO 33 MAPLE GROVE"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "MAPLE GROVE",
+      "number": "33",
+      "raw_text": "33 MAPLE GROVE",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "33 MAPLE GROVE"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "PAYING CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-159",
+  "annotation_notes": "Adding items after the yes changes the placed order: MODIFY_ORDER, placed_order, time_sensitive; decision resets to pending."
+}

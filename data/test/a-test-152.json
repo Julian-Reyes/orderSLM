@@ -1,0 +1,79 @@
+{
+  "conversation": {
+    "id": "a-test-152",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi i think i got charged twice for my order tonite, can i get the extra one refunded",
+        "sent_at": "2026-10-10T22:30:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! What name was the order under?",
+        "sent_at": "2026-10-10T22:30:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Ramos, it was a double cheesburger n fries",
+        "sent_at": "2026-10-10T22:31:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks, I've sent this to the manager. You'll hear back soon.",
+        "sent_at": "2026-10-10T22:31:45-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "k thx",
+        "sent_at": "2026-10-10T22:32:10-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-152",
+  "annotation_notes": "A double charge is a payment dispute: needs_staff_now. The order isn't in this chat."
+}

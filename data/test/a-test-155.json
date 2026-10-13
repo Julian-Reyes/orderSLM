@@ -1,0 +1,96 @@
+{
+  "conversation": {
+    "id": "a-test-155",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get 2 pastor burritos n chips n guac for delivery, card. do u still have the tamarind jarritos?",
+        "sent_at": "2026-10-10T19:50:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "al_pastor",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 pastor burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_guac",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "chips n guac"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for delivery"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "address",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What's the delivery address?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-155",
+  "annotation_notes": "Asking whether tamarind Jarritos is available doesn't order one. Delivery with no address: address/missing."
+}
