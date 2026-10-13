@@ -1,0 +1,86 @@
+{
+  "conversation": {
+    "id": "a-test-140",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, i placed an order on the phone earlier n already paid w my card",
+        "sent_at": "2026-10-11T18:45:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pls make sure the driver doesnt charge me agian",
+        "sent_at": "2026-10-11T18:45:04-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Thanks, I've noted it for staff to check. What name is the order under?",
+        "sent_at": "2026-10-11T18:45:44-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "its under Whitaker, thank u",
+        "sent_at": "2026-10-11T18:46:09-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "much apreciated",
+        "sent_at": "2026-10-11T18:46:12-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-140",
+  "annotation_notes": "A claim about an order placed by phone, not in this chat: no gold_extraction; the claim stays unverified for staff."
+}

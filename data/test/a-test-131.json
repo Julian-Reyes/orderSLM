@@ -1,0 +1,107 @@
+{
+  "conversation": {
+    "id": "a-test-131",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! 😊 Order for pickup at 12:30 under Kim: 3 medium lattes and 3 blueberry muffins. I already paid through the app, I have a screenshot if you need it 📱",
+        "sent_at": "2026-10-10T11:40:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 3,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 3,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 blueberry muffins"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup at 12:30"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 12:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "I already paid through the app"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Kim",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "under Kim"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-131",
+  "annotation_notes": "A claim in the same message as the items: PLACE_ORDER + secondary PAYMENT_CLAIM. 'through the app' is a channel, not a method: unknown, customer_claims_paid true; the screenshot doesn't verify it."
+}

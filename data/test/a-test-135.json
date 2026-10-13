@@ -1,0 +1,160 @@
+{
+  "conversation": {
+    "id": "a-test-135",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi!",
+        "sent_at": "2026-10-10T13:25:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can I get a pollo burrito?",
+        "sent_at": "2026-10-10T13:25:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "And chips and guac.",
+        "sent_at": "2026-10-10T13:25:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "And a tamarind Jarritos.",
+        "sent_at": "2026-10-10T13:26:15-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "I'll pick it up and pay cash.",
+        "sent_at": "2026-10-10T13:26:40-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 1,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a pollo burrito"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_guac",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "chips and guac"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "jarritos",
+        "quantity": 1,
+        "variant_id": "tamarind",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a tamarind Jarritos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "I'll pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-135"
+}

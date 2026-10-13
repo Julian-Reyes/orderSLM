@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-127",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "CAN I PAY CASH FOR DELIVERY? WILL THE DRIVER HAVE CHANGE FOR A 20?",
+        "sent_at": "2026-10-10T17:40:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-127",
+  "annotation_notes": "A payment question before any order."
+}

@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-test-147",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD EVENING. I WOULD LIKE THREE CARNITAS TACOS AND NACHOS GRANDE DELIVERED TO 14 FOREST LANE. I WILL PAY CASH.",
+        "sent_at": "2026-10-11T18:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 3 Tacos (Carnitas), 1 Nachos (Grande). Delivery to 14 FOREST LANE as soon as possible. Total $28.45 (incl. $3.49 delivery), paying cash. Is that right?",
+        "sent_at": "2026-10-11T18:15:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "YEP THATS IT",
+        "sent_at": "2026-10-11T18:16:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 3,
+        "variant_id": "carnitas",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "THREE CARNITAS TACOS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "nachos",
+        "quantity": 1,
+        "variant_id": "grande",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "NACHOS GRANDE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERED TO 14 FOREST LANE"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "FOREST LANE",
+      "number": "14",
+      "raw_text": "14 FOREST LANE",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "14 FOREST LANE"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "I WILL PAY CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "YEP THATS IT"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-147"
+}

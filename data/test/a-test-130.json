@@ -1,0 +1,156 @@
+{
+  "conversation": {
+    "id": "a-test-130",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD EVENING, I WOULD LIKE TO ORDER A PIZZA, HALF MARGHERITA AND HALF VEGGIE PLEASE",
+        "sent_at": "2026-10-09T19:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ALONG WITH AN ORDER OF GARLIC KNOTS",
+        "sent_at": "2026-10-09T19:15:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "PLEASE DELIVER IT TO 9 WILLOWBROOK COURT",
+        "sent_at": "2026-10-09T19:15:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "I WILL BE PAYING WITH MY CARD. THANK YOU",
+        "sent_at": "2026-10-09T19:16:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "margherita_pizza"
+          },
+          {
+            "menu_item_id": "veggie_pizza"
+          }
+        ],
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A PIZZA, HALF MARGHERITA AND HALF VEGGIE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "AN ORDER OF GARLIC KNOTS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "DELIVER IT TO 9 WILLOWBROOK COURT"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "WILLOWBROOK COURT",
+      "number": "9",
+      "raw_text": "9 WILLOWBROOK COURT",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "9 WILLOWBROOK COURT"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "PAYING WITH MY CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "What size would you like for the pizza (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-130",
+  "annotation_notes": "No size for the half-and-half: item_variant/missing."
+}

@@ -1,0 +1,171 @@
+{
+  "conversation": {
+    "id": "a-test-137",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get a large latte with vanilla and a plain bagel with cream cheese? Do you take cash?",
+        "sent_at": "2026-10-09T13:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we take card or cash.",
+        "sent_at": "2026-10-09T13:40:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Great, I'll pay cash.",
+        "sent_at": "2026-10-09T13:41:05-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Pickup at 2:15.",
+        "sent_at": "2026-10-09T13:41:30-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Name's Jules.",
+        "sent_at": "2026-10-09T13:41:55-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "vanilla_syrup",
+            "raw_text": "with vanilla"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large latte with vanilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "with cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a plain bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "Pickup at 2:15"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 2:15",
+        "normalized_local": "14:15",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 2:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "I'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Jules",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "Name's Jules"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-137",
+  "annotation_notes": "Asking whether cash is accepted isn't choosing it; message 2 chooses it. 2:15 at a café open 07-15 is 14:15."
+}

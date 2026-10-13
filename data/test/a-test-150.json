@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-test-150",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good evening! 😊 I'd like a large cheese pizza with sun-dried tomatoes, please.",
+        "sent_at": "2026-10-09T19:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "And a 2 liter Sprite. 🥤",
+        "sent_at": "2026-10-09T19:00:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Please deliver to 66 Linden Avenue.",
+        "sent_at": "2026-10-09T19:00:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "I'll pay with cash. Thank you! 🙏",
+        "sent_at": "2026-10-09T19:01:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "with sun-dried tomatoes",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large cheese pizza"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a 2 liter Sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 66 Linden Avenue"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Linden Avenue",
+      "number": "66",
+      "raw_text": "66 Linden Avenue",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "66 Linden Avenue"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "I'll pay with cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have sun-dried tomatoes for the cheese pizza. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-150",
+  "annotation_notes": "Halfmoon has fresh tomatoes but not sun-dried tomatoes: a different topping, so not_on_menu (it isn't mapped to tomatoes)."
+}

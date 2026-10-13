@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-test-139",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi need lunch for the office",
+        "sent_at": "2026-10-12T11:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "6 pollo burritos n 2 chips n guac",
+        "sent_at": "2026-10-12T11:30:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 700 commerce pkwy suite 300, card",
+        "sent_at": "2026-10-12T11:30:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 6 Burritos (Pollo), 2 Chips & Guacs. Delivery to 700 commerce pkwy suite 300 as soon as possible. Total $82.41 (incl. $3.49 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-12T11:31:30-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok sounds good",
+        "sent_at": "2026-10-12T11:31:55-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 6,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "6 pollo burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_guac",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 chips n guac"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 700 commerce pkwy suite 300"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "commerce pkwy",
+      "number": "700",
+      "unit": "suite 300",
+      "raw_text": "700 commerce pkwy suite 300",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "700 commerce pkwy suite 300"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "ok sounds good"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-139"
+}

@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-128",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I ordered two lattes and a breakfast sandwich for pickup about 20 minutes ago under Morgan. Roughly how long until it's ready?",
+        "sent_at": "2026-10-11T13:50:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-128",
+  "annotation_notes": "Asks for an ETA on an order placed outside this chat; no deadline or delay mentioned: normal. gold_extraction is null."
+}

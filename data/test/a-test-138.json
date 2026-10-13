@@ -1,0 +1,160 @@
+{
+  "conversation": {
+    "id": "a-test-138",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get a veggie burger and onion rings for pickup?",
+        "sent_at": "2026-10-10T22:00:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'll pay with cash.",
+        "sent_at": "2026-10-10T22:00:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 Veggie Burger, 1 Onion Rings. Pickup as soon as possible. Total $14.48, paying cash. Is that right?",
+        "sent_at": "2026-10-10T22:01:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Yes, that's right.",
+        "sent_at": "2026-10-10T22:01:30-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Actually, can I pay with card instead?",
+        "sent_at": "2026-10-10T22:01:55-04:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Sure, I've changed it to card.",
+        "sent_at": "2026-10-10T22:02:35-04:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "Thanks.",
+        "sent_at": "2026-10-10T22:03:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a veggie burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay with card instead"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-138",
+  "annotation_notes": "A payment switch after the yes: MODIFY_ORDER, placed_order, normal (payment, not food or time). The decision resets to pending."
+}

@@ -1,0 +1,79 @@
+{
+  "conversation": {
+    "id": "a-test-148",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "this bot isnt understanding me, can i talk to an actual person",
+        "sent_at": "2026-10-12T11:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! I'll have a staff member message you.",
+        "sent_at": "2026-10-12T11:20:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "thx. its a big lunch order for the ofice, easier w a human",
+        "sent_at": "2026-10-12T11:21:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it, they'll be in touch shortly.",
+        "sent_at": "2026-10-12T11:21:45-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok",
+        "sent_at": "2026-10-12T11:22:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "unclear",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-148",
+  "annotation_notes": "The order attempt the bot misunderstood isn't in this chat: refers_to unclear. Message 2 explains the request for a person about an order not yet made (none). Frustration alone is not urgency."
+}

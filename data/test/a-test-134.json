@@ -1,0 +1,144 @@
+{
+  "conversation": {
+    "id": "a-test-134",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi need 8 croissants for a party, 4 plain 4 chocolate",
+        "sent_at": "2026-10-12T08:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 2 dozen muffins, all bluebery",
+        "sent_at": "2026-10-12T08:20:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-12T08:20:50-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "croissant",
+        "quantity": 4,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "8 croissants"
+          },
+          {
+            "message_index": 0,
+            "quote": "4 plain"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 4,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "8 croissants"
+          },
+          {
+            "message_index": 0,
+            "quote": "4 chocolate"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "muffin",
+        "quantity": 24,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 dozen muffins, all bluebery"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-134",
+  "annotation_notes": "'2 dozen' is 24. Pickup-only café with no method or name stated."
+}

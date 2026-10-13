@@ -1,0 +1,168 @@
+{
+  "conversation": {
+    "id": "a-test-143",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get a medium cappucino?",
+        "sent_at": "2026-10-11T14:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Do you have any non-dairy milk?",
+        "sent_at": "2026-10-11T14:20:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "We have oat and almond milk.",
+        "sent_at": "2026-10-11T14:21:05-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Oat milk then, please. And a banana nut muffin.",
+        "sent_at": "2026-10-11T14:21:30-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Pickup in 15 minutes, my name is Kris, paying by card.",
+        "sent_at": "2026-10-11T14:21:55-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "Oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium cappucino"
+          },
+          {
+            "message_index": 3,
+            "quote": "Oat milk then"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "banana_nut",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a banana nut muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "Pickup in 15 minutes"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 15 minutes",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "in 15 minutes"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Kris",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "my name is Kris"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-143",
+  "annotation_notes": "The business lists the menu's milk options (oat, almond) without a dietary claim. 'Oat milk then' substitutes the included whole milk. Pickup in 15 minutes is within ~15: time_sensitive."
+}

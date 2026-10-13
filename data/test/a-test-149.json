@@ -1,0 +1,86 @@
+{
+  "conversation": {
+    "id": "a-test-149",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do u deliver to the convention center",
+        "sent_at": "2026-10-10T09:55:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "or is it pickup only",
+        "sent_at": "2026-10-10T09:55:03-07:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "We're pickup only.",
+        "sent_at": "2026-10-10T09:55:43-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok how far r u from the convention center",
+        "sent_at": "2026-10-10T09:56:08-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "nvm ill look it up",
+        "sent_at": "2026-10-10T09:56:14-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "delivery_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-149",
+  "annotation_notes": "Delivery area and where the café is are logistics questions. 'nvm ill look it up' withdraws the question with no order: small talk."
+}

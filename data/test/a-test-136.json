@@ -1,0 +1,170 @@
+{
+  "conversation": {
+    "id": "a-test-136",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 🌙 can i get a bacon burger",
+        "sent_at": "2026-10-11T21:35:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "extra bacon 🥓",
+        "sent_at": "2026-10-11T21:35:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n a chocolate shake 🍫",
+        "sent_at": "2026-10-11T21:35:50-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 220 harbor st apt 9",
+        "sent_at": "2026-10-11T21:36:15-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cash 💵",
+        "sent_at": "2026-10-11T21:36:40-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "bacon",
+            "amount": "extra",
+            "raw_text": "extra bacon"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          },
+          {
+            "message_index": 1,
+            "quote": "extra bacon"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a chocolate shake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 220 harbor st apt 9"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "harbor st",
+      "number": "220",
+      "unit": "apt 9",
+      "raw_text": "220 harbor st apt 9",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "220 harbor st apt 9"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-136",
+  "annotation_notes": "'extra bacon' on a burger that includes bacon is add + extra."
+}

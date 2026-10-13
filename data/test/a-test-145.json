@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-test-145",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! just wondering if my order is ready yet, its under Hana",
+        "sent_at": "2026-10-09T08:35:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thanks Hana! Let me check.",
+        "sent_at": "2026-10-09T08:35:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "no rush, im still on the bus lol",
+        "sent_at": "2026-10-09T08:36:05-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "It's ready for pickup!",
+        "sent_at": "2026-10-09T08:36:45-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "awsome thx, see u soon",
+        "sent_at": "2026-10-09T08:37:10-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-145",
+  "annotation_notes": "A polite status check; the follow-ups are chit-chat about the same placed order."
+}

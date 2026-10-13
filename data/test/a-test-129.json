@@ -1,0 +1,188 @@
+{
+  "conversation": {
+    "id": "a-test-129",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "large pizza",
+        "sent_at": "2026-10-12T18:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "half suprme",
+        "sent_at": "2026-10-12T18:05:03-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "half bbq chicken",
+        "sent_at": "2026-10-12T18:05:06-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n a 2 liter coke",
+        "sent_at": "2026-10-12T18:05:10-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "deliver to 18 station rd",
+        "sent_at": "2026-10-12T18:05:15-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-12T18:05:18-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "supreme_pizza"
+          },
+          {
+            "menu_item_id": "bbq_chicken_pizza"
+          }
+        ],
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "large pizza"
+          },
+          {
+            "message_index": 1,
+            "quote": "half suprme"
+          },
+          {
+            "message_index": 2,
+            "quote": "half bbq chicken"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a 2 liter coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "deliver to 18 station rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "station rd",
+      "number": "18",
+      "raw_text": "18 station rd",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "18 station rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-129",
+  "annotation_notes": "The halves arrive in separate messages and complete the 'large pizza' line: one half-and-half line citing all three."
+}
