@@ -1,0 +1,161 @@
+{
+  "conversation": {
+    "id": "a-test-005",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a taco plate 🌮🌮 one carnitas n one pollo, w a large horchata 🥤 + chips n guac",
+        "sent_at": "2026-10-10T18:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "wait does the plate come w chips?? 👀",
+        "sent_at": "2026-10-10T18:20:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Yes, the Two-Taco Plate comes with chips & salsa.",
+        "sent_at": "2026-10-10T18:21:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "perfect 🙌 deliver to 2250 pine st, ill pay cash 💵",
+        "sent_at": "2026-10-10T18:21:30-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "two_taco_plate",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "taco_1",
+            "menu_item_id": "taco",
+            "variant_id": "carnitas"
+          },
+          {
+            "slot_id": "taco_2",
+            "menu_item_id": "taco",
+            "variant_id": "pollo"
+          },
+          {
+            "slot_id": "side",
+            "menu_item_id": "chips_salsa"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "horchata",
+            "variant_id": "large"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a taco plate"
+          },
+          {
+            "message_index": 0,
+            "quote": "one carnitas n one pollo"
+          },
+          {
+            "message_index": 0,
+            "quote": "a large horchata"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_guac",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "chips n guac"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 2250 pine st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "pine st",
+      "number": "2250",
+      "raw_text": "2250 pine st",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "2250 pine st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "ill pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-005",
+  "annotation_notes": "The plate's side slot has one choice (chips & salsa), so it is filled with it: there is nothing for the customer to choose. 'a large horchata' upsizes the plate's drink (variant large on the combo selection). The chips & guac is a separate item."
+}

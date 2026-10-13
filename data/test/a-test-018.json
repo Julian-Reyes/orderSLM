@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-018",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "I ORDERED AN ALMOND CROISSANT THIS MORNING AND GOT A PLAIN ONE. THIS IS THE SECOND TIME THIS WEEK.",
+        "sent_at": "2026-10-09T10:22:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-018",
+  "annotation_notes": "A complaint about a received order; no refund asked. Frustration alone is not urgency. The order isn't in this chat: gold_extraction is null."
+}

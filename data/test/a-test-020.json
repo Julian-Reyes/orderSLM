@@ -1,0 +1,105 @@
+{
+  "conversation": {
+    "id": "a-test-020",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI, CAN I GET 2 CHICKEN BURRITOS AND AN ORDER OF EGG ROLLS? DELIVERY TO 77 ELM CT PLEASE, I WILL PAY CASH.",
+        "sent_at": "2026-10-10T19:35:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 CHICKEN BURRITOS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "unmatched_text": "EGG ROLLS",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "AN ORDER OF EGG ROLLS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERY TO 77 ELM CT"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ELM CT",
+      "number": "77",
+      "raw_text": "77 ELM CT",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 ELM CT"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "I WILL PAY CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "off_menu",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "We don't have egg rolls. Would you like something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-020",
+  "annotation_notes": "Egg rolls aren't on a taqueria menu: unmatched_text, quantity 1 ('an order of'), item_menu_match/off_menu. Question hand-written in lower case (the template would repeat the customer's caps)."
+}

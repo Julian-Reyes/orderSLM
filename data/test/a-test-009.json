@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-009",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "whats ur most popular pizza",
+        "sent_at": "2026-10-10T17:31:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "need smth the kids will eat lol",
+        "sent_at": "2026-10-10T17:31:04-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-009",
+  "annotation_notes": "Both messages ask for a menu recommendation before any order exists: refers_to none. No order: gold_extraction is null."
+}

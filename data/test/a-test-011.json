@@ -1,0 +1,58 @@
+{
+  "conversation": {
+    "id": "a-test-011",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is there a real person i can talk to? the bot keeps getting my order wrong n its for my kids dinner",
+        "sent_at": "2026-10-09T19:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! I'll get a staff member to message you now.",
+        "sent_at": "2026-10-09T19:10:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok pls hurry, just have someone txt me here",
+        "sent_at": "2026-10-09T19:11:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "unclear",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "unclear",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-011",
+  "annotation_notes": "The order attempt the customer mentions isn't in this chat and isn't clearly placed: refers_to unclear. Frustration and 'pls hurry' alone are not urgency: normal. No order in the chat: gold_extraction is null."
+}

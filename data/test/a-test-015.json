@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-test-015",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey my order just came but the chips n guac wasnt in the bag",
+        "sent_at": "2026-10-11T21:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! What name is the order under?",
+        "sent_at": "2026-10-11T21:05:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "its under Marcus. can i just get a refund for the guac",
+        "sent_at": "2026-10-11T21:06:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks Marcus, I've passed this to the manager to refund the Chips & Guac. You'll hear back shortly.",
+        "sent_at": "2026-10-11T21:06:45-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok thx",
+        "sent_at": "2026-10-11T21:07:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-015",
+  "annotation_notes": "A missing item is first a complaint (ORDER_PROBLEM), then the customer asks for money back (REFUND_REQUEST). Not a payment dispute (the order arrived), so normal urgency. The order isn't in this chat: gold_extraction is null."
+}

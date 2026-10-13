@@ -1,0 +1,215 @@
+{
+  "conversation": {
+    "id": "a-test-010",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiii good morning",
+        "sent_at": "2026-10-11T08:02:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a med latte",
+        "sent_at": "2026-10-11T08:02:05-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n that muffin i got last time, that one",
+        "sent_at": "2026-10-11T08:02:10-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "actualy make the latte a large",
+        "sent_at": "2026-10-11T08:02:17-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "w oat milk",
+        "sent_at": "2026-10-11T08:02:21-07:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh n a plain bagel",
+        "sent_at": "2026-10-11T08:02:27-07:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "thx!!",
+        "sent_at": "2026-10-11T08:02:31-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "w oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a med latte"
+          },
+          {
+            "message_index": 3,
+            "quote": "make the latte a large"
+          },
+          {
+            "message_index": 4,
+            "quote": "oat milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "that muffin i got last time"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "a plain bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which muffin would you like (blueberry, chocolate chip or banana nut), is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-010",
+  "annotation_notes": "'that muffin i got last time, that one' names a muffin but not the flavor, and nothing in the chat resolves it: muffin with no variant, item_variant/missing. 'make the latte a large' replaces the stated size: MODIFY_ORDER; 'w oat milk' adds a detail: PLACE_ORDER. Pickup-only café with no method stated: method, name and payment are missing."
+}

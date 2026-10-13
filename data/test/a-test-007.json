@@ -1,0 +1,215 @@
+{
+  "conversation": {
+    "id": "a-test-007",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "morning! lemme get a lg oat latte",
+        "sent_at": "2026-10-12T07:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "w an extra shot",
+        "sent_at": "2026-10-12T07:20:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "do u still have the almond croissants?",
+        "sent_at": "2026-10-12T07:20:50-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "We do! Almond croissants are on the menu.",
+        "sent_at": "2026-10-12T07:21:30-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok 1 of those warmed up",
+        "sent_at": "2026-10-12T07:21:55-07:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "pickup at 7:45, names Priya",
+        "sent_at": "2026-10-12T07:22:20-07:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-10-12T07:22:45-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "oat"
+          },
+          {
+            "kind": "add",
+            "modifier_id": "espresso_shot",
+            "amount": "extra",
+            "raw_text": "an extra shot"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "lg oat latte"
+          },
+          {
+            "message_index": 1,
+            "quote": "an extra shot"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "almond",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "warmed up",
+            "kitchen_note": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "almond croissants"
+          },
+          {
+            "message_index": 4,
+            "quote": "1 of those"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "pickup at 7:45"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7:45",
+        "normalized_local": "07:45",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "at 7:45"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Priya",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "names Priya"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-007",
+  "annotation_notes": "'oat latte' substitutes the included whole milk with oat. 'an extra shot' is add espresso_shot + extra. '1 of those' resolves to the almond croissant the customer named in message 2 (the business message only confirms it); 'warmed up' is an accepted kitchen request."
+}

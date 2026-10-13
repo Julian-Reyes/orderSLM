@@ -1,0 +1,57 @@
+{
+  "conversation": {
+    "id": "a-test-001",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I have a question before I order. My son has a severe tree nut and sesame allergy, and I need to know how you handle cross-contact in the kitchen. Could I speak with a person, please?",
+        "sent_at": "2026-10-09T17:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Of course. I can't confirm allergen details here, so I'll ask a staff member to message you shortly.",
+        "sent_at": "2026-10-09T17:05:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Thank you, I appreciate it. I'll wait to hear from them before ordering.",
+        "sent_at": "2026-10-09T17:06:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-001",
+  "annotation_notes": "An allergy question the menu can't answer goes to a person. No reaction is happening, so urgency is normal. Message 2 only thanks and waits: small talk. No order is built: gold_extraction is null."
+}

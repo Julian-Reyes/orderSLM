@@ -1,0 +1,170 @@
+{
+  "conversation": {
+    "id": "a-test-017",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get 2 medium pizzas, 1 pepperoni 1 sausage",
+        "sent_at": "2026-10-11T18:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup, paying card",
+        "sent_at": "2026-10-11T18:40:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actually can u make one of them thin crust",
+        "sent_at": "2026-10-11T18:40:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Sure! Which one, the pepperoni or the sausage?",
+        "sent_at": "2026-10-11T18:41:30-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "the pep one",
+        "sent_at": "2026-10-11T18:41:55-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_thin",
+            "raw_text": "thin crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 medium pizzas"
+          },
+          {
+            "message_index": 0,
+            "quote": "1 pepperoni"
+          },
+          {
+            "message_index": 2,
+            "quote": "thin crust"
+          },
+          {
+            "message_index": 4,
+            "quote": "the pep one"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "sausage",
+            "raw_text": "1 sausage"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 medium pizzas"
+          },
+          {
+            "message_index": 0,
+            "quote": "1 sausage"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-017",
+  "annotation_notes": "'1 sausage' has no sausage pizza on the menu: a cheese pizza with sausage added. 'one of them' can't be resolved from message 2 alone; the customer resolves it in message 4 ('the pep one'), so the thin crust goes on the pepperoni line and nothing stays ambiguous. 'make one of them thin crust' changes a stated pizza: MODIFY_ORDER, and its answer completes that change."
+}

@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-012",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "just wanted to say ur al pastor tacos r the best in town 🌮🔥",
+        "sent_at": "2026-10-10T13:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Aw, thank you so much! 😊",
+        "sent_at": "2026-10-10T13:05:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "fr 🙌 see u this weekend",
+        "sent_at": "2026-10-10T13:06:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-012",
+  "annotation_notes": "Only chit-chat: no request, no order."
+}

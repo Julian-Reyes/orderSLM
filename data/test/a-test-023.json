@@ -1,0 +1,79 @@
+{
+  "conversation": {
+    "id": "a-test-023",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 👋 i got charged twice for my order last night 😕 can u refund one of them?",
+        "sent_at": "2026-10-10T12:05:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! What name was the order under?",
+        "sent_at": "2026-10-10T12:05:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Jordan, it was 2 bacon burgers 🍔 same amount both times",
+        "sent_at": "2026-10-10T12:06:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks Jordan, I've sent this to the manager to check the charges. You'll hear back today.",
+        "sent_at": "2026-10-10T12:06:45-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok thank u 🙂",
+        "sent_at": "2026-10-10T12:07:10-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-023",
+  "annotation_notes": "A double charge is a payment dispute: needs_staff_now. Message 2 gives details for the same refund request. The order isn't in this chat: gold_extraction is null."
+}

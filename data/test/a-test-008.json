@@ -1,0 +1,172 @@
+{
+  "conversation": {
+    "id": "a-test-008",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI NEED LUNCH FOR 4 PPL",
+        "sent_at": "2026-10-09T11:45:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "4 CHEESBURGERS AND 4 MEDIUM FRIES",
+        "sent_at": "2026-10-09T11:45:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 COKES 1 SPRITE 1 LEMONAID",
+        "sent_at": "2026-10-09T11:45:50-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "PAYING CARD",
+        "sent_at": "2026-10-09T11:46:15-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 CHEESBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 4,
+        "unmatched_variant_text": "MEDIUM",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 MEDIUM FRIES"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 COKES"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 SPRITE"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 LEMONAID"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "PAYING CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have a medium for the fries; we have regular or large. Which would you like? Also, is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-008",
+  "annotation_notes": "Fries come regular or large, so 'MEDIUM' is a size the item doesn't have: it stays fries, variant null, unmatched_variant_text, item_variant/missing (even though regular is the default). Typos ('CHEESBURGERS', 'LEMONAID') map to the menu. Pickup or delivery is never said."
+}

@@ -1,0 +1,134 @@
+{
+  "conversation": {
+    "id": "a-test-025",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get 2 veggie burritos no cheese",
+        "sent_at": "2026-10-12T18:45:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n chips n salsa",
+        "sent_at": "2026-10-12T18:45:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 315 aspen way, paying card",
+        "sent_at": "2026-10-12T18:45:50-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "veggie",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "queso_fresco",
+            "raw_text": "no cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 veggie burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "chips_salsa",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "chips n salsa"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 315 aspen way"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "aspen way",
+      "number": "315",
+      "raw_text": "315 aspen way",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "315 aspen way"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-025",
+  "annotation_notes": "'no cheese' removes the burrito's queso fresco."
+}

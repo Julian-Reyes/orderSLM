@@ -1,0 +1,88 @@
+{
+  "conversation": {
+    "id": "a-test-021",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good afternoon! 😊 I would like to order two chicken quesadillas and one large horchata, please. I will pick them up myself and pay with my card. Thank you kindly! 🌮",
+        "sent_at": "2026-10-11T14:10:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "quesadilla",
+        "quantity": 2,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two chicken quesadillas"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "horchata",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "one large horchata"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "I will pick them up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "pay with my card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-021"
+}
