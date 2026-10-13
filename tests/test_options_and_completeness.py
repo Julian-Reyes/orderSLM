@@ -226,3 +226,18 @@ def test_extractor_sees_the_piece_count():
 def test_pieces_per_order_needs_sold_as_order():
     with pytest.raises(ValidationError, match="pieces_per_order"):
         CP.item("coke").model_validate({**CP.item("coke").model_dump(), "pieces_per_order": 6})
+
+
+# ---------------------------------------------------------------- an address given without choosing delivery
+
+
+def test_method_question_names_an_address_the_customer_already_gave():
+    def ask(**kw):
+        proposal = with_missing(CP, line("L1", "veggie_burger"), method="unknown", payment="unknown", **kw)
+        return template_question(proposal.missing_or_ambiguous, proposal, CP)
+
+    assert ask(address="the harbor inn on water st") == (
+        "Would you like it delivered to the harbor inn on water st, or will you pick it up?"
+        " Also, will you pay by card or cash?"
+    )
+    assert ask() == "Is this for pickup or delivery, and will you pay by card or cash?"

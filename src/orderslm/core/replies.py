@@ -30,7 +30,7 @@ from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.4"
+REPLIES_VERSION = "replies@0.5"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -65,6 +65,7 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_option_unverified": "Just checking, we may not be able to do {text} on the {name}. Want it without, or keep it as a note for the kitchen?",
         "q_combo": "what would you like with the {name} ({options})",
         "q_method": "is this for pickup or delivery",
+        "q_method_to_address": "Would you like it delivered to {address}, or will you pick it up?",
         "q_method_pickup_only": "is this for pickup",
         "q_size": "what size would you like for the {name} ({options})",
         "q_time": "what time would you like it",
@@ -293,7 +294,13 @@ def template_question(
                         )
                     )
         elif m.field is FieldRef.fulfillment_method:
-            questions.append(T["q_method"] if menu.delivery.available else T["q_method_pickup_only"])
+            if not menu.delivery.available:
+                questions.append(T["q_method_pickup_only"])
+            elif proposal.address.state is SlotState.provided and proposal.address.raw_text:
+                # an address given without choosing delivery ("do u deliver to …?"): ask about that address
+                statements.append(T["q_method_to_address"].format(address=proposal.address.raw_text))
+            else:
+                questions.append(T["q_method"])
         elif m.field is FieldRef.requested_time:
             questions.append(T["q_time"])
         elif m.field is FieldRef.address:
@@ -306,7 +313,7 @@ def template_question(
     if questions:
         q = _join(questions, lang)
         q = q[0].upper() + q[1:] + "?"
-        if statements:  # the off-menu sentence already asks; continue with "Also, ..."
+        if statements:  # the off-menu / address sentence already asks; continue with "Also, ..."
             q = "Also, " + q[0].lower() + q[1:]
         text = f"{text} {q}".strip()
     return text
