@@ -382,8 +382,10 @@ the annotation guide):
   CONFIRM_ORDER 16, HUMAN_REQUEST 13, PAYMENT_CLAIM 12, DELIVERY_QUESTION 11, CANCEL_ORDER 9, OUT_OF_SCOPE 8,
   PAYMENT_QUESTION 8, REFUND_REQUEST 8, UNKNOWN 8. Urgency: time_sensitive 19, needs_staff_now 11.
 - **Cards that couldn't be written as stated** (noted in each file): 043 (three labels in one message: split over
-  two messages), 061 and 175 (a greeting can't share a message with a request: own message), 151 (pickup vs. "change
-  the address": the variant wins, as with a-dev-020).
+  two messages), 061 and 175 (the card expects a SMALL_TALK label, and a greeting in the same message as a request
+  gets no label of its own, so the greeting is a separate message), 151 (pickup vs. "change the address": the variant
+  wins, as with a-dev-020). Greeting + order in one message is allowed and common (labeled PLACE_ORDER only): 31 dev
+  and 73 test messages. **Julian approved all four, the two conventions and 121's urgency (2026-10-13).**
 - **New conventions** (annotation guide, for Julian to confirm): a combo slot with one choice is filled with it
   (Lucky Lime plate side; 005, 065, 096); a payment channel ("through the app", "on the phone") is not a method, a
   named method the business doesn't take (Venmo) is `other` (089, 191).
@@ -399,8 +401,16 @@ the annotation guide):
 
 ### Open for Julian (M2)
 
-1. **Spot-check ≥ 50 test conversations (25%)** with `make annotate-test` and "Save as reviewed"; then
-   `make lock-test`. Confirm the two new conventions and the judgment calls above.
+1. **Spot-check these 50 test conversations (25%)** with `make annotate-test` and "Save as reviewed"; then
+   `make lock-test`. The 5 flagged ones plus 45 drawn with `random.Random(20261013).sample` per menu from the sorted
+   remaining ids, stratified by menu (13 Halfmoon, 13 Lucky Lime, 12 Corner Patty, 12 Morning Crumb, flagged ones
+   counted in their menu):
+   - Flagged: 043, 061, 121, 151, 175.
+   - Corner Patty: 026, 056, 085, 110, 124, 126, 152, 159, 162, 167, 198.
+   - Halfmoon: 006, 016, 017, 028, 035, 060, 062, 144, 148, 150, 156, 184, 186.
+   - Lucky Lime: 012, 033, 039, 045, 050, 058, 082, 113, 132, 160, 161.
+   - Morning Crumb: 091, 107, 109, 114, 128, 145, 153, 163, 176, 179.
+   (All ids are `a-test-NNN`.)
 2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
 3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
