@@ -13,7 +13,7 @@ Spec: orderslm-project-plan.md (authoritative). Status: PROGRESS.md. Read PROGRE
 - Prices, fees and totals are computed in code (pricing engine), never by a model. Model output schemas have no price fields.
 - Model proposals (schema/extraction.py) and verified results (schema/order.py, tool results) stay separate. The reply layer states only verified facts.
 - Customer claims are not facts: "I already paid" is `customer_claims_paid`, never a confirmed payment.
-- The test split is sealed: only `orderslm.paths.test_split_dir()` reaches it, and only with ORDERSLM_UNSEAL_TEST set for a final eval. Never train, tune prompts or generate data from it.
+- The test split is sealed: only `orderslm.paths.test_split_dir()` reaches it, and only with ORDERSLM_UNSEAL_TEST set for a final eval. Never train, tune prompts or generate data from it. Exception (Julian, 2026-10-13): at final eval, fixed code may make planted-mistake copies of test gold for scoring only (spec §11b).
 - Test-set contamination: if a test run reveals a problem we then fix, those results are reported as "used for fixes", not clean held-out results. Measure the fix on fresh unseen data (unused PIZZA orders or a new Claude-written test batch); add the lesson to dev as new cases.
 - Every reported number comes from saved, reproducible outputs in `runs/`. Log provider, model, prompt version and data version for every run, and actual cost in docs/COSTS.md.
 - No real customer chats anywhere in the repo or training data.

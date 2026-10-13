@@ -345,8 +345,8 @@ the annotation guide):
   filled from menu data only (spec §2, §16, §18). Not part of gold or any reported number.
 - **Decision (Julian):** the order checker (spec §11b) runs in two versions, whole-order yes/no and line-by-line
   yes/no, and is measured with **planted mistakes** (code plants known errors into gold orders, per error type),
-  also for the training-label auditor (§11d). **Open:** planted copies of *test* gold at final eval need Julian's
-  OK under the sealed-test rule (evaluation only, never training or tuning).
+  also for the training-label auditor (§11d). Planted copies of *test* gold at final eval are allowed (Julian,
+  2026-10-13): made by fixed code for scoring only, never inspected, trained on or used for tuning.
 - **Decision (Julian):** the M8 demo replies to off-topic messages with one fixed sentence ("I can only help with
   orders at Corner Patty. Want to order something?") and to small talk with a short greeting; it never answers the
   off-topic question (spec §16). Re-inspect AgentDesk's reply checks and off-topic handling before building replies.
@@ -367,8 +367,7 @@ the annotation guide):
 
 ### Open for Julian (M2)
 
-1. **Planted copies of test gold** for the order checker (spec §11b): OK under the sealed-test rule?
-2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
-3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
+1. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
+2. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
-4. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
+3. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
