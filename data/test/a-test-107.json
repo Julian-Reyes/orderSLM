@@ -1,0 +1,134 @@
+{
+  "conversation": {
+    "id": "a-test-107",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey morning!",
+        "sent_at": "2026-10-11T07:25:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a lg drip w room for milk n a bec on an english muffin",
+        "sent_at": "2026-10-11T07:25:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup, name Ed, cash",
+        "sent_at": "2026-10-11T07:25:50-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w room for milk",
+            "kitchen_note": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lg drip"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 1,
+        "variant_id": "english_muffin",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a bec on an english muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "name Ed"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-107",
+  "annotation_notes": "'room for milk' is an accepted kitchen request: a free note."
+}

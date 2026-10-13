@@ -1,0 +1,117 @@
+{
+  "conversation": {
+    "id": "a-test-122",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a large meat lovers delivered to 77 elm st apt 5 🍕 paying card",
+        "sent_at": "2026-10-10T22:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 1 Meat Lovers Pizza (Large 14-inch). Delivery to 77 elm st apt 5 as soon as possible. Total $24.48 (incl. $2.99 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-10T22:30:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-10-10T22:31:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "meat_lovers_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large meat lovers"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 77 elm st apt 5"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elm st",
+      "number": "77",
+      "unit": "apt 5",
+      "raw_text": "77 elm st apt 5",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 elm st apt 5"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "👍"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-122",
+  "annotation_notes": "A bare 👍 right after the summary of a complete order confirms it."
+}

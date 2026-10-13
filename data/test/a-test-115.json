@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-test-115",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HOW MUCH IS A LARGE PEPPERONI",
+        "sent_at": "2026-10-10T17:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "A large pepperoni is $18.49.",
+        "sent_at": "2026-10-10T17:00:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "AND THE GARLIC KNOTS?",
+        "sent_at": "2026-10-10T17:01:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Garlic knots are $5.99 for an order of 6.",
+        "sent_at": "2026-10-10T17:01:45-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "OK THANKS, MIGHT ORDER LATER",
+        "sent_at": "2026-10-10T17:02:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-115",
+  "annotation_notes": "Price questions are menu questions. The prices are the real menu prices ($14.49 + $4.00 large; knots $5.99 for 6). 'might order later' places nothing."
+}

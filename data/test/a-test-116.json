@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "a-test-116",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get two cheesburgers with no pickles, and a large fries?",
+        "sent_at": "2026-10-12T12:50:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Actually, make one of them a double.",
+        "sent_at": "2026-10-12T12:50:25-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "pickle",
+            "raw_text": "no pickles"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two cheesburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "pickle",
+            "raw_text": "no pickles"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two cheesburgers"
+          },
+          {
+            "message_index": 1,
+            "quote": "make one of them a double"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-116",
+  "annotation_notes": "'one of them' can only be one of the cheeseburgers (fries have no double), so it resolves: the two-burger line splits into a single (L1) and a double (L3), both without pickles. Pickup/delivery and payment never given."
+}

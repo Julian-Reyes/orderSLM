@@ -1,0 +1,100 @@
+{
+  "conversation": {
+    "id": "a-test-106",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get a half pepperoni half Hawaiin pizza delivered to 15 Brook Lane? Paying with card.",
+        "sent_at": "2026-10-12T18:15:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "pepperoni_pizza"
+          },
+          {
+            "menu_item_id": "hawaiian_pizza"
+          }
+        ],
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a half pepperoni half Hawaiin pizza"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 15 Brook Lane"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Brook Lane",
+      "number": "15",
+      "raw_text": "15 Brook Lane",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "15 Brook Lane"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Paying with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "What size would you like for the pizza (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-106",
+  "annotation_notes": "Halves named by recipe ('pepperoni', 'Hawaiin' typo) are those pizzas. No size: item_variant/missing."
+}

@@ -1,0 +1,118 @@
+{
+  "conversation": {
+    "id": "a-test-120",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "cb combo w rings n a sprite",
+        "sent_at": "2026-10-11T13:35:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup",
+        "sent_at": "2026-10-11T13:35:03-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "paying cash, do u have change for a 100?",
+        "sent_at": "2026-10-11T13:35:07-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "onion_rings"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "sprite"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "cb combo w rings n a sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "change_for_cents": 10000,
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-120",
+  "annotation_notes": "'rings' and 'a sprite' are the combo's side and drink. Cash with change for a $100 bill: change_for_cents 10000."
+}

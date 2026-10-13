@@ -1,0 +1,58 @@
+{
+  "conversation": {
+    "id": "a-test-121",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I asked for no cheese on my burrito because I'm alergic to dairy, and it came with cheese on it.",
+        "sent_at": "2026-10-12T20:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm so sorry! Please don't eat it. What name is the order under?",
+        "sent_at": "2026-10-12T20:30:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Its under Ortiz. I didn't eat it, but I'd like it remade.",
+        "sent_at": "2026-10-12T20:31:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-121",
+  "annotation_notes": "An allergen in delivered food is a safety problem (urgency rubric: safety), so needs_staff_now even though the customer didn't eat it; an allergy question alone would be normal. Judgment call, flagged for review."
+}

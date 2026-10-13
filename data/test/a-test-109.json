@@ -1,0 +1,117 @@
+{
+  "conversation": {
+    "id": "a-test-109",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! ☀️",
+        "sent_at": "2026-10-12T10:15:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can I get 5 medium lattes and 5 blueberry muffins? ☕🧁",
+        "sent_at": "2026-10-12T10:15:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Actually never mind, we're going out for lunch instead 😅 cancel please",
+        "sent_at": "2026-10-12T10:15:50-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 5,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "5 medium lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 5,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "5 blueberry muffins"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cancel please"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-109",
+  "annotation_notes": "Cancelled before method, payment or name were given: nothing missing."
+}

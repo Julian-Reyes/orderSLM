@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-test-124",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like to order 3 cheeseburgers and 3 Cokes for the office.",
+        "sent_at": "2026-10-09T15:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Please deliver to 500 Market Street, 4th floor.",
+        "sent_at": "2026-10-09T15:20:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Around 7 or 8 would be great. We'll pay by card.",
+        "sent_at": "2026-10-09T15:20:50-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 Cokes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 500 Market Street"
+        }
+      ],
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "Around 7 or 8",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "Around 7 or 8"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Market Street",
+      "number": "500",
+      "unit": "4th floor",
+      "raw_text": "500 Market Street, 4th floor",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "500 Market Street, 4th floor"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "We'll pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      }
+    ],
+    "clarification_question": "Would you like it delivered around 7 or around 8?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-124",
+  "annotation_notes": "'Around 7 or 8' is two possible times: requested_time ambiguous, requested_time/ambiguous missing. Question hand-written to offer the two times (the template asks a generic 'What time would you like it?')."
+}

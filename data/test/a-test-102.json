@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-102",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Quick question for a bet at the office: how many cups of coffee does the average person drink a day?",
+        "sent_at": "2026-10-10T12:10:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-102",
+  "annotation_notes": "General trivia, even about coffee, is unrelated to ordering here. No order."
+}

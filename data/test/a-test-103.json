@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-test-103",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a large pepperoni n some breadsticks",
+        "sent_at": "2026-10-11T19:25:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver to 22 grove st, card",
+        "sent_at": "2026-10-11T19:25:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breadsticks",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "some breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 22 grove st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "grove st",
+      "number": "22",
+      "raw_text": "22 grove st",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "22 grove st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "How many orders of breadsticks would you like (4 per order)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-103",
+  "annotation_notes": "'some breadsticks' is an unclear quantity: quantity null, item_quantity/ambiguous. Breadsticks are sold by the order, so the question asks how many orders."
+}

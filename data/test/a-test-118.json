@@ -1,0 +1,115 @@
+{
+  "conversation": {
+    "id": "a-test-118",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello there, id like a steak burrito w guac n a large horchata pls",
+        "sent_at": "2026-10-09T17:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ill pick it up, paying w card, thank u kindly",
+        "sent_at": "2026-10-09T17:10:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 1,
+        "variant_id": "carne_asada",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "guacamole",
+            "raw_text": "w guac"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a steak burrito"
+          },
+          {
+            "message_index": 0,
+            "quote": "w guac"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "horchata",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large horchata"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "ill pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying w card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-118",
+  "annotation_notes": "'steak' is the carne asada filling."
+}
