@@ -10,7 +10,7 @@ _Last updated 2026-10-08._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); **91 dev conversations written, awaiting Julian's review** |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); **91 dev conversations reviewed by Julian (2026-10-13)**; next: test conversations |
 | 3 | Teacher bake-off | Not started |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
@@ -355,11 +355,19 @@ the annotation guide):
   OpenAI Decisions, the student and the teacher. An experiment only; the student still fills the whole order.
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
+### Dev review complete (Julian, 2026-10-13)
+
+- All **91/91** Source A dev conversations reviewed (`data/dev/REVIEWS.jsonl`, now committed); every review's
+  `sha256_after` matches the file on disk, including the four changed today before their review.
+- **Correction rate:** the tool logs **0.0** (no edits saved through the tool). That understates it: during review,
+  four conversations changed at Julian's direction before he saved them: 034 (off-menu question wording), 045
+  (orders-of question), 050 (vegan answer), 077 (address question). Report the correction rate as **4/91 (4.4%)**
+  changed during review, 0 in the tool.
+- Rulings from this review are in the entries above (templates replies@0.2–0.5, menu@0.6, spec §2/§11/§16/§18).
+
 ### Open for Julian (M2)
 
-1. **Regenerate the sealed test cards** (`! ORDERSLM_UNSEAL_TEST="author Source A cards" uv run python -m orderslm.data.cards generate --split test --force`).
-1. **Review the 91 dev conversations** in the tool (`make annotate`, "Save as reviewed"). Anything you change, I
-   apply to the guide/conventions before writing the test conversations.
+1. **Planted copies of test gold** for the order checker (spec §11b): OK under the sealed-test rule?
 2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
 3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
