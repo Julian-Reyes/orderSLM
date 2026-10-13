@@ -202,13 +202,12 @@ def test_quantity_question_uses_the_plural_for_every_item_counted_one_by_one():
         "nachos": "nachos",
         "jarritos": "jarritos",
         "coffee_pastry_combo": "coffee & pastries",
+        "chips_salsa": "chips & salsas",  # Julian, 2026-10-13: keep counted one by one
+        "chips_guac": "chips & guacs",
     }
     for menu in load_menus(include_held_out=True).values():
         for item in menu.items:
-            if item.sold_as == "order" or item.id in {
-                "chips_salsa",
-                "chips_guac",
-            }:  # by the order: Julian to decide
+            if item.sold_as == "order":
                 continue
             proposal = with_missing(
                 menu, line("L1", item.id, qty=None, variant=item.variants[0].id if item.variants else None)

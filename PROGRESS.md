@@ -332,8 +332,8 @@ the annotation guide):
   The extractor sees the piece count. Held-out menu unchanged; no wings on any menu.
 - **Plural in the quantity question** (replies@0.4): "How many veggie burgers would you like?" A small English rule
   (`replies._plural_en`; names ending in s stay as they are), tested on every item counted one by one. No gold
-  question used the plain quantity template, so no data changed. Open: the held-out menu's chips & salsa / chips &
-  guac read "chips & salsas"; they are probably sold by the order (Julian to decide).
+  question used the plain quantity template, so no data changed. The held-out menu's chips & salsa / chips & guac
+  stay counted one by one ("How many chips & salsas would you like?"; Julian, 2026-10-13).
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)
