@@ -347,6 +347,9 @@ the annotation guide):
   yes/no, and is measured with **planted mistakes** (code plants known errors into gold orders, per error type),
   also for the training-label auditor (§11d). **Open:** planted copies of *test* gold at final eval need Julian's
   OK under the sealed-test rule (evaluation only, never training or tuning).
+- **Decision (Julian):** the M8 demo replies to off-topic messages with one fixed sentence ("I can only help with
+  orders at Corner Patty. Want to order something?") and to small talk with a short greeting; it never answers the
+  off-topic question (spec §16). Re-inspect AgentDesk's reply checks and off-topic handling before building replies.
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)

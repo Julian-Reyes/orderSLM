@@ -38,7 +38,7 @@ Status key: **Ported (M0)** = already in OrderSLM · **Planned (Mx)** = port in 
 |---|---|
 | `web/src/styles.css`, all page components (`Storefront.tsx`, `Ops.tsx`, `*Page.tsx`, `Timeline.tsx`) | Spec: OrderSLM's UI must have its own visual design. See docs/ARCHITECTURE.md, "Frontend". |
 | `server/src/seed/*` (Larchgrove catalog), `server/src/policy/*` (refunds, coupons, goodwill, returns, promotions) | Different domain. OrderSLM's menus are its own (M1). |
-| `server/src/agents/*` (router + multi-agent loop, handoffs, reply checks) | OrderSLM does structured extraction + routing via decision providers, not an agent loop. |
+| `server/src/agents/*` (router + multi-agent loop, handoffs, reply checks) | OrderSLM does structured extraction + routing via decision providers, not an agent loop. **Revisit in M8** (Julian, 2026-10-13): reply checks and off-topic/handoff wording, as patterns for the demo's template replies (spec §16). |
 | `server/src/db/*`, `server/drizzle/*` | No Postgres: JSON files and SQLite are enough (spec §15). |
 | `server/src/evals/grading/*`, `compare.ts` leak/emoji checks | Graded AgentDesk's free-text agent replies. OrderSLM grades structured outputs against gold (item-F1, exact match, field accuracy). |
 | `server/src/llm/openai-compatible.ts` tool-call repair | No tool-calling loop in OrderSLM. |
