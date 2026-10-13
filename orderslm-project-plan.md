@@ -30,7 +30,7 @@ Every model choice in the project is backed by a saved, reproducible comparison.
 | Domain | Food ordering (3 fictional menus + 1 held-out menu) | Appointment-based businesses (salons, clinics): durations, staff, conflicts |
 | Ordering | Place, modify, cancel, confirm; corrections across messages; clarifying questions | Reorders from history |
 | Timing | Requested pickup/delivery time as stated ("at 7", "asap") | Full scheduling: slots, capacity, rescheduling, recurring orders |
-| Support | Router recognizes status, problems, refunds; mocked lookups and staff handoff | Full returns/refund workflows, inventory and substitutions, promotions |
+| Support | Router recognizes status, problems, refunds; mocked lookups and staff handoff. Menu, delivery, hours and payment questions get template answers from menu data only | Full returns/refund workflows, inventory and substitutions, promotions |
 | Channel | Web chat simulator | Live WhatsApp Cloud API |
 
 Design the schema and business logic to be **language-neutral** from the start. Only messages, reply templates, and test sets are tied to a language. Keep V2 items out of V1 code except where a field or label needs to exist so V2 can be added later without breaking changes.
@@ -386,6 +386,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 
 - **Chat simulator** (web): pick a business, type messages as the customer, watch the order update live next to the chat. The bot replies with a confirmation or a clarifying question, e.g.:
   > "Got it: 1 Cheeseburger, 1 Cheeseburger (no onions), 1 Sprite. Pickup at 7pm. Total $20.00, paying cash. Is that right?"
+- **Answers to simple questions** (`MENU_QUESTION`, `DELIVERY_QUESTION`, `PAYMENT_QUESTION`; added October 13, 2026): templates filled from the menu only, never by a model. Delivery: available, fee, minimum (no delivery-area claims). Hours: opening and closing time. Payment: accepted methods. Menu: whether an item exists, its sizes and options (no dietary or allergen claims). Anything the menu can't answer: say so and offer staff. The answer comes first, then any clarifying question ("We deliver: $3.99 fee, $15 minimum. Would you like it delivered to …?"). Not annotated in gold and not scored.
 - **Order ticket view** for the business: incoming orders and a simple status flow (new → preparing → ready).
 - **Comparison view:** teacher vs. students on the same conversation, and the router providers' answers side by side, with cost and latency.
 - Hosting: static or lightweight; never expose paid API keys publicly. Rate-limit anything public.
@@ -409,7 +410,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 | 5 | Student bake-off (zero-shot, local) | License/tooling checks; results table; students chosen |
 | 6 | LoRA training (student outputs intent + order); zero-shot vs. few-shot vs. fine-tuned vs. teacher on the test set; single-menu vs. mixed 2B student; order checker (§11b); error analysis | Reproducible training configs and eval outputs; intent accuracy |
 | 7 | Decision providers: router benchmark + cross-check with the student's intent (§11a), order checker (b), item chooser pilot (c, optional), menu narrowing incl. mega menu (e); architecture comparison A/B/C | Verified API contracts, per-label metrics with CIs, stability, latency and cost results; disagreement log; break-even router latency |
-| 8 | Demo, report, Hugging Face release | Working demo; every number traceable to saved outputs |
+| 8 | Demo (incl. template answers to menu/delivery/hours/payment questions, §16), report, Hugging Face release | Working demo; every number traceable to saved outputs |
 
 **V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration; automatic payment verification (e.g. a Pix provider's payment notification marks the order paid; until then a customer's "I already paid" stays an unverified claim on the ticket); fine-tuning Julia-1 on teacher-labeled router data, reported separately as "off-the-shelf vs. fine-tuned" (first check that a fine-tuning path exists, §11).
 

@@ -341,6 +341,8 @@ the annotation guide):
   card or cash?" (the customer's own words; pickup-only menus unchanged). Regenerated; the only dev case. Open for
   the reply layer: answering the DELIVERY_QUESTION itself (fee and minimum from the menu; menus have no delivery
   area, so "yes, we deliver to Water St" can't be verified).
+- **Decision (Julian):** the M8 demo answers simple menu, delivery, hours and payment questions with templates
+  filled from menu data only (spec §2, §16, §18). Not part of gold or any reported number.
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)
