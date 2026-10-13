@@ -343,6 +343,10 @@ the annotation guide):
   area, so "yes, we deliver to Water St" can't be verified).
 - **Decision (Julian):** the M8 demo answers simple menu, delivery, hours and payment questions with templates
   filled from menu data only (spec §2, §16, §18). Not part of gold or any reported number.
+- **Decision (Julian):** the order checker (spec §11b) runs in two versions, whole-order yes/no and line-by-line
+  yes/no, and is measured with **planted mistakes** (code plants known errors into gold orders, per error type),
+  also for the training-label auditor (§11d). **Open:** planted copies of *test* gold at final eval need Julian's
+  OK under the sealed-test rule (evaluation only, never training or tuning).
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)
