@@ -330,8 +330,11 @@ the annotation guide):
   garlic knots would you like (6 per order)?"; a-dev-045 regenerated. Not defaulted to 1: the card tests an unclear
   quantity. Annotation rule: a piece count that divides evenly becomes orders ("12 knots" = 2), else ambiguous.
   The extractor sees the piece count. Held-out menu unchanged; no wings on any menu.
-- **Noticed, not changed:** `q_quantity` doesn't pluralize ("How many veggie burger would you like?"); a-dev-016,
-  038, 046 and 049 have hand-written questions that differ from the template (not affected by these changes).
+- **Plural in the quantity question** (replies@0.4): "How many veggie burgers would you like?" A small English rule
+  (`replies._plural_en`; names ending in s stay as they are), tested on every item counted one by one. No gold
+  question used the plain quantity template, so no data changed. Open: the held-out menu's chips & salsa / chips &
+  guac read "chips & salsas"; they are probably sold by the order (Julian to decide).
+- **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)
 

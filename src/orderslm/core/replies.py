@@ -30,7 +30,7 @@ from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.3"
+REPLIES_VERSION = "replies@0.4"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -100,6 +100,21 @@ def _t(lang: str) -> dict[str, str]:
     if lang not in TEMPLATES:
         raise KeyError(f"no reply templates for language {lang!r}")
     return TEMPLATES[lang]
+
+
+def _plural_en(name: str) -> str:
+    """'veggie burger' -> 'veggie burgers', 'breakfast sandwich' -> 'breakfast sandwiches'; names already ending
+    in s ('nachos', 'jarritos') stay as they are."""
+    if name.endswith("s"):
+        return name
+    if name.endswith(("ch", "sh", "x", "z")):
+        return name + "es"
+    if len(name) > 1 and name.endswith("y") and name[-2] not in "aeiou":
+        return name[:-1] + "ies"
+    return name + "s"
+
+
+PLURALS = {"en": _plural_en}
 
 
 def _join(parts: list[str], lang: str, word: str = "and", comma: bool = True) -> str:
@@ -244,7 +259,8 @@ def template_question(
             key = "q_quantity" if item.sold_as is SoldAs.each else "q_quantity_orders"
             if item.pieces_per_order:
                 key = "q_quantity_pieces"
-            questions.append(T[key].format(name=item.name.lower(), pieces=item.pieces_per_order))
+            name = item.name.lower() if key != "q_quantity" else PLURALS[lang](item.name.lower())
+            questions.append(T[key].format(name=name, pieces=item.pieces_per_order))
         elif m.field is FieldRef.item_variant and item:
             options = _join([v.name.lower() for v in item.variants], lang, "or", comma=False)
             if line and line.unmatched_variant_text:

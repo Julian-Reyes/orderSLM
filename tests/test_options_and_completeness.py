@@ -193,7 +193,30 @@ def test_quantity_question_counts_orders_for_items_sold_by_the_order():
     assert ask(HM, "garlic_knots") == "How many orders of garlic knots would you like (6 per order)?"
     assert ask(HM, "breadsticks") == "How many orders of breadsticks would you like (4 per order)?"
     assert ask(CP, "onion_rings") == "How many orders of onion rings would you like?"
-    assert "orders of" not in ask(CP, "veggie_burger")  # counted one by one
+    assert ask(CP, "veggie_burger") == "How many veggie burgers would you like?"
+
+
+def test_quantity_question_uses_the_plural_for_every_item_counted_one_by_one():
+    expected = {
+        "breakfast_sandwich": "breakfast sandwiches",
+        "nachos": "nachos",
+        "jarritos": "jarritos",
+        "coffee_pastry_combo": "coffee & pastries",
+    }
+    for menu in load_menus(include_held_out=True).values():
+        for item in menu.items:
+            if item.sold_as == "order" or item.id in {
+                "chips_salsa",
+                "chips_guac",
+            }:  # by the order: Julian to decide
+                continue
+            proposal = with_missing(
+                menu, line("L1", item.id, qty=None, variant=item.variants[0].id if item.variants else None)
+            )
+            plural = expected.get(item.id, item.name.lower() + "s")
+            assert template_question(proposal.missing_or_ambiguous, proposal, menu).startswith(
+                f"How many {plural} would you like"
+            ), item.id
 
 
 def test_extractor_sees_the_piece_count():
