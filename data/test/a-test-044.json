@@ -1,0 +1,164 @@
+{
+  "conversation": {
+    "id": "a-test-044",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY CAN I GET THE USUAL",
+        "sent_at": "2026-10-12T19:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, I can't see past orders here. What would you like?",
+        "sent_at": "2026-10-12T19:00:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "OH OK. A MEDIUM VEGGIE ON GLUTEN FREE CRUST",
+        "sent_at": "2026-10-12T19:01:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ACTUALY MAKE IT A LARGE",
+        "sent_at": "2026-10-12T19:01:30-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "AND NO OLIVES",
+        "sent_at": "2026-10-12T19:01:55-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "CARD",
+        "sent_at": "2026-10-12T19:02:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "ON GLUTEN FREE CRUST"
+          },
+          {
+            "kind": "remove",
+            "modifier_id": "olives",
+            "raw_text": "NO OLIVES"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "A MEDIUM VEGGIE"
+          },
+          {
+            "message_index": 2,
+            "quote": "GLUTEN FREE CRUST"
+          },
+          {
+            "message_index": 3,
+            "quote": "MAKE IT A LARGE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-044",
+  "annotation_notes": "'the usual' (L1) is resolved by message 2, so it is dropped and the pizza gets a new line id (L2). 'MAKE IT A LARGE' replaces the stated size (MODIFY_ORDER); 'NO OLIVES' adds a detail (PLACE_ORDER). Pickup or delivery never said."
+}

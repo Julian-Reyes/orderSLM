@@ -1,0 +1,137 @@
+{
+  "conversation": {
+    "id": "a-test-032",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! can i get 4 chicken tacos 🌮 n a cheese quesadilla for my lil one",
+        "sent_at": "2026-10-10T17:45:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "is the horchata sweet? 🤔",
+        "sent_at": "2026-10-10T17:45:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Yes, it's sweet!",
+        "sent_at": "2026-10-10T17:46:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok 2 small horchatas 🥤 n we'll pick up, paying cash",
+        "sent_at": "2026-10-10T17:46:30-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 4,
+        "variant_id": "pollo",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 chicken tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "quesadilla",
+        "quantity": 1,
+        "variant_id": "cheese_only",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheese quesadilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "horchata",
+        "quantity": 2,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "2 small horchatas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "we'll pick up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-032",
+  "annotation_notes": "A menu question mid-order is refers_to draft. 'cheese quesadilla' is the cheese-only variant."
+}

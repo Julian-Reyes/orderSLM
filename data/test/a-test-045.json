@@ -1,0 +1,95 @@
+{
+  "conversation": {
+    "id": "a-test-045",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get 2 veggie burritos w black beans insted of pinto, n what else comes in the veggie burrito? deliver to 52 maple ct, card",
+        "sent_at": "2026-10-10T12:30:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "veggie",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "pinto_beans",
+            "replacement_modifier_id": "black_beans",
+            "raw_text": "w black beans insted of pinto"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 veggie burritos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "deliver to 52 maple ct"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "maple ct",
+      "number": "52",
+      "raw_text": "52 maple ct",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "52 maple ct"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-045",
+  "annotation_notes": "'black beans instead of pinto' substitutes the included pinto beans."
+}

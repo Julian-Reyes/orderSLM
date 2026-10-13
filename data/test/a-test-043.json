@@ -1,0 +1,110 @@
+{
+  "conversation": {
+    "id": "a-test-043",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get 4 cb combos for the ofice, do u deliver to 200 commerce st?",
+        "sent_at": "2026-10-09T11:30:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver there pls, paying card. n can the combos come w onion rings?",
+        "sent_at": "2026-10-09T11:30:25-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cb combos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver there pls"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "commerce st",
+      "number": "200",
+      "raw_text": "200 commerce st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "200 commerce st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "combo_choice",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "Which side would you like with the cheeseburger combos (fries or onion rings), and which drink (Coke, Sprite or lemonade)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-043",
+  "annotation_notes": "The card asks for three labels in one message, but a message carries at most two (primary + secondary), so the order spans two messages. The address given in the delivery question counts as provided; 'deliver there' then chooses delivery. Asking whether combos can have onion rings is not choosing them: the side and drink stay missing (combo_choice). Question hand-written: the template repeats 'what would you like with the cheeseburger combo' for each missing slot."
+}

@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-027",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD MORNIGN!!",
+        "sent_at": "2026-10-10T07:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Good morning! What can I get you?",
+        "sent_at": "2026-10-10T07:05:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "NOTHING YET JUST SAYING HI, HAVE A GOOD ONE",
+        "sent_at": "2026-10-10T07:06:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-027",
+  "annotation_notes": "Only greetings; the customer declines to order. No order: gold_extraction is null."
+}

@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-test-041",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI CAN I GET 6 BLUEBERY AND 6 BANANA NUT MUFFINS FOR A PARTY",
+        "sent_at": "2026-10-10T08:15:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "PICKUP AT 10, NAME IS ROSA",
+        "sent_at": "2026-10-10T08:15:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "WAIT DO YOU HAVE ANY GLUTEN FREE ONES",
+        "sent_at": "2026-10-10T08:15:50-07:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "I can't confirm that from here, but staff can check the ingredients for you.",
+        "sent_at": "2026-10-10T08:16:30-07:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "OK NEVERMIND THEN, CANCEL THE ORDER, ILL FIND SOMETHING ELSE",
+        "sent_at": "2026-10-10T08:16:55-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 BLUEBERY"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "banana_nut",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 BANANA NUT MUFFINS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "PICKUP AT 10"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 10",
+        "normalized_local": "10:00",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "AT 10"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "ROSA",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "NAME IS ROSA"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "CANCEL THE ORDER"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-041",
+  "annotation_notes": "The business makes no dietary claim. Cancelled: items stay as they were, nothing missing (payment was never given). 'AT 10' is 10:00 at a café open 07-15."
+}

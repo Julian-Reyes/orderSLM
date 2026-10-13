@@ -1,0 +1,149 @@
+{
+  "conversation": {
+    "id": "a-test-028",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 👋 can i get a large bbq chicken n a large hawaiian, deliver to 909 mill st 🍕",
+        "sent_at": "2026-10-11T22:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it! Will you pay by card or cash?",
+        "sent_at": "2026-10-11T22:05:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card 💳 n can u make the other one a medium",
+        "sent_at": "2026-10-11T22:06:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Sure, which one should be medium, the BBQ chicken or the Hawaiian?",
+        "sent_at": "2026-10-11T22:06:45-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "the hawaiian 🍍",
+        "sent_at": "2026-10-11T22:07:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large bbq chicken"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large hawaiian"
+          },
+          {
+            "message_index": 2,
+            "quote": "the other one a medium"
+          },
+          {
+            "message_index": 4,
+            "quote": "the hawaiian"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "deliver to 909 mill st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "mill st",
+      "number": "909",
+      "raw_text": "909 mill st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "909 mill st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "secondary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-028",
+  "annotation_notes": "'the other one' can't be resolved from message 2 (two pizzas, no earlier 'one'); the customer resolves it in message 4, so the size change goes on the Hawaiian. Message 2 changes a size and gives the first payment: MODIFY_ORDER + secondary PLACE_ORDER."
+}

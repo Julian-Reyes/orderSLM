@@ -1,0 +1,98 @@
+{
+  "conversation": {
+    "id": "a-test-049",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 😕 our pizza just arrived and it's completely cold",
+        "sent_at": "2026-10-11T19:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm so sorry! What name is the order under?",
+        "sent_at": "2026-10-11T19:50:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Patel. it was the large veggie on gluten free crust 🍕",
+        "sent_at": "2026-10-11T19:51:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks, I've let the manager know and they'll message you about making it right.",
+        "sent_at": "2026-10-11T19:51:45-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok thanks, we waited over an hour too ⏰",
+        "sent_at": "2026-10-11T19:52:10-05:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Sorry again about the wait.",
+        "sent_at": "2026-10-11T19:52:50-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "😔 ok",
+        "sent_at": "2026-10-11T19:53:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-049",
+  "annotation_notes": "Complaints about a delivered order (cold, late). The order already arrived, so the delay is no longer time pressure: normal. The order isn't in this chat: gold_extraction is null."
+}

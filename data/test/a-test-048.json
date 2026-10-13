@@ -1,0 +1,118 @@
+{
+  "conversation": {
+    "id": "a-test-048",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a bacon burger n a choc shake 🍔🥤 pickup, paying card",
+        "sent_at": "2026-10-10T16:25:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Got it: 1 Bacon Burger, 1 Milkshake (Chocolate). Pickup as soon as possible. Total $16.48, paying by card. Is that right?",
+        "sent_at": "2026-10-10T16:25:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "yesss 👍",
+        "sent_at": "2026-10-10T16:26:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a choc shake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "yesss"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-048",
+  "annotation_notes": "'yesss 👍' right after the summary of a complete order confirms it."
+}

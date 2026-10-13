@@ -1,0 +1,102 @@
+{
+  "conversation": {
+    "id": "a-test-034",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi 😊 could I get the coffee and pastry deal with a medium americano? I'll pick it up, I'm Sam. Paying by card ☕",
+        "sent_at": "2026-10-12T08:40:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "coffee_pastry_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "drink",
+            "menu_item_id": "americano",
+            "variant_id": "medium"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "the coffee and pastry deal"
+          },
+          {
+            "message_index": 0,
+            "quote": "a medium americano"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "I'll pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sam",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "I'm Sam"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "combo_choice",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "What would you like with the coffee & pastry (Croissant or Muffin)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-034",
+  "annotation_notes": "The pastry is never chosen: combo_choice/missing."
+}

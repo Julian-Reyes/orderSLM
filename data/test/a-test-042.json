@@ -1,0 +1,180 @@
+{
+  "conversation": {
+    "id": "a-test-042",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo",
+        "sent_at": "2026-10-11T21:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 pastor tacos",
+        "sent_at": "2026-10-11T21:10:04-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n a mexican coke",
+        "sent_at": "2026-10-11T21:10:07-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "wait make it 5 tacos",
+        "sent_at": "2026-10-11T21:10:12-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "n chips n salsa",
+        "sent_at": "2026-10-11T21:10:16-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-11T21:10:19-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "taco",
+        "quantity": 5,
+        "variant_id": "al_pastor",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 pastor tacos"
+          },
+          {
+            "message_index": 3,
+            "quote": "make it 5 tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "mexican_coke",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a mexican coke"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "chips_salsa",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "chips n salsa"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-042",
+  "annotation_notes": "'make it 5 tacos' changes the existing line's quantity (3 -> 5), citing both messages. Pickup or delivery never said."
+}

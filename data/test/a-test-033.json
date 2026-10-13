@@ -1,0 +1,173 @@
+{
+  "conversation": {
+    "id": "a-test-033",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hey!",
+        "sent_at": "2026-10-11T18:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can I get a carnitas burrito and grande nachos delivered to 640 Birch Lane? Paying with card.",
+        "sent_at": "2026-10-11T18:30:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 Burrito (Carnitas), 1 Nachos (Grande). Delivery to 640 Birch Lane as soon as possible. Total $27.97 (incl. $3.49 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-11T18:31:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Yes",
+        "sent_at": "2026-10-11T18:31:30-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Oh wait, it's 604 Birch Lane, not 640. Sorry!",
+        "sent_at": "2026-10-11T18:31:55-06:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "No problem, I've updated the address to 604 Birch Lane.",
+        "sent_at": "2026-10-11T18:32:35-06:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "Thanks!",
+        "sent_at": "2026-10-11T18:33:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 1,
+        "variant_id": "carnitas",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a carnitas burrito"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "nachos",
+        "quantity": 1,
+        "variant_id": "grande",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "grande nachos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivered to 640 Birch Lane"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Birch Lane",
+      "number": "604",
+      "raw_text": "604 Birch Lane",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "604 Birch Lane"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Paying with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-033",
+  "annotation_notes": "An address change after the yes changes the placed order: MODIFY_ORDER, placed_order, time_sensitive. customer_decision resets to pending. The final address is 604."
+}

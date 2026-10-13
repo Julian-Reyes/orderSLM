@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-047",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, are you hiring? I'd like to apply for a delivery driver position.",
+        "sent_at": "2026-10-09T15:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I can only help with orders at Halfmoon Pizza. Want to order something?",
+        "sent_at": "2026-10-09T15:10:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "No thanks, I'll ask in person then.",
+        "sent_at": "2026-10-09T15:11:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-047",
+  "annotation_notes": "A job question is unrelated to ordering. The reply is the demo's fixed off-topic sentence. Message 2 declines and closes: small talk. No order."
+}

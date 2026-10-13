@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-test-037",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "WHAT VEGETERIAN PIZZAS DO YOU HAVE",
+        "sent_at": "2026-10-09T22:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ALSO IS THE MARGARITA ONE VEGETARIAN TOO",
+        "sent_at": "2026-10-09T22:15:08-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-037",
+  "annotation_notes": "Two menu questions before any order. No business reply is written (the menus have no dietary data). No order: gold_extraction is null."
+}

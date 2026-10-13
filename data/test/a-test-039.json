@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-test-039",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get 2 asada burritos for pickup",
+        "sent_at": "2026-10-12T20:55:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a large horchata",
+        "sent_at": "2026-10-12T20:55:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actualy can u deliver instead",
+        "sent_at": "2026-10-12T20:55:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "to 88 university blvd apt 4b",
+        "sent_at": "2026-10-12T20:56:15-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "paying cash",
+        "sent_at": "2026-10-12T20:56:40-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "burrito",
+        "quantity": 2,
+        "variant_id": "carne_asada",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 asada burritos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "horchata",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large horchata"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver instead"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "university blvd",
+      "number": "88",
+      "unit": "apt 4b",
+      "raw_text": "88 university blvd apt 4b",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "88 university blvd apt 4b"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-039",
+  "annotation_notes": "'deliver instead' replaces pickup: MODIFY_ORDER. The address that follows is a first detail: PLACE_ORDER."
+}

@@ -1,0 +1,115 @@
+{
+  "conversation": {
+    "id": "a-test-029",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "need 5 cheesburgers n 5 cokes for a bday thing",
+        "sent_at": "2026-10-10T15:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 2 large fries, paying cash",
+        "sent_at": "2026-10-10T15:40:25-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 5,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "5 cheesburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 5,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "5 cokes"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-029",
+  "annotation_notes": "Pickup or delivery is never said: fulfillment_method/missing."
+}

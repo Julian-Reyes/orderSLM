@@ -1,0 +1,133 @@
+{
+  "conversation": {
+    "id": "a-test-030",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do u have gluten free crust",
+        "sent_at": "2026-10-12T17:02:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, gluten-free crust is one of our crust options.",
+        "sent_at": "2026-10-12T17:02:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a small cheese on gf crust",
+        "sent_at": "2026-10-12T17:03:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup in 20 min",
+        "sent_at": "2026-10-12T17:03:14-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "on gf crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a small cheese"
+          },
+          {
+            "message_index": 2,
+            "quote": "gf crust"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup in 20 min"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 20 min",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "in 20 min"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-030",
+  "annotation_notes": "The crust question comes before any order: refers_to none. The business names the menu option without any dietary claim. Pickup in 20 minutes is not within ~15, so normal. Payment is never given."
+}

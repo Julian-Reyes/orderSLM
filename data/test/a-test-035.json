@@ -1,0 +1,176 @@
+{
+  "conversation": {
+    "id": "a-test-035",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get 2 large cheese pizzas n a large pepperoni",
+        "sent_at": "2026-10-10T18:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver to 55 orchard ln, card",
+        "sent_at": "2026-10-10T18:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 2 Cheese Pizzas (Large 14-inch), 1 Pepperoni Pizza (Large 14-inch). Delivery to 55 orchard ln as soon as possible. Total $53.46 (incl. $2.99 delivery), paying by card. Is that right?",
+        "sent_at": "2026-10-10T18:11:05-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-10-10T18:11:30-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh wait can u make the pepperoni an xl, kids r starving lol",
+        "sent_at": "2026-10-10T18:11:55-05:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Done, the pepperoni is now extra large.",
+        "sent_at": "2026-10-10T18:12:35-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "ty!",
+        "sent_at": "2026-10-10T18:13:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 large cheese pizzas"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large pepperoni"
+          },
+          {
+            "message_index": 4,
+            "quote": "make the pepperoni an xl"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 55 orchard ln"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "orchard ln",
+      "number": "55",
+      "raw_text": "55 orchard ln",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "55 orchard ln"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-035",
+  "annotation_notes": "A size change after the yes changes what the kitchen makes: MODIFY_ORDER, placed_order, time_sensitive; customer_decision resets to pending. 'kids r starving' alone wouldn't be urgency."
+}
