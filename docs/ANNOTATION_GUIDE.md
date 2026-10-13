@@ -69,7 +69,8 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
     is treated as unverified by the rules (`item_modification / ambiguous`), so either add it to the menu or ask.
   - **Every request with no menu id is explicitly `not_on_menu` or `kitchen_note`**; the tool won't save one that
     is neither (`UNCLASSIFIED_REQUEST`).
-- Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`.
+- Combos: `combo_selections` per slot. Missing choice → `combo_choice / missing`. A slot with exactly one choice
+  (Lucky Lime's plate side: chips & salsa) is filled with it: there is nothing for the customer to choose.
 - Half-and-half: `halves` with two `menu_item_id`s; the size goes on the line's `variant_id`. A half named by a
   recipe ("half hawaiian") is that pizza; a half named only by toppings ("half mushroom n olives") is
   `cheese_pizza` with those toppings added.
@@ -90,7 +91,8 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   Delivery instructions ("ring the side door") go in `notes`, not the address.
 - Payment: `card`, `cash`, `other`, `unknown`. "change for a 50" → `change_for_cents: 5000`.
   "I already paid" → `customer_claims_paid: true` (a claim; staff verify it), method `unknown` unless the customer
-  states one (a channel like "when I called" is not a method). Unknown payment → `payment_method / missing`.
+  states one (a channel like "when I called", "through the app" or "online" is not a method; a named method the
+  business doesn't take, like Venmo, is `other`). Unknown payment → `payment_method / missing`.
   Cash with a bill smaller than the total ("pay w a 100" on a $170 order) can't be right: the code flags it
   (`CASH_BELOW_TOTAL`), so don't write it unless that is the point of the conversation.
   A claim during an order: `PLACE_ORDER` + secondary `PAYMENT_CLAIM` in the same message as the items, or primary
@@ -157,4 +159,4 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 4. Disagreements found later: fix the gold, log the change (conversation id, field, old → new, reason).
    Don't change test gold after any model has been scored on it without recording why.
 
-_Last updated 2026-10-08 (M2 dev review: confirmed = complete, sizes/options not on the menu, changes after confirming)._
+_Last updated 2026-10-13 (test writing: one-choice combo slots, payment channels vs. methods; earlier: 2026-10-08 M2 dev review)._

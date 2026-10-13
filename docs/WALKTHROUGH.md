@@ -109,7 +109,7 @@ it should produce and the box each message belongs in.
 |---|---|---|
 | M0 | Foundations: the data formats, rules, tests | Done |
 | M1 | The code half: menus, prices, missing-info rules, simple keyword versions | Done |
-| M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Dev set reviewed.** Next: writing the 199 test conversations, Julian spot-checks at least 25%, then the test set is locked |
+| M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Dev set reviewed; all 199 test conversations written.** Next: Julian spot-checks at least 50 of them, then the test set is locked |
 | M3–M7 | The experiments | Not started |
 | M8 | Demo and report | Not started |
 
@@ -327,8 +327,13 @@ independent audit by a fresh agent, and Julian's review of all 91 in the annotat
   (§16); the order checker in two versions with planted mistakes (§11b, also for the auditor §11d); the
   closed-field comparison (§11f). Planted copies of test gold are allowed at final eval, for scoring only.
 
-**Where M2 stands:** tooling merged to `main`; cards, 91 reviewed dev conversations and the review log on
-branch `m2-eval-data`. Next: the 199 test conversations, Julian's spot-check of ≥ 25%, then the lock.
+**The test conversations (2026-10-13):** all 199 written from the sealed cards (50 on the held-out menu), checked
+by the same code as the annotation tool (0 findings, no near-duplicates with dev). Four cards asked for something
+the rules don't allow and were adjusted (noted in each file and in PROGRESS.md); two new labeling conventions came
+out of it (one-choice combo slots; payment channels vs. methods).
+
+**Where M2 stands:** tooling merged to `main`; cards, 91 reviewed dev conversations, the review log and 199 test
+conversations on branch `m2-eval-data`. Next: Julian's spot-check of ≥ 50 test conversations, then the lock.
 
 ---
 
