@@ -350,6 +350,9 @@ the annotation guide):
 - **Decision (Julian):** the M8 demo replies to off-topic messages with one fixed sentence ("I can only help with
   orders at Corner Patty. Want to order something?") and to small talk with a short greeting; it never answers the
   off-topic question (spec §16). Re-inspect AgentDesk's reply checks and off-topic handling before building replies.
+- **Decision (Julian):** new decision-provider role (f) **closed-field comparison** (spec §11, M7): fulfillment
+  method, payment method, customer decision and paid claim, each answered side by side by rules, Julia-1, Jev,
+  OpenAI Decisions, the student and the teacher. An experiment only; the student still fills the whole order.
 - **Noticed, not changed:** a-dev-016, 038, 046 and 049 have hand-written questions that differ from the template.
 
 ### Open for Julian (M2)

@@ -1,6 +1,6 @@
 # OrderSLM: Food-Order Understanding, Decision Routing, and Distilled Small Models
 
-Updated October 7, 2026 (evaluation data revised speed-first the same day, §7). Updated October 8, 2026: test-set contamination rule (§12), student intent output (§3, §4, §10), five roles for the decision providers and the architecture comparison (§11). This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, evaluation separate from training data, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
+Updated October 7, 2026 (evaluation data revised speed-first the same day, §7). Updated October 8, 2026: test-set contamination rule (§12), student intent output (§3, §4, §10), five roles for the decision providers and the architecture comparison (§11). Updated October 13, 2026: demo template answers for simple questions, off-topic and small talk (§2, §16, §18); order checker in two versions with planted mistakes (§11b, §11d); closed-field comparison (§11f). This document replaces `pedido-facil-project-plan.md`. It keeps that plan's core principles (evidence-backed extraction, evaluation separate from training data, deterministic pricing, no fabricated results) but narrows the scope to an English-first V1 and adds model-selection experiments.
 
 ## 1. Goal
 
@@ -247,11 +247,11 @@ All three accept a state/input, named questions, and choice/score/boolean questi
 - Treat provider confidence scores as provider-specific; do not compare them directly without calibration on dev data.
 - The student's own intent output (§4) is one more row in every routing comparison.
 
-### Five roles for the decision providers (October 8, 2026)
+### Roles for the decision providers (October 8, 2026; f added October 13)
 
 The extractor reads the whole message anyway, so routing alone may add little (its main benefits are skipping the extractor on non-order messages and handling non-order intents). These roles give the decision providers jobs the extractor doesn't already do, so they are useful as **independent checkers**, while the router benchmark still measures how well each one categorizes.
 
-- **Primary roles:** the order checker (b) and the training-label auditor (d). **Supporting roles:** router (a), menu narrowing (e), item chooser (c, optional).
+- **Primary roles:** the order checker (b) and the training-label auditor (d). **Supporting roles:** router (a), menu narrowing (e), closed-field comparison (f), item chooser (c, optional).
 - Each role is **tuned on dev and scored once on test**, with **identical wording for every provider**. Where an LLM could do the same job, also compare against the **teacher LLM** (the bake-off winner), so the key question is answered throughout: do decision providers approach LLM-level quality at a fraction of the cost and time?
 
 **a) Router benchmark + cross-check (M7).**
@@ -290,6 +290,12 @@ The extractor reads the whole message anyway, so routing alone may add little (i
 - Test conversations must include **implicit category mentions** (synonyms like "pop"/"something fizzy", item names without category words, vague requests like "something sweet"); Source A cards include them (scenario tag `implicit_category`). Report narrowing accuracy separately for explicit vs. implicit mentions.
 - **Training experiment (2B student only):** train (1) a single-menu student on per-restaurant conversations only and (2) a mixed student on the same data plus ~20% mega-menu conversations (teacher-labeled in M4). Test both on: single menu, mega menu full, and mega menu narrowed. Report whether big-menu training alone closes the gap and how much narrowing helps each version.
 - Measure: prompt tokens, latency p50/p95, extraction accuracy, retry rate, and how often narrowing dropped a needed category.
+
+**f) Closed-field comparison (supporting, M7; added October 13, 2026).** A side-by-side experiment, not a product change: the student still fills the whole order.
+- The order fields that are a fixed choice, asked as one question each over the conversation so far: fulfillment method (`pickup` / `delivery` / `unknown`), payment method (`card` / `cash` / `other` / `unknown`), customer decision (`pending` / `confirmed` / `cancelled`), and whether the customer claims to have paid (yes / no). Item and size choices are left out (they depend on quantities and corrections, the student's job; the item chooser covers unmatched items).
+- Compared side by side on the same test conversations, with identical wording: rules baseline, Julia-1, Jev, OpenAI Decisions, the student's own answer (read from its full extraction), and the teacher LLM.
+- Tuned on dev, scored once on test. Measure per field: accuracy against gold, latency p50/p95, cost per 1,000 conversations, and the agreement between each provider and the student.
+- Optional follow-up only if a provider matches or beats the student on a field: a hybrid run (provider fills that field, student the rest), reported against the student alone.
 
 ### Architecture comparison (M7)
 
@@ -415,7 +421,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 | 4 | Synthetic generation: 200-conversation pilot → audit → 1–2k bulk, labeled by the winning teacher (order **and** router intents); ~20% mega-menu conversations for the mixed student; training-label audit by the decision providers (§11d) | Data audit, distribution log, drop rate, audit flag rate + precision, actual cost |
 | 5 | Student bake-off (zero-shot, local) | License/tooling checks; results table; students chosen |
 | 6 | LoRA training (student outputs intent + order); zero-shot vs. few-shot vs. fine-tuned vs. teacher on the test set; single-menu vs. mixed 2B student; order checker (§11b); error analysis | Reproducible training configs and eval outputs; intent accuracy |
-| 7 | Decision providers: router benchmark + cross-check with the student's intent (§11a), order checker (b), item chooser pilot (c, optional), menu narrowing incl. mega menu (e); architecture comparison A/B/C | Verified API contracts, per-label metrics with CIs, stability, latency and cost results; disagreement log; break-even router latency |
+| 7 | Decision providers: router benchmark + cross-check with the student's intent (§11a), order checker (b), item chooser pilot (c, optional), menu narrowing incl. mega menu (e), closed-field comparison (f); architecture comparison A/B/C | Verified API contracts, per-label metrics with CIs, stability, latency and cost results; disagreement log; break-even router latency |
 | 8 | Demo (incl. template answers to menu/delivery/hours/payment questions, §16), report, Hugging Face release | Working demo; every number traceable to saved outputs |
 
 **V2 candidates (separate plan later):** food scheduling (slots, capacity, rescheduling); Brazilian Portuguese (new data and test set, transfer experiment); appointment-based business domain; inventory, promotions, and full returns workflows; live WhatsApp integration; automatic payment verification (e.g. a Pix provider's payment notification marks the order paid; until then a customer's "I already paid" stays an unverified claim on the ticket); fine-tuning Julia-1 on teacher-labeled router data, reported separately as "off-the-shelf vs. fine-tuned" (first check that a fine-tuning path exists, §11).
