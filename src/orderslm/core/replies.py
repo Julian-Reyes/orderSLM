@@ -30,7 +30,7 @@ from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.1"
+REPLIES_VERSION = "replies@0.2"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -59,7 +59,7 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_quantity": "how many {name} would you like",
         "q_variant": "which {name} would you like ({options})",
         "q_variant_not_on_menu": "We don't have a {text} for the {name}; we have {options}. Which would you like?",
-        "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it without, or something else?",
+        "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it as it comes, or with something else instead?",
         "q_option_unverified": "Just checking, we may not be able to do {text} on the {name}. Want it without, or keep it as a note for the kitchen?",
         "q_combo": "what would you like with the {name} ({options})",
         "q_method": "is this for pickup or delivery",

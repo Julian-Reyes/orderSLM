@@ -66,7 +66,7 @@ def test_kitchen_request_is_a_free_note_not_a_flag():
 def test_not_on_menu_reply_names_the_option_and_offers_choices():
     proposal = with_missing(HM, line("L1", "supreme_pizza", variant="large", mods=[ARTICHOKE]))
     assert template_question(proposal.missing_or_ambiguous, proposal, HM) == (
-        "We don't have artichoke hearts for the supreme pizza. Would you like it without, or something else?"
+        "We don't have artichoke hearts for the supreme pizza. Would you like it as it comes, or with something else instead?"
     )
 
 

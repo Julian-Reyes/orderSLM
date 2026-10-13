@@ -318,6 +318,13 @@ the annotation guide):
 8. Payment claims during an order: `PLACE_ORDER` + secondary `PAYMENT_CLAIM` (072) or primary `PAYMENT_CLAIM` (089);
    method stays `unknown`, `customer_claims_paid: true`, so payment isn't asked again.
 
+### Dev review fixes (Julian, 2026-10-13)
+
+- **Off-menu option question reworded** (replies@0.2): "Would you like it without, or something else?" read as
+  "without artichoke hearts", which the restaurant can't make anyway. Now "Would you like it as it comes, or with
+  something else instead?" (covers add and substitute). Only a-dev-034 uses it; its gold question was regenerated
+  from the template. No test conversations exist yet and no PIZZA case has an off-menu option.
+
 ### Open for Julian (M2)
 
 1. **Regenerate the sealed test cards** (`! ORDERSLM_UNSEAL_TEST="author Source A cards" uv run python -m orderslm.data.cards generate --split test --force`).
