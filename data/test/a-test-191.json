@@ -1,0 +1,129 @@
+{
+  "conversation": {
+    "id": "a-test-191",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get a large cheese n a large pepperoni delivered to 404 valley rd",
+        "sent_at": "2026-10-09T18:25:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i paid already thru venmo, can send u the screenshot",
+        "sent_at": "2026-10-09T18:25:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pls dont charge me again at the door",
+        "sent_at": "2026-10-09T18:25:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 404 valley rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "valley rd",
+      "number": "404",
+      "raw_text": "404 valley rd",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "404 valley rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "other",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "i paid already thru venmo"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-191",
+  "annotation_notes": "Venmo is a stated method (other), not one Halfmoon takes; the claim and screenshot stay unverified (as in a-test-089)."
+}

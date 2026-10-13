@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-test-193",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Is the the the one with",
+        "sent_at": "2026-10-11T14:50:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, I didn't catch that. What can I get you?",
+        "sent_at": "2026-10-11T14:50:40-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Sorry, my phone autocorrected. Never mind for now.",
+        "sent_at": "2026-10-11T14:51:05-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-193"
+}

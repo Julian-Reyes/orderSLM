@@ -1,0 +1,149 @@
+{
+  "conversation": {
+    "id": "a-test-198",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! can i get 2 cheeseburgers n a large fries 🍔🍟",
+        "sent_at": "2026-10-12T17:40:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "do the shakes come in chocolate? 🍫",
+        "sent_at": "2026-10-12T17:40:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Yes, we have chocolate shakes.",
+        "sent_at": "2026-10-12T17:41:05-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "yay one of those then 🙌 deliver to 81 north ave, card 💳",
+        "sent_at": "2026-10-12T17:41:30-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "the shakes come in chocolate"
+          },
+          {
+            "message_index": 3,
+            "quote": "one of those then"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 81 north ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "north ave",
+      "number": "81",
+      "raw_text": "81 north ave",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "81 north ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-198",
+  "annotation_notes": "'one of those then' orders the chocolate shake the customer asked about in message 1."
+}

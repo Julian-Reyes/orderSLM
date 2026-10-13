@@ -1,0 +1,36 @@
+{
+  "conversation": {
+    "id": "a-test-199",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "MY SON HAS A SEVERE PEANUT ALLERGY. CAN I PLEASE TALK TO SOMEONE ABOUT WHAT IS SAFE FOR HIM BEFORE I ORDER?",
+        "sent_at": "2026-10-10T16:15:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-199",
+  "annotation_notes": "An allergy question for a person before ordering; no reaction: normal urgency."
+}

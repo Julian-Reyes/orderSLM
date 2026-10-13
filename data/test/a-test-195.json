@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-195",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "WHAT YEAR WERE TACOS INVENTED",
+        "sent_at": "2026-10-09T17:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I can only help with orders at Lucky Lime Taqueria. Want to order something?",
+        "sent_at": "2026-10-09T17:05:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "NO THANKS JUST CURIOUS",
+        "sent_at": "2026-10-09T17:06:05-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-195",
+  "annotation_notes": "Trivia about tacos is still unrelated to ordering here; the reply is the demo's fixed off-topic sentence."
+}

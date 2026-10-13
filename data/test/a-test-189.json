@@ -1,0 +1,89 @@
+{
+  "conversation": {
+    "id": "a-test-189",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i talk to a manager abt catering",
+        "sent_at": "2026-10-11T21:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "its for like 60 ppl next sat",
+        "sent_at": "2026-10-11T21:00:03-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "tacos n burritos mostly",
+        "sent_at": "2026-10-11T21:00:06-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "I'll have our manager message you about catering.",
+        "sent_at": "2026-10-11T21:00:46-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cool thx",
+        "sent_at": "2026-10-11T21:01:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-189",
+  "annotation_notes": "A catering inquiry for a manager; the details belong to that request, not to an order in the chat."
+}

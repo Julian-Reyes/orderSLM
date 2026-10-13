@@ -1,0 +1,80 @@
+{
+  "conversation": {
+    "id": "a-test-182",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi where is my order?? 😤 it's been over an hour",
+        "sent_at": "2026-10-11T19:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry about that! What name is it under?",
+        "sent_at": "2026-10-11T19:40:40-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Chen. two veggie burritos, no cheese 🌯",
+        "sent_at": "2026-10-11T19:41:05-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thanks, I'm checking with the driver now.",
+        "sent_at": "2026-10-11T19:41:45-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "please hurry, I'm starving ⏰",
+        "sent_at": "2026-10-11T19:42:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-182",
+  "annotation_notes": "A late order still not received (over an hour): ORDER_STATUS, time_sensitive. The order isn't in this chat."
+}

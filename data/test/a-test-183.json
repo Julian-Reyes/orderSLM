@@ -1,0 +1,80 @@
+{
+  "conversation": {
+    "id": "a-test-183",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey our order just came but stuff is missing",
+        "sent_at": "2026-10-12T19:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "no nachos",
+        "sent_at": "2026-10-12T19:00:03-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n only 3 horchatas instead of 4",
+        "sent_at": "2026-10-12T19:00:07-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "its under Lopez",
+        "sent_at": "2026-10-12T19:00:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-183",
+  "annotation_notes": "Missing items in a received order; the name belongs to the same complaint. Normal urgency."
+}

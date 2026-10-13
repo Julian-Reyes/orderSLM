@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-test-177",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, our garlic knots never arrived w the pizza tonight",
+        "sent_at": "2026-10-10T20:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm so sorry! What name is the order under?",
+        "sent_at": "2026-10-10T20:10:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "its under Bennett. could we please get a refund for the knots",
+        "sent_at": "2026-10-10T20:11:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-177",
+  "annotation_notes": "A missing item, then a refund request. The order arrived (minus one item): normal urgency."
+}

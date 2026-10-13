@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-test-179",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a lg drip n something sweet",
+        "sent_at": "2026-10-12T09:20:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We have croissants (plain, chocolate or almond) and muffins (blueberry, chocolate chip or banana nut). What sounds good?",
+        "sent_at": "2026-10-12T09:20:40-07:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "choc croissant pls, card",
+        "sent_at": "2026-10-12T09:21:05-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lg drip"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "something sweet"
+          },
+          {
+            "message_index": 2,
+            "quote": "choc croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-179",
+  "annotation_notes": "'something sweet' is settled by the customer's choice after the business lists the pastries; the line cites both customer messages. Pickup-only café: method and name not stated."
+}

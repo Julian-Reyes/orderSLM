@@ -1,0 +1,100 @@
+{
+  "conversation": {
+    "id": "a-test-188",
+    "business_id": "corner-patty",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "wheres my order",
+        "sent_at": "2026-10-10T20:30:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordered 50 min ago",
+        "sent_at": "2026-10-10T20:30:03-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "delivery to the hotel",
+        "sent_at": "2026-10-10T20:30:06-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "under Kowalski",
+        "sent_at": "2026-10-10T20:30:09-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "hello??",
+        "sent_at": "2026-10-10T20:30:49-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-188",
+  "annotation_notes": "A delivery 50 minutes out and not here: a late order, time_sensitive. 'hello??' presses the same question."
+}

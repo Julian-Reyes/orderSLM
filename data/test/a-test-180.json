@@ -1,0 +1,113 @@
+{
+  "conversation": {
+    "id": "a-test-180",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get a medium margherita n somethin to snack on b4, pickup",
+        "sent_at": "2026-10-09T18:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We have garlic knots or breadsticks as sides.",
+        "sent_at": "2026-10-09T18:50:40-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "garlic knots then, paying card",
+        "sent_at": "2026-10-09T18:51:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "somethin to snack on"
+          },
+          {
+            "message_index": 2,
+            "quote": "garlic knots then"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-180",
+  "annotation_notes": "The vague snack is settled as one order of garlic knots."
+}

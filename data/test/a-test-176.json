@@ -1,0 +1,36 @@
+{
+  "conversation": {
+    "id": "a-test-176",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi picked up my order n its totally wrong, got 2 americanos insted of lattes, can i get a refund pls",
+        "sent_at": "2026-10-09T08:45:00-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "secondary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-176",
+  "annotation_notes": "A complaint plus a refund request in one message: ORDER_PROBLEM + secondary REFUND_REQUEST (the guide's 'bacon was missing, I want a refund' pattern). Picked up wrong, not a wrong delivery: normal."
+}

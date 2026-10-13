@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-test-186",
+    "business_id": "halfmoon-pizza",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi sorry to bother, just checking on our delivery, ordered around 6:15 under Garcia, thx!",
+        "sent_at": "2026-10-12T18:55:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-186",
+  "annotation_notes": "A polite check-in ~40 minutes after ordering, no missed deadline: normal."
+}

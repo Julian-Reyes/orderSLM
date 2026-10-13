@@ -1,0 +1,52 @@
+{
+  "conversation": {
+    "id": "a-test-197",
+    "business_id": "morning-crumb",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi got charged twice for my latte this morning",
+        "sent_at": "2026-10-11T10:05:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can u refund one, name is Petra",
+        "sent_at": "2026-10-11T10:05:04-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-197",
+  "annotation_notes": "A double charge is a payment dispute: needs_staff_now. Message 0 reports it, message 1 asks for the refund."
+}

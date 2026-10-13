@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-test-192",
+    "business_id": "lucky-lime",
+    "split": "test",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "r u hiring",
+        "sent_at": "2026-10-10T15:45:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "looking for weekend shifts",
+        "sent_at": "2026-10-10T15:45:03-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A)",
+  "card_id": "a-test-192"
+}
