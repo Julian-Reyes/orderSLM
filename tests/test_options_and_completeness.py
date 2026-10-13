@@ -180,3 +180,27 @@ def test_size_facts_never_change_a_price():
     sizes = ("personal", "small", "medium", "large", "extra_large")
     pizzas = order(*(line(f"L{n}", "pepperoni_pizza", variant=v) for n, v in enumerate(sizes, 1)))
     assert P.quote(HM, pizzas).data.total_cents == P.quote(HM.extractor_view(), pizzas).data.total_cents
+
+
+# ---------------------------------------------------------------- items sold by the order (menu@0.6)
+
+
+def test_quantity_question_counts_orders_for_items_sold_by_the_order():
+    def ask(menu, item):
+        proposal = with_missing(menu, line("L1", item, qty=None))
+        return template_question(proposal.missing_or_ambiguous, proposal, menu)
+
+    assert ask(HM, "garlic_knots") == "How many orders of garlic knots would you like (6 per order)?"
+    assert ask(HM, "breadsticks") == "How many orders of breadsticks would you like (4 per order)?"
+    assert ask(CP, "onion_rings") == "How many orders of onion rings would you like?"
+    assert "orders of" not in ask(CP, "veggie_burger")  # counted one by one
+
+
+def test_extractor_sees_the_piece_count():
+    knots = HM.extractor_view().item("garlic_knots")
+    assert knots.sold_as == "order" and knots.pieces_per_order == 6
+
+
+def test_pieces_per_order_needs_sold_as_order():
+    with pytest.raises(ValidationError, match="pieces_per_order"):
+        CP.item("coke").model_validate({**CP.item("coke").model_dump(), "pieces_per_order": 6})

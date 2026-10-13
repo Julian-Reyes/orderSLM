@@ -18,8 +18,9 @@ CONVERSATION_SCHEMA_VERSION = (
     # 0.4: Scenario.implicit_category
 )
 MENU_SCHEMA_VERSION = (
-    "menu@0.5"  # 0.2: name_required_for_pickup; 0.3: ingredients/add-ons, aliases, exclusive groups;
-    # 0.4: Variant.diameter_cm/slices (reply layer only); 0.5: accepted_kitchen_requests
+    "menu@0.6"  # 0.2: name_required_for_pickup; 0.3: ingredients/add-ons, aliases, exclusive groups;
+    # 0.4: Variant.diameter_cm/slices (reply layer only); 0.5: accepted_kitchen_requests;
+    # 0.6: MenuItem.sold_as/pieces_per_order
 )
 TAXONOMY_VERSION = "taxonomy@0.1"
 

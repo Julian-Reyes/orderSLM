@@ -49,6 +49,10 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   `unmatched_variant_text`, and `item_variant / missing` (even if a default exists). The business asks which size;
   it doesn't reject the item.
 - Quantity unclear ("some wings"): `quantity: null` + `item_quantity / ambiguous`.
+- Items sold by the order (`sold_as: order`: garlic knots, breadsticks, fries, onion rings): quantity counts
+  orders. "an order of knots" = 1, "two orders of knots" = 2. A piece count that divides evenly by
+  `pieces_per_order` becomes orders ("12 garlic knots" = 2 at 6 per order); one that doesn't ("8 knots") is
+  `quantity: null` + `item_quantity / ambiguous`.
 - Modifications use the catalog `modifier_id` (an ingredient or add-on of that item):
   - "no onions", "hold the pickles" → `remove`.
   - "add bacon", "with mushrooms" → `add` (amount `normal`).

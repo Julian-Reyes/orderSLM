@@ -1,6 +1,6 @@
 # Menus
 
-Fictional businesses, `menu@0.5` JSON in `data/menus/`. Run `make menus` to validate them and print each
+Fictional businesses, `menu@0.6` JSON in `data/menus/`. Run `make menus` to validate them and print each
 menu's content hash (`menu_version`), which every quote and run records.
 
 | Business | File | Cuisine / tests | Hours (local) | Delivery | Name for pickup |
@@ -19,6 +19,9 @@ free, printed on the ticket (core/requests.py matches them before anything else)
 | Halfmoon Pizza | well done / extra crispy, cut in squares, uncut (pizzas); sauce on the side (pizzas, sides); warm (sides) |
 | Morning Crumb Café | warm / toasted (pastries, sandwiches, combos); cut in half (pastries, sandwiches); extra hot, room for milk, extra foam (coffee, combos) |
 | Lucky Lime Taqueria | well done, salsa on the side (tacos, burritos, mains, combos); cut in half (burritos); extra crispy (mains, sides); no ice (drinks) |
+
+Items **sold by the order** (menu@0.6, `sold_as: order`; quantity counts orders): Halfmoon garlic knots (6 per
+order) and breadsticks (4 per order); Corner Patty fries and onion rings (no piece count).
 
 Halfmoon's pizza sizes (menu@0.4, reply layer only; the extractor never sees them):
 

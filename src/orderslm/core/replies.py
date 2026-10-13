@@ -25,12 +25,12 @@ from orderslm.schema.extraction import (
     SlotState,
     TimeKind,
 )
-from orderslm.schema.menu import MenuCatalog
+from orderslm.schema.menu import MenuCatalog, SoldAs
 from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote, ToolErr, ToolResult
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.2"
+REPLIES_VERSION = "replies@0.3"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -57,6 +57,8 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_off_menu": "We don't have {text}. Would you like something else instead?",
         "q_ambiguous_item": "which one do you mean by “{text}”",
         "q_quantity": "how many {name} would you like",
+        "q_quantity_orders": "how many orders of {name} would you like",
+        "q_quantity_pieces": "how many orders of {name} would you like ({pieces} per order)",
         "q_variant": "which {name} would you like ({options})",
         "q_variant_not_on_menu": "We don't have a {text} for the {name}; we have {options}. Which would you like?",
         "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it as it comes, or with something else instead?",
@@ -239,7 +241,10 @@ def template_question(
             else:
                 questions.append(T["q_ambiguous_item"].format(text=line.unmatched_text))
         elif m.field is FieldRef.item_quantity and item:
-            questions.append(T["q_quantity"].format(name=item.name.lower()))
+            key = "q_quantity" if item.sold_as is SoldAs.each else "q_quantity_orders"
+            if item.pieces_per_order:
+                key = "q_quantity_pieces"
+            questions.append(T[key].format(name=item.name.lower(), pieces=item.pieces_per_order))
         elif m.field is FieldRef.item_variant and item:
             options = _join([v.name.lower() for v in item.variants], lang, "or", comma=False)
             if line and line.unmatched_variant_text:

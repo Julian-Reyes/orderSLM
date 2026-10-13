@@ -324,6 +324,14 @@ the annotation guide):
   "without artichoke hearts", which the restaurant can't make anyway. Now "Would you like it as it comes, or with
   something else instead?" (covers add and substitute). Only a-dev-034 uses it; its gold question was regenerated
   from the template. No test conversations exist yet and no PIZZA case has an off-menu option.
+- **Items sold by the order** (menu@0.6, replies@0.3): a-dev-045's "some garlic knots" was asked as "How many garlic
+  knots would you like?", which invites a piece count. `MenuItem.sold_as: order` + optional `pieces_per_order`
+  (Julian: knots 6, breadsticks 4; fries and onion rings without a count). The question is now "How many orders of
+  garlic knots would you like (6 per order)?"; a-dev-045 regenerated. Not defaulted to 1: the card tests an unclear
+  quantity. Annotation rule: a piece count that divides evenly becomes orders ("12 knots" = 2), else ambiguous.
+  The extractor sees the piece count. Held-out menu unchanged; no wings on any menu.
+- **Noticed, not changed:** `q_quantity` doesn't pluralize ("How many veggie burger would you like?"); a-dev-016,
+  038, 046 and 049 have hand-written questions that differ from the template (not affected by these changes).
 
 ### Open for Julian (M2)
 

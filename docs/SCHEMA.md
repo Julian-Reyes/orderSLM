@@ -9,7 +9,7 @@ Code is the source of truth: `src/orderslm/schema/`. This page explains the desi
 | Router decision | `router@0.1` | `schema/routing.py` |
 | Router taxonomy (labels + descriptions) | `taxonomy@0.1` | `schema/routing.py`, docs/TAXONOMY.md |
 | Conversation | `conversation@0.4` | `schema/conversation.py` |
-| Menu catalog | `menu@0.5` | `schema/menu.py` |
+| Menu catalog | `menu@0.6` | `schema/menu.py` |
 | Verified results (quote, order, tool results) | — (internal) | `schema/order.py` |
 | Annotated conversation (samples, dev, test) | — | `schema/annotation.py` |
 
@@ -163,7 +163,7 @@ staff/payment systems), `HandoffTicket`, and `ToolOk[T] | ToolErr` (`error.code`
 Order statuses: `draft → awaiting_confirmation → new → preparing → ready → completed`, or `cancelled`.
 Allowed transitions: `core/state.py` (customer changes to a placed order go to staff).
 
-## Menu catalog (`menu@0.4`)
+## Menu catalog (`menu@0.6`)
 
 Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents`, `min_order_cents`),
 `name_required_for_pickup` (0.2), `exclusive_groups` (0.3), modifiers, and items.
@@ -174,6 +174,9 @@ Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents
   is 36 cm, 10 slices"). The extractor gets `MenuCatalog.extractor_view()`, which drops them, and
   `ExtractionRequest` rejects a menu that still has them, so a model can never turn "feeds 10 people" into a
   quantity. They don't affect any price (tested).
+- **Sold by the order** (0.6): `sold_as: each | order` (default `each`) and optional `pieces_per_order` (only with
+  `order`). Quantity counts orders; the quantity question says "how many orders of garlic knots would you like
+  (6 per order)". Visible to the extractor, so "12 garlic knots" can be read as 2 orders.
 - **Modifiers** (0.3) are ingredients/add-ons with a `group` (topping, sauce, crust, milk…), `aliases` and a
   `price_cents` for adding one portion. They no longer have an add/remove kind.
 - **Items**: aliases, base price, variants (price delta, aliases, optional default), `ingredient_ids`

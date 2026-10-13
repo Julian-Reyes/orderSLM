@@ -11,9 +11,14 @@ quantity (ExtractionRequest rejects a menu that still has them).
 menu@0.5: `accepted_kitchen_requests` lists the preparation requests this business can always do
 ("well done", "cut in squares", "warm"). Code matches a request with no catalog id against it first
 (core/requests.py); a match is a free kitchen note whatever the model said.
+
+menu@0.6: `sold_as: order` marks items sold by the order (garlic knots, fries), optionally with
+`pieces_per_order`. The quantity question asks "how many orders of …", and the extractor sees the piece
+count so "12 garlic knots" can be read as 2 orders (docs/ANNOTATION_GUIDE.md).
 """
 
 from datetime import time
+from enum import StrEnum
 
 from pydantic import Field, model_validator
 
@@ -68,6 +73,11 @@ class ComboSlot(Strict):
     choices: list[str] = Field(min_length=1, description="menu item ids")
 
 
+class SoldAs(StrEnum):
+    each = "each"
+    order = "order"
+
+
 class MenuItem(Strict):
     id: str = Field(pattern=ID_PATTERN)
     name: str
@@ -83,9 +93,13 @@ class MenuItem(Strict):
     splittable: bool = Field(default=False, description="half-and-half allowed (pizza)")
     combo_slots: list[ComboSlot] = Field(default_factory=list)
     available: bool = True
+    sold_as: SoldAs = Field(default=SoldAs.each, description="'order': quantity counts orders, not pieces")
+    pieces_per_order: int | None = Field(default=None, ge=2, description="only with sold_as 'order'")
 
     @model_validator(mode="after")
     def _variants(self) -> "MenuItem":
+        if self.pieces_per_order is not None and self.sold_as is not SoldAs.order:
+            raise ValueError(f"{self.id}: pieces_per_order needs sold_as 'order'")
         ids = [v.id for v in self.variants]
         if len(ids) != len(set(ids)):
             raise ValueError(f"{self.id}: duplicate variant ids")
