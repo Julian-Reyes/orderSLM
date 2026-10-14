@@ -109,11 +109,12 @@ it should produce and the box each message belongs in.
 |---|---|---|
 | M0 | Foundations: the data formats, rules, tests | Done |
 | M1 | The code half: menus, prices, missing-info rules, simple keyword versions | Done |
-| M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Dev set reviewed; all 199 test conversations written.** Next: Julian spot-checks at least 50 of them, then the test set is locked |
+| M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Done (2026-10-14).** 91 practice conversations reviewed; 199 final-exam conversations written, 58 reviewed, and the final exam **locked** |
 | M3–M7 | The experiments | Not started |
 | M8 | Demo and report | Not started |
 
-No AI model has been run or scored yet, and **$0 has been spent**.
+No AI model has been run or scored yet, and **$0 has been spent**. The final exam is now locked: any later change
+to it is logged with a reason.
 
 ### What changed during Julian's review of the practice set
 
@@ -332,8 +333,12 @@ by the same code as the annotation tool (0 findings, no near-duplicates with dev
 the rules don't allow and were adjusted (noted in each file and in PROGRESS.md); two new labeling conventions came
 out of it (one-choice combo slots; payment channels vs. methods).
 
-**Where M2 stands:** tooling merged to `main`; cards, 91 reviewed dev conversations, the review log and 199 test
-conversations on branch `m2-eval-data`. Next: Julian's spot-check of ≥ 50 test conversations, then the lock.
+**Review and lock (2026-10-14):** Julian reviewed 58 test conversations (001–046 plus targeted ones so every menu
+and situation type is covered) and changed none; the test split was then locked (`LOCK.json`, sha256
+`3f09234131e3825d`). Correction rates: dev 4/91 (changed during review), test 0/58.
+
+**Where M2 stands:** done. Cards, conversations, review logs and the lock are on branch `m2-eval-data`, not yet
+merged into `main`. Next milestone: M3, the teacher bake-off (asks before any spend over $2).
 
 ---
 

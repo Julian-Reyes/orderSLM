@@ -407,18 +407,25 @@ the annotation guide):
   ambiguous time asks a generic "What time would you like it?"; an unmatched item is quoted as written (caps,
   "same as last time").
 
+### Test review and lock (Julian, 2026-10-14)
+
+- **Reviewed 58/199 (29%)**, not the seeded sample first proposed (finding scattered ids in the tool was too slow):
+  a contiguous block a-test-001–046, the four flagged ones beyond it (061, 121, 151, 175), and one conversation of
+  each situation type missing from that block (047 off-topic, 048 contextual yes, 052 unclear, 056 delivery
+  question, 063 order status, 070 half-and-half, 077 payment question, 172 implicit category). Every menu and all
+  24 situations are covered. Report it as a contiguous block plus targeted additions, not a random sample.
+- **Correction rate (test): 0/58.** 013 and 043 changed after their first review (combo-question template fix,
+  wording only) and were re-reviewed before the lock; every review matches the locked file.
+- **Correction rates as LOCK.json records them:** dev 0.0 and test 0.0, the tool's count. Report dev as **4/91
+  (4.4%) changed during review** (034, 045, 050, 077, changed at Julian's direction before he saved them), test as
+  0/58.
+- **Locked** with `make lock-test`: 199 test conversations, sha256 `3f09234131e3825d`; `make verify-test` passes.
+  From now on a test file changes only with a logged reason (CHANGES.jsonl), and results after any model run on test
+  follow the contamination rule (CLAUDE.md).
+
 ### Open for Julian (M2)
 
-1. **Spot-check these 50 test conversations (25%)** with `make annotate-test` and "Save as reviewed"; then
-   `make lock-test`. The 5 flagged ones plus 45 drawn with `random.Random(20261013).sample` per menu from the sorted
-   remaining ids, stratified by menu (13 Halfmoon, 13 Lucky Lime, 12 Corner Patty, 12 Morning Crumb, flagged ones
-   counted in their menu):
-   - Flagged: 043, 061, 121, 151, 175.
-   - Corner Patty: 026, 056, 085, 110, 124, 126, 152, 159, 162, 167, 198.
-   - Halfmoon: 006, 016, 017, 028, 035, 060, 062, 144, 148, 150, 156, 184, 186.
-   - Lucky Lime: 012, 033, 039, 045, 050, 058, 082, 113, 132, 160, 161.
-   - Morning Crumb: 091, 107, 109, 114, 128, 145, 153, 163, 176, 179.
-   (All ids are `a-test-NNN`.)
+1. Merge `m2-eval-data` into `main` and push when you want (ask first; secrets check before any push).
 2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
 3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
