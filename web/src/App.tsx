@@ -665,7 +665,7 @@ function AddItem({ menu, disabled, onAdd }: { menu: Menu; disabled: boolean; onA
       </select>
       {!!item?.variants.length && (
         <select value={variant} onChange={(e) => setVariant(e.currentTarget.value)}>
-          <option value="">{item.default_variant_id ? `default (${item.default_variant_id})` : "size not stated"}</option>
+          <option value="">{item.default_variant_id ? `default (${item.default_variant_id})` : "not stated"}</option>
           {item.variants.map((v) => (
             <option value={v.id}>{v.name}</option>
           ))}

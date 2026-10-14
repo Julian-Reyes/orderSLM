@@ -395,6 +395,9 @@ the annotation guide):
   compares fields only).
 - **Hand-written questions** (template wording didn't fit): 020 (lower case), 043 (two combo slots), 124 (offers
   the two times), 133 and 165 (can't see past orders).
+- **Plain-English view wording:** an unstated variant said "size not stated" even for muffin flavors or taco fillings
+  (Julian, reviewing a-test-010). It now names the options: "not stated (Blueberry, Chocolate chip, Banana nut)";
+  the editor's dropdown says "not stated". Display only; no gold changed.
 - **Template issues noticed, not changed:** two missing combo slots repeat "what would you like with the …"; an
   ambiguous time asks a generic "What time would you like it?"; an unmatched item is quoted as written (caps,
   "same as last time").

@@ -46,7 +46,9 @@ def test_missing_requests_and_claims_are_spelled_out():
     )
     t = text(HM, o)
     assert "NOT ON THE MENU: “artichoke hearts”" in t
-    assert "L2  1 × Pepperoni Pizza, size not stated" in t
+    assert "L2  1 × Pepperoni Pizza, not stated (Personal 8-inch, Small 10-inch" in t
     assert "customer SAYS they already paid (a claim, not verified)" in t
     assert "STILL NEEDED BEFORE THE ORDER CAN BE CONFIRMED" in t
-    assert "L2: size / flavor (not given)" in t and "pickup or delivery (not given)" in t
+    assert (
+        "L2: which kind (size, flavor, filling…) (not given)" in t and "pickup or delivery (not given)" in t
+    )

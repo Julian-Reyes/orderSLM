@@ -26,7 +26,7 @@ FIELD_NAMES = {
     "items": "what to order",
     "item_menu_match": "which menu item",
     "item_quantity": "how many",
-    "item_variant": "size / flavor",
+    "item_variant": "which kind (size, flavor, filling…)",
     "item_modification": "a requested option",
     "combo_choice": "a combo choice",
     "fulfillment_method": "pickup or delivery",
@@ -81,11 +81,13 @@ def _size(item: MenuItem | None, line: ItemProposal) -> str:
         return ""
     if line.variant_id and (v := item.variant(line.variant_id)):
         return f", {v.name}"
+    # The menu doesn't say whether the options are sizes, flavors or fillings, so name the options instead.
+    options = ", ".join(v.name for v in item.variants)
     if line.unmatched_variant_text:
-        return f", size “{line.unmatched_variant_text}” (not a size we have)"
+        return f", “{line.unmatched_variant_text}” (not one we have: {options})"
     if item.default_variant_id and (v := item.variant(item.default_variant_id)):
         return f", {v.name} (default; not stated)"
-    return ", size not stated"
+    return f", not stated ({options})"
 
 
 def _item(menu: MenuCatalog, line: ItemProposal, out: ExtractionOutput) -> str:
