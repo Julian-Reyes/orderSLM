@@ -30,7 +30,7 @@ from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.6"
+REPLIES_VERSION = "replies@0.7"
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -63,7 +63,9 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_variant_not_on_menu": "We don't have a {text} for the {name}; we have {options}. Which would you like?",
         "q_option_not_on_menu": "We don't have {text} for the {name}. Would you like it as it comes, or with something else instead?",
         "q_option_unverified": "Just checking, we may not be able to do {text} on the {name}. Want it without, or keep it as a note for the kitchen?",
-        "q_combo": "what would you like with the {name} ({options})",
+        "q_combo": "which {slot} would you like with the {name} ({options})",
+        "q_combo_more": "which {slot} ({options})",
+        "q_combo_variant": "which {choice} would you like in the {name} ({options})",
         "q_method": "is this for pickup or delivery",
         "q_method_to_address": "Would you like it delivered to {address}, or will you pick it up?",
         "q_method_pickup_only": "is this for pickup",
@@ -286,13 +288,31 @@ def template_question(
                     )
                     statements.append(T[key].format(text=_option_text(mod.raw_text), name=item.name.lower()))
         elif m.field is FieldRef.combo_choice and item:
-            picked = {s.slot_id for s in line.combo_selections} if line else set()
+            picked = {s.slot_id: s for s in line.combo_selections} if line else {}
+            first = True  # name the combo once; later missing slots just add "and which drink (...)"
             for slot in item.combo_slots:
-                if slot.id not in picked:
+                sel = picked.get(slot.id)
+                if sel is None:
                     names = [c.name for cid in slot.choices if (c := menu.item(cid))]
+                    key = "q_combo" if first else "q_combo_more"
+                    first = False
                     questions.append(
-                        T["q_combo"].format(
-                            name=item.name.lower(), options=_join(names, lang, "or", comma=False)
+                        T[key].format(
+                            slot=slot.name.lower(),
+                            name=item.name.lower(),
+                            options=_join(names, lang, "or", comma=False),
+                        )
+                    )
+                elif (
+                    (choice := menu.item(sel.menu_item_id))
+                    and choice.variants
+                    and not (sel.variant_id or choice.default_variant_id)
+                ):  # picked, but the choice needs a size/flavor ("a latte" in the coffee & pastry)
+                    questions.append(
+                        T["q_combo_variant"].format(
+                            choice=choice.name.lower(),
+                            name=item.name.lower(),
+                            options=_join([v.name.lower() for v in choice.variants], lang, "or", comma=False),
                         )
                     )
         elif m.field is FieldRef.fulfillment_method:

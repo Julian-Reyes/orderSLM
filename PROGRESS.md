@@ -398,7 +398,12 @@ the annotation guide):
 - **Plain-English view wording:** an unstated variant said "size not stated" even for muffin flavors or taco fillings
   (Julian, reviewing a-test-010). It now names the options: "not stated (Blueberry, Chocolate chip, Banana nut)";
   the editor's dropdown says "not stated". Display only; no gold changed.
-- **Template issues noticed, not changed:** two missing combo slots repeat "what would you like with the …"; an
+- **Combo question names the slot** (replies@0.7, Julian reviewing a-test-034): "What would you like with the coffee &
+  pastry (Croissant or Muffin)?" is now "Which pastry would you like with the coffee & pastry (…)?"; several missing
+  slots read "…, and which drink (…)"; a picked choice that still needs a size is asked too. Regenerated from the
+  template: a-dev-011 (reviewed earlier; wording only, not counted as a review correction), a-test-013, 034, 043
+  (043 no longer hand-written).
+- **Template issues noticed, not changed:** an
   ambiguous time asks a generic "What time would you like it?"; an unmatched item is quoted as written (caps,
   "same as last time").
 

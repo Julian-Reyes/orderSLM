@@ -247,3 +247,20 @@ def test_summary_line_uses_the_plural_above_one():
     proposal = order(line("L1", "veggie_burger", qty=2), line("L2", "onion_rings"))
     assert _line_text(CP, proposal, "L1", "en") == "2 Veggie Burgers"
     assert _line_text(CP, proposal, "L2", "en") == "1 Onion Rings"
+
+
+def test_combo_question_names_each_missing_slot():
+    def ask(menu, *lines):
+        proposal = with_missing(menu, *lines, method="pickup")
+        return template_question(proposal.missing_or_ambiguous, proposal, menu)
+
+    assert ask(CP, line("L1", "cheeseburger_combo")) == (
+        "Which side would you like with the cheeseburger combo (Fries or Onion Rings), "
+        "and which drink (Coke, Sprite or Lemonade)?"
+    )
+    mc = load_menu("morning-crumb")
+    deal = line("L1", "coffee_pastry_combo", combo=[("drink", "latte")])
+    assert ask(mc, deal).startswith(
+        "Which latte would you like in the coffee & pastry (small 8 oz, medium 12 oz or large 16 oz), "
+        "which pastry would you like with the coffee & pastry (Croissant or Muffin)"
+    )
