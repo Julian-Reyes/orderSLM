@@ -425,8 +425,8 @@ the annotation guide):
 
 ### Open for Julian (M2)
 
-1. Merge `m2-eval-data` into `main` and push when you want (ask first; secrets check before any push).
+1. Merge `m2-eval-data` into `main` and push when you want (ask first; secrets check before any push);
+   `milestone-2` is merged and can be deleted locally.
 2. Rare labels now have 3 dev / 7–8 test cards each; per-label test metrics are still noisy (reported with CIs).
 3. Mega menu (spec §11e): the three menus combined have **36 items** (100 item/variant combinations), not ~80–100
    items. Decide in M7 whether "items" means item/variant combinations or the mega menu needs more items.
-4. Push `main` when you want; `milestone-2` is merged and can be deleted locally.
