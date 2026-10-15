@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-022",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"double cheeseburger no onions\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"large fries\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"deliver to 58 Linden St apt 2\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Linden St\",\"number\":\"58\",\"unit\":\"apt 2\",\"reference\":null,\"raw_text\":\"58 Linden St apt 2\",\"evidence\":[{\"message_index\":1,\"quote\":\"58 Linden St apt 2\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8451,
+   "cached_input_tokens": 6760,
+   "cache_write_tokens": 0,
+   "output_tokens": 410,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 6012.453695992008,
+  "cost_micros": 442,
+  "at": "2026-10-15T19:05:34.247787+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 8451,
+   "completion_tokens": 410,
+   "total_tokens": 8861,
+   "prompt_tokens_details": {
+    "cached_tokens": 6760,
+    "cache_write_tokens": 1688,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

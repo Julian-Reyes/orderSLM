@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-004",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_gluten_free\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"GLUTEN FREE CRUST\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"A LARGE VEGGIE PIZZA\"},{\"message_index\":0,\"quote\":\"GLUTEN FREE CRUST\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"GARLIC KNOTS\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Birch St\",\"number\":\"77\",\"unit\":null,\"reference\":null,\"raw_text\":\"77 BIRCH ST\",\"evidence\":[{\"message_index\":2,\"quote\":\"77 BIRCH ST\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"CANCEL THE WHOLE THING\"}]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11696,
+   "cached_input_tokens": 6760,
+   "cache_write_tokens": 0,
+   "output_tokens": 434,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 4571.178240003064,
+  "cost_micros": 779,
+  "at": "2026-10-15T19:03:56.241151+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 11696,
+   "completion_tokens": 434,
+   "total_tokens": 12130,
+   "prompt_tokens_details": {
+    "cached_tokens": 6760,
+    "cache_write_tokens": 4933,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}
