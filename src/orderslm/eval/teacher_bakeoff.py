@@ -300,8 +300,8 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
         ]
     lines += [
         "| Variant | JSON valid | Item F1 | Exact | Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv "
-        "| Cost/1k conv | p50 ms |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "| Cost (this run) | Cost/1k conv | p50 ms |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for v, r in results.items():
         t = r.get("tokens_per_conversation", {})
@@ -309,8 +309,11 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
             f"| `{v}` | {r.get('json_valid', 0)}/{r.get('conversations', 0)} | {_pct(r.get('item', {}).get('f1'))} "
             f"| {_pct(r.get('exact_match_rate'))} | {r.get('grounding', {}).get('conversations_with_issues', '—')} "
             f"| {t.get('input_tokens', '—')} | {t.get('output_tokens', '—')} | {t.get('reasoning_tokens', '—')} "
-            f"| ${r['cost_per_1000_conversations_usd']:.2f} | {r.get('latency_ms_p50', '—')} |"
+            f"| ${r['cost_micros'] / 1e6:.4f} | ${r['cost_per_1000_conversations_usd']:.2f} "
+            f"| {r.get('latency_ms_p50', '—')} |"
         )
+    total = sum(r["cost_micros"] for r in results.values())
+    lines.append(f"| **all variants** | | | | | | | | **${total / 1e6:.4f}** | | |")
     lines += [
         "",
         "Full metrics per variant: `metrics.json`. Raw outputs: `outputs/<variant>/<conversation>.json`.",

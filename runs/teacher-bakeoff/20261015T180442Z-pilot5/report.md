@@ -4,20 +4,21 @@ pilot 5 conversations from dev (Source A, Claude-written), prompt `teacher-extra
 
 **Pilot: 5 conversations is far too few to compare accuracy.** Use it for validity, tokens, cost and latency; accuracy differences here are noise.
 
-| Variant | JSON valid | Item F1 | Exact | Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv | Cost/1k conv | p50 ms |
-|---|---|---|---|---|---|---|---|---|---|
-| `openai/gpt-6-luna@none` | 5/5 | 77.8% | 60.0% | 0 | 10378.8 | 403.8 | 0.0 | $0.76 | 7416 |
-| `openai/gpt-6-luna@low` | 5/5 | 100.0% | 100.0% | 0 | 10378.8 | 476.6 | 73.2 | $0.80 | 4855 |
-| `openai/gpt-6-luna@medium` | 5/5 | 100.0% | 100.0% | 0 | 10378.8 | 749.8 | 230.8 | $0.94 | 8340 |
-| `anthropic/claude-haiku-5-5@off-low` | 3/5 | 75.0% | 40.0% | 0 | 13270.2 | 672.2 | 0.0 | $1.66 | 3068 |
-| `anthropic/claude-haiku-5-5@off-medium` | 3/5 | 75.0% | 40.0% | 0 | 13270.2 | 698.0 | 0.0 | $1.68 | 2847 |
-| `anthropic/claude-haiku-5-5@on-low` | 5/5 | 100.0% | 100.0% | 0 | 13271.2 | 1228.2 | 559.8 | $1.94 | 5420 |
-| `anthropic/claude-haiku-5-5@on-medium` | 5/5 | 100.0% | 100.0% | 0 | 13271.2 | 1427.6 | 755.6 | $2.04 | 5821 |
-| `google/gemini-3.1-flash-lite@minimal` | 5/5 | 77.8% | 60.0% | 0 | 8747.6 | 666.8 | 0.0 | $3.19 | 2793 |
-| `google/gemini-3.1-flash-lite@default` | 5/5 | 77.8% | 60.0% | 0 | 8747.6 | 746.6 | 0.0 | $3.31 | 2972 |
-| `deepseek/deepseek-flash@none` | 4/5 | 75.0% | 60.0% | 0 | 9001.2 | 509.8 | 0.0 | $0.81 | 2868 |
-| `deepseek/deepseek-flash@low` | 5/5 | 100.0% | 100.0% | 0 | 9026.2 | 1065.0 | 646.2 | $1.14 | 6318 |
-| `deepseek/deepseek-flash@high` | 4/5 | 75.0% | 60.0% | 0 | 9026.2 | 1009.4 | 595.6 | $1.10 | 5513 |
+| Variant | JSON valid | Item F1 | Exact | Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv | Cost (this run) | Cost/1k conv | p50 ms |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `openai/gpt-6-luna@none` | 5/5 | 77.8% | 60.0% | 0 | 10378.8 | 403.8 | 0.0 | $0.0038 | $0.76 | 7416 |
+| `openai/gpt-6-luna@low` | 5/5 | 100.0% | 100.0% | 0 | 10378.8 | 476.6 | 73.2 | $0.0040 | $0.80 | 4855 |
+| `openai/gpt-6-luna@medium` | 5/5 | 100.0% | 100.0% | 0 | 10378.8 | 749.8 | 230.8 | $0.0047 | $0.94 | 8340 |
+| `anthropic/claude-haiku-5-5@off-low` | 3/5 | 75.0% | 40.0% | 0 | 13270.2 | 672.2 | 0.0 | $0.0083 | $1.66 | 3068 |
+| `anthropic/claude-haiku-5-5@off-medium` | 3/5 | 75.0% | 40.0% | 0 | 13270.2 | 698.0 | 0.0 | $0.0084 | $1.68 | 2847 |
+| `anthropic/claude-haiku-5-5@on-low` | 5/5 | 100.0% | 100.0% | 0 | 13271.2 | 1228.2 | 559.8 | $0.0097 | $1.94 | 5420 |
+| `anthropic/claude-haiku-5-5@on-medium` | 5/5 | 100.0% | 100.0% | 0 | 13271.2 | 1427.6 | 755.6 | $0.0102 | $2.04 | 5821 |
+| `google/gemini-3.1-flash-lite@minimal` | 5/5 | 77.8% | 60.0% | 0 | 8747.6 | 666.8 | 0.0 | $0.0159 | $3.19 | 2793 |
+| `google/gemini-3.1-flash-lite@default` | 5/5 | 77.8% | 60.0% | 0 | 8747.6 | 746.6 | 0.0 | $0.0165 | $3.31 | 2972 |
+| `deepseek/deepseek-flash@none` | 4/5 | 75.0% | 60.0% | 0 | 9001.2 | 509.8 | 0.0 | $0.0040 | $0.81 | 2868 |
+| `deepseek/deepseek-flash@low` | 5/5 | 100.0% | 100.0% | 0 | 9026.2 | 1065.0 | 646.2 | $0.0057 | $1.14 | 6318 |
+| `deepseek/deepseek-flash@high` | 4/5 | 75.0% | 60.0% | 0 | 9026.2 | 1009.4 | 595.6 | $0.0055 | $1.10 | 5513 |
+| **all variants** | | | | | | | | **$0.0968** | | |
 
 Full metrics per variant: `metrics.json`. Raw outputs: `outputs/<variant>/<conversation>.json`.
 
