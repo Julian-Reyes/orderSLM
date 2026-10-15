@@ -1,8 +1,9 @@
 # OrderSLM walkthrough (for learning the project)
 
-First written 2026-10-07; updated 2026-10-13, after Julian finished reviewing the 91 dev conversations.
-Nothing here is a result: **no model has been run or scored yet**. Where this page shows output, it is real
-output from running the code on a sample conversation, not a measurement.
+First written 2026-10-07; updated 2026-10-13 (dev review) and 2026-10-15 (M3, the teacher bake-off).
+The only measurements so far are M3's, on the **dev** practice set: they guided prompt and code fixes, so they are
+tuning results, not final scores (those come from the sealed test set at the end). Elsewhere, output shown on this
+page is real output from running the code on a sample conversation, not a measurement.
 
 **Two ways to read it.** §0 explains the whole project in plain English, with no coding knowledge needed.
 §1 onward is the technical walkthrough, for learning how the code works.
@@ -103,18 +104,39 @@ it should produce and the box each message belongs in.
   B = 199 real human-written pizza orders from a public dataset (PIZZA), C = optionally, ~30 Julian writes. A
   has a single author, so B and C check that results hold up on real human writing.
 
-### Where things stand (2026-10-13)
+### Where things stand (2026-10-15)
 
 | Milestone | What | Status |
 |---|---|---|
 | M0 | Foundations: the data formats, rules, tests | Done |
 | M1 | The code half: menus, prices, missing-info rules, simple keyword versions | Done |
 | M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Done (2026-10-14).** 91 practice conversations reviewed; 199 final-exam conversations written, 58 reviewed, and the final exam **locked** |
-| M3–M7 | The experiments | Not started |
+| M3 | Teacher bake-off | **Done (2026-10-15).** The teacher is **OpenAI gpt-6-luna with reasoning "low"** |
+| M4–M7 | Training data, student, training, decision providers | Not started (M4 next) |
 | M8 | Demo and report | Not started |
 
-No AI model has been run or scored yet, and **$0 has been spent**. The final exam is now locked: any later change
-to it is logged with a reason.
+**$0.96 spent** so far (of a $10 budget), all on M3. The final exam is locked: any later change to it is logged with
+a reason.
+
+### What the teacher bake-off found (M3)
+
+Four AI models, in 12 settings (how much each one "thinks" before answering), read the same practice chats and
+filled in the order form. Each answer was compared with the answer key.
+
+- **luna (OpenAI) at "low" reasoning was the best value.** On 86 chats it tied the most accurate setting
+  (Anthropic's Haiku, thinking on) at about a third of the cost: $0.57–0.63 per 1,000 chats vs $1.83–1.90.
+  Gemini was the least accurate and the most expensive. More thinking was not better: luna and DeepSeek at their
+  default (higher) settings made more broken answers than at "low".
+- **Code took over the rule-following.** The models usually read the chat right but sometimes applied the rules
+  wrong: forgetting to ask a pizza size, asking for payment after "I already paid", offering delivery at a
+  pickup-only café. Now code works out what's still missing from the model's facts, the same way every time, and
+  writes the question. "2 cheeseburgers" and "2 single cheeseburgers" also count as the same order (single is the
+  menu default).
+- **Two prompt fixes:** a complaint about a past order ("my order was missing the croissant") is not a new order,
+  and a few formatting rules spelled out. After both, and with the code rules, luna got every item right on all 91 practice chats and
+  90 of 91 whole orders right, in two separate runs.
+- **Every number is saved**, per model and setting (accuracy counts, tokens, cost of the run and per 1,000 chats,
+  before and after the fixes), for the case study: `docs/TEACHER_BAKEOFF.md` and `runs/teacher-bakeoff/`.
 
 ### What changed during Julian's review of the practice set
 
@@ -337,8 +359,56 @@ out of it (one-choice combo slots; payment channels vs. methods).
 and situation type is covered) and changed none; the test split was then locked (`LOCK.json`, sha256
 `3f09234131e3825d`). Correction rates: dev 4/91 (changed during review), test 0/58.
 
-**Where M2 stands:** done. Cards, conversations, review logs and the lock are on branch `m2-eval-data`, not yet
-merged into `main`. Next milestone: M3, the teacher bake-off (asks before any spend over $2).
+**Where M2 stands:** done and merged into `main`.
+
+### Milestone 3: the teacher bake-off (branch `milestone-3`, 2026-10-14 … 10-15)
+
+**Built:**
+- **Accounts and caps.** OrderSLM-only API keys for OpenAI, Anthropic, Google and DeepSeek, each with a monthly
+  cap; prices re-verified on the official pages (docs/COSTS.md).
+- **Provider clients** (`llm/`): one client for OpenAI-compatible APIs (OpenAI, Gemini, DeepSeek) and one for
+  Anthropic's own API, over `httpx`. Retries on rate limits, stops at once on bad keys or empty balances, and computes
+  cost in integer micro-dollars from the provider's reported tokens × the verified price (DeepSeek's peak/off-peak,
+  Haiku's long-prompt price). A **record/replay cache** (`LLM_CACHE`) makes reruns free; tests can't reach the network
+  (`conftest.no_real_http`). Models live in `config/models.json` as **variants**, `provider/model@setting`.
+- **Teacher prompt** (`extractors/prompts/teacher-extract@0.4.md`): the annotation guide's gold rules, the menu as
+  JSON, the chat with message numbers; the same for every model. The output schema is a simplified "portable"
+  version of the contract (`extractors/teacher.portable_schema`).
+- **Evaluation** (`eval/`): a loader that refuses samples, a fixed seeded 40-chat bake-off set, metrics (JSON
+  validity, item F1, fully correct, field accuracy, corrections, grounding), Wilson confidence intervals, and a runner
+  that prints a cost estimate, runs a pilot, stops itself at a spending limit, saves every raw answer, and rebuilds its
+  report from the saved files only.
+- **Code rules** (`core/finalize.py`): fills a default size, recomputes the missing list with `core/missing.py`,
+  writes the question from the template, turns "confirmed" with gaps into "pending". Tested by rebuilding the missing
+  list of every dev gold label from its facts.
+
+**How the experiment went** (full write-up: `docs/TEACHER_BAKEOFF.md`):
+1. Smoke test: one tiny call per setting ($0.0007).
+2. Pilot, 5 chats × 12 settings ($0.097). Haiku failed every call: Anthropic's schema mode allows 16 nullable fields
+   and ours has 24, so Haiku (like DeepSeek) now gets the schema in the prompt only.
+3. Bake-off, 35 new chats × 12 settings with prompt v0.2 ($0.58). Best: Haiku on-medium (all 58 items) and luna low
+   (all 58, 2 extra) at a third of the price. Gemini last.
+4. Head-to-head luna low vs Haiku on-medium on the other 51 dev chats ($0.12): tied on items, luna 3× cheaper. Julian
+   chose luna low.
+5. luna low on all 91 dev chats with prompt v0.3 and v0.4, then the same run again ($0.16): with the code rules,
+   91/91 valid, 146/146 items, 90/91 fully correct both times.
+
+**Key decisions and trade-offs:**
+- **Reasoning settings were tested, not assumed:** lowest vs default for every model (Julian), plus `low` for luna and
+  DeepSeek and four Haiku combinations. Defaults were not better.
+- **Every extra item came from a chat with no new order** (a complaint, an order placed by phone, a catering request
+  for a manager); prompt v0.3 fixed all of them.
+- **The rules moved from the model to code**, because the model had the facts right but applied the rules
+  inconsistently, and code is identical every time. The model still makes the calls that need the words ("a burger"
+  is ambiguous, "one of the other one" is an ambiguous flavor).
+- **Scoring fix (`scorer@0.2`):** a blank size and the menu default count as the same. This changed earlier numbers
+  (Gemini minimal 74% → 91% item F1); the ranking didn't change. Every report now has a raw view and a "with code
+  rules" view, both from the same saved answers.
+- **Statistical honesty:** with 35–91 chats the top settings' confidence intervals overlap; the choice rests on cost
+  and a clean record, not on a significant accuracy win. These dev numbers are tuning results.
+
+**Where M3 stands:** done and merged into `main`. Next: M4, synthetic chats labeled by luna (see PROGRESS.md "Start
+here").
 
 ---
 
@@ -365,6 +435,12 @@ merged into `main`. Next milestone: M3, the teacher bake-off (asks before any sp
 | `src/orderslm/data/cards.py` | Scenario-card generator for Source A | 2 |
 | `src/orderslm/app/main.py` | FastAPI backend for the annotation tool | 2 |
 | `src/orderslm/paths.py` | Where data lives + the **seal** on the test split | 0, 2 |
+| `config/models.json` | The 12 model settings (`provider/model@variant`), prices and where each price was verified | 3 |
+| `src/orderslm/llm/` | Provider clients, cost in micro-dollars, record/replay cache, throttle, scripted fake, `smoke.py` | 3 |
+| `src/orderslm/extractors/` | The teacher: `teacher.py` (prompt + portable schema), `prompts/teacher-extract@0.1…0.4.md` | 3 |
+| `src/orderslm/core/finalize.py` | Code rules on a model's answer: default size, missing list, template question | 3 |
+| `src/orderslm/eval/` | `dataset.py` (which chats), `metrics.py` (scoring), `stats.py` (Wilson), `teacher_bakeoff.py` (runner + reports), `bakeoff_chart.py` + `bakeoff_svg.py` (case-study data + chart) | 3 |
+| `runs/smoke/`, `runs/teacher-bakeoff/` | Every saved answer, manifest, metrics and report; `summary.json` and `chart-data.json` for the case study | 3 |
 | `web/` | The annotation tool's web page (Vite + Preact + TypeScript) | 2 |
 | `data/menus/` | The three business menus; `held_out/lucky-lime.json` | 1 |
 | `data/dev/a-dev-*.json`, `REVIEWS.jsonl` | The 91 Source A dev conversations and Julian's review log | 2 |
@@ -375,10 +451,11 @@ merged into `main`. Next milestone: M3, the teacher bake-off (asks before any sp
 | `docs/ANNOTATION_GUIDE.md` | How to label gold: what counts as missing, corrections, "yes" | 0 |
 | `docs/ARCHITECTURE.md` | Components, folder layout, planned commands, visual design | 0 |
 | `docs/AGENTDESK_REUSE.md` | What was ported from AgentDesk | 0 |
-| `docs/COSTS.md` | Actual spend (still $0) | 0 |
+| `docs/COSTS.md` | Actual spend, call by call ($0.96 after M3), caps, verified prices | 0, 3 |
+| `docs/TEACHER_BAKEOFF.md`, `docs/figures/` | The M3 write-up and its accuracy-vs-cost chart | 3 |
 | `docs/PRICING.md`, `MENUS.md` | Pricing rules; the menus and why they're shaped that way | 1 |
 | `docs/PIZZA.md`, `SPLITS.md` | The PIZZA benchmark; sources, cards, review, lock | 2 |
-| `tests/` | 343 tests in 18 files, one per area (`test_pricing.py`, `test_pizza.py`, `test_splits.py`, ...) | 0–2 |
+| `tests/` | 395 tests in 22 files, one per area (`test_pricing.py`, `test_llm.py`, `test_finalize.py`, ...) | 0–3 |
 
 ---
 
@@ -539,16 +616,25 @@ needed, and why the metrics look at fields as well as items.
 | **Planted mistakes** | Known errors that code puts into correct orders (dropped modification, wrong quantity, swapped item…) so a checker's catch rate can be measured per error type. |
 | **Closed-field comparison** | Fixed-choice fields (pickup/delivery, card/cash, confirming, paid claim) answered side by side by rules, the three decision providers, the student and the teacher (spec §11f). |
 | **Sold by the order** | `sold_as: order` on a menu item: quantity counts orders, not pieces (garlic knots: 6 per order). |
+| **Variant (model setting)** | One model at one reasoning setting, written `provider/model@setting`, e.g. `openai/gpt-6-luna@low`. M3 compared 12. |
+| **Reasoning effort / thinking** | How much a model works through the problem before answering (hidden tokens, billed as output). |
+| **Fully correct (exact match)** | The whole order matches the answer key: every item and every order-level field, including what's still missing. |
+| **Code rules / finalize** | `core/finalize.py`: code applies the missing-info rules, the default size and the question template to the model's facts. |
+| **Before / after view** | The same saved answers scored raw with the original scorer (before) or after the code rules with `scorer@0.2` (after). |
+| **Record/replay cache** | Saved API answers keyed by the exact request (`.llm-cache/`); replaying costs $0 and gives identical numbers. |
+| **Smoke test** | One tiny call per model setting to prove the key, endpoint and JSON mode work (`make smoke`). |
+| **Pilot** | A small paid run before the big one, to check the estimate and catch problems cheaply (spec §14). |
+| **Prompt version** | `teacher-extract@0.N`: every prompt change gets a new number, and every run logs which one it used. |
 
 ---
 
 ## 6. Commands to try
 
-Run these from the repo root. None of them spends money or calls a model.
+Run these from the repo root. None of them spends money or calls a model (the M3 commands only spend with `--yes`).
 
 | Command | What you'll see / what to look for |
 |---|---|
-| `make check` | Ruff lint + format check, then 343 tests. Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
+| `make check` | Ruff lint + format check, then 395 tests. Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
 | `uv run pytest tests/test_pricing.py -vv` | Each pricing rule as a named test (`-vv` because the config adds `-q`), e.g. `test_half_and_half_costs_the_dearer_half_plus_half_priced_toppings`. The test names read as the spec. |
 | `make menus` | Each menu validated, with its content hash (`halfmoon-pizza@44183959594b`) and item/variant/modifier counts. Lucky Lime is marked HELD OUT. |
 | `make annotate`, then open http://127.0.0.1:8765 | The annotation tool. Click **New conversation**, type a message, select some words to make evidence, use **+ item line**, and watch the check panel: findings, "rules say missing", and the computed quote. `?open=<id>` opens one directly. |
@@ -558,13 +644,17 @@ Run these from the repo root. None of them spends money or calls a model.
 | `ORDERSLM_UNSEAL_TEST="read cards" uv run python -m orderslm.data.cards summary` | Both splits' card counts, with the seal deliberately opened. |
 | `uv run python -c "from orderslm.paths import test_split_dir; test_split_dir()"` | Raises `SealedSplitError`: the seal in one line. |
 | `git log --oneline` | The history from §2. |
+| `make smoke` | The cost estimate for one tiny call per model (under a cent); no calls without `ARGS=--yes`. |
+| `make teacher-bakeoff` | The bake-off's cost estimate per setting; no calls without `--yes`. |
+| `make teacher-bakeoff ARGS="--report runs/teacher-bakeoff/20261015T182916Z-full-skip5 --postprocess finalize"` | Rebuilds the 12-setting report "with code rules" from the saved answers: no API calls, $0. |
+| `make bakeoff-chart` | Regenerates `runs/teacher-bakeoff/chart-data.json` and `docs/figures/teacher-bakeoff-accuracy-cost.svg` from the saved answers. |
 
 To trace an order yourself, adapt §4: load `sample-005.json`, call `extract_rules(menu, messages[:k])` for
 k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing().quote`.
 
 ---
 
-## 7. Ten questions
+## 7. Questions
 
 1. Why does a model never output a price, and what stops it from doing so anyway?
 2. What's the difference between `schema/extraction.py` and `schema/order.py`?
@@ -576,6 +666,9 @@ k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing(
 8. What are Sources A, B and C, and why must results be reported per source?
 9. Why are dev and test split by scenario card, and what else guards against overlap?
 10. In the traced example, what did the rules baseline get right, and what did it miss (extraction and routing)?
+11. Why was luna "low" chosen over Haiku "on-medium", which scored as high or higher?
+12. Why does code, not the model, decide what's still missing?
+13. Why are M3's numbers called tuning results, and what would make them held-out results?
 
 ### Answers
 
@@ -612,3 +705,14 @@ k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing(
     correction (1 → 2 garlic knots). It also got delivery, the address and card payment, but missed the note
     "ring the side door". Routing: it labeled "hi", the correction and the delivery/payment messages correctly,
     but called the two item messages `UNKNOWN` instead of `PLACE_ORDER`.
+11. They tied on 86 dev chats (raw answers: 137 of 137 items each, 80/86 whole orders right), and the confidence
+    intervals overlap.
+    luna cost about a third as much ($0.57–0.63 vs $1.83–1.90 per 1,000 chats), so it is the better value; and since
+    the practice chats were written by Claude, a non-Claude teacher avoids any bias toward Claude's own phrasing.
+12. The rules are mechanical ("a pizza with no size → ask", "already paid → don't ask about payment"), and
+    `core/missing.py` already implements them for the gold labels. luna had the facts right but sometimes applied the
+    rules wrong, and differently between runs; code gives the same answer every time (checked against every dev gold
+    label). The model still makes the calls that need the words, like "a burger" being ambiguous.
+13. The dev chats showed the problems that the prompt fixes and the code rules then fixed, so scoring on the same chats
+    flatters them. Held-out results come from data nobody looked at while building: the sealed test set (Sources A, B,
+    C) at the end of the project, or fresh unused PIZZA orders for checking a specific fix.
