@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-051",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 large meat lovers\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6\",\"normalized_local\":\"18:00\",\"evidence\":[{\"message_index\":0,\"quote\":\"at 6\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"payment_method\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"How would you like to pay\u2014by card or cash?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11450,
+   "cached_input_tokens": 6673,
+   "cache_write_tokens": 0,
+   "output_tokens": 305,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3562.770468997769,
+  "cost_micros": 697,
+  "at": "2026-10-15T18:52:53.707923+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 11450,
+   "completion_tokens": 305,
+   "total_tokens": 11755,
+   "prompt_tokens_details": {
+    "cached_tokens": 6673,
+    "cache_write_tokens": 4774,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

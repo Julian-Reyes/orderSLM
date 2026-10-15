@@ -1,0 +1,31 @@
+{
+ "conversation_id": "a-dev-004",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"schema_version\": \"extraction@0.4\",\n  \"items\": [\n    {\n      \"line_id\": \"L1\",\n      \"menu_item_id\": \"veggie_pizza\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": \"large\",\n      \"unmatched_variant_text\": null,\n      \"modifications\": [\n        {\n          \"kind\": \"add\",\n          \"modifier_id\": \"crust_gluten_free\",\n          \"replacement_modifier_id\": null,\n          \"amount\": \"normal\",\n          \"raw_text\": \"ON GLUTEN FREE CRUST\",\n          \"not_on_menu\": false,\n          \"kitchen_note\": false\n        }\n      ],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"A LARGE VEGGIE PIZZA ON GLUTEN FREE CRUST\"\n        }\n      ]\n    },\n    {\n      \"line_id\": \"L2\",\n      \"menu_item_id\": \"garlic_knots\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": null,\n      \"unmatched_variant_text\": null,\n      \"modifications\": [],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 1,\n          \"quote\": \"AND GARLIC KNOTS\"\n        }\n      ]\n    }\n  ],\n  \"fulfillment\": {\n    \"method\": \"delivery\",\n    \"method_evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"DELIVERY TO 77 BIRCH ST\"\n      }\n    ],\n    \"requested_time\": {\n      \"state\": \"not_mentioned\",\n      \"kind\": null,\n      \"raw_text\": null,\n      \"normalized_local\": null,\n      \"evidence\": []\n    }\n  },\n  \"address\": {\n    \"state\": \"provided\",\n    \"street\": \"BIRCH ST\",\n    \"number\": \"77\",\n    \"unit\": null,\n    \"reference\": null,\n    \"raw_text\": \"77 BIRCH ST\",\n    \"evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"77 BIRCH ST\"\n      }\n    ]\n  },\n  \"payment\": {\n    \"method\": \"unknown\",\n    \"change_for_cents\": null,\n    \"customer_claims_paid\": false,\n    \"evidence\": []\n  },\n  \"customer_name\": {\n    \"state\": \"not_mentioned\",\n    \"value\": null,\n    \"evidence\": []\n  },\n  \"customer_decision\": {\n    \"state\": \"cancelled\",\n    \"agreed_while_incomplete\": false,\n    \"evidence\": [\n      {\n        \"message_index\": 4,\n        \"quote\": \"CANCEL THE WHOLE THING\"\n      }\n    ]\n  },\n  \"notes\": [],\n  \"missing_or_ambiguous\": [],\n  \"clarification_question\": null\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10350,
+   "cached_input_tokens": 9984,
+   "cache_write_tokens": 0,
+   "output_tokens": 676,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3226.2050319986884,
+  "cost_micros": 491,
+  "at": "2026-10-15T18:30:03.132123+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10350,
+   "completion_tokens": 676,
+   "total_tokens": 11026,
+   "prompt_tokens_details": {
+    "cached_tokens": 9984
+   },
+   "prompt_cache_hit_tokens": 9984,
+   "prompt_cache_miss_tokens": 366
+  }
+ }
+}

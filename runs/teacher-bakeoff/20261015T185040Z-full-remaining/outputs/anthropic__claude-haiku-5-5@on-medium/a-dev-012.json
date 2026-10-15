@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-012",
+ "config_id": "anthropic/claude-haiku-5-5@on-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 large cheese pizzas\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery please\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"paying card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"address\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"What's the delivery address for the 2 large cheese pizzas?\"}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 14983,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1017,
+   "reasoning_tokens": 531
+  },
+  "latency_ms": 4272.006467013853,
+  "cost_micros": 2007,
+  "at": "2026-10-15T18:51:03.626560+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 14983,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1017,
+   "output_tokens_details": {
+    "thinking_tokens": 531
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

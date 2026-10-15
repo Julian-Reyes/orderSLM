@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-046",
+ "config_id": "anthropic/claude-haiku-5-5@on-low",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"pepperoni pizza\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a hawaiian\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_variant\",\"reason\":\"missing\",\"line_id\":\"L1\"},{\"field\":\"item_variant\",\"reason\":\"missing\",\"line_id\":\"L2\"}],\"clarification_question\":\"What size would you like for the pepperoni and the Hawaiian pizzas? We have personal 8-inch, small 10-inch, medium 12-inch, large 14-inch, or extra large 16-inch.\"}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 15026,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1263,
+   "reasoning_tokens": 583
+  },
+  "latency_ms": 5818.170754995663,
+  "cost_micros": 2135,
+  "at": "2026-10-15T18:31:43.425808+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 15026,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1263,
+   "output_tokens_details": {
+    "thinking_tokens": 583
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

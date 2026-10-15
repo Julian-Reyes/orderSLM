@@ -2,7 +2,23 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-08._
+_Last updated 2026-10-15 (end of session)._
+
+## Start here next session
+
+- **State:** M0–M3 done. `milestone-3` merged into local `main`; **not pushed** (ask Julian first; run a secrets check).
+  Old local branches `milestone-2`, `m2-eval-data` are fully contained in main (delete only if Julian wants).
+- **Next: M4** (synthetic generation + teacher labeling, spec §7 "Synthetic training data", §11d label audit). Open
+  items to settle before bulk labeling, all from M3:
+  1. Contract for the labels: add `intent` (spec §4); decide whether the model still outputs
+     `missing_or_ambiguous`/`clarification_question` (code computes them now via `core/finalize`) or only flags the
+     text judgments (ambiguous item / ambiguous size).
+  2. Label pipeline runs through `core/finalize`; chats with no items are stored as "no order" (null), like gold.
+  3. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
+  4. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7, required before bulk labeling).
+  5. Generator model ≠ teacher (spec §7); 200-conversation pilot first, Julian audits it.
+- **Case study:** every experiment records all numbers per model/setting (accuracy counts, tokens, run cost and per
+  1,000, latency, before/after views) in `runs/<experiment>/` + a summary/chart-data JSON (Julian, 2026-10-15).
 
 ## Milestones
 
@@ -10,16 +26,111 @@ _Last updated 2026-10-08._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | Not started |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
+| 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.00** (docs/COSTS.md). No API calls, model downloads, training or deployment so far.
+**Spend to date: $0.8011** (docs/COSTS.md): M3 smoke tests, teacher bake-off pilot, second bake-off, head-to-head. No model downloads,
+training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
+
+## M3 so far (2026-10-15)
+
+- **Accounts:** OrderSLM-only keys for OpenAI, Anthropic, Google, DeepSeek, each with a cap (docs/COSTS.md,
+  "Spend controls"). OpenAI project allows `gpt-6-luna` only; Gemini key restricted to the Gemini API.
+- **Client layer** (`src/orderslm/llm/`, `config/models.json`): OpenAI-compatible client (OpenAI, Gemini,
+  DeepSeek) + native Anthropic client over `httpx`; retry 429/5xx with Retry-After, fail fast on auth/quota;
+  cost in integer micro-USD from recorded usage × verified price (DeepSeek peak/off-peak, Haiku > 100K
+  prompts; an unverified long-context price refuses instead of guessing); record/replay cache
+  (`LLM_CACHE`); rpm throttle; scripted fake. Clients never edit the prompt.
+- **Smoke test** (`make smoke ARGS=--yes`, `runs/smoke/20261015T173802Z/`): all 4 return valid JSON.
+- **Open, decide before the bake-off:**
+  1. Reasoning settings: **Julian chose to pilot both** (2026-10-15): lowest vs. provider default, 5 conversations
+     × 4 models × 2 settings, then decide from the data. Lowest (config now): luna `none`, Gemini `minimal`,
+     DeepSeek thinking off, Haiku thinking disabled + effort `low`. Defaults: luna `medium`, Gemini model
+     default, DeepSeek thinking on `high`, Haiku adaptive thinking at effort `medium` (Anthropic effort docs;
+     the smoke call ran Haiku at its default and skipped thinking on the easy prompt).
+  2. DeepSeek has JSON-object mode only, so the shared prompt must describe the JSON itself (same prompt for all).
+  3. Gemini: json_schema enforcement on the OpenAI-compatible endpoint and thinking-token accounting are not
+     documented; the smoke call had no thinking tokens, so still unproven. Parser bills hidden thinking either way.
+  4. OpenAI usage reports `prompt_tokens_details.cache_write_tokens`; check whether OpenAI bills cache
+     writes before bulk labeling (no cache-write price in COSTS yet).
+  5. Haiku's structured-output mode adds ~200 input tokens per call (273 vs 39–79 for the others).
+- **Variants (Julian, 2026-10-15):** 12 configs, `provider/model@variant`: luna none/low/medium; Haiku
+  thinking off/on × effort low/medium; Gemini minimal/default; DeepSeek none/low/high. All 12 pass the smoke test.
+- **Pilot** (`runs/teacher-bakeoff/20261015T180442Z-pilot5/report.md`; 5 dev conversations, far too few to rank
+  accuracy): every variant with reasoning on (luna low/medium, Haiku on-low/on-medium, DeepSeek low) got 5/5
+  valid and all items right; the no-reasoning variants missed the half-and-half pizza (a-dev-017) or another item.
+  Cost per 1,000 conversations: luna $0.76–0.94, DeepSeek $0.81–1.14, Haiku $1.66–2.04, Gemini $3.19–3.31.
+- **Pilot findings:**
+  1. Anthropic structured output allows at most 16 union-typed parameters; ExtractionOutput has 24 (HTTP 400 on
+     every Haiku call in the first run, not billed). Haiku now runs prompt-only JSON like DeepSeek: the prompt is
+     identical for all; luna and Gemini have schema-constrained decoding, Haiku and DeepSeek don't (report this).
+  2. Unconstrained models set `menu_item_id` and `halves` together on a half-and-half (a-dev-017; DeepSeek
+     none/high, Haiku off-*). A clearer prompt line would likely fix it; not changed, because tuning on bake-off
+     conversations would bias the comparison (Julian to decide).
+  3. Gemini default ≈ minimal (same tokens, no reasoning reported); docs don't state flash-lite's default.
+  4. Gemini caches prompts implicitly (`cached_tokens` up to 8.3K of 9.9K); no verified cached price, so its
+     cost is billed at full input price and may be overstated. Verify before the full run.
+  5. Input tokens differ by tokenizer for the same prompt: luna 10.4K, Haiku 13.3K, DeepSeek 9.0K, Gemini 8.7K.
+  6. A test reached the network once (fake key, 401, no cost) after the Anthropic change; tests now block real
+     HTTP (`conftest.no_real_http`).
+- **Second bake-off** (`runs/teacher-bakeoff/20261015T182916Z-full-skip5/report.md`; Julian: prompt v0.2 with the
+  half-and-half wording, run on the 35 bake-off conversations the pilot never used, so no scored conversation shaped
+  the prompt). 58 gold items. Best item F1: Haiku on-medium 100% (58/58, exact 33/35, $1.90/1k); luna low 98.3%
+  (58/58 found, 2 extra, exact 32/35, $0.63/1k); luna none 97.4% (exact 30/35, $0.58/1k); DeepSeek low 95.5% (exact
+  33/35, $0.84/1k). Gemini worst and priciest (74–78%, $2.82–2.94/1k). More reasoning was not better: luna medium and
+  DeepSeek high scored below their `low` (invalid outputs: decision evidence, off-menu line with a variant).
+  Exact-match 95% CIs overlap for the top four (e.g. 81–98% vs 78–97%): 35 conversations can't separate them.
+  Spec rule (cheapest within 3 pp of best item F1) → luna `none`; Julian to decide (see the run report).
+- **Head-to-head** (Julian: luna `low` vs Haiku `on-medium` on more chats; the sealed test split can't be used, so the
+  51 dev conversations outside the bake-off set: `runs/teacher-bakeoff/20261015T185040Z-full-remaining/`). Tied:
+  both found all 79 gold items with 2 extras (F1 98.8%); fully correct 48/51 (luna) vs 47/51 (Haiku); Haiku had 2
+  invalid outputs (address on a pickup order). Cost $0.0292 vs $0.0933 ($0.57 vs $1.83 per 1k): luna got automatic
+  prompt caching (340K of 491K input tokens cached); Haiku had none (Anthropic needs explicit cache_control, not
+  used) and spends ~680 reasoning tokens per chat. Combined with the second bake-off (86 conversations, 137 gold
+  items): luna 137 found / 4 extra, 80/86 fully correct; Haiku 137 / 2, 80/86.
+- **Teacher decision (Julian, 2026-10-15): `openai/gpt-6-luna@low`.** Tied with Haiku on-medium on accuracy over 86
+  conversations at about a third of the cost, and not exposed to the Claude-written-data bias.
+- **Extras (false-positive items), luna low:** all 4 in conversations with no new order: a complaint about a missing
+  croissant (a-dev-044), a catering request asking for a manager (a-dev-021: "30 large pizzas" → off-menu line), and an
+  already-placed order with a payment claim (a-dev-056: latte + croissant). Haiku's 2 extras: the same a-dev-056.
+  No extras in real ordering chats. **M4 labeling prompt:** say explicitly that items mentioned about a past or
+  already-placed order (complaint, status, "I ordered X earlier") or a request to talk to someone are not a new
+  order; check on dev before bulk labeling.
+- **Teacher prompt fixes on dev (Julian, 2026-10-15), luna low, all 91 dev:**
+  - v0.3 (no items for past/placed orders or handoff requests, `runs/…T190341Z-full-all`): the 4 extras are gone
+    (a-dev-021/044/056 now correct). But 3 chats (a-dev-023/059/064: confirm, then change) became invalid: luna cited
+    the change as evidence on a plain `pending` decision; the same error appeared for luna none/medium in the v0.2 run.
+  - v0.4 (plain pending has no evidence, `runs/…T191233Z-full-all`): 91/91 valid, items 143 found / 3 extra / 3 missed
+    of 146 (F1 97.9%), fully correct 83/91. The 3 fixed; 5 others changed with nothing in v0.4 touching them
+    (unstated cheeseburger size filled with the default `single` ×2, missing pizza size / pickup name not flagged,
+    payment asked despite a payment claim): **luna's answers vary between runs of the same prompt.**
+  - These dev results are prompt tuning, not held-out numbers (the fixes came from these chats).
+  - Ideas for M4 (not done): measure run-to-run variation (same prompt twice); compute `missing_or_ambiguous` in code
+    (core/missing.py already has the rules) instead of trusting the model; normalize an unstated default variant.
+- **Code applies the rules (Julian, 2026-10-15)**, `core/finalize.py` (`finalize@0.1`): fills an unstated default
+  variant ("2 cheeseburgers" = single); recomputes `missing_or_ambiguous` with `core/missing.py`, keeping only the
+  model's "ambiguous" calls (unmatched item, variant) that need the text; builds the question from the template
+  (a pickup-only café is never asked "pickup or delivery?"); turns "confirmed" with gaps into pending +
+  agreed_while_incomplete. The model's own missing list and question are ignored. Tested by rebuilding every dev
+  gold missing list from its facts (raw-JSON path included). **Scoring `scorer@0.2`:** blank = default variant
+  on both sides; all saved reports rebuilt, so numbers differ from the first ones reported (Gemini minimal item
+  F1 74%→91%, DeepSeek none 81%→88%, luna medium 90%→94%); ranking and teacher choice unchanged. Each run now
+  also has `report.finalize.md` / `metrics.finalize.json` (same saved outputs, scored after finalize).
+- **Run-to-run variation (luna low, v0.4, all 91 dev, twice; second run cache off):** raw answers differ in 3/91
+  chats (never in items); after finalize in 1/91 (a no-order complaint, where only the unused missing list
+  differs). Both runs after finalize: 91/91 valid, 146/146 items, 0 extra, 90/91 fully correct (the miss:
+  a-dev-049 "one of the other one" shake flavor, ambiguous vs missing: same question to the customer).
+  Still prompt tuning on dev, not a held-out result.
+- **M4 to-dos from this:** labels for chats with no items are stored as "no order" (null), like gold; labeling runs
+  through finalize; the decision providers' label audit (§11d) checks "new order vs. past order".
+- **Case-study data:** every run's metrics, tokens, costs and settings are in `runs/teacher-bakeoff/summary.json`
+  (`--summary` rebuilds it from the saved run folders; reports from saved outputs only).
 
 ## Plan updates (Julian, 2026-10-08)
 

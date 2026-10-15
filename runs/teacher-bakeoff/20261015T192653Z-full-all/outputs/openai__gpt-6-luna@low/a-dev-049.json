@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-049",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"swap the chocolate for a lemonade\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one of the other one\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"2 CHEESEBURGERS\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":3,\"quote\":\"CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_variant\",\"reason\":\"missing\",\"line_id\":\"L2\"},{\"field\":\"fulfillment_method\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"Which flavor would you like for the milkshake\u2014vanilla, chocolate, or strawberry\u2014and would you like pickup or delivery?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8547,
+   "cached_input_tokens": 6810,
+   "cache_write_tokens": 0,
+   "output_tokens": 842,
+   "reasoning_tokens": 372
+  },
+  "latency_ms": 8727.216528990539,
+  "cost_micros": 663,
+  "at": "2026-10-15T19:30:39.703210+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 8547,
+   "completion_tokens": 842,
+   "total_tokens": 9389,
+   "prompt_tokens_details": {
+    "cached_tokens": 6810,
+    "cache_write_tokens": 1734,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 372,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

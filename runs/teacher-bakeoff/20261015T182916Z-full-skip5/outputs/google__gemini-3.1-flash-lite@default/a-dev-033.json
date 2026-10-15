@@ -1,0 +1,29 @@
+{
+ "conversation_id": "a-dev-033",
+ "config_id": "google/gemini-3.1-flash-lite@default",
+ "response": {
+  "config_id": "google/gemini-3.1-flash-lite@default",
+  "model": "gemini-3.1-flash-lite",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"3rd and Pine\",\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":\"3rd n pine\",\"evidence\":[{\"message_index\":1,\"quote\":\"3rd n pine\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"items\",\"reason\":\"missing\",\"line_id\":null},{\"field\":\"fulfillment_method\",\"reason\":\"missing\",\"line_id\":null},{\"field\":\"payment_method\",\"reason\":\"missing\",\"line_id\":null},{\"field\":\"customer_name\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"Since we are pickup only, what would you like to order today, and could I please have your name for the order?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 7420,
+   "cached_input_tokens": 4993,
+   "cache_write_tokens": 0,
+   "output_tokens": 276,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2089.791250997223,
+  "cost_micros": 2269,
+  "at": "2026-10-15T18:29:41.613314+00:00",
+  "cached": false,
+  "raw_usage": {
+   "completion_tokens": 276,
+   "prompt_tokens": 7420,
+   "prompt_tokens_details": {
+    "cached_tokens": 4993
+   },
+   "total_tokens": 7696
+  }
+ }
+}

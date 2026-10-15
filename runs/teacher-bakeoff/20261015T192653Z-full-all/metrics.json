@@ -1,0 +1,73 @@
+{
+  "openai/gpt-6-luna@low": {
+    "conversations": 91,
+    "conversations_with_order": 64,
+    "json_valid": 91,
+    "json_validity_rate": 1.0,
+    "item": {
+      "gold_items": 146,
+      "tp": 146,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match": 88,
+    "exact_match_rate": 0.967032967032967,
+    "exact_match_ci95": [
+      0.9075053921522588,
+      0.9887257975366542
+    ],
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.953125
+    },
+    "correction": {
+      "conversations": 15,
+      "exact_match_rate": 0.9333333333333333,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "scorer": "scorer@0.2",
+    "postprocess": null,
+    "raw_json_valid": 91,
+    "calls_answered": 91,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 91
+    },
+    "tokens": {
+      "input_tokens": 898031,
+      "cached_input_tokens": 612900,
+      "cache_write_tokens": 0,
+      "output_tokens": 39990,
+      "reasoning_tokens": 7073
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9868.5,
+      "cached_input_tokens": 6735.2,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 439.5,
+      "reasoning_tokens": 77.7
+    },
+    "cost_micros": 54679,
+    "cost_per_1000_conversations_usd": 0.6009,
+    "projected_cost_40_conversations_usd": 0.024,
+    "latency_ms_p50": 4887,
+    "latency_ms_p95": 9455
+  }
+}

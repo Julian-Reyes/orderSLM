@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-002",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"extraction@0.4\",\n  \"items\": [\n    {\n      \"line_id\": \"L1\",\n      \"menu_item_id\": \"cheeseburger_combo\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": null,\n      \"unmatched_variant_text\": null,\n      \"modifications\": [\n        {\n          \"kind\": \"remove\",\n          \"modifier_id\": \"cheese\",\n          \"replacement_modifier_id\": null,\n          \"amount\": \"normal\",\n          \"raw_text\": \"no cheese\",\n          \"not_on_menu\": false,\n          \"kitchen_note\": false\n        }\n      ],\n      \"combo_selections\": [\n        {\n          \"slot_id\": \"side\",\n          \"menu_item_id\": \"onion_rings\",\n          \"variant_id\": null\n        },\n        {\n          \"slot_id\": \"drink\",\n          \"menu_item_id\": \"lemonade\",\n          \"variant_id\": null\n        }\n      ],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"cb combo\"\n        },\n        {\n          \"message_index\": 0,\n          \"quote\": \"onion rings\"\n        },\n        {\n          \"message_index\": 0,\n          \"quote\": \"a lemonade\"\n        },\n        {\n          \"message_index\": 0,\n          \"quote\": \"no cheese\"\n        }\n      ]\n    },\n    {\n      \"line_id\": \"L2\",\n      \"menu_item_id\": \"sprite\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": null,\n      \"unmatched_variant_text\": null,\n      \"modifications\": [],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 1,\n          \"quote\": \"a sprite\"\n        }\n      ]\n    }\n  ],\n  \"fulfillment\": {\n    \"method\": \"delivery\",\n    \"method_evidence\": [\n      {\n        \"message_index\": 1,\n        \"quote\": \"deliver\"\n      }\n    ],\n    \"requested_time\": {\n      \"state\": \"not_mentioned\",\n      \"kind\": null,\n      \"raw_text\": null,\n      \"normalized_local\": null,\n      \"evidence\": []\n    }\n  },\n  \"address\": {\n    \"state\": \"provided\",\n    \"street\": \"maple ave\",\n    \"number\": \"412\",\n    \"unit\": null,\n    \"reference\": null,\n    \"raw_text\": \"412 maple ave\",\n    \"evidence\": [\n      {\n        \"message_index\": 1,\n        \"quote\": \"412 maple ave\"\n      }\n    ]\n  },\n  \"payment\": {\n    \"method\": \"cash\",\n    \"change_for_cents\": 2000,\n    \"customer_claims_paid\": false,\n    \"evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"payin cash\"\n      },\n      {\n        \"message_index\": 2,\n        \"quote\": \"change for a 20\"\n      }\n    ]\n  },\n  \"customer_name\": {\n    \"state\": \"not_mentioned\",\n    \"value\": null,\n    \"evidence\": []\n  },\n  \"customer_decision\": {\n    \"state\": \"pending\",\n    \"agreed_while_incomplete\": false,\n    \"evidence\": []\n  },\n  \"notes\": [],\n  \"missing_or_ambiguous\": [],\n  \"clarification_question\": null\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8513,
+   "cached_input_tokens": 6810,
+   "cache_write_tokens": 0,
+   "output_tokens": 771,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 6821.416458988097,
+  "cost_micros": 624,
+  "at": "2026-10-15T19:26:58.056531+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 8513,
+   "completion_tokens": 771,
+   "total_tokens": 9284,
+   "prompt_tokens_details": {
+    "cached_tokens": 6810,
+    "cache_write_tokens": 1700,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

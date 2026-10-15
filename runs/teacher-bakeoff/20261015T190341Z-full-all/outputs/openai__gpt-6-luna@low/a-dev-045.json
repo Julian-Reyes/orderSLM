@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-045",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":null,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"some GARLIC KNOTS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a LARGE CHEESE PIZZA\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"FOR PICKUP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_quantity\",\"reason\":\"ambiguous\",\"line_id\":\"L1\"}],\"clarification_question\":\"How many garlic knots would you like?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11570,
+   "cached_input_tokens": 6760,
+   "cache_write_tokens": 0,
+   "output_tokens": 376,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 4207.365948997904,
+  "cost_micros": 737,
+  "at": "2026-10-15T19:07:34.836749+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 11570,
+   "completion_tokens": 376,
+   "total_tokens": 11946,
+   "prompt_tokens_details": {
+    "cached_tokens": 6760,
+    "cache_write_tokens": 4807,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "conversation_id": "a-dev-061",
+ "config_id": "google/gemini-3.1-flash-lite@minimal",
+ "response": {
+  "config_id": "google/gemini-3.1-flash-lite@minimal",
+  "model": "gemini-3.1-flash-lite",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a medium pepperoni\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":\"Mountain Dew\",\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a Mountain Dew\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"pay with card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_menu_match\",\"reason\":\"off_menu\",\"line_id\":\"L2\"}],\"clarification_question\":\"I'm sorry, but we don't have Mountain Dew. Would you like a Coke, Diet Coke, Sprite, Dr Pepper, Iced Tea or Bottled Water instead?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9955,
+   "cached_input_tokens": 8317,
+   "cache_write_tokens": 0,
+   "output_tokens": 408,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1751.733677025186,
+  "cost_micros": 3101,
+  "at": "2026-10-15T18:31:15.060400+00:00",
+  "cached": false,
+  "raw_usage": {
+   "completion_tokens": 408,
+   "prompt_tokens": 9955,
+   "prompt_tokens_details": {
+    "cached_tokens": 8317
+   },
+   "total_tokens": 10363
+  }
+ }
+}

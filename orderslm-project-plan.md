@@ -167,6 +167,7 @@ Synthetic training data mostly measures how well a model imitates the teacher, s
 | OpenAI `gpt-6-luna` | $0.10 / $0.50 | Batch: $0.05 / $0.25 | Cheapest OpenAI model |
 | Google `gemini-3.1-flash-lite` | $0.25 / $1.50 | Batch: $0.125 / $0.75 | Cheapest Gemini. Free tier exists, but free-tier content is used to improve Google's products |
 | DeepSeek `deepseek-flash` | $0.30 / $1.20 (peak) | Off-peak: $0.15 / $0.60 | No batch API; off-peak is outside 01:00–04:00 and 06:00–10:00 UTC on weekdays |
+| Anthropic `claude-haiku-5-5` | $0.10 / $0.50 (prompts ≤ 100K tokens) | Batch: $0.05 / $0.25 | Added October 15, 2026. Same price as `gpt-6-luna`. Source A is Claude-written, so Haiku may be favored there: if it is near the top, Source B (PIZZA) decides |
 | *Optional:* `gemini-3.8-flash` | $0.75 / $3.75 (promo until Dec 31, 2026) | Batch: $0.375 / $1.875 | Newest Gemini Flash; include only if budget allows |
 
 **Method:**

@@ -1,0 +1,106 @@
+{
+  "run_id": "20261015T185040Z-full-remaining",
+  "experiment": "teacher-bakeoff",
+  "mode": "full 51 (remaining dev: not in the bake-off set)",
+  "started_at": "2026-10-15T18:50:40.348915+00:00",
+  "git_commit": "63a79e8d85110d3399c0f3ff633ed89e4f7870ef",
+  "prompt_version": "teacher-extract@0.2",
+  "prompt_sha256": "11d2aeb367c5daf9",
+  "schema_version": "extraction@0.4",
+  "portable_schema_sha256": "e746d31047419f2d",
+  "data": {
+    "split": "dev",
+    "source": "A (claude_written)",
+    "selection": "remaining_dev()[0:]",
+    "conversation_ids": [
+      "a-dev-007",
+      "a-dev-008",
+      "a-dev-010",
+      "a-dev-011",
+      "a-dev-012",
+      "a-dev-013",
+      "a-dev-014",
+      "a-dev-015",
+      "a-dev-018",
+      "a-dev-019",
+      "a-dev-022",
+      "a-dev-023",
+      "a-dev-024",
+      "a-dev-025",
+      "a-dev-026",
+      "a-dev-027",
+      "a-dev-028",
+      "a-dev-029",
+      "a-dev-030",
+      "a-dev-032",
+      "a-dev-034",
+      "a-dev-036",
+      "a-dev-037",
+      "a-dev-038",
+      "a-dev-041",
+      "a-dev-045",
+      "a-dev-048",
+      "a-dev-051",
+      "a-dev-052",
+      "a-dev-053",
+      "a-dev-054",
+      "a-dev-055",
+      "a-dev-056",
+      "a-dev-060",
+      "a-dev-062",
+      "a-dev-066",
+      "a-dev-068",
+      "a-dev-069",
+      "a-dev-072",
+      "a-dev-074",
+      "a-dev-075",
+      "a-dev-076",
+      "a-dev-077",
+      "a-dev-078",
+      "a-dev-079",
+      "a-dev-082",
+      "a-dev-083",
+      "a-dev-084",
+      "a-dev-085",
+      "a-dev-086",
+      "a-dev-087"
+    ],
+    "dev_files_sha256": "55b8ce5312628040",
+    "menu_versions": {
+      "corner-patty": "corner-patty@882e409e5aa8",
+      "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+      "morning-crumb": "morning-crumb@c8f57ec59225"
+    }
+  },
+  "variants": {
+    "openai/gpt-6-luna@low": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "low"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "anthropic/claude-haiku-5-5@on-medium": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-15"
+    }
+  },
+  "cache_mode": "record",
+  "estimate_micros": 263546,
+  "max_cost_micros": 527092,
+  "finished_at": "2026-10-15T18:55:10.303661+00:00",
+  "actual_cost_micros": 122479,
+  "stopped_early": false
+}

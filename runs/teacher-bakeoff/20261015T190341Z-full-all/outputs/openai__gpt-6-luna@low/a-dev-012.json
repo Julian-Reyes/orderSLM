@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-012",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 large cheese pizzas\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"paying card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"address\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"What delivery address should we use?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11538,
+   "cached_input_tokens": 6760,
+   "cache_write_tokens": 0,
+   "output_tokens": 357,
+   "reasoning_tokens": 58
+  },
+  "latency_ms": 4690.176827018149,
+  "cost_micros": 724,
+  "at": "2026-10-15T19:04:35.461053+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 11538,
+   "completion_tokens": 357,
+   "total_tokens": 11895,
+   "prompt_tokens_details": {
+    "cached_tokens": 6760,
+    "cache_write_tokens": 4775,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 58,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

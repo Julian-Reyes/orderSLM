@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-077",
+ "config_id": "anthropic/claude-haiku-5-5@on-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"cheeseburger\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"lemonade\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Water St\",\"number\":null,\"unit\":null,\"reference\":\"Harbor Inn\",\"raw_text\":\"harbor inn on water st\",\"evidence\":[{\"message_index\":0,\"quote\":\"harbor inn on water st\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"fulfillment_method\",\"reason\":\"missing\",\"line_id\":null},{\"field\":\"payment_method\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"Sure! Would you like it delivered to the Harbor Inn on Water St or picked up, and will you pay by card or cash?\"}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 9962,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1388,
+   "reasoning_tokens": 745
+  },
+  "latency_ms": 5820.991676999256,
+  "cost_micros": 1691,
+  "at": "2026-10-15T18:54:21.567227+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 9962,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1388,
+   "output_tokens_details": {
+    "thinking_tokens": 745
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}
