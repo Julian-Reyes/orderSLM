@@ -11,7 +11,7 @@ _Last updated 2026-10-15._
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants, $0.0968) second bake-off (35 new conv × 12, prompt v0.2, $0.5811) and head-to-head luna low vs Haiku on-medium (51 remaining dev, $0.1225) done 2026-10-15**; next: Julian picks the teacher. Case-study data: `runs/teacher-bakeoff/summary.json` |
+| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants, $0.0968) second bake-off (35 new conv × 12, prompt v0.2, $0.5811) and head-to-head luna low vs Haiku on-medium (51 remaining dev, $0.1225) done 2026-10-15**; **teacher chosen (Julian, 2026-10-15): `openai/gpt-6-luna@low`**. Case-study data: `runs/teacher-bakeoff/summary.json` |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
@@ -78,6 +78,14 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   prompt caching (340K of 491K input tokens cached); Haiku had none (Anthropic needs explicit cache_control, not
   used) and spends ~680 reasoning tokens per chat. Combined with the second bake-off (86 conversations, 137 gold
   items): luna 137 found / 4 extra, 80/86 fully correct; Haiku 137 / 2, 80/86.
+- **Teacher decision (Julian, 2026-10-15): `openai/gpt-6-luna@low`.** Tied with Haiku on-medium on accuracy over 86
+  conversations at about a third of the cost, and not exposed to the Claude-written-data bias.
+- **Extras (false-positive items), luna low:** all 4 in conversations with no new order: a complaint about a missing
+  croissant (a-dev-044), a catering request asking for a manager (a-dev-021: "30 large pizzas" → off-menu line), and an
+  already-placed order with a payment claim (a-dev-056: latte + croissant). Haiku's 2 extras: the same a-dev-056.
+  No extras in real ordering chats. **M4 labeling prompt:** say explicitly that items mentioned about a past or
+  already-placed order (complaint, status, "I ordered X earlier") or a request to talk to someone are not a new
+  order; check on dev before bulk labeling.
 - **Case-study data:** every run's metrics, tokens, costs and settings are in `runs/teacher-bakeoff/summary.json`
   (`--summary` rebuilds it from the saved run folders; reports from saved outputs only).
 
