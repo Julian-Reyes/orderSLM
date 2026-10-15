@@ -47,7 +47,8 @@ verify-test:
 # One tiny live call per model in config/models.json. Without ARGS=--yes it only prints the estimate.
 smoke:
 	$(RUN) python -m orderslm.llm.smoke $(ARGS)
-teacher-bakeoff:  ; $(call not_yet,3)
+teacher-bakeoff:
+	$(RUN) python -m orderslm.eval.teacher_bakeoff $(ARGS)
 synth:            ; $(call not_yet,4)
 label:            ; $(call not_yet,4)
 student-bakeoff:  ; $(call not_yet,5)
