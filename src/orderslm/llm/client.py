@@ -16,7 +16,9 @@ Request/response contracts were checked against each provider's docs on 2026-10-
 - Anthropic Messages: output_config.format {type: json_schema, schema} (no beta header);
   stop_reason "refusal" / "max_tokens"; usage cache_read_input_tokens / cache_creation_input_tokens.
   Haiku 5.5: effort low/medium (default)/high/xhigh/max in output_config.effort; adaptive thinking is
-  on by default, thinking {type: disabled} allowed at effort high or below.
+  on by default, thinking {type: disabled} allowed at effort high or below. A json_schema may have at
+  most 16 parameters with union types (API error, 2026-10-15); ExtractionOutput has 24, so the teacher
+  config uses prompt-only JSON for Anthropic ("json_object": no output_config.format).
 """
 
 import time
@@ -141,14 +143,18 @@ def openai_body(config: ModelConfig, request: ChatRequest) -> dict[str, Any]:
                 "json_schema": {"name": request.schema_name, "schema": request.json_schema, "strict": True},
             }
         else:
-            prompt = request.system + "".join(m.content for m in request.messages)
-            if "json" not in prompt.lower():
-                raise ValueError(
-                    f"{config.id} has JSON-object mode only: the prompt must mention JSON and show "
-                    "the format (the client never edits the prompt)"
-                )
+            _require_json_prompt(config, request)
             body["response_format"] = {"type": "json_object"}
     return _merge(config, body)
+
+
+def _require_json_prompt(config: ModelConfig, request: ChatRequest) -> None:
+    prompt = request.system + "".join(m.content for m in request.messages)
+    if "json" not in prompt.lower():
+        raise ValueError(
+            f"{config.id} has no schema-constrained mode here: the prompt must mention JSON and show the "
+            "format (the client never edits the prompt)"
+        )
 
 
 def anthropic_body(config: ModelConfig, request: ChatRequest) -> dict[str, Any]:
@@ -159,7 +165,10 @@ def anthropic_body(config: ModelConfig, request: ChatRequest) -> dict[str, Any]:
         "max_tokens": request.max_output_tokens,
     }
     if request.json_schema is not None:
-        body["output_config"] = {"format": {"type": "json_schema", "schema": request.json_schema}}
+        if config.structured_output == "json_schema":
+            body["output_config"] = {"format": {"type": "json_schema", "schema": request.json_schema}}
+        else:  # prompt-only JSON (e.g. a schema over Anthropic's limit of 16 union-typed parameters)
+            _require_json_prompt(config, request)
     return _merge(config, body)
 
 

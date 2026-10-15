@@ -1,0 +1,163 @@
+{
+  "run_id": "20261015T180115Z-pilot5",
+  "experiment": "teacher-bakeoff",
+  "mode": "pilot 5",
+  "started_at": "2026-10-15T18:01:15.754151+00:00",
+  "git_commit": "c6e5984ccb4f4fb535fcc98048a972e2a4924cd6",
+  "prompt_version": "teacher-extract@0.1",
+  "prompt_sha256": "f07c52a9b9314577",
+  "schema_version": "extraction@0.4",
+  "portable_schema_sha256": "e746d31047419f2d",
+  "data": {
+    "split": "dev",
+    "source": "A (claude_written)",
+    "selection": "bakeoff_set(size=40, seed=20261015)[:5]",
+    "conversation_ids": [
+      "a-dev-039",
+      "a-dev-017",
+      "a-dev-040",
+      "a-dev-042",
+      "a-dev-081"
+    ],
+    "dev_files_sha256": "938ff7632d0c8209",
+    "menu_versions": {
+      "corner-patty": "corner-patty@882e409e5aa8",
+      "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+      "morning-crumb": "morning-crumb@c8f57ec59225"
+    }
+  },
+  "variants": {
+    "openai/gpt-6-luna@none": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "none"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "openai/gpt-6-luna@low": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "low"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "openai/gpt-6-luna@medium": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "medium"
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    },
+    "anthropic/claude-haiku-5-5@off-low": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@off-medium": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@on-low": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@on-medium": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-15"
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "extra_body": {
+        "reasoning_effort": "minimal"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "google/gemini-3.1-flash-lite@default": {
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "extra_body": {},
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@none": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "none"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@low": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "low"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@high": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "high"
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    }
+  },
+  "cache_mode": "record",
+  "estimate_micros": 228106,
+  "max_cost_micros": 456212,
+  "finished_at": "2026-10-15T18:02:52.635770+00:00",
+  "actual_cost_micros": 60176,
+  "stopped_early": false
+}

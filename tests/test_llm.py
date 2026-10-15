@@ -39,6 +39,13 @@ def openai_reply(content='{"n": 1}', usage=None, **message):
     }
 
 
+def _no_network(request):
+    raise AssertionError(f"test tried to reach {request.url}")
+
+
+NO_NETWORK = httpx.Client(transport=httpx.MockTransport(_no_network))
+
+
 def client_for(config_id, handler, *, at=OFF_PEAK, sleeps=None):
     http = httpx.Client(transport=httpx.MockTransport(handler))
     return HttpChatClient(
@@ -204,7 +211,8 @@ def test_anthropic_request_and_usage():
     assert seen["headers"]["x-api-key"] == "sk-test"
     assert seen["headers"]["anthropic-version"] == "2023-06-01"
     assert body["system"] == "Reply in JSON." and body["max_tokens"] == 2048
-    assert body["output_config"] == {"format": {"type": "json_schema", "schema": SCHEMA}, "effort": "low"}
+    # Prompt-only JSON (structured_output json_object): no schema sent, effort still merged in.
+    assert body["output_config"] == {"effort": "low"}
     assert body["thinking"] == {"type": "disabled"}
     assert resp.usage == LLMUsage(
         input_tokens=1100, cached_input_tokens=1000, output_tokens=20, reasoning_tokens=12
@@ -260,8 +268,8 @@ def test_refusal_is_recorded():
     ],
 )
 def test_extra_body_cannot_override_core_fields(config_id, extra):
-    config = get_model(config_id).model_copy(update={"extra_body": extra})
-    client = HttpChatClient(config, lambda: "k", clock=fixed_clock(OFF_PEAK), http=httpx.Client())
+    config = get_model(config_id).model_copy(update={"extra_body": extra, "structured_output": "json_schema"})
+    client = HttpChatClient(config, lambda: "k", clock=fixed_clock(OFF_PEAK), http=NO_NETWORK)
     with pytest.raises(ValueError, match="may not override"):
         client.complete(REQ)
 
@@ -386,3 +394,37 @@ def test_scripted_client_runs_out():
     fake.complete(REQ)
     with pytest.raises(IndexError):
         fake.complete(REQ)
+
+
+def test_anthropic_schema_mode_sends_format_alongside_effort():
+    seen = {}
+
+    def handler(request):
+        seen["body"] = json.loads(request.content)
+        return httpx.Response(
+            200, json={"content": [{"type": "text", "text": "{}"}], "stop_reason": "end_turn", "usage": {}}
+        )
+
+    haiku = get_model("anthropic/claude-haiku-5-5@off-low").model_copy(
+        update={"structured_output": "json_schema"}
+    )
+    client = HttpChatClient(
+        haiku,
+        lambda: "k",
+        clock=fixed_clock(OFF_PEAK),
+        http=httpx.Client(transport=httpx.MockTransport(handler)),
+    )
+    client.complete(REQ)
+    assert seen["body"]["output_config"] == {
+        "format": {"type": "json_schema", "schema": SCHEMA},
+        "effort": "low",
+    }
+    with pytest.raises(ValueError, match="must mention JSON"):
+        client_for("anthropic/claude-haiku-5-5@off-low", handler).complete(
+            REQ.model_copy(update={"system": "Answer briefly."})
+        )
+
+
+def test_real_http_is_blocked_in_tests():
+    with pytest.raises(AssertionError, match="tried to reach the network"):
+        httpx.Client().get("https://api.openai.com/v1/models")
