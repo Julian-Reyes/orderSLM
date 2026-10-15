@@ -1,9 +1,11 @@
 {
   "openai/gpt-6-luna@none": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 7,
       "fp": 2,
       "fn": 2,
@@ -11,7 +13,12 @@
       "recall": 0.7777777777777778,
       "f1": 0.7777777777777778
     },
+    "exact_match": 3,
     "exact_match_rate": 0.6,
+    "exact_match_ci95": [
+      0.23071993220883708,
+      0.8823817688407467
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -62,9 +69,11 @@
   },
   "openai/gpt-6-luna@low": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 9,
       "fp": 0,
       "fn": 0,
@@ -72,7 +81,12 @@
       "recall": 1.0,
       "f1": 1.0
     },
+    "exact_match": 5,
     "exact_match_rate": 1.0,
+    "exact_match_ci95": [
+      0.5655085052479191,
+      1.0
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -123,9 +137,11 @@
   },
   "openai/gpt-6-luna@medium": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 9,
       "fp": 0,
       "fn": 0,
@@ -133,7 +149,12 @@
       "recall": 1.0,
       "f1": 1.0
     },
+    "exact_match": 5,
     "exact_match_rate": 1.0,
+    "exact_match_ci95": [
+      0.5655085052479191,
+      1.0
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -184,9 +205,11 @@
   },
   "anthropic/claude-haiku-5-5@off-low": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 0,
     "json_validity_rate": 0.0,
     "item": {
+      "gold_items": 9,
       "tp": 0,
       "fp": 0,
       "fn": 9,
@@ -194,7 +217,12 @@
       "recall": 0.0,
       "f1": 0.0
     },
+    "exact_match": 0,
     "exact_match_rate": 0.0,
+    "exact_match_ci95": [
+      0.0,
+      0.43449149475208104
+    ],
     "field_accuracy": {
       "method": null,
       "time": null,
@@ -237,9 +265,11 @@
   },
   "anthropic/claude-haiku-5-5@off-medium": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 0,
     "json_validity_rate": 0.0,
     "item": {
+      "gold_items": 9,
       "tp": 0,
       "fp": 0,
       "fn": 9,
@@ -247,7 +277,12 @@
       "recall": 0.0,
       "f1": 0.0
     },
+    "exact_match": 0,
     "exact_match_rate": 0.0,
+    "exact_match_ci95": [
+      0.0,
+      0.43449149475208104
+    ],
     "field_accuracy": {
       "method": null,
       "time": null,
@@ -290,9 +325,11 @@
   },
   "anthropic/claude-haiku-5-5@on-low": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 0,
     "json_validity_rate": 0.0,
     "item": {
+      "gold_items": 9,
       "tp": 0,
       "fp": 0,
       "fn": 9,
@@ -300,7 +337,12 @@
       "recall": 0.0,
       "f1": 0.0
     },
+    "exact_match": 0,
     "exact_match_rate": 0.0,
+    "exact_match_ci95": [
+      0.0,
+      0.43449149475208104
+    ],
     "field_accuracy": {
       "method": null,
       "time": null,
@@ -343,9 +385,11 @@
   },
   "anthropic/claude-haiku-5-5@on-medium": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 0,
     "json_validity_rate": 0.0,
     "item": {
+      "gold_items": 9,
       "tp": 0,
       "fp": 0,
       "fn": 9,
@@ -353,7 +397,12 @@
       "recall": 0.0,
       "f1": 0.0
     },
+    "exact_match": 0,
     "exact_match_rate": 0.0,
+    "exact_match_ci95": [
+      0.0,
+      0.43449149475208104
+    ],
     "field_accuracy": {
       "method": null,
       "time": null,
@@ -396,9 +445,11 @@
   },
   "google/gemini-3.1-flash-lite@minimal": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 7,
       "fp": 2,
       "fn": 2,
@@ -406,7 +457,12 @@
       "recall": 0.7777777777777778,
       "f1": 0.7777777777777778
     },
+    "exact_match": 3,
     "exact_match_rate": 0.6,
+    "exact_match_ci95": [
+      0.23071993220883708,
+      0.8823817688407467
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -457,9 +513,11 @@
   },
   "google/gemini-3.1-flash-lite@default": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 7,
       "fp": 2,
       "fn": 2,
@@ -467,7 +525,12 @@
       "recall": 0.7777777777777778,
       "f1": 0.7777777777777778
     },
+    "exact_match": 3,
     "exact_match_rate": 0.6,
+    "exact_match_ci95": [
+      0.23071993220883708,
+      0.8823817688407467
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -518,9 +581,11 @@
   },
   "deepseek/deepseek-flash@none": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 4,
     "json_validity_rate": 0.8,
     "item": {
+      "gold_items": 9,
       "tp": 6,
       "fp": 1,
       "fn": 3,
@@ -528,7 +593,12 @@
       "recall": 0.6666666666666666,
       "f1": 0.75
     },
+    "exact_match": 3,
     "exact_match_rate": 0.6,
+    "exact_match_ci95": [
+      0.23071993220883708,
+      0.8823817688407467
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -581,9 +651,11 @@
   },
   "deepseek/deepseek-flash@low": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 5,
     "json_validity_rate": 1.0,
     "item": {
+      "gold_items": 9,
       "tp": 9,
       "fp": 0,
       "fn": 0,
@@ -591,7 +663,12 @@
       "recall": 1.0,
       "f1": 1.0
     },
+    "exact_match": 5,
     "exact_match_rate": 1.0,
+    "exact_match_ci95": [
+      0.5655085052479191,
+      1.0
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -642,9 +719,11 @@
   },
   "deepseek/deepseek-flash@high": {
     "conversations": 5,
+    "conversations_with_order": 4,
     "json_valid": 4,
     "json_validity_rate": 0.8,
     "item": {
+      "gold_items": 9,
       "tp": 6,
       "fp": 1,
       "fn": 3,
@@ -652,7 +731,12 @@
       "recall": 0.6666666666666666,
       "f1": 0.75
     },
+    "exact_match": 3,
     "exact_match_rate": 0.6,
+    "exact_match_ci95": [
+      0.23071993220883708,
+      0.8823817688407467
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,

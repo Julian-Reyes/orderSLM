@@ -1,0 +1,145 @@
+{
+  "openai/gpt-6-luna@low": {
+    "conversations": 51,
+    "conversations_with_order": 36,
+    "json_valid": 51,
+    "json_validity_rate": 1.0,
+    "item": {
+      "gold_items": 79,
+      "tp": 79,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9753086419753086,
+      "recall": 1.0,
+      "f1": 0.9875
+    },
+    "exact_match": 48,
+    "exact_match_rate": 0.9411764705882353,
+    "exact_match_ci95": [
+      0.8407512606105803,
+      0.9797937271359478
+    ],
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9444444444444444
+    },
+    "correction": {
+      "conversations": 5,
+      "exact_match_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.0196078431372549,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 51,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 51
+    },
+    "tokens": {
+      "input_tokens": 491236,
+      "cached_input_tokens": 340323,
+      "cache_write_tokens": 0,
+      "output_tokens": 21284,
+      "reasoning_tokens": 3055
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9632.1,
+      "cached_input_tokens": 6673.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 417.3,
+      "reasoning_tokens": 59.9
+    },
+    "cost_micros": 29166,
+    "cost_per_1000_conversations_usd": 0.5719,
+    "projected_cost_40_conversations_usd": 0.0229,
+    "latency_ms_p50": 4823,
+    "latency_ms_p95": 7307
+  },
+  "anthropic/claude-haiku-5-5@on-medium": {
+    "conversations": 51,
+    "conversations_with_order": 36,
+    "json_valid": 49,
+    "json_validity_rate": 0.9607843137254902,
+    "item": {
+      "gold_items": 79,
+      "tp": 79,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9753086419753086,
+      "recall": 1.0,
+      "f1": 0.9875
+    },
+    "exact_match": 47,
+    "exact_match_rate": 0.9215686274509803,
+    "exact_match_ci95": [
+      0.8149980177513917,
+      0.9690783038730685
+    ],
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9722222222222222
+    },
+    "correction": {
+      "conversations": 5,
+      "exact_match_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.02040816326530612,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 51,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-076: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-087: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 51
+    },
+    "tokens": {
+      "input_tokens": 615143,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 63554,
+      "reasoning_tokens": 34543
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 12061.6,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1246.2,
+      "reasoning_tokens": 677.3
+    },
+    "cost_micros": 93313,
+    "cost_per_1000_conversations_usd": 1.8297,
+    "projected_cost_40_conversations_usd": 0.0732,
+    "latency_ms_p50": 5671,
+    "latency_ms_p95": 8776
+  }
+}
