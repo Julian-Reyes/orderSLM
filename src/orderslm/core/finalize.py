@@ -22,7 +22,14 @@ from pydantic import ValidationError
 
 from orderslm.core.missing import required_missing
 from orderslm.core.replies import template_question
-from orderslm.schema.extraction import DecisionState, ExtractionOutput, FieldRef, MissingInfo, MissingReason
+from orderslm.schema.extraction import (
+    CustomerDecision,
+    DecisionState,
+    ExtractionOutput,
+    FieldRef,
+    MissingInfo,
+    MissingReason,
+)
 from orderslm.schema.menu import MenuCatalog
 
 FINALIZE_VERSION = "finalize@0.1"
@@ -103,8 +110,20 @@ def parse_and_finalize(
         if not isinstance(data, dict):
             return None, "output is not a JSON object"
         judgments = _model_judgments(data.get("missing_or_ambiguous"))
-        data["missing_or_ambiguous"] = []
-        data["clarification_question"] = None
-        return finalize(ExtractionOutput.model_validate(data), menu, judgments, lang), None
+        # Validate the facts with neutral placeholders for the three rules that tie the missing list to the rest
+        # (off-menu lines listed, no gaps on confirmed/cancelled, question iff gaps); finalize rebuilds all three
+        # and the result is validated again in full.
+        decision = CustomerDecision.model_validate(data.get("customer_decision") or {})
+        items = data.get("items") if isinstance(data.get("items"), list) else []
+        placeholder = [
+            {"field": "item_menu_match", "reason": "off_menu", "line_id": it.get("line_id")}
+            for it in items
+            if isinstance(it, dict) and it.get("unmatched_text") is not None
+        ]
+        data["missing_or_ambiguous"] = placeholder
+        data["clarification_question"] = "?" if placeholder else None
+        data["customer_decision"] = CustomerDecision().model_dump(mode="json")
+        facts = ExtractionOutput.model_validate(data).model_copy(update={"customer_decision": decision})
+        return finalize(facts, menu, judgments, lang), None
     except (ValueError, ValidationError) as e:  # json.JSONDecodeError subclasses ValueError
         return None, str(e)

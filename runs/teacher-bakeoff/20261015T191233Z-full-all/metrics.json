@@ -6,18 +6,18 @@
     "json_validity_rate": 1.0,
     "item": {
       "gold_items": 146,
-      "tp": 143,
-      "fp": 3,
-      "fn": 3,
-      "precision": 0.9794520547945206,
-      "recall": 0.9794520547945206,
-      "f1": 0.9794520547945206
+      "tp": 146,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
     },
-    "exact_match": 83,
-    "exact_match_rate": 0.9120879120879121,
+    "exact_match": 86,
+    "exact_match_rate": 0.945054945054945,
     "exact_match_ci95": [
-      0.8360118928653627,
-      0.9547803333307369
+      0.8777503545818438,
+      0.9763052497099437
     ],
     "field_accuracy": {
       "method": 1.0,
@@ -30,10 +30,10 @@
     },
     "correction": {
       "conversations": 15,
-      "exact_match_rate": 0.8666666666666667,
-      "precision": 0.9722222222222222,
-      "recall": 0.9722222222222222,
-      "f1": 0.9722222222222222
+      "exact_match_rate": 0.9333333333333333,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
     },
     "grounding": {
       "conversations_with_issues": 0,
@@ -41,6 +41,9 @@
       "issues": {}
     },
     "unclassified_requests": 0,
+    "scorer": "scorer@0.2",
+    "postprocess": null,
+    "raw_json_valid": 91,
     "calls_answered": 91,
     "provider_errors": [],
     "invalid_examples": [],

@@ -121,3 +121,19 @@ def test_parse_and_finalize_reports_invalid_json():
     menu = load_menu("corner-patty")
     assert parse_and_finalize("{oops", menu)[0] is None
     assert parse_and_finalize("[]", menu) == (None, "output is not a JSON object")
+
+
+def test_raw_json_path_rebuilds_every_dev_gold():
+    """The model path: raw JSON whose missing list and question are wrong (here: empty) must still finalize to the
+    gold's missing list, including off-menu lines and confirmed/cancelled orders."""
+    for ac in DEV:
+        gold = ac.gold_extraction
+        data = json.loads(gold.model_dump_json())
+        data["missing_or_ambiguous"] = [
+            m for m in data["missing_or_ambiguous"] if m["reason"] == "ambiguous"
+        ]  # keep only the text judgments
+        data["clarification_question"] = None
+        out, err = parse_and_finalize(json.dumps(data), load_menu(ac.conversation.business_id))
+        assert err is None, (ac.conversation.id, err)
+        assert _key(out) == _key(gold), ac.conversation.id
+        assert out.customer_decision == gold.customer_decision, ac.conversation.id

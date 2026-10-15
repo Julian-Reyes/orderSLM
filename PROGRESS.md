@@ -97,6 +97,22 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   - These dev results are prompt tuning, not held-out numbers (the fixes came from these chats).
   - Ideas for M4 (not done): measure run-to-run variation (same prompt twice); compute `missing_or_ambiguous` in code
     (core/missing.py already has the rules) instead of trusting the model; normalize an unstated default variant.
+- **Code applies the rules (Julian, 2026-10-15)**, `core/finalize.py` (`finalize@0.1`): fills an unstated default
+  variant ("2 cheeseburgers" = single); recomputes `missing_or_ambiguous` with `core/missing.py`, keeping only the
+  model's "ambiguous" calls (unmatched item, variant) that need the text; builds the question from the template
+  (a pickup-only café is never asked "pickup or delivery?"); turns "confirmed" with gaps into pending +
+  agreed_while_incomplete. The model's own missing list and question are ignored. Tested by rebuilding every dev
+  gold missing list from its facts (raw-JSON path included). **Scoring `scorer@0.2`:** blank = default variant
+  on both sides; all saved reports rebuilt, so numbers differ from the first ones reported (Gemini minimal item
+  F1 74%→91%, DeepSeek none 81%→88%, luna medium 90%→94%); ranking and teacher choice unchanged. Each run now
+  also has `report.finalize.md` / `metrics.finalize.json` (same saved outputs, scored after finalize).
+- **Run-to-run variation (luna low, v0.4, all 91 dev, twice; second run cache off):** raw answers differ in 3/91
+  chats (never in items); after finalize in 1/91 (a no-order complaint, where only the unused missing list
+  differs). Both runs after finalize: 91/91 valid, 146/146 items, 0 extra, 90/91 fully correct (the miss:
+  a-dev-049 "one of the other one" shake flavor, ambiguous vs missing: same question to the customer).
+  Still prompt tuning on dev, not a held-out result.
+- **M4 to-dos from this:** labels for chats with no items are stored as "no order" (null), like gold; labeling runs
+  through finalize; the decision providers' label audit (§11d) checks "new order vs. past order".
 - **Case-study data:** every run's metrics, tokens, costs and settings are in `runs/teacher-bakeoff/summary.json`
   (`--summary` rebuilds it from the saved run folders; reports from saved outputs only).
 

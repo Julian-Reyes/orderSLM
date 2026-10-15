@@ -34,18 +34,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -69,6 +69,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -93,7 +96,78 @@
           "cost_per_1000_conversations_usd": 0.7624,
           "projected_cost_40_conversations_usd": 0.0305,
           "latency_ms_p50": 7416,
-          "latency_ms_p95": 9958
+          "latency_ms_p95": 9958,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 2019,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 403.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 3812,
+            "cost_per_1000_conversations_usd": 0.7624,
+            "projected_cost_40_conversations_usd": 0.0305,
+            "latency_ms_p50": 7416,
+            "latency_ms_p95": 9958
+          }
         },
         "openai/gpt-6-luna@low": {
           "settings": {
@@ -146,6 +220,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -170,7 +247,78 @@
           "cost_per_1000_conversations_usd": 0.799,
           "projected_cost_40_conversations_usd": 0.032,
           "latency_ms_p50": 4855,
-          "latency_ms_p95": 6100
+          "latency_ms_p95": 6100,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 2383,
+              "reasoning_tokens": 366
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 476.6,
+              "reasoning_tokens": 73.2
+            },
+            "cost_micros": 3995,
+            "cost_per_1000_conversations_usd": 0.799,
+            "projected_cost_40_conversations_usd": 0.032,
+            "latency_ms_p50": 4855,
+            "latency_ms_p95": 6100
+          }
         },
         "openai/gpt-6-luna@medium": {
           "settings": {
@@ -223,6 +371,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -247,7 +398,78 @@
           "cost_per_1000_conversations_usd": 0.9354,
           "projected_cost_40_conversations_usd": 0.0374,
           "latency_ms_p50": 8340,
-          "latency_ms_p95": 12732
+          "latency_ms_p95": 12732,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 3749,
+              "reasoning_tokens": 1154
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 749.8,
+              "reasoning_tokens": 230.8
+            },
+            "cost_micros": 4677,
+            "cost_per_1000_conversations_usd": 0.9354,
+            "projected_cost_40_conversations_usd": 0.0374,
+            "latency_ms_p50": 8340,
+            "latency_ms_p95": 12732
+          }
         },
         "anthropic/claude-haiku-5-5@off-low": {
           "settings": {
@@ -305,6 +527,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 0,
           "calls_answered": 0,
           "provider_errors": [
             "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o",
@@ -321,7 +546,70 @@
           "cost_per_1000_conversations_usd": 0.0,
           "projected_cost_40_conversations_usd": 0.0,
           "latency_ms_p50": null,
-          "latency_ms_p95": null
+          "latency_ms_p95": null,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 0,
+            "json_validity_rate": 0.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "exact_match": 0,
+            "exact_match_rate": 0.0,
+            "exact_match_ci95": [
+              0.0,
+              0.43449149475208104
+            ],
+            "field_accuracy": {
+              "method": null,
+              "time": null,
+              "address": null,
+              "payment": null,
+              "name": null,
+              "decision": null,
+              "missing": null
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": null,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 0,
+            "calls_answered": 0,
+            "provider_errors": [
+              "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o",
+              "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o",
+              "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o",
+              "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o",
+              "anthropic/claude-haiku-5-5@off-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays o"
+            ],
+            "invalid_examples": [],
+            "finish_reasons": {},
+            "tokens": {},
+            "tokens_per_conversation": {},
+            "cost_micros": 0,
+            "cost_per_1000_conversations_usd": 0.0,
+            "projected_cost_40_conversations_usd": 0.0,
+            "latency_ms_p50": null,
+            "latency_ms_p95": null
+          }
         },
         "anthropic/claude-haiku-5-5@off-medium": {
           "settings": {
@@ -379,6 +667,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 0,
           "calls_answered": 0,
           "provider_errors": [
             "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array",
@@ -395,7 +686,70 @@
           "cost_per_1000_conversations_usd": 0.0,
           "projected_cost_40_conversations_usd": 0.0,
           "latency_ms_p50": null,
-          "latency_ms_p95": null
+          "latency_ms_p95": null,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 0,
+            "json_validity_rate": 0.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "exact_match": 0,
+            "exact_match_rate": 0.0,
+            "exact_match_ci95": [
+              0.0,
+              0.43449149475208104
+            ],
+            "field_accuracy": {
+              "method": null,
+              "time": null,
+              "address": null,
+              "payment": null,
+              "name": null,
+              "decision": null,
+              "missing": null
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": null,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 0,
+            "calls_answered": 0,
+            "provider_errors": [
+              "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array",
+              "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array",
+              "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array",
+              "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array",
+              "anthropic/claude-haiku-5-5@off-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type array"
+            ],
+            "invalid_examples": [],
+            "finish_reasons": {},
+            "tokens": {},
+            "tokens_per_conversation": {},
+            "cost_micros": 0,
+            "cost_per_1000_conversations_usd": 0.0,
+            "projected_cost_40_conversations_usd": 0.0,
+            "latency_ms_p50": null,
+            "latency_ms_p95": null
+          }
         },
         "anthropic/claude-haiku-5-5@on-low": {
           "settings": {
@@ -453,6 +807,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 0,
           "calls_answered": 0,
           "provider_errors": [
             "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or",
@@ -469,7 +826,70 @@
           "cost_per_1000_conversations_usd": 0.0,
           "projected_cost_40_conversations_usd": 0.0,
           "latency_ms_p50": null,
-          "latency_ms_p95": null
+          "latency_ms_p95": null,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 0,
+            "json_validity_rate": 0.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "exact_match": 0,
+            "exact_match_rate": 0.0,
+            "exact_match_ci95": [
+              0.0,
+              0.43449149475208104
+            ],
+            "field_accuracy": {
+              "method": null,
+              "time": null,
+              "address": null,
+              "payment": null,
+              "name": null,
+              "decision": null,
+              "missing": null
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": null,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 0,
+            "calls_answered": 0,
+            "provider_errors": [
+              "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or",
+              "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or",
+              "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or",
+              "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or",
+              "anthropic/claude-haiku-5-5@on-low: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays or"
+            ],
+            "invalid_examples": [],
+            "finish_reasons": {},
+            "tokens": {},
+            "tokens_per_conversation": {},
+            "cost_micros": 0,
+            "cost_per_1000_conversations_usd": 0.0,
+            "projected_cost_40_conversations_usd": 0.0,
+            "latency_ms_p50": null,
+            "latency_ms_p95": null
+          }
         },
         "anthropic/claude-haiku-5-5@on-medium": {
           "settings": {
@@ -527,6 +947,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 0,
           "calls_answered": 0,
           "provider_errors": [
             "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays",
@@ -543,7 +966,70 @@
           "cost_per_1000_conversations_usd": 0.0,
           "projected_cost_40_conversations_usd": 0.0,
           "latency_ms_p50": null,
-          "latency_ms_p95": null
+          "latency_ms_p95": null,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 0,
+            "json_validity_rate": 0.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 0,
+              "fp": 0,
+              "fn": 9,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "exact_match": 0,
+            "exact_match_rate": 0.0,
+            "exact_match_ci95": [
+              0.0,
+              0.43449149475208104
+            ],
+            "field_accuracy": {
+              "method": null,
+              "time": null,
+              "address": null,
+              "payment": null,
+              "name": null,
+              "decision": null,
+              "missing": null
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": null,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 0,
+            "calls_answered": 0,
+            "provider_errors": [
+              "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays",
+              "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays",
+              "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays",
+              "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays",
+              "anthropic/claude-haiku-5-5@on-medium: HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many parameters with union types (24 parameters with type arrays"
+            ],
+            "invalid_examples": [],
+            "finish_reasons": {},
+            "tokens": {},
+            "tokens_per_conversation": {},
+            "cost_micros": 0,
+            "cost_per_1000_conversations_usd": 0.0,
+            "projected_cost_40_conversations_usd": 0.0,
+            "latency_ms_p50": null,
+            "latency_ms_p95": null
+          }
         },
         "google/gemini-3.1-flash-lite@minimal": {
           "settings": {
@@ -561,18 +1047,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -596,6 +1082,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -620,7 +1109,78 @@
           "cost_per_1000_conversations_usd": 3.1874,
           "projected_cost_40_conversations_usd": 0.1275,
           "latency_ms_p50": 2793,
-          "latency_ms_p95": 4829
+          "latency_ms_p95": 4829,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 43738,
+              "cached_input_tokens": 26900,
+              "cache_write_tokens": 0,
+              "output_tokens": 3334,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8747.6,
+              "cached_input_tokens": 5380.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 666.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 15937,
+            "cost_per_1000_conversations_usd": 3.1874,
+            "projected_cost_40_conversations_usd": 0.1275,
+            "latency_ms_p50": 2793,
+            "latency_ms_p95": 4829
+          }
         },
         "google/gemini-3.1-flash-lite@default": {
           "settings": {
@@ -636,18 +1196,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -671,6 +1231,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -695,7 +1258,78 @@
           "cost_per_1000_conversations_usd": 3.3072,
           "projected_cost_40_conversations_usd": 0.1323,
           "latency_ms_p50": 2972,
-          "latency_ms_p95": 3822
+          "latency_ms_p95": 3822,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 43738,
+              "cached_input_tokens": 34666,
+              "cache_write_tokens": 0,
+              "output_tokens": 3733,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8747.6,
+              "cached_input_tokens": 6933.2,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 746.6,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 16536,
+            "cost_per_1000_conversations_usd": 3.3072,
+            "projected_cost_40_conversations_usd": 0.1323,
+            "latency_ms_p50": 2972,
+            "latency_ms_p95": 3822
+          }
         },
         "deepseek/deepseek-flash@none": {
           "settings": {
@@ -713,18 +1347,18 @@
           "json_validity_rate": 0.8,
           "item": {
             "gold_items": 9,
-            "tp": 6,
-            "fp": 1,
-            "fn": 3,
-            "precision": 0.8571428571428571,
-            "recall": 0.6666666666666666,
-            "f1": 0.75
+            "tp": 7,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1": 0.875
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -748,6 +1382,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 4,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -774,7 +1411,80 @@
           "cost_per_1000_conversations_usd": 0.806,
           "projected_cost_40_conversations_usd": 0.0322,
           "latency_ms_p50": 2868,
-          "latency_ms_p95": 4708
+          "latency_ms_p95": 4708,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 4,
+            "json_validity_rate": 0.8,
+            "item": {
+              "gold_items": 9,
+              "tp": 7,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.7777777777777778,
+              "f1": 0.875
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 4,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+            ],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45006,
+              "cached_input_tokens": 28928,
+              "cache_write_tokens": 0,
+              "output_tokens": 2549,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9001.2,
+              "cached_input_tokens": 5785.6,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 509.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 4030,
+            "cost_per_1000_conversations_usd": 0.806,
+            "projected_cost_40_conversations_usd": 0.0322,
+            "latency_ms_p50": 2868,
+            "latency_ms_p95": 4708
+          }
         },
         "deepseek/deepseek-flash@low": {
           "settings": {
@@ -827,6 +1537,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -851,7 +1564,78 @@
           "cost_per_1000_conversations_usd": 1.1356,
           "projected_cost_40_conversations_usd": 0.0454,
           "latency_ms_p50": 6318,
-          "latency_ms_p95": 9035
+          "latency_ms_p95": 9035,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45131,
+              "cached_input_tokens": 29184,
+              "cache_write_tokens": 0,
+              "output_tokens": 5325,
+              "reasoning_tokens": 3231
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9026.2,
+              "cached_input_tokens": 5836.8,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1065.0,
+              "reasoning_tokens": 646.2
+            },
+            "cost_micros": 5678,
+            "cost_per_1000_conversations_usd": 1.1356,
+            "projected_cost_40_conversations_usd": 0.0454,
+            "latency_ms_p50": 6318,
+            "latency_ms_p95": 9035
+          }
         },
         "deepseek/deepseek-flash@high": {
           "settings": {
@@ -869,18 +1653,18 @@
           "json_validity_rate": 0.8,
           "item": {
             "gold_items": 9,
-            "tp": 6,
-            "fp": 1,
-            "fn": 3,
-            "precision": 0.8571428571428571,
-            "recall": 0.6666666666666666,
-            "f1": 0.75
+            "tp": 7,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1": 0.875
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -904,6 +1688,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 4,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -930,7 +1717,80 @@
           "cost_per_1000_conversations_usd": 1.1022,
           "projected_cost_40_conversations_usd": 0.0441,
           "latency_ms_p50": 5513,
-          "latency_ms_p95": 9233
+          "latency_ms_p95": 9233,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 4,
+            "json_validity_rate": 0.8,
+            "item": {
+              "gold_items": 9,
+              "tp": 7,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.7777777777777778,
+              "f1": 0.875
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 4,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+            ],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45131,
+              "cached_input_tokens": 29184,
+              "cache_write_tokens": 0,
+              "output_tokens": 5047,
+              "reasoning_tokens": 2978
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9026.2,
+              "cached_input_tokens": 5836.8,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1009.4,
+              "reasoning_tokens": 595.6
+            },
+            "cost_micros": 5511,
+            "cost_per_1000_conversations_usd": 1.1022,
+            "projected_cost_40_conversations_usd": 0.0441,
+            "latency_ms_p50": 5513,
+            "latency_ms_p95": 9233
+          }
         }
       }
     },
@@ -967,18 +1827,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -1002,6 +1862,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1026,7 +1889,78 @@
           "cost_per_1000_conversations_usd": 0.7624,
           "projected_cost_40_conversations_usd": 0.0305,
           "latency_ms_p50": 7416,
-          "latency_ms_p95": 9958
+          "latency_ms_p95": 9958,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 2019,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 403.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 3812,
+            "cost_per_1000_conversations_usd": 0.7624,
+            "projected_cost_40_conversations_usd": 0.0305,
+            "latency_ms_p50": 7416,
+            "latency_ms_p95": 9958
+          }
         },
         "openai/gpt-6-luna@low": {
           "settings": {
@@ -1079,6 +2013,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1103,7 +2040,78 @@
           "cost_per_1000_conversations_usd": 0.799,
           "projected_cost_40_conversations_usd": 0.032,
           "latency_ms_p50": 4855,
-          "latency_ms_p95": 6100
+          "latency_ms_p95": 6100,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 2383,
+              "reasoning_tokens": 366
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 476.6,
+              "reasoning_tokens": 73.2
+            },
+            "cost_micros": 3995,
+            "cost_per_1000_conversations_usd": 0.799,
+            "projected_cost_40_conversations_usd": 0.032,
+            "latency_ms_p50": 4855,
+            "latency_ms_p95": 6100
+          }
         },
         "openai/gpt-6-luna@medium": {
           "settings": {
@@ -1156,6 +2164,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1180,7 +2191,78 @@
           "cost_per_1000_conversations_usd": 0.9354,
           "projected_cost_40_conversations_usd": 0.0374,
           "latency_ms_p50": 8340,
-          "latency_ms_p95": 12732
+          "latency_ms_p95": 12732,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 51894,
+              "cached_input_tokens": 26552,
+              "cache_write_tokens": 0,
+              "output_tokens": 3749,
+              "reasoning_tokens": 1154
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 10378.8,
+              "cached_input_tokens": 5310.4,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 749.8,
+              "reasoning_tokens": 230.8
+            },
+            "cost_micros": 4677,
+            "cost_per_1000_conversations_usd": 0.9354,
+            "projected_cost_40_conversations_usd": 0.0374,
+            "latency_ms_p50": 8340,
+            "latency_ms_p95": 12732
+          }
         },
         "anthropic/claude-haiku-5-5@off-low": {
           "settings": {
@@ -1238,6 +2320,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 3,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -1265,7 +2350,81 @@
           "cost_per_1000_conversations_usd": 1.6638,
           "projected_cost_40_conversations_usd": 0.0666,
           "latency_ms_p50": 3068,
-          "latency_ms_p95": 3363
+          "latency_ms_p95": 3363,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 3,
+            "json_validity_rate": 0.6,
+            "item": {
+              "gold_items": 9,
+              "tp": 6,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0.8571428571428571,
+              "recall": 0.6666666666666666,
+              "f1": 0.75
+            },
+            "exact_match": 2,
+            "exact_match_rate": 0.4,
+            "exact_match_ci95": [
+              0.1176182311592533,
+              0.769280067791163
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 3,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i...",
+              "a-dev-081: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 5
+            },
+            "tokens": {
+              "input_tokens": 66351,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 3361,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 13270.2,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 672.2,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 8319,
+            "cost_per_1000_conversations_usd": 1.6638,
+            "projected_cost_40_conversations_usd": 0.0666,
+            "latency_ms_p50": 3068,
+            "latency_ms_p95": 3363
+          }
         },
         "anthropic/claude-haiku-5-5@off-medium": {
           "settings": {
@@ -1323,6 +2482,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 3,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -1350,7 +2512,81 @@
           "cost_per_1000_conversations_usd": 1.6768,
           "projected_cost_40_conversations_usd": 0.0671,
           "latency_ms_p50": 2847,
-          "latency_ms_p95": 4296
+          "latency_ms_p95": 4296,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 3,
+            "json_validity_rate": 0.6,
+            "item": {
+              "gold_items": 9,
+              "tp": 6,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0.8571428571428571,
+              "recall": 0.6666666666666666,
+              "f1": 0.75
+            },
+            "exact_match": 2,
+            "exact_match_rate": 0.4,
+            "exact_match_ci95": [
+              0.1176182311592533,
+              0.769280067791163
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 3,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i...",
+              "a-dev-081: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 5
+            },
+            "tokens": {
+              "input_tokens": 66351,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 3490,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 13270.2,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 698.0,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 8384,
+            "cost_per_1000_conversations_usd": 1.6768,
+            "projected_cost_40_conversations_usd": 0.0671,
+            "latency_ms_p50": 2847,
+            "latency_ms_p95": 4296
+          }
         },
         "anthropic/claude-haiku-5-5@on-low": {
           "settings": {
@@ -1408,6 +2644,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1432,7 +2671,78 @@
           "cost_per_1000_conversations_usd": 1.9418,
           "projected_cost_40_conversations_usd": 0.0777,
           "latency_ms_p50": 5420,
-          "latency_ms_p95": 7136
+          "latency_ms_p95": 7136,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "end_turn": 5
+            },
+            "tokens": {
+              "input_tokens": 66356,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 6141,
+              "reasoning_tokens": 2799
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 13271.2,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1228.2,
+              "reasoning_tokens": 559.8
+            },
+            "cost_micros": 9709,
+            "cost_per_1000_conversations_usd": 1.9418,
+            "projected_cost_40_conversations_usd": 0.0777,
+            "latency_ms_p50": 5420,
+            "latency_ms_p95": 7136
+          }
         },
         "anthropic/claude-haiku-5-5@on-medium": {
           "settings": {
@@ -1490,6 +2800,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1514,7 +2827,78 @@
           "cost_per_1000_conversations_usd": 2.0414,
           "projected_cost_40_conversations_usd": 0.0817,
           "latency_ms_p50": 5821,
-          "latency_ms_p95": 7972
+          "latency_ms_p95": 7972,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "end_turn": 5
+            },
+            "tokens": {
+              "input_tokens": 66356,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 7138,
+              "reasoning_tokens": 3778
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 13271.2,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1427.6,
+              "reasoning_tokens": 755.6
+            },
+            "cost_micros": 10207,
+            "cost_per_1000_conversations_usd": 2.0414,
+            "projected_cost_40_conversations_usd": 0.0817,
+            "latency_ms_p50": 5821,
+            "latency_ms_p95": 7972
+          }
         },
         "google/gemini-3.1-flash-lite@minimal": {
           "settings": {
@@ -1532,18 +2916,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -1567,6 +2951,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1591,7 +2978,78 @@
           "cost_per_1000_conversations_usd": 3.1874,
           "projected_cost_40_conversations_usd": 0.1275,
           "latency_ms_p50": 2793,
-          "latency_ms_p95": 4829
+          "latency_ms_p95": 4829,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 43738,
+              "cached_input_tokens": 26900,
+              "cache_write_tokens": 0,
+              "output_tokens": 3334,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8747.6,
+              "cached_input_tokens": 5380.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 666.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 15937,
+            "cost_per_1000_conversations_usd": 3.1874,
+            "projected_cost_40_conversations_usd": 0.1275,
+            "latency_ms_p50": 2793,
+            "latency_ms_p95": 4829
+          }
         },
         "google/gemini-3.1-flash-lite@default": {
           "settings": {
@@ -1607,18 +3065,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 9,
-            "tp": 7,
-            "fp": 2,
-            "fn": 2,
-            "precision": 0.7777777777777778,
-            "recall": 0.7777777777777778,
-            "f1": 0.7777777777777778
+            "tp": 8,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8888888888888888,
+            "recall": 0.8888888888888888,
+            "f1": 0.8888888888888888
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -1642,6 +3100,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1666,7 +3127,78 @@
           "cost_per_1000_conversations_usd": 3.3072,
           "projected_cost_40_conversations_usd": 0.1323,
           "latency_ms_p50": 2972,
-          "latency_ms_p95": 3822
+          "latency_ms_p95": 3822,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 8,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 43738,
+              "cached_input_tokens": 34666,
+              "cache_write_tokens": 0,
+              "output_tokens": 3733,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8747.6,
+              "cached_input_tokens": 6933.2,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 746.6,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 16536,
+            "cost_per_1000_conversations_usd": 3.3072,
+            "projected_cost_40_conversations_usd": 0.1323,
+            "latency_ms_p50": 2972,
+            "latency_ms_p95": 3822
+          }
         },
         "deepseek/deepseek-flash@none": {
           "settings": {
@@ -1684,18 +3216,18 @@
           "json_validity_rate": 0.8,
           "item": {
             "gold_items": 9,
-            "tp": 6,
-            "fp": 1,
-            "fn": 3,
-            "precision": 0.8571428571428571,
-            "recall": 0.6666666666666666,
-            "f1": 0.75
+            "tp": 7,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1": 0.875
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -1719,6 +3251,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 4,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -1745,7 +3280,80 @@
           "cost_per_1000_conversations_usd": 0.806,
           "projected_cost_40_conversations_usd": 0.0322,
           "latency_ms_p50": 2868,
-          "latency_ms_p95": 4708
+          "latency_ms_p95": 4708,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 4,
+            "json_validity_rate": 0.8,
+            "item": {
+              "gold_items": 9,
+              "tp": 7,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.7777777777777778,
+              "f1": 0.875
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 4,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+            ],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45006,
+              "cached_input_tokens": 28928,
+              "cache_write_tokens": 0,
+              "output_tokens": 2549,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9001.2,
+              "cached_input_tokens": 5785.6,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 509.8,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 4030,
+            "cost_per_1000_conversations_usd": 0.806,
+            "projected_cost_40_conversations_usd": 0.0322,
+            "latency_ms_p50": 2868,
+            "latency_ms_p95": 4708
+          }
         },
         "deepseek/deepseek-flash@low": {
           "settings": {
@@ -1798,6 +3406,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 5,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [],
@@ -1822,7 +3433,78 @@
           "cost_per_1000_conversations_usd": 1.1356,
           "projected_cost_40_conversations_usd": 0.0454,
           "latency_ms_p50": 6318,
-          "latency_ms_p95": 9035
+          "latency_ms_p95": 9035,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 5,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 9,
+              "tp": 9,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 5,
+            "exact_match_rate": 1.0,
+            "exact_match_ci95": [
+              0.5655085052479191,
+              1.0
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 5,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45131,
+              "cached_input_tokens": 29184,
+              "cache_write_tokens": 0,
+              "output_tokens": 5325,
+              "reasoning_tokens": 3231
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9026.2,
+              "cached_input_tokens": 5836.8,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1065.0,
+              "reasoning_tokens": 646.2
+            },
+            "cost_micros": 5678,
+            "cost_per_1000_conversations_usd": 1.1356,
+            "projected_cost_40_conversations_usd": 0.0454,
+            "latency_ms_p50": 6318,
+            "latency_ms_p95": 9035
+          }
         },
         "deepseek/deepseek-flash@high": {
           "settings": {
@@ -1840,18 +3522,18 @@
           "json_validity_rate": 0.8,
           "item": {
             "gold_items": 9,
-            "tp": 6,
-            "fp": 1,
-            "fn": 3,
-            "precision": 0.8571428571428571,
-            "recall": 0.6666666666666666,
-            "f1": 0.75
+            "tp": 7,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1": 0.875
           },
-          "exact_match": 3,
-          "exact_match_rate": 0.6,
+          "exact_match": 4,
+          "exact_match_rate": 0.8,
           "exact_match_ci95": [
-            0.23071993220883708,
-            0.8823817688407467
+            0.3755282641185388,
+            0.9637768390302125
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -1875,6 +3557,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 4,
           "calls_answered": 5,
           "provider_errors": [],
           "invalid_examples": [
@@ -1901,7 +3586,80 @@
           "cost_per_1000_conversations_usd": 1.1022,
           "projected_cost_40_conversations_usd": 0.0441,
           "latency_ms_p50": 5513,
-          "latency_ms_p95": 9233
+          "latency_ms_p95": 9233,
+          "finalized": {
+            "conversations": 5,
+            "conversations_with_order": 4,
+            "json_valid": 4,
+            "json_validity_rate": 0.8,
+            "item": {
+              "gold_items": 9,
+              "tp": 7,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.7777777777777778,
+              "f1": 0.875
+            },
+            "exact_match": 4,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.3755282641185388,
+              0.9637768390302125
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 0,
+              "exact_match_rate": null,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 4,
+            "calls_answered": 5,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+            ],
+            "finish_reasons": {
+              "stop": 5
+            },
+            "tokens": {
+              "input_tokens": 45131,
+              "cached_input_tokens": 29184,
+              "cache_write_tokens": 0,
+              "output_tokens": 5047,
+              "reasoning_tokens": 2978
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9026.2,
+              "cached_input_tokens": 5836.8,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1009.4,
+              "reasoning_tokens": 595.6
+            },
+            "cost_micros": 5511,
+            "cost_per_1000_conversations_usd": 1.1022,
+            "projected_cost_40_conversations_usd": 0.0441,
+            "latency_ms_p50": 5513,
+            "latency_ms_p95": 9233
+          }
         }
       }
     },
@@ -1975,6 +3733,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 34,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2001,7 +3762,82 @@
           "cost_per_1000_conversations_usd": 0.5805,
           "projected_cost_40_conversations_usd": 0.0232,
           "latency_ms_p50": 3612,
-          "latency_ms_p95": 6768
+          "latency_ms_p95": 6768,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 34,
+            "json_validity_rate": 0.9714285714285714,
+            "item": {
+              "gold_items": 58,
+              "tp": 56,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0.9824561403508771,
+              "recall": 0.9655172413793104,
+              "f1": 0.9739130434782609
+            },
+            "exact_match": 32,
+            "exact_match_rate": 0.9142857142857143,
+            "exact_match_ci95": [
+              0.7762040092883747,
+              0.970418168994703
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9565217391304348
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.8,
+              "precision": 1.0,
+              "recall": 0.9230769230769231,
+              "f1": 0.96
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.029411764705882353,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 34,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi"
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 342259,
+              "cached_input_tokens": 226882,
+              "cache_write_tokens": 0,
+              "output_tokens": 12988,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9778.8,
+              "cached_input_tokens": 6482.3,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 371.1,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 20317,
+            "cost_per_1000_conversations_usd": 0.5805,
+            "projected_cost_40_conversations_usd": 0.0232,
+            "latency_ms_p50": 3612,
+            "latency_ms_p95": 6768
+          }
         },
         "openai/gpt-6-luna@low": {
           "settings": {
@@ -2056,6 +3892,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 35,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [],
@@ -2080,7 +3919,80 @@
           "cost_per_1000_conversations_usd": 0.6318,
           "projected_cost_40_conversations_usd": 0.0253,
           "latency_ms_p50": 5899,
-          "latency_ms_p95": 9143
+          "latency_ms_p95": 9143,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 35,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 58,
+              "tp": 58,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0.9666666666666667,
+              "recall": 1.0,
+              "f1": 0.9830508474576272
+            },
+            "exact_match": 32,
+            "exact_match_rate": 0.9142857142857143,
+            "exact_match_ci95": [
+              0.7762040092883747,
+              0.970418168994703
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9583333333333334
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 2,
+              "rate": 0.05714285714285714,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 2
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 35,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 342259,
+              "cached_input_tokens": 226882,
+              "cache_write_tokens": 0,
+              "output_tokens": 16570,
+              "reasoning_tokens": 4013
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9778.8,
+              "cached_input_tokens": 6482.3,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 473.4,
+              "reasoning_tokens": 114.7
+            },
+            "cost_micros": 22112,
+            "cost_per_1000_conversations_usd": 0.6318,
+            "projected_cost_40_conversations_usd": 0.0253,
+            "latency_ms_p50": 5899,
+            "latency_ms_p95": 9143
+          }
         },
         "openai/gpt-6-luna@medium": {
           "settings": {
@@ -2098,18 +4010,18 @@
           "json_validity_rate": 0.9142857142857143,
           "item": {
             "gold_items": 58,
-            "tp": 50,
-            "fp": 3,
-            "fn": 8,
-            "precision": 0.9433962264150944,
-            "recall": 0.8620689655172413,
-            "f1": 0.9009009009009009
+            "tp": 52,
+            "fp": 1,
+            "fn": 6,
+            "precision": 0.9811320754716981,
+            "recall": 0.896551724137931,
+            "f1": 0.9369369369369369
           },
-          "exact_match": 29,
-          "exact_match_rate": 0.8285714285714286,
+          "exact_match": 30,
+          "exact_match_rate": 0.8571428571428571,
           "exact_match_ci95": [
-            0.6731739236041119,
-            0.9189747005514328
+            0.7062411969132573,
+            0.9373986119514649
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -2122,10 +4034,10 @@
           },
           "correction": {
             "conversations": 10,
-            "exact_match_rate": 0.6,
-            "precision": 0.9,
-            "recall": 0.6923076923076923,
-            "f1": 0.782608695652174
+            "exact_match_rate": 0.7,
+            "precision": 1.0,
+            "recall": 0.7692307692307693,
+            "f1": 0.8695652173913043
           },
           "grounding": {
             "conversations_with_issues": 1,
@@ -2135,6 +4047,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 32,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2163,7 +4078,84 @@
           "cost_per_1000_conversations_usd": 0.7437,
           "projected_cost_40_conversations_usd": 0.0297,
           "latency_ms_p50": 4971,
-          "latency_ms_p95": 9785
+          "latency_ms_p95": 9785,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 32,
+            "json_validity_rate": 0.9142857142857143,
+            "item": {
+              "gold_items": 58,
+              "tp": 52,
+              "fp": 1,
+              "fn": 6,
+              "precision": 0.9811320754716981,
+              "recall": 0.896551724137931,
+              "f1": 0.9369369369369369
+            },
+            "exact_match": 30,
+            "exact_match_rate": 0.8571428571428571,
+            "exact_match_ci95": [
+              0.7062411969132573,
+              0.9373986119514649
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9545454545454546
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.7,
+              "precision": 1.0,
+              "recall": 0.7692307692307693,
+              "f1": 0.8695652173913043
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.03125,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 32,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-059: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-021: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: an off-menu item can't have variant, modifications or combo picks [type=value_error, input_value={'line_id': 'L1', 'menu_i...bout 30 "
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 342259,
+              "cached_input_tokens": 226882,
+              "cache_write_tokens": 0,
+              "output_tokens": 24409,
+              "reasoning_tokens": 10295
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9778.8,
+              "cached_input_tokens": 6482.3,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 697.4,
+              "reasoning_tokens": 294.1
+            },
+            "cost_micros": 26029,
+            "cost_per_1000_conversations_usd": 0.7437,
+            "projected_cost_40_conversations_usd": 0.0297,
+            "latency_ms_p50": 4971,
+            "latency_ms_p95": 9785
+          }
         },
         "anthropic/claude-haiku-5-5@off-low": {
           "settings": {
@@ -2186,12 +4178,12 @@
           "json_validity_rate": 0.8571428571428571,
           "item": {
             "gold_items": 58,
-            "tp": 53,
-            "fp": 5,
-            "fn": 5,
-            "precision": 0.9137931034482759,
-            "recall": 0.9137931034482759,
-            "f1": 0.9137931034482759
+            "tp": 55,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.9482758620689655,
+            "recall": 0.9482758620689655,
+            "f1": 0.9482758620689655
           },
           "exact_match": 21,
           "exact_match_rate": 0.6,
@@ -2211,9 +4203,9 @@
           "correction": {
             "conversations": 10,
             "exact_match_rate": 0.5,
-            "precision": 0.8461538461538461,
-            "recall": 0.8461538461538461,
-            "f1": 0.8461538461538461
+            "precision": 0.9230769230769231,
+            "recall": 0.9230769230769231,
+            "f1": 0.9230769230769231
           },
           "grounding": {
             "conversations_with_issues": 1,
@@ -2223,6 +4215,9 @@
             }
           },
           "unclassified_requests": 1,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 30,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2253,7 +4248,85 @@
           "cost_per_1000_conversations_usd": 1.5355,
           "projected_cost_40_conversations_usd": 0.0614,
           "latency_ms_p50": 2643,
-          "latency_ms_p95": 6142
+          "latency_ms_p95": 6142,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 31,
+            "json_validity_rate": 0.8857142857142857,
+            "item": {
+              "gold_items": 58,
+              "tp": 55,
+              "fp": 3,
+              "fn": 3,
+              "precision": 0.9482758620689655,
+              "recall": 0.9482758620689655,
+              "f1": 0.9482758620689655
+            },
+            "exact_match": 27,
+            "exact_match_rate": 0.7714285714285715,
+            "exact_match_ci95": [
+              0.6098236221989801,
+              0.879342632538209
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 0.9583333333333334,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9166666666666666
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.7,
+              "precision": 0.9230769230769231,
+              "recall": 0.9230769230769231,
+              "f1": 0.9230769230769231
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.03225806451612903,
+              "issues": {
+                "EVIDENCE_BUSINESS_MESSAGE": 1
+              }
+            },
+            "unclassified_requests": 1,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 30,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-088: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 35
+            },
+            "tokens": {
+              "input_tokens": 429980,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 21465,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 12285.1,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 613.3,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 53743,
+            "cost_per_1000_conversations_usd": 1.5355,
+            "projected_cost_40_conversations_usd": 0.0614,
+            "latency_ms_p50": 2643,
+            "latency_ms_p95": 6142
+          }
         },
         "anthropic/claude-haiku-5-5@off-medium": {
           "settings": {
@@ -2313,6 +4386,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 28,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2343,7 +4419,85 @@
           "cost_per_1000_conversations_usd": 1.5339,
           "projected_cost_40_conversations_usd": 0.0614,
           "latency_ms_p50": 2527,
-          "latency_ms_p95": 3937
+          "latency_ms_p95": 3937,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 31,
+            "json_validity_rate": 0.8857142857142857,
+            "item": {
+              "gold_items": 58,
+              "tp": 56,
+              "fp": 2,
+              "fn": 2,
+              "precision": 0.9655172413793104,
+              "recall": 0.9655172413793104,
+              "f1": 0.9655172413793104
+            },
+            "exact_match": 27,
+            "exact_match_rate": 0.7714285714285715,
+            "exact_match_ci95": [
+              0.6098236221989801,
+              0.879342632538209
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 0.9583333333333334,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9166666666666666
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.7,
+              "precision": 0.9230769230769231,
+              "recall": 0.9230769230769231,
+              "f1": 0.9230769230769231
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.03225806451612903,
+              "issues": {
+                "EVIDENCE_BUSINESS_MESSAGE": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 28,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-088: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 35
+            },
+            "tokens": {
+              "input_tokens": 429980,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 21354,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 12285.1,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 610.1,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 53688,
+            "cost_per_1000_conversations_usd": 1.5339,
+            "projected_cost_40_conversations_usd": 0.0614,
+            "latency_ms_p50": 2527,
+            "latency_ms_p95": 3937
+          }
         },
         "anthropic/claude-haiku-5-5@on-low": {
           "settings": {
@@ -2401,6 +4555,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 32,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2429,7 +4586,82 @@
           "cost_per_1000_conversations_usd": 1.8203,
           "projected_cost_40_conversations_usd": 0.0728,
           "latency_ms_p50": 5267,
-          "latency_ms_p95": 9831
+          "latency_ms_p95": 9831,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 32,
+            "json_validity_rate": 0.9142857142857143,
+            "item": {
+              "gold_items": 58,
+              "tp": 54,
+              "fp": 0,
+              "fn": 4,
+              "precision": 1.0,
+              "recall": 0.9310344827586207,
+              "f1": 0.9642857142857143
+            },
+            "exact_match": 31,
+            "exact_match_rate": 0.8857142857142857,
+            "exact_match_ci95": [
+              0.7404820521187976,
+              0.9546489414551025
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9565217391304348
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.8,
+              "precision": 1.0,
+              "recall": 0.8461538461538461,
+              "f1": 0.9166666666666666
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 32,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-059: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 35
+            },
+            "tokens": {
+              "input_tokens": 430015,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 41382,
+              "reasoning_tokens": 20980
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 12286.1,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1182.3,
+              "reasoning_tokens": 599.4
+            },
+            "cost_micros": 63711,
+            "cost_per_1000_conversations_usd": 1.8203,
+            "projected_cost_40_conversations_usd": 0.0728,
+            "latency_ms_p50": 5267,
+            "latency_ms_p95": 9831
+          }
         },
         "anthropic/claude-haiku-5-5@on-medium": {
           "settings": {
@@ -2487,6 +4719,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 34,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2513,7 +4748,80 @@
           "cost_per_1000_conversations_usd": 1.8952,
           "projected_cost_40_conversations_usd": 0.0758,
           "latency_ms_p50": 5553,
-          "latency_ms_p95": 9981
+          "latency_ms_p95": 9981,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 34,
+            "json_validity_rate": 0.9714285714285714,
+            "item": {
+              "gold_items": 58,
+              "tp": 58,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 33,
+            "exact_match_rate": 0.9428571428571428,
+            "exact_match_ci95": [
+              0.8139261926062996,
+              0.984187170385956
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9583333333333334
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 34,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 35
+            },
+            "tokens": {
+              "input_tokens": 430015,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 46630,
+              "reasoning_tokens": 26074
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 12286.1,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1332.3,
+              "reasoning_tokens": 745.0
+            },
+            "cost_micros": 66332,
+            "cost_per_1000_conversations_usd": 1.8952,
+            "projected_cost_40_conversations_usd": 0.0758,
+            "latency_ms_p50": 5553,
+            "latency_ms_p95": 9981
+          }
         },
         "google/gemini-3.1-flash-lite@minimal": {
           "settings": {
@@ -2531,18 +4839,18 @@
           "json_validity_rate": 0.7714285714285715,
           "item": {
             "gold_items": 58,
-            "tp": 40,
-            "fp": 10,
-            "fn": 18,
-            "precision": 0.8,
-            "recall": 0.6896551724137931,
-            "f1": 0.7407407407407407
+            "tp": 49,
+            "fp": 1,
+            "fn": 9,
+            "precision": 0.98,
+            "recall": 0.8448275862068966,
+            "f1": 0.9074074074074074
           },
-          "exact_match": 17,
-          "exact_match_rate": 0.4857142857142857,
+          "exact_match": 22,
+          "exact_match_rate": 0.6285714285714286,
           "exact_match_ci95": [
-            0.32993980391252736,
-            0.6443146037328837
+            0.46336640488021064,
+            0.7683439263110894
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -2555,10 +4863,10 @@
           },
           "correction": {
             "conversations": 10,
-            "exact_match_rate": 0.2,
-            "precision": 0.6666666666666666,
-            "recall": 0.46153846153846156,
-            "f1": 0.5454545454545454
+            "exact_match_rate": 0.6,
+            "precision": 1.0,
+            "recall": 0.6923076923076923,
+            "f1": 0.8181818181818182
           },
           "grounding": {
             "conversations_with_issues": 1,
@@ -2568,6 +4876,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 27,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2598,7 +4909,86 @@
           "cost_per_1000_conversations_usd": 2.8245,
           "projected_cost_40_conversations_usd": 0.113,
           "latency_ms_p50": 2183,
-          "latency_ms_p95": 2736
+          "latency_ms_p95": 2736,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 27,
+            "json_validity_rate": 0.7714285714285715,
+            "item": {
+              "gold_items": 58,
+              "tp": 49,
+              "fp": 1,
+              "fn": 9,
+              "precision": 0.98,
+              "recall": 0.8448275862068966,
+              "f1": 0.9074074074074074
+            },
+            "exact_match": 24,
+            "exact_match_rate": 0.6857142857142857,
+            "exact_match_ci95": [
+              0.5201992812074803,
+              0.8144934194021753
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 0.9523809523809523,
+              "missing": 0.9047619047619048
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.6,
+              "precision": 1.0,
+              "recall": 0.6923076923076923,
+              "f1": 0.8181818181818182
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.037037037037037035,
+              "issues": {
+                "EVIDENCE_BUSINESS_MESSAGE": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 27,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-080: 1 validation error for ExtractionOutput\n  Value error, L3: off-menu item must be listed as item_menu_match/off_menu [type=value_error, input_value={'schema_version': 'extra...ication_question': None},",
+              "a-dev-033: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-067: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-090: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 283889,
+              "cached_input_tokens": 202118,
+              "cache_write_tokens": 0,
+              "output_tokens": 18583,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8111.1,
+              "cached_input_tokens": 5774.8,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 530.9,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 98859,
+            "cost_per_1000_conversations_usd": 2.8245,
+            "projected_cost_40_conversations_usd": 0.113,
+            "latency_ms_p50": 2183,
+            "latency_ms_p95": 2736
+          }
         },
         "google/gemini-3.1-flash-lite@default": {
           "settings": {
@@ -2614,18 +5004,18 @@
           "json_validity_rate": 0.8571428571428571,
           "item": {
             "gold_items": 58,
-            "tp": 43,
-            "fp": 9,
-            "fn": 15,
-            "precision": 0.8269230769230769,
-            "recall": 0.7413793103448276,
-            "f1": 0.7818181818181819
+            "tp": 52,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.896551724137931,
+            "f1": 0.9454545454545454
           },
-          "exact_match": 22,
-          "exact_match_rate": 0.6285714285714286,
+          "exact_match": 27,
+          "exact_match_rate": 0.7714285714285715,
           "exact_match_ci95": [
-            0.46336640488021064,
-            0.7683439263110894
+            0.6098236221989801,
+            0.879342632538209
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -2638,10 +5028,10 @@
           },
           "correction": {
             "conversations": 10,
-            "exact_match_rate": 0.4,
-            "precision": 0.7391304347826086,
-            "recall": 0.6538461538461539,
-            "f1": 0.6938775510204082
+            "exact_match_rate": 0.8,
+            "precision": 1.0,
+            "recall": 0.8846153846153846,
+            "f1": 0.9387755102040817
           },
           "grounding": {
             "conversations_with_issues": 1,
@@ -2651,6 +5041,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 30,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2681,7 +5074,86 @@
           "cost_per_1000_conversations_usd": 2.9352,
           "projected_cost_40_conversations_usd": 0.1174,
           "latency_ms_p50": 2313,
-          "latency_ms_p95": 3487
+          "latency_ms_p95": 3487,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 30,
+            "json_validity_rate": 0.8571428571428571,
+            "item": {
+              "gold_items": 58,
+              "tp": 52,
+              "fp": 0,
+              "fn": 6,
+              "precision": 1.0,
+              "recall": 0.896551724137931,
+              "f1": 0.9454545454545454
+            },
+            "exact_match": 28,
+            "exact_match_rate": 0.8,
+            "exact_match_ci95": [
+              0.6410806339053748,
+              0.899576805540992
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 0.9545454545454546,
+              "missing": 0.9545454545454546
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.8,
+              "precision": 1.0,
+              "recall": 0.8846153846153846,
+              "f1": 0.9387755102040817
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.03333333333333333,
+              "issues": {
+                "EVIDENCE_BUSINESS_MESSAGE": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 30,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-050: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'confi",
+              "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-049: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-005: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 283889,
+              "cached_input_tokens": 217983,
+              "cache_write_tokens": 0,
+              "output_tokens": 21164,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8111.1,
+              "cached_input_tokens": 6228.1,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 604.7,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 102731,
+            "cost_per_1000_conversations_usd": 2.9352,
+            "projected_cost_40_conversations_usd": 0.1174,
+            "latency_ms_p50": 2313,
+            "latency_ms_p95": 3487
+          }
         },
         "deepseek/deepseek-flash@none": {
           "settings": {
@@ -2699,18 +5171,18 @@
           "json_validity_rate": 0.8857142857142857,
           "item": {
             "gold_items": 58,
-            "tp": 44,
-            "fp": 7,
-            "fn": 14,
-            "precision": 0.8627450980392157,
-            "recall": 0.7586206896551724,
-            "f1": 0.8073394495412844
+            "tp": 48,
+            "fp": 3,
+            "fn": 10,
+            "precision": 0.9411764705882353,
+            "recall": 0.8275862068965517,
+            "f1": 0.8807339449541285
           },
-          "exact_match": 25,
-          "exact_match_rate": 0.7142857142857143,
+          "exact_match": 27,
+          "exact_match_rate": 0.7714285714285715,
           "exact_match_ci95": [
-            0.5494475193017891,
-            0.8367363660170444
+            0.6098236221989801,
+            0.879342632538209
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -2723,10 +5195,10 @@
           },
           "correction": {
             "conversations": 10,
-            "exact_match_rate": 0.5,
-            "precision": 0.9411764705882353,
-            "recall": 0.6153846153846154,
-            "f1": 0.7441860465116279
+            "exact_match_rate": 0.6,
+            "precision": 1.0,
+            "recall": 0.6538461538461539,
+            "f1": 0.7906976744186046
           },
           "grounding": {
             "conversations_with_issues": 2,
@@ -2736,6 +5208,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 31,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2765,7 +5240,85 @@
           "cost_per_1000_conversations_usd": 0.3782,
           "projected_cost_40_conversations_usd": 0.0151,
           "latency_ms_p50": 2286,
-          "latency_ms_p95": 3322
+          "latency_ms_p95": 3322,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 31,
+            "json_validity_rate": 0.8857142857142857,
+            "item": {
+              "gold_items": 58,
+              "tp": 48,
+              "fp": 3,
+              "fn": 10,
+              "precision": 0.9411764705882353,
+              "recall": 0.8275862068965517,
+              "f1": 0.8807339449541285
+            },
+            "exact_match": 27,
+            "exact_match_rate": 0.7714285714285715,
+            "exact_match_ci95": [
+              0.6098236221989801,
+              0.879342632538209
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 0.9523809523809523,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.6,
+              "precision": 1.0,
+              "recall": 0.6538461538461539,
+              "f1": 0.7906976744186046
+            },
+            "grounding": {
+              "conversations_with_issues": 2,
+              "rate": 0.06451612903225806,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 2
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 31,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-033: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-059: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-049: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 291634,
+              "cached_input_tokens": 270464,
+              "cache_write_tokens": 0,
+              "output_tokens": 15391,
+              "reasoning_tokens": 0
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8332.4,
+              "cached_input_tokens": 7727.5,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 439.7,
+              "reasoning_tokens": 0.0
+            },
+            "cost_micros": 13237,
+            "cost_per_1000_conversations_usd": 0.3782,
+            "projected_cost_40_conversations_usd": 0.0151,
+            "latency_ms_p50": 2286,
+            "latency_ms_p95": 3322
+          }
         },
         "deepseek/deepseek-flash@low": {
           "settings": {
@@ -2818,6 +5371,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 33,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2845,7 +5401,81 @@
           "cost_per_1000_conversations_usd": 0.8407,
           "projected_cost_40_conversations_usd": 0.0336,
           "latency_ms_p50": 5386,
-          "latency_ms_p95": 15694
+          "latency_ms_p95": 15694,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 33,
+            "json_validity_rate": 0.9428571428571428,
+            "item": {
+              "gold_items": 58,
+              "tp": 53,
+              "fp": 0,
+              "fn": 5,
+              "precision": 1.0,
+              "recall": 0.9137931034482759,
+              "f1": 0.954954954954955
+            },
+            "exact_match": 33,
+            "exact_match_rate": 0.9428571428571428,
+            "exact_match_ci95": [
+              0.8139261926062996,
+              0.984187170385956
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.8,
+              "precision": 1.0,
+              "recall": 0.8076923076923077,
+              "f1": 0.8936170212765957
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 33,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-067: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi"
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 292509,
+              "cached_input_tokens": 269696,
+              "cache_write_tokens": 0,
+              "output_tokens": 41956,
+              "reasoning_tokens": 28372
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8357.4,
+              "cached_input_tokens": 7705.6,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1198.7,
+              "reasoning_tokens": 810.6
+            },
+            "cost_micros": 29423,
+            "cost_per_1000_conversations_usd": 0.8407,
+            "projected_cost_40_conversations_usd": 0.0336,
+            "latency_ms_p50": 5386,
+            "latency_ms_p95": 15694
+          }
         },
         "deepseek/deepseek-flash@high": {
           "settings": {
@@ -2863,18 +5493,18 @@
           "json_validity_rate": 0.9142857142857143,
           "item": {
             "gold_items": 58,
-            "tp": 45,
-            "fp": 4,
-            "fn": 13,
-            "precision": 0.9183673469387755,
-            "recall": 0.7758620689655172,
-            "f1": 0.8411214953271028
+            "tp": 49,
+            "fp": 0,
+            "fn": 9,
+            "precision": 1.0,
+            "recall": 0.8448275862068966,
+            "f1": 0.9158878504672897
           },
-          "exact_match": 29,
-          "exact_match_rate": 0.8285714285714286,
+          "exact_match": 32,
+          "exact_match_rate": 0.9142857142857143,
           "exact_match_ci95": [
-            0.6731739236041119,
-            0.9189747005514328
+            0.7762040092883747,
+            0.970418168994703
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -2887,10 +5517,10 @@
           },
           "correction": {
             "conversations": 10,
-            "exact_match_rate": 0.4,
-            "precision": 0.7647058823529411,
-            "recall": 0.5,
-            "f1": 0.6046511627906976
+            "exact_match_rate": 0.7,
+            "precision": 1.0,
+            "recall": 0.6538461538461539,
+            "f1": 0.7906976744186046
           },
           "grounding": {
             "conversations_with_issues": 0,
@@ -2898,6 +5528,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 32,
           "calls_answered": 35,
           "provider_errors": [],
           "invalid_examples": [
@@ -2926,7 +5559,82 @@
           "cost_per_1000_conversations_usd": 0.8841,
           "projected_cost_40_conversations_usd": 0.0354,
           "latency_ms_p50": 5733,
-          "latency_ms_p95": 14674
+          "latency_ms_p95": 14674,
+          "finalized": {
+            "conversations": 35,
+            "conversations_with_order": 24,
+            "json_valid": 32,
+            "json_validity_rate": 0.9142857142857143,
+            "item": {
+              "gold_items": 58,
+              "tp": 49,
+              "fp": 0,
+              "fn": 9,
+              "precision": 1.0,
+              "recall": 0.8448275862068966,
+              "f1": 0.9158878504672897
+            },
+            "exact_match": 32,
+            "exact_match_rate": 0.9142857142857143,
+            "exact_match_ci95": [
+              0.7762040092883747,
+              0.970418168994703
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 10,
+              "exact_match_rate": 0.7,
+              "precision": 1.0,
+              "recall": 0.6538461538461539,
+              "f1": 0.7906976744186046
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 32,
+            "calls_answered": 35,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-059: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-067: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi"
+            ],
+            "finish_reasons": {
+              "stop": 35
+            },
+            "tokens": {
+              "input_tokens": 292509,
+              "cached_input_tokens": 269696,
+              "cache_write_tokens": 0,
+              "output_tokens": 44485,
+              "reasoning_tokens": 31271
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 8357.4,
+              "cached_input_tokens": 7705.6,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1271.0,
+              "reasoning_tokens": 893.5
+            },
+            "cost_micros": 30942,
+            "cost_per_1000_conversations_usd": 0.8841,
+            "projected_cost_40_conversations_usd": 0.0354,
+            "latency_ms_p50": 5733,
+            "latency_ms_p95": 14674
+          }
         }
       }
     },
@@ -3000,6 +5708,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 51,
           "calls_answered": 51,
           "provider_errors": [],
           "invalid_examples": [],
@@ -3024,7 +5735,80 @@
           "cost_per_1000_conversations_usd": 0.5719,
           "projected_cost_40_conversations_usd": 0.0229,
           "latency_ms_p50": 4823,
-          "latency_ms_p95": 7307
+          "latency_ms_p95": 7307,
+          "finalized": {
+            "conversations": 51,
+            "conversations_with_order": 36,
+            "json_valid": 51,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 79,
+              "tp": 79,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0.9753086419753086,
+              "recall": 1.0,
+              "f1": 0.9875
+            },
+            "exact_match": 50,
+            "exact_match_rate": 0.9803921568627451,
+            "exact_match_ci95": [
+              0.8969519232441061,
+              0.9965303967465577
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 5,
+              "exact_match_rate": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.0196078431372549,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 51,
+            "calls_answered": 51,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 51
+            },
+            "tokens": {
+              "input_tokens": 491236,
+              "cached_input_tokens": 340323,
+              "cache_write_tokens": 0,
+              "output_tokens": 21284,
+              "reasoning_tokens": 3055
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9632.1,
+              "cached_input_tokens": 6673.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 417.3,
+              "reasoning_tokens": 59.9
+            },
+            "cost_micros": 29166,
+            "cost_per_1000_conversations_usd": 0.5719,
+            "projected_cost_40_conversations_usd": 0.0229,
+            "latency_ms_p50": 4823,
+            "latency_ms_p95": 7307
+          }
         },
         "anthropic/claude-haiku-5-5@on-medium": {
           "settings": {
@@ -3084,6 +5868,9 @@
             }
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 49,
           "calls_answered": 51,
           "provider_errors": [],
           "invalid_examples": [
@@ -3111,7 +5898,83 @@
           "cost_per_1000_conversations_usd": 1.8297,
           "projected_cost_40_conversations_usd": 0.0732,
           "latency_ms_p50": 5671,
-          "latency_ms_p95": 8776
+          "latency_ms_p95": 8776,
+          "finalized": {
+            "conversations": 51,
+            "conversations_with_order": 36,
+            "json_valid": 49,
+            "json_validity_rate": 0.9607843137254902,
+            "item": {
+              "gold_items": 79,
+              "tp": 79,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0.9753086419753086,
+              "recall": 1.0,
+              "f1": 0.9875
+            },
+            "exact_match": 48,
+            "exact_match_rate": 0.9411764705882353,
+            "exact_match_ci95": [
+              0.8407512606105803,
+              0.9797937271359478
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 1.0
+            },
+            "correction": {
+              "conversations": 5,
+              "exact_match_rate": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 1,
+              "rate": 0.02040816326530612,
+              "issues": {
+                "ITEMS_WITHOUT_ORDER": 1
+              }
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 49,
+            "calls_answered": 51,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-076: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+              "a-dev-087: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+            ],
+            "finish_reasons": {
+              "end_turn": 51
+            },
+            "tokens": {
+              "input_tokens": 615143,
+              "cached_input_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 63554,
+              "reasoning_tokens": 34543
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 12061.6,
+              "cached_input_tokens": 0.0,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 1246.2,
+              "reasoning_tokens": 677.3
+            },
+            "cost_micros": 93313,
+            "cost_per_1000_conversations_usd": 1.8297,
+            "projected_cost_40_conversations_usd": 0.0732,
+            "latency_ms_p50": 5671,
+            "latency_ms_p95": 8776
+          }
         }
       }
     },
@@ -3148,18 +6011,18 @@
           "json_validity_rate": 0.967032967032967,
           "item": {
             "gold_items": 146,
-            "tp": 137,
-            "fp": 1,
-            "fn": 9,
-            "precision": 0.9927536231884058,
-            "recall": 0.9383561643835616,
-            "f1": 0.9647887323943662
+            "tp": 138,
+            "fp": 0,
+            "fn": 8,
+            "precision": 1.0,
+            "recall": 0.9452054794520548,
+            "f1": 0.971830985915493
           },
-          "exact_match": 85,
-          "exact_match_rate": 0.9340659340659341,
+          "exact_match": 86,
+          "exact_match_rate": 0.945054945054945,
           "exact_match_ci95": [
-            0.8635336815438649,
-            0.9694341300493602
+            0.8777503545818438,
+            0.9763052497099437
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -3183,6 +6046,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 88,
           "calls_answered": 91,
           "provider_errors": [],
           "invalid_examples": [
@@ -3211,7 +6077,82 @@
           "cost_per_1000_conversations_usd": 0.5976,
           "projected_cost_40_conversations_usd": 0.0239,
           "latency_ms_p50": 5410,
-          "latency_ms_p95": 7867
+          "latency_ms_p95": 7867,
+          "finalized": {
+            "conversations": 91,
+            "conversations_with_order": 64,
+            "json_valid": 88,
+            "json_validity_rate": 0.967032967032967,
+            "item": {
+              "gold_items": 146,
+              "tp": 138,
+              "fp": 0,
+              "fn": 8,
+              "precision": 1.0,
+              "recall": 0.9452054794520548,
+              "f1": 0.971830985915493
+            },
+            "exact_match": 87,
+            "exact_match_rate": 0.9560439560439561,
+            "exact_match_ci95": [
+              0.8923674847182562,
+              0.9827759122720942
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.9836065573770492
+            },
+            "correction": {
+              "conversations": 15,
+              "exact_match_rate": 0.7333333333333333,
+              "precision": 1.0,
+              "recall": 0.7777777777777778,
+              "f1": 0.875
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 88,
+            "calls_answered": 91,
+            "provider_errors": [],
+            "invalid_examples": [
+              "a-dev-023: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-059: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi",
+              "a-dev-064: 1 validation error for CustomerDecision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_value={'state': 'pendi"
+            ],
+            "finish_reasons": {
+              "stop": 91
+            },
+            "tokens": {
+              "input_tokens": 893481,
+              "cached_input_tokens": 608400,
+              "cache_write_tokens": 0,
+              "output_tokens": 39511,
+              "reasoning_tokens": 7453
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9818.5,
+              "cached_input_tokens": 6685.7,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 434.2,
+              "reasoning_tokens": 81.9
+            },
+            "cost_micros": 54384,
+            "cost_per_1000_conversations_usd": 0.5976,
+            "projected_cost_40_conversations_usd": 0.0239,
+            "latency_ms_p50": 5410,
+            "latency_ms_p95": 7867
+          }
         }
       }
     },
@@ -3248,18 +6189,18 @@
           "json_validity_rate": 1.0,
           "item": {
             "gold_items": 146,
-            "tp": 143,
-            "fp": 3,
-            "fn": 3,
-            "precision": 0.9794520547945206,
-            "recall": 0.9794520547945206,
-            "f1": 0.9794520547945206
+            "tp": 146,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
           },
-          "exact_match": 83,
-          "exact_match_rate": 0.9120879120879121,
+          "exact_match": 86,
+          "exact_match_rate": 0.945054945054945,
           "exact_match_ci95": [
-            0.8360118928653627,
-            0.9547803333307369
+            0.8777503545818438,
+            0.9763052497099437
           ],
           "field_accuracy": {
             "method": 1.0,
@@ -3272,10 +6213,10 @@
           },
           "correction": {
             "conversations": 15,
-            "exact_match_rate": 0.8666666666666667,
-            "precision": 0.9722222222222222,
-            "recall": 0.9722222222222222,
-            "f1": 0.9722222222222222
+            "exact_match_rate": 0.9333333333333333,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
           },
           "grounding": {
             "conversations_with_issues": 0,
@@ -3283,6 +6224,9 @@
             "issues": {}
           },
           "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 91,
           "calls_answered": 91,
           "provider_errors": [],
           "invalid_examples": [],
@@ -3307,7 +6251,248 @@
           "cost_per_1000_conversations_usd": 0.6006,
           "projected_cost_40_conversations_usd": 0.024,
           "latency_ms_p50": 5003,
-          "latency_ms_p95": 7155
+          "latency_ms_p95": 7155,
+          "finalized": {
+            "conversations": 91,
+            "conversations_with_order": 64,
+            "json_valid": 91,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 146,
+              "tp": 146,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 90,
+            "exact_match_rate": 0.989010989010989,
+            "exact_match_ci95": [
+              0.9403491964093862,
+              0.9980575786766521
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.984375
+            },
+            "correction": {
+              "conversations": 15,
+              "exact_match_rate": 0.9333333333333333,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 91,
+            "calls_answered": 91,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 91
+            },
+            "tokens": {
+              "input_tokens": 898031,
+              "cached_input_tokens": 612900,
+              "cache_write_tokens": 0,
+              "output_tokens": 39946,
+              "reasoning_tokens": 7281
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9868.5,
+              "cached_input_tokens": 6735.2,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 439.0,
+              "reasoning_tokens": 80.0
+            },
+            "cost_micros": 54654,
+            "cost_per_1000_conversations_usd": 0.6006,
+            "projected_cost_40_conversations_usd": 0.024,
+            "latency_ms_p50": 5003,
+            "latency_ms_p95": 7155
+          }
+        }
+      }
+    },
+    {
+      "run_id": "20261015T192653Z-full-all",
+      "path": "runs/teacher-bakeoff/20261015T192653Z-full-all",
+      "mode": "full 91 (all dev)",
+      "started_at": "2026-10-15T19:26:53.221537+00:00",
+      "git_commit": "ba8e6a104f83aca2d4510a53cb3429019034b6e7",
+      "prompt_version": "teacher-extract@0.4",
+      "schema_version": "extraction@0.4",
+      "data": {
+        "split": "dev",
+        "source": "A (claude_written)",
+        "selection": "all dev, sorted by id[0:]"
+      },
+      "conversations": 91,
+      "estimate_usd": 0.179944,
+      "actual_cost_usd": 0.054679,
+      "variants": {
+        "openai/gpt-6-luna@low": {
+          "settings": {
+            "provider": "openai",
+            "model": "gpt-6-luna",
+            "extra_body": {
+              "reasoning_effort": "low"
+            },
+            "provider_default": false,
+            "price_verified": "2026-10-14"
+          },
+          "conversations": 91,
+          "conversations_with_order": 64,
+          "json_valid": 91,
+          "json_validity_rate": 1.0,
+          "item": {
+            "gold_items": 146,
+            "tp": 146,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "exact_match": 88,
+          "exact_match_rate": 0.967032967032967,
+          "exact_match_ci95": [
+            0.9075053921522588,
+            0.9887257975366542
+          ],
+          "field_accuracy": {
+            "method": 1.0,
+            "time": 1.0,
+            "address": 1.0,
+            "payment": 1.0,
+            "name": 1.0,
+            "decision": 1.0,
+            "missing": 0.953125
+          },
+          "correction": {
+            "conversations": 15,
+            "exact_match_rate": 0.9333333333333333,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "grounding": {
+            "conversations_with_issues": 0,
+            "rate": 0.0,
+            "issues": {}
+          },
+          "unclassified_requests": 0,
+          "scorer": "scorer@0.2",
+          "postprocess": null,
+          "raw_json_valid": 91,
+          "calls_answered": 91,
+          "provider_errors": [],
+          "invalid_examples": [],
+          "finish_reasons": {
+            "stop": 91
+          },
+          "tokens": {
+            "input_tokens": 898031,
+            "cached_input_tokens": 612900,
+            "cache_write_tokens": 0,
+            "output_tokens": 39990,
+            "reasoning_tokens": 7073
+          },
+          "tokens_per_conversation": {
+            "input_tokens": 9868.5,
+            "cached_input_tokens": 6735.2,
+            "cache_write_tokens": 0.0,
+            "output_tokens": 439.5,
+            "reasoning_tokens": 77.7
+          },
+          "cost_micros": 54679,
+          "cost_per_1000_conversations_usd": 0.6009,
+          "projected_cost_40_conversations_usd": 0.024,
+          "latency_ms_p50": 4887,
+          "latency_ms_p95": 9455,
+          "finalized": {
+            "conversations": 91,
+            "conversations_with_order": 64,
+            "json_valid": 91,
+            "json_validity_rate": 1.0,
+            "item": {
+              "gold_items": 146,
+              "tp": 146,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "exact_match": 90,
+            "exact_match_rate": 0.989010989010989,
+            "exact_match_ci95": [
+              0.9403491964093862,
+              0.9980575786766521
+            ],
+            "field_accuracy": {
+              "method": 1.0,
+              "time": 1.0,
+              "address": 1.0,
+              "payment": 1.0,
+              "name": 1.0,
+              "decision": 1.0,
+              "missing": 0.984375
+            },
+            "correction": {
+              "conversations": 15,
+              "exact_match_rate": 0.9333333333333333,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "grounding": {
+              "conversations_with_issues": 0,
+              "rate": 0.0,
+              "issues": {}
+            },
+            "unclassified_requests": 0,
+            "scorer": "scorer@0.2",
+            "postprocess": "finalize@0.1",
+            "raw_json_valid": 91,
+            "calls_answered": 91,
+            "provider_errors": [],
+            "invalid_examples": [],
+            "finish_reasons": {
+              "stop": 91
+            },
+            "tokens": {
+              "input_tokens": 898031,
+              "cached_input_tokens": 612900,
+              "cache_write_tokens": 0,
+              "output_tokens": 39990,
+              "reasoning_tokens": 7073
+            },
+            "tokens_per_conversation": {
+              "input_tokens": 9868.5,
+              "cached_input_tokens": 6735.2,
+              "cache_write_tokens": 0.0,
+              "output_tokens": 439.5,
+              "reasoning_tokens": 77.7
+            },
+            "cost_micros": 54679,
+            "cost_per_1000_conversations_usd": 0.6009,
+            "projected_cost_40_conversations_usd": 0.024,
+            "latency_ms_p50": 4887,
+            "latency_ms_p95": 9455
+          }
         }
       }
     }

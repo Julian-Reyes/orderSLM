@@ -1,21 +1,23 @@
 # Teacher bake-off: 20261015T182916Z-full-skip5
 
+Scored with `scorer@0.2`. Raw model output (no code post-processing); see `report.finalize.md` for the finalized view.
+
 full 35 (bake-off set positions 6-40) conversations from dev (Source A, Claude-written), prompt `teacher-extract@0.2`, schema `extraction@0.4`, commit `f800c833ffda458392fbc60d495f40f4acc7cb24`, cache `record`. Actual cost of this run: $0.5811 (estimate $1.5234).
 
 | Variant | JSON valid | Items found / extra / missed (of gold) | Item F1 | Fully correct (95% CI) | Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv | Cost (this run) | Cost/1k conv | p50 ms |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `openai/gpt-6-luna@none` | 34/35 | 56 / 1 / 2 (of 58) | 97.4% | 30/35 (70.6%–93.7%) | 1 | 9778.8 | 371.1 | 0.0 | $0.0203 | $0.58 | 3612 |
 | `openai/gpt-6-luna@low` | 35/35 | 58 / 2 / 0 (of 58) | 98.3% | 32/35 (77.6%–97.0%) | 2 | 9778.8 | 473.4 | 114.7 | $0.0221 | $0.63 | 5899 |
-| `openai/gpt-6-luna@medium` | 32/35 | 50 / 3 / 8 (of 58) | 90.1% | 29/35 (67.3%–91.9%) | 1 | 9778.8 | 697.4 | 294.1 | $0.0260 | $0.74 | 4971 |
-| `anthropic/claude-haiku-5-5@off-low` | 30/35 | 53 / 5 / 5 (of 58) | 91.4% | 21/35 (43.6%–74.4%) | 1 | 12285.1 | 613.3 | 0.0 | $0.0537 | $1.54 | 2643 |
+| `openai/gpt-6-luna@medium` | 32/35 | 52 / 1 / 6 (of 58) | 93.7% | 30/35 (70.6%–93.7%) | 1 | 9778.8 | 697.4 | 294.1 | $0.0260 | $0.74 | 4971 |
+| `anthropic/claude-haiku-5-5@off-low` | 30/35 | 55 / 3 / 3 (of 58) | 94.8% | 21/35 (43.6%–74.4%) | 1 | 12285.1 | 613.3 | 0.0 | $0.0537 | $1.54 | 2643 |
 | `anthropic/claude-haiku-5-5@off-medium` | 28/35 | 50 / 2 / 8 (of 58) | 90.9% | 22/35 (46.3%–76.8%) | 1 | 12285.1 | 610.1 | 0.0 | $0.0537 | $1.53 | 2527 |
 | `anthropic/claude-haiku-5-5@on-low` | 32/35 | 54 / 0 / 4 (of 58) | 96.4% | 31/35 (74.0%–95.5%) | 0 | 12286.1 | 1182.3 | 599.4 | $0.0637 | $1.82 | 5267 |
 | `anthropic/claude-haiku-5-5@on-medium` | 34/35 | 58 / 0 / 0 (of 58) | 100.0% | 33/35 (81.4%–98.4%) | 0 | 12286.1 | 1332.3 | 745.0 | $0.0663 | $1.90 | 5553 |
-| `google/gemini-3.1-flash-lite@minimal` | 27/35 | 40 / 10 / 18 (of 58) | 74.1% | 17/35 (33.0%–64.4%) | 1 | 8111.1 | 530.9 | 0.0 | $0.0989 | $2.82 | 2183 |
-| `google/gemini-3.1-flash-lite@default` | 30/35 | 43 / 9 / 15 (of 58) | 78.2% | 22/35 (46.3%–76.8%) | 1 | 8111.1 | 604.7 | 0.0 | $0.1027 | $2.94 | 2313 |
-| `deepseek/deepseek-flash@none` | 31/35 | 44 / 7 / 14 (of 58) | 80.7% | 25/35 (54.9%–83.7%) | 2 | 8332.4 | 439.7 | 0.0 | $0.0132 | $0.38 | 2286 |
+| `google/gemini-3.1-flash-lite@minimal` | 27/35 | 49 / 1 / 9 (of 58) | 90.7% | 22/35 (46.3%–76.8%) | 1 | 8111.1 | 530.9 | 0.0 | $0.0989 | $2.82 | 2183 |
+| `google/gemini-3.1-flash-lite@default` | 30/35 | 52 / 0 / 6 (of 58) | 94.5% | 27/35 (61.0%–87.9%) | 1 | 8111.1 | 604.7 | 0.0 | $0.1027 | $2.94 | 2313 |
+| `deepseek/deepseek-flash@none` | 31/35 | 48 / 3 / 10 (of 58) | 88.1% | 27/35 (61.0%–87.9%) | 2 | 8332.4 | 439.7 | 0.0 | $0.0132 | $0.38 | 2286 |
 | `deepseek/deepseek-flash@low` | 33/35 | 53 / 0 / 5 (of 58) | 95.5% | 33/35 (81.4%–98.4%) | 0 | 8357.4 | 1198.7 | 810.6 | $0.0294 | $0.84 | 5386 |
-| `deepseek/deepseek-flash@high` | 32/35 | 45 / 4 / 13 (of 58) | 84.1% | 29/35 (67.3%–91.9%) | 0 | 8357.4 | 1271.0 | 893.5 | $0.0309 | $0.88 | 5733 |
+| `deepseek/deepseek-flash@high` | 32/35 | 49 / 0 / 9 (of 58) | 91.6% | 32/35 (77.6%–97.0%) | 0 | 8357.4 | 1271.0 | 893.5 | $0.0309 | $0.88 | 5733 |
 | **all variants** | | | | | | | | | **$0.5811** | | |
 
 Full metrics per variant: `metrics.json`. Raw outputs: `outputs/<variant>/<conversation>.json`.
