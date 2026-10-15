@@ -1,0 +1,798 @@
+{
+  "openai/gpt-6-luna@none": {
+    "conversations": 35,
+    "json_valid": 34,
+    "json_validity_rate": 0.9714285714285714,
+    "item": {
+      "tp": 56,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.9824561403508771,
+      "recall": 0.9655172413793104,
+      "f1": 0.9739130434782609
+    },
+    "exact_match_rate": 0.8571428571428571,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.8695652173913043
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.8,
+      "precision": 1.0,
+      "recall": 0.9230769230769231,
+      "f1": 0.96
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.029411764705882353,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-064: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu"
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 342259,
+      "cached_input_tokens": 226882,
+      "cache_write_tokens": 0,
+      "output_tokens": 12988,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9778.8,
+      "cached_input_tokens": 6482.3,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 371.1,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 20317,
+    "cost_per_1000_conversations_usd": 0.5805,
+    "projected_cost_40_conversations_usd": 0.0232,
+    "latency_ms_p50": 3612,
+    "latency_ms_p95": 6768
+  },
+  "openai/gpt-6-luna@low": {
+    "conversations": 35,
+    "json_valid": 35,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 58,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9666666666666667,
+      "recall": 1.0,
+      "f1": 0.9830508474576272
+    },
+    "exact_match_rate": 0.9142857142857143,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9583333333333334
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "grounding": {
+      "conversations_with_issues": 2,
+      "rate": 0.05714285714285714,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 2
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 342259,
+      "cached_input_tokens": 226882,
+      "cache_write_tokens": 0,
+      "output_tokens": 16570,
+      "reasoning_tokens": 4013
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9778.8,
+      "cached_input_tokens": 6482.3,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 473.4,
+      "reasoning_tokens": 114.7
+    },
+    "cost_micros": 22112,
+    "cost_per_1000_conversations_usd": 0.6318,
+    "projected_cost_40_conversations_usd": 0.0253,
+    "latency_ms_p50": 5899,
+    "latency_ms_p95": 9143
+  },
+  "openai/gpt-6-luna@medium": {
+    "conversations": 35,
+    "json_valid": 32,
+    "json_validity_rate": 0.9142857142857143,
+    "item": {
+      "tp": 50,
+      "fp": 3,
+      "fn": 8,
+      "precision": 0.9433962264150944,
+      "recall": 0.8620689655172413,
+      "f1": 0.9009009009009009
+    },
+    "exact_match_rate": 0.8285714285714286,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9545454545454546
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.6,
+      "precision": 0.9,
+      "recall": 0.6923076923076923,
+      "f1": 0.782608695652174
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.03125,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-059: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-064: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-021: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: an off-menu item can't have variant, modifications or combo picks [type=value_error, input_value={'line_id': 'L1', 'menu_i...bout 30 "
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 342259,
+      "cached_input_tokens": 226882,
+      "cache_write_tokens": 0,
+      "output_tokens": 24409,
+      "reasoning_tokens": 10295
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9778.8,
+      "cached_input_tokens": 6482.3,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 697.4,
+      "reasoning_tokens": 294.1
+    },
+    "cost_micros": 26029,
+    "cost_per_1000_conversations_usd": 0.7437,
+    "projected_cost_40_conversations_usd": 0.0297,
+    "latency_ms_p50": 4971,
+    "latency_ms_p95": 9785
+  },
+  "anthropic/claude-haiku-5-5@off-low": {
+    "conversations": 35,
+    "json_valid": 30,
+    "json_validity_rate": 0.8571428571428571,
+    "item": {
+      "tp": 53,
+      "fp": 5,
+      "fn": 5,
+      "precision": 0.9137931034482759,
+      "recall": 0.9137931034482759,
+      "f1": 0.9137931034482759
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 0.9583333333333334,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.7083333333333334
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.5,
+      "precision": 0.8461538461538461,
+      "recall": 0.8461538461538461,
+      "f1": 0.8461538461538461
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.03333333333333333,
+      "issues": {
+        "EVIDENCE_BUSINESS_MESSAGE": 1
+      }
+    },
+    "unclassified_requests": 1,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-009: 1 validation error for ExtractionOutput\n  Value error, clarification_question is required exactly when missing_or_ambiguous is non-empty [type=value_error, input_value={'schema_version': 'extra...icat",
+      "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ime would you like it?'}, input_type=dict]\n ",
+      "a-dev-088: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 35
+    },
+    "tokens": {
+      "input_tokens": 429980,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 21465,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 12285.1,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 613.3,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 53743,
+    "cost_per_1000_conversations_usd": 1.5355,
+    "projected_cost_40_conversations_usd": 0.0614,
+    "latency_ms_p50": 2643,
+    "latency_ms_p95": 6142
+  },
+  "anthropic/claude-haiku-5-5@off-medium": {
+    "conversations": 35,
+    "json_valid": 28,
+    "json_validity_rate": 0.8,
+    "item": {
+      "tp": 50,
+      "fp": 2,
+      "fn": 8,
+      "precision": 0.9615384615384616,
+      "recall": 0.8620689655172413,
+      "f1": 0.9090909090909091
+    },
+    "exact_match_rate": 0.6285714285714286,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 0.9545454545454546,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.8181818181818182
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.6,
+      "precision": 0.9090909090909091,
+      "recall": 0.7692307692307693,
+      "f1": 0.8333333333333334
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.03571428571428571,
+      "issues": {
+        "EVIDENCE_BUSINESS_MESSAGE": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-009: 1 validation error for ExtractionOutput\n  Value error, clarification_question is required exactly when missing_or_ambiguous is non-empty [type=value_error, input_value={'schema_version': 'extra...icat",
+      "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...e sure it gets sorted.\"}, input_type=dict]\n ",
+      "a-dev-020: 1 validation error for ExtractionOutput\n  Value error, clarification_question is required exactly when missing_or_ambiguous is non-empty [type=value_error, input_value={'schema_version': 'extra...icat",
+      "a-dev-016: 1 validation error for ExtractionOutput\nmissing_or_ambiguous.0\n  Value error, missing_or_ambiguous: line_id is required for item fields only (items) [type=value_error, input_value={'field': 'items', '",
+      "a-dev-088: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 35
+    },
+    "tokens": {
+      "input_tokens": 429980,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 21354,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 12285.1,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 610.1,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 53688,
+    "cost_per_1000_conversations_usd": 1.5339,
+    "projected_cost_40_conversations_usd": 0.0614,
+    "latency_ms_p50": 2527,
+    "latency_ms_p95": 3937
+  },
+  "anthropic/claude-haiku-5-5@on-low": {
+    "conversations": 35,
+    "json_valid": 32,
+    "json_validity_rate": 0.9142857142857143,
+    "item": {
+      "tp": 54,
+      "fp": 0,
+      "fn": 4,
+      "precision": 1.0,
+      "recall": 0.9310344827586207,
+      "f1": 0.9642857142857143
+    },
+    "exact_match_rate": 0.8857142857142857,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9565217391304348
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.8,
+      "precision": 1.0,
+      "recall": 0.8461538461538461,
+      "f1": 0.9166666666666666
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-059: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 35
+    },
+    "tokens": {
+      "input_tokens": 430015,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 41382,
+      "reasoning_tokens": 20980
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 12286.1,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1182.3,
+      "reasoning_tokens": 599.4
+    },
+    "cost_micros": 63711,
+    "cost_per_1000_conversations_usd": 1.8203,
+    "projected_cost_40_conversations_usd": 0.0728,
+    "latency_ms_p50": 5267,
+    "latency_ms_p95": 9831
+  },
+  "anthropic/claude-haiku-5-5@on-medium": {
+    "conversations": 35,
+    "json_valid": 34,
+    "json_validity_rate": 0.9714285714285714,
+    "item": {
+      "tp": 58,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 0.9428571428571428,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9583333333333334
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-001: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 35
+    },
+    "tokens": {
+      "input_tokens": 430015,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 46630,
+      "reasoning_tokens": 26074
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 12286.1,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1332.3,
+      "reasoning_tokens": 745.0
+    },
+    "cost_micros": 66332,
+    "cost_per_1000_conversations_usd": 1.8952,
+    "projected_cost_40_conversations_usd": 0.0758,
+    "latency_ms_p50": 5553,
+    "latency_ms_p95": 9981
+  },
+  "google/gemini-3.1-flash-lite@minimal": {
+    "conversations": 35,
+    "json_valid": 27,
+    "json_validity_rate": 0.7714285714285715,
+    "item": {
+      "tp": 40,
+      "fp": 10,
+      "fn": 18,
+      "precision": 0.8,
+      "recall": 0.6896551724137931,
+      "f1": 0.7407407407407407
+    },
+    "exact_match_rate": 0.4857142857142857,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 0.9523809523809523,
+      "missing": 0.8095238095238095
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.2,
+      "precision": 0.6666666666666666,
+      "recall": 0.46153846153846156,
+      "f1": 0.5454545454545454
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.037037037037037035,
+      "issues": {
+        "EVIDENCE_BUSINESS_MESSAGE": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-080: 1 validation error for ExtractionOutput\n  Value error, L3: off-menu item must be listed as item_menu_match/off_menu [type=value_error, input_value={'schema_version': 'extra...ication_question': None},",
+      "a-dev-033: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...let me know your name?'}, input_type=dict]\n ",
+      "a-dev-067: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-090: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 283889,
+      "cached_input_tokens": 202118,
+      "cache_write_tokens": 0,
+      "output_tokens": 18583,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8111.1,
+      "cached_input_tokens": 5774.8,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 530.9,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 98859,
+    "cost_per_1000_conversations_usd": 2.8245,
+    "projected_cost_40_conversations_usd": 0.113,
+    "latency_ms_p50": 2183,
+    "latency_ms_p95": 2736
+  },
+  "google/gemini-3.1-flash-lite@default": {
+    "conversations": 35,
+    "json_valid": 30,
+    "json_validity_rate": 0.8571428571428571,
+    "item": {
+      "tp": 43,
+      "fp": 9,
+      "fn": 15,
+      "precision": 0.8269230769230769,
+      "recall": 0.7413793103448276,
+      "f1": 0.7818181818181819
+    },
+    "exact_match_rate": 0.6285714285714286,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 0.9545454545454546,
+      "missing": 0.9090909090909091
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.4,
+      "precision": 0.7391304347826086,
+      "recall": 0.6538461538461539,
+      "f1": 0.6938775510204082
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.03333333333333333,
+      "issues": {
+        "EVIDENCE_BUSINESS_MESSAGE": 1
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-050: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-044: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...yment method you used?\"}, input_type=dict]\n ",
+      "a-dev-049: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...or pickup or delivery?'}, input_type=dict]\n ",
+      "a-dev-070: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-005: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 283889,
+      "cached_input_tokens": 217983,
+      "cache_write_tokens": 0,
+      "output_tokens": 21164,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8111.1,
+      "cached_input_tokens": 6228.1,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 604.7,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 102731,
+    "cost_per_1000_conversations_usd": 2.9352,
+    "projected_cost_40_conversations_usd": 0.1174,
+    "latency_ms_p50": 2313,
+    "latency_ms_p95": 3487
+  },
+  "deepseek/deepseek-flash@none": {
+    "conversations": 35,
+    "json_valid": 31,
+    "json_validity_rate": 0.8857142857142857,
+    "item": {
+      "tp": 44,
+      "fp": 7,
+      "fn": 14,
+      "precision": 0.8627450980392157,
+      "recall": 0.7586206896551724,
+      "f1": 0.8073394495412844
+    },
+    "exact_match_rate": 0.7142857142857143,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 0.9523809523809523,
+      "missing": 0.9523809523809523
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.5,
+      "precision": 0.9411764705882353,
+      "recall": 0.6153846153846154,
+      "f1": 0.7441860465116279
+    },
+    "grounding": {
+      "conversations_with_issues": 2,
+      "rate": 0.06451612903225806,
+      "issues": {
+        "ITEMS_WITHOUT_ORDER": 2
+      }
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-033: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n ",
+      "a-dev-059: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-064: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-049: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...for your second shake?'}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 291634,
+      "cached_input_tokens": 270464,
+      "cache_write_tokens": 0,
+      "output_tokens": 15391,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8332.4,
+      "cached_input_tokens": 7727.5,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 439.7,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 13237,
+    "cost_per_1000_conversations_usd": 0.3782,
+    "projected_cost_40_conversations_usd": 0.0151,
+    "latency_ms_p50": 2286,
+    "latency_ms_p95": 3322
+  },
+  "deepseek/deepseek-flash@low": {
+    "conversations": 35,
+    "json_valid": 33,
+    "json_validity_rate": 0.9428571428571428,
+    "item": {
+      "tp": 53,
+      "fp": 0,
+      "fn": 5,
+      "precision": 1.0,
+      "recall": 0.9137931034482759,
+      "f1": 0.954954954954955
+    },
+    "exact_match_rate": 0.9428571428571428,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.8,
+      "precision": 1.0,
+      "recall": 0.8076923076923077,
+      "f1": 0.8936170212765957
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-067: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-064: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu"
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 292509,
+      "cached_input_tokens": 269696,
+      "cache_write_tokens": 0,
+      "output_tokens": 41956,
+      "reasoning_tokens": 28372
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8357.4,
+      "cached_input_tokens": 7705.6,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1198.7,
+      "reasoning_tokens": 810.6
+    },
+    "cost_micros": 29423,
+    "cost_per_1000_conversations_usd": 0.8407,
+    "projected_cost_40_conversations_usd": 0.0336,
+    "latency_ms_p50": 5386,
+    "latency_ms_p95": 15694
+  },
+  "deepseek/deepseek-flash@high": {
+    "conversations": 35,
+    "json_valid": 32,
+    "json_validity_rate": 0.9142857142857143,
+    "item": {
+      "tp": 45,
+      "fp": 4,
+      "fn": 13,
+      "precision": 0.9183673469387755,
+      "recall": 0.7758620689655172,
+      "f1": 0.8411214953271028
+    },
+    "exact_match_rate": 0.8285714285714286,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 10,
+      "exact_match_rate": 0.4,
+      "precision": 0.7647058823529411,
+      "recall": 0.5,
+      "f1": 0.6046511627906976
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 35,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-059: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-067: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu",
+      "a-dev-064: 1 validation error for ExtractionOutput\ncustomer_decision\n  Value error, customer_decision: evidence required for confirmed/cancelled or an agreement, forbidden otherwise [type=value_error, input_valu"
+    ],
+    "finish_reasons": {
+      "stop": 35
+    },
+    "tokens": {
+      "input_tokens": 292509,
+      "cached_input_tokens": 269696,
+      "cache_write_tokens": 0,
+      "output_tokens": 44485,
+      "reasoning_tokens": 31271
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8357.4,
+      "cached_input_tokens": 7705.6,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1271.0,
+      "reasoning_tokens": 893.5
+    },
+    "cost_micros": 30942,
+    "cost_per_1000_conversations_usd": 0.8841,
+    "projected_cost_40_conversations_usd": 0.0354,
+    "latency_ms_p50": 5733,
+    "latency_ms_p95": 14674
+  }
+}

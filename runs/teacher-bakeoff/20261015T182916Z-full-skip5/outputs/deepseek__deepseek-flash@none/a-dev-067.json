@@ -1,0 +1,31 @@
+{
+ "conversation_id": "a-dev-067",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"schema_version\": \"extraction@0.4\",\n  \"items\": [\n    {\n      \"line_id\": \"L1\",\n      \"menu_item_id\": \"cheeseburger\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": \"double\",\n      \"unmatched_variant_text\": null,\n      \"modifications\": [],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"a cheeseburger\"\n        },\n        {\n          \"message_index\": 5,\n          \"quote\": \"the burger be a double\"\n        }\n      ]\n    },\n    {\n      \"line_id\": \"L2\",\n      \"menu_item_id\": \"fries\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": \"regular\",\n      \"unmatched_variant_text\": null,\n      \"modifications\": [],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 1,\n          \"quote\": \"regular fries\"\n        }\n      ]\n    },\n    {\n      \"line_id\": \"L3\",\n      \"menu_item_id\": \"lemonade\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": null,\n      \"unmatched_variant_text\": null,\n      \"modifications\": [],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 1,\n          \"quote\": \"a lemonade\"\n        }\n      ]\n    }\n  ],\n  \"fulfillment\": {\n    \"method\": \"delivery\",\n    \"method_evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"deliver to 16 hill st\"\n      }\n    ],\n    \"requested_time\": {\n      \"state\": \"not_mentioned\",\n      \"kind\": null,\n      \"raw_text\": null,\n      \"normalized_local\": null,\n      \"evidence\": []\n    }\n  },\n  \"address\": {\n    \"state\": \"provided\",\n    \"street\": \"hill st\",\n    \"number\": \"16\",\n    \"unit\": null,\n    \"reference\": null,\n    \"raw_text\": \"16 hill st\",\n    \"evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"16 hill st\"\n      }\n    ]\n  },\n  \"payment\": {\n    \"method\": \"card\",\n    \"change_for_cents\": null,\n    \"customer_claims_paid\": false,\n    \"evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"card\"\n      }\n    ]\n  },\n  \"customer_name\": {\n    \"state\": \"not_mentioned\",\n    \"value\": null,\n    \"evidence\": []\n  },\n  \"customer_decision\": {\n    \"state\": \"pending\",\n    \"agreed_while_incomplete\": false,\n    \"evidence\": []\n  },\n  \"notes\": [],\n  \"missing_or_ambiguous\": [],\n  \"clarification_question\": null\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 6891,
+   "cached_input_tokens": 6656,
+   "cache_write_tokens": 0,
+   "output_tokens": 695,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3018.7933720008004,
+  "cost_micros": 473,
+  "at": "2026-10-15T18:33:43.625507+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 6891,
+   "completion_tokens": 695,
+   "total_tokens": 7586,
+   "prompt_tokens_details": {
+    "cached_tokens": 6656
+   },
+   "prompt_cache_hit_tokens": 6656,
+   "prompt_cache_miss_tokens": 235
+  }
+ }
+}

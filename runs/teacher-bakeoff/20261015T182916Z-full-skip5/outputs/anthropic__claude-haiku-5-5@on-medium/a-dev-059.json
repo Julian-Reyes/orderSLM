@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-059",
+ "config_id": "anthropic/claude-haiku-5-5@on-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"2 cheeseburgers\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"1 veggie burger\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"2 fries\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"strawberry\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"strawberry shake\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"for pickup at 6:15\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:15\",\"normalized_local\":\"18:15\",\"evidence\":[{\"message_index\":1,\"quote\":\"pickup at 6:15\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"paying card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 10169,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1639,
+   "reasoning_tokens": 815
+  },
+  "latency_ms": 6467.248934000963,
+  "cost_micros": 1837,
+  "at": "2026-10-15T18:33:08.998254+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 10169,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1639,
+   "output_tokens_details": {
+    "thinking_tokens": 815
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

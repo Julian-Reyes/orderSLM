@@ -1,0 +1,193 @@
+{
+  "run_id": "20261015T182916Z-full-skip5",
+  "experiment": "teacher-bakeoff",
+  "mode": "full 35 (bake-off set positions 6-40)",
+  "started_at": "2026-10-15T18:29:16.937594+00:00",
+  "git_commit": "f800c833ffda458392fbc60d495f40f4acc7cb24",
+  "prompt_version": "teacher-extract@0.2",
+  "prompt_sha256": "11d2aeb367c5daf9",
+  "schema_version": "extraction@0.4",
+  "portable_schema_sha256": "e746d31047419f2d",
+  "data": {
+    "split": "dev",
+    "source": "A (claude_written)",
+    "selection": "bakeoff_set(size=40, seed=20261015)[5:]",
+    "conversation_ids": [
+      "a-dev-002",
+      "a-dev-073",
+      "a-dev-080",
+      "a-dev-004",
+      "a-dev-033",
+      "a-dev-003",
+      "a-dev-057",
+      "a-dev-089",
+      "a-dev-046",
+      "a-dev-009",
+      "a-dev-091",
+      "a-dev-035",
+      "a-dev-050",
+      "a-dev-059",
+      "a-dev-044",
+      "a-dev-063",
+      "a-dev-058",
+      "a-dev-067",
+      "a-dev-064",
+      "a-dev-090",
+      "a-dev-071",
+      "a-dev-020",
+      "a-dev-043",
+      "a-dev-006",
+      "a-dev-031",
+      "a-dev-061",
+      "a-dev-049",
+      "a-dev-016",
+      "a-dev-065",
+      "a-dev-088",
+      "a-dev-070",
+      "a-dev-047",
+      "a-dev-021",
+      "a-dev-001",
+      "a-dev-005"
+    ],
+    "dev_files_sha256": "03ba33f8d6d99fd9",
+    "menu_versions": {
+      "corner-patty": "corner-patty@882e409e5aa8",
+      "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+      "morning-crumb": "morning-crumb@c8f57ec59225"
+    }
+  },
+  "variants": {
+    "openai/gpt-6-luna@none": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "none"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "openai/gpt-6-luna@low": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "low"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "openai/gpt-6-luna@medium": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "extra_body": {
+        "reasoning_effort": "medium"
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    },
+    "anthropic/claude-haiku-5-5@off-low": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@off-medium": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@on-low": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-15"
+    },
+    "anthropic/claude-haiku-5-5@on-medium": {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "extra_body": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-15"
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "extra_body": {
+        "reasoning_effort": "minimal"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "google/gemini-3.1-flash-lite@default": {
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "extra_body": {},
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@none": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "none"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@low": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "low"
+      },
+      "provider_default": false,
+      "price_verified": "2026-10-14"
+    },
+    "deepseek/deepseek-flash@high": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "extra_body": {
+        "reasoning_effort": "high"
+      },
+      "provider_default": true,
+      "price_verified": "2026-10-14"
+    }
+  },
+  "cache_mode": "record",
+  "estimate_micros": 1523394,
+  "max_cost_micros": 2000000,
+  "finished_at": "2026-10-15T18:38:55.640751+00:00",
+  "actual_cost_micros": 581124,
+  "stopped_early": false
+}

@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.0975** (smoke tests $0.0007; bake-off pilot $0.0968) |
-| Remaining (of $10 ceiling) | $9.9025 |
+| Spent to date | **$0.6786** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811) |
+| Remaining (of $10 ceiling) | $9.3214 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -22,6 +22,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-15 | M3 | 12 reasoning variants, 1 call each | Smoke `smoke@0.2`: every variant accepted by its API | 1,650 / 637 | 0.000595 | recorded usage × verified price | `runs/smoke/20261015T175548Z` |
 | 2026-10-15 | M3 | luna, Gemini, DeepSeek variants (8) | Teacher bake-off pilot, 5 dev conversations (Haiku calls rejected: HTTP 400, not billed) | 378,426 / 28,139 | 0.060176 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180115Z-pilot5` |
 | 2026-10-15 | M3 | Haiku 5.5 variants (4) | Pilot re-run after prompt-only JSON fix; the other 48 calls replayed from cache ($0) | 265,414 / 20,130 | 0.036619 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180442Z-pilot5` |
+| 2026-10-15 | M3 | all 12 variants | Second bake-off: 35 new dev conversations, prompt `teacher-extract@0.2` (estimate $1.52, projection $0.68) | 4,191,197 / 326,377 | 0.581100 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T182916Z-full-skip5` |
 
 ## Prepaid credit (purchases, not spend)
 
@@ -37,7 +38,7 @@ Buying credit is not spending it: spend is counted only in the ledger above, fro
 
 | Item | Milestone | Planned | Notes |
 |---|---|---|---|
-| Teacher bake-off (~40 dev conversations × 12 variants) | 3 | ≈ $0.70 | Pilot measured $0.0968 for 5 × 12 (incl. one Haiku retry); remaining 35 × 12 projected ≈ $0.68 from measured cost/conversation. Gemini may be overstated (cached price not verified). |
+| Teacher bake-off (~40 dev conversations × 12 variants) | 3 | ≈ $0.70 | Pilot measured $0.0968 for 5 × 12 (incl. one Haiku retry); second run 35 × 12 with prompt v0.2 projected ≈ $0.68 from measured cost/conversation. Gemini's implicit cache hits are billed at full input price in our numbers: Google says the savings are "passed on" but not at which rate (caching price $0.025/M). Compare with the Google Cloud bill. |
 | Synthetic generation + bulk labeling (1–2k conversations) | 4 | $1–4 | 200-conversation pilot first; batch APIs where available. Ask if > $2. |
 | Router benchmark (Jev, OpenAI Decisions) | 7 | < $1 | Jev input price not in its docs (spec §11): confirm before running. |
 | Decision-provider roles + teacher-LLM comparisons (label audit, order checker, narrowing) | 4, 6, 7 | estimate first | Spec §11 b–e; ask before any single spend over $2. |
@@ -52,7 +53,7 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 | Model | Standard in / out per 1M | Discounted | Verified by OrderSLM |
 |---|---|---|---|
 | OpenAI `gpt-6-luna` | $0.10 / $0.50 (cached input $0.01) | Batch $0.05 / $0.25 | 2026-10-14, [OpenAI pricing](https://developers.openai.com/api/docs/pricing). Short context (≤ 272K input); long context costs more (not relevant here) |
-| Google `gemini-3.1-flash-lite` | $0.25 / $1.50 (text in; output includes thinking tokens) | Batch $0.125 / $0.75 | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Paid tier only: free-tier data is used to improve Google's products, paid-tier data is not |
+| Google `gemini-3.1-flash-lite` | $0.25 / $1.50 (text in; output includes thinking tokens); context caching $0.025 (verified 2026-10-15) | Batch $0.125 / $0.75 (caching $0.0125) | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Paid tier only: free-tier data is used to improve Google's products, paid-tier data is not |
 | DeepSeek `deepseek-flash` | $0.30 / $1.20 peak (cache hit $0.006) | Off-peak $0.15 / $0.60 (cache hit $0.003) | 2026-10-14, [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing). Peak = 01:00–04:00 and 06:00–10:00 UTC Mon–Fri (excl. Chinese public holidays). `deepseek-flash` = DeepSeek-V4.1-Flash |
 | Anthropic `claude-haiku-5-5` | $0.10 / $0.50 for prompts ≤ 100K tokens (cache hit $0.01); prompts > 100K: $0.50 / $2.50 | Batch $0.05 / $0.25 | 2026-10-15, [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Added as a teacher candidate 2026-10-15 (spec §8) |
 | Google `gemini-3.8-flash` (optional) | $0.75 / $3.75 until 2026-12-31, then $1.50 / $7.50 | Batch $0.375 / $1.875 (then $0.75 / $3.75) | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Output includes thinking tokens |

@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-067",
+ "config_id": "anthropic/claude-haiku-5-5@on-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"can i get a cheeseburger\"},{\"message_index\":5,\"quote\":\"can the burger be a double\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"regular\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"regular fries\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"deliver to 16 hill st\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"hill st\",\"number\":\"16\",\"unit\":null,\"reference\":null,\"raw_text\":\"16 hill st\",\"evidence\":[{\"message_index\":2,\"quote\":\"16 hill st\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 10166,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1615,
+   "reasoning_tokens": 895
+  },
+  "latency_ms": 6235.716823983239,
+  "cost_micros": 1825,
+  "at": "2026-10-15T18:34:23.685406+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 10166,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1615,
+   "output_tokens_details": {
+    "thinking_tokens": 895
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

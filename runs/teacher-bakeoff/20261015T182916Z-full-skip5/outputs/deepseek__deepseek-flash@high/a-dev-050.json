@@ -1,0 +1,34 @@
+{
+ "conversation_id": "a-dev-050",
+ "config_id": "deepseek/deepseek-flash@high",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@high",
+  "model": "deepseek-flash",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"caramel_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with caramel\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"medium latte with caramel\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"cinnamon_raisin\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a cinnamon raisin bagel\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":3,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 2:30\",\"normalized_local\":\"14:30\",\"evidence\":[{\"message_index\":3,\"quote\":\"at 2:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Jordan\",\"evidence\":[{\"message_index\":4,\"quote\":\"Name's Jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 7806,
+   "cached_input_tokens": 7424,
+   "cache_write_tokens": 0,
+   "output_tokens": 1060,
+   "reasoning_tokens": 628
+  },
+  "latency_ms": 5600.805549009237,
+  "cost_micros": 716,
+  "at": "2026-10-15T18:32:24.201254+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 7806,
+   "completion_tokens": 1060,
+   "total_tokens": 8866,
+   "prompt_tokens_details": {
+    "cached_tokens": 7424
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 628
+   },
+   "prompt_cache_hit_tokens": 7424,
+   "prompt_cache_miss_tokens": 382
+  }
+ }
+}

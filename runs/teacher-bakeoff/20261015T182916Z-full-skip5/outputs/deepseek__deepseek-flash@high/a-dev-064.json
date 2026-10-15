@@ -1,0 +1,34 @@
+{
+ "conversation_id": "a-dev-064",
+ "config_id": "deepseek/deepseek-flash@high",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@high",
+  "model": "deepseek-flash",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"medium pepperoni\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a coke\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"card instead\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":3,\"quote\":\"ye\"},{\"message_index\":4,\"quote\":\"wait can i do card instead\"}]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10352,
+   "cached_input_tokens": 9984,
+   "cache_write_tokens": 0,
+   "output_tokens": 1163,
+   "reasoning_tokens": 789
+  },
+  "latency_ms": 6433.420767978532,
+  "cost_micros": 783,
+  "at": "2026-10-15T18:34:28.082704+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10352,
+   "completion_tokens": 1163,
+   "total_tokens": 11515,
+   "prompt_tokens_details": {
+    "cached_tokens": 9984
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 789
+   },
+   "prompt_cache_hit_tokens": 9984,
+   "prompt_cache_miss_tokens": 368
+  }
+ }
+}

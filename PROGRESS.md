@@ -11,14 +11,14 @@ _Last updated 2026-10-15._
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants) done 2026-10-15, $0.0968**; next: Julian's call on the pilot findings, then the full 40-conversation run (≈ $0.68) |
+| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants, $0.0968) and second bake-off (35 new conv × 12, prompt v0.2, $0.5811) done 2026-10-15**; next: Julian picks the teacher |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.0975** (docs/COSTS.md): M3 smoke tests and the teacher bake-off pilot. No model downloads,
+**Spend to date: $0.6786** (docs/COSTS.md): M3 smoke tests, teacher bake-off pilot and second bake-off. No model downloads,
 training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
 
@@ -63,6 +63,14 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   5. Input tokens differ by tokenizer for the same prompt: luna 10.4K, Haiku 13.3K, DeepSeek 9.0K, Gemini 8.7K.
   6. A test reached the network once (fake key, 401, no cost) after the Anthropic change; tests now block real
      HTTP (`conftest.no_real_http`).
+- **Second bake-off** (`runs/teacher-bakeoff/20261015T182916Z-full-skip5/report.md`; Julian: prompt v0.2 with the
+  half-and-half wording, run on the 35 bake-off conversations the pilot never used, so no scored conversation shaped
+  the prompt). 58 gold items. Best item F1: Haiku on-medium 100% (58/58, exact 33/35, $1.90/1k); luna low 98.3%
+  (58/58 found, 2 extra, exact 32/35, $0.63/1k); luna none 97.4% (exact 30/35, $0.58/1k); DeepSeek low 95.5% (exact
+  33/35, $0.84/1k). Gemini worst and priciest (74–78%, $2.82–2.94/1k). More reasoning was not better: luna medium and
+  DeepSeek high scored below their `low` (invalid outputs: decision evidence, off-menu line with a variant).
+  Exact-match 95% CIs overlap for the top four (e.g. 81–98% vs 78–97%): 35 conversations can't separate them.
+  Spec rule (cheapest within 3 pp of best item F1) → luna `none`; Julian to decide (see the run report).
 
 ## Plan updates (Julian, 2026-10-08)
 

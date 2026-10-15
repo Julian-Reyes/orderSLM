@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-020",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"single\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"pickle\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no pickles\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 no pickles\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"single\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"4 cheeseburgers\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"3 lg fries\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"4 cokes\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"can u deliver instead\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"12:30\",\"normalized_local\":\"12:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"pickup at 12:30\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Park Ave\",\"number\":\"200\",\"unit\":\"5th fl\",\"reference\":null,\"raw_text\":\"200 park ave 5th fl\",\"evidence\":[{\"message_index\":5,\"quote\":\"200 park ave 5th fl\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":5,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_modification\",\"reason\":\"ambiguous\",\"line_id\":\"L2\"},{\"field\":\"item_quantity\",\"reason\":\"ambiguous\",\"line_id\":\"L1\"}],\"clarification_question\":\"Just to confirm: of the 4 cheeseburgers, should 2 have no pickles and 2 be regular, or should all 4 be regular?\"}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 10119,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1030,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3872.8445910091978,
+  "cost_micros": 1527,
+  "at": "2026-10-15T18:35:16.534848+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 10119,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1030,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

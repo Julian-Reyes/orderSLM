@@ -1,0 +1,31 @@
+{
+ "conversation_id": "a-dev-046",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"pepperoni pizza\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"n a hawaiian\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"item_variant\",\"reason\":\"missing\",\"line_id\":\"L1\"},{\"field\":\"item_variant\",\"reason\":\"missing\",\"line_id\":\"L2\"}],\"clarification_question\":\"What size would you like for the pepperoni pizza and the Hawaiian pizza \u2014 personal, small, medium, large or extra large?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10227,
+   "cached_input_tokens": 9984,
+   "cache_write_tokens": 0,
+   "output_tokens": 412,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2251.8808059976436,
+  "cost_micros": 314,
+  "at": "2026-10-15T18:31:16.090909+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10227,
+   "completion_tokens": 412,
+   "total_tokens": 10639,
+   "prompt_tokens_details": {
+    "cached_tokens": 9984
+   },
+   "prompt_cache_hit_tokens": 9984,
+   "prompt_cache_miss_tokens": 243
+  }
+ }
+}

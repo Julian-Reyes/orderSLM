@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-009",
+ "config_id": "anthropic/claude-haiku-5-5@off-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Okafor\",\"evidence\":[{\"message_index\":2,\"quote\":\"It's under Okafor\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[{\"text\":\"Customer asks about delivery ETA for an existing order placed about 40 minutes earlier; needs it by 6 for a party.\",\"evidence\":[{\"message_index\":2,\"quote\":\"The party starts at 6, so we really need it by then.\"}]}],\"missing_or_ambiguous\":[{\"field\":\"items\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":null}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 15080,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 409,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2194.576585025061,
+  "cost_micros": 1713,
+  "at": "2026-10-15T18:31:57.007415+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 15080,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 409,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}
