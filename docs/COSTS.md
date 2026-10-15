@@ -10,12 +10,21 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 |---|---|
 | Spent to date | **$0.00** |
 | Remaining (of $10 ceiling) | $10.00 |
+| Prepaid credit bought (not spend) | $5.00 (OpenAI) |
 
 ## Ledger (actual)
 
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
 | 2026-10-07 | M0 | none | No API calls, downloads or training in M0 | 0 / 0 | 0.00 | — | — |
+
+## Prepaid credit (purchases, not spend)
+
+Buying credit is not spending it: spend is counted only in the ledger above, from actual usage.
+
+| Date | Provider | Amount (USD) | Why | Notes |
+|---|---|---|---|---|
+| 2026-10-15 | OpenAI (OrderSLM project) | 5.00 | Leave the free tier (50 requests/day, small batch queue) | Account moved to a paid usage tier; `gpt-6-luna` now 5,000 RPM, 2M TPM, 20M batch-queue TPD |
 
 ## Planned (estimates, spec §14)
 
@@ -46,5 +55,8 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 ## Spend controls
 
 - Separate OrderSLM API keys/projects, with provider-side spend caps where offered (record the cap here when set).
+- OpenAI (2026-10-15): OrderSLM project; key is Restricted (Responses/Chat completions: Request, Batch and
+  Files: write, everything else None); project limited to `gpt-6-luna` only (the teacher candidate and the
+  only model OpenAI Decisions accepts). Project budget cap: _record when set_.
 - Preflight estimate → priced pilot → compare pilot actual vs. estimate → bulk run.
 - `LLM_CACHE=replay` reruns cost $0 (M3).
