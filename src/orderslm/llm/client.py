@@ -201,6 +201,7 @@ def parse_anthropic(data: dict[str, Any]) -> tuple[str, str, str, LLMUsage]:
         input_tokens=int(u.get("input_tokens") or 0) + read + write,
         cached_input_tokens=read,
         cache_write_tokens=write,
-        output_tokens=int(u.get("output_tokens") or 0),
+        output_tokens=int(u.get("output_tokens") or 0),  # includes thinking
+        reasoning_tokens=int((u.get("output_tokens_details") or {}).get("thinking_tokens") or 0),
     )
     return text, data.get("stop_reason") or "", data.get("model") or "", usage

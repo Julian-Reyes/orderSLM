@@ -194,6 +194,7 @@ def test_anthropic_request_and_usage():
                     "cache_read_input_tokens": 1000,
                     "cache_creation_input_tokens": 0,
                     "output_tokens": 20,
+                    "output_tokens_details": {"thinking_tokens": 12},
                 },
             },
         )
@@ -205,7 +206,9 @@ def test_anthropic_request_and_usage():
     assert body["system"] == "Reply in JSON." and body["max_tokens"] == 2048
     assert body["output_config"] == {"format": {"type": "json_schema", "schema": SCHEMA}, "effort": "low"}
     assert body["thinking"] == {"type": "disabled"}
-    assert resp.usage == LLMUsage(input_tokens=1100, cached_input_tokens=1000, output_tokens=20)
+    assert resp.usage == LLMUsage(
+        input_tokens=1100, cached_input_tokens=1000, output_tokens=20, reasoning_tokens=12
+    )
     assert resp.cost_micros == 30  # 100×0.1 + 1000×0.01 + 20×0.5
 
 
