@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.0007** (smoke tests: $0.000740) |
-| Remaining (of $10 ceiling) | $9.9993 |
+| Spent to date | **$0.0975** (smoke tests $0.0007; bake-off pilot $0.0968) |
+| Remaining (of $10 ceiling) | $9.9025 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -20,6 +20,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-15 | M3 | 4 teacher candidates, 1 call each | Smoke test (`smoke@0.1`): keys, endpoints, JSON output | 456 / 71 | 0.000107 | recorded usage × verified price | `runs/smoke/20261015T173802Z` |
 | 2026-10-15 | M3 | anthropic/claude-haiku-5-5 | Smoke re-run after fixing Haiku's lowest setting (thinking disabled, effort low) | 272 / 21 | 0.000038 | recorded usage × verified price | `runs/smoke/20261015T174904Z` |
 | 2026-10-15 | M3 | 12 reasoning variants, 1 call each | Smoke `smoke@0.2`: every variant accepted by its API | 1,650 / 637 | 0.000595 | recorded usage × verified price | `runs/smoke/20261015T175548Z` |
+| 2026-10-15 | M3 | luna, Gemini, DeepSeek variants (8) | Teacher bake-off pilot, 5 dev conversations (Haiku calls rejected: HTTP 400, not billed) | 378,426 / 28,139 | 0.060176 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180115Z-pilot5` |
+| 2026-10-15 | M3 | Haiku 5.5 variants (4) | Pilot re-run after prompt-only JSON fix; the other 48 calls replayed from cache ($0) | 265,414 / 20,130 | 0.036619 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180442Z-pilot5` |
 
 ## Prepaid credit (purchases, not spend)
 
@@ -35,7 +37,7 @@ Buying credit is not spending it: spend is counted only in the ledger above, fro
 
 | Item | Milestone | Planned | Notes |
 |---|---|---|---|
-| Teacher bake-off (~40 dev conversations × 3–4 models) | 3 | < $1 | Priced pilot first; preflight estimate from measured tokens. |
+| Teacher bake-off (~40 dev conversations × 12 variants) | 3 | ≈ $0.70 | Pilot measured $0.0968 for 5 × 12 (incl. one Haiku retry); remaining 35 × 12 projected ≈ $0.68 from measured cost/conversation. Gemini may be overstated (cached price not verified). |
 | Synthetic generation + bulk labeling (1–2k conversations) | 4 | $1–4 | 200-conversation pilot first; batch APIs where available. Ask if > $2. |
 | Router benchmark (Jev, OpenAI Decisions) | 7 | < $1 | Jev input price not in its docs (spec §11): confirm before running. |
 | Decision-provider roles + teacher-LLM comparisons (label audit, order checker, narrowing) | 4, 6, 7 | estimate first | Spec §11 b–e; ask before any single spend over $2. |

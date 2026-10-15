@@ -1,0 +1,744 @@
+{
+  "openai/gpt-6-luna@none": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.7777777777777778,
+      "recall": 0.7777777777777778,
+      "f1": 0.7777777777777778
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 51894,
+      "cached_input_tokens": 26552,
+      "cache_write_tokens": 0,
+      "output_tokens": 2019,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 10378.8,
+      "cached_input_tokens": 5310.4,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 403.8,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 3812,
+    "cost_per_1000_conversations_usd": 0.7624,
+    "projected_cost_40_conversations_usd": 0.0305,
+    "latency_ms_p50": 7416,
+    "latency_ms_p95": 9958
+  },
+  "openai/gpt-6-luna@low": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 1.0,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 51894,
+      "cached_input_tokens": 26552,
+      "cache_write_tokens": 0,
+      "output_tokens": 2383,
+      "reasoning_tokens": 366
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 10378.8,
+      "cached_input_tokens": 5310.4,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 476.6,
+      "reasoning_tokens": 73.2
+    },
+    "cost_micros": 3995,
+    "cost_per_1000_conversations_usd": 0.799,
+    "projected_cost_40_conversations_usd": 0.032,
+    "latency_ms_p50": 4855,
+    "latency_ms_p95": 6100
+  },
+  "openai/gpt-6-luna@medium": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 1.0,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 51894,
+      "cached_input_tokens": 26552,
+      "cache_write_tokens": 0,
+      "output_tokens": 3749,
+      "reasoning_tokens": 1154
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 10378.8,
+      "cached_input_tokens": 5310.4,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 749.8,
+      "reasoning_tokens": 230.8
+    },
+    "cost_micros": 4677,
+    "cost_per_1000_conversations_usd": 0.9354,
+    "projected_cost_40_conversations_usd": 0.0374,
+    "latency_ms_p50": 8340,
+    "latency_ms_p95": 12732
+  },
+  "anthropic/claude-haiku-5-5@off-low": {
+    "conversations": 5,
+    "json_valid": 3,
+    "json_validity_rate": 0.6,
+    "item": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1": 0.75
+    },
+    "exact_match_rate": 0.4,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i...",
+      "a-dev-081: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 5
+    },
+    "tokens": {
+      "input_tokens": 66351,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 3361,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 13270.2,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 672.2,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 8319,
+    "cost_per_1000_conversations_usd": 1.6638,
+    "projected_cost_40_conversations_usd": 0.0666,
+    "latency_ms_p50": 3068,
+    "latency_ms_p95": 3363
+  },
+  "anthropic/claude-haiku-5-5@off-medium": {
+    "conversations": 5,
+    "json_valid": 3,
+    "json_validity_rate": 0.6,
+    "item": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1": 0.75
+    },
+    "exact_match_rate": 0.4,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i...",
+      "a-dev-081: 1 validation error for ExtractionOutput\n  Value error, address is only not_applicable for pickup [type=value_error, input_value={'schema_version': 'extra...ication_question': None}, input_type=dict]\n "
+    ],
+    "finish_reasons": {
+      "end_turn": 5
+    },
+    "tokens": {
+      "input_tokens": 66351,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 3490,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 13270.2,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 698.0,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 8384,
+    "cost_per_1000_conversations_usd": 1.6768,
+    "projected_cost_40_conversations_usd": 0.0671,
+    "latency_ms_p50": 2847,
+    "latency_ms_p95": 4296
+  },
+  "anthropic/claude-haiku-5-5@on-low": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 1.0,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "end_turn": 5
+    },
+    "tokens": {
+      "input_tokens": 66356,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 6141,
+      "reasoning_tokens": 2799
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 13271.2,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1228.2,
+      "reasoning_tokens": 559.8
+    },
+    "cost_micros": 9709,
+    "cost_per_1000_conversations_usd": 1.9418,
+    "projected_cost_40_conversations_usd": 0.0777,
+    "latency_ms_p50": 5420,
+    "latency_ms_p95": 7136
+  },
+  "anthropic/claude-haiku-5-5@on-medium": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 1.0,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "end_turn": 5
+    },
+    "tokens": {
+      "input_tokens": 66356,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 7138,
+      "reasoning_tokens": 3778
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 13271.2,
+      "cached_input_tokens": 0.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1427.6,
+      "reasoning_tokens": 755.6
+    },
+    "cost_micros": 10207,
+    "cost_per_1000_conversations_usd": 2.0414,
+    "projected_cost_40_conversations_usd": 0.0817,
+    "latency_ms_p50": 5821,
+    "latency_ms_p95": 7972
+  },
+  "google/gemini-3.1-flash-lite@minimal": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.7777777777777778,
+      "recall": 0.7777777777777778,
+      "f1": 0.7777777777777778
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 43738,
+      "cached_input_tokens": 26900,
+      "cache_write_tokens": 0,
+      "output_tokens": 3334,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8747.6,
+      "cached_input_tokens": 5380.0,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 666.8,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 15937,
+    "cost_per_1000_conversations_usd": 3.1874,
+    "projected_cost_40_conversations_usd": 0.1275,
+    "latency_ms_p50": 2793,
+    "latency_ms_p95": 4829
+  },
+  "google/gemini-3.1-flash-lite@default": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.7777777777777778,
+      "recall": 0.7777777777777778,
+      "f1": 0.7777777777777778
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 43738,
+      "cached_input_tokens": 34666,
+      "cache_write_tokens": 0,
+      "output_tokens": 3733,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 8747.6,
+      "cached_input_tokens": 6933.2,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 746.6,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 16536,
+    "cost_per_1000_conversations_usd": 3.3072,
+    "projected_cost_40_conversations_usd": 0.1323,
+    "latency_ms_p50": 2972,
+    "latency_ms_p95": 3822
+  },
+  "deepseek/deepseek-flash@none": {
+    "conversations": 5,
+    "json_valid": 4,
+    "json_validity_rate": 0.8,
+    "item": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1": 0.75
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+    ],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 45006,
+      "cached_input_tokens": 28928,
+      "cache_write_tokens": 0,
+      "output_tokens": 2549,
+      "reasoning_tokens": 0
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9001.2,
+      "cached_input_tokens": 5785.6,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 509.8,
+      "reasoning_tokens": 0.0
+    },
+    "cost_micros": 4030,
+    "cost_per_1000_conversations_usd": 0.806,
+    "projected_cost_40_conversations_usd": 0.0322,
+    "latency_ms_p50": 2868,
+    "latency_ms_p95": 4708
+  },
+  "deepseek/deepseek-flash@low": {
+    "conversations": 5,
+    "json_valid": 5,
+    "json_validity_rate": 1.0,
+    "item": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "exact_match_rate": 1.0,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 45131,
+      "cached_input_tokens": 29184,
+      "cache_write_tokens": 0,
+      "output_tokens": 5325,
+      "reasoning_tokens": 3231
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9026.2,
+      "cached_input_tokens": 5836.8,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1065.0,
+      "reasoning_tokens": 646.2
+    },
+    "cost_micros": 5678,
+    "cost_per_1000_conversations_usd": 1.1356,
+    "projected_cost_40_conversations_usd": 0.0454,
+    "latency_ms_p50": 6318,
+    "latency_ms_p95": 9035
+  },
+  "deepseek/deepseek-flash@high": {
+    "conversations": 5,
+    "json_valid": 4,
+    "json_validity_rate": 0.8,
+    "item": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1": 0.75
+    },
+    "exact_match_rate": 0.6,
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 1.0,
+      "address": 1.0,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 1.0
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": 0.0,
+      "issues": {}
+    },
+    "unclassified_requests": 0,
+    "calls_answered": 5,
+    "provider_errors": [],
+    "invalid_examples": [
+      "a-dev-017: 1 validation error for ExtractionOutput\nitems.0\n  Value error, L1: exactly one of menu_item_id, unmatched_text, halves must be set (spec \u00a74) [type=value_error, input_value={'line_id': 'L1', 'menu_i..."
+    ],
+    "finish_reasons": {
+      "stop": 5
+    },
+    "tokens": {
+      "input_tokens": 45131,
+      "cached_input_tokens": 29184,
+      "cache_write_tokens": 0,
+      "output_tokens": 5047,
+      "reasoning_tokens": 2978
+    },
+    "tokens_per_conversation": {
+      "input_tokens": 9026.2,
+      "cached_input_tokens": 5836.8,
+      "cache_write_tokens": 0.0,
+      "output_tokens": 1009.4,
+      "reasoning_tokens": 595.6
+    },
+    "cost_micros": 5511,
+    "cost_per_1000_conversations_usd": 1.1022,
+    "projected_cost_40_conversations_usd": 0.0441,
+    "latency_ms_p50": 5513,
+    "latency_ms_p95": 9233
+  }
+}

@@ -1,0 +1,31 @@
+{
+ "conversation_id": "a-dev-017",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"cheese_pizza\",\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mushrooms\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"mushroom\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"olives\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"olives\",\"not_on_menu\":false,\"kitchen_note\":false}]},{\"menu_item_id\":\"cheese_pizza\",\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"sausage\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"sausage\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapenos\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"jalapenos\",\"not_on_menu\":false,\"kitchen_note\":false}]}],\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"xl pizza half mushroom n olives, half sausage n jalapenos\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"2 orders of garlic knots\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"fulfillment_method\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"Would you like that for pickup or delivery?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10179,
+   "cached_input_tokens": 4608,
+   "cache_write_tokens": 0,
+   "output_tokens": 578,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2867.8488729929086,
+  "cost_micros": 1197,
+  "at": "2026-10-15T18:01:34.711244+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 578,
+   "prompt_cache_hit_tokens": 4608,
+   "prompt_cache_miss_tokens": 5571,
+   "prompt_tokens": 10179,
+   "prompt_tokens_details": {
+    "cached_tokens": 4608
+   },
+   "total_tokens": 10757
+  }
+ }
+}

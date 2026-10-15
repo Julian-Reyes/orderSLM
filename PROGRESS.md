@@ -11,14 +11,14 @@ _Last updated 2026-10-15._
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients + record/replay cache + smoke test done 2026-10-15** (all 4 keys work, $0.0001); next: teacher prompt, eval loader (rejects `split: sample`), scoring, run store, estimate → pilot |
+| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants) done 2026-10-15, $0.0968**; next: Julian's call on the pilot findings, then the full 40-conversation run (≈ $0.68) |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.0001** (docs/COSTS.md): the M3 smoke test, one call per teacher candidate. No model downloads,
+**Spend to date: $0.0975** (docs/COSTS.md): M3 smoke tests and the teacher bake-off pilot. No model downloads,
 training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
 
@@ -44,6 +44,25 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   4. OpenAI usage reports `prompt_tokens_details.cache_write_tokens`; check whether OpenAI bills cache
      writes before bulk labeling (no cache-write price in COSTS yet).
   5. Haiku's structured-output mode adds ~200 input tokens per call (273 vs 39–79 for the others).
+- **Variants (Julian, 2026-10-15):** 12 configs, `provider/model@variant`: luna none/low/medium; Haiku
+  thinking off/on × effort low/medium; Gemini minimal/default; DeepSeek none/low/high. All 12 pass the smoke test.
+- **Pilot** (`runs/teacher-bakeoff/20261015T180442Z-pilot5/report.md`; 5 dev conversations, far too few to rank
+  accuracy): every variant with reasoning on (luna low/medium, Haiku on-low/on-medium, DeepSeek low) got 5/5
+  valid and all items right; the no-reasoning variants missed the half-and-half pizza (a-dev-017) or another item.
+  Cost per 1,000 conversations: luna $0.76–0.94, DeepSeek $0.81–1.14, Haiku $1.66–2.04, Gemini $3.19–3.31.
+- **Pilot findings:**
+  1. Anthropic structured output allows at most 16 union-typed parameters; ExtractionOutput has 24 (HTTP 400 on
+     every Haiku call in the first run, not billed). Haiku now runs prompt-only JSON like DeepSeek: the prompt is
+     identical for all; luna and Gemini have schema-constrained decoding, Haiku and DeepSeek don't (report this).
+  2. Unconstrained models set `menu_item_id` and `halves` together on a half-and-half (a-dev-017; DeepSeek
+     none/high, Haiku off-*). A clearer prompt line would likely fix it; not changed, because tuning on bake-off
+     conversations would bias the comparison (Julian to decide).
+  3. Gemini default ≈ minimal (same tokens, no reasoning reported); docs don't state flash-lite's default.
+  4. Gemini caches prompts implicitly (`cached_tokens` up to 8.3K of 9.9K); no verified cached price, so its
+     cost is billed at full input price and may be overstated. Verify before the full run.
+  5. Input tokens differ by tokenizer for the same prompt: luna 10.4K, Haiku 13.3K, DeepSeek 9.0K, Gemini 8.7K.
+  6. A test reached the network once (fake key, 401, no cost) after the Anthropic change; tests now block real
+     HTTP (`conftest.no_real_http`).
 
 ## Plan updates (Julian, 2026-10-08)
 

@@ -1,0 +1,36 @@
+{
+ "conversation_id": "a-dev-039",
+ "config_id": "anthropic/claude-haiku-5-5@on-medium",
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@on-medium",
+  "model": "claude-haiku-5-5",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"almond_milk\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"WITH ALMOND MILK\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"MEDIUM AMERICANO WITH ALMOND MILK\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"plain\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"avocado\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"WITH AVOCADO\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"PLAIN BAGEL WITH AVOCADO\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"FOR PICKUP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"CARD\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Dev\",\"evidence\":[{\"message_index\":0,\"quote\":\"NAME IS DEV\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"YEP THATS IT\"}]},\"notes\":[{\"text\":\"Customer says they don't do dairy.\",\"evidence\":[{\"message_index\":0,\"quote\":\"I DON'T DO DAIRY\"}]}],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 11429,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 1817,
+   "reasoning_tokens": 982
+  },
+  "latency_ms": 7162.632242019754,
+  "cost_micros": 2052,
+  "at": "2026-10-15T18:04:56.450071+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 11429,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 1817,
+   "output_tokens_details": {
+    "thinking_tokens": 982
+   },
+   "service_tier": "standard",
+   "inference_geo": "global"
+  }
+ }
+}

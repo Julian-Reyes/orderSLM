@@ -1,0 +1,31 @@
+{
+ "conversation_id": "a-dev-039",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"schema_version\": \"extraction@0.4\",\n  \"items\": [\n    {\n      \"line_id\": \"L1\",\n      \"menu_item_id\": \"americano\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": \"medium\",\n      \"unmatched_variant_text\": null,\n      \"modifications\": [\n        {\n          \"kind\": \"add\",\n          \"modifier_id\": \"almond_milk\",\n          \"replacement_modifier_id\": null,\n          \"amount\": \"normal\",\n          \"raw_text\": \"with almond milk\",\n          \"not_on_menu\": false,\n          \"kitchen_note\": false\n        }\n      ],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"A MEDIUM AMERICANO WITH ALMOND MILK\"\n        }\n      ]\n    },\n    {\n      \"line_id\": \"L2\",\n      \"menu_item_id\": \"bagel\",\n      \"unmatched_text\": null,\n      \"halves\": null,\n      \"quantity\": 1,\n      \"variant_id\": \"plain\",\n      \"unmatched_variant_text\": null,\n      \"modifications\": [\n        {\n          \"kind\": \"add\",\n          \"modifier_id\": \"avocado\",\n          \"replacement_modifier_id\": null,\n          \"amount\": \"normal\",\n          \"raw_text\": \"with avocado\",\n          \"not_on_menu\": false,\n          \"kitchen_note\": false\n        }\n      ],\n      \"combo_selections\": [],\n      \"notes\": null,\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"A PLAIN BAGEL WITH AVOCADO\"\n        }\n      ]\n    }\n  ],\n  \"fulfillment\": {\n    \"method\": \"pickup\",\n    \"method_evidence\": [\n      {\n        \"message_index\": 0,\n        \"quote\": \"FOR PICKUP\"\n      }\n    ],\n    \"requested_time\": {\n      \"state\": \"not_mentioned\",\n      \"kind\": null,\n      \"raw_text\": null,\n      \"normalized_local\": null,\n      \"evidence\": []\n    }\n  },\n  \"address\": {\n    \"state\": \"not_applicable\",\n    \"street\": null,\n    \"number\": null,\n    \"unit\": null,\n    \"reference\": null,\n    \"raw_text\": null,\n    \"evidence\": []\n  },\n  \"payment\": {\n    \"method\": \"card\",\n    \"change_for_cents\": null,\n    \"customer_claims_paid\": false,\n    \"evidence\": [\n      {\n        \"message_index\": 0,\n        \"quote\": \"CARD\"\n      }\n    ]\n  },\n  \"customer_name\": {\n    \"state\": \"provided\",\n    \"value\": \"Dev\",\n    \"evidence\": [\n      {\n        \"message_index\": 0,\n        \"quote\": \"NAME IS DEV\"\n      }\n    ]\n  },\n  \"customer_decision\": {\n    \"state\": \"confirmed\",\n    \"agreed_while_incomplete\": false,\n    \"evidence\": [\n      {\n        \"message_index\": 2,\n        \"quote\": \"YEP THATS IT\"\n      }\n    ]\n  },\n  \"notes\": [],\n  \"missing_or_ambiguous\": [],\n  \"clarification_question\": null\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 7703,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 729,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 4056.872186018154,
+  "cost_micros": 1593,
+  "at": "2026-10-15T18:01:15.895277+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 729,
+   "prompt_cache_hit_tokens": 0,
+   "prompt_cache_miss_tokens": 7703,
+   "prompt_tokens": 7703,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "total_tokens": 8432
+  }
+ }
+}
