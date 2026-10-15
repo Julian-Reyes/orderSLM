@@ -22,8 +22,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-15 | M3 | 12 reasoning variants, 1 call each | Smoke `smoke@0.2`: every variant accepted by its API | 1,650 / 637 | 0.000595 | recorded usage × verified price | `runs/smoke/20261015T175548Z` |
 | 2026-10-15 | M3 | luna, Gemini, DeepSeek variants (8) | Teacher bake-off pilot, 5 dev conversations (Haiku calls rejected: HTTP 400, not billed) | 378,426 / 28,139 | 0.060176 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180115Z-pilot5` |
 | 2026-10-15 | M3 | Haiku 5.5 variants (4) | Pilot re-run after prompt-only JSON fix; the other 48 calls replayed from cache ($0) | 265,414 / 20,130 | 0.036619 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180442Z-pilot5` |
-| 2026-10-15 | M3 | all 12 variants | Second bake-off: 35 new dev conversations, prompt `teacher-extract@0.2` (estimate $1.52, projection $0.68) | 4,191,197 / 326,377 | 0.581100 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T182916Z-full-skip5` |
-| 2026-10-15 | M3 | luna low, Haiku on-medium | Head-to-head: the 51 remaining dev conversations, prompt v0.2 (estimate $0.26) | 1,106,379 / 84,838 | 0.122500 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T185040Z-full-remaining` |
+| 2026-10-15 | M3 | all 12 variants | Second bake-off: 35 new dev conversations, prompt `teacher-extract@0.2` (estimate $1.52, projection $0.68) | 4,191,197 / 326,377 | 0.581124 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T182916Z-full-skip5` |
+| 2026-10-15 | M3 | luna low, Haiku on-medium | Head-to-head: the 51 remaining dev conversations, prompt v0.2 (estimate $0.26) | 1,106,379 / 84,838 | 0.122479 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T185040Z-full-remaining` |
 
 ## Prepaid credit (purchases, not spend)
 
