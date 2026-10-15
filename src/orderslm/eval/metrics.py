@@ -3,7 +3,9 @@
 - JSON validity: the output parsed and validated as ExtractionOutput.
 - Item-level F1 (micro, over item lines): a predicted line counts only if menu item (or halves) + quantity +
   size + modifications (+ combo picks) all match a gold line. Line ids and evidence are ignored. Off-menu
-  lines match on being off-menu with the same quantity (their wording is free text).
+  lines match on being off-menu with the same quantity (their wording is free text). An unstated variant of an
+  item with a default equals that default, on both sides (scorer@0.2, Julian 2026-10-15: "2 cheeseburgers" and
+  "2 single cheeseburgers" are the same order).
 - Order exact match: the item multiset and every order-level field equal (method, time, address state,
   payment, name, decision, the missing set by field + reason). A conversation with no gold order
   (gold_extraction null) is an exact match when the prediction has no items.
@@ -18,12 +20,14 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from orderslm.checks import check_catalog, check_evidence, check_requests
+from orderslm.core.finalize import fill_default_variants
 from orderslm.eval.stats import wilson
 from orderslm.schema.annotation import AnnotatedConversation, Scenario
 from orderslm.schema.conversation import Role
 from orderslm.schema.extraction import ExtractionOutput, ItemProposal, Modification
 from orderslm.schema.menu import MenuCatalog
 
+SCORER_VERSION = "scorer@0.2"  # 0.2: unstated default variant = the default
 CORRECTION_SCENARIOS = {Scenario.correction, Scenario.correction_after_confirmation, Scenario.cancellation}
 
 
@@ -101,6 +105,9 @@ def score_conversation(
     gold: AnnotatedConversation, predicted: ExtractionOutput | None, menu: MenuCatalog
 ) -> ConversationScore:
     conv = gold.conversation
+    gold_extraction = fill_default_variants(gold.gold_extraction, menu) if gold.gold_extraction else None
+    predicted = fill_default_variants(predicted, menu) if predicted else None
+    gold = gold.model_copy(update={"gold_extraction": gold_extraction})
     gold_items = (
         Counter(item_key(i) for i in gold.gold_extraction.items) if gold.gold_extraction else Counter()
     )

@@ -25,6 +25,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from orderslm.core.finalize import FINALIZE_VERSION, parse_and_finalize
 from orderslm.data.splits import conversation_files
 from orderslm.extractors.teacher import (
     TEACHER_PROMPT_VERSION,
@@ -45,7 +46,7 @@ from orderslm.schema.common import EXTRACTION_SCHEMA_VERSION
 from orderslm.schema.conversation import Split
 
 from .dataset import BAKEOFF_SEED, BAKEOFF_SIZE, bakeoff_set, load_eval_split, remaining_dev
-from .metrics import aggregate, score_conversation
+from .metrics import SCORER_VERSION, aggregate, score_conversation
 
 EXPERIMENT = "teacher-bakeoff"
 OVER_LIMIT_MICROS = 2_000_000  # $2: ask Julian first (CLAUDE.md)
@@ -243,8 +244,12 @@ def _pct(x: float | None) -> str:
     return "—" if x is None else f"{100 * x:.1f}%"
 
 
-def report(out_dir: Path) -> dict[str, Any]:
-    """Rebuild metrics.json and report.md from saved outputs only."""
+def report(out_dir: Path, postprocess: str | None = None) -> dict[str, Any]:
+    """Rebuild metrics.json and report.md from saved outputs only. postprocess="finalize" scores the outputs after
+    core.finalize (code computes the missing list, question and default variants) and writes
+    metrics.finalize.json / report.finalize.md instead; the raw files are untouched."""
+    if postprocess not in (None, "finalize"):
+        raise ValueError(f"unknown postprocess {postprocess!r}")
     manifest = json.loads((out_dir / "manifest.json").read_text())
     ids = manifest["data"]["conversation_ids"]
     gold = {ac.conversation.id: ac for ac in load_eval_split(Split.dev) if ac.conversation.id in ids}
@@ -252,6 +257,7 @@ def report(out_dir: Path) -> dict[str, Any]:
     results: dict[str, Any] = {}
     for v in manifest["variants"]:
         scores, usage, costs, latencies, errors, finishes = [], defaultdict(int), [], [], [], defaultdict(int)
+        raw_valid = 0
         for cid in ids:
             path = out_dir / "outputs" / _slug(v) / f"{cid}.json"
             if not path.exists():
@@ -265,10 +271,14 @@ def report(out_dir: Path) -> dict[str, Any]:
                 continue
             resp = ChatResponse.model_validate(rec["response"])
             result = to_result(resp)
+            raw_valid += result.output is not None
+            output, error = result.output, result.error
+            if postprocess == "finalize":
+                output, error = parse_and_finalize(resp.text, menu, ac.conversation.language)
             finishes[resp.finish_reason] += 1
-            if result.output is None:
-                errors.append(f"{cid}: {(result.error or '')[:200]}")
-            scores.append(score_conversation(ac, result.output, menu))
+            if output is None:
+                errors.append(f"{cid}: {(error or '')[:200]}")
+            scores.append(score_conversation(ac, output, menu))
             for k, val in resp.usage.model_dump().items():
                 usage[k] += val
             costs.append(resp.cost_micros)
@@ -278,6 +288,9 @@ def report(out_dir: Path) -> dict[str, Any]:
         mean_cost = sum(costs) / done if done else 0
         results[v] = {
             **m,
+            "scorer": SCORER_VERSION,
+            "postprocess": FINALIZE_VERSION if postprocess else None,
+            "raw_json_valid": raw_valid,
             "calls_answered": done,
             "provider_errors": [e for e in errors if not e.startswith(tuple(ids))],
             "invalid_examples": [e for e in errors if e.startswith(tuple(ids))][:5],
@@ -292,15 +305,24 @@ def report(out_dir: Path) -> dict[str, Any]:
             if len(latencies) >= 2
             else None,
         }
-    (out_dir / "metrics.json").write_text(json.dumps(results, indent=2) + "\n")
-    _write_report(out_dir, manifest, results)
+    suffix = f".{postprocess}" if postprocess else ""
+    (out_dir / f"metrics{suffix}.json").write_text(json.dumps(results, indent=2) + "\n")
+    _write_report(out_dir, manifest, results, suffix)
     return results
 
 
-def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
+def _write_report(out_dir: Path, manifest: dict, results: dict, suffix: str = "") -> None:
     n = len(manifest["data"]["conversation_ids"])
     lines = [
-        f"# Teacher bake-off: {manifest['run_id']}",
+        f"# Teacher bake-off: {manifest['run_id']}" + (f" ({FINALIZE_VERSION})" if suffix else ""),
+        "",
+        f"Scored with `{SCORER_VERSION}`"
+        + (
+            f" after `{FINALIZE_VERSION}`: code computes the missing list, the clarification question and default "
+            "variants from the model's facts. Raw model scores: `report.md`."
+            if suffix
+            else ". Raw model output (no code post-processing); see `report.finalize.md` for the finalized view."
+        ),
         "",
         f"{manifest['mode']} conversations from dev (Source A, Claude-written), prompt `{manifest['prompt_version']}`, "
         f"schema `{manifest['schema_version']}`, commit `{manifest['git_commit']}`, cache `{manifest['cache_mode']}`. "
@@ -344,7 +366,7 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
         for v, r in problems.items():
             for e in r.get("provider_errors", []) + r.get("invalid_examples", []):
                 lines.append(f"- `{v}`: {e}")
-    (out_dir / "report.md").write_text("\n".join(lines) + "\n")
+    (out_dir / f"report{suffix}.md").write_text("\n".join(lines) + "\n")
 
 
 def write_summary() -> Path:
@@ -356,6 +378,7 @@ def write_summary() -> Path:
             continue
         m = json.loads((d / "manifest.json").read_text())
         metrics = report(d)
+        finalized = report(d, "finalize")
         runs.append(
             {
                 "run_id": m["run_id"],
@@ -369,7 +392,10 @@ def write_summary() -> Path:
                 "conversations": len(m["data"]["conversation_ids"]),
                 "estimate_usd": m["estimate_micros"] / 1e6,
                 "actual_cost_usd": m.get("actual_cost_micros", 0) / 1e6,
-                "variants": {v: {"settings": m["variants"][v], **metrics.get(v, {})} for v in m["variants"]},
+                "variants": {
+                    v: {"settings": m["variants"][v], **metrics.get(v, {}), "finalized": finalized.get(v, {})}
+                    for v in m["variants"]
+                },
             }
         )
     out = RUNS / EXPERIMENT / "summary.json"
@@ -395,10 +421,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--allow-over-2", action="store_true", help="run even if the estimate is over $2")
     ap.add_argument("--max-cost", type=float, help="stop when actual spend passes this many USD")
     ap.add_argument("--report", type=Path, help="rebuild metrics + report for a saved run, no calls")
+    ap.add_argument("--postprocess", choices=["finalize"], help="with --report: score after core.finalize")
     args = ap.parse_args(argv)
     if args.report:
-        report(args.report)
-        print((args.report / "report.md").read_text())
+        report(args.report, args.postprocess)
+        print((args.report / f"report{'.' + args.postprocess if args.postprocess else ''}.md").read_text())
         return 0
     if args.summary:
         path = write_summary()
