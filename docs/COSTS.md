@@ -10,7 +10,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 |---|---|
 | Spent to date | **$0.00** |
 | Remaining (of $10 ceiling) | $10.00 |
-| Prepaid credit bought (not spend) | $5.00 (OpenAI) |
+| Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
 
@@ -25,6 +25,8 @@ Buying credit is not spending it: spend is counted only in the ledger above, fro
 | Date | Provider | Amount (USD) | Why | Notes |
 |---|---|---|---|---|
 | 2026-10-15 | OpenAI (OrderSLM project) | 5.00 | Leave the free tier (50 requests/day, small batch queue) | Account moved to a paid usage tier; `gpt-6-luna` now 5,000 RPM, 2M TPM, 20M batch-queue TPD |
+| 2026-10-15 | Anthropic | 5.00 | API credit for the Haiku 5.5 teacher candidate | |
+| 2026-10-15 | DeepSeek | 2.00 | Prepaid balance for `deepseek-flash` | The balance is DeepSeek's only spend cap |
 
 ## Planned (estimates, spec §14)
 
@@ -58,8 +60,14 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 - Separate OrderSLM API keys/projects, with provider-side spend caps where offered (record the cap here when set).
 - OpenAI (2026-10-15): OrderSLM project; key is Restricted (Responses/Chat completions: Request, Batch and
   Files: write, everything else None); project limited to `gpt-6-luna` only (the teacher candidate and the
-  only model OpenAI Decisions accepts). Project budget cap: _record when set_.
+  only model OpenAI Decisions accepts). Project budget cap: **$5/month** (set 2026-10-15).
 - Anthropic: create a dedicated `orderslm` workspace (the Default Workspace cannot take spend limits, per
-  Anthropic's workspace docs) with a monthly spend limit; key created inside it. Cap: _record when set_.
+  Anthropic's workspace docs) with a monthly spend limit; key created inside it. Cap: **$5/month** (set 2026-10-15).
+- Google (2026-10-15): `orderslm` Cloud project, billing on (paid tier). Key restricted to the Gemini API
+  only (Google keys cannot be limited to one model; the model is pinned in config). Budget: **$5/month**,
+  alerts plus a hard cap.
+- DeepSeek (2026-10-15): prepaid balance **$2** is the cap.
+- These provider caps are backstops (up to $15/month post-paid plus prepaid balances). The project ceiling
+  above ($10 total) and "ask before any single spend over $2" still govern actual spending.
 - Preflight estimate → priced pilot → compare pilot actual vs. estimate → bulk run.
 - `LLM_CACHE=replay` reruns cost $0 (M3).
