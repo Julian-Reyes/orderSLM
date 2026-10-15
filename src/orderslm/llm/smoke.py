@@ -15,7 +15,7 @@ from datetime import UTC, datetime
 
 from orderslm.paths import ROOT, RUNS
 
-from .config import load_models
+from .config import load_models, lowest_variants
 from .factory import make_client
 from .types import ChatMessage, ChatRequest, LLMError, LLMUsage
 
@@ -50,11 +50,19 @@ def _git_commit() -> str:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--yes", action="store_true", help="make the live calls")
-    ap.add_argument("--models", help="comma-separated config ids (default: all)")
+    ap.add_argument(
+        "--models", help="comma-separated config ids, or 'all' (default: each model's lowest variant)"
+    )
     args = ap.parse_args(argv)
 
     models = load_models()
-    ids = args.models.split(",") if args.models else list(models)
+    if args.models == "all":
+        ids = list(models)
+    else:
+        ids = args.models.split(",") if args.models else lowest_variants()
+    unknown = [i for i in ids if i not in models]
+    if unknown:
+        ap.error(f"unknown model ids {unknown}; known: {sorted(models)}")
     now = datetime.now(UTC)
     print(f"Smoke test, {len(ids)} model(s), one call each ({SMOKE_PROMPT_VERSION}).")
     worst = 0

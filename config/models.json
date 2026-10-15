@@ -1,16 +1,19 @@
 {
-  "_comment": "Models as config (ported from AgentDesk server/config/models.json). Prices are micro-USD per 1M tokens, verified on the date in price_verified against price_source (docs/COSTS.md). extra_body holds provider-specific request fields; reasoning is set to each model's lowest setting until the M3 bake-off decides otherwise. rpm is OrderSLM's own pacing, below every provider limit.",
+  "_comment": "Models as config (ported from AgentDesk server/config/models.json). Prices are micro-USD per 1M tokens, verified on the date in price_verified against price_source (docs/COSTS.md). Each model has reasoning variants (request fields merged into the body); the config id is provider/model@variant, the first variant is the lowest setting and the one marked provider_default matches sending nothing. rpm is OrderSLM's own pacing, below every provider limit.",
   "models": [
     {
-      "id": "openai/gpt-6-luna",
       "provider": "openai",
+      "model": "gpt-6-luna",
       "api": "openai_chat",
       "base_url": "https://api.openai.com/v1",
-      "model": "gpt-6-luna",
       "key_env": "OPENAI_API_KEY",
       "structured_output": "json_schema",
       "max_tokens_param": "max_completion_tokens",
-      "extra_body": {"reasoning_effort": "none"},
+      "variants": [
+        {"name": "none", "extra_body": {"reasoning_effort": "none"}},
+        {"name": "low", "extra_body": {"reasoning_effort": "low"}},
+        {"name": "medium", "extra_body": {"reasoning_effort": "medium"}, "provider_default": true}
+      ],
       "rpm": 60,
       "price": {"input": 100000, "cached_input": 10000, "output": 500000},
       "long_context": {"threshold_input_tokens": 272000, "price": null},
@@ -18,15 +21,19 @@
       "price_source": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "id": "anthropic/claude-haiku-5-5",
       "provider": "anthropic",
+      "model": "claude-haiku-5-5",
       "api": "anthropic_messages",
       "base_url": "https://api.anthropic.com/v1",
-      "model": "claude-haiku-5-5",
       "key_env": "ANTHROPIC_API_KEY",
       "structured_output": "json_schema",
       "max_tokens_param": "max_tokens",
-      "extra_body": {"thinking": {"type": "disabled"}, "output_config": {"effort": "low"}},
+      "variants": [
+        {"name": "off-low", "extra_body": {"thinking": {"type": "disabled"}, "output_config": {"effort": "low"}}},
+        {"name": "off-medium", "extra_body": {"thinking": {"type": "disabled"}, "output_config": {"effort": "medium"}}},
+        {"name": "on-low", "extra_body": {"thinking": {"type": "adaptive"}, "output_config": {"effort": "low"}}},
+        {"name": "on-medium", "extra_body": {"thinking": {"type": "adaptive"}, "output_config": {"effort": "medium"}}, "provider_default": true}
+      ],
       "rpm": 60,
       "price": {"input": 100000, "cached_input": 10000, "cache_write": 125000, "output": 500000},
       "long_context": {
@@ -37,30 +44,35 @@
       "price_source": "https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
-      "id": "google/gemini-3.1-flash-lite",
       "provider": "google",
+      "model": "gemini-3.1-flash-lite",
       "api": "openai_chat",
       "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
-      "model": "gemini-3.1-flash-lite",
       "key_env": "GEMINI_API_KEY",
       "structured_output": "json_schema",
       "max_tokens_param": "max_tokens",
-      "extra_body": {"reasoning_effort": "minimal"},
+      "variants": [
+        {"name": "minimal", "extra_body": {"reasoning_effort": "minimal"}},
+        {"name": "default", "extra_body": {}, "provider_default": true}
+      ],
       "rpm": 60,
       "price": {"input": 250000, "output": 1500000},
       "price_verified": "2026-10-14",
       "price_source": "https://ai.google.dev/gemini-api/docs/pricing"
     },
     {
-      "id": "deepseek/deepseek-flash",
       "provider": "deepseek",
+      "model": "deepseek-flash",
       "api": "openai_chat",
       "base_url": "https://api.deepseek.com",
-      "model": "deepseek-flash",
       "key_env": "DEEPSEEK_API_KEY",
       "structured_output": "json_object",
       "max_tokens_param": "max_tokens",
-      "extra_body": {"thinking": {"type": "disabled"}},
+      "variants": [
+        {"name": "none", "extra_body": {"reasoning_effort": "none"}},
+        {"name": "low", "extra_body": {"reasoning_effort": "low"}},
+        {"name": "high", "extra_body": {"reasoning_effort": "high"}, "provider_default": true}
+      ],
       "rpm": 60,
       "price": {"input": 300000, "cached_input": 6000, "output": 1200000},
       "off_peak": {

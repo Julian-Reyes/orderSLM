@@ -30,7 +30,15 @@ class CacheMiss(LookupError):
 def cache_key_material(config: ModelConfig, request: ChatRequest) -> dict[str, Any]:
     return {
         "config": config.model_dump(
-            include={"id", "api", "base_url", "model", "structured_output", "max_tokens_param", "extra_body"}
+            include={
+                "id",
+                "api",
+                "base_url",
+                "model",
+                "structured_output",
+                "max_tokens_param",
+                "extra_body",
+            }
         ),
         "request": request.model_dump(mode="json"),
     }

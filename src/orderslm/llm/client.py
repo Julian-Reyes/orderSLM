@@ -12,7 +12,7 @@ Request/response contracts were checked against each provider's docs on 2026-10-
   json_schema is enforced there and how thinking tokens are counted are not stated in the docs; the
   smoke test (orderslm.llm.smoke) checks both on a live call.
 - DeepSeek: response_format json_object only (prompt must say "json" and show the format);
-  usage.prompt_cache_hit_tokens; thinking {type: disabled}.
+  usage.prompt_cache_hit_tokens; reasoning_effort none (thinking off) | low | high (default) | max.
 - Anthropic Messages: output_config.format {type: json_schema, schema} (no beta header);
   stop_reason "refusal" / "max_tokens"; usage cache_read_input_tokens / cache_creation_input_tokens.
   Haiku 5.5: effort low/medium (default)/high/xhigh/max in output_config.effort; adaptive thinking is
