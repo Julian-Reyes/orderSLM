@@ -26,7 +26,7 @@
       "key_env": "ANTHROPIC_API_KEY",
       "structured_output": "json_schema",
       "max_tokens_param": "max_tokens",
-      "extra_body": {},
+      "extra_body": {"thinking": {"type": "disabled"}, "output_config": {"effort": "low"}},
       "rpm": 60,
       "price": {"input": 100000, "cached_input": 10000, "cache_write": 125000, "output": 500000},
       "long_context": {

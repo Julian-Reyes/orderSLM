@@ -15,6 +15,8 @@ Request/response contracts were checked against each provider's docs on 2026-10-
   usage.prompt_cache_hit_tokens; thinking {type: disabled}.
 - Anthropic Messages: output_config.format {type: json_schema, schema} (no beta header);
   stop_reason "refusal" / "max_tokens"; usage cache_read_input_tokens / cache_creation_input_tokens.
+  Haiku 5.5: effort low/medium (default)/high/xhigh/max in output_config.effort; adaptive thinking is
+  on by default, thinking {type: disabled} allowed at effort high or below.
 """
 
 import time
@@ -112,10 +114,17 @@ def _backoff(attempt: int, retry_after: str | None) -> float:
 
 
 def _merge(config: ModelConfig, body: dict[str, Any]) -> dict[str, Any]:
-    clash = set(body) & set(config.extra_body)
-    if clash:
-        raise ValueError(f"{config.id}: extra_body may not override {sorted(clash)}")
-    return {**body, **config.extra_body}
+    """Add extra_body to the request. Objects present in both are merged one level deep (Anthropic's
+    output_config holds both the schema and the effort level); overriding any set field is an error."""
+    merged = dict(body)
+    for key, value in config.extra_body.items():
+        if key not in merged:
+            merged[key] = value
+        elif isinstance(merged[key], dict) and isinstance(value, dict) and not set(merged[key]) & set(value):
+            merged[key] = {**merged[key], **value}
+        else:
+            raise ValueError(f"{config.id}: extra_body may not override {key!r}")
+    return merged
 
 
 def openai_body(config: ModelConfig, request: ChatRequest) -> dict[str, Any]:

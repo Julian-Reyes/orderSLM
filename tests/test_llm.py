@@ -173,7 +173,8 @@ def test_anthropic_request_and_usage():
     assert seen["headers"]["x-api-key"] == "sk-test"
     assert seen["headers"]["anthropic-version"] == "2023-06-01"
     assert body["system"] == "Reply in JSON." and body["max_tokens"] == 2048
-    assert body["output_config"] == {"format": {"type": "json_schema", "schema": SCHEMA}}
+    assert body["output_config"] == {"format": {"type": "json_schema", "schema": SCHEMA}, "effort": "low"}
+    assert body["thinking"] == {"type": "disabled"}
     assert resp.usage == LLMUsage(input_tokens=1100, cached_input_tokens=1000, output_tokens=20)
     assert resp.cost_micros == 30  # 100×0.1 + 1000×0.01 + 20×0.5
 
@@ -217,9 +218,16 @@ def test_refusal_is_recorded():
     assert resp.finish_reason == "refusal" and resp.text == "I can't help with that."
 
 
-def test_extra_body_cannot_override_core_fields(monkeypatch):
-    luna = get_model("openai/gpt-6-luna").model_copy(update={"extra_body": {"model": "other"}})
-    client = HttpChatClient(luna, lambda: "k", clock=fixed_clock(OFF_PEAK), http=httpx.Client())
+@pytest.mark.parametrize(
+    "config_id,extra",
+    [
+        ("openai/gpt-6-luna", {"model": "other"}),
+        ("anthropic/claude-haiku-5-5", {"output_config": {"format": {"type": "text"}}}),
+    ],
+)
+def test_extra_body_cannot_override_core_fields(config_id, extra):
+    config = get_model(config_id).model_copy(update={"extra_body": extra})
+    client = HttpChatClient(config, lambda: "k", clock=fixed_clock(OFF_PEAK), http=httpx.Client())
     with pytest.raises(ValueError, match="may not override"):
         client.complete(REQ)
 

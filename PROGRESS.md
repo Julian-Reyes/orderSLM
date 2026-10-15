@@ -33,8 +33,11 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   (`LLM_CACHE`); rpm throttle; scripted fake. Clients never edit the prompt.
 - **Smoke test** (`make smoke ARGS=--yes`, `runs/smoke/20261015T173802Z/`): all 4 return valid JSON.
 - **Open, decide before the bake-off:**
-  1. Reasoning settings: config uses each model's lowest (luna `none`, Gemini `minimal`, DeepSeek thinking
-     off, Haiku no thinking). Provider defaults are higher (luna medium, DeepSeek high). Julian to decide.
+  1. Reasoning settings: **Julian chose to pilot both** (2026-10-15): lowest vs. provider default, 5 conversations
+     × 4 models × 2 settings, then decide from the data. Lowest (config now): luna `none`, Gemini `minimal`,
+     DeepSeek thinking off, Haiku thinking disabled + effort `low`. Defaults: luna `medium`, Gemini model
+     default, DeepSeek thinking on `high`, Haiku adaptive thinking at effort `medium` (Anthropic effort docs;
+     the smoke call ran Haiku at its default and skipped thinking on the easy prompt).
   2. DeepSeek has JSON-object mode only, so the shared prompt must describe the JSON itself (same prompt for all).
   3. Gemini: json_schema enforcement on the OpenAI-compatible endpoint and thinking-token accounting are not
      documented; the smoke call had no thinking tokens, so still unproven. Parser bills hidden thinking either way.
