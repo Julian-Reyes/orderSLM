@@ -47,6 +47,7 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 | OpenAI `gpt-6-luna` | $0.10 / $0.50 (cached input $0.01) | Batch $0.05 / $0.25 | 2026-10-14, [OpenAI pricing](https://developers.openai.com/api/docs/pricing). Short context (≤ 272K input); long context costs more (not relevant here) |
 | Google `gemini-3.1-flash-lite` | $0.25 / $1.50 (text in; output includes thinking tokens) | Batch $0.125 / $0.75 | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Paid tier only: free-tier data is used to improve Google's products, paid-tier data is not |
 | DeepSeek `deepseek-flash` | $0.30 / $1.20 peak (cache hit $0.006) | Off-peak $0.15 / $0.60 (cache hit $0.003) | 2026-10-14, [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing). Peak = 01:00–04:00 and 06:00–10:00 UTC Mon–Fri (excl. Chinese public holidays). `deepseek-flash` = DeepSeek-V4.1-Flash |
+| Anthropic `claude-haiku-5-5` | $0.10 / $0.50 for prompts ≤ 100K tokens (cache hit $0.01); prompts > 100K: $0.50 / $2.50 | Batch $0.05 / $0.25 | 2026-10-15, [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Added as a teacher candidate 2026-10-15 (spec §8) |
 | Google `gemini-3.8-flash` (optional) | $0.75 / $3.75 until 2026-12-31, then $1.50 / $7.50 | Batch $0.375 / $1.875 (then $0.75 / $3.75) | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Output includes thinking tokens |
 | OpenAI Decisions (`gpt-6-luna`) | $0.10 per 1M input, no output charge | — | not yet (not on the OpenAI pricing page as of 2026-10-14; check the Decisions guide before M7) |
 | Jev (TypeSafe) | input billed, price not documented; output free | — | not yet (M7) |
@@ -58,5 +59,7 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 - OpenAI (2026-10-15): OrderSLM project; key is Restricted (Responses/Chat completions: Request, Batch and
   Files: write, everything else None); project limited to `gpt-6-luna` only (the teacher candidate and the
   only model OpenAI Decisions accepts). Project budget cap: _record when set_.
+- Anthropic: create a dedicated `orderslm` workspace (the Default Workspace cannot take spend limits, per
+  Anthropic's workspace docs) with a monthly spend limit; key created inside it. Cap: _record when set_.
 - Preflight estimate → priced pilot → compare pilot actual vs. estimate → bulk run.
 - `LLM_CACHE=replay` reruns cost $0 (M3).

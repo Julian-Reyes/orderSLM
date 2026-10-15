@@ -11,7 +11,7 @@ _Last updated 2026-10-14._
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); next: provider clients, prompt, scoring, record/replay cache |
+| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); next: provider clients, prompt, scoring, record/replay cache |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
