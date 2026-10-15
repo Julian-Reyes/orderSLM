@@ -19,7 +19,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-07 | M0 | none | No API calls, downloads or training in M0 | 0 / 0 | 0.00 | — | — |
 | 2026-10-15 | M3 | 4 teacher candidates, 1 call each | Smoke test (`smoke@0.1`): keys, endpoints, JSON output | 456 / 71 | 0.000107 | recorded usage × verified price | `runs/smoke/20261015T173802Z` |
 | 2026-10-15 | M3 | anthropic/claude-haiku-5-5 | Smoke re-run after fixing Haiku's lowest setting (thinking disabled, effort low) | 272 / 21 | 0.000038 | recorded usage × verified price | `runs/smoke/20261015T174904Z` |
-| 2026-10-15 | M3 | 12 reasoning variants, 1 call each | Smoke `smoke@0.2`: every variant accepted by its API | 1,500 / 657 | 0.000595 | recorded usage × verified price | `runs/smoke/20261015T175548Z` |
+| 2026-10-15 | M3 | 12 reasoning variants, 1 call each | Smoke `smoke@0.2`: every variant accepted by its API | 1,650 / 637 | 0.000595 | recorded usage × verified price | `runs/smoke/20261015T175548Z` |
 
 ## Prepaid credit (purchases, not spend)
 
