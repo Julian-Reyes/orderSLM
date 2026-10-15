@@ -2,7 +2,23 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-15._
+_Last updated 2026-10-15 (end of session)._
+
+## Start here next session
+
+- **State:** M0–M3 done. `milestone-3` merged into local `main`; **not pushed** (ask Julian first; run a secrets check).
+  Old local branches `milestone-2`, `m2-eval-data` are fully contained in main (delete only if Julian wants).
+- **Next: M4** (synthetic generation + teacher labeling, spec §7 "Synthetic training data", §11d label audit). Open
+  items to settle before bulk labeling, all from M3:
+  1. Contract for the labels: add `intent` (spec §4); decide whether the model still outputs
+     `missing_or_ambiguous`/`clarification_question` (code computes them now via `core/finalize`) or only flags the
+     text judgments (ambiguous item / ambiguous size).
+  2. Label pipeline runs through `core/finalize`; chats with no items are stored as "no order" (null), like gold.
+  3. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
+  4. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7, required before bulk labeling).
+  5. Generator model ≠ teacher (spec §7); 200-conversation pilot first, Julian audits it.
+- **Case study:** every experiment records all numbers per model/setting (accuracy counts, tokens, run cost and per
+  1,000, latency, before/after views) in `runs/<experiment>/` + a summary/chart-data JSON (Julian, 2026-10-15).
 
 ## Milestones
 
@@ -10,8 +26,8 @@ _Last updated 2026-10-15._
 |---|---|---|
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
-| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients, cache, smoke test, prompt `teacher-extract@0.1`, eval loader, scoring, runner done; pilot (5 conv × 12 variants, $0.0968) second bake-off (35 new conv × 12, prompt v0.2, $0.5811) and head-to-head luna low vs Haiku on-medium (51 remaining dev, $0.1225) done 2026-10-15**; **teacher chosen (Julian, 2026-10-15): `openai/gpt-6-luna@low`**; prompt v0.4 + `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md` + chart `docs/figures/teacher-bakeoff-accuracy-cost.svg` (data: `runs/teacher-bakeoff/chart-data.json`, `summary.json`); next: merge to main (push only with Julian's OK) |
+| 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
+| 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
