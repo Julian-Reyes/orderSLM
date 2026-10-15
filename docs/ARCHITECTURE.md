@@ -71,7 +71,8 @@ orderslm/
 │   │                             requests.py (requests with no menu id), ticket.py (business ticket)
 │   ├── baselines/                rules_extractor.py (regex + menu matching), rules_router.py (keywords)
 │   ├── menus.py                  load_menus (held-out excluded by default), menu_version
-│   ├── llm/                      (M3) client.py, config.py, cache.py, throttle.py, fake.py
+│   ├── llm/                      (M3) client.py, config.py (+ config/models.json), cache.py, throttle.py,
+│   │                             fake.py, factory.py, env.py, smoke.py (one live call per model)
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
 │   ├── data/                     splits.py (dev/test storage, review, lock), cards.py (Source A scenario cards), pizza.py + sexp.py (PIZZA); (M4) synthetic

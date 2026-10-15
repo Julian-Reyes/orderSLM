@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.00** |
-| Remaining (of $10 ceiling) | $10.00 |
+| Spent to date | **$0.0001** (smoke test) |
+| Remaining (of $10 ceiling) | $9.9999 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -17,6 +17,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
 | 2026-10-07 | M0 | none | No API calls, downloads or training in M0 | 0 / 0 | 0.00 | — | — |
+| 2026-10-15 | M3 | 4 teacher candidates, 1 call each | Smoke test (`smoke@0.1`): keys, endpoints, JSON output | 456 / 71 | 0.000107 | recorded usage × verified price | `runs/smoke/20261015T173802Z` |
 
 ## Prepaid credit (purchases, not spend)
 

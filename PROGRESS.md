@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-14._
+_Last updated 2026-10-15._
 
 ## Milestones
 
@@ -11,15 +11,36 @@ _Last updated 2026-10-14._
 | 0 | AgentDesk inspection, layout, contracts, docs, interfaces + mocks, samples, tests | ✅ Done 2026-10-07 |
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | 🟡 Tooling merged to main; 290 scenario cards approved (91 dev, 199 test; branch `m2-eval-data`); 91 dev reviewed (2026-10-13); **199 test conversations written (2026-10-13)**; next: Julian's spot-check (≥ 50), then lock |
-| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); next: provider clients, prompt, scoring, record/replay cache |
+| 3 | Teacher bake-off | 🟡 Branch `milestone-3`; teacher prices re-verified 2026-10-14 (all match spec, docs/COSTS.md); Haiku 5.5 added as a 4th teacher candidate 2026-10-15 (spec §8, same price as gpt-6-luna); **provider clients + record/replay cache + smoke test done 2026-10-15** (all 4 keys work, $0.0001); next: teacher prompt, eval loader (rejects `split: sample`), scoring, run store, estimate → pilot |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.00** (docs/COSTS.md). No API calls, model downloads, training or deployment so far.
+**Spend to date: $0.0001** (docs/COSTS.md): the M3 smoke test, one call per teacher candidate. No model downloads,
+training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
+
+## M3 so far (2026-10-15)
+
+- **Accounts:** OrderSLM-only keys for OpenAI, Anthropic, Google, DeepSeek, each with a cap (docs/COSTS.md,
+  "Spend controls"). OpenAI project allows `gpt-6-luna` only; Gemini key restricted to the Gemini API.
+- **Client layer** (`src/orderslm/llm/`, `config/models.json`): OpenAI-compatible client (OpenAI, Gemini,
+  DeepSeek) + native Anthropic client over `httpx`; retry 429/5xx with Retry-After, fail fast on auth/quota;
+  cost in integer micro-USD from recorded usage × verified price (DeepSeek peak/off-peak, Haiku > 100K
+  prompts; an unverified long-context price refuses instead of guessing); record/replay cache
+  (`LLM_CACHE`); rpm throttle; scripted fake. Clients never edit the prompt.
+- **Smoke test** (`make smoke ARGS=--yes`, `runs/smoke/20261015T173802Z/`): all 4 return valid JSON.
+- **Open, decide before the bake-off:**
+  1. Reasoning settings: config uses each model's lowest (luna `none`, Gemini `minimal`, DeepSeek thinking
+     off, Haiku no thinking). Provider defaults are higher (luna medium, DeepSeek high). Julian to decide.
+  2. DeepSeek has JSON-object mode only, so the shared prompt must describe the JSON itself (same prompt for all).
+  3. Gemini: json_schema enforcement on the OpenAI-compatible endpoint and thinking-token accounting are not
+     documented; the smoke call had no thinking tokens, so still unproven. Parser bills hidden thinking either way.
+  4. OpenAI usage reports `prompt_tokens_details.cache_write_tokens`; check whether OpenAI bills cache
+     writes before bulk labeling (no cache-write price in COSTS yet).
+  5. Haiku's structured-output mode adds ~200 input tokens per call (273 vs 39–79 for the others).
 
 ## Plan updates (Julian, 2026-10-08)
 

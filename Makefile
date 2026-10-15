@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test teacher-bakeoff synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -44,6 +44,9 @@ lock-test:
 	ORDERSLM_UNSEAL_TEST="lock M2" $(RUN) python -m orderslm.data.splits lock
 verify-test:
 	ORDERSLM_UNSEAL_TEST="verify lock" $(RUN) python -m orderslm.data.splits verify
+# One tiny live call per model in config/models.json. Without ARGS=--yes it only prints the estimate.
+smoke:
+	$(RUN) python -m orderslm.llm.smoke $(ARGS)
 teacher-bakeoff:  ; $(call not_yet,3)
 synth:            ; $(call not_yet,4)
 label:            ; $(call not_yet,4)
