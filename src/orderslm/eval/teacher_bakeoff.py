@@ -102,7 +102,10 @@ def run(args: argparse.Namespace) -> int:
     if unknown:
         raise SystemExit(f"unknown variants {unknown}; known: {sorted(models)}")
     dev = load_eval_split(Split.dev)
-    pool = remaining_dev(dev) if args.set == "remaining" else bakeoff_set(dev, BAKEOFF_SIZE, BAKEOFF_SEED)
+    if args.set == "all":
+        pool = sorted(dev, key=lambda ac: ac.conversation.id)
+    else:
+        pool = remaining_dev(dev) if args.set == "remaining" else bakeoff_set(dev, BAKEOFF_SIZE, BAKEOFF_SEED)
     convs = pool[args.skip :]
     if args.pilot:
         convs = convs[: args.pilot]
@@ -118,8 +121,8 @@ def run(args: argparse.Namespace) -> int:
     mode = f"pilot {len(convs)}" if args.pilot else f"full {len(convs)}"
     if args.skip:
         mode += f" (bake-off set positions {args.skip + 1}-{args.skip + len(convs)})"
-    if args.set == "remaining":
-        mode += " (remaining dev: not in the bake-off set)"
+    if args.set != "bakeoff":
+        mode += {"remaining": " (remaining dev: not in the bake-off set)", "all": " (all dev)"}[args.set]
     print(
         f"Teacher bake-off ({mode} conversations × {len(variants)} variants = {len(convs) * len(variants)} calls)"
     )
@@ -145,7 +148,7 @@ def run(args: argparse.Namespace) -> int:
     started = datetime.now(UTC)
     run_id = started.strftime("%Y%m%dT%H%M%SZ") + (f"-pilot{len(convs)}" if args.pilot else "-full")
     run_id += f"-skip{args.skip}" if args.skip else ""
-    run_id += "-remaining" if args.set == "remaining" else ""
+    run_id += f"-{args.set}" if args.set != "bakeoff" else ""
     out_dir = RUNS / EXPERIMENT / run_id
     cache_mode: CacheMode = cache_mode_from_env()
     manifest: dict[str, Any] = {
@@ -163,11 +166,11 @@ def run(args: argparse.Namespace) -> int:
         "data": {
             "split": "dev",
             "source": "A (claude_written)",
-            "selection": (
-                "remaining_dev()"
-                if args.set == "remaining"
-                else f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})"
-            )
+            "selection": {
+                "remaining": "remaining_dev()",
+                "all": "all dev, sorted by id",
+                "bakeoff": f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})",
+            }[args.set]
             + f"[{args.skip}:]"
             + (f"[:{args.pilot}]" if args.pilot else ""),
             "conversation_ids": [ac.conversation.id for ac in convs],
@@ -379,9 +382,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--pilot", type=int, help="only the first N conversations of the bake-off set")
     ap.add_argument(
         "--set",
-        choices=["bakeoff", "remaining"],
+        choices=["bakeoff", "remaining", "all"],
         default="bakeoff",
-        help="bakeoff: the 40-conversation bake-off set; remaining: dev conversations outside it",
+        help="bakeoff: the 40-conversation bake-off set; remaining: dev outside it; all: every dev conversation",
     )
     ap.add_argument(
         "--summary", action="store_true", help="write runs/teacher-bakeoff/summary.json, no calls"
