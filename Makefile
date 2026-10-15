@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -49,6 +49,9 @@ smoke:
 	$(RUN) python -m orderslm.llm.smoke $(ARGS)
 teacher-bakeoff:
 	$(RUN) python -m orderslm.eval.teacher_bakeoff $(ARGS)
+# Chart data (before/after views, from saved outputs) + docs/figures SVG for the write-up and case study.
+bakeoff-chart:
+	$(RUN) python -m orderslm.eval.bakeoff_chart
 synth:            ; $(call not_yet,4)
 label:            ; $(call not_yet,4)
 student-bakeoff:  ; $(call not_yet,5)

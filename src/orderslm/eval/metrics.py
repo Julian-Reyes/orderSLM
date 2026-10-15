@@ -102,12 +102,18 @@ class ConversationScore:
 
 
 def score_conversation(
-    gold: AnnotatedConversation, predicted: ExtractionOutput | None, menu: MenuCatalog
+    gold: AnnotatedConversation,
+    predicted: ExtractionOutput | None,
+    menu: MenuCatalog,
+    *,
+    normalize_variants: bool = True,
 ) -> ConversationScore:
+    """normalize_variants=False reproduces scorer@0.1 (blank and default variant counted as different)."""
     conv = gold.conversation
-    gold_extraction = fill_default_variants(gold.gold_extraction, menu) if gold.gold_extraction else None
-    predicted = fill_default_variants(predicted, menu) if predicted else None
-    gold = gold.model_copy(update={"gold_extraction": gold_extraction})
+    if normalize_variants:
+        gold_extraction = fill_default_variants(gold.gold_extraction, menu) if gold.gold_extraction else None
+        predicted = fill_default_variants(predicted, menu) if predicted else None
+        gold = gold.model_copy(update={"gold_extraction": gold_extraction})
     gold_items = (
         Counter(item_key(i) for i in gold.gold_extraction.items) if gold.gold_extraction else Counter()
     )

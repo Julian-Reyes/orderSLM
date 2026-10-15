@@ -76,7 +76,8 @@ orderslm/
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
 │   ├── data/                     splits.py (dev/test storage, review, lock), cards.py (Source A scenario cards), pizza.py + sexp.py (PIZZA); (M4) synthetic
-│   ├── eval/                     (M3) metrics.py, stats.py, estimate.py, store.py, report.py, judge_agreement.py
+│   ├── eval/                     (M3) metrics.py, stats.py, dataset.py, teacher_bakeoff.py (runner, estimate, reports),
+│   │                             bakeoff_chart.py + bakeoff_svg.py (case-study data, chart); (M6) judge_agreement.py
 │   ├── train/                    (M6) LoRA configs and scripts (run on Colab/Kaggle)
 │   ├── tracing.py                (M6/M8) step traces to JSONL/SQLite
 │   └── app/                      main.py: FastAPI annotation API (M2); chat simulator, tickets, comparison in M8
