@@ -86,6 +86,17 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   No extras in real ordering chats. **M4 labeling prompt:** say explicitly that items mentioned about a past or
   already-placed order (complaint, status, "I ordered X earlier") or a request to talk to someone are not a new
   order; check on dev before bulk labeling.
+- **Teacher prompt fixes on dev (Julian, 2026-10-15), luna low, all 91 dev:**
+  - v0.3 (no items for past/placed orders or handoff requests, `runs/…T190341Z-full-all`): the 4 extras are gone
+    (a-dev-021/044/056 now correct). But 3 chats (a-dev-023/059/064: confirm, then change) became invalid: luna cited
+    the change as evidence on a plain `pending` decision; the same error appeared for luna none/medium in the v0.2 run.
+  - v0.4 (plain pending has no evidence, `runs/…T191233Z-full-all`): 91/91 valid, items 143 found / 3 extra / 3 missed
+    of 146 (F1 97.9%), fully correct 83/91. The 3 fixed; 5 others changed with nothing in v0.4 touching them
+    (unstated cheeseburger size filled with the default `single` ×2, missing pizza size / pickup name not flagged,
+    payment asked despite a payment claim): **luna's answers vary between runs of the same prompt.**
+  - These dev results are prompt tuning, not held-out numbers (the fixes came from these chats).
+  - Ideas for M4 (not done): measure run-to-run variation (same prompt twice); compute `missing_or_ambiguous` in code
+    (core/missing.py already has the rules) instead of trusting the model; normalize an unstated default variant.
 - **Case-study data:** every run's metrics, tokens, costs and settings are in `runs/teacher-bakeoff/summary.json`
   (`--summary` rebuilds it from the saved run folders; reports from saved outputs only).
 

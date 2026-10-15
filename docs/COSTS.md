@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.8011** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225) |
-| Remaining (of $10 ceiling) | $9.1989 |
+| Spent to date | **$0.9102** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090) |
+| Remaining (of $10 ceiling) | $9.0898 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -24,6 +24,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-15 | M3 | Haiku 5.5 variants (4) | Pilot re-run after prompt-only JSON fix; the other 48 calls replayed from cache ($0) | 265,414 / 20,130 | 0.036619 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T180442Z-pilot5` |
 | 2026-10-15 | M3 | all 12 variants | Second bake-off: 35 new dev conversations, prompt `teacher-extract@0.2` (estimate $1.52, projection $0.68) | 4,191,197 / 326,377 | 0.581124 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T182916Z-full-skip5` |
 | 2026-10-15 | M3 | luna low, Haiku on-medium | Head-to-head: the 51 remaining dev conversations, prompt v0.2 (estimate $0.26) | 1,106,379 / 84,838 | 0.122479 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T185040Z-full-remaining` |
+| 2026-10-15 | M3 | openai/gpt-6-luna@low | Prompt v0.3 check (no items for past orders) on all 91 dev | 893,481 / 39,511 | 0.054384 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T190341Z-full-all` |
+| 2026-10-15 | M3 | openai/gpt-6-luna@low | Prompt v0.4 check (plain pending has no evidence) on all 91 dev | 898,031 / 39,946 | 0.054654 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T191233Z-full-all` |
 
 ## Prepaid credit (purchases, not spend)
 

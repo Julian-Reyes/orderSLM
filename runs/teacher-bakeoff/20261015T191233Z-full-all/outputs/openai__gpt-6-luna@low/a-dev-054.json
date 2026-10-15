@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-054",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 small cappuccinos\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card then\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[{\"field\":\"fulfillment_method\",\"reason\":\"missing\",\"line_id\":null}],\"clarification_question\":\"Would you like these for pickup or delivery?\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9316,
+   "cached_input_tokens": 6810,
+   "cache_write_tokens": 0,
+   "output_tokens": 398,
+   "reasoning_tokens": 107
+  },
+  "latency_ms": 5056.184421991929,
+  "cost_micros": 518,
+  "at": "2026-10-15T19:16:49.430266+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9316,
+   "completion_tokens": 398,
+   "total_tokens": 9714,
+   "prompt_tokens_details": {
+    "cached_tokens": 6810,
+    "cache_write_tokens": 2503,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 107,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

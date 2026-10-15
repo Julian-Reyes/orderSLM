@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-063",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"extraction@0.4\",\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onion\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"4 cheeseburgers\"},{\"message_index\":0,\"quote\":\"2 no onion\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"4 cheeseburgers\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"4 fries\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"4 lemonades\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"deliver\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Elm St\",\"number\":\"77\",\"unit\":null,\"reference\":null,\"raw_text\":\"77 elm st\",\"evidence\":[{\"message_index\":0,\"quote\":\"77 elm st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"missing_or_ambiguous\":[],\"clarification_question\":null}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8454,
+   "cached_input_tokens": 6810,
+   "cache_write_tokens": 0,
+   "output_tokens": 658,
+   "reasoning_tokens": 104
+  },
+  "latency_ms": 5697.37864198396,
+  "cost_micros": 562,
+  "at": "2026-10-15T19:17:28.931390+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 8454,
+   "completion_tokens": 658,
+   "total_tokens": 9112,
+   "prompt_tokens_details": {
+    "cached_tokens": 6810,
+    "cache_write_tokens": 1641,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 104,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}
