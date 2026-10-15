@@ -19,7 +19,7 @@ from .config import load_models, lowest_variants
 from .factory import make_client
 from .types import ChatMessage, ChatRequest, LLMError, LLMUsage
 
-SMOKE_PROMPT_VERSION = "smoke@0.1"
+SMOKE_PROMPT_VERSION = "smoke@0.2"  # 0.2: max_output_tokens 2000 (room for reasoning)
 SCHEMA = {
     "type": "object",
     "properties": {"item": {"type": "string"}, "quantity": {"type": "integer"}},
@@ -36,10 +36,10 @@ REQUEST = ChatRequest(
     ],
     json_schema=SCHEMA,
     schema_name="smoke",
-    max_output_tokens=200,
+    max_output_tokens=2000,
 )
-# Generous upper bound for the estimate: the prompt is ~60 tokens, the answer ~20.
-ESTIMATE_USAGE = LLMUsage(input_tokens=150, output_tokens=200)
+# Upper bound for the estimate: the prompt is ~60-280 tokens; the answer ~20 plus any reasoning, capped at 2000.
+ESTIMATE_USAGE = LLMUsage(input_tokens=300, output_tokens=2000)
 
 
 def _git_commit() -> str:
