@@ -36,6 +36,12 @@ def load_eval_split(split: Split) -> list[AnnotatedConversation]:
     return check_evaluable(load_split(split), split)
 
 
+def remaining_dev(convs: list[AnnotatedConversation]) -> list[AnnotatedConversation]:
+    """Dev conversations outside the bake-off set, by id (Julian, 2026-10-15: the head-to-head round)."""
+    used = {ac.conversation.id for ac in bakeoff_set(convs)}
+    return sorted((ac for ac in convs if ac.conversation.id not in used), key=lambda ac: ac.conversation.id)
+
+
 def bakeoff_set(
     convs: list[AnnotatedConversation], size: int = BAKEOFF_SIZE, seed: int = BAKEOFF_SEED
 ) -> list[AnnotatedConversation]:

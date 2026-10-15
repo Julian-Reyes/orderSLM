@@ -44,7 +44,7 @@ from orderslm.schema.annotation import AnnotatedConversation
 from orderslm.schema.common import EXTRACTION_SCHEMA_VERSION
 from orderslm.schema.conversation import Split
 
-from .dataset import BAKEOFF_SEED, BAKEOFF_SIZE, bakeoff_set, load_eval_split
+from .dataset import BAKEOFF_SEED, BAKEOFF_SIZE, bakeoff_set, load_eval_split, remaining_dev
 from .metrics import aggregate, score_conversation
 
 EXPERIMENT = "teacher-bakeoff"
@@ -101,7 +101,9 @@ def run(args: argparse.Namespace) -> int:
     unknown = [v for v in variants if v not in models]
     if unknown:
         raise SystemExit(f"unknown variants {unknown}; known: {sorted(models)}")
-    convs = bakeoff_set(load_eval_split(Split.dev), BAKEOFF_SIZE, BAKEOFF_SEED)[args.skip :]
+    dev = load_eval_split(Split.dev)
+    pool = remaining_dev(dev) if args.set == "remaining" else bakeoff_set(dev, BAKEOFF_SIZE, BAKEOFF_SEED)
+    convs = pool[args.skip :]
     if args.pilot:
         convs = convs[: args.pilot]
     schema = portable_schema()
@@ -116,6 +118,8 @@ def run(args: argparse.Namespace) -> int:
     mode = f"pilot {len(convs)}" if args.pilot else f"full {len(convs)}"
     if args.skip:
         mode += f" (bake-off set positions {args.skip + 1}-{args.skip + len(convs)})"
+    if args.set == "remaining":
+        mode += " (remaining dev: not in the bake-off set)"
     print(
         f"Teacher bake-off ({mode} conversations × {len(variants)} variants = {len(convs) * len(variants)} calls)"
     )
@@ -141,6 +145,7 @@ def run(args: argparse.Namespace) -> int:
     started = datetime.now(UTC)
     run_id = started.strftime("%Y%m%dT%H%M%SZ") + (f"-pilot{len(convs)}" if args.pilot else "-full")
     run_id += f"-skip{args.skip}" if args.skip else ""
+    run_id += "-remaining" if args.set == "remaining" else ""
     out_dir = RUNS / EXPERIMENT / run_id
     cache_mode: CacheMode = cache_mode_from_env()
     manifest: dict[str, Any] = {
@@ -158,7 +163,12 @@ def run(args: argparse.Namespace) -> int:
         "data": {
             "split": "dev",
             "source": "A (claude_written)",
-            "selection": f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})[{args.skip}:]"
+            "selection": (
+                "remaining_dev()"
+                if args.set == "remaining"
+                else f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})"
+            )
+            + f"[{args.skip}:]"
             + (f"[:{args.pilot}]" if args.pilot else ""),
             "conversation_ids": [ac.conversation.id for ac in convs],
             "dev_files_sha256": _dev_hash([ac.conversation.id for ac in convs]),
@@ -302,21 +312,25 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
             "",
         ]
     lines += [
-        "| Variant | JSON valid | Item F1 | Exact | Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv "
-        "| Cost (this run) | Cost/1k conv | p50 ms |",
-        "|---|---|---|---|---|---|---|---|---|---|---|",
+        "| Variant | JSON valid | Items found / extra / missed (of gold) | Item F1 | Fully correct (95% CI) "
+        "| Grounding issues | In tok/conv | Out tok/conv | Reasoning/conv | Cost (this run) | Cost/1k conv | p50 ms |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for v, r in results.items():
         t = r.get("tokens_per_conversation", {})
+        it, ci = r.get("item", {}), r.get("exact_match_ci95")
+        ci_text = f" ({_pct(ci[0])}–{_pct(ci[1])})" if ci else ""
         lines.append(
-            f"| `{v}` | {r.get('json_valid', 0)}/{r.get('conversations', 0)} | {_pct(r.get('item', {}).get('f1'))} "
-            f"| {_pct(r.get('exact_match_rate'))} | {r.get('grounding', {}).get('conversations_with_issues', '—')} "
+            f"| `{v}` | {r.get('json_valid', 0)}/{r.get('conversations', 0)} "
+            f"| {it.get('tp', 0)} / {it.get('fp', 0)} / {it.get('fn', 0)} (of {it.get('gold_items', 0)}) "
+            f"| {_pct(it.get('f1'))} | {r.get('exact_match', 0)}/{r.get('conversations', 0)}{ci_text} "
+            f"| {r.get('grounding', {}).get('conversations_with_issues', '—')} "
             f"| {t.get('input_tokens', '—')} | {t.get('output_tokens', '—')} | {t.get('reasoning_tokens', '—')} "
             f"| ${r['cost_micros'] / 1e6:.4f} | ${r['cost_per_1000_conversations_usd']:.2f} "
             f"| {r.get('latency_ms_p50', '—')} |"
         )
     total = sum(r["cost_micros"] for r in results.values())
-    lines.append(f"| **all variants** | | | | | | | | **${total / 1e6:.4f}** | | |")
+    lines.append(f"| **all variants** | | | | | | | | | **${total / 1e6:.4f}** | | |")
     lines += [
         "",
         "Full metrics per variant: `metrics.json`. Raw outputs: `outputs/<variant>/<conversation>.json`.",
@@ -330,9 +344,48 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
     (out_dir / "report.md").write_text("\n".join(lines) + "\n")
 
 
+def write_summary() -> Path:
+    """One file for the case study / dashboard: every saved run's manifest facts and per-variant metrics,
+    read from the run folders (never recomputed from memory). Rebuild after each run."""
+    runs = []
+    for d in sorted((RUNS / EXPERIMENT).iterdir()):
+        if not (d / "manifest.json").exists():
+            continue
+        m = json.loads((d / "manifest.json").read_text())
+        metrics = report(d)
+        runs.append(
+            {
+                "run_id": m["run_id"],
+                "path": str(d.relative_to(ROOT)),
+                "mode": m["mode"],
+                "started_at": m["started_at"],
+                "git_commit": m["git_commit"],
+                "prompt_version": m["prompt_version"],
+                "schema_version": m["schema_version"],
+                "data": {k: m["data"][k] for k in ("split", "source", "selection") if k in m["data"]},
+                "conversations": len(m["data"]["conversation_ids"]),
+                "estimate_usd": m["estimate_micros"] / 1e6,
+                "actual_cost_usd": m.get("actual_cost_micros", 0) / 1e6,
+                "variants": {v: {"settings": m["variants"][v], **metrics.get(v, {})} for v in m["variants"]},
+            }
+        )
+    out = RUNS / EXPERIMENT / "summary.json"
+    out.write_text(json.dumps({"experiment": EXPERIMENT, "runs": runs}, indent=2) + "\n")
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pilot", type=int, help="only the first N conversations of the bake-off set")
+    ap.add_argument(
+        "--set",
+        choices=["bakeoff", "remaining"],
+        default="bakeoff",
+        help="bakeoff: the 40-conversation bake-off set; remaining: dev conversations outside it",
+    )
+    ap.add_argument(
+        "--summary", action="store_true", help="write runs/teacher-bakeoff/summary.json, no calls"
+    )
     ap.add_argument("--skip", type=int, default=0, help="skip the first N conversations of the bake-off set")
     ap.add_argument("--variants", help="comma-separated config ids (default: all in config/models.json)")
     ap.add_argument("--yes", action="store_true", help="make the calls")
@@ -343,6 +396,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.report:
         report(args.report)
         print((args.report / "report.md").read_text())
+        return 0
+    if args.summary:
+        path = write_summary()
+        print(f"Wrote {path.relative_to(ROOT)}")
         return 0
     return run(args)
 

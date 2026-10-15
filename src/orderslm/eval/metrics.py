@@ -18,6 +18,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from orderslm.checks import check_catalog, check_evidence, check_requests
+from orderslm.eval.stats import wilson
 from orderslm.schema.annotation import AnnotatedConversation, Scenario
 from orderslm.schema.conversation import Role
 from orderslm.schema.extraction import ExtractionOutput, ItemProposal, Modification
@@ -155,12 +156,16 @@ def aggregate(scores: list[ConversationScore]) -> dict[str, Any]:
     corrections = [s for s in scores if s.correction]
     tp, fp, fn = (sum(getattr(s, k) for s in scores) for k in ("tp", "fp", "fn"))
     issue_counts = Counter(code for s in valid for code in s.grounding_issues)
+    exact = sum(s.exact for s in scores)
     return {
         "conversations": n,
+        "conversations_with_order": sum(s.has_gold_order for s in scores),
         "json_valid": len(valid),
         "json_validity_rate": _rate(len(valid), n),
-        "item": {"tp": tp, "fp": fp, "fn": fn, **_f1(tp, fp, fn)},
-        "exact_match_rate": _rate(sum(s.exact for s in scores), n),
+        "item": {"gold_items": tp + fn, "tp": tp, "fp": fp, "fn": fn, **_f1(tp, fp, fn)},
+        "exact_match": exact,
+        "exact_match_rate": _rate(exact, n),
+        "exact_match_ci95": wilson(exact, n),
         "field_accuracy": {f: _rate(sum(s.fields[f] for s in with_order), len(with_order)) for f in FIELDS},
         "correction": {
             "conversations": len(corrections),

@@ -239,3 +239,19 @@ def test_report_rebuilds_from_saved_outputs(tmp_path):
     assert r["tokens"]["input_tokens"] == 5000 and r["cost_micros"] == 750
     assert r["cost_per_1000_conversations_usd"] == 0.15
     assert "openai/gpt-6-luna@none" in (tmp_path / "report.md").read_text()
+
+
+def test_remaining_dev_is_disjoint_from_the_bakeoff_set():
+    from orderslm.eval.dataset import remaining_dev
+
+    rest = remaining_dev(DEV)
+    used = {ac.conversation.id for ac in bakeoff_set(DEV)}
+    assert len(rest) == len(DEV) - 40 and not used & {ac.conversation.id for ac in rest}
+
+
+def test_wilson_interval():
+    from orderslm.eval.stats import wilson
+
+    lo, hi = wilson(33, 35)
+    assert round(lo, 2) == 0.81 and round(hi, 2) == 0.98
+    assert wilson(0, 0) is None and wilson(0, 10)[0] == 0.0 and wilson(10, 10)[1] == 1.0
