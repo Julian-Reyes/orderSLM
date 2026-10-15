@@ -17,7 +17,7 @@ from orderslm.interfaces.extractor import ExtractionRequest, ExtractionResult, p
 from orderslm.llm.types import ChatClient, ChatMessage, ChatRequest, ChatResponse
 from orderslm.schema.extraction import ExtractionOutput
 
-TEACHER_PROMPT_VERSION = "teacher-extract@0.1"
+TEACHER_PROMPT_VERSION = "teacher-extract@0.2"  # 0.2: explicit half-and-half line shape
 MAX_OUTPUT_TOKENS = 16000  # room for reasoning variants; billing is for tokens used
 _DROP = {
     "title",

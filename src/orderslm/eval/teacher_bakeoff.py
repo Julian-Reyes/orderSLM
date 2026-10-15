@@ -101,7 +101,7 @@ def run(args: argparse.Namespace) -> int:
     unknown = [v for v in variants if v not in models]
     if unknown:
         raise SystemExit(f"unknown variants {unknown}; known: {sorted(models)}")
-    convs = bakeoff_set(load_eval_split(Split.dev), BAKEOFF_SIZE, BAKEOFF_SEED)
+    convs = bakeoff_set(load_eval_split(Split.dev), BAKEOFF_SIZE, BAKEOFF_SEED)[args.skip :]
     if args.pilot:
         convs = convs[: args.pilot]
     schema = portable_schema()
@@ -114,6 +114,8 @@ def run(args: argparse.Namespace) -> int:
         per_variant_est[v] = est
         total_est += est
     mode = f"pilot {len(convs)}" if args.pilot else f"full {len(convs)}"
+    if args.skip:
+        mode += f" (bake-off set positions {args.skip + 1}-{args.skip + len(convs)})"
     print(
         f"Teacher bake-off ({mode} conversations × {len(variants)} variants = {len(convs) * len(variants)} calls)"
     )
@@ -138,6 +140,7 @@ def run(args: argparse.Namespace) -> int:
 
     started = datetime.now(UTC)
     run_id = started.strftime("%Y%m%dT%H%M%SZ") + (f"-pilot{len(convs)}" if args.pilot else "-full")
+    run_id += f"-skip{args.skip}" if args.skip else ""
     out_dir = RUNS / EXPERIMENT / run_id
     cache_mode: CacheMode = cache_mode_from_env()
     manifest: dict[str, Any] = {
@@ -155,7 +158,7 @@ def run(args: argparse.Namespace) -> int:
         "data": {
             "split": "dev",
             "source": "A (claude_written)",
-            "selection": f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})"
+            "selection": f"bakeoff_set(size={BAKEOFF_SIZE}, seed={BAKEOFF_SEED})[{args.skip}:]"
             + (f"[:{args.pilot}]" if args.pilot else ""),
             "conversation_ids": [ac.conversation.id for ac in convs],
             "dev_files_sha256": _dev_hash([ac.conversation.id for ac in convs]),
@@ -330,6 +333,7 @@ def _write_report(out_dir: Path, manifest: dict, results: dict) -> None:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pilot", type=int, help="only the first N conversations of the bake-off set")
+    ap.add_argument("--skip", type=int, default=0, help="skip the first N conversations of the bake-off set")
     ap.add_argument("--variants", help="comma-separated config ids (default: all in config/models.json)")
     ap.add_argument("--yes", action="store_true", help="make the calls")
     ap.add_argument("--allow-over-2", action="store_true", help="run even if the estimate is over $2")
