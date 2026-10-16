@@ -1,0 +1,42 @@
+{
+  "stage": "generate",
+  "batch": "p1",
+  "started_at": "2026-10-16T14:55:48.546611+00:00",
+  "git_commit": "02bffd3ff49db201931e140d51c3728f0eb90f93-dirty",
+  "versions": {
+    "generator_prompt": "synth-write@0.1",
+    "cards": "synth-cards@0.1"
+  },
+  "models": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "extra_body": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "price_verified": "2026-10-16"
+    },
+    "deepseek/deepseek-flash@none": {
+      "extra_body": {
+        "reasoning_effort": "none"
+      },
+      "price_verified": "2026-10-16"
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "extra_body": {
+        "reasoning_effort": "minimal"
+      },
+      "price_verified": "2026-10-16"
+    }
+  },
+  "calls": 15,
+  "cache_mode": "record",
+  "estimate_micros": 21062,
+  "max_cost_micros": 42124,
+  "finished_at": "2026-10-16T14:55:58.016180+00:00",
+  "actual_cost_micros": 6070,
+  "stopped_early": false
+}

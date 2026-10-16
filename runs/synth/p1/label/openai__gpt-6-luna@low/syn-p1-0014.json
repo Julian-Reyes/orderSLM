@@ -1,0 +1,37 @@
+{
+ "key": "syn-p1-0014",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 ORDERS OF GARLIC KNOTS\"},{\"message_index\":4,\"quote\":\"JUST 1 ORDER\"},{\"message_index\":5,\"quote\":\"1 order of garlic knots, 6 pieces\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":7,\"quote\":\"DELIVERY PLEASE\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Maple Ave\",\"number\":\"418\",\"unit\":\"apt 3B\",\"reference\":null,\"raw_text\":\"418 Maple Ave apt 3B\",\"evidence\":[{\"message_index\":7,\"quote\":\"418 Maple Ave apt 3B\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":9,\"quote\":\"CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[{\"text\":\"ill have it ready at the door\",\"evidence\":[{\"message_index\":9,\"quote\":\"ill have it ready at the door\"}]}],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12476,
+   "cached_input_tokens": 7356,
+   "cache_write_tokens": 0,
+   "output_tokens": 624,
+   "reasoning_tokens": 170
+  },
+  "latency_ms": 6638.55098199565,
+  "cost_micros": 898,
+  "at": "2026-10-16T14:57:32.478380+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12476,
+   "completion_tokens": 624,
+   "total_tokens": 13100,
+   "prompt_tokens_details": {
+    "cached_tokens": 7356,
+    "cache_write_tokens": 5117,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 170,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

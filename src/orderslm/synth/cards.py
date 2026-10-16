@@ -19,7 +19,8 @@ from orderslm.schema.menu import MenuCatalog, MenuItem
 from orderslm.schema.routing import RouterLabel
 from orderslm.schema.synthetic import PlannedItem, SynthCard, SynthFeature
 
-CARDS_VERSION = "synth-cards@0.1"
+CARDS_VERSION = "synth-cards@0.3"  # 0.2: address picked by code, no item twice in one order; 0.3: unstated
+# default size said explicitly, a greeting is no longer an expected SMALL_TALK label (often part of the order message)
 L = RouterLabel
 S = Scenario
 F = SynthFeature
@@ -142,6 +143,20 @@ OFF_MENU = {
 }
 NOT_REMOVABLE_GROUPS = {"extra"}  # espresso shot
 TIMES = ["asap", "a clock time (like 'at 6:30')", "a relative time (like 'in 20 min')"]
+# Code picks the address: left to the generators, every pilot chat lived on "Maple" (p1 mini-pilot, 2026-10-16).
+STREETS = ["Oak", "Birch", "Hawthorne", "Juniper", "Mission", "Lakeview", "Kensington", "Delancey", "Fulton", "Grant",
+           "Harbor", "Ridgecrest", "Willow Creek", "Sycamore", "Orchard", "Prospect", "Union", "Cedar Hill", "Elm",
+           "Franklin", "Magnolia", "Sunset", "Bayview", "Chestnut", "Larkin", "Quincy", "Riverside", "Spruce",
+           "Thornton", "Vine", "Wexford", "Alder", "Brookside", "Clement", "Dover", "Easton", "Fairmont", "Glenwood",
+           "Hollis", "Ivanhoe"]  # fmt: skip
+SUFFIXES = ["St", "Ave", "Rd", "Blvd", "Dr", "Ln", "Ct", "Pl", "Way", "Terrace"]
+LANDMARKS = [
+    "blue door",
+    "next to the laundromat",
+    "side entrance",
+    "across from the park",
+    "above the bakery",
+]
 VAGUE = ["the usual", "one of those", "same as last time", "the one I always get", "that thing from before"]
 PROBLEMS = ["missing", "cold", "the wrong one", "squashed", "undercooked"]
 GENERATORS = (  # Julian, 2026-10-16: pilot 200 / 200 / 100
@@ -207,8 +222,10 @@ def plan_item(
     *,
     pool: list[MenuItem] | None = None,
     state_variant: bool = True,
+    exclude: set[str] = frozenset(),  # type: ignore[assignment]
 ) -> PlannedItem:
     items = pool or [i for i in menu.items if i.available and not i.combo_slots]
+    items = [i for i in items if i.id not in exclude] or items
     item = rng.choice(items)
     quantity = rng.choices([1, 2, 3, 4], weights=[60, 25, 10, 5])[0]
     p = PlannedItem(
@@ -249,6 +266,8 @@ def item_text(p: PlannedItem, menu: MenuCatalog) -> str:
         text += f" ({item.variant(p.variant_id).name})"  # type: ignore[union-attr]
     elif item.variants and item.default_variant_id is None:
         text += " (size/flavor not stated)"
+    elif item.variants:
+        text += " (no size mentioned by anyone: the regular one)"
     extras = [f"no {mname(m)}" for m in p.remove] + [f"add {mname(m)}" for m in p.add]
     extras += [f"{mname(new)} instead of {mname(old)}" for old, new in p.substitute.items()]
     for slot_id, choice in p.combo.items():
@@ -258,6 +277,17 @@ def item_text(p: PlannedItem, menu: MenuCatalog) -> str:
 
 def _items_text(items: list[PlannedItem], menu: MenuCatalog) -> str:
     return "; ".join(item_text(p, menu) for p in items)
+
+
+def _address(rng: random.Random) -> str:
+    number = rng.choice([rng.randint(1, 99), rng.randint(100, 999), rng.randint(1000, 9999)])
+    text = f"{number} {rng.choice(STREETS)} {rng.choice(SUFFIXES)}"
+    r = rng.random()
+    if r < 0.3:
+        text += f", {rng.choice(['apt', 'unit', '#'])} {rng.randint(1, 30)}{rng.choice(['', 'A', 'B', 'C'])}"
+    elif r < 0.4:
+        text += f" ({rng.choice(LANDMARKS)})"
+    return text
 
 
 def _start(menu: MenuCatalog, rng: random.Random) -> datetime:
@@ -299,12 +329,11 @@ def _card(
     extras: list[str] = []
     items: list[PlannedItem] = []
     first_ask: PlannedItem | None = None
-    fulfillment, payment, name = "not_applicable", "not_applicable", None
+    fulfillment, payment, name, address = "not_applicable", "not_applicable", None, None
 
     if plan.order:
         if rng.random() < 0.25:
             extras.append("greets_first")
-            labels.insert(0, L.SMALL_TALK)
             msgs += 1
         if scenario not in (S.two_requests,) and rng.random() < 0.15:
             extras.append("asks_menu_mid_order")
@@ -333,7 +362,7 @@ def _card(
             items.append(plan_item(menu, rng, pool=sizeable, state_variant=False))
             n_items -= 1
         for _ in range(max(n_items, 0)):
-            items.append(plan_item(menu, rng))
+            items.append(plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id}))
         if scenario is S.off_menu:
             items.append(PlannedItem(off_menu_text=rng.choice(OFF_MENU[menu.business_id]), quantity=1))
 
@@ -399,9 +428,8 @@ def _card(
         if gap == "address":
             brief.append("Chooses delivery but never gives an address.")
         if fulfillment == "delivery" and gap != "address":
-            brief.append(
-                "Wants delivery and gives a made-up street address (number and street, maybe an apt)."
-            )
+            address = _address(rng)
+            brief.append(f"Wants delivery to {address} (written the way the customer would type it).")
         elif fulfillment == "pickup":
             brief.append("Will pick it up.")
         else:
@@ -444,6 +472,7 @@ def _card(
         fulfillment=fulfillment,  # type: ignore[arg-type]
         payment=payment,  # type: ignore[arg-type]
         customer_name=name,
+        address=address,
         items=items,
         first_ask=first_ask,
         brief=text,

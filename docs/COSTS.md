@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.9648** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547) |
-| Remaining (of $10 ceiling) | $9.0352 |
+| Spent to date | **$0.9965** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317) |
+| Remaining (of $10 ceiling) | $9.0035 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -27,6 +27,10 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-15 | M3 | openai/gpt-6-luna@low | Prompt v0.3 check (no items for past orders) on all 91 dev | 893,481 / 39,511 | 0.054384 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T190341Z-full-all` |
 | 2026-10-15 | M3 | openai/gpt-6-luna@low | Prompt v0.4 check (plain pending has no evidence) on all 91 dev | 898,031 / 39,946 | 0.054654 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T191233Z-full-all` |
 | 2026-10-15 | M3 | openai/gpt-6-luna@low | Repeat of the v0.4 run, cache off: run-to-run variation | 898,031 / 39,990 | 0.054679 | recorded usage × verified price | `runs/teacher-bakeoff/20261015T192653Z-full-all` |
+| 2026-10-16 | M4 | DeepSeek flash none, Gemini flash-lite minimal, Haiku off-low | Mini-pilot generation, 5 chats each, `synth-write@0.1` (estimate $0.0211) | 27,180 / 2,529 | 0.006070 | recorded usage × verified price | `runs/synth/p1` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Mini-pilot labels, 14 chats, `teacher-label@0.1` (estimate $0.0343) | 151,044 / 7,362 | 0.010185 | recorded usage × verified price | `runs/synth/p1` |
+| 2026-10-16 | M4 | same 3 generators | Second mini-pilot after fixes (cards 0.2, `synth-write@0.2`), 5 each | 25,285 / 2,769 | 0.005425 | recorded usage × verified price | `runs/synth/p2` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Second mini-pilot labels, 15 chats, `teacher-label@0.2` | 152,730 / 8,144 | 0.010055 | recorded usage × verified price | `runs/synth/p2` |
 
 ## Prepaid credit (purchases, not spend)
 
@@ -56,7 +60,7 @@ pricing pages on **2026-10-14**; all match the spec. Re-check again on the day o
 
 | Model | Standard in / out per 1M | Discounted | Verified by OrderSLM |
 |---|---|---|---|
-| OpenAI `gpt-6-luna` | $0.10 / $0.50 (cached input $0.01) | Batch $0.05 / $0.25 | 2026-10-14, [OpenAI pricing](https://developers.openai.com/api/docs/pricing). Short context (≤ 272K input); long context costs more (not relevant here) |
+| OpenAI `gpt-6-luna` | $0.10 / $0.50 (cached input $0.01, cache writes $0.125; cache-write price first seen 2026-10-16) | Batch $0.05 / $0.25 (cache writes $0.0625) | 2026-10-14, re-checked 2026-10-16 (all four models unchanged), [OpenAI pricing](https://developers.openai.com/api/docs/pricing). Short context (≤ 272K input); long context costs more (not relevant here) |
 | Google `gemini-3.1-flash-lite` | $0.25 / $1.50 (text in; output includes thinking tokens); context caching $0.025 (verified 2026-10-15) | Batch $0.125 / $0.75 (caching $0.0125) | 2026-10-14, [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing). Paid tier only: free-tier data is used to improve Google's products, paid-tier data is not |
 | DeepSeek `deepseek-flash` | $0.30 / $1.20 peak (cache hit $0.006) | Off-peak $0.15 / $0.60 (cache hit $0.003) | 2026-10-14, [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing). Peak = 01:00–04:00 and 06:00–10:00 UTC Mon–Fri (excl. Chinese public holidays). `deepseek-flash` = DeepSeek-V4.1-Flash |
 | Anthropic `claude-haiku-5-5` | $0.10 / $0.50 for prompts ≤ 100K tokens (cache hit $0.01); prompts > 100K: $0.50 / $2.50 | Batch $0.05 / $0.25 | 2026-10-15, [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Added as a teacher candidate 2026-10-15 (spec §8) |

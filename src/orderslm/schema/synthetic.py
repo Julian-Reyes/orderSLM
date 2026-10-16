@@ -66,6 +66,7 @@ class SynthCard(Strict):
     fulfillment: Literal["delivery", "pickup", "unstated", "not_applicable"]
     payment: Literal["card", "cash", "unstated", "not_applicable"]
     customer_name: str | None = None
+    address: str | None = Field(default=None, description="made-up delivery address, picked by code")
     items: list[PlannedItem] = Field(default_factory=list, description="the order the chat ends with")
     first_ask: PlannedItem | None = Field(
         default=None, description="what the customer asks for first, then replaces (corrections)"
@@ -95,6 +96,7 @@ class SyntheticConversation(Strict):
     card_id: str = Field(pattern=ID_PATTERN)
     generator: str
     generator_prompt_version: str
+    repairs: list[str] = Field(default_factory=list, description="fixes code made to the generated chat")
 
     @model_validator(mode="after")
     def _synthetic(self) -> "SyntheticConversation":

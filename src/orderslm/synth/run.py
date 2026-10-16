@@ -409,6 +409,7 @@ def report(args: argparse.Namespace) -> int:
             "cards": len(mine),
             "generated": len(attempted),
             "kept": sum(1 for c in mine if c.id in convs),
+            "repairs": dict(Counter(r for c in mine if c.id in convs for r in convs[c.id].repairs)),
             "gen_drops": dict(
                 Counter(d["reason"].split(":")[0].split(" ")[0] for d in gen_drops if d["generator"] == g)
             ),

@@ -1,9 +1,9 @@
 """Writing a synthetic chat from a card (spec §7): one call per card to the card's generator model.
 
 The generator sees the menu without prices and the card without ids (names only), and returns the messages.
-Code adds the indices and timestamps (seeded from the card, starting at the card's start time) and drops chats
-that break a rule the label can't repair: invalid JSON, the last message not from the customer, a business
-message that states a price.
+Code adds the indices and timestamps (seeded from the card, starting at the card's start time), trims business
+messages after the last customer message (logged in `repairs`), and drops chats that break a rule the label
+can't repair: invalid JSON, no customer message, a business message that states a price.
 """
 
 import json
@@ -22,7 +22,7 @@ from orderslm.schema.synthetic import GeneratedChat, SynthCard, SyntheticConvers
 
 from .cards import FEATURE_TEXT, STYLE_TEXT, item_text
 
-GENERATOR_PROMPT_VERSION = "synth-write@0.1"
+GENERATOR_PROMPT_VERSION = "synth-write@0.2"  # 0.2: steps in order, card address, no formal letters
 MAX_OUTPUT_TOKENS = 4000
 PRICE = re.compile(r"\$\s?\d|\b\d+\.\d{2}\b|\b\d+\s*(dollars?|bucks)\b", re.IGNORECASE)
 
@@ -100,17 +100,22 @@ def to_conversation(card: SynthCard, text: str) -> tuple[SyntheticConversation |
         chat = GeneratedChat.model_validate(json.loads(_strip_fences(text)))
     except (ValueError, ValidationError) as e:
         return None, f"invalid_output: {str(e)[:200]}"
-    if chat.messages[-1].role is not Role.customer:
-        return None, "last_message_not_customer"
-    for m in chat.messages:
+    msgs = list(chat.messages)
+    repairs = []
+    while msgs and msgs[-1].role is not Role.customer:  # the label is "after the last customer message"
+        msgs.pop()
+        repairs.append("trimmed_trailing_business_message")
+    if not msgs:
+        return None, "no_customer_message"
+    for m in msgs:
         if m.role is Role.business and PRICE.search(m.text):
             return None, "business_states_price"
     rng = random.Random(card.id)
     at = card.start_at
     messages = []
-    for i, m in enumerate(chat.messages):
+    for i, m in enumerate(msgs):
         if i:
-            prev = chat.messages[i - 1].role
+            prev = msgs[i - 1].role
             gap = (3, 40) if prev is m.role else ((20, 90) if m.role is Role.business else (15, 120))
             at = at + timedelta(seconds=rng.randint(*gap))
         messages.append(Message(index=i, role=m.role, text=m.text, sent_at=at))
@@ -127,6 +132,7 @@ def to_conversation(card: SynthCard, text: str) -> tuple[SyntheticConversation |
             card_id=card.id,
             generator=card.generator,
             generator_prompt_version=GENERATOR_PROMPT_VERSION,
+            repairs=repairs,
         ),
         None,
     )

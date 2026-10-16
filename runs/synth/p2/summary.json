@@ -1,0 +1,218 @@
+{
+  "batch": "p2",
+  "built_at": "2026-10-16T15:02:00.725877+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "cards": 100,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {
+        "trimmed_trailing_business_message": 1
+      },
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 3,
+        "flags": {
+          "labels": 1,
+          "item_details": 1
+        }
+      },
+      "customer_messages_mean": 3.6,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 9883,
+        "cached_input_tokens": 0,
+        "output_tokens": 1367,
+        "reasoning_tokens": 0,
+        "cost_micros": 1675,
+        "cost_per_1k_usd": 0.335,
+        "latency_p50_ms": 1979
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 48496,
+        "cached_input_tokens": 36885,
+        "output_tokens": 3356,
+        "reasoning_tokens": 840,
+        "cost_micros": 3210,
+        "cost_per_1k_usd": 0.642,
+        "latency_p50_ms": 6786
+      }
+    },
+    "deepseek/deepseek-flash@none": {
+      "cards": 200,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {
+        "trimmed_trailing_business_message": 2
+      },
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 5,
+        "flags": {}
+      },
+      "customer_messages_mean": 3.4,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 9011,
+        "cached_input_tokens": 4864,
+        "output_tokens": 659,
+        "reasoning_tokens": 0,
+        "cost_micros": 1035,
+        "cost_per_1k_usd": 0.207,
+        "latency_p50_ms": 1792
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 56044,
+        "cached_input_tokens": 36885,
+        "output_tokens": 1812,
+        "reasoning_tokens": 363,
+        "cost_micros": 3192,
+        "cost_per_1k_usd": 0.6384,
+        "latency_p50_ms": 3713
+      }
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "cards": 200,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 2,
+        "flags": {
+          "labels": 2,
+          "item_details": 1
+        }
+      },
+      "customer_messages_mean": 2.6,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 6391,
+        "cached_input_tokens": 0,
+        "output_tokens": 743,
+        "reasoning_tokens": 0,
+        "cost_micros": 2715,
+        "cost_per_1k_usd": 0.543,
+        "latency_p50_ms": 1484
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 48190,
+        "cached_input_tokens": 29508,
+        "output_tokens": 2976,
+        "reasoning_tokens": 512,
+        "cost_micros": 3653,
+        "cost_per_1k_usd": 0.7306,
+        "latency_p50_ms": 6099
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 23,
+    "MENU_QUESTION": 5,
+    "CONFIRM_ORDER": 5,
+    "SMALL_TALK": 4,
+    "ORDER_STATUS": 3,
+    "MODIFY_ORDER": 3,
+    "HUMAN_REQUEST": 2,
+    "ORDER_PROBLEM": 1,
+    "UNKNOWN": 1,
+    "DELIVERY_QUESTION": 1
+  },
+  "planned": {
+    "generator": {
+      "google/gemini-3.1-flash-lite@minimal": 200,
+      "deepseek/deepseek-flash@none": 200,
+      "anthropic/claude-haiku-5-5@off-low": 100
+    },
+    "scenario": {
+      "simple_order": 69,
+      "multi_message_order": 49,
+      "correction": 44,
+      "missing_info": 29,
+      "contextual_yes": 29,
+      "correction_after_confirmation": 24,
+      "implicit_category": 24,
+      "combo": 24,
+      "off_menu": 20,
+      "ambiguous_reference": 20,
+      "cancellation": 20,
+      "two_requests": 19,
+      "half_and_half": 19,
+      "order_problem": 10,
+      "menu_question": 10,
+      "human_request": 10,
+      "payment_question": 10,
+      "refund_request": 10,
+      "out_of_scope": 10,
+      "status_question": 10,
+      "small_talk": 10,
+      "unclear_message": 10,
+      "payment_claim": 10,
+      "delivery_question": 10
+    },
+    "business": {
+      "halfmoon-pizza": 178,
+      "corner-patty": 169,
+      "morning-crumb": 153
+    },
+    "style": {
+      "texting": 150,
+      "clean": 100,
+      "emoji": 100,
+      "rapid_fire": 100,
+      "shouty": 50
+    },
+    "fulfillment": {
+      "pickup": 194,
+      "not_applicable": 110,
+      "delivery": 108,
+      "unstated": 88
+    },
+    "payment": {
+      "card": 167,
+      "cash": 112,
+      "unstated": 111,
+      "not_applicable": 110
+    },
+    "items": {
+      "1": 166,
+      "2": 129,
+      "0": 110,
+      "3": 89,
+      "4": 6
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 390,
+      "SMALL_TALK": 113,
+      "MENU_QUESTION": 93,
+      "MODIFY_ORDER": 68,
+      "CONFIRM_ORDER": 53,
+      "CANCEL_ORDER": 20,
+      "ORDER_PROBLEM": 10,
+      "HUMAN_REQUEST": 10,
+      "PAYMENT_QUESTION": 10,
+      "REFUND_REQUEST": 10,
+      "OUT_OF_SCOPE": 10,
+      "ORDER_STATUS": 10,
+      "UNKNOWN": 10,
+      "PAYMENT_CLAIM": 10,
+      "DELIVERY_QUESTION": 10
+    }
+  }
+}

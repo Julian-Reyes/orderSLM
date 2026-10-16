@@ -210,7 +210,7 @@ def test_generated_chat_becomes_a_synthetic_conversation():
     ("text", "reason"),
     [
         ("not json", "invalid_output"),
-        (_chat(("customer", "a coke"), ("business", "sure!")), "last_message_not_customer"),
+        (_chat(("business", "hi! what can I get you?")), "no_customer_message"),
         (
             _chat(("customer", "a coke"), ("business", "that's $2.50"), ("customer", "ok")),
             "business_states_price",
@@ -222,6 +222,25 @@ def test_generated_chat_becomes_a_synthetic_conversation():
 def test_generated_chat_drops(text, reason):
     sc, got = gen.to_conversation(CARDS[0], text)
     assert sc is None and got.startswith(reason)
+
+
+def test_trailing_business_messages_are_trimmed_and_logged():
+    sc, reason = gen.to_conversation(
+        CARDS[0], _chat(("customer", "a coke"), ("business", "sure!"), ("business", "anything else?"))
+    )
+    assert reason is None
+    assert [m.text for m in sc.conversation.messages] == ["a coke"]
+    assert sc.repairs == ["trimmed_trailing_business_message"] * 2
+
+
+def test_cards_pick_varied_addresses_and_never_repeat_an_item():
+    addresses = [c.address for c in CARDS if c.address]
+    assert len(addresses) > 50 and len(set(addresses)) == len(addresses)
+    assert all(c.address in c.brief for c in CARDS if c.address)
+    assert all(c.fulfillment == "delivery" for c in CARDS if c.address)
+    for c in CARDS:
+        ids = [p.menu_item_id for p in c.items if p.menu_item_id]
+        assert len(ids) == len(set(ids)), c.id
 
 
 # ---------------------------------------------------------------- labels

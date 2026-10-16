@@ -15,9 +15,9 @@
         {"name": "medium", "extra_body": {"reasoning_effort": "medium"}, "provider_default": true}
       ],
       "rpm": 60,
-      "price": {"input": 100000, "cached_input": 10000, "output": 500000},
+      "price": {"input": 100000, "cached_input": 10000, "cache_write": 125000, "output": 500000},
       "long_context": {"threshold_input_tokens": 272000, "price": null},
-      "price_verified": "2026-10-14",
+      "price_verified": "2026-10-16",
       "price_source": "https://developers.openai.com/api/docs/pricing"
     },
     {
@@ -40,7 +40,7 @@
         "threshold_input_tokens": 100000,
         "price": {"input": 500000, "cached_input": 50000, "cache_write": 625000, "output": 2500000}
       },
-      "price_verified": "2026-10-15",
+      "price_verified": "2026-10-16",
       "price_source": "https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
@@ -57,7 +57,7 @@
       ],
       "rpm": 60,
       "price": {"input": 250000, "output": 1500000},
-      "price_verified": "2026-10-14",
+      "price_verified": "2026-10-16",
       "price_source": "https://ai.google.dev/gemini-api/docs/pricing"
     },
     {
@@ -79,7 +79,7 @@
         "price": {"input": 150000, "cached_input": 3000, "output": 600000},
         "peak_windows_utc_weekdays": [[1, 4], [6, 10]]
       },
-      "price_verified": "2026-10-14",
+      "price_verified": "2026-10-16",
       "price_source": "https://api-docs.deepseek.com/quick_start/pricing"
     }
   ]

@@ -1,0 +1,100 @@
+{
+  "batch": "p2",
+  "n": 500,
+  "seed": 20261016,
+  "cards_version": "synth-cards@0.2",
+  "synth_schema_version": "synth@0.1",
+  "generators": {
+    "deepseek/deepseek-flash@none": 2,
+    "google/gemini-3.1-flash-lite@minimal": 2,
+    "anthropic/claude-haiku-5-5@off-low": 1
+  },
+  "menu_versions": {
+    "corner-patty": "corner-patty@882e409e5aa8",
+    "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+    "morning-crumb": "morning-crumb@c8f57ec59225"
+  },
+  "planned_at": "2026-10-16T14:59:30.702382+00:00",
+  "git_commit": "02bffd3ff49db201931e140d51c3728f0eb90f93-dirty",
+  "distribution": {
+    "generator": {
+      "google/gemini-3.1-flash-lite@minimal": 200,
+      "deepseek/deepseek-flash@none": 200,
+      "anthropic/claude-haiku-5-5@off-low": 100
+    },
+    "scenario": {
+      "simple_order": 69,
+      "multi_message_order": 49,
+      "correction": 44,
+      "missing_info": 29,
+      "contextual_yes": 29,
+      "correction_after_confirmation": 24,
+      "implicit_category": 24,
+      "combo": 24,
+      "off_menu": 20,
+      "ambiguous_reference": 20,
+      "cancellation": 20,
+      "two_requests": 19,
+      "half_and_half": 19,
+      "order_problem": 10,
+      "menu_question": 10,
+      "human_request": 10,
+      "payment_question": 10,
+      "refund_request": 10,
+      "out_of_scope": 10,
+      "status_question": 10,
+      "small_talk": 10,
+      "unclear_message": 10,
+      "payment_claim": 10,
+      "delivery_question": 10
+    },
+    "business": {
+      "halfmoon-pizza": 178,
+      "corner-patty": 169,
+      "morning-crumb": 153
+    },
+    "style": {
+      "texting": 150,
+      "clean": 100,
+      "emoji": 100,
+      "rapid_fire": 100,
+      "shouty": 50
+    },
+    "fulfillment": {
+      "pickup": 194,
+      "not_applicable": 110,
+      "delivery": 108,
+      "unstated": 88
+    },
+    "payment": {
+      "card": 167,
+      "cash": 112,
+      "unstated": 111,
+      "not_applicable": 110
+    },
+    "items": {
+      "1": 166,
+      "2": 129,
+      "0": 110,
+      "3": 89,
+      "4": 6
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 390,
+      "SMALL_TALK": 113,
+      "MENU_QUESTION": 93,
+      "MODIFY_ORDER": 68,
+      "CONFIRM_ORDER": 53,
+      "CANCEL_ORDER": 20,
+      "ORDER_PROBLEM": 10,
+      "HUMAN_REQUEST": 10,
+      "PAYMENT_QUESTION": 10,
+      "REFUND_REQUEST": 10,
+      "OUT_OF_SCOPE": 10,
+      "ORDER_STATUS": 10,
+      "UNKNOWN": 10,
+      "PAYMENT_CLAIM": 10,
+      "DELIVERY_QUESTION": 10
+    }
+  }
+}

@@ -25,7 +25,7 @@ from orderslm.schema.menu import MenuCatalog
 from orderslm.schema.routing import LABEL_DESCRIPTIONS
 from orderslm.schema.synthetic import LabeledConversation, PlannedItem, SynthCard
 
-LABEL_PROMPT_VERSION = "teacher-label@0.1"
+LABEL_PROMPT_VERSION = "teacher-label@0.2"  # 0.2: answering a size question is PLACE_ORDER
 TEACHER = "openai/gpt-6-luna@low"  # Julian, 2026-10-15 (docs/TEACHER_BAKEOFF.md)
 MAX_OUTPUT_TOKENS = 16000
 

@@ -8,10 +8,9 @@ _Last updated 2026-10-16._
 
 - **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
   M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Next: M4 step 2**, the priced mini-pilot: re-verify the four prices on the official pages, then
-  `make synth ARGS="generate --batch p1 --limit 5 --yes"` (15 chats, est. $0.02) and
-  `make label ARGS="--batch p1 --limit 5 --yes"` (est. $0.04). Read the chats and labels, then re-project the full
-  500 from measured tokens; ask Julian if it is over $2. Then step 3: the full pilot, the analysis, Julian's audit.
+- **Next: M4 step 3**, the full pilot (ask Julian to go): `make synth ARGS="generate --batch p3 --yes"`, then
+  `make label ARGS="--batch p3 --yes"` and `make synth ARGS="report --batch p3"`. Projection from measured
+  mini-pilot tokens: ~$0.6 (generation $0.2–0.25, labels ~$0.35). Then the analysis per generator and Julian's audit.
 - Still open before **bulk** labeling (not needed for the pilot):
   1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
   2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
@@ -30,7 +29,7 @@ _Last updated 2026-10-16._
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
-| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: step 1 (contract, cards, prompts, checks, CLI) done 2026-10-16; no spend yet |
+| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: step 1 (contract, cards, prompts, checks, CLI) and step 2 (priced mini-pilots, $0.03) done 2026-10-16 |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
@@ -71,6 +70,22 @@ No results exist yet: the rules baselines have **not** been scored on anything (
 - **Estimates for the full p1 pilot** (chars/3, peak price, no caching): generation $0.76 (DeepSeek $0.33,
   Gemini $0.36, Haiku $0.07); labeling ~$1.20 (luna `low`, $0.0024/chat). M3's measured luna cost was $0.57–0.63
   per 1,000 with caching, so expect less. Total ≤ ~$1.96.
+
+- **Step 2, mini-pilots (2026-10-16, $0.0317 total).** Prices re-checked on the four official pages: unchanged,
+  but OpenAI now lists a luna **cache-write price ($0.125/1M)**: added to config (it was billed as plain input).
+  - `p1` (cards 0.1, `synth-write@0.1`, `teacher-label@0.1`): 15 chats, 14 kept (1 ended on a business message), 14/14
+    labeled. Found: every address on "Maple" (mode collapse), a card repeating an item, Haiku skipping the
+    confirm step, Gemini's "clean" style reading like a letter, one intent ("regular pls" answering a size question
+    as MODIFY_ORDER).
+  - Fixes: code picks the address (cards 0.2), no item twice in an order, `synth-write@0.2` (steps in order, card
+    address, no letters, business doesn't assume details), trailing business messages trimmed and logged as a
+    repair instead of a drop, `teacher-label@0.2` (answering a size question is PLACE_ORDER).
+  - `p2`: 15/15 kept, 15/15 labeled, varied addresses. All 30 labels read by hand: no teacher errors found; the 5
+    card disagreements were generator drift (greeting merged into the order message, Haiku again skipping the
+    confirm: 2 of 2 correction-after-confirmation cards, a business asking for a default size). Cards 0.3: the card
+    says "no size mentioned" for default sizes; a greeting is no longer an expected SMALL_TALK label.
+  - Measured cost per 1,000 chats: generation DeepSeek $0.20 (off-peak; ×2 at peak), Haiku $0.32, Gemini $0.69;
+    labels $0.61–0.84. Full pilot batch `p3` (cards 0.3) planned.
 
 ## M3 so far (2026-10-15)
 

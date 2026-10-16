@@ -1,0 +1,213 @@
+{
+  "batch": "p1",
+  "built_at": "2026-10-16T15:01:59.903223+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "cards": 100,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 4,
+        "flags": {
+          "labels": 1
+        }
+      },
+      "customer_messages_mean": 4.4,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 10301,
+        "cached_input_tokens": 0,
+        "output_tokens": 1175,
+        "reasoning_tokens": 0,
+        "cost_micros": 1620,
+        "cost_per_1k_usd": 0.324,
+        "latency_p50_ms": 1814
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 49859,
+        "cached_input_tokens": 36780,
+        "output_tokens": 2752,
+        "reasoning_tokens": 777,
+        "cost_micros": 3054,
+        "cost_per_1k_usd": 0.6108,
+        "latency_p50_ms": 5821
+      }
+    },
+    "deepseek/deepseek-flash@none": {
+      "cards": 200,
+      "generated": 5,
+      "kept": 4,
+      "repairs": {},
+      "gen_drops": {
+        "last_message_not_customer": 1
+      },
+      "label_attempted": 4,
+      "labeled": 4,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 4,
+        "all_agree": 4,
+        "flags": {}
+      },
+      "customer_messages_mean": 3.5,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 7828,
+        "cached_input_tokens": 3456,
+        "output_tokens": 570,
+        "reasoning_tokens": 0,
+        "cost_micros": 1010,
+        "cost_per_1k_usd": 0.202,
+        "latency_p50_ms": 1919
+      },
+      "label_usage": {
+        "calls": 4,
+        "input_tokens": 44475,
+        "cached_input_tokens": 22068,
+        "output_tokens": 1824,
+        "reasoning_tokens": 280,
+        "cost_micros": 3375,
+        "cost_per_1k_usd": 0.8438,
+        "latency_p50_ms": 5579
+      }
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "cards": 200,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 4,
+        "flags": {
+          "items": 1,
+          "labels": 1
+        }
+      },
+      "customer_messages_mean": 2.6,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 9051,
+        "cached_input_tokens": 0,
+        "output_tokens": 784,
+        "reasoning_tokens": 0,
+        "cost_micros": 3440,
+        "cost_per_1k_usd": 0.688,
+        "latency_p50_ms": 1614
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 56710,
+        "cached_input_tokens": 36780,
+        "output_tokens": 2786,
+        "reasoning_tokens": 518,
+        "cost_micros": 3756,
+        "cost_per_1k_usd": 0.7512,
+        "latency_p50_ms": 6041
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 31,
+    "SMALL_TALK": 5,
+    "MODIFY_ORDER": 5,
+    "CANCEL_ORDER": 3,
+    "ORDER_STATUS": 2,
+    "DELIVERY_QUESTION": 1,
+    "CONFIRM_ORDER": 1,
+    "PAYMENT_QUESTION": 1
+  },
+  "planned": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 200,
+      "google/gemini-3.1-flash-lite@minimal": 200,
+      "anthropic/claude-haiku-5-5@off-low": 100
+    },
+    "scenario": {
+      "simple_order": 69,
+      "multi_message_order": 49,
+      "correction": 44,
+      "contextual_yes": 29,
+      "missing_info": 29,
+      "implicit_category": 24,
+      "correction_after_confirmation": 24,
+      "combo": 24,
+      "cancellation": 20,
+      "off_menu": 20,
+      "ambiguous_reference": 20,
+      "two_requests": 19,
+      "half_and_half": 19,
+      "status_question": 10,
+      "payment_question": 10,
+      "unclear_message": 10,
+      "out_of_scope": 10,
+      "order_problem": 10,
+      "delivery_question": 10,
+      "menu_question": 10,
+      "payment_claim": 10,
+      "refund_request": 10,
+      "small_talk": 10,
+      "human_request": 10
+    },
+    "business": {
+      "halfmoon-pizza": 176,
+      "morning-crumb": 175,
+      "corner-patty": 149
+    },
+    "style": {
+      "texting": 150,
+      "rapid_fire": 100,
+      "clean": 100,
+      "emoji": 100,
+      "shouty": 50
+    },
+    "fulfillment": {
+      "pickup": 205,
+      "not_applicable": 110,
+      "delivery": 102,
+      "unstated": 83
+    },
+    "payment": {
+      "card": 172,
+      "cash": 128,
+      "not_applicable": 110,
+      "unstated": 90
+    },
+    "items": {
+      "1": 158,
+      "2": 139,
+      "0": 110,
+      "3": 89,
+      "4": 4
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 390,
+      "SMALL_TALK": 99,
+      "MENU_QUESTION": 76,
+      "MODIFY_ORDER": 68,
+      "CONFIRM_ORDER": 53,
+      "CANCEL_ORDER": 20,
+      "ORDER_STATUS": 10,
+      "PAYMENT_QUESTION": 10,
+      "UNKNOWN": 10,
+      "OUT_OF_SCOPE": 10,
+      "ORDER_PROBLEM": 10,
+      "DELIVERY_QUESTION": 10,
+      "PAYMENT_CLAIM": 10,
+      "REFUND_REQUEST": 10,
+      "HUMAN_REQUEST": 10
+    }
+  }
+}
