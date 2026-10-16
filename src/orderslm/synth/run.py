@@ -39,6 +39,7 @@ from orderslm.schema.common import LABEL_SCHEMA_VERSION, SYNTH_SCHEMA_VERSION
 from orderslm.schema.conversation import Split
 from orderslm.schema.synthetic import LabeledConversation, SynthCard, SyntheticConversation
 
+from . import analysis as an
 from . import generate as gen
 from . import label as lab
 from .cards import CARDS_VERSION, GENERATORS, plan_cards
@@ -215,11 +216,14 @@ def _call_all(
                     print(f"STOP: actual ${spent[0] / 1e6:.4f} passed the limit ${max_cost / 1e6:.4f}")
                     stop.set()
 
+    # One queue per provider, split over `workers` threads each; the shared per-model throttle still caps the rate.
+    workers = max(getattr(args, "workers", 1) or 1, 1)
     by_provider: dict[str, list] = defaultdict(list)
     for j in jobs:
         by_provider[models[j[1]].provider].append(j)
-    with ThreadPoolExecutor(max_workers=max(len(by_provider), 1)) as pool:
-        list(pool.map(worker, by_provider.values()))
+    groups = [g[k::workers] for g in by_provider.values() for k in range(workers) if g[k::workers]]
+    with ThreadPoolExecutor(max_workers=max(len(groups), 1)) as pool:
+        list(pool.map(worker, groups))
     record.update(
         finished_at=datetime.now(UTC).isoformat(), actual_cost_micros=spent[0], stopped_early=stop.is_set()
     )
@@ -391,6 +395,10 @@ def _usage(paths: list[Path]) -> dict[str, Any]:
 
 def report(args: argparse.Namespace) -> int:
     out = batch_dir(args.batch)
+    # Rebuild the derived files from the saved responses first, so the report reflects the current checks ($0).
+    collect(args.batch)
+    for d in sorted((out / "label").glob("*")) if (out / "label").exists() else []:
+        collect_labels(args.batch, d.name.replace("__", "/"))
     cards = load_cards(args.batch)
     convs = {s.card_id: s for s in load_conversations(args.batch)}
     gen_drops = _read_jsonl(out / "gen_drops.jsonl")
@@ -399,6 +407,7 @@ def report(args: argparse.Namespace) -> int:
     }
     label_drops = _read_jsonl(out / "label_drops.jsonl")
     agreement = {r["card_id"]: r for r in _read_jsonl(out / "agreement.jsonl")}
+    card_by_id = {c.id: c for c in cards}
     by_gen: dict[str, Any] = {}
     for g in sorted({c.generator for c in cards}):
         mine = [c for c in cards if c.generator == g]
@@ -433,6 +442,9 @@ def report(args: argparse.Namespace) -> int:
             else None,
             "generation_usage": _usage([out / "gen" / _slug(g) / f"{c.id}.json" for c in attempted]),
             "label_usage": _usage(sorted(p for c in mine for p in (out / "label").glob(f"*/{c.id}.json"))),
+            "style": an.style_stats([convs[c.id] for c in mine if c.id in convs]),
+            "diversity": an.diversity([convs[c.id] for c in mine if c.id in convs]),
+            "addresses": an.addresses([convs[c.id] for c in mine if c.id in convs], card_by_id),
         }
     intents = Counter(i.primary.value for lc in labels.values() for i in lc.intents)
     summary = {
@@ -442,9 +454,16 @@ def report(args: argparse.Namespace) -> int:
         "by_generator": by_gen,
         "labeled_intents": dict(intents.most_common()),
         "planned": _card_distribution(cards),
+        "agreement_by_scenario": an.agreement_by_scenario(agreement, card_by_id),
+        "intents_by_generator": an.intents_by_generator(labels, card_by_id),
+        "audit_sample": an.audit_sample(convs, agreement, card_by_id, args.audit_per_generator),
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    print(json.dumps(by_gen, indent=1))
+    (out / "report.md").write_text(an.render(summary, card_by_id))
+    (out / "audit.md").write_text(
+        an.render_audit(summary["audit_sample"], convs, labels, agreement, card_by_id)
+    )
+    print((out / "report.md").read_text())
     return 0
 
 
@@ -463,10 +482,14 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--yes", action="store_true", help="make the calls")
         p.add_argument("--allow-over-2", action="store_true")
         p.add_argument("--max-cost", type=float, help="stop when actual spend passes this many USD")
+        p.add_argument(
+            "--workers", type=int, default=1, help="parallel calls per provider (rpm throttle still applies)"
+        )
         if name == "label":
             p.add_argument("--teacher", default=lab.TEACHER)
     p = sub.add_parser("report")
     p.add_argument("--batch", required=True)
+    p.add_argument("--audit-per-generator", type=int, default=10)
     args = ap.parse_args(argv)
     return {"plan": plan, "generate": generate, "label": label, "report": report}[args.stage](args)
 

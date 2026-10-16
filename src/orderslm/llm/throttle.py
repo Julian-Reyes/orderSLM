@@ -5,6 +5,7 @@ limiter is not ported yet; OrderSLM's rpm settings sit far below every provider'
 inside the cache, so replays never wait.
 """
 
+import threading
 import time
 from collections.abc import Callable
 
@@ -25,13 +26,16 @@ class Throttle:
         self._now = now
         self._sleep = sleep
         self._next: float | None = None
+        self._lock = threading.Lock()
 
     def wait(self) -> None:
-        t = self._now()
-        if self._next is not None and t < self._next:
-            self._sleep(self._next - t)
-            t = self._next
-        self._next = t + self._interval
+        """Reserve the next slot under a lock (safe across threads), then sleep until it outside the lock."""
+        with self._lock:
+            t = self._now()
+            slot = t if self._next is None or t >= self._next else self._next
+            self._next = slot + self._interval
+        if slot > t:
+            self._sleep(slot - t)
 
 
 class ThrottledClient:

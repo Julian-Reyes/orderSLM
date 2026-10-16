@@ -428,3 +428,24 @@ def test_anthropic_schema_mode_sends_format_alongside_effort():
 def test_real_http_is_blocked_in_tests():
     with pytest.raises(AssertionError, match="tried to reach the network"):
         httpx.Client().get("https://api.openai.com/v1/models")
+
+
+def test_throttle_gives_each_thread_its_own_slot():
+    import threading
+
+    from orderslm.llm.throttle import Throttle
+
+    slept: list[float] = []
+    lock = threading.Lock()
+
+    def sleep(d: float) -> None:
+        with lock:
+            slept.append(round(d, 6))
+
+    th = Throttle(60, now=lambda: 100.0, sleep=sleep)  # clock frozen: every caller arrives at once
+    threads = [threading.Thread(target=th.wait) for _ in range(5)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    assert sorted(slept) == [1.0, 2.0, 3.0, 4.0]  # the first goes at once, the rest 1 s apart

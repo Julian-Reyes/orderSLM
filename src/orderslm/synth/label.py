@@ -116,6 +116,11 @@ def _line_key(line: ItemProposal) -> tuple[str, int | None]:
     return str(line.menu_item_id), line.quantity
 
 
+def _mods(remove: set, add: set, substitute: set) -> tuple[frozenset, frozenset]:
+    """A substitute (a → b) counts the same as removing a and adding b: "no ketchup, add mustard instead"."""
+    return frozenset(remove | {a for a, _ in substitute}), frozenset(add | {b for _, b in substitute})
+
+
 def _planned_detail(p: PlannedItem, menu: MenuCatalog) -> tuple[Any, ...]:
     variant = p.variant_id
     if variant is None and p.menu_item_id is not None:
@@ -124,9 +129,7 @@ def _planned_detail(p: PlannedItem, menu: MenuCatalog) -> tuple[Any, ...]:
     return (
         _planned_key(p),
         variant,
-        frozenset(p.remove),
-        frozenset(p.add),
-        frozenset(p.substitute.items()),
+        _mods(set(p.remove), set(p.add), set(p.substitute.items())),
         frozenset(p.combo.items()),
     )
 
@@ -136,10 +139,14 @@ def _line_detail(line: ItemProposal) -> tuple[Any, ...]:
     return (
         _line_key(line),
         line.variant_id,
-        frozenset(m.modifier_id for m in mods if m.kind is ModificationKind.remove),
-        frozenset(m.modifier_id for m in mods if m.kind is ModificationKind.add and m.modifier_id),
-        frozenset(
-            (m.modifier_id, m.replacement_modifier_id) for m in mods if m.kind is ModificationKind.substitute
+        _mods(
+            {m.modifier_id for m in mods if m.kind is ModificationKind.remove},
+            {m.modifier_id for m in mods if m.kind is ModificationKind.add and m.modifier_id},
+            {
+                (m.modifier_id, m.replacement_modifier_id)
+                for m in mods
+                if m.kind is ModificationKind.substitute
+            },
         ),
         frozenset((s.slot_id, s.menu_item_id) for s in line.combo_selections),
     )
@@ -159,8 +166,7 @@ def card_agreement(card: SynthCard, label: LabeledConversation, menu: MenuCatalo
     decision_ok = True
     if card.scenario.value == "cancellation":
         decision_ok = decision is DecisionState.cancelled
-    elif card.scenario.value == "correction_after_confirmation":
-        decision_ok = decision is DecisionState.pending
+    # correction_after_confirmation has no decision check: a customer may confirm again after the change.
     flags = []
     if not items_ok:
         flags.append("items")

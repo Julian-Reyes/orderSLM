@@ -19,8 +19,10 @@ from orderslm.schema.menu import MenuCatalog, MenuItem
 from orderslm.schema.routing import RouterLabel
 from orderslm.schema.synthetic import PlannedItem, SynthCard, SynthFeature
 
-CARDS_VERSION = "synth-cards@0.3"  # 0.2: address picked by code, no item twice in one order; 0.3: unstated
-# default size said explicitly, a greeting is no longer an expected SMALL_TALK label (often part of the order message)
+CARDS_VERSION = "synth-cards@0.4"  # 0.2: address picked by code, no item twice in one order; 0.3: unstated
+# default size said explicitly, a greeting is no longer an expected SMALL_TALK label (often part of the order message);
+# 0.4 (p3 review): no "regular one" wording (leaked into chats), address-gap cards no longer also say "never says
+# pickup or delivery", a correction never swaps an item for itself, clearer payment-claim and unclear-message briefs
 L = RouterLabel
 S = Scenario
 F = SynthFeature
@@ -73,14 +75,14 @@ NON_ORDER_BRIEFS: dict[Scenario, str] = {
     "Complains. Does not order anything new.",
     S.refund_request: "Got an earlier order (not in this chat) where the {item} was {problem}, and asks for "
     "their money back.",
-    S.payment_claim: "Says they already paid for an earlier order (on the phone, online or in the app) and asks "
-    "whether it went through. Does not order anything new.",
+    S.payment_claim: "Says outright that they already paid for an earlier order (e.g. 'I paid online', 'I sent "
+    "the money on the app') and asks whether the payment went through. Does not order anything new.",
     S.human_request: "Asks to talk to a person or the manager, with a short reason. Does not order.",
     S.small_talk: "Only greets, thanks the business or chats briefly. No request.",
     S.out_of_scope: "Asks something unrelated to ordering food (a job, parking, a lost item, the wifi, a "
     "donation). Does not order.",
-    S.unclear_message: "Sends a message too unclear to tell what they want (a fragment, a garbled word, a message "
-    "meant for someone else). Does not order.",
+    S.unclear_message: "Sends one or two messages that can't be understood: a cut-off fragment, garbled words or a "
+    "pocket-text. Not a clear 'wrong chat' or 'never mind' (those are understandable). Does not order.",
 }
 
 STYLE_WEIGHTS = {
@@ -267,7 +269,7 @@ def item_text(p: PlannedItem, menu: MenuCatalog) -> str:
     elif item.variants and item.default_variant_id is None:
         text += " (size/flavor not stated)"
     elif item.variants:
-        text += " (no size mentioned by anyone: the regular one)"
+        text += " (the customer doesn't mention a size)"
     extras = [f"no {mname(m)}" for m in p.remove] + [f"add {mname(m)}" for m in p.add]
     extras += [f"{mname(new)} instead of {mname(old)}" for old, new in p.substitute.items()]
     for slot_id, choice in p.combo.items():
@@ -404,7 +406,7 @@ def _card(
                 first_ask = target.model_copy(update={"quantity": target.quantity % 4 + 1})
                 change = f"changes the quantity to {target.quantity}"
             else:
-                first_ask = plan_item(menu, rng)
+                first_ask = plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id})
                 change = f"swaps it for {item_text(target, menu)}"
             if scenario is S.correction:
                 brief.append(
@@ -430,6 +432,8 @@ def _card(
         if fulfillment == "delivery" and gap != "address":
             address = _address(rng)
             brief.append(f"Wants delivery to {address} (written the way the customer would type it).")
+        elif fulfillment == "delivery":
+            pass  # the address gap sentence above already says delivery
         elif fulfillment == "pickup":
             brief.append("Will pick it up.")
         else:

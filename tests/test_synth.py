@@ -410,6 +410,11 @@ def test_cli_plan_generate_label_report(tmp_path, monkeypatch, capsys):
     for g, row in summary["by_generator"].items():
         assert row["kept"] == 1 and row["labeled"] == 1, g
         assert row["generation_usage"]["cost_micros"] == 150
+    assert summary["audit_sample"] and all(
+        cid in (tmp_path / "x" / "audit.md").read_text() for cid in summary["audit_sample"]
+    )
+    report_md = (tmp_path / "x" / "report.md").read_text()
+    assert "## Yield" in report_md and "card agrees with label" in report_md
     calls = sorted((tmp_path / "x" / "calls").iterdir())
     assert [json.loads(p.read_text())["actual_cost_micros"] for p in calls] == [450, 450]
 
@@ -420,3 +425,19 @@ def test_cli_refuses_over_two_dollars(tmp_path, monkeypatch):
     monkeypatch.setattr(run, "_estimate", lambda *a: 3_000_000)
     run.main(["plan", "--batch", "x", "--n", "5"])
     assert run.main(["generate", "--batch", "x", "--yes"]) == 2
+
+
+def test_card_fixes_from_the_p3_review():
+    for c in CARDS:
+        assert "regular one" not in c.brief
+        if "never gives an address" in c.brief:
+            assert "pickup or delivery" not in c.brief, c.id
+        if c.first_ask is not None and c.scenario is Scenario.correction and "swaps it" in c.brief:
+            assert c.first_ask.menu_item_id not in {p.menu_item_id for p in c.items}, c.id
+
+
+def test_substitute_counts_as_remove_plus_add_in_card_agreement():
+    planned = PlannedItem(menu_item_id="cheeseburger", quantity=1, remove=["ketchup"], add=["mustard"])
+    swapped = PlannedItem(menu_item_id="cheeseburger", quantity=1, substitute={"ketchup": "mustard"})
+    menu = load_menu("corner-patty")
+    assert lab._planned_detail(planned, menu) == lab._planned_detail(swapped, menu)

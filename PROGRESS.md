@@ -8,9 +8,10 @@ _Last updated 2026-10-16._
 
 - **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
   M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Next: M4 step 3**, the full pilot (ask Julian to go): `make synth ARGS="generate --batch p3 --yes"`, then
-  `make label ARGS="--batch p3 --yes"` and `make synth ARGS="report --batch p3"`. Projection from measured
-  mini-pilot tokens: ~$0.6 (generation $0.2–0.25, labels ~$0.35). Then the analysis per generator and Julian's audit.
+- **Next (Julian):** audit `runs/synth/p3/audit.md` (30 chats, 10 per generator, half card-flagged) and read
+  `runs/synth/p3/report.md`; then decide the bulk generator mix. Proposed before bulk: score `teacher-label@0.2` on
+  all 91 dev chats (order + **intent** accuracy against reviewed gold; est. ~$0.06): the label prompt has not been
+  measured on gold yet, and card agreement can't check intents.
 - Still open before **bulk** labeling (not needed for the pilot):
   1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
   2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
@@ -29,7 +30,7 @@ _Last updated 2026-10-16._
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
-| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: step 1 (contract, cards, prompts, checks, CLI) and step 2 (priced mini-pilots, $0.03) done 2026-10-16 |
+| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: steps 1–3 done 2026-10-16 (code; mini-pilots $0.03; pilot p3 500 chats $0.52); waiting for Julian's audit |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
@@ -86,6 +87,26 @@ No results exist yet: the rules baselines have **not** been scored on anything (
     says "no size mentioned" for default sizes; a greeting is no longer an expected SMALL_TALK label.
   - Measured cost per 1,000 chats: generation DeepSeek $0.20 (off-peak; ×2 at peak), Haiku $0.32, Gemini $0.69;
     labels $0.61–0.84. Full pilot batch `p3` (cards 0.3) planned.
+
+- **Step 3, pilot `p3` (2026-10-16, $0.5157: generation $0.1888, labels $0.3269; estimate $1.98, projection ~$0.6).**
+  Report `runs/synth/p3/report.md`, summary `summary.json`, audit sample `audit.md`. Labeling ran with
+  `--workers 8` (the rpm throttle is now thread-safe).
+  - Yield: 498/500 chats kept (2 DeepSeek outputs echoed schema keys `"type":"object"`); 64 trailing business
+    messages trimmed (DeepSeek 47); 493/498 labels kept (5 teacher errors caught by the checks: 2 ambiguous time
+    with a kind, 3 quotes not in the chat).
+  - Card agrees with label: Haiku 90/99 (91%), DeepSeek 180/194 (93%), Gemini 179/200 (90%) (after fixing the check:
+    substitute = remove + add; re-confirming after a change is fine). Weakest scenarios for every generator:
+    correction_after_confirmation (8/23: they change the order instead of confirming first) and unclear_message
+    (2/10: they write clear "wrong chat" messages).
+  - Hand review of all 48 original disagreements: ~30 generator drift, ~10 card wording/bugs (fixed in cards 0.4:
+    "regular one" leaked into chats, address-gap contradiction, swap of an item for itself, payment-claim and
+    unclear-message briefs), 3 check rules (fixed), **4 clear teacher errors** (dropped a kept combo; missed
+    "sesame"; a menu question turned into an order line; an extra line from the leaked wording) + 3 debatable.
+  - Cost per 1,000 chats: generation DeepSeek $0.13 (off-peak + cached prompt), Haiku $0.38, Gemini $0.63; labels
+    $0.64–0.70 (input 66–70% cached). Labels dominate: 1,500 more chats ≈ $1.0 labels standard ($0.5 with Batch).
+  - Style/diversity (customer text): Haiku most varied (distinct 3-grams 86%, distinct openers 39%), DeepSeek 78% /
+    37%, Gemini 75% / 25% ("hey there" ×24) and wordiest (11.4 words/message). DeepSeek's "yo u guys open rn"
+    openers make DELIVERY_QUESTION its third-largest intent (54 vs 14–18).
 
 ## M3 so far (2026-10-15)
 

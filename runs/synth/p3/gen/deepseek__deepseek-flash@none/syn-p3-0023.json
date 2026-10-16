@@ -1,0 +1,31 @@
+{
+ "key": "syn-p3-0023",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"messages\": [\n    {\n      \"role\": \"customer\",\n      \"text\": \"Hey, I need to get a delivery order in. I'm working from home and pretty swamped, so this is a lifesaver.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Hi! Happy to help. What can I get started for you?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"Ok, so first, 3 orders of Garlic Knots, 6 pieces each. Then I also need a Personal 8-inch Cheese Pizza and 2 Diet Cokes in the 20 oz bottles. Delivering to 580 Glenwood Blvd, side entrance.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Got it — let me read that back to you: 3 orders of Garlic Knots (6 pieces each), 1 Personal 8-inch Cheese Pizza, and 2 Diet Cokes (Bottle 20 oz). Delivery to 580 Glenwood Blvd, side entrance. Does that look right?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"Yes, that's all correct, but actually can you make the Garlic Knots just 2 orders instead of 3? Sorry, typo on my end.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"No problem at all! Just to confirm the update: 2 orders of Garlic Knots (6 pieces each), 1 Personal 8-inch Cheese Pizza, and 2 Diet Cokes (Bottle 20 oz). Delivery to 580 Glenwood Blvd, side entrance. That's the final order, right?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"Yes, that's it. Thanks so much!\"\n    }\n  ]\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2254,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 385,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2811.6484149941243,
+  "cost_micros": 269,
+  "at": "2026-10-16T15:08:06.418268+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2254,
+   "completion_tokens": 385,
+   "total_tokens": 2639,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 206
+  }
+ }
+}

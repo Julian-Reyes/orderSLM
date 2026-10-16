@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$0.9965** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317) |
-| Remaining (of $10 ceiling) | $9.0035 |
+| Spent to date | **$1.5122** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157) |
+| Remaining (of $10 ceiling) | $8.4878 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -31,6 +31,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Mini-pilot labels, 14 chats, `teacher-label@0.1` (estimate $0.0343) | 151,044 / 7,362 | 0.010185 | recorded usage × verified price | `runs/synth/p1` |
 | 2026-10-16 | M4 | same 3 generators | Second mini-pilot after fixes (cards 0.2, `synth-write@0.2`), 5 each | 25,285 / 2,769 | 0.005425 | recorded usage × verified price | `runs/synth/p2` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Second mini-pilot labels, 15 chats, `teacher-label@0.2` | 152,730 / 8,144 | 0.010055 | recorded usage × verified price | `runs/synth/p2` |
+| 2026-10-16 | M4 | DeepSeek 200, Gemini 200, Haiku 100 | Pilot generation, 500 cards (cards 0.3, `synth-write@0.2`; estimate $0.7717, projection ~$0.25) | 891,554 / 84,215 | 0.188789 | recorded usage × verified price | `runs/synth/p3` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Pilot labels, 498 chats, `teacher-label@0.2` (estimate $1.2052, projection ~$0.35) | 5,246,079 / 265,331 | 0.326883 | recorded usage × verified price | `runs/synth/p3` |
 
 ## Prepaid credit (purchases, not spend)
 
