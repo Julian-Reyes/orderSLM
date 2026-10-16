@@ -56,7 +56,10 @@ from orderslm.schema.synthetic import LabeledConversation
 from .dataset import load_eval_split
 from .stats import wilson
 
-AUDIT_VERSION = "label-audit@0.2"  # 0.2 (dev): cancelled / no-order / unclear-item wording
+AUDIT_VERSION = (
+    "label-audit@0.3"  # 0.2 (dev): cancelled / no-order / unclear-item wording; 0.3 (train review):
+)
+# an earlier order the customer describes is not part of the record
 EXPERIMENT = "label-audit"
 OVER_LIMIT_MICROS = 2_000_000
 CHARS_PER_TOKEN = 3.5
@@ -64,8 +67,9 @@ INTENT_PROMPT = "What does customer message [{i}] do, read in the context of the
 ORDER_PROMPT = (
     "Does the record below match the chat: the same items, quantities, sizes and options after any changes, the same "
     "pickup or delivery and payment, and the same status (still open, confirmed or cancelled)? Something the customer "
-    "never said is listed as 'not stated', and that is not a mismatch. If the record says no order was placed, answer "
-    "yes only if the customer ordered nothing in this chat. Answer yes only if everything matches."
+    "never said is listed as 'not stated', and that is not a mismatch. If the record says no new order was placed, "
+    "answer yes if the customer ordered nothing new in this chat: describing or asking about an earlier order is not "
+    "ordering. Answer yes only if everything matches."
 )
 LABEL_OPTIONS = [Option(id=k.value, description=v) for k, v in LABEL_DESCRIPTIONS.items()]
 
@@ -124,7 +128,10 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
 
 def order_text(out: ExtractionOutput | None, menu: MenuCatalog) -> str:
     if out is None or not out.items:
-        return "No order was placed in this chat."
+        return (
+            "No new order was placed in this chat. An order the customer placed before this chat (one they describe, "
+            "ask about or complain about) is not part of this record."
+        )
     unclear = {
         m.line_id
         for m in out.missing_or_ambiguous

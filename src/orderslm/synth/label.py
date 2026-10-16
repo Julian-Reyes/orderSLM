@@ -25,7 +25,7 @@ from orderslm.schema.menu import MenuCatalog
 from orderslm.schema.routing import LABEL_DESCRIPTIONS
 from orderslm.schema.synthetic import LabeledConversation, PlannedItem, SynthCard
 
-LABEL_PROMPT_VERSION = "teacher-label@0.6"  # 0.2: answering a size question is PLACE_ORDER; 0.3 (p3 audit): PLACE vs MODIFY by "adds vs changes", answers take the request's label, garbled text is UNKNOWN with no items; 0.4: an answer keeps its own request's label, additions after a confirm are MODIFY; 0.5 (Julian): order announcements are SMALL_TALK, additions to a placed order add no items; 0.6 (Julian): a yes to any read-back is CONFIRM, details after a confirm stay PLACE
+LABEL_PROMPT_VERSION = "teacher-label@0.7"  # 0.2: answering a size question is PLACE_ORDER; 0.3 (p3 audit): PLACE vs MODIFY by "adds vs changes", answers take the request's label, garbled text is UNKNOWN with no items; 0.4: an answer keeps its own request's label, additions after a confirm are MODIFY; 0.5 (Julian): order announcements are SMALL_TALK, additions to a placed order add no items; 0.6 (Julian): a yes to any read-back is CONFIRM, details after a confirm stay PLACE; 0.7 (audit review): follow-ups keep the request's label, "did the payment go through" is PAYMENT_CLAIM
 TEACHER = "openai/gpt-6-luna@low"  # Julian, 2026-10-15 (docs/TEACHER_BAKEOFF.md)
 MAX_OUTPUT_TOKENS = 16000
 

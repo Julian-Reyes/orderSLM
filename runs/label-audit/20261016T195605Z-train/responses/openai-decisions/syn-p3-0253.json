@@ -1,0 +1,107 @@
+{
+ "id": "syn-p3-0253",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "PLACE_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.85,
+    "probabilities": {
+     "PLACE_ORDER": 0.86,
+     "MODIFY_ORDER": 0.02,
+     "CANCEL_ORDER": 0.01,
+     "CONFIRM_ORDER": 0.01,
+     "MENU_QUESTION": 0.02,
+     "DELIVERY_QUESTION": 0.01,
+     "PAYMENT_QUESTION": 0.01,
+     "PAYMENT_CLAIM": 0.0,
+     "ORDER_STATUS": 0.01,
+     "ORDER_PROBLEM": 0.0,
+     "REFUND_REQUEST": 0.01,
+     "HUMAN_REQUEST": 0.0,
+     "SMALL_TALK": 0.01,
+     "OUT_OF_SCOPE": 0.01,
+     "UNKNOWN": 0.02
+    },
+    "refused": false
+   },
+   "intent_m2": {
+    "name": "intent_m2",
+    "type": "choice",
+    "choice": "MENU_QUESTION",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.38,
+    "probabilities": {
+     "PLACE_ORDER": 0.34,
+     "MODIFY_ORDER": 0.07,
+     "CANCEL_ORDER": 0.01,
+     "CONFIRM_ORDER": 0.01,
+     "MENU_QUESTION": 0.42,
+     "DELIVERY_QUESTION": 0.02,
+     "PAYMENT_QUESTION": 0.02,
+     "PAYMENT_CLAIM": 0.03,
+     "ORDER_STATUS": 0.01,
+     "ORDER_PROBLEM": 0.01,
+     "REFUND_REQUEST": 0.01,
+     "HUMAN_REQUEST": 0.01,
+     "SMALL_TALK": 0.01,
+     "OUT_OF_SCOPE": 0.01,
+     "UNKNOWN": 0.02
+    },
+    "refused": false
+   },
+   "intent_m4": {
+    "name": "intent_m4",
+    "type": "choice",
+    "choice": "PLACE_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.46,
+    "probabilities": {
+     "PLACE_ORDER": 0.5,
+     "MODIFY_ORDER": 0.2,
+     "CANCEL_ORDER": 0.02,
+     "CONFIRM_ORDER": 0.13,
+     "MENU_QUESTION": 0.04,
+     "DELIVERY_QUESTION": 0.01,
+     "PAYMENT_QUESTION": 0.01,
+     "PAYMENT_CLAIM": 0.0,
+     "ORDER_STATUS": 0.0,
+     "ORDER_PROBLEM": 0.0,
+     "REFUND_REQUEST": 0.01,
+     "HUMAN_REQUEST": 0.01,
+     "SMALL_TALK": 0.03,
+     "OUT_OF_SCOPE": 0.02,
+     "UNKNOWN": 0.02
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1583,
+   "output_tokens": 0
+  },
+  "latency_ms": 245.11952098691836,
+  "cost_micros": 159,
+  "cached": false
+ }
+}

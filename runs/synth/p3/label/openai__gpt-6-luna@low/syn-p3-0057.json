@@ -1,40 +1,42 @@
 {
  "key": "syn-p3-0057",
  "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"bagel\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one breakfast sandwich on a bagel\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"when we get there\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"yep that's perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coffee_pastry_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[{\"slot_id\":\"drink\",\"menu_item_id\":\"drip_coffee\",\"variant_id\":null},{\"slot_id\":\"pastry\",\"menu_item_id\":\"croissant\",\"variant_id\":\"plain\"}],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one of the coffee & pastry combos\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"bagel\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one breakfast sandwich on a bagel\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"when we get there\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"yep that's perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10380,
-   "cached_input_tokens": 7673,
+   "input_tokens": 10542,
+   "cached_input_tokens": 7835,
    "cache_write_tokens": 0,
-   "output_tokens": 489,
-   "reasoning_tokens": 131
+   "output_tokens": 854,
+   "reasoning_tokens": 377
   },
-  "latency_ms": 5278.19890898536,
-  "cost_micros": 592,
-  "at": "2026-10-16T17:07:31.354250+00:00",
+  "latency_ms": 10558.44707301003,
+  "cost_micros": 777,
+  "at": "2026-10-16T19:53:54.481684+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10380,
-   "completion_tokens": 489,
-   "total_tokens": 10869,
+   "prompt_tokens": 10542,
+   "completion_tokens": 854,
+   "total_tokens": 11396,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7835,
     "cache_write_tokens": 2704,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 131,
+    "reasoning_tokens": 377,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
- },
- "versions": {
-  "label_prompt": "teacher-label@0.5"
  }
 }

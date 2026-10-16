@@ -1,40 +1,42 @@
 {
  "key": "syn-b1-0581",
  "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_STATUS\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"i paid online\"},{\"message_index\":2,\"quote\":\"i sent the money on the app\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Jordan\",\"evidence\":[{\"message_index\":2,\"quote\":\"jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"i paid online\"},{\"message_index\":2,\"quote\":\"i sent the money on the app\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"jordan\",\"evidence\":[{\"message_index\":2,\"quote\":\"jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12538,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12700,
+   "cached_input_tokens": 7835,
    "cache_write_tokens": 0,
-   "output_tokens": 463,
-   "reasoning_tokens": 216
+   "output_tokens": 400,
+   "reasoning_tokens": 149
   },
-  "latency_ms": 6165.841170004569,
-  "cost_micros": 795,
-  "at": "2026-10-16T16:38:48.334618+00:00",
+  "latency_ms": 4646.2215789943,
+  "cost_micros": 765,
+  "at": "2026-10-16T19:54:46.041186+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12538,
-   "completion_tokens": 463,
-   "total_tokens": 13001,
+   "prompt_tokens": 12700,
+   "completion_tokens": 400,
+   "total_tokens": 13100,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7835,
     "cache_write_tokens": 4862,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 216,
+    "reasoning_tokens": 149,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
- },
- "versions": {
-  "label_prompt": "teacher-label@0.5"
  }
 }

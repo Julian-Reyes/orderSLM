@@ -1,0 +1,38 @@
+{
+ "reviewer": "Claude at Julian's request (2026-10-16), not a human review",
+ "order_flags_by_both": {
+  "count": 13,
+  "real_teacher_errors": [
+   "syn-b1-0356 (excluded)",
+   "syn-p3-0160 (excluded)"
+  ],
+  "follows_labeling_rules": [
+   "syn-p3-0115",
+   "syn-b1-0264",
+   "syn-b1-0711",
+   "syn-b1-1091",
+   "syn-b1-1234",
+   "syn-m1-0033",
+   "syn-m1-0282"
+  ],
+  "debatable": [
+   "syn-m1-0044"
+  ],
+  "not_checked": [
+   "syn-b1-0857",
+   "syn-b1-1209",
+   "syn-m1-0039"
+  ]
+ },
+ "before_after_vs_first_train_audit": {
+  "orders_flagged_by_both": [
+   31,
+   13
+  ],
+  "intent_messages_both_disagree": [
+   425,
+   374
+  ]
+ },
+ "changes_between": "audit wording v0.2\u2192v0.3 (earlier orders not part of the record); 67 chats relabeled with teacher-label@0.7"
+}

@@ -1,40 +1,42 @@
 {
  "key": "syn-m1-0085",
  "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PAYMENT_QUESTION\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":5,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":7,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":1,\"quote\":\"I paid online\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":5,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":1,\"quote\":\"I paid online\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 16133,
-   "cached_input_tokens": 7673,
+   "input_tokens": 16295,
+   "cached_input_tokens": 7835,
    "cache_write_tokens": 0,
-   "output_tokens": 557,
-   "reasoning_tokens": 267
+   "output_tokens": 433,
+   "reasoning_tokens": 141
   },
-  "latency_ms": 7027.48219697969,
-  "cost_micros": 1202,
-  "at": "2026-10-16T16:35:37.107620+00:00",
+  "latency_ms": 5304.062237002654,
+  "cost_micros": 1141,
+  "at": "2026-10-16T19:55:28.036848+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 16133,
-   "completion_tokens": 557,
-   "total_tokens": 16690,
+   "prompt_tokens": 16295,
+   "completion_tokens": 433,
+   "total_tokens": 16728,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7835,
     "cache_write_tokens": 8457,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 267,
+    "reasoning_tokens": 141,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
- },
- "versions": {
-  "label_prompt": "teacher-label@0.5"
  }
 }

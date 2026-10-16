@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-018",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"PAYMENT_QUESTION\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PAYMENT_QUESTION\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [],\n    \"fulfillment\": {\n      \"method\": \"unknown\",\n      \"method_evidence\": [],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_mentioned\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9544,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 391,
+   "reasoning_tokens": 58
+  },
+  "latency_ms": 4527.1521960094105,
+  "cost_micros": 445,
+  "at": "2026-10-16T19:51:39.194975+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9544,
+   "completion_tokens": 391,
+   "total_tokens": 9935,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1706,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 58,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

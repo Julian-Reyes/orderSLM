@@ -1,40 +1,42 @@
 {
  "key": "syn-b1-0771",
  "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_STATUS\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_STATUS\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"paid for it\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Coach Reynolds\",\"evidence\":[{\"message_index\":2,\"quote\":\"Coach Reynolds\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"paid for it\"},{\"message_index\":0,\"quote\":\"whether my payment went through\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12537,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12699,
+   "cached_input_tokens": 7835,
    "cache_write_tokens": 0,
-   "output_tokens": 585,
-   "reasoning_tokens": 355
+   "output_tokens": 233,
+   "reasoning_tokens": 0
   },
-  "latency_ms": 6678.47241400159,
-  "cost_micros": 856,
-  "at": "2026-10-16T16:43:22.544516+00:00",
+  "latency_ms": 2744.567048008321,
+  "cost_micros": 682,
+  "at": "2026-10-16T19:54:35.041211+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12537,
-   "completion_tokens": 585,
-   "total_tokens": 13122,
+   "prompt_tokens": 12699,
+   "completion_tokens": 233,
+   "total_tokens": 12932,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7835,
     "cache_write_tokens": 4861,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 355,
+    "reasoning_tokens": 0,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
- },
- "versions": {
-  "label_prompt": "teacher-label@0.5"
  }
 }

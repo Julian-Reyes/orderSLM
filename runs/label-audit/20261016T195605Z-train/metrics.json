@@ -1,0 +1,196 @@
+{
+  "jev": {
+    "intent_messages": 8310,
+    "intent_agree_primary": 7355,
+    "intent_agree_rate": 0.8851,
+    "intent_agree_ci95": [
+      0.8780423488493636,
+      0.8917582208415478
+    ],
+    "intent_agree_primary_or_secondary": 7473,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 228
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 134
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 126
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CONFIRM_ORDER",
+        "count": 98
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 29
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 25
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 24
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "OUT_OF_SCOPE",
+        "count": 24
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 23
+      },
+      {
+        "expected": "ORDER_PROBLEM",
+        "provider": "REFUND_REQUEST",
+        "count": 21
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "MODIFY_ORDER",
+        "count": 16
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "PLACE_ORDER",
+        "count": 16
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 15
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 13
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 8
+      }
+    ],
+    "orders_expected_ok": 2356,
+    "order_flagged": 45,
+    "order_flag_rate": 0.0191,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 4745335,
+    "cost_micros": 200426,
+    "latency_p50_ms": 271,
+    "latency_p95_ms": 386
+  },
+  "openai-decisions": {
+    "intent_messages": 8310,
+    "intent_agree_primary": 7402,
+    "intent_agree_rate": 0.8907,
+    "intent_agree_ci95": [
+      0.883844952874229,
+      0.8972620626840176
+    ],
+    "intent_agree_primary_or_secondary": 7547,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 170
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 135
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 74
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "SMALL_TALK",
+        "count": 55
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 38
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 38
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 37
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 34
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 29
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 20
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 19
+      },
+      {
+        "expected": "ORDER_PROBLEM",
+        "provider": "SMALL_TALK",
+        "count": 18
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "PLACE_ORDER",
+        "count": 17
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "UNKNOWN",
+        "count": 16
+      },
+      {
+        "expected": "ORDER_STATUS",
+        "provider": "SMALL_TALK",
+        "count": 16
+      }
+    ],
+    "orders_expected_ok": 2356,
+    "order_flagged": 24,
+    "order_flag_rate": 0.0102,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 4047412,
+    "cost_micros": 405666,
+    "latency_p50_ms": 327,
+    "latency_p95_ms": 1378
+  }
+}

@@ -1,0 +1,1298 @@
+{
+  "batches": {
+    "p1": {
+      "what": "mini-pilot 1",
+      "by_generator": {
+        "anthropic/claude-haiku-5-5@off-low": {
+          "cards": 100,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {},
+          "labeled": 5,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 5,
+            "all_agree": 4,
+            "flags": {
+              "labels": 1
+            }
+          },
+          "generation_cost_usd": 0.00162,
+          "label_cost_usd_current_labels": 0.003054
+        },
+        "deepseek/deepseek-flash@none": {
+          "cards": 200,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 1
+          },
+          "labeled": 4,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 4,
+            "all_agree": 4,
+            "flags": {}
+          },
+          "generation_cost_usd": 0.00101,
+          "label_cost_usd_current_labels": 0.003375
+        },
+        "google/gemini-3.1-flash-lite@minimal": {
+          "cards": 200,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {},
+          "labeled": 5,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 5,
+            "all_agree": 4,
+            "flags": {
+              "items": 1,
+              "labels": 1
+            }
+          },
+          "generation_cost_usd": 0.00344,
+          "label_cost_usd_current_labels": 0.003756
+        }
+      },
+      "label_prompt_versions": {
+        "teacher-label@0.1": 14
+      },
+      "relabeled_chats": {},
+      "calls_cost_usd": 0.016255
+    },
+    "p2": {
+      "what": "mini-pilot 2",
+      "by_generator": {
+        "anthropic/claude-haiku-5-5@off-low": {
+          "cards": 100,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 1
+          },
+          "labeled": 5,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 5,
+            "all_agree": 3,
+            "flags": {
+              "labels": 1,
+              "item_details": 1
+            }
+          },
+          "generation_cost_usd": 0.001675,
+          "label_cost_usd_current_labels": 0.00321
+        },
+        "deepseek/deepseek-flash@none": {
+          "cards": 200,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 2
+          },
+          "labeled": 5,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 5,
+            "all_agree": 5,
+            "flags": {}
+          },
+          "generation_cost_usd": 0.001035,
+          "label_cost_usd_current_labels": 0.003192
+        },
+        "google/gemini-3.1-flash-lite@minimal": {
+          "cards": 200,
+          "generated": 5,
+          "kept": 5,
+          "generation_drops": {},
+          "repairs": {},
+          "labeled": 5,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 5,
+            "all_agree": 2,
+            "flags": {
+              "labels": 2,
+              "item_details": 1
+            }
+          },
+          "generation_cost_usd": 0.002715,
+          "label_cost_usd_current_labels": 0.003653
+        }
+      },
+      "label_prompt_versions": {
+        "teacher-label@0.2": 15
+      },
+      "relabeled_chats": {},
+      "calls_cost_usd": 0.01548
+    },
+    "p3": {
+      "what": "pilot",
+      "by_generator": {
+        "anthropic/claude-haiku-5-5@off-low": {
+          "cards": 100,
+          "generated": 100,
+          "kept": 100,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 8
+          },
+          "labeled": 99,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 1
+          },
+          "card_agreement": {
+            "labeled": 99,
+            "all_agree": 93,
+            "flags": {
+              "labels": 5,
+              "items": 1
+            }
+          },
+          "generation_cost_usd": 0.038316,
+          "label_cost_usd_current_labels": 0.069836
+        },
+        "deepseek/deepseek-flash@none": {
+          "cards": 200,
+          "generated": 200,
+          "kept": 198,
+          "generation_drops": {
+            "invalid_output": 2
+          },
+          "repairs": {
+            "trimmed_trailing_business_message": 47
+          },
+          "labeled": 196,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 1,
+            "check_failed: REMOVE_NOT_INCLUDED": 1
+          },
+          "card_agreement": {
+            "labeled": 196,
+            "all_agree": 186,
+            "flags": {
+              "labels": 8,
+              "items": 3
+            }
+          },
+          "generation_cost_usd": 0.02538,
+          "label_cost_usd_current_labels": 0.129301
+        },
+        "google/gemini-3.1-flash-lite@minimal": {
+          "cards": 200,
+          "generated": 200,
+          "kept": 200,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 9
+          },
+          "labeled": 199,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 1
+          },
+          "card_agreement": {
+            "labeled": 199,
+            "all_agree": 177,
+            "flags": {
+              "items": 8,
+              "labels": 14,
+              "item_details": 1
+            }
+          },
+          "generation_cost_usd": 0.125093,
+          "label_cost_usd_current_labels": 0.127748
+        }
+      },
+      "label_prompt_versions": {
+        "teacher-label@0.5": 395,
+        "teacher-label@0.6": 86,
+        "teacher-label@0.7": 13
+      },
+      "relabeled_chats": {
+        "v0.6": 86,
+        "v0.7": 13
+      },
+      "calls_cost_usd": 0.91668
+    },
+    "b1": {
+      "what": "bulk",
+      "by_generator": {
+        "anthropic/claude-haiku-5-5@off-low": {
+          "cards": 250,
+          "generated": 250,
+          "kept": 250,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 41
+          },
+          "labeled": 249,
+          "label_drops": {
+            "check_failed: REMOVE_NOT_INCLUDED": 1
+          },
+          "card_agreement": {
+            "labeled": 249,
+            "all_agree": 227,
+            "flags": {
+              "labels": 13,
+              "items": 8,
+              "item_details": 4
+            }
+          },
+          "generation_cost_usd": 0.089258,
+          "label_cost_usd_current_labels": 0.161334
+        },
+        "deepseek/deepseek-flash@none": {
+          "cards": 1000,
+          "generated": 1000,
+          "kept": 983,
+          "generation_drops": {
+            "invalid_output": 14,
+            "business_states_price": 2,
+            "near_duplicate_of": 1
+          },
+          "repairs": {
+            "trimmed_trailing_business_message": 227
+          },
+          "labeled": 974,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 3,
+            "invalid_contract": 4,
+            "check_failed: REMOVE_NOT_INCLUDED": 2
+          },
+          "card_agreement": {
+            "labeled": 974,
+            "all_agree": 926,
+            "flags": {
+              "items": 17,
+              "item_details": 6,
+              "labels": 34,
+              "decision": 1
+            }
+          },
+          "generation_cost_usd": 0.121443,
+          "label_cost_usd_current_labels": 0.626495
+        },
+        "google/gemini-3.1-flash-lite@minimal": {
+          "cards": 250,
+          "generated": 250,
+          "kept": 248,
+          "generation_drops": {
+            "business_states_price": 1,
+            "invalid_output": 1
+          },
+          "repairs": {
+            "trimmed_trailing_business_message": 9
+          },
+          "labeled": 248,
+          "label_drops": {},
+          "card_agreement": {
+            "labeled": 248,
+            "all_agree": 228,
+            "flags": {
+              "items": 8,
+              "labels": 13,
+              "item_details": 1
+            }
+          },
+          "generation_cost_usd": 0.160957,
+          "label_cost_usd_current_labels": 0.157151
+        }
+      },
+      "label_prompt_versions": {
+        "teacher-label@0.5": 1233,
+        "teacher-label@0.6": 193,
+        "teacher-label@0.7": 45
+      },
+      "relabeled_chats": {
+        "v0.6": 198,
+        "v0.7": 45
+      },
+      "calls_cost_usd": 1.49274
+    },
+    "m1": {
+      "what": "mega-menu",
+      "by_generator": {
+        "anthropic/claude-haiku-5-5@off-low": {
+          "cards": 66,
+          "generated": 66,
+          "kept": 66,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 8
+          },
+          "labeled": 65,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 1
+          },
+          "card_agreement": {
+            "labeled": 65,
+            "all_agree": 60,
+            "flags": {
+              "labels": 3,
+              "items": 2
+            }
+          },
+          "generation_cost_usd": 0.040194,
+          "label_cost_usd_current_labels": 0.078155
+        },
+        "deepseek/deepseek-flash@none": {
+          "cards": 264,
+          "generated": 264,
+          "kept": 262,
+          "generation_drops": {
+            "invalid_output": 2
+          },
+          "repairs": {
+            "trimmed_trailing_business_message": 58
+          },
+          "labeled": 261,
+          "label_drops": {
+            "check_failed: EVIDENCE_NOT_FOUND": 1
+          },
+          "card_agreement": {
+            "labeled": 261,
+            "all_agree": 245,
+            "flags": {
+              "items": 5,
+              "labels": 9,
+              "item_details": 4
+            }
+          },
+          "generation_cost_usd": 0.03299,
+          "label_cost_usd_current_labels": 0.306589
+        },
+        "google/gemini-3.1-flash-lite@minimal": {
+          "cards": 66,
+          "generated": 66,
+          "kept": 66,
+          "generation_drops": {},
+          "repairs": {
+            "trimmed_trailing_business_message": 3
+          },
+          "labeled": 65,
+          "label_drops": {
+            "invalid_contract": 1
+          },
+          "card_agreement": {
+            "labeled": 65,
+            "all_agree": 62,
+            "flags": {
+              "labels": 2,
+              "items": 1
+            }
+          },
+          "generation_cost_usd": 0.063977,
+          "label_cost_usd_current_labels": 0.07723
+        }
+      },
+      "label_prompt_versions": {
+        "teacher-label@0.5": 311,
+        "teacher-label@0.6": 71,
+        "teacher-label@0.7": 9
+      },
+      "relabeled_chats": {
+        "v0.6": 72,
+        "v0.7": 9
+      },
+      "calls_cost_usd": 0.701689
+    }
+  },
+  "training_set": {
+    "single_menu": 1963,
+    "mega_menu": 391,
+    "by_generator": {
+      "google/gemini-3.1-flash-lite@minimal": 512,
+      "anthropic/claude-haiku-5-5@off-low": 412,
+      "deepseek/deepseek-flash@none": 1430
+    },
+    "intents": {
+      "PLACE_ORDER": 3830,
+      "SMALL_TALK": 1553,
+      "CONFIRM_ORDER": 563,
+      "DELIVERY_QUESTION": 501,
+      "MODIFY_ORDER": 394,
+      "MENU_QUESTION": 376,
+      "ORDER_PROBLEM": 249,
+      "ORDER_STATUS": 191,
+      "HUMAN_REQUEST": 120,
+      "PAYMENT_QUESTION": 110,
+      "PAYMENT_CLAIM": 110,
+      "OUT_OF_SCOPE": 89,
+      "CANCEL_ORDER": 84,
+      "REFUND_REQUEST": 72,
+      "UNKNOWN": 54
+    },
+    "excluded": [
+      {
+        "id": "syn-p3-0160",
+        "batch": "p3",
+        "reason": "chat contradicts itself (card bug: swap onion rings for onion rings, fixed in cards 0.4)",
+        "found_by": "label audit 2026-10-16, both providers"
+      },
+      {
+        "id": "syn-b1-0356",
+        "batch": "b1",
+        "reason": "teacher adds a drip coffee never ordered (from 'NEED COFFEE'); same label after relabel with v0.7",
+        "found_by": "label audit 2026-10-16, both providers (before and after fixes)"
+      }
+    ]
+  },
+  "label_prompt_on_dev": [
+    {
+      "run": "runs/label-dev/20261016T153544Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.2",
+      "orders_fully_correct": 91,
+      "orders": 91,
+      "items_found": 146,
+      "items_extra": 0,
+      "items_missed": 0,
+      "intents_correct": 263,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {},
+      "cost_usd": 0.056934
+    },
+    {
+      "run": "runs/label-dev/20261016T160210Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.3",
+      "orders_fully_correct": 91,
+      "orders": 91,
+      "items_found": 146,
+      "items_extra": 0,
+      "items_missed": 0,
+      "intents_correct": 263,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {},
+      "cost_usd": 0.057721
+    },
+    {
+      "run": "runs/label-dev/20261016T160414Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.4",
+      "orders_fully_correct": 90,
+      "orders": 91,
+      "items_found": 145,
+      "items_extra": 1,
+      "items_missed": 1,
+      "intents_correct": 264,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {},
+      "cost_usd": 0.057834
+    },
+    {
+      "run": "runs/label-dev/20261016T161207Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.5",
+      "orders_fully_correct": 91,
+      "orders": 91,
+      "items_found": 146,
+      "items_extra": 0,
+      "items_missed": 0,
+      "intents_correct": 265,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {},
+      "cost_usd": 0.057376
+    },
+    {
+      "run": "runs/label-dev/20261016T173049Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.6",
+      "orders_fully_correct": 91,
+      "orders": 91,
+      "items_found": 146,
+      "items_extra": 0,
+      "items_missed": 0,
+      "intents_correct": 265,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {},
+      "cost_usd": 0.058087
+    },
+    {
+      "run": "runs/label-dev/20261016T195121Z-openai__gpt-6-luna@low",
+      "label_prompt": "teacher-label@0.7",
+      "orders_fully_correct": 90,
+      "orders": 91,
+      "items_found": 144,
+      "items_extra": 0,
+      "items_missed": 2,
+      "intents_correct": 259,
+      "intent_messages": 268,
+      "labels_dropped_by_checks": {
+        "invalid_contract": 1
+      },
+      "cost_usd": 0.057745
+    }
+  ],
+  "label_audits": [
+    {
+      "run": "runs/label-audit/20261016T183925Z-dev",
+      "set": "dev",
+      "audit_version": "label-audit@0.1",
+      "cost_usd": 0.044358,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 256,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9552,
+          "order_flagged": 38,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.4176,
+          "planted": {
+            "added_modification": {
+              "caught": 59,
+              "of": 60,
+              "rate": 0.983
+            },
+            "dropped_modification": {
+              "caught": 12,
+              "of": 23,
+              "rate": 0.522
+            },
+            "extra_item": {
+              "caught": 64,
+              "of": 64,
+              "rate": 1.0
+            },
+            "fulfillment_flip": {
+              "caught": 48,
+              "of": 49,
+              "rate": 0.98
+            },
+            "missing_item": {
+              "caught": 48,
+              "of": 54,
+              "rate": 0.889
+            },
+            "swapped_item": {
+              "caught": 52,
+              "of": 54,
+              "rate": 0.963
+            },
+            "wrong_payment": {
+              "caught": 53,
+              "of": 53,
+              "rate": 1.0
+            },
+            "wrong_quantity": {
+              "caught": 61,
+              "of": 64,
+              "rate": 0.953
+            },
+            "wrong_size": {
+              "caught": 50,
+              "of": 52,
+              "rate": 0.962
+            }
+          },
+          "planted_catch_rate": 0.945,
+          "input_tokens": 368163,
+          "cost_micros": 15746,
+          "latency_p50_ms": 251,
+          "latency_p95_ms": 342,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 258,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9627,
+          "order_flagged": 30,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.3297,
+          "planted": {
+            "added_modification": {
+              "caught": 42,
+              "of": 60,
+              "rate": 0.7
+            },
+            "dropped_modification": {
+              "caught": 9,
+              "of": 23,
+              "rate": 0.391
+            },
+            "extra_item": {
+              "caught": 60,
+              "of": 64,
+              "rate": 0.938
+            },
+            "fulfillment_flip": {
+              "caught": 49,
+              "of": 49,
+              "rate": 1.0
+            },
+            "missing_item": {
+              "caught": 54,
+              "of": 54,
+              "rate": 1.0
+            },
+            "swapped_item": {
+              "caught": 49,
+              "of": 54,
+              "rate": 0.907
+            },
+            "wrong_payment": {
+              "caught": 51,
+              "of": 53,
+              "rate": 0.962
+            },
+            "wrong_quantity": {
+              "caught": 61,
+              "of": 64,
+              "rate": 0.953
+            },
+            "wrong_size": {
+              "caught": 45,
+              "of": 52,
+              "rate": 0.865
+            }
+          },
+          "planted_catch_rate": 0.8879,
+          "input_tokens": 283513,
+          "cost_micros": 28612,
+          "latency_p50_ms": 282,
+          "latency_p95_ms": 614,
+          "errors": 0
+        }
+      },
+      "missed_by_all_examples": {
+        "dropped_modification": [
+          "a-dev-007--dropped-modification",
+          "a-dev-008--dropped-modification",
+          "a-dev-013--dropped-modification"
+        ],
+        "wrong_quantity": [
+          "a-dev-035--wrong-quantity"
+        ],
+        "wrong_size": [
+          "a-dev-068--wrong-size"
+        ],
+        "swapped_item": [
+          "a-dev-071--swapped-item"
+        ]
+      }
+    },
+    {
+      "run": "runs/label-audit/20261016T184944Z-dev",
+      "set": "dev",
+      "audit_version": "label-audit@0.1",
+      "cost_usd": 0.0,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 256,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9552,
+          "order_flagged": 38,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.4176,
+          "planted": {
+            "added_modification": {
+              "caught": 59,
+              "of": 60,
+              "rate": 0.983
+            },
+            "dropped_modification": {
+              "caught": 12,
+              "of": 23,
+              "rate": 0.522
+            },
+            "extra_item": {
+              "caught": 64,
+              "of": 64,
+              "rate": 1.0
+            },
+            "fulfillment_flip": {
+              "caught": 48,
+              "of": 49,
+              "rate": 0.98
+            },
+            "missing_item": {
+              "caught": 48,
+              "of": 54,
+              "rate": 0.889
+            },
+            "swapped_item": {
+              "caught": 52,
+              "of": 54,
+              "rate": 0.963
+            },
+            "wrong_payment": {
+              "caught": 53,
+              "of": 53,
+              "rate": 1.0
+            },
+            "wrong_quantity": {
+              "caught": 61,
+              "of": 64,
+              "rate": 0.953
+            },
+            "wrong_size": {
+              "caught": 50,
+              "of": 52,
+              "rate": 0.962
+            }
+          },
+          "planted_catch_rate": 0.945,
+          "input_tokens": 368163,
+          "cost_micros": 0,
+          "latency_p50_ms": 251,
+          "latency_p95_ms": 342,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 258,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9627,
+          "order_flagged": 30,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.3297,
+          "planted": {
+            "added_modification": {
+              "caught": 42,
+              "of": 60,
+              "rate": 0.7
+            },
+            "dropped_modification": {
+              "caught": 9,
+              "of": 23,
+              "rate": 0.391
+            },
+            "extra_item": {
+              "caught": 60,
+              "of": 64,
+              "rate": 0.938
+            },
+            "fulfillment_flip": {
+              "caught": 49,
+              "of": 49,
+              "rate": 1.0
+            },
+            "missing_item": {
+              "caught": 54,
+              "of": 54,
+              "rate": 1.0
+            },
+            "swapped_item": {
+              "caught": 49,
+              "of": 54,
+              "rate": 0.907
+            },
+            "wrong_payment": {
+              "caught": 51,
+              "of": 53,
+              "rate": 0.962
+            },
+            "wrong_quantity": {
+              "caught": 61,
+              "of": 64,
+              "rate": 0.953
+            },
+            "wrong_size": {
+              "caught": 45,
+              "of": 52,
+              "rate": 0.865
+            }
+          },
+          "planted_catch_rate": 0.8879,
+          "input_tokens": 283513,
+          "cost_micros": 0,
+          "latency_p50_ms": 282,
+          "latency_p95_ms": 614,
+          "errors": 0
+        }
+      },
+      "missed_by_all_examples": {
+        "dropped_modification": [
+          "a-dev-007--dropped-modification",
+          "a-dev-008--dropped-modification",
+          "a-dev-013--dropped-modification"
+        ],
+        "wrong_quantity": [
+          "a-dev-035--wrong-quantity"
+        ],
+        "wrong_size": [
+          "a-dev-068--wrong-size"
+        ],
+        "swapped_item": [
+          "a-dev-071--swapped-item"
+        ]
+      }
+    },
+    {
+      "run": "runs/label-audit/20261016T185011Z-dev",
+      "set": "dev",
+      "audit_version": "label-audit@0.2",
+      "cost_usd": 0.048166,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 256,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9552,
+          "order_flagged": 11,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.1209,
+          "planted": {
+            "added_modification": {
+              "caught": 54,
+              "of": 60,
+              "rate": 0.9
+            },
+            "dropped_modification": {
+              "caught": 8,
+              "of": 23,
+              "rate": 0.348
+            },
+            "extra_item": {
+              "caught": 64,
+              "of": 64,
+              "rate": 1.0
+            },
+            "fulfillment_flip": {
+              "caught": 48,
+              "of": 49,
+              "rate": 0.98
+            },
+            "missing_item": {
+              "caught": 43,
+              "of": 54,
+              "rate": 0.796
+            },
+            "swapped_item": {
+              "caught": 52,
+              "of": 54,
+              "rate": 0.963
+            },
+            "wrong_payment": {
+              "caught": 51,
+              "of": 53,
+              "rate": 0.962
+            },
+            "wrong_quantity": {
+              "caught": 56,
+              "of": 64,
+              "rate": 0.875
+            },
+            "wrong_size": {
+              "caught": 44,
+              "of": 52,
+              "rate": 0.846
+            }
+          },
+          "planted_catch_rate": 0.8879,
+          "input_tokens": 395085,
+          "cost_micros": 16875,
+          "latency_p50_ms": 253,
+          "latency_p95_ms": 349,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 258,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9627,
+          "order_flagged": 2,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.022,
+          "planted": {
+            "added_modification": {
+              "caught": 37,
+              "of": 60,
+              "rate": 0.617
+            },
+            "dropped_modification": {
+              "caught": 5,
+              "of": 23,
+              "rate": 0.217
+            },
+            "extra_item": {
+              "caught": 57,
+              "of": 64,
+              "rate": 0.891
+            },
+            "fulfillment_flip": {
+              "caught": 47,
+              "of": 49,
+              "rate": 0.959
+            },
+            "missing_item": {
+              "caught": 50,
+              "of": 54,
+              "rate": 0.926
+            },
+            "swapped_item": {
+              "caught": 45,
+              "of": 54,
+              "rate": 0.833
+            },
+            "wrong_payment": {
+              "caught": 51,
+              "of": 53,
+              "rate": 0.962
+            },
+            "wrong_quantity": {
+              "caught": 57,
+              "of": 64,
+              "rate": 0.891
+            },
+            "wrong_size": {
+              "caught": 40,
+              "of": 52,
+              "rate": 0.769
+            }
+          },
+          "planted_catch_rate": 0.8224,
+          "input_tokens": 310379,
+          "cost_micros": 31291,
+          "latency_p50_ms": 276,
+          "latency_p95_ms": 640,
+          "errors": 0
+        }
+      },
+      "missed_by_all_examples": {
+        "added_modification": [
+          "a-dev-002--added-modification",
+          "a-dev-025--added-modification",
+          "a-dev-049--added-modification"
+        ],
+        "dropped_modification": [
+          "a-dev-004--dropped-modification",
+          "a-dev-007--dropped-modification",
+          "a-dev-008--dropped-modification"
+        ],
+        "wrong_size": [
+          "a-dev-004--wrong-size",
+          "a-dev-019--wrong-size",
+          "a-dev-024--wrong-size"
+        ],
+        "missing_item": [
+          "a-dev-038--missing-item",
+          "a-dev-075--missing-item"
+        ],
+        "wrong_quantity": [
+          "a-dev-038--wrong-quantity"
+        ],
+        "swapped_item": [
+          "a-dev-071--swapped-item"
+        ],
+        "wrong_payment": [
+          "a-dev-079--wrong-payment"
+        ],
+        "fulfillment_flip": [
+          "a-dev-085--fulfillment-flip"
+        ]
+      }
+    },
+    {
+      "run": "runs/label-audit/20261016T185956Z-train",
+      "set": "train",
+      "audit_version": "label-audit@0.2",
+      "cost_usd": 0.599268,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 7309,
+          "intent_messages": 8310,
+          "intent_agree_rate": 0.8795,
+          "order_flagged": 155,
+          "orders_expected_ok": 2356,
+          "order_flag_rate": 0.0658,
+          "planted": {},
+          "planted_catch_rate": null,
+          "input_tokens": 4696961,
+          "cost_micros": 198409,
+          "latency_p50_ms": 260,
+          "latency_p95_ms": 354,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 7341,
+          "intent_messages": 8310,
+          "intent_agree_rate": 0.8834,
+          "order_flagged": 40,
+          "orders_expected_ok": 2356,
+          "order_flag_rate": 0.017,
+          "planted": {},
+          "planted_catch_rate": null,
+          "input_tokens": 3999038,
+          "cost_micros": 400859,
+          "latency_p50_ms": 348,
+          "latency_p95_ms": 1014,
+          "errors": 0
+        }
+      },
+      "chats_flagged_by_any": 946,
+      "chats_flagged_by_all": 485,
+      "hand_check": {
+        "reviewer": "Claude at Julian's request (2026-10-16), not a human review",
+        "order_flags_by_both": {
+          "checked": 31,
+          "real_teacher_errors": 7,
+          "false_alarm_earlier_order_described": 17,
+          "follows_labeling_rules": 7,
+          "precision_overall": 0.23,
+          "precision_chats_with_order": 0.5,
+          "real_error_ids": [
+            "syn-p3-0057",
+            "syn-b1-0356",
+            "syn-m1-0019",
+            "syn-p3-0085",
+            "syn-b1-0711",
+            "syn-p3-0160",
+            "syn-b1-0264"
+          ]
+        },
+        "intent_flags_by_both": {
+          "messages": 425,
+          "chats": 351,
+          "sampled": 25,
+          "real_teacher_errors": "6-9",
+          "julian_conventions": 13,
+          "precision_range": [
+            0.24,
+            0.36
+          ]
+        },
+        "notes": "see review.md in this folder"
+      }
+    },
+    {
+      "run": "runs/label-audit/20261016T194620Z-dev",
+      "set": "dev",
+      "audit_version": "label-audit@0.3",
+      "cost_usd": 0.049218,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 257,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.959,
+          "order_flagged": 5,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.0549,
+          "planted": {
+            "added_modification": {
+              "caught": 54,
+              "of": 60,
+              "rate": 0.9
+            },
+            "dropped_modification": {
+              "caught": 6,
+              "of": 23,
+              "rate": 0.261
+            },
+            "extra_item": {
+              "caught": 64,
+              "of": 64,
+              "rate": 1.0
+            },
+            "fulfillment_flip": {
+              "caught": 48,
+              "of": 49,
+              "rate": 0.98
+            },
+            "missing_item": {
+              "caught": 46,
+              "of": 54,
+              "rate": 0.852
+            },
+            "swapped_item": {
+              "caught": 52,
+              "of": 54,
+              "rate": 0.963
+            },
+            "wrong_payment": {
+              "caught": 51,
+              "of": 53,
+              "rate": 0.962
+            },
+            "wrong_quantity": {
+              "caught": 56,
+              "of": 64,
+              "rate": 0.875
+            },
+            "wrong_size": {
+              "caught": 43,
+              "of": 52,
+              "rate": 0.827
+            }
+          },
+          "planted_catch_rate": 0.8879,
+          "input_tokens": 402582,
+          "cost_micros": 17185,
+          "latency_p50_ms": 261,
+          "latency_p95_ms": 358,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 258,
+          "intent_messages": 268,
+          "intent_agree_rate": 0.9627,
+          "order_flagged": 0,
+          "orders_expected_ok": 91,
+          "order_flag_rate": 0.0,
+          "planted": {
+            "added_modification": {
+              "caught": 27,
+              "of": 60,
+              "rate": 0.45
+            },
+            "dropped_modification": {
+              "caught": 4,
+              "of": 23,
+              "rate": 0.174
+            },
+            "extra_item": {
+              "caught": 53,
+              "of": 64,
+              "rate": 0.828
+            },
+            "fulfillment_flip": {
+              "caught": 48,
+              "of": 49,
+              "rate": 0.98
+            },
+            "missing_item": {
+              "caught": 50,
+              "of": 54,
+              "rate": 0.926
+            },
+            "swapped_item": {
+              "caught": 44,
+              "of": 54,
+              "rate": 0.815
+            },
+            "wrong_payment": {
+              "caught": 52,
+              "of": 53,
+              "rate": 0.981
+            },
+            "wrong_quantity": {
+              "caught": 55,
+              "of": 64,
+              "rate": 0.859
+            },
+            "wrong_size": {
+              "caught": 37,
+              "of": 52,
+              "rate": 0.712
+            }
+          },
+          "planted_catch_rate": 0.7822,
+          "input_tokens": 317876,
+          "cost_micros": 32033,
+          "latency_p50_ms": 238,
+          "latency_p95_ms": 615,
+          "errors": 0
+        }
+      },
+      "missed_by_all_examples": {
+        "added_modification": [
+          "a-dev-002--added-modification",
+          "a-dev-011--added-modification",
+          "a-dev-025--added-modification"
+        ],
+        "dropped_modification": [
+          "a-dev-004--dropped-modification",
+          "a-dev-007--dropped-modification",
+          "a-dev-008--dropped-modification"
+        ],
+        "wrong_size": [
+          "a-dev-004--wrong-size",
+          "a-dev-007--wrong-size",
+          "a-dev-013--wrong-size"
+        ],
+        "swapped_item": [
+          "a-dev-019--swapped-item",
+          "a-dev-071--swapped-item"
+        ],
+        "wrong_quantity": [
+          "a-dev-035--wrong-quantity",
+          "a-dev-038--wrong-quantity"
+        ],
+        "missing_item": [
+          "a-dev-038--missing-item",
+          "a-dev-083--missing-item"
+        ],
+        "fulfillment_flip": [
+          "a-dev-085--fulfillment-flip"
+        ]
+      }
+    },
+    {
+      "run": "runs/label-audit/20261016T195605Z-train",
+      "set": "train",
+      "audit_version": "label-audit@0.3",
+      "cost_usd": 0.606092,
+      "providers": {
+        "jev": {
+          "intent_agree_primary": 7355,
+          "intent_messages": 8310,
+          "intent_agree_rate": 0.8851,
+          "order_flagged": 45,
+          "orders_expected_ok": 2356,
+          "order_flag_rate": 0.0191,
+          "planted": {},
+          "planted_catch_rate": null,
+          "input_tokens": 4745335,
+          "cost_micros": 200426,
+          "latency_p50_ms": 271,
+          "latency_p95_ms": 386,
+          "errors": 0
+        },
+        "openai-decisions": {
+          "intent_agree_primary": 7402,
+          "intent_messages": 8310,
+          "intent_agree_rate": 0.8907,
+          "order_flagged": 24,
+          "orders_expected_ok": 2356,
+          "order_flag_rate": 0.0102,
+          "planted": {},
+          "planted_catch_rate": null,
+          "input_tokens": 4047412,
+          "cost_micros": 405666,
+          "latency_p50_ms": 327,
+          "latency_p95_ms": 1378,
+          "errors": 0
+        }
+      },
+      "chats_flagged_by_any": 845,
+      "chats_flagged_by_all": 419,
+      "hand_check": {
+        "reviewer": "Claude at Julian's request (2026-10-16), not a human review",
+        "order_flags_by_both": {
+          "count": 13,
+          "real_teacher_errors": [
+            "syn-b1-0356 (excluded)",
+            "syn-p3-0160 (excluded)"
+          ],
+          "follows_labeling_rules": [
+            "syn-p3-0115",
+            "syn-b1-0264",
+            "syn-b1-0711",
+            "syn-b1-1091",
+            "syn-b1-1234",
+            "syn-m1-0033",
+            "syn-m1-0282"
+          ],
+          "debatable": [
+            "syn-m1-0044"
+          ],
+          "not_checked": [
+            "syn-b1-0857",
+            "syn-b1-1209",
+            "syn-m1-0039"
+          ]
+        },
+        "before_after_vs_first_train_audit": {
+          "orders_flagged_by_both": [
+            31,
+            13
+          ],
+          "intent_messages_both_disagree": [
+            425,
+            374
+          ]
+        },
+        "changes_between": "audit wording v0.2\u2192v0.3 (earlier orders not part of the record); 67 chats relabeled with teacher-label@0.7"
+      }
+    }
+  ]
+}

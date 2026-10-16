@@ -1,0 +1,40 @@
+{
+ "key": "syn-b1-0020",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":\"ORDER_STATUS\"},{\"message_index\":2,\"primary\":\"ORDER_STATUS\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"i paid online\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10213,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 420,
+   "reasoning_tokens": 196
+  },
+  "latency_ms": 6127.807324024616,
+  "cost_micros": 541,
+  "at": "2026-10-16T16:30:07.753056+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10213,
+   "completion_tokens": 420,
+   "total_tokens": 10633,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 2537,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 196,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.5"
+ }
+}

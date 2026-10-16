@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit m4-report synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -61,6 +61,9 @@ label-dev:
 # Training-label audit by the decision providers (spec §11d): dev (gold + planted mistakes) or train.
 label-audit:
 	$(RUN) python -m orderslm.eval.label_audit $(ARGS)
+# M4 data report: every drop, repair, relabel, flag and catch rate, from saved runs (report + dashboard data).
+m4-report:
+	$(RUN) python -m orderslm.eval.m4_report
 # Synthetic training data (M4): plan / generate / report stages; label is its own target. See synth/run.py.
 synth:
 	$(RUN) python -m orderslm.synth.run $(ARGS)

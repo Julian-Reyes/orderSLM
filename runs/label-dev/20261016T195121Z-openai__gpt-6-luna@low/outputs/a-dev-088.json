@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-088",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_PROBLEM\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_PROBLEM\",\"secondary\":null},{\"message_index\":4,\"primary\":\"REFUND_REQUEST\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":0,\"quote\":\"the card was charged\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Whitfield\",\"evidence\":[{\"message_index\":2,\"quote\":\"Whitfield\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12752,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 548,
+   "reasoning_tokens": 293
+  },
+  "latency_ms": 7131.806663994212,
+  "cost_micros": 845,
+  "at": "2026-10-16T19:52:51.789323+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12752,
+   "completion_tokens": 548,
+   "total_tokens": 13300,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4914,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 293,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

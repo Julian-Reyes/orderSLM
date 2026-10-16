@@ -53,3 +53,18 @@ def test_score_counts_agreement_false_alarms_and_catches():
     assert m["order_flagged"] == 0 and m["orders_expected_ok"] == 1
     planted = len(jobs) - 1
     assert sum(v["caught"] for v in m["planted"].values()) == planted - 1
+
+
+def test_m4_report_builds_from_saved_runs():
+    from orderslm.eval import m4_report
+
+    r = m4_report.build()
+    assert {"batches", "training_set", "label_prompt_on_dev", "label_audits"} <= set(r)
+    b1 = r["batches"]["b1"]["by_generator"]
+    assert all(
+        {"generation_drops", "label_drops", "repairs", "card_agreement"} <= set(x) for x in b1.values()
+    )
+    assert r["training_set"]["single_menu"] > 1900 and r["training_set"]["excluded"]
+    dev = [a for a in r["label_audits"] if a["set"] == "dev"]
+    assert dev and all("planted" in m for a in dev for m in a["providers"].values())
+    assert "| batch | generator |" in m4_report.render(r)

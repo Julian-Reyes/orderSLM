@@ -129,6 +129,14 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   merged, clashing cheese/avocado renamed; built by `orderslm/mega.py`, tested to equal the committed file). Not a
   4th regular menu (`load_menus()` excludes it; `load_menu("food-court")` finds it). Mega batch `m1` planned: 396
   cards (~20% of ~2,000 single-menu), 264/66/66.
+- **Audit fixes (2026-10-16, Julian):** audit wording v0.3 (an earlier order the customer describes is not part of
+  the record): dev false alarms Jev 5.5%, Decisions 0% (planted caught 89% / 78%). Label prompt **v0.7** (follow-ups
+  keep the request's label; "did the payment go through" = PAYMENT_CLAIM; dev: 1 contract flake dropped, otherwise as
+  v0.6); 67 audit-flagged chats relabeled. Re-audit of the training labels: orders flagged by both 31 → 13, intent
+  messages both dispute 425 → 374. Excluded from training: syn-p3-0160, syn-b1-0356 (`runs/synth/excluded.json`).
+  Training set: **1,963 single-menu + 391 mega-menu**. Every drop/repair/relabel/flag/catch rate: `make m4-report`
+  → `runs/m4-report/m4_report.json` (dashboard data) + `M4_REPORT.md` (Julian: show drops in reports/dashboard).
+  Real miss example for the write-up: a-dev-007 "no mayo" on a veggie burger dropped, judged matching by both.
 - **Label audit by Jev + OpenAI Decisions (2026-10-16; `make label-audit`; Julia-1 waits for an Apple-Silicon Mac or
   Kaggle: this Intel Mac can't install torch ≥ 2.6).** Dev (`label-audit@0.2`, after fixing cancelled / no-order /
   unclear-item wording on dev): intents vs gold Jev 95.5%, Decisions 96.3% (teacher 98.9%); correct orders flagged

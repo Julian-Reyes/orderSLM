@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$5.0365** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993) |
-| Remaining (of $10 ceiling) | $4.9635 |
+| Spent to date | **$5.8007** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642) |
+| Remaining (of $10 ceiling) | $4.1993 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -47,6 +47,10 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on dev (`label-audit@0.1`): 91 gold + 473 planted | 368,163 + 283,513 / 0 | 0.044358 | input × price (Jev price unverified) | `runs/label-audit/20261016T183925Z-dev` |
 | 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on dev (`label-audit@0.2`): 91 gold + 473 planted | 395,085 + 310,379 / 0 | 0.048166 | input × price (Jev price unverified) | `runs/label-audit/20261016T185011Z-dev` |
 | 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on the training labels (2,356 chats, `label-audit@0.2`) | 4,696,961 + 3,999,038 / 0 | 0.599268 | input × price (Jev price unverified) | `runs/label-audit/20261016T185956Z-train` |
+| 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on dev, `label-audit@0.3` | see metrics.json | 0.049218 | input × price (Jev unverified) | `runs/label-audit/20261016T194620Z-dev` |
+| 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on training labels, `label-audit@0.3` (after fixes) | see metrics.json | 0.606092 | input × price (Jev unverified) | `runs/label-audit/20261016T195605Z-train` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | `teacher-label@0.7` scored on all 91 dev | see manifest | 0.057745 | recorded usage × verified price | `runs/label-dev/20261016T195121Z-openai__gpt-6-luna@low` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel 67 audit-flagged chats with `teacher-label@0.7` | see calls logs | 0.051157 | recorded usage × verified price | `runs/synth/*/calls/20261016T195*-label.json` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | `teacher-label@0.6` scored on all 91 dev | see manifest | 0.058087 | recorded usage × verified price | `runs/label-dev/20261016T173049Z-openai__gpt-6-luna@low` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel p3 chats hit by the v0.6 rule (`teacher-label@0.6`, ids in `relabel_v0.6_ids.json`) | see calls log | 0.064876 | recorded usage × verified price | `runs/synth/p3/calls/20261016T173321Z-label.json` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel b1 chats hit by the v0.6 rule (`teacher-label@0.6`, ids in `relabel_v0.6_ids.json`) | see calls log | 0.149907 | recorded usage × verified price | `runs/synth/b1/calls/20261016T173516Z-label.json` |
