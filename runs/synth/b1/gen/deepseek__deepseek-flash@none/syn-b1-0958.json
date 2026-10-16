@@ -1,0 +1,31 @@
+{
+ "key": "syn-b1-0958",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"messages\": [\n    {\n      \"role\": \"customer\",\n      \"text\": \"hey i placed an order a bit ago and was wondering where it is rn\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Hi! Let me check on that for you. Can you tell me the name on the order?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"it's under alex\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Thanks, Alex! I see your order. It's being prepared and should be out for delivery soon. It should arrive in about 20-30 minutes.\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"ok thx\"\n    }\n  ]\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1127,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 168,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1971.8661499791779,
+  "cost_micros": 139,
+  "at": "2026-10-16T16:22:22.997653+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1127,
+   "completion_tokens": 168,
+   "total_tokens": 1295,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 231
+  }
+ }
+}

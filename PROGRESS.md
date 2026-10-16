@@ -8,8 +8,10 @@ _Last updated 2026-10-16._
 
 - **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
   M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Next (Julian):** audit `runs/synth/p3/audit.md` (30 chats, 10 per generator, half card-flagged), then decide the
-  bulk generator mix (my suggestion: DeepSeek as main writer + a second one for variety; decide after the audit).
+- **Bulk done (2026-10-16, $1.91).** Training data now: single-menu **1,969 labeled chats** (p3 493 with label
+  prompt v0.2 + b1 1,476 with v0.5) and mega-menu **391** (m1, 19.9%). Next: decide whether to relabel p3 with v0.5
+  for one consistent label version (~$0.33); spot-check b1/m1 (`audit.md` in each); then the §11d label audit by
+  the decision providers (needs M7 providers) and M5 (student bake-off).
 - Still open before **bulk** labeling (not needed for the pilot):
   1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
   2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
@@ -28,7 +30,7 @@ _Last updated 2026-10-16._
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
-| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: steps 1–3 done 2026-10-16 (code; mini-pilots $0.03; pilot p3 500 chats $0.52); waiting for Julian's audit |
+| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
@@ -123,6 +125,11 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   merged, clashing cheese/avocado renamed; built by `orderslm/mega.py`, tested to equal the committed file). Not a
   4th regular menu (`load_menus()` excludes it; `load_menu("food-court")` finds it). Mega batch `m1` planned: 396
   cards (~20% of ~2,000 single-menu), 264/66/66.
+- **Bulk run `b1` + mega `m1` (2026-10-16):** b1 generation $0.3714 (1,481/1,500 kept: DeepSeek 14 schema-echo
+  outputs, 3 business prices, 1 exact duplicate), labels $0.9407 (1,476 kept, 5 dropped); m1 generation $0.1372
+  (394/396), labels $0.4609 (391/394). Card agreement: b1 Haiku 91%, DeepSeek 95%, Gemini 92%; m1 91% / 94% / 94%.
+  Rare intents now ≥ 36 messages each in b1 (UNKNOWN 36, REFUND_REQUEST 49, PAYMENT_CLAIM 61). DeepSeek's "u open
+  rn" openers still inflate DELIVERY_QUESTION (244 of its messages). Reports: `runs/synth/{b1,m1}/report.md`.
 - **Audit of p3 (2026-10-16, by Claude at Julian's request, `runs/synth/p3/audit_review.md`):** 30 chats: realistic
   28/30, intents fully right 26/30, order right 27/30. Teacher patterns for label prompt v0.3: PLACE vs MODIFY when
   adding a detail to an item being ordered; an answer takes the label of the request it serves; garbled text is

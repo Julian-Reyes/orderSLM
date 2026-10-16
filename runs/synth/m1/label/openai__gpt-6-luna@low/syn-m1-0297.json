@@ -1,0 +1,37 @@
+{
+ "key": "syn-m1-0297",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"pepperoni\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"take the pepperoni off\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"grilled_chicken\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w grilled chicken\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_gluten_free\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"gluten free crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"the pepperoni one\"},{\"message_index\":4,\"quote\":\"pizza\"},{\"message_index\":4,\"quote\":\"personal 8 inch\"},{\"message_index\":6,\"quote\":\"gluten free crust\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"deliver to\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"riverside blvd\",\"number\":\"4791\",\"unit\":\"25a\",\"reference\":null,\"raw_text\":\"4791 riverside blvd # 25a\",\"evidence\":[{\"message_index\":6,\"quote\":\"4791 riverside blvd # 25a\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying cash\"},{\"message_index\":6,\"quote\":\"change for a 50\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 16183,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 900,
+   "reasoning_tokens": 360
+  },
+  "latency_ms": 10643.595917004859,
+  "cost_micros": 1378,
+  "at": "2026-10-16T16:39:06.116782+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 16183,
+   "completion_tokens": 900,
+   "total_tokens": 17083,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 8507,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 360,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

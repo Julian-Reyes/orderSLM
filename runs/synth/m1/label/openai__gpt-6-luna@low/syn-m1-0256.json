@@ -1,0 +1,37 @@
+{
+ "key": "syn-m1-0256",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"pickle\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no pickles\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a cheeseburger combo\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"deliver\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"hollis blvd\",\"number\":\"6186\",\"unit\":\"23b\",\"reference\":null,\"raw_text\":\"6186 hollis blvd #23b\",\"evidence\":[{\"message_index\":0,\"quote\":\"6186 hollis blvd #23b\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"yep thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 16023,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 468,
+   "reasoning_tokens": 55
+  },
+  "latency_ms": 6613.173460995313,
+  "cost_micros": 1146,
+  "at": "2026-10-16T16:38:32.293359+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 16023,
+   "completion_tokens": 468,
+   "total_tokens": 16491,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 8347,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 55,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

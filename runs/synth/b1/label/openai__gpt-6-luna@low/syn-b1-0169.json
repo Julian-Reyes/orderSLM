@@ -1,0 +1,37 @@
+{
+ "key": "syn-b1-0169",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"CONFIRM_ORDER\"},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"margherita_pizza\",\"modifications\":[]},{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one personal 8 inch pizza half margherita half bbq chicken\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"deliver to 3490 delancey st apt 2a\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"delancey st\",\"number\":\"3490\",\"unit\":\"apt 2a\",\"reference\":null,\"raw_text\":\"3490 delancey st apt 2a\",\"evidence\":[{\"message_index\":4,\"quote\":\"3490 delancey st apt 2a\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"cash\"},{\"message_index\":6,\"quote\":\"make change for that\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12665,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 617,
+   "reasoning_tokens": 190
+  },
+  "latency_ms": 7314.319894998334,
+  "cost_micros": 885,
+  "at": "2026-10-16T16:32:28.756861+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12665,
+   "completion_tokens": 617,
+   "total_tokens": 13282,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 4989,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 190,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

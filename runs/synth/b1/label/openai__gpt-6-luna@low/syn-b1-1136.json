@@ -1,0 +1,37 @@
+{
+ "key": "syn-b1-1136",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"jalapeno\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add jalapeños\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"fries\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"three cheeseburger combos\"},{\"message_index\":2,\"quote\":\"all fries 🍟 and cokes\"},{\"message_index\":2,\"quote\":\"add jalapeños to all of them\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"deliver to\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"around 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"around 6:30\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Riverside St\",\"number\":\"6048\",\"unit\":null,\"reference\":null,\"raw_text\":\"6048 Riverside St\",\"evidence\":[{\"message_index\":4,\"quote\":\"6048 Riverside St\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9488,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 652,
+   "reasoning_tokens": 198
+  },
+  "latency_ms": 7009.404686978087,
+  "cost_micros": 585,
+  "at": "2026-10-16T16:48:08.886009+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9488,
+   "completion_tokens": 652,
+   "total_tokens": 10140,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 1812,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 198,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

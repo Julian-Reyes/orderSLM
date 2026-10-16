@@ -1,0 +1,37 @@
+{
+ "key": "syn-m1-0133",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":12,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":13,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":14,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thin\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thin crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 orders of breadsticks\"},{\"message_index\":8,\"quote\":\"a large meat lovers pizza instead\"},{\"message_index\":9,\"quote\":\"thin crust\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":12,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Spruce Terrace\",\"number\":\"2387\",\"unit\":\"19A\",\"reference\":null,\"raw_text\":\"2387 spruce terrace, unit 19A\",\"evidence\":[{\"message_index\":12,\"quote\":\"2387 spruce terrace\"},{\"message_index\":13,\"quote\":\"unit 19A\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":14,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 16305,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 897,
+   "reasoning_tokens": 334
+  },
+  "latency_ms": 10950.374774023658,
+  "cost_micros": 1389,
+  "at": "2026-10-16T16:36:26.116461+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 16305,
+   "completion_tokens": 897,
+   "total_tokens": 17202,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 8629,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 334,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,746 @@
+{
+  "batch": "b1",
+  "built_at": "2026-10-16T16:55:44.594068+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "cards": 250,
+      "generated": 250,
+      "kept": 250,
+      "repairs": {
+        "trimmed_trailing_business_message": 41
+      },
+      "gen_drops": {},
+      "label_attempted": 250,
+      "labeled": 250,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 250,
+        "all_agree": 228,
+        "flags": {
+          "labels": 12,
+          "items": 8,
+          "item_details": 5
+        }
+      },
+      "customer_messages_mean": 3.56,
+      "generation_usage": {
+        "calls": 250,
+        "input_tokens": 617210,
+        "cached_input_tokens": 0,
+        "output_tokens": 54854,
+        "reasoning_tokens": 0,
+        "cost_micros": 89258,
+        "cost_per_1k_usd": 0.357,
+        "latency_p50_ms": 1864
+      },
+      "label_usage": {
+        "calls": 250,
+        "input_tokens": 2699640,
+        "cached_input_tokens": 1918250,
+        "output_tokens": 125163,
+        "reasoning_tokens": 33227,
+        "cost_micros": 160038,
+        "cost_per_1k_usd": 0.6402,
+        "latency_p50_ms": 5450
+      },
+      "style": {
+        "chats": 250,
+        "customer_messages_per_chat": 3.56,
+        "business_messages_per_chat": 1.73,
+        "words_per_customer_message": 9.9,
+        "share_lowercase_messages": 0.729,
+        "share_all_caps_messages": 0.061,
+        "share_messages_with_emoji": 0.183,
+        "share_uppercase_letters": 0.106,
+        "distinct_openers": 0.296,
+        "top_openers": {
+          "hey": 38,
+          "hey lemme": 30,
+          "hey can": 17,
+          "hey u": 13,
+          "hi i": 12
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.076,
+        "max_nearest_similarity": 0.209,
+        "distinct_3gram_share": 0.774
+      },
+      "addresses": {
+        "cards_with_address": 47,
+        "card_address_used": 36
+      }
+    },
+    "deepseek/deepseek-flash@none": {
+      "cards": 1000,
+      "generated": 1000,
+      "kept": 983,
+      "repairs": {
+        "trimmed_trailing_business_message": 227
+      },
+      "gen_drops": {
+        "invalid_output": 14,
+        "business_states_price": 2,
+        "near_duplicate_of": 1
+      },
+      "label_attempted": 983,
+      "labeled": 978,
+      "label_drops": {
+        "invalid_contract": 3,
+        "check_failed": 2
+      },
+      "card_agreement": {
+        "labeled": 978,
+        "all_agree": 928,
+        "flags": {
+          "items": 16,
+          "item_details": 10,
+          "labels": 34,
+          "decision": 1
+        }
+      },
+      "customer_messages_mean": 3.62,
+      "generation_usage": {
+        "calls": 1000,
+        "input_tokens": 1561526,
+        "cached_input_tokens": 1325824,
+        "output_tokens": 135992,
+        "reasoning_tokens": 0,
+        "cost_micros": 121443,
+        "cost_per_1k_usd": 0.1214,
+        "latency_p50_ms": 1882
+      },
+      "label_usage": {
+        "calls": 983,
+        "input_tokens": 10575199,
+        "cached_input_tokens": 7542559,
+        "output_tokens": 489013,
+        "reasoning_tokens": 118505,
+        "cost_micros": 623681,
+        "cost_per_1k_usd": 0.6345,
+        "latency_p50_ms": 5492
+      },
+      "style": {
+        "chats": 983,
+        "customer_messages_per_chat": 3.62,
+        "business_messages_per_chat": 1.72,
+        "words_per_customer_message": 9.0,
+        "share_lowercase_messages": 0.71,
+        "share_all_caps_messages": 0.066,
+        "share_messages_with_emoji": 0.147,
+        "share_uppercase_letters": 0.095,
+        "distinct_openers": 0.167,
+        "top_openers": {
+          "hey": 85,
+          "yo": 74,
+          "hey can": 66,
+          "yo u": 60,
+          "hi there": 39
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.117,
+        "max_nearest_similarity": 0.636,
+        "distinct_3gram_share": 0.613
+      },
+      "addresses": {
+        "cards_with_address": 163,
+        "card_address_used": 159
+      }
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "cards": 250,
+      "generated": 250,
+      "kept": 248,
+      "repairs": {
+        "trimmed_trailing_business_message": 9
+      },
+      "gen_drops": {
+        "business_states_price": 1,
+        "invalid_output": 1
+      },
+      "label_attempted": 248,
+      "labeled": 248,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 248,
+        "all_agree": 228,
+        "flags": {
+          "items": 8,
+          "labels": 13,
+          "item_details": 1
+        }
+      },
+      "customer_messages_mean": 2.98,
+      "generation_usage": {
+        "calls": 250,
+        "input_tokens": 394259,
+        "cached_input_tokens": 0,
+        "output_tokens": 41533,
+        "reasoning_tokens": 0,
+        "cost_micros": 160957,
+        "cost_per_1k_usd": 0.6438,
+        "latency_p50_ms": 1664
+      },
+      "label_usage": {
+        "calls": 248,
+        "input_tokens": 2682662,
+        "cached_input_tokens": 1902904,
+        "output_tokens": 119632,
+        "reasoning_tokens": 29522,
+        "cost_micros": 156954,
+        "cost_per_1k_usd": 0.6329,
+        "latency_p50_ms": 5342
+      },
+      "style": {
+        "chats": 248,
+        "customer_messages_per_chat": 2.98,
+        "business_messages_per_chat": 1.38,
+        "words_per_customer_message": 11.4,
+        "share_lowercase_messages": 0.646,
+        "share_all_caps_messages": 0.086,
+        "share_messages_with_emoji": 0.103,
+        "share_uppercase_letters": 0.128,
+        "distinct_openers": 0.222,
+        "top_openers": {
+          "hey u": 30,
+          "hey there": 23,
+          "hey": 20,
+          "hello i": 19,
+          "hi i": 18
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.085,
+        "max_nearest_similarity": 0.286,
+        "distinct_3gram_share": 0.741
+      },
+      "addresses": {
+        "cards_with_address": 43,
+        "card_address_used": 43
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 2347,
+    "SMALL_TALK": 1000,
+    "DELIVERY_QUESTION": 325,
+    "MODIFY_ORDER": 287,
+    "CONFIRM_ORDER": 251,
+    "MENU_QUESTION": 233,
+    "ORDER_PROBLEM": 176,
+    "ORDER_STATUS": 135,
+    "PAYMENT_QUESTION": 87,
+    "HUMAN_REQUEST": 79,
+    "PAYMENT_CLAIM": 61,
+    "OUT_OF_SCOPE": 60,
+    "REFUND_REQUEST": 49,
+    "CANCEL_ORDER": 48,
+    "UNKNOWN": 36
+  },
+  "planned": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 1000,
+      "google/gemini-3.1-flash-lite@minimal": 250,
+      "anthropic/claude-haiku-5-5@off-low": 250
+    },
+    "scenario": {
+      "simple_order": 169,
+      "multi_message_order": 121,
+      "correction": 109,
+      "contextual_yes": 73,
+      "missing_info": 73,
+      "correction_after_confirmation": 61,
+      "implicit_category": 61,
+      "combo": 61,
+      "ambiguous_reference": 49,
+      "half_and_half": 49,
+      "cancellation": 49,
+      "off_menu": 49,
+      "refund_request": 48,
+      "menu_question": 48,
+      "delivery_question": 48,
+      "order_problem": 48,
+      "small_talk": 48,
+      "status_question": 48,
+      "unclear_message": 48,
+      "payment_claim": 48,
+      "out_of_scope": 48,
+      "two_requests": 48,
+      "payment_question": 48,
+      "human_request": 48
+    },
+    "business": {
+      "morning-crumb": 514,
+      "halfmoon-pizza": 494,
+      "corner-patty": 492
+    },
+    "style": {
+      "texting": 450,
+      "emoji": 300,
+      "rapid_fire": 300,
+      "clean": 300,
+      "shouty": 150
+    },
+    "fulfillment": {
+      "not_applicable": 528,
+      "pickup": 501,
+      "delivery": 271,
+      "unstated": 200
+    },
+    "payment": {
+      "not_applicable": 528,
+      "card": 425,
+      "cash": 299,
+      "unstated": 248
+    },
+    "items": {
+      "0": 528,
+      "1": 412,
+      "2": 342,
+      "3": 209,
+      "4": 9
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 972,
+      "MENU_QUESTION": 230,
+      "MODIFY_ORDER": 170,
+      "CONFIRM_ORDER": 134,
+      "CANCEL_ORDER": 49,
+      "REFUND_REQUEST": 48,
+      "DELIVERY_QUESTION": 48,
+      "ORDER_PROBLEM": 48,
+      "SMALL_TALK": 48,
+      "ORDER_STATUS": 48,
+      "UNKNOWN": 48,
+      "PAYMENT_CLAIM": 48,
+      "OUT_OF_SCOPE": 48,
+      "PAYMENT_QUESTION": 48,
+      "HUMAN_REQUEST": 48
+    }
+  },
+  "agreement_by_scenario": {
+    "refund_request": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 5
+      }
+    },
+    "correction_after_confirmation": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 38,
+        "agree": 22
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 10,
+        "agree": 5
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 10,
+        "agree": 5
+      }
+    },
+    "menu_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "correction": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 19,
+        "agree": 18
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 69,
+        "agree": 67
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 18,
+        "agree": 17
+      }
+    },
+    "ambiguous_reference": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 30
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "contextual_yes": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 48,
+        "agree": 47
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 12,
+        "agree": 11
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 12,
+        "agree": 12
+      }
+    },
+    "delivery_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 30,
+        "agree": 30
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 7,
+        "agree": 7
+      }
+    },
+    "order_problem": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "half_and_half": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 33,
+        "agree": 33
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 6
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "small_talk": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 31
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 6
+      }
+    },
+    "missing_info": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 49,
+        "agree": 49
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 12,
+        "agree": 12
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 12,
+        "agree": 12
+      }
+    },
+    "status_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 31,
+        "agree": 31
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "unclear_message": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 31,
+        "agree": 16
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 4
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 7,
+        "agree": 2
+      }
+    },
+    "implicit_category": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 41,
+        "agree": 37
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 10,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 10,
+        "agree": 10
+      }
+    },
+    "simple_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 111,
+        "agree": 110
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 28,
+        "agree": 25
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 28,
+        "agree": 26
+      }
+    },
+    "payment_claim": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 31,
+        "agree": 30
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 7
+      }
+    },
+    "out_of_scope": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "cancellation": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 30,
+        "agree": 29
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "combo": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 41,
+        "agree": 41
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 10,
+        "agree": 9
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 10,
+        "agree": 10
+      }
+    },
+    "two_requests": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 28
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 7
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "payment_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "off_menu": {
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 9,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 7
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 31,
+        "agree": 29
+      }
+    },
+    "human_request": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 32,
+        "agree": 32
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "multi_message_order": {
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 21,
+        "agree": 20
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 20,
+        "agree": 20
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 76,
+        "agree": 76
+      }
+    }
+  },
+  "intents_by_generator": {
+    "deepseek/deepseek-flash@none": {
+      "PLACE_ORDER": 1585,
+      "SMALL_TALK": 698,
+      "DELIVERY_QUESTION": 244,
+      "MODIFY_ORDER": 183,
+      "MENU_QUESTION": 162,
+      "CONFIRM_ORDER": 157,
+      "ORDER_PROBLEM": 126,
+      "ORDER_STATUS": 104,
+      "PAYMENT_QUESTION": 59,
+      "HUMAN_REQUEST": 54,
+      "OUT_OF_SCOPE": 44,
+      "PAYMENT_CLAIM": 41,
+      "REFUND_REQUEST": 35,
+      "CANCEL_ORDER": 30,
+      "UNKNOWN": 22
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "PLACE_ORDER": 333,
+      "SMALL_TALK": 140,
+      "CONFIRM_ORDER": 56,
+      "MODIFY_ORDER": 52,
+      "DELIVERY_QUESTION": 29,
+      "MENU_QUESTION": 28,
+      "ORDER_PROBLEM": 21,
+      "ORDER_STATUS": 16,
+      "PAYMENT_QUESTION": 14,
+      "HUMAN_REQUEST": 11,
+      "CANCEL_ORDER": 10,
+      "PAYMENT_CLAIM": 9,
+      "OUT_OF_SCOPE": 8,
+      "UNKNOWN": 7,
+      "REFUND_REQUEST": 6
+    },
+    "anthropic/claude-haiku-5-5@off-low": {
+      "PLACE_ORDER": 429,
+      "SMALL_TALK": 162,
+      "DELIVERY_QUESTION": 52,
+      "MODIFY_ORDER": 52,
+      "MENU_QUESTION": 43,
+      "CONFIRM_ORDER": 38,
+      "ORDER_PROBLEM": 29,
+      "ORDER_STATUS": 15,
+      "PAYMENT_QUESTION": 14,
+      "HUMAN_REQUEST": 14,
+      "PAYMENT_CLAIM": 11,
+      "OUT_OF_SCOPE": 8,
+      "REFUND_REQUEST": 8,
+      "CANCEL_ORDER": 8,
+      "UNKNOWN": 7
+    }
+  },
+  "audit_sample": [
+    "syn-b1-0044",
+    "syn-b1-0099",
+    "syn-b1-0139",
+    "syn-b1-0279",
+    "syn-b1-0280",
+    "syn-b1-0331",
+    "syn-b1-0339",
+    "syn-b1-0438",
+    "syn-b1-0461",
+    "syn-b1-0518",
+    "syn-b1-0563",
+    "syn-b1-0698",
+    "syn-b1-0798",
+    "syn-b1-0885",
+    "syn-b1-0892",
+    "syn-b1-0975",
+    "syn-b1-1061",
+    "syn-b1-1062",
+    "syn-b1-1073",
+    "syn-b1-1075",
+    "syn-b1-1094",
+    "syn-b1-1095",
+    "syn-b1-1121",
+    "syn-b1-1143",
+    "syn-b1-1209",
+    "syn-b1-1212",
+    "syn-b1-1245",
+    "syn-b1-1276",
+    "syn-b1-1352",
+    "syn-b1-1419"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+ "key": "syn-b1-1008",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"messages\": [\n    {\n      \"role\": \"customer\",\n      \"text\": \"Hello. I would like to order a Coke.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Hey there! One Coke, got it. Anything else?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"That's all for now. Can I get delivery to 18 Juniper Terrace, # 27?\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Sure, we can deliver to 18 Juniper Terrace, # 27. When would you like it?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"In 20 min, please.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Perfect. So one Coke, delivered to 18 Juniper Terrace, # 27 in about 20 minutes. Thanks!\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"Yes, that's correct.\"\n    }\n  ]\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1140,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 224,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2014.3103169975802,
+  "cost_micros": 174,
+  "at": "2026-10-16T16:23:05.003026+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1140,
+   "completion_tokens": 224,
+   "total_tokens": 1364,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 244
+  }
+ }
+}

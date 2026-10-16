@@ -1,0 +1,37 @@
+{
+ "key": "syn-b1-0564",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two bottled waters\"},{\"message_index\":2,\"quote\":\"swap the two bottled waters for two 12 oz cans of Dr Pepper\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thin\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thin crust\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"remove\",\"modifier_id\":\"bacon\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"hold the bacon\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"one medium Meat Lovers pizza\"},{\"message_index\":2,\"quote\":\"thin crust\"},{\"message_index\":2,\"quote\":\"hold the bacon\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"Please send it to 9879 Larkin Rd, # 26A.\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Larkin Rd\",\"number\":\"9879\",\"unit\":\"26A\",\"reference\":null,\"raw_text\":\"9879 Larkin Rd, # 26A\",\"evidence\":[{\"message_index\":0,\"quote\":\"9879 Larkin Rd, # 26A\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying with my card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12591,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 686,
+   "reasoning_tokens": 138
+  },
+  "latency_ms": 6560.03726698691,
+  "cost_micros": 912,
+  "at": "2026-10-16T16:39:01.333419+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12591,
+   "completion_tokens": 686,
+   "total_tokens": 13277,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 4915,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 138,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

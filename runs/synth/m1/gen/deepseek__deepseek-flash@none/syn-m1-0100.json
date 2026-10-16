@@ -1,0 +1,31 @@
+{
+ "key": "syn-m1-0100",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello.\"}, {\"role\": \"customer\", \"text\": \"I'd like to order 3 medium lattes and 4 everything bagels, please.\"}, {\"role\": \"business\", \"text\": \"Hi! Just to confirm: 3 medium lattes and 4 everything bagels. Is that right?\"}, {\"role\": \"customer\", \"text\": \"Yes, but please change the lattes to 2 instead of 3.\"}, {\"role\": \"business\", \"text\": \"Got it — 2 medium lattes and 4 everything bagels. Anything else?\"}, {\"role\": \"customer\", \"text\": \"That's everything. Please deliver it to 2125 hawthorne way asap.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2974,
+   "cached_input_tokens": 2816,
+   "cache_write_tokens": 0,
+   "output_tokens": 165,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1841.2951740028802,
+  "cost_micros": 132,
+  "at": "2026-10-16T16:30:35.441352+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2974,
+   "completion_tokens": 165,
+   "total_tokens": 3139,
+   "prompt_tokens_details": {
+    "cached_tokens": 2816
+   },
+   "prompt_cache_hit_tokens": 2816,
+   "prompt_cache_miss_tokens": 158
+  }
+ }
+}

@@ -1,0 +1,739 @@
+{
+  "batch": "m1",
+  "built_at": "2026-10-16T16:55:48.700880+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "cards": 66,
+      "generated": 66,
+      "kept": 66,
+      "repairs": {
+        "trimmed_trailing_business_message": 8
+      },
+      "gen_drops": {},
+      "label_attempted": 66,
+      "labeled": 65,
+      "label_drops": {
+        "check_failed": 1
+      },
+      "card_agreement": {
+        "labeled": 65,
+        "all_agree": 59,
+        "flags": {
+          "labels": 4,
+          "items": 2
+        }
+      },
+      "customer_messages_mean": 3.79,
+      "generation_usage": {
+        "calls": 66,
+        "input_tokens": 326416,
+        "cached_input_tokens": 0,
+        "output_tokens": 15041,
+        "reasoning_tokens": 0,
+        "cost_micros": 40194,
+        "cost_per_1k_usd": 0.609,
+        "latency_p50_ms": 1802
+      },
+      "label_usage": {
+        "calls": 66,
+        "input_tokens": 1061608,
+        "cached_input_tokens": 506418,
+        "output_tokens": 34214,
+        "reasoning_tokens": 9751,
+        "cost_micros": 77723,
+        "cost_per_1k_usd": 1.1776,
+        "latency_p50_ms": 6022
+      },
+      "style": {
+        "chats": 66,
+        "customer_messages_per_chat": 3.79,
+        "business_messages_per_chat": 1.76,
+        "words_per_customer_message": 9.5,
+        "share_lowercase_messages": 0.72,
+        "share_all_caps_messages": 0.108,
+        "share_messages_with_emoji": 0.152,
+        "share_uppercase_letters": 0.166,
+        "distinct_openers": 0.455,
+        "top_openers": {
+          "hey lemme": 10,
+          "hey": 10,
+          "hey can": 8,
+          "hello i": 3,
+          "hey u": 3
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.055,
+        "max_nearest_similarity": 0.2,
+        "distinct_3gram_share": 0.887
+      },
+      "addresses": {
+        "cards_with_address": 19,
+        "card_address_used": 16
+      }
+    },
+    "deepseek/deepseek-flash@none": {
+      "cards": 264,
+      "generated": 264,
+      "kept": 262,
+      "repairs": {
+        "trimmed_trailing_business_message": 58
+      },
+      "gen_drops": {
+        "invalid_output": 2
+      },
+      "label_attempted": 262,
+      "labeled": 261,
+      "label_drops": {
+        "check_failed": 1
+      },
+      "card_agreement": {
+        "labeled": 261,
+        "all_agree": 246,
+        "flags": {
+          "items": 4,
+          "labels": 9,
+          "item_details": 4
+        }
+      },
+      "customer_messages_mean": 3.63,
+      "generation_usage": {
+        "calls": 264,
+        "input_tokens": 779938,
+        "cached_input_tokens": 724864,
+        "output_tokens": 37373,
+        "reasoning_tokens": 0,
+        "cost_micros": 32990,
+        "cost_per_1k_usd": 0.125,
+        "latency_p50_ms": 1904
+      },
+      "label_usage": {
+        "calls": 262,
+        "input_tokens": 4212981,
+        "cached_input_tokens": 2010326,
+        "output_tokens": 131407,
+        "reasoning_tokens": 33888,
+        "cost_micros": 306207,
+        "cost_per_1k_usd": 1.1687,
+        "latency_p50_ms": 5468
+      },
+      "style": {
+        "chats": 262,
+        "customer_messages_per_chat": 3.63,
+        "business_messages_per_chat": 1.83,
+        "words_per_customer_message": 9.4,
+        "share_lowercase_messages": 0.686,
+        "share_all_caps_messages": 0.062,
+        "share_messages_with_emoji": 0.144,
+        "share_uppercase_letters": 0.092,
+        "distinct_openers": 0.282,
+        "top_openers": {
+          "yo": 23,
+          "hey can": 21,
+          "yo u": 17,
+          "hey": 17,
+          "hey u": 16
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.09,
+        "max_nearest_similarity": 0.476,
+        "distinct_3gram_share": 0.762
+      },
+      "addresses": {
+        "cards_with_address": 60,
+        "card_address_used": 59
+      }
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "cards": 66,
+      "generated": 66,
+      "kept": 66,
+      "repairs": {
+        "trimmed_trailing_business_message": 3
+      },
+      "gen_drops": {},
+      "label_attempted": 66,
+      "labeled": 65,
+      "label_drops": {
+        "invalid_contract": 1
+      },
+      "card_agreement": {
+        "labeled": 65,
+        "all_agree": 61,
+        "flags": {
+          "labels": 3,
+          "items": 1
+        }
+      },
+      "customer_messages_mean": 3.09,
+      "generation_usage": {
+        "calls": 66,
+        "input_tokens": 192562,
+        "cached_input_tokens": 0,
+        "output_tokens": 10543,
+        "reasoning_tokens": 0,
+        "cost_micros": 63977,
+        "cost_per_1k_usd": 0.9693,
+        "latency_p50_ms": 1712
+      },
+      "label_usage": {
+        "calls": 66,
+        "input_tokens": 1059057,
+        "cached_input_tokens": 506418,
+        "output_tokens": 33150,
+        "reasoning_tokens": 7930,
+        "cost_micros": 76935,
+        "cost_per_1k_usd": 1.1657,
+        "latency_p50_ms": 5719
+      },
+      "style": {
+        "chats": 66,
+        "customer_messages_per_chat": 3.09,
+        "business_messages_per_chat": 1.21,
+        "words_per_customer_message": 11.2,
+        "share_lowercase_messages": 0.52,
+        "share_all_caps_messages": 0.064,
+        "share_messages_with_emoji": 0.074,
+        "share_uppercase_letters": 0.119,
+        "distinct_openers": 0.409,
+        "top_openers": {
+          "hey there": 7,
+          "hello i": 7,
+          "hey can": 6,
+          "hey i": 5,
+          "hey": 5
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.053,
+        "max_nearest_similarity": 0.172,
+        "distinct_3gram_share": 0.873
+      },
+      "addresses": {
+        "cards_with_address": 16,
+        "card_address_used": 16
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 600,
+    "SMALL_TALK": 262,
+    "MODIFY_ORDER": 102,
+    "DELIVERY_QUESTION": 92,
+    "CONFIRM_ORDER": 82,
+    "MENU_QUESTION": 70,
+    "ORDER_PROBLEM": 42,
+    "ORDER_STATUS": 32,
+    "HUMAN_REQUEST": 24,
+    "PAYMENT_QUESTION": 19,
+    "PAYMENT_CLAIM": 17,
+    "REFUND_REQUEST": 15,
+    "OUT_OF_SCOPE": 14,
+    "CANCEL_ORDER": 13,
+    "UNKNOWN": 11
+  },
+  "planned": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 264,
+      "google/gemini-3.1-flash-lite@minimal": 66,
+      "anthropic/claude-haiku-5-5@off-low": 66
+    },
+    "scenario": {
+      "simple_order": 44,
+      "multi_message_order": 32,
+      "correction": 28,
+      "contextual_yes": 19,
+      "missing_info": 19,
+      "combo": 16,
+      "implicit_category": 16,
+      "correction_after_confirmation": 16,
+      "cancellation": 13,
+      "ambiguous_reference": 13,
+      "delivery_question": 13,
+      "small_talk": 13,
+      "menu_question": 13,
+      "two_requests": 13,
+      "half_and_half": 13,
+      "payment_question": 13,
+      "refund_request": 13,
+      "off_menu": 13,
+      "human_request": 13,
+      "order_problem": 13,
+      "payment_claim": 13,
+      "status_question": 13,
+      "out_of_scope": 12,
+      "unclear_message": 12
+    },
+    "business": {
+      "food-court": 396
+    },
+    "style": {
+      "texting": 119,
+      "emoji": 79,
+      "clean": 79,
+      "rapid_fire": 79,
+      "shouty": 40
+    },
+    "fulfillment": {
+      "not_applicable": 141,
+      "pickup": 97,
+      "delivery": 97,
+      "unstated": 61
+    },
+    "payment": {
+      "not_applicable": 141,
+      "card": 110,
+      "cash": 75,
+      "unstated": 70
+    },
+    "items": {
+      "0": 141,
+      "1": 114,
+      "2": 86,
+      "3": 52,
+      "4": 3
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 255,
+      "MENU_QUESTION": 69,
+      "MODIFY_ORDER": 44,
+      "CONFIRM_ORDER": 35,
+      "CANCEL_ORDER": 13,
+      "DELIVERY_QUESTION": 13,
+      "SMALL_TALK": 13,
+      "PAYMENT_QUESTION": 13,
+      "REFUND_REQUEST": 13,
+      "HUMAN_REQUEST": 13,
+      "ORDER_PROBLEM": 13,
+      "PAYMENT_CLAIM": 13,
+      "ORDER_STATUS": 13,
+      "OUT_OF_SCOPE": 12,
+      "UNKNOWN": 12
+    }
+  },
+  "agreement_by_scenario": {
+    "out_of_scope": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "cancellation": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "multi_message_order": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 6,
+        "agree": 6
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 21,
+        "agree": 21
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 5,
+        "agree": 5
+      }
+    },
+    "ambiguous_reference": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 0
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "delivery_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "combo": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 10,
+        "agree": 10
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 3,
+        "agree": 3
+      }
+    },
+    "simple_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 28,
+        "agree": 25
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 7,
+        "agree": 7
+      }
+    },
+    "contextual_yes": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 4,
+        "agree": 3
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 12,
+        "agree": 12
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 3,
+        "agree": 2
+      }
+    },
+    "implicit_category": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 11,
+        "agree": 11
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "missing_info": {
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 4,
+        "agree": 4
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 12,
+        "agree": 12
+      }
+    },
+    "small_talk": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 1
+      }
+    },
+    "menu_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "two_requests": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 8
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "correction": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 19,
+        "agree": 18
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 5,
+        "agree": 5
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 4,
+        "agree": 4
+      }
+    },
+    "half_and_half": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "payment_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "refund_request": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 7
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "off_menu": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 7
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 1
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "human_request": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "order_problem": {
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 3,
+        "agree": 3
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 8
+      }
+    },
+    "correction_after_confirmation": {
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 3,
+        "agree": 1
+      },
+      "deepseek/deepseek-flash@none": {
+        "labeled": 11,
+        "agree": 5
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 0
+      }
+    },
+    "payment_claim": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "status_question": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 9,
+        "agree": 9
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 2
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    },
+    "unclear_message": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 8,
+        "agree": 5
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 2,
+        "agree": 1
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 2,
+        "agree": 2
+      }
+    }
+  },
+  "intents_by_generator": {
+    "deepseek/deepseek-flash@none": {
+      "PLACE_ORDER": 391,
+      "SMALL_TALK": 190,
+      "DELIVERY_QUESTION": 67,
+      "MODIFY_ORDER": 61,
+      "MENU_QUESTION": 56,
+      "CONFIRM_ORDER": 51,
+      "ORDER_PROBLEM": 28,
+      "ORDER_STATUS": 21,
+      "HUMAN_REQUEST": 18,
+      "PAYMENT_QUESTION": 15,
+      "PAYMENT_CLAIM": 15,
+      "OUT_OF_SCOPE": 10,
+      "REFUND_REQUEST": 10,
+      "CANCEL_ORDER": 9,
+      "UNKNOWN": 6
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "PLACE_ORDER": 86,
+      "SMALL_TALK": 36,
+      "MODIFY_ORDER": 21,
+      "CONFIRM_ORDER": 16,
+      "DELIVERY_QUESTION": 11,
+      "MENU_QUESTION": 6,
+      "ORDER_STATUS": 5,
+      "ORDER_PROBLEM": 4,
+      "UNKNOWN": 4,
+      "REFUND_REQUEST": 3,
+      "OUT_OF_SCOPE": 2,
+      "CANCEL_ORDER": 2,
+      "PAYMENT_QUESTION": 2,
+      "HUMAN_REQUEST": 2,
+      "PAYMENT_CLAIM": 1
+    },
+    "anthropic/claude-haiku-5-5@off-low": {
+      "PLACE_ORDER": 123,
+      "SMALL_TALK": 36,
+      "MODIFY_ORDER": 20,
+      "CONFIRM_ORDER": 15,
+      "DELIVERY_QUESTION": 14,
+      "ORDER_PROBLEM": 10,
+      "MENU_QUESTION": 8,
+      "ORDER_STATUS": 6,
+      "HUMAN_REQUEST": 4,
+      "CANCEL_ORDER": 2,
+      "OUT_OF_SCOPE": 2,
+      "PAYMENT_QUESTION": 2,
+      "REFUND_REQUEST": 2,
+      "PAYMENT_CLAIM": 1,
+      "UNKNOWN": 1
+    }
+  },
+  "audit_sample": [
+    "syn-m1-0024",
+    "syn-m1-0030",
+    "syn-m1-0038",
+    "syn-m1-0044",
+    "syn-m1-0069",
+    "syn-m1-0079",
+    "syn-m1-0115",
+    "syn-m1-0116",
+    "syn-m1-0130",
+    "syn-m1-0143",
+    "syn-m1-0145",
+    "syn-m1-0146",
+    "syn-m1-0171",
+    "syn-m1-0189",
+    "syn-m1-0194",
+    "syn-m1-0246",
+    "syn-m1-0248",
+    "syn-m1-0260",
+    "syn-m1-0273",
+    "syn-m1-0275",
+    "syn-m1-0277",
+    "syn-m1-0281",
+    "syn-m1-0293",
+    "syn-m1-0296",
+    "syn-m1-0312",
+    "syn-m1-0314",
+    "syn-m1-0318",
+    "syn-m1-0340",
+    "syn-m1-0347",
+    "syn-m1-0370"
+  ]
+}
