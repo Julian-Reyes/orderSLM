@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 breakfast sandwich\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"yep\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9957,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10253,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 431,
-   "reasoning_tokens": 111
+   "output_tokens": 407,
+   "reasoning_tokens": 87
   },
-  "latency_ms": 4648.1634080118965,
-  "cost_micros": 548,
-  "at": "2026-10-16T15:18:53.562911+00:00",
+  "latency_ms": 4625.482620002003,
+  "cost_micros": 539,
+  "at": "2026-10-16T17:09:20.426947+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9957,
-   "completion_tokens": 431,
-   "total_tokens": 10388,
+   "prompt_tokens": 10253,
+   "completion_tokens": 407,
+   "total_tokens": 10660,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2577,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 111,
+    "reasoning_tokens": 87,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

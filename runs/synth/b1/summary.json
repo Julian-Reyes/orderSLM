@@ -1,6 +1,6 @@
 {
   "batch": "b1",
-  "built_at": "2026-10-16T16:55:44.594068+00:00",
+  "built_at": "2026-10-16T17:15:51.331338+00:00",
   "dedup_threshold": 0.8,
   "by_generator": {
     "anthropic/claude-haiku-5-5@off-low": {
@@ -12,15 +12,17 @@
       },
       "gen_drops": {},
       "label_attempted": 250,
-      "labeled": 250,
-      "label_drops": {},
+      "labeled": 249,
+      "label_drops": {
+        "check_failed": 1
+      },
       "card_agreement": {
-        "labeled": 250,
+        "labeled": 249,
         "all_agree": 228,
         "flags": {
           "labels": 12,
           "items": 8,
-          "item_details": 5
+          "item_details": 4
         }
       },
       "customer_messages_mean": 3.56,
@@ -85,17 +87,17 @@
         "near_duplicate_of": 1
       },
       "label_attempted": 983,
-      "labeled": 978,
+      "labeled": 976,
       "label_drops": {
         "invalid_contract": 3,
-        "check_failed": 2
+        "check_failed": 4
       },
       "card_agreement": {
-        "labeled": 978,
+        "labeled": 976,
         "all_agree": 928,
         "flags": {
           "items": 16,
-          "item_details": 10,
+          "item_details": 8,
           "labels": 34,
           "decision": 1
         }
@@ -223,12 +225,12 @@
     }
   },
   "labeled_intents": {
-    "PLACE_ORDER": 2347,
-    "SMALL_TALK": 1000,
+    "PLACE_ORDER": 2339,
+    "SMALL_TALK": 999,
     "DELIVERY_QUESTION": 325,
-    "MODIFY_ORDER": 287,
+    "MODIFY_ORDER": 286,
     "CONFIRM_ORDER": 251,
-    "MENU_QUESTION": 233,
+    "MENU_QUESTION": 231,
     "ORDER_PROBLEM": 176,
     "ORDER_STATUS": 135,
     "PAYMENT_QUESTION": 87,
@@ -369,7 +371,7 @@
         "agree": 18
       },
       "deepseek/deepseek-flash@none": {
-        "labeled": 69,
+        "labeled": 68,
         "agree": 67
       },
       "anthropic/claude-haiku-5-5@off-low": {
@@ -383,7 +385,7 @@
         "agree": 9
       },
       "deepseek/deepseek-flash@none": {
-        "labeled": 32,
+        "labeled": 31,
         "agree": 30
       },
       "anthropic/claude-haiku-5-5@off-low": {
@@ -523,7 +525,7 @@
         "agree": 110
       },
       "anthropic/claude-haiku-5-5@off-low": {
-        "labeled": 28,
+        "labeled": 27,
         "agree": 25
       },
       "google/gemini-3.1-flash-lite@minimal": {
@@ -660,11 +662,11 @@
   },
   "intents_by_generator": {
     "deepseek/deepseek-flash@none": {
-      "PLACE_ORDER": 1585,
+      "PLACE_ORDER": 1580,
       "SMALL_TALK": 698,
       "DELIVERY_QUESTION": 244,
-      "MODIFY_ORDER": 183,
-      "MENU_QUESTION": 162,
+      "MODIFY_ORDER": 182,
+      "MENU_QUESTION": 161,
       "CONFIRM_ORDER": 157,
       "ORDER_PROBLEM": 126,
       "ORDER_STATUS": 104,
@@ -694,11 +696,11 @@
       "REFUND_REQUEST": 6
     },
     "anthropic/claude-haiku-5-5@off-low": {
-      "PLACE_ORDER": 429,
-      "SMALL_TALK": 162,
+      "PLACE_ORDER": 426,
+      "SMALL_TALK": 161,
       "DELIVERY_QUESTION": 52,
       "MODIFY_ORDER": 52,
-      "MENU_QUESTION": 43,
+      "MENU_QUESTION": 42,
       "CONFIRM_ORDER": 38,
       "ORDER_PROBLEM": 29,
       "ORDER_STATUS": 15,
@@ -713,34 +715,34 @@
   },
   "audit_sample": [
     "syn-b1-0044",
-    "syn-b1-0099",
+    "syn-b1-0083",
     "syn-b1-0139",
-    "syn-b1-0279",
     "syn-b1-0280",
+    "syn-b1-0289",
     "syn-b1-0331",
     "syn-b1-0339",
     "syn-b1-0438",
-    "syn-b1-0461",
     "syn-b1-0518",
     "syn-b1-0563",
     "syn-b1-0698",
     "syn-b1-0798",
-    "syn-b1-0885",
+    "syn-b1-0889",
     "syn-b1-0892",
+    "syn-b1-0962",
     "syn-b1-0975",
-    "syn-b1-1061",
+    "syn-b1-1045",
     "syn-b1-1062",
     "syn-b1-1073",
     "syn-b1-1075",
     "syn-b1-1094",
     "syn-b1-1095",
     "syn-b1-1121",
-    "syn-b1-1143",
+    "syn-b1-1187",
     "syn-b1-1209",
     "syn-b1-1212",
-    "syn-b1-1245",
+    "syn-b1-1249",
+    "syn-b1-1253",
     "syn-b1-1276",
-    "syn-b1-1352",
-    "syn-b1-1419"
+    "syn-b1-1352"
   ]
 }

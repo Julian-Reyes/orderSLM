@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no lettuce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"fries\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"sprite\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 cheeseburger combos\"},{\"message_index\":0,\"quote\":\"no lettuce\"},{\"message_index\":0,\"quote\":\"side fries\"},{\"message_index\":0,\"quote\":\"drink sprite\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapeno\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add jalapeños\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"3 double patty cheeseburgers\"},{\"message_index\":0,\"quote\":\"no tomato\"},{\"message_index\":0,\"quote\":\"add jalapeños\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for 167 willow creek terrace unit 4b\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Willow Creek Terrace\",\"number\":\"167\",\"unit\":\"4b\",\"reference\":null,\"raw_text\":\"167 willow creek terrace unit 4b\",\"evidence\":[{\"message_index\":0,\"quote\":\"167 willow creek terrace unit 4b\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no lettuce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"fries\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"sprite\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 cheeseburger combos\"},{\"message_index\":0,\"quote\":\"no lettuce\"},{\"message_index\":0,\"quote\":\"side fries\"},{\"message_index\":0,\"quote\":\"drink sprite\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapeno\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add jalapeños\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"3 double patty cheeseburgers\"},{\"message_index\":0,\"quote\":\"no tomato\"},{\"message_index\":0,\"quote\":\"add jalapeños\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for 167 willow creek terrace unit 4b\"},{\"message_index\":0,\"quote\":\"get it here\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"willow creek terrace\",\"number\":\"167\",\"unit\":\"4b\",\"reference\":null,\"raw_text\":\"167 willow creek terrace unit 4b\",\"evidence\":[{\"message_index\":0,\"quote\":\"167 willow creek terrace unit 4b\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9056,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9352,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 758,
-   "reasoning_tokens": 136
+   "output_tokens": 821,
+   "reasoning_tokens": 188
   },
-  "latency_ms": 9402.656254998874,
-  "cost_micros": 621,
-  "at": "2026-10-16T15:17:03.291942+00:00",
+  "latency_ms": 7472.477230010554,
+  "cost_micros": 656,
+  "at": "2026-10-16T17:07:36.351095+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9056,
-   "completion_tokens": 758,
-   "total_tokens": 9814,
+   "prompt_tokens": 9352,
+   "completion_tokens": 821,
+   "total_tokens": 10173,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1676,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 136,
+    "reasoning_tokens": 188,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

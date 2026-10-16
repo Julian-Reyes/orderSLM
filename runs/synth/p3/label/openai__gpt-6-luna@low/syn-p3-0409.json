@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 ORDERS OF BREADSTICKS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"2 LARGE HAWAIIAN PIZZAS\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"FOR PICKUP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"June\",\"evidence\":[{\"message_index\":0,\"quote\":\"NAME IS JUNE\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":5,\"quote\":\"YES THAT IS EVERYTHING\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12366,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12662,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 421,
-   "reasoning_tokens": 0
+   "output_tokens": 498,
+   "reasoning_tokens": 71
   },
-  "latency_ms": 3986.6673079959583,
-  "cost_micros": 784,
-  "at": "2026-10-16T15:23:10.692219+00:00",
+  "latency_ms": 5955.198554001981,
+  "cost_micros": 825,
+  "at": "2026-10-16T17:13:39.853546+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12366,
-   "completion_tokens": 421,
-   "total_tokens": 12787,
+   "prompt_tokens": 12662,
+   "completion_tokens": 498,
+   "total_tokens": 13160,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4986,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 71,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

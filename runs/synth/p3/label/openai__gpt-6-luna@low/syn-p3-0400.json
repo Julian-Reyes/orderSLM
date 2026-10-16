@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a coke\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"4 lemonades\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"rn\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"rn\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"payin cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"luis\",\"evidence\":[{\"message_index\":6,\"quote\":\"name is luis\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"DELIVERY_QUESTION\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 6,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"coke\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"a coke\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"lemonade\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 4,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"4 lemonades\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 6,\n          \"quote\": \"pick it up\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"asap\",\n        \"raw_text\": \"rn\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"rn\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 6,\n          \"quote\": \"cash\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"luis\",\n      \"evidence\": [\n        {\n          \"message_index\": 6,\n          \"quote\": \"luis\"\n        }\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9202,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9498,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 418,
-   "reasoning_tokens": 0
+   "output_tokens": 771,
+   "reasoning_tokens": 80
   },
-  "latency_ms": 4449.239086010493,
-  "cost_micros": 466,
-  "at": "2026-10-16T15:22:50.697238+00:00",
+  "latency_ms": 7516.1628579953685,
+  "cost_micros": 645,
+  "at": "2026-10-16T17:12:58.849292+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9202,
-   "completion_tokens": 418,
-   "total_tokens": 9620,
+   "prompt_tokens": 9498,
+   "completion_tokens": 771,
+   "total_tokens": 10269,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1822,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 80,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 cappuccinos\"},{\"message_index\":4,\"quote\":\"medium 12 oz\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":\"fruit cup\",\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"one fruit cup\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"SMALL_TALK\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": \"MENU_QUESTION\"\n    },\n    {\n      \"message_index\": 5,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"cappuccino\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"3 cappuccinos\"\n          },\n          {\n            \"message_index\": 4,\n            \"quote\": \"medium 12 oz\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": null,\n        \"unmatched_text\": \"fruit cup\",\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 5,\n            \"quote\": \"one fruit cup\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"unknown\",\n      \"method_evidence\": [],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_mentioned\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9991,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10287,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 529,
-   "reasoning_tokens": 135
+   "output_tokens": 707,
+   "reasoning_tokens": 76
   },
-  "latency_ms": 6286.411983979633,
-  "cost_micros": 600,
-  "at": "2026-10-16T15:18:05.724594+00:00",
+  "latency_ms": 6304.03790800483,
+  "cost_micros": 692,
+  "at": "2026-10-16T17:08:38.350794+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9991,
-   "completion_tokens": 529,
-   "total_tokens": 10520,
+   "prompt_tokens": 10287,
+   "completion_tokens": 707,
+   "total_tokens": 10994,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2611,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 135,
+    "reasoning_tokens": 76,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"3 large margherita pizzas\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"bottle_20oz\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 iced tea, the 20 oz bottle\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"we'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":2,\"quote\":\"name's Maya\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"yep that's it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12333,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12629,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 424,
-   "reasoning_tokens": 0
+   "output_tokens": 500,
+   "reasoning_tokens": 70
   },
-  "latency_ms": 4091.0404459864367,
-  "cost_micros": 782,
-  "at": "2026-10-16T15:22:55.701707+00:00",
+  "latency_ms": 5290.943029016489,
+  "cost_micros": 823,
+  "at": "2026-10-16T17:13:23.854367+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12333,
-   "completion_tokens": 424,
-   "total_tokens": 12757,
+   "prompt_tokens": 12629,
+   "completion_tokens": 500,
+   "total_tokens": 13129,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4953,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 70,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

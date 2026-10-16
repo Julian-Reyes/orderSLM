@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"large cappuccino\"},{\"message_index\":2,\"quote\":\"4 large cappuccinos\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"banana_nut\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a banana nut muffin\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"i'll be there\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"jordan\",\"evidence\":[{\"message_index\":2,\"quote\":\"name is jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a large cappuccino\"},{\"message_index\":2,\"quote\":\"4 large cappuccinos\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"banana_nut\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a banana nut muffin\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"i'll be there\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"jordan\",\"evidence\":[{\"message_index\":2,\"quote\":\"name is jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9909,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10205,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 521,
-   "reasoning_tokens": 103
+   "output_tokens": 564,
+   "reasoning_tokens": 144
   },
-  "latency_ms": 5976.694142998895,
-  "cost_micros": 588,
-  "at": "2026-10-16T15:22:56.697436+00:00",
+  "latency_ms": 7000.961455982178,
+  "cost_micros": 612,
+  "at": "2026-10-16T17:13:08.854364+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9909,
-   "completion_tokens": 521,
-   "total_tokens": 10430,
+   "prompt_tokens": 10205,
+   "completion_tokens": 564,
+   "total_tokens": 10769,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2529,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 103,
+    "reasoning_tokens": 144,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

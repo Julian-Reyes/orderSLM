@@ -1,6 +1,6 @@
 {
   "batch": "p3",
-  "built_at": "2026-10-16T15:26:40.671966+00:00",
+  "built_at": "2026-10-16T17:15:18.951246+00:00",
   "dedup_threshold": 0.8,
   "by_generator": {
     "anthropic/claude-haiku-5-5@off-low": {
@@ -18,11 +18,10 @@
       },
       "card_agreement": {
         "labeled": 99,
-        "all_agree": 90,
+        "all_agree": 93,
         "flags": {
-          "labels": 6,
-          "items": 3,
-          "item_details": 1
+          "labels": 5,
+          "items": 1
         }
       },
       "customer_messages_mean": 4.37,
@@ -38,13 +37,13 @@
       },
       "label_usage": {
         "calls": 100,
-        "input_tokens": 1067947,
-        "cached_input_tokens": 737700,
-        "output_tokens": 58317,
-        "reasoning_tokens": 16053,
-        "cost_micros": 69610,
-        "cost_per_1k_usd": 0.6961,
-        "latency_p50_ms": 6439
+        "input_tokens": 1097547,
+        "cached_input_tokens": 767300,
+        "output_tokens": 58142,
+        "reasoning_tokens": 16529,
+        "cost_micros": 69821,
+        "cost_per_1k_usd": 0.6982,
+        "latency_p50_ms": 6422
       },
       "style": {
         "chats": 100,
@@ -85,18 +84,16 @@
         "invalid_output": 2
       },
       "label_attempted": 198,
-      "labeled": 194,
+      "labeled": 196,
       "label_drops": {
-        "invalid_contract": 2,
         "check_failed": 2
       },
       "card_agreement": {
-        "labeled": 194,
-        "all_agree": 180,
+        "labeled": 196,
+        "all_agree": 186,
         "flags": {
-          "labels": 9,
-          "items": 5,
-          "item_details": 1
+          "labels": 8,
+          "items": 3
         }
       },
       "customer_messages_mean": 3.72,
@@ -112,13 +109,13 @@
       },
       "label_usage": {
         "calls": 198,
-        "input_tokens": 2081457,
-        "cached_input_tokens": 1460646,
-        "output_tokens": 105316,
-        "reasoning_tokens": 23623,
-        "cost_micros": 129446,
-        "cost_per_1k_usd": 0.6538,
-        "latency_p50_ms": 5584
+        "input_tokens": 2140065,
+        "cached_input_tokens": 1519254,
+        "output_tokens": 102870,
+        "reasoning_tokens": 24163,
+        "cost_micros": 128818,
+        "cost_per_1k_usd": 0.6506,
+        "latency_p50_ms": 5652
       },
       "style": {
         "chats": 198,
@@ -157,15 +154,17 @@
       },
       "gen_drops": {},
       "label_attempted": 200,
-      "labeled": 200,
-      "label_drops": {},
+      "labeled": 199,
+      "label_drops": {
+        "check_failed": 1
+      },
       "card_agreement": {
-        "labeled": 200,
-        "all_agree": 179,
+        "labeled": 199,
+        "all_agree": 175,
         "flags": {
-          "items": 7,
-          "labels": 13,
-          "item_details": 2
+          "items": 8,
+          "labels": 16,
+          "item_details": 1
         }
       },
       "customer_messages_mean": 3.02,
@@ -181,13 +180,13 @@
       },
       "label_usage": {
         "calls": 200,
-        "input_tokens": 2096675,
-        "cached_input_tokens": 1475400,
-        "output_tokens": 101698,
-        "reasoning_tokens": 24868,
-        "cost_micros": 127827,
-        "cost_per_1k_usd": 0.6391,
-        "latency_p50_ms": 5447
+        "input_tokens": 2155875,
+        "cached_input_tokens": 1534600,
+        "output_tokens": 100806,
+        "reasoning_tokens": 24207,
+        "cost_micros": 127974,
+        "cost_per_1k_usd": 0.6399,
+        "latency_p50_ms": 5445
       },
       "style": {
         "chats": 200,
@@ -219,21 +218,21 @@
     }
   },
   "labeled_intents": {
-    "PLACE_ORDER": 879,
-    "SMALL_TALK": 322,
-    "MODIFY_ORDER": 121,
-    "CONFIRM_ORDER": 118,
-    "DELIVERY_QUESTION": 86,
-    "MENU_QUESTION": 72,
-    "ORDER_STATUS": 34,
-    "ORDER_PROBLEM": 31,
+    "PLACE_ORDER": 864,
+    "SMALL_TALK": 352,
+    "CONFIRM_ORDER": 116,
+    "MODIFY_ORDER": 114,
+    "DELIVERY_QUESTION": 89,
+    "MENU_QUESTION": 75,
+    "ORDER_STATUS": 38,
+    "ORDER_PROBLEM": 28,
     "CANCEL_ORDER": 23,
-    "OUT_OF_SCOPE": 16,
-    "HUMAN_REQUEST": 16,
-    "UNKNOWN": 13,
-    "PAYMENT_QUESTION": 13,
-    "PAYMENT_CLAIM": 7,
-    "REFUND_REQUEST": 4
+    "HUMAN_REQUEST": 17,
+    "OUT_OF_SCOPE": 15,
+    "PAYMENT_QUESTION": 12,
+    "REFUND_REQUEST": 7,
+    "UNKNOWN": 6,
+    "PAYMENT_CLAIM": 5
   },
   "planned": {
     "generator": {
@@ -320,7 +319,7 @@
     "multi_message_order": {
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 20,
-        "agree": 20
+        "agree": 19
       },
       "deepseek/deepseek-flash@none": {
         "labeled": 19,
@@ -337,8 +336,8 @@
         "agree": 5
       },
       "deepseek/deepseek-flash@none": {
-        "labeled": 9,
-        "agree": 9
+        "labeled": 10,
+        "agree": 10
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 9,
@@ -352,7 +351,7 @@
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 4,
-        "agree": 2
+        "agree": 1
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 2,
@@ -376,7 +375,7 @@
     "missing_info": {
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 12,
-        "agree": 11
+        "agree": 12
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 6,
@@ -389,16 +388,16 @@
     },
     "ambiguous_reference": {
       "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 7,
+        "agree": 7
+      },
+      "deepseek/deepseek-flash@none": {
         "labeled": 8,
-        "agree": 8
+        "agree": 7
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 4,
         "agree": 4
-      },
-      "deepseek/deepseek-flash@none": {
-        "labeled": 6,
-        "agree": 5
       }
     },
     "delivery_question": {
@@ -446,7 +445,7 @@
     "status_question": {
       "deepseek/deepseek-flash@none": {
         "labeled": 4,
-        "agree": 3
+        "agree": 4
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 4,
@@ -477,12 +476,12 @@
         "agree": 2
       },
       "deepseek/deepseek-flash@none": {
-        "labeled": 9,
-        "agree": 6
+        "labeled": 10,
+        "agree": 8
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 9,
-        "agree": 3
+        "agree": 2
       }
     },
     "menu_question": {
@@ -501,8 +500,8 @@
     },
     "correction": {
       "deepseek/deepseek-flash@none": {
-        "labeled": 17,
-        "agree": 17
+        "labeled": 16,
+        "agree": 16
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 18,
@@ -510,7 +509,7 @@
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 8,
-        "agree": 6
+        "agree": 7
       }
     },
     "out_of_scope": {
@@ -543,12 +542,12 @@
     },
     "contextual_yes": {
       "deepseek/deepseek-flash@none": {
-        "labeled": 12,
+        "labeled": 11,
         "agree": 10
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 11,
-        "agree": 10
+        "agree": 9
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 6,
@@ -594,7 +593,7 @@
       },
       "deepseek/deepseek-flash@none": {
         "labeled": 8,
-        "agree": 7
+        "agree": 8
       }
     },
     "combo": {
@@ -618,7 +617,7 @@
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 4,
-        "agree": 3
+        "agree": 4
       },
       "deepseek/deepseek-flash@none": {
         "labeled": 7,
@@ -650,92 +649,92 @@
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 2,
-        "agree": 1
+        "agree": 2
       }
     }
   },
   "intents_by_generator": {
     "google/gemini-3.1-flash-lite@minimal": {
-      "PLACE_ORDER": 295,
-      "SMALL_TALK": 105,
-      "MODIFY_ORDER": 54,
-      "CONFIRM_ORDER": 48,
+      "PLACE_ORDER": 290,
+      "SMALL_TALK": 124,
+      "CONFIRM_ORDER": 45,
+      "MODIFY_ORDER": 43,
       "MENU_QUESTION": 24,
-      "DELIVERY_QUESTION": 18,
-      "ORDER_STATUS": 12,
-      "ORDER_PROBLEM": 12,
+      "DELIVERY_QUESTION": 19,
+      "ORDER_STATUS": 14,
       "CANCEL_ORDER": 10,
+      "ORDER_PROBLEM": 9,
       "HUMAN_REQUEST": 7,
-      "UNKNOWN": 7,
-      "OUT_OF_SCOPE": 7,
+      "OUT_OF_SCOPE": 6,
       "PAYMENT_QUESTION": 4,
-      "PAYMENT_CLAIM": 1
+      "REFUND_REQUEST": 3,
+      "UNKNOWN": 2
     },
     "anthropic/claude-haiku-5-5@off-low": {
-      "PLACE_ORDER": 228,
-      "SMALL_TALK": 89,
+      "PLACE_ORDER": 218,
+      "SMALL_TALK": 96,
       "MODIFY_ORDER": 28,
       "CONFIRM_ORDER": 25,
-      "MENU_QUESTION": 18,
-      "DELIVERY_QUESTION": 14,
+      "MENU_QUESTION": 19,
+      "DELIVERY_QUESTION": 15,
+      "ORDER_STATUS": 6,
       "ORDER_PROBLEM": 6,
-      "ORDER_STATUS": 5,
       "PAYMENT_QUESTION": 4,
       "CANCEL_ORDER": 4,
-      "OUT_OF_SCOPE": 4,
-      "PAYMENT_CLAIM": 3,
-      "HUMAN_REQUEST": 2,
-      "UNKNOWN": 2,
+      "UNKNOWN": 3,
+      "HUMAN_REQUEST": 3,
+      "OUT_OF_SCOPE": 3,
+      "PAYMENT_CLAIM": 2,
       "REFUND_REQUEST": 1
     },
     "deepseek/deepseek-flash@none": {
       "PLACE_ORDER": 356,
-      "SMALL_TALK": 128,
-      "DELIVERY_QUESTION": 54,
-      "CONFIRM_ORDER": 45,
-      "MODIFY_ORDER": 39,
-      "MENU_QUESTION": 30,
-      "ORDER_STATUS": 17,
+      "SMALL_TALK": 132,
+      "DELIVERY_QUESTION": 55,
+      "CONFIRM_ORDER": 46,
+      "MODIFY_ORDER": 43,
+      "MENU_QUESTION": 32,
+      "ORDER_STATUS": 18,
       "ORDER_PROBLEM": 13,
       "CANCEL_ORDER": 9,
       "HUMAN_REQUEST": 7,
-      "PAYMENT_QUESTION": 5,
-      "OUT_OF_SCOPE": 5,
-      "UNKNOWN": 4,
+      "OUT_OF_SCOPE": 6,
+      "PAYMENT_QUESTION": 4,
       "REFUND_REQUEST": 3,
-      "PAYMENT_CLAIM": 3
+      "PAYMENT_CLAIM": 3,
+      "UNKNOWN": 1
     }
   },
   "audit_sample": [
     "syn-p3-0003",
-    "syn-p3-0004",
+    "syn-p3-0008",
+    "syn-p3-0035",
     "syn-p3-0072",
-    "syn-p3-0085",
+    "syn-p3-0105",
     "syn-p3-0113",
-    "syn-p3-0115",
+    "syn-p3-0118",
     "syn-p3-0123",
-    "syn-p3-0144",
+    "syn-p3-0148",
     "syn-p3-0160",
-    "syn-p3-0194",
     "syn-p3-0205",
-    "syn-p3-0248",
-    "syn-p3-0256",
+    "syn-p3-0271",
     "syn-p3-0280",
-    "syn-p3-0283",
-    "syn-p3-0284",
-    "syn-p3-0297",
-    "syn-p3-0298",
-    "syn-p3-0314",
-    "syn-p3-0316",
-    "syn-p3-0332",
-    "syn-p3-0343",
-    "syn-p3-0365",
-    "syn-p3-0369",
-    "syn-p3-0406",
+    "syn-p3-0292",
+    "syn-p3-0310",
+    "syn-p3-0313",
+    "syn-p3-0361",
+    "syn-p3-0402",
+    "syn-p3-0424",
     "syn-p3-0425",
-    "syn-p3-0454",
-    "syn-p3-0458",
-    "syn-p3-0460",
-    "syn-p3-0490"
+    "syn-p3-0427",
+    "syn-p3-0434",
+    "syn-p3-0436",
+    "syn-p3-0438",
+    "syn-p3-0446",
+    "syn-p3-0452",
+    "syn-p3-0464",
+    "syn-p3-0475",
+    "syn-p3-0487",
+    "syn-p3-0489"
   ]
 }

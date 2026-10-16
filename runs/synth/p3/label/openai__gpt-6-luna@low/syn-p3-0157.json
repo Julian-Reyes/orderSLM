@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a large 14-inch Supreme pizza\"},{\"message_index\":2,\"quote\":\"an order of Garlic Knots\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Ivanhoe Blvd.\",\"number\":\"112\",\"unit\":null,\"reference\":null,\"raw_text\":\"112 Ivanhoe Blvd.\",\"evidence\":[{\"message_index\":0,\"quote\":\"112 Ivanhoe Blvd.\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Yes, that is perfect!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a large 14-inch Supreme pizza\"},{\"message_index\":2,\"quote\":\"an order of Garlic Knots instead\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Ivanhoe Blvd\",\"number\":\"112\",\"unit\":null,\"reference\":null,\"raw_text\":\"112 Ivanhoe Blvd\",\"evidence\":[{\"message_index\":0,\"quote\":\"112 Ivanhoe Blvd\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Yes, that is perfect!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12368,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12664,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 505,
-   "reasoning_tokens": 148
+   "output_tokens": 444,
+   "reasoning_tokens": 87
   },
-  "latency_ms": 5184.520381008042,
-  "cost_micros": 826,
-  "at": "2026-10-16T15:18:40.005836+00:00",
+  "latency_ms": 4665.359109989367,
+  "cost_micros": 798,
+  "at": "2026-10-16T17:09:06.354263+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12368,
-   "completion_tokens": 505,
-   "total_tokens": 12873,
+   "prompt_tokens": 12664,
+   "completion_tokens": 444,
+   "total_tokens": 13108,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4988,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 148,
+    "reasoning_tokens": 87,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

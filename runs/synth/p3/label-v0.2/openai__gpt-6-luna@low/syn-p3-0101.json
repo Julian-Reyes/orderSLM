@@ -1,0 +1,37 @@
+{
+ "key": "syn-p3-0101",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 ORDERS OF ONION RINGS\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"SENT TO 3324 JUNIPER ST\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Juniper St\",\"number\":\"3324\",\"unit\":null,\"reference\":null,\"raw_text\":\"3324 JUNIPER ST\",\"evidence\":[{\"message_index\":0,\"quote\":\"3324 JUNIPER ST\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"PAYING CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"YES THAT IS CORRECT!!!!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9106,
+   "cached_input_tokens": 7377,
+   "cache_write_tokens": 0,
+   "output_tokens": 416,
+   "reasoning_tokens": 63
+  },
+  "latency_ms": 5376.97769200895,
+  "cost_micros": 455,
+  "at": "2026-10-16T15:17:42.724460+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9106,
+   "completion_tokens": 416,
+   "total_tokens": 9522,
+   "prompt_tokens_details": {
+    "cached_tokens": 7377,
+    "cache_write_tokens": 1726,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 63,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

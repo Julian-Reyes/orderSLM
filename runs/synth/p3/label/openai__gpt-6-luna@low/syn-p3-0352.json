@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"cappuccino\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"caramel_syrup\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"caramel syrup\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"One medium cappuccino with caramel syrup\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"drip_coffee\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"large\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"one large drip coffee\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"for pickup\"\n        },\n        {\n          \"message_index\": 4,\n          \"quote\": \"pick it up\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"relative\",\n        \"raw_text\": \"in about twenty minutes\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"in about twenty minutes\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"pay by card\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"Rosa\",\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"Rosa\"\n        }\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"caramel_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"caramel syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"One medium cappuccino with caramel syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one large drip coffee\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"},{\"message_index\":4,\"quote\":\"to pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"about twenty minutes\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"about twenty minutes\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Rosa\",\"evidence\":[{\"message_index\":4,\"quote\":\"Rosa\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9970,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10266,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 951,
-   "reasoning_tokens": 185
+   "output_tokens": 579,
+   "reasoning_tokens": 108
   },
-  "latency_ms": 8805.804839998018,
-  "cost_micros": 809,
-  "at": "2026-10-16T15:22:03.559167+00:00",
+  "latency_ms": 7395.373914012453,
+  "cost_micros": 626,
+  "at": "2026-10-16T17:12:07.854008+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9970,
-   "completion_tokens": 951,
-   "total_tokens": 10921,
+   "prompt_tokens": 10266,
+   "completion_tokens": 579,
+   "total_tokens": 10845,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2590,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 185,
+    "reasoning_tokens": 108,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

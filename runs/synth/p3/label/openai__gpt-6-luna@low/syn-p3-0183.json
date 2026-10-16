@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 bacon burgers\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"later\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"later\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay w cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Nico\",\"evidence\":[{\"message_index\":0,\"quote\":\"Nico\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 bacon burgers\"},{\"message_index\":4,\"quote\":\"3 bacon burgers\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"later\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"later\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay w cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Nico\",\"evidence\":[{\"message_index\":0,\"quote\":\"It's Nico\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9183,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9479,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 604,
-   "reasoning_tokens": 256
+   "output_tokens": 549,
+   "reasoning_tokens": 197
   },
-  "latency_ms": 6997.2865560266655,
-  "cost_micros": 557,
-  "at": "2026-10-16T15:19:10.567850+00:00",
+  "latency_ms": 6370.940895983949,
+  "cost_micros": 532,
+  "at": "2026-10-16T17:09:41.432170+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9183,
-   "completion_tokens": 604,
-   "total_tokens": 9787,
+   "prompt_tokens": 9479,
+   "completion_tokens": 549,
+   "total_tokens": 10028,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1803,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 256,
+    "reasoning_tokens": 197,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

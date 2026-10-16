@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two Cokes\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two Personal 8-inch Meat Lovers Pizzas with thick crust\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pick this up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"as soon as possible\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"as soon as possible\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay with my card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12294,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12590,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 543,
-   "reasoning_tokens": 96
+   "output_tokens": 546,
+   "reasoning_tokens": 99
   },
-  "latency_ms": 5335.067387990421,
-  "cost_micros": 837,
-  "at": "2026-10-16T15:23:21.700290+00:00",
+  "latency_ms": 6257.184188987594,
+  "cost_micros": 842,
+  "at": "2026-10-16T17:13:35.854276+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12294,
-   "completion_tokens": 543,
-   "total_tokens": 12837,
+   "prompt_tokens": 12590,
+   "completion_tokens": 546,
+   "total_tokens": 13136,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4914,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 96,
+    "reasoning_tokens": 99,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

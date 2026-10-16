@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 medium lattes\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"to pick them up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about 20 mins\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"in about 20 mins\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":0,\"quote\":\"Maya here\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 medium lattes\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"to pick them up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about 20 mins\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"in about 20 mins\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"I'll pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":0,\"quote\":\"Maya here\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9929,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10225,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 477,
-   "reasoning_tokens": 145
+   "output_tokens": 441,
+   "reasoning_tokens": 108
   },
-  "latency_ms": 5296.595134015661,
-  "cost_micros": 568,
-  "at": "2026-10-16T15:18:32.924762+00:00",
+  "latency_ms": 5705.763072997797,
+  "cost_micros": 553,
+  "at": "2026-10-16T17:09:08.353352+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9929,
-   "completion_tokens": 477,
-   "total_tokens": 10406,
+   "prompt_tokens": 10225,
+   "completion_tokens": 441,
+   "total_tokens": 10666,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2549,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 145,
+    "reasoning_tokens": 108,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

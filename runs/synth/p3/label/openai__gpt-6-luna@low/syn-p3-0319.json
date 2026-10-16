@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO ONIONS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"lemonade\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 CHEESEBURGER COMBO\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":0,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO ONIONS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"lemonade\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 CHEESEBURGER COMBO\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"AT 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":0,\"quote\":\"AT 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"PAY BY CARD\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9046,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9342,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 459,
-   "reasoning_tokens": 77
+   "output_tokens": 376,
+   "reasoning_tokens": 0
   },
-  "latency_ms": 4692.744383995887,
-  "cost_micros": 471,
-  "at": "2026-10-16T15:21:28.564574+00:00",
+  "latency_ms": 3995.4673230240587,
+  "cost_micros": 432,
+  "at": "2026-10-16T17:11:58.849658+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9046,
-   "completion_tokens": 459,
-   "total_tokens": 9505,
+   "prompt_tokens": 9342,
+   "completion_tokens": 376,
+   "total_tokens": 9718,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1666,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 77,
+    "reasoning_tokens": 0,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

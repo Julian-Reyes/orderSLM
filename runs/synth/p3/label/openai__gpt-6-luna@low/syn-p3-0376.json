@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"the garlic knots\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"going to 999 delancey blvd\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Delancey Blvd\",\"number\":\"999\",\"unit\":null,\"reference\":null,\"raw_text\":\"999 delancey blvd\",\"evidence\":[{\"message_index\":2,\"quote\":\"999 delancey blvd\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"},{\"message_index\":2,\"quote\":\"change for a 20\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12237,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12533,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 437,
-   "reasoning_tokens": 92
+   "output_tokens": 476,
+   "reasoning_tokens": 131
   },
-  "latency_ms": 5184.797663998324,
-  "cost_micros": 779,
-  "at": "2026-10-16T15:22:28.692645+00:00",
+  "latency_ms": 5105.047873017611,
+  "cost_micros": 801,
+  "at": "2026-10-16T17:12:33.852073+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12237,
-   "completion_tokens": 437,
-   "total_tokens": 12674,
+   "prompt_tokens": 12533,
+   "completion_tokens": 476,
+   "total_tokens": 13009,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4857,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 92,
+    "reasoning_tokens": 131,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

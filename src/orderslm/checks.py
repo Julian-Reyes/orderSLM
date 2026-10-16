@@ -63,6 +63,33 @@ def _check_mods(menu: MenuCatalog, item_id: str, mods: list[Modification], path:
     return issues
 
 
+def check_removals(output: ExtractionOutput, menu: MenuCatalog) -> list[Issue]:
+    """Only something an item comes with can be removed ("no cheese" on a burger without cheese changes nothing).
+    Used for synthetic teacher labels only: PIZZA's human gold negates toppings a plain pizza doesn't include
+    ("no onions"), so this is not part of check_all and never changes the benchmark."""
+    issues: list[Issue] = []
+    for line in output.items:
+        if line.halves:
+            parts = [(h.menu_item_id, h.modifications) for h in line.halves]
+        else:
+            parts = [(line.menu_item_id, line.modifications)]
+        for item_id, mods in parts:
+            item = menu.item(item_id or "")
+            if item is None:
+                continue
+            not_included = set(item.addon_ids) - set(item.ingredient_ids)
+            for mod in mods:
+                if mod.kind is ModificationKind.remove and mod.modifier_id in not_included:
+                    issues.append(
+                        Issue(
+                            "REMOVE_NOT_INCLUDED",
+                            f"items[{line.line_id}]",
+                            f"{mod.modifier_id!r} is not part of {item_id!r} to remove",
+                        )
+                    )
+    return issues
+
+
 def check_catalog(output: ExtractionOutput, menu: MenuCatalog) -> list[Issue]:
     issues: list[Issue] = []
     for item in output.items:

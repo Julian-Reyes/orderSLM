@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]},{\"menu_item_id\":\"margherita_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"one small ten-inch pizza, half BBQ Chicken and half Margherita\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":2,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Brookside Rd\",\"number\":\"245\",\"unit\":\"16\",\"reference\":null,\"raw_text\":\"245 Brookside Rd, #16\",\"evidence\":[{\"message_index\":2,\"quote\":\"245 Brookside Rd, #16\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"},{\"message_index\":2,\"quote\":\"change for a twenty\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]},{\"menu_item_id\":\"margherita_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"one small ten-inch pizza, half BBQ Chicken and half Margherita\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":2,\"quote\":\"6:30\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Brookside Rd\",\"number\":\"245\",\"unit\":\"16\",\"reference\":null,\"raw_text\":\"245 Brookside Rd, #16\",\"evidence\":[{\"message_index\":2,\"quote\":\"245 Brookside Rd, #16\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"},{\"message_index\":2,\"quote\":\"change for a twenty\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12355,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12651,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 487,
-   "reasoning_tokens": 77
+   "output_tokens": 571,
+   "reasoning_tokens": 165
   },
-  "latency_ms": 4546.601831010776,
-  "cost_micros": 816,
-  "at": "2026-10-16T15:19:44.558261+00:00",
+  "latency_ms": 6202.312956971582,
+  "cost_micros": 861,
+  "at": "2026-10-16T17:10:06.429104+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12355,
-   "completion_tokens": 487,
-   "total_tokens": 12842,
+   "prompt_tokens": 12651,
+   "completion_tokens": 571,
+   "total_tokens": 13222,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4975,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 77,
+    "reasoning_tokens": 165,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

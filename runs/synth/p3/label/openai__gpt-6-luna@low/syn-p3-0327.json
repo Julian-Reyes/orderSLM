@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"hot choc\"},{\"message_index\":5,\"quote\":\"medium\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":7,\"quote\":\"yep\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10009,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10305,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 456,
-   "reasoning_tokens": 97
+   "output_tokens": 593,
+   "reasoning_tokens": 228
   },
-  "latency_ms": 8677.205559011782,
-  "cost_micros": 565,
-  "at": "2026-10-16T15:21:36.561383+00:00",
+  "latency_ms": 6573.099275992718,
+  "cost_micros": 637,
+  "at": "2026-10-16T17:12:05.851657+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10009,
-   "completion_tokens": 456,
-   "total_tokens": 10465,
+   "prompt_tokens": 10305,
+   "completion_tokens": 593,
+   "total_tokens": 10898,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2629,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 97,
+    "reasoning_tokens": 228,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

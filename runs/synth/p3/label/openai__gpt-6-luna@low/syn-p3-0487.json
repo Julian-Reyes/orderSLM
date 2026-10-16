@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":8,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":9,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":12,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"one order\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":9,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Franklin Way\",\"number\":\"80\",\"unit\":null,\"reference\":null,\"raw_text\":\"80 franklin way\",\"evidence\":[{\"message_index\":9,\"quote\":\"80 franklin way\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":12,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":11,\"quote\":\"yep\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\"message_index\": 0, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 2, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 3, \"primary\": \"MENU_QUESTION\", \"secondary\": null},\n    {\"message_index\": 5, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 6, \"primary\": \"MENU_QUESTION\", \"secondary\": null},\n    {\"message_index\": 8, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 9, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 11, \"primary\": \"CONFIRM_ORDER\", \"secondary\": null},\n    {\"message_index\": 12, \"primary\": \"MODIFY_ORDER\", \"secondary\": null}\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"breadsticks\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 5, \"quote\": \"one order pls\"}\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\"message_index\": 9, \"quote\": \"delivery\"}\n      ],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"franklin way\",\n      \"number\": \"80\",\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": \"80 franklin way\",\n      \"evidence\": [\n        {\"message_index\": 9, \"quote\": \"80 franklin way\"}\n      ]\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\"message_index\": 12, \"quote\": \"paying cash\"}\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12512,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12808,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 427,
-   "reasoning_tokens": 0
+   "output_tokens": 817,
+   "reasoning_tokens": 184
   },
-  "latency_ms": 4860.561342997244,
-  "cost_micros": 801,
-  "at": "2026-10-16T15:24:21.034399+00:00",
+  "latency_ms": 6645.517534023384,
+  "cost_micros": 999,
+  "at": "2026-10-16T17:14:47.675477+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12512,
-   "completion_tokens": 427,
-   "total_tokens": 12939,
+   "prompt_tokens": 12808,
+   "completion_tokens": 817,
+   "total_tokens": 13625,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 5132,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 184,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

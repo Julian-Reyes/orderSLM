@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"oat_milk\",\"amount\":\"normal\",\"raw_text\":\"switch to oat milk\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a hot choc\"},{\"message_index\":3,\"quote\":\"vanilla syrup\"},{\"message_index\":4,\"quote\":\"switch to oat milk\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"sm cappuccino\"},{\"message_index\":5,\"quote\":\"vanilla\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"3 croissants\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":10,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 8:30\",\"normalized_local\":\"08:30\",\"evidence\":[{\"message_index\":10,\"quote\":\"at 8:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":11,\"quote\":\"pay w card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":9,\"quote\":\"maya\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"yep thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"oat_milk\",\"amount\":\"normal\",\"raw_text\":\"switch to oat milk\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"hot choc\"},{\"message_index\":3,\"quote\":\"vanilla syrup\"},{\"message_index\":4,\"quote\":\"switch to oat milk\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"sm cappuccino\"},{\"message_index\":5,\"quote\":\"vanilla\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"3 croissants\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":10,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 8:30\",\"normalized_local\":\"08:30\",\"evidence\":[{\"message_index\":10,\"quote\":\"at 8:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":11,\"quote\":\"pay w card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"maya\",\"evidence\":[{\"message_index\":9,\"quote\":\"maya\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10152,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10448,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 972,
-   "reasoning_tokens": 206
+   "output_tokens": 1094,
+   "reasoning_tokens": 335
   },
-  "latency_ms": 10167.725134000648,
-  "cost_micros": 838,
-  "at": "2026-10-16T15:23:31.695314+00:00",
+  "latency_ms": 11713.210362009704,
+  "cost_micros": 902,
+  "at": "2026-10-16T17:14:00.853182+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10152,
-   "completion_tokens": 972,
-   "total_tokens": 11124,
+   "prompt_tokens": 10448,
+   "completion_tokens": 1094,
+   "total_tokens": 11542,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2772,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 206,
+    "reasoning_tokens": 335,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

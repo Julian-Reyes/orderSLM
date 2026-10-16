@@ -10,10 +10,10 @@ Built from the saved files in this folder (`make synth ARGS="report --batch b1"`
 | chats kept | 250/250 (100%) | 983/1000 (98%) | 248/250 (99%) |
 | generation drops | 0 | invalid_output 14, business_states_price 2, near_duplicate_of 1 | business_states_price 1, invalid_output 1 |
 | repairs | trimmed_trailing_business_message 41 | trimmed_trailing_business_message 227 | trimmed_trailing_business_message 9 |
-| labels kept | 250/250 (100%) | 978/983 (99%) | 248/248 (100%) |
-| label drops | 0 | invalid_contract 3, check_failed 2 | 0 |
-| card agrees with label | 228/250 (91%) | 928/978 (95%) | 228/248 (92%) |
-| disagreement types | labels 12, items 8, item_details 5 | items 16, item_details 10, labels 34, decision 1 | items 8, labels 13, item_details 1 |
+| labels kept | 249/250 (100%) | 976/983 (99%) | 248/248 (100%) |
+| label drops | check_failed 1 | invalid_contract 3, check_failed 4 | 0 |
+| card agrees with label | 228/249 (92%) | 928/976 (95%) | 228/248 (92%) |
+| disagreement types | labels 12, items 8, item_details 4 | items 16, item_details 8, labels 34, decision 1 | items 8, labels 13, item_details 1 |
 | card address used | 36/47 (77%) | 159/163 (98%) | 43/43 (100%) |
 
 ## Cost and tokens
@@ -51,11 +51,11 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 
 | scenario | claude-haiku-5-5@off-low | deepseek-flash@none | gemini-3.1-flash-lite@minimal |
 |---|---|---|---|
-| ambiguous_reference | 8/8 | 30/32 | 9/9 |
+| ambiguous_reference | 8/8 | 30/31 | 9/9 |
 | cancellation | 8/8 | 29/30 | 8/8 |
 | combo | 9/10 | 41/41 | 10/10 |
 | contextual_yes | 11/12 | 47/48 | 12/12 |
-| correction | 17/18 | 67/69 | 18/19 |
+| correction | 17/18 | 67/68 | 18/19 |
 | correction_after_confirmation | 5/10 | 22/38 | 5/10 |
 | delivery_question | 8/8 | 30/30 | 7/7 |
 | half_and_half | 6/8 | 33/33 | 8/8 |
@@ -70,7 +70,7 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 | payment_claim | 8/8 | 30/31 | 7/8 |
 | payment_question | 8/8 | 32/32 | 8/8 |
 | refund_request | 8/8 | 32/32 | 5/8 |
-| simple_order | 25/28 | 110/111 | 26/28 |
+| simple_order | 25/27 | 110/111 | 26/28 |
 | small_talk | 8/8 | 31/32 | 6/8 |
 | status_question | 8/8 | 31/31 | 8/8 |
 | two_requests | 7/8 | 28/32 | 8/8 |
@@ -84,16 +84,16 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 | CONFIRM_ORDER | 38 | 157 | 56 |
 | DELIVERY_QUESTION | 52 | 244 | 29 |
 | HUMAN_REQUEST | 14 | 54 | 11 |
-| MENU_QUESTION | 43 | 162 | 28 |
-| MODIFY_ORDER | 52 | 183 | 52 |
+| MENU_QUESTION | 42 | 161 | 28 |
+| MODIFY_ORDER | 52 | 182 | 52 |
 | ORDER_PROBLEM | 29 | 126 | 21 |
 | ORDER_STATUS | 15 | 104 | 16 |
 | OUT_OF_SCOPE | 8 | 44 | 8 |
 | PAYMENT_CLAIM | 11 | 41 | 9 |
 | PAYMENT_QUESTION | 14 | 59 | 14 |
-| PLACE_ORDER | 429 | 1585 | 333 |
+| PLACE_ORDER | 426 | 1580 | 333 |
 | REFUND_REQUEST | 8 | 35 | 6 |
-| SMALL_TALK | 162 | 698 | 140 |
+| SMALL_TALK | 161 | 698 | 140 |
 | UNKNOWN | 7 | 22 | 7 |
 
 Audit sample: `audit.md` (30 chats, seed 20261016).

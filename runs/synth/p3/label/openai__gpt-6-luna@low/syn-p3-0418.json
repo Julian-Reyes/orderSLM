@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"one cheeseburger\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"delivered\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about twenty min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in about twenty min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Orchard Terrace\",\"number\":\"6\",\"unit\":null,\"reference\":null,\"raw_text\":\"6 Orchard Terrace\",\"evidence\":[{\"message_index\":2,\"quote\":\"6 Orchard Terrace\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9174,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9470,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 510,
-   "reasoning_tokens": 77
+   "output_tokens": 520,
+   "reasoning_tokens": 87
   },
-  "latency_ms": 4654.6937840175815,
-  "cost_micros": 509,
-  "at": "2026-10-16T15:23:06.692826+00:00",
+  "latency_ms": 6009.2031239764765,
+  "cost_micros": 517,
+  "at": "2026-10-16T17:13:29.851100+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9174,
-   "completion_tokens": 510,
-   "total_tokens": 9684,
+   "prompt_tokens": 9470,
+   "completion_tokens": 520,
+   "total_tokens": 9990,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1794,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 77,
+    "reasoning_tokens": 87,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

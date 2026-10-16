@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"one Dr Pepper, the 12 oz can\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"water\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"two bottled waters\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"I'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":5,\"quote\":\"pay with cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12318,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12614,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 517,
-   "reasoning_tokens": 94
+   "output_tokens": 660,
+   "reasoning_tokens": 237
   },
-  "latency_ms": 4948.384791990975,
-  "cost_micros": 827,
-  "at": "2026-10-16T15:19:24.567257+00:00",
+  "latency_ms": 7610.093109979061,
+  "cost_micros": 901,
+  "at": "2026-10-16T17:09:53.432648+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12318,
-   "completion_tokens": 517,
-   "total_tokens": 12835,
+   "prompt_tokens": 12614,
+   "completion_tokens": 660,
+   "total_tokens": 13274,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4938,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 94,
+    "reasoning_tokens": 237,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

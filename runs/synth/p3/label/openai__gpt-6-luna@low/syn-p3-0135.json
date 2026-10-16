@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\"message_index\": 0, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 1, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 2, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 4, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 5, \"primary\": \"MODIFY_ORDER\", \"secondary\": null},\n    {\"message_index\": 7, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 8, \"primary\": \"PLACE_ORDER\", \"secondary\": null}\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"bacon_burger\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"avocado\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"add avocado\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 4, \"quote\": \"the bacon burger\"},\n          {\"message_index\": 5, \"quote\": \"add avocado\"}\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\"message_index\": 8, \"quote\": \"grab it\"}\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"relative\",\n        \"raw_text\": \"in 20 min\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\"message_index\": 8, \"quote\": \"in 20 min\"}\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"Nico\",\n      \"evidence\": [\n        {\"message_index\": 1, \"quote\": \"nico\"}\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"avocado\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add avocado\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"the bacon burger\"},{\"message_index\":5,\"quote\":\"add avocado\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"grab it\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Nico\",\"evidence\":[{\"message_index\":1,\"quote\":\"nico\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9223,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9519,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 795,
-   "reasoning_tokens": 131
+   "output_tokens": 663,
+   "reasoning_tokens": 216
   },
-  "latency_ms": 6983.63858499215,
-  "cost_micros": 656,
-  "at": "2026-10-16T15:18:15.722783+00:00",
+  "latency_ms": 6997.9524860100355,
+  "cost_micros": 593,
+  "at": "2026-10-16T17:08:53.350782+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9223,
-   "completion_tokens": 795,
-   "total_tokens": 10018,
+   "prompt_tokens": 9519,
+   "completion_tokens": 663,
+   "total_tokens": 10182,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1843,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 131,
+    "reasoning_tokens": 216,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

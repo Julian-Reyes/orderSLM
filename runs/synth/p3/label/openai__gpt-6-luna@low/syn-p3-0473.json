@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO LETTUCE\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 BACON BURGERS\"},{\"message_index\":0,\"quote\":\"NO LETTUCE\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"ASAP!!\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"ASAP!!\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Tom\",\"evidence\":[{\"message_index\":2,\"quote\":\"TOM\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO LETTUCE\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 BACON BURGERS\"},{\"message_index\":0,\"quote\":\"NO LETTUCE\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"ASAP\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"ASAP\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"TOM\",\"evidence\":[{\"message_index\":2,\"quote\":\"TOM\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9086,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9382,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 486,
-   "reasoning_tokens": 127
+   "output_tokens": 437,
+   "reasoning_tokens": 79
   },
-  "latency_ms": 4921.450132998871,
-  "cost_micros": 488,
-  "at": "2026-10-16T15:24:13.004535+00:00",
+  "latency_ms": 4676.225330011221,
+  "cost_micros": 467,
+  "at": "2026-10-16T17:14:46.675588+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9086,
-   "completion_tokens": 486,
-   "total_tokens": 9572,
+   "prompt_tokens": 9382,
+   "completion_tokens": 437,
+   "total_tokens": 9819,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1706,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 127,
+    "reasoning_tokens": 79,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

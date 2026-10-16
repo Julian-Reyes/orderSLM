@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"bacon\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"bacon added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"1 veggie burger with bacon added\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"come pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"pay cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9045,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9341,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 433,
-   "reasoning_tokens": 84
+   "output_tokens": 444,
+   "reasoning_tokens": 95
   },
-  "latency_ms": 4826.677450007992,
-  "cost_micros": 458,
-  "at": "2026-10-16T15:23:57.005498+00:00",
+  "latency_ms": 5361.361470015254,
+  "cost_micros": 466,
+  "at": "2026-10-16T17:14:23.852839+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9045,
-   "completion_tokens": 433,
-   "total_tokens": 9478,
+   "prompt_tokens": 9341,
+   "completion_tokens": 444,
+   "total_tokens": 9785,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1665,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 84,
+    "reasoning_tokens": 95,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

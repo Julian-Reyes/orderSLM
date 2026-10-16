@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CANCEL_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"sesame\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one sesame bagel\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"I'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying in cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Luis\",\"evidence\":[{\"message_index\":6,\"quote\":\"It's for Luis\"}]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"cancel the whole order\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CANCEL_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"sesame\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one sesame bagel\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"I'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying in cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Luis\",\"evidence\":[{\"message_index\":6,\"quote\":\"Luis\"}]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"cancel the whole order\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10126,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10422,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 498,
-   "reasoning_tokens": 122
+   "output_tokens": 503,
+   "reasoning_tokens": 129
   },
-  "latency_ms": 4900.086498004384,
-  "cost_micros": 598,
-  "at": "2026-10-16T15:21:45.561511+00:00",
+  "latency_ms": 5024.15734398528,
+  "cost_micros": 604,
+  "at": "2026-10-16T17:12:26.850038+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10126,
-   "completion_tokens": 498,
-   "total_tokens": 10624,
+   "prompt_tokens": 10422,
+   "completion_tokens": 503,
+   "total_tokens": 10925,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2746,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 122,
+    "reasoning_tokens": 129,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

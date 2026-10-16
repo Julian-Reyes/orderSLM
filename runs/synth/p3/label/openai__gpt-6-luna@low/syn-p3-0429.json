@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 lemonade\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"yep\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9064,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9360,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 329,
-   "reasoning_tokens": 39
+   "output_tokens": 337,
+   "reasoning_tokens": 47
   },
-  "latency_ms": 4608.0193590023555,
-  "cost_micros": 407,
-  "at": "2026-10-16T15:23:23.692973+00:00",
+  "latency_ms": 5419.298440974671,
+  "cost_micros": 414,
+  "at": "2026-10-16T17:13:49.852532+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9064,
-   "completion_tokens": 329,
-   "total_tokens": 9393,
+   "prompt_tokens": 9360,
+   "completion_tokens": 337,
+   "total_tokens": 9697,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1684,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 39,
+    "reasoning_tokens": 47,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

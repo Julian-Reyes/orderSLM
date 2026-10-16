@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_PROBLEM\",\"secondary\":\"REFUND_REQUEST\"}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"REFUND_REQUEST\",\"secondary\":\"ORDER_PROBLEM\"}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12166,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12462,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 280,
-   "reasoning_tokens": 83
+   "output_tokens": 191,
+   "reasoning_tokens": 0
   },
-  "latency_ms": 3750.3377299872227,
-  "cost_micros": 693,
-  "at": "2026-10-16T15:23:43.002319+00:00",
+  "latency_ms": 3147.4259410169907,
+  "cost_micros": 652,
+  "at": "2026-10-16T17:14:01.851533+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12166,
-   "completion_tokens": 280,
-   "total_tokens": 12446,
+   "prompt_tokens": 12462,
+   "completion_tokens": 191,
+   "total_tokens": 12653,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4786,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 83,
+    "reasoning_tokens": 0,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

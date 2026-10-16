@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"cheese_pizza\",\"modifications\":[]},{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"PERSONAL 8 INCH PIZZA HALF CHEESE HALF BBQ CHICKEN\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 ORDERS OF GARLIC KNOTS\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"SEND TO 2 WILLOW CREEK CT\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Willow Creek Ct\",\"number\":\"2\",\"unit\":null,\"reference\":null,\"raw_text\":\"2 WILLOW CREEK CT\",\"evidence\":[{\"message_index\":2,\"quote\":\"2 WILLOW CREEK CT\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"MY CARD READY\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12289,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12585,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 619,
-   "reasoning_tokens": 162
+   "output_tokens": 636,
+   "reasoning_tokens": 179
   },
-  "latency_ms": 7057.712571986485,
-  "cost_micros": 875,
-  "at": "2026-10-16T15:23:01.701561+00:00",
+  "latency_ms": 6172.343751008157,
+  "cost_micros": 886,
+  "at": "2026-10-16T17:13:30.852222+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12289,
-   "completion_tokens": 619,
-   "total_tokens": 12908,
+   "prompt_tokens": 12585,
+   "completion_tokens": 636,
+   "total_tokens": 13221,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4909,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 162,
+    "reasoning_tokens": 179,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

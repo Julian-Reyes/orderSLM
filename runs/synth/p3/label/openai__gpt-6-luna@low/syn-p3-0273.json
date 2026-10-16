@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"avocado\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w avocado\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"three cheeseburgers\"},{\"message_index\":0,\"quote\":\"w avocado\"},{\"message_index\":2,\"quote\":\"instead of one of them\"},{\"message_index\":4,\"quote\":\"the 2 burgers should be double patty\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"deliver\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Bayview Dr\",\"number\":\"118\",\"unit\":null,\"reference\":null,\"raw_text\":\"118 bayview dr\",\"evidence\":[{\"message_index\":6,\"quote\":\"118 bayview dr\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"double\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"avocado\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w avocado\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"three cheeseburgers w avocado\"},{\"message_index\":2,\"quote\":\"instead of one of them\"},{\"message_index\":4,\"quote\":\"the 2 burgers should be double patty\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"deliver to 118 bayview dr\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"bayview dr\",\"number\":\"118\",\"unit\":null,\"reference\":null,\"raw_text\":\"118 bayview dr\",\"evidence\":[{\"message_index\":6,\"quote\":\"118 bayview dr\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9243,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9539,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 795,
-   "reasoning_tokens": 296
+   "output_tokens": 694,
+   "reasoning_tokens": 197
   },
-  "latency_ms": 7309.970849979436,
-  "cost_micros": 658,
-  "at": "2026-10-16T15:20:47.566782+00:00",
+  "latency_ms": 7682.908649003366,
+  "cost_micros": 611,
+  "at": "2026-10-16T17:11:17.431143+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9243,
-   "completion_tokens": 795,
-   "total_tokens": 10038,
+   "prompt_tokens": 9539,
+   "completion_tokens": 694,
+   "total_tokens": 10233,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1863,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 296,
+    "reasoning_tokens": 197,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

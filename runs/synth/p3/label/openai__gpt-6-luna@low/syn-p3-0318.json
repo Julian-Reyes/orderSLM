@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CANCEL_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 sprites\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"deliver\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Lakeview Ln\",\"number\":\"7018\",\"unit\":null,\"reference\":null,\"raw_text\":\"7018 lakeview ln\",\"evidence\":[{\"message_index\":2,\"quote\":\"7018 lakeview ln\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"cancel the whole thing\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CANCEL_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 sprites\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"deliver to 7018 lakeview ln\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"lakeview ln\",\"number\":\"7018\",\"unit\":null,\"reference\":null,\"raw_text\":\"7018 lakeview ln\",\"evidence\":[{\"message_index\":2,\"quote\":\"7018 lakeview ln\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"payin w card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"cancel the whole thing\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9160,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9456,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 422,
-   "reasoning_tokens": 64
+   "output_tokens": 429,
+   "reasoning_tokens": 61
   },
-  "latency_ms": 4238.928081002086,
-  "cost_micros": 464,
-  "at": "2026-10-16T15:21:24.559057+00:00",
+  "latency_ms": 4286.705719976453,
+  "cost_micros": 470,
+  "at": "2026-10-16T17:11:57.849676+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9160,
-   "completion_tokens": 422,
-   "total_tokens": 9582,
+   "prompt_tokens": 9456,
+   "completion_tokens": 429,
+   "total_tokens": 9885,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1780,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 64,
+    "reasoning_tokens": 61,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

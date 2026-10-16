@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_PROBLEM\",\"secondary\":\"REFUND_REQUEST\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"SMALL_TALK\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"fries\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three cheeseburger combos with fries and cokes\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_PROBLEM\",\"secondary\":\"REFUND_REQUEST\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"SMALL_TALK\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"fries\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three cheeseburger combos\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9118,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9414,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 431,
-   "reasoning_tokens": 102
+   "output_tokens": 428,
+   "reasoning_tokens": 104
   },
-  "latency_ms": 4514.587694022339,
-  "cost_micros": 464,
-  "at": "2026-10-16T15:20:51.561731+00:00",
+  "latency_ms": 4897.416004998377,
+  "cost_micros": 465,
+  "at": "2026-10-16T17:11:09.429220+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9118,
-   "completion_tokens": 431,
-   "total_tokens": 9549,
+   "prompt_tokens": 9414,
+   "completion_tokens": 428,
+   "total_tokens": 9842,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1738,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 102,
+    "reasoning_tokens": 104,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

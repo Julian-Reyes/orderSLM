@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"3 SMALL SUPREME PIZZAS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no house cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A MEDIUM PEPPERONI PIZZA\"},{\"message_index\":2,\"quote\":\"no house cheese blend\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"6:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":4,\"quote\":\"MY NAME IS MAYA\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"YES THATS PERFECT\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12357,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12653,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 668,
-   "reasoning_tokens": 167
+   "output_tokens": 686,
+   "reasoning_tokens": 185
   },
-  "latency_ms": 6368.865494005149,
-  "cost_micros": 906,
-  "at": "2026-10-16T15:23:33.699496+00:00",
+  "latency_ms": 7063.9951119956095,
+  "cost_micros": 918,
+  "at": "2026-10-16T17:14:17.852117+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12357,
-   "completion_tokens": 668,
-   "total_tokens": 13025,
+   "prompt_tokens": 12653,
+   "completion_tokens": 686,
+   "total_tokens": 13339,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4977,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 167,
+    "reasoning_tokens": 185,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

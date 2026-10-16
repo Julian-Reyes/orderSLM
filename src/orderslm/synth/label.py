@@ -14,7 +14,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from orderslm.checks import Issue, check_all
+from orderslm.checks import Issue, check_all, check_removals
 from orderslm.core.finalize import FINALIZE_VERSION, finalize_order
 from orderslm.extractors.teacher import conversation_prompt, portable_schema
 from orderslm.llm.types import ChatMessage, ChatRequest
@@ -81,7 +81,11 @@ def parse_label(
         extraction = finalize_order(label.order, menu, conversation.language)
     except (ValueError, ValidationError) as e:
         return None, f"finalize: {str(e)[:300]}"
-    issues = check_all(extraction, conversation, menu) + _customer_evidence(extraction, conversation)
+    issues = (
+        check_all(extraction, conversation, menu)
+        + check_removals(extraction, menu)
+        + _customer_evidence(extraction, conversation)
+    )
     if issues:
         return None, "check_failed: " + "; ".join(f"{i.code} {i.path}" for i in issues[:5])
     return (

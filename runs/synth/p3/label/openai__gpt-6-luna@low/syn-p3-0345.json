@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":\"PAYMENT_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 ONION RINGS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"2 BACON BURGERS\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"in like 20 min\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9224,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9520,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 622,
-   "reasoning_tokens": 215
+   "output_tokens": 668,
+   "reasoning_tokens": 261
   },
-  "latency_ms": 6658.474181982456,
-  "cost_micros": 570,
-  "at": "2026-10-16T15:22:06.559236+00:00",
+  "latency_ms": 7343.113718001405,
+  "cost_micros": 596,
+  "at": "2026-10-16T17:12:37.851761+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9224,
-   "completion_tokens": 622,
-   "total_tokens": 9846,
+   "prompt_tokens": 9520,
+   "completion_tokens": 668,
+   "total_tokens": 10188,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1844,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 215,
+    "reasoning_tokens": 261,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

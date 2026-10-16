@@ -1,0 +1,37 @@
+{
+ "key": "syn-p3-0073",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an order of onion rings\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"jalapeno\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with JALAPEÑOS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a VEGGIE BURGER\"},{\"message_index\":2,\"quote\":\"with JALAPEÑOS\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 20 mins\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in like 20 mins\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Oak Rd\",\"number\":\"770\",\"unit\":null,\"reference\":\"across from the park\",\"raw_text\":\"770 OAK RD ACROSS FROM THE PARK\",\"evidence\":[{\"message_index\":2,\"quote\":\"770 OAK RD ACROSS FROM THE PARK\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"PAYING BY CARD\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"YEP THATS IT!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9192,
+   "cached_input_tokens": 7377,
+   "cache_write_tokens": 0,
+   "output_tokens": 700,
+   "reasoning_tokens": 185
+  },
+  "latency_ms": 6809.638857987011,
+  "cost_micros": 606,
+  "at": "2026-10-16T15:17:22.723516+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9192,
+   "completion_tokens": 700,
+   "total_tokens": 9892,
+   "prompt_tokens_details": {
+    "cached_tokens": 7377,
+    "cache_write_tokens": 1812,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 185,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

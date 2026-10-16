@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coffee_pastry_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[{\"slot_id\":\"pastry\",\"menu_item_id\":\"muffin\",\"variant_id\":\"blueberry\"},{\"slot_id\":\"drink\",\"menu_item_id\":\"drip_coffee\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"coffee & pastry combo\"},{\"message_index\":2,\"quote\":\"blueberry muffin\"},{\"message_index\":2,\"quote\":\"drip coffee\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay w card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Ivy\",\"evidence\":[{\"message_index\":2,\"quote\":\"Ivy\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coffee_pastry_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[{\"slot_id\":\"drink\",\"menu_item_id\":\"drip_coffee\",\"variant_id\":null},{\"slot_id\":\"pastry\",\"menu_item_id\":\"muffin\",\"variant_id\":\"blueberry\"}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"coffee & pastry combo\"},{\"message_index\":2,\"quote\":\"blueberry muffin\"},{\"message_index\":2,\"quote\":\"drip coffee\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"pay w card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Ivy\",\"evidence\":[{\"message_index\":2,\"quote\":\"Ivy\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9937,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10233,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 532,
-   "reasoning_tokens": 141
+   "output_tokens": 538,
+   "reasoning_tokens": 147
   },
-  "latency_ms": 5385.752333007986,
-  "cost_micros": 596,
-  "at": "2026-10-16T15:18:01.728065+00:00",
+  "latency_ms": 6925.923972012242,
+  "cost_micros": 602,
+  "at": "2026-10-16T17:08:26.353561+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9937,
-   "completion_tokens": 532,
-   "total_tokens": 10469,
+   "prompt_tokens": 10233,
+   "completion_tokens": 538,
+   "total_tokens": 10771,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2557,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 141,
+    "reasoning_tokens": 147,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

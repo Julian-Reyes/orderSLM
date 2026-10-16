@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 extra large supreme pizza\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"744 Hollis Ct.\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in about 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Hollis Ct\",\"number\":\"744\",\"unit\":null,\"reference\":null,\"raw_text\":\"744 Hollis Ct.\",\"evidence\":[{\"message_index\":2,\"quote\":\"744 Hollis Ct.\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 extra large supreme pizza\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"744 Hollis Ct.\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in about 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Hollis Ct.\",\"number\":\"744\",\"unit\":null,\"reference\":null,\"raw_text\":\"744 Hollis Ct.\",\"evidence\":[{\"message_index\":2,\"quote\":\"744 Hollis Ct.\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12229,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12525,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 461,
-   "reasoning_tokens": 129
+   "output_tokens": 416,
+   "reasoning_tokens": 84
   },
-  "latency_ms": 6388.996509980643,
-  "cost_micros": 790,
-  "at": "2026-10-16T15:21:18.564081+00:00",
+  "latency_ms": 4892.670066998107,
+  "cost_micros": 770,
+  "at": "2026-10-16T17:11:33.432505+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12229,
-   "completion_tokens": 461,
-   "total_tokens": 12690,
+   "prompt_tokens": 12525,
+   "completion_tokens": 416,
+   "total_tokens": 12941,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4849,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 129,
+    "reasoning_tokens": 84,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

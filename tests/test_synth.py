@@ -14,7 +14,7 @@ from orderslm.llm.types import ChatResponse, LLMUsage
 from orderslm.menus import load_menu, load_menus
 from orderslm.schema.annotation import Scenario
 from orderslm.schema.conversation import Role, Split
-from orderslm.schema.extraction import DecisionState, ExtractionOutput, MissingReason
+from orderslm.schema.extraction import DecisionState, ExtractionOutput, MissingReason, Modification
 from orderslm.schema.label import AmbiguityFlag, MessageIntent, ModelOrder, TeacherLabel
 from orderslm.schema.routing import LABEL_DESCRIPTIONS, RouterLabel
 from orderslm.schema.synthetic import GeneratedChat, PlannedItem
@@ -500,3 +500,25 @@ def test_mega_menu_cards():
             _check_planned(p, mega)
     with pytest.raises(KeyError, match="held-out"):
         synth_cards.plan_cards(5, seed=1, batch="h", business_ids=("lucky-lime",))
+
+
+def test_removing_an_add_on_the_item_does_not_include_is_flagged():
+    from orderslm.checks import check_all, check_removals
+
+    ac = next(a for a in DEV_ORDERS if a.conversation.business_id == "corner-patty" and _plain(a))
+    gold = ac.gold_extraction
+    line = gold.items[0].model_copy(
+        update={
+            "menu_item_id": "veggie_burger",
+            "variant_id": None,
+            "modifications": [Modification(kind="remove", modifier_id="cheese", raw_text="no cheese")],
+        }
+    )
+    bad = gold.model_copy(update={"items": [line]})
+    menu = load_menu("corner-patty")
+    assert [i.code for i in check_removals(bad, menu)] == ["REMOVE_NOT_INCLUDED"]
+    assert all(
+        i.code != "REMOVE_NOT_INCLUDED" for i in check_all(bad, ac.conversation, menu)
+    )  # not in check_all
+    for a in DEV_ORDERS:  # never fires on dev gold
+        assert not check_removals(a.gold_extraction, load_menu(a.conversation.business_id))

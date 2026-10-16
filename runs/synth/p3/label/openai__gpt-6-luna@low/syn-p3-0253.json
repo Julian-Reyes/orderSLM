@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"veggie_pizza\",\"modifications\":[]},{\"menu_item_id\":\"hawaiian_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"medium half-and-half pizza with half Veggie and half Hawaiian\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"order a delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Grant Dr\",\"number\":\"6350\",\"unit\":null,\"reference\":null,\"raw_text\":\"6350 Grant Dr\",\"evidence\":[{\"message_index\":0,\"quote\":\"6350 Grant Dr\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying with cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"Yes, that works\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"veggie_pizza\",\"modifications\":[]},{\"menu_item_id\":\"hawaiian_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"medium half-and-half pizza with half Veggie and half Hawaiian\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"order a delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Grant Dr\",\"number\":\"6350\",\"unit\":null,\"reference\":null,\"raw_text\":\"6350 Grant Dr\",\"evidence\":[{\"message_index\":0,\"quote\":\"6350 Grant Dr\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying with cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12365,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12661,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 706,
-   "reasoning_tokens": 321
+   "output_tokens": 766,
+   "reasoning_tokens": 396
   },
-  "latency_ms": 8469.733884994639,
-  "cost_micros": 926,
-  "at": "2026-10-16T15:20:18.560063+00:00",
+  "latency_ms": 8813.670328003354,
+  "cost_micros": 959,
+  "at": "2026-10-16T17:10:46.432930+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12365,
-   "completion_tokens": 706,
-   "total_tokens": 13071,
+   "prompt_tokens": 12661,
+   "completion_tokens": 766,
+   "total_tokens": 13427,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4985,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 321,
+    "reasoning_tokens": 396,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

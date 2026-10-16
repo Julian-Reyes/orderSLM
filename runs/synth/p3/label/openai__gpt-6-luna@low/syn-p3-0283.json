@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"MODIFY_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"breadsticks\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 4,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 0,\n            \"quote\": \"one order of breadsticks\"\n          },\n          {\n            \"message_index\": 2,\n            \"quote\": \"4 orders of breadsticks\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"when I get there\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"relative\",\n        \"raw_text\": \"In 20 min\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"In 20 min\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"pay cash\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"one order of breadsticks\"},{\"message_index\":2,\"quote\":\"4 orders of breadsticks\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"when I get there\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"In 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"In 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12334,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12630,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 653,
-   "reasoning_tokens": 88
+   "output_tokens": 497,
+   "reasoning_tokens": 150
   },
-  "latency_ms": 5423.896102991421,
-  "cost_micros": 896,
-  "at": "2026-10-16T15:20:42.562441+00:00",
+  "latency_ms": 6102.203050017124,
+  "cost_micros": 821,
+  "at": "2026-10-16T17:11:12.428668+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12334,
-   "completion_tokens": 653,
-   "total_tokens": 12987,
+   "prompt_tokens": 12630,
+   "completion_tokens": 497,
+   "total_tokens": 13127,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4954,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 88,
+    "reasoning_tokens": 150,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

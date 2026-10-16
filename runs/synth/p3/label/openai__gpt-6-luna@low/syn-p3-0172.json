@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 large hot chocolates with vanilla syrup\"},{\"message_index\":4,\"quote\":\"just 1 large hot chocolate with vanilla syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a breakfast sandwich\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"pick this up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"soon\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"soon\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"pay with my card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Marcus\",\"evidence\":[{\"message_index\":6,\"quote\":\"My name is Marcus\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":\"PLACE_ORDER\"},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 large hot chocolates with vanilla syrup\"},{\"message_index\":4,\"quote\":\"just 1 large hot chocolate with vanilla syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a breakfast sandwich\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"pick this up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"soon\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"soon\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"pay with my card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Marcus\",\"evidence\":[{\"message_index\":6,\"quote\":\"My name is Marcus\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10082,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10378,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 658,
-   "reasoning_tokens": 166
+   "output_tokens": 671,
+   "reasoning_tokens": 178
   },
-  "latency_ms": 6398.571596015245,
-  "cost_micros": 674,
-  "at": "2026-10-16T15:18:52.561099+00:00",
+  "latency_ms": 7197.264743997948,
+  "cost_micros": 683,
+  "at": "2026-10-16T17:09:13.353661+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10082,
-   "completion_tokens": 658,
-   "total_tokens": 10740,
+   "prompt_tokens": 10378,
+   "completion_tokens": 671,
+   "total_tokens": 11049,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2702,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 166,
+    "reasoning_tokens": 178,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

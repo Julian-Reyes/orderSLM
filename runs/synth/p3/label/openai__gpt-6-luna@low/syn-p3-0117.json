@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"meat_lovers_pizza\",\"modifications\":[]},{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"small half-and-half pizza\"},{\"message_index\":0,\"quote\":\"Half meat lovers\"},{\"message_index\":0,\"quote\":\"half bbq chicken\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay with a 50\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Eli\",\"evidence\":[{\"message_index\":0,\"quote\":\"my name is Eli\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"meat_lovers_pizza\",\"modifications\":[]},{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"small half-and-half pizza? Half meat lovers and half bbq chicken\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay with a 50\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Eli\",\"evidence\":[{\"message_index\":0,\"quote\":\"my name is Eli\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12195,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12491,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 349,
-   "reasoning_tokens": 0
+   "output_tokens": 416,
+   "reasoning_tokens": 75
   },
-  "latency_ms": 3313.276632979978,
-  "cost_micros": 731,
-  "at": "2026-10-16T15:17:54.724303+00:00",
+  "latency_ms": 4322.475981985917,
+  "cost_micros": 767,
+  "at": "2026-10-16T17:08:24.354901+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12195,
-   "completion_tokens": 349,
-   "total_tokens": 12544,
+   "prompt_tokens": 12491,
+   "completion_tokens": 416,
+   "total_tokens": 12907,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4815,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 75,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

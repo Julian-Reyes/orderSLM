@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"red_onions\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"red onions added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a margherita pizza with red onions added\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"sending to 43 thornton st\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"thornton st\",\"number\":\"43\",\"unit\":null,\"reference\":null,\"raw_text\":\"43 thornton st\",\"evidence\":[{\"message_index\":0,\"quote\":\"43 thornton st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"i have a 20 so need change\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"red_onions\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"red onions added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a margherita pizza with red onions added\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"sending to 43 thornton st\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Thornton St\",\"number\":\"43\",\"unit\":null,\"reference\":null,\"raw_text\":\"43 thornton st\",\"evidence\":[{\"message_index\":0,\"quote\":\"43 thornton st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"i have a 20 so need change\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12176,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12472,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 447,
-   "reasoning_tokens": 83
+   "output_tokens": 358,
+   "reasoning_tokens": 0
   },
-  "latency_ms": 4768.428020004649,
-  "cost_micros": 778,
-  "at": "2026-10-16T15:20:44.562717+00:00",
+  "latency_ms": 4156.644450995373,
+  "cost_micros": 736,
+  "at": "2026-10-16T17:11:02.431666+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12176,
-   "completion_tokens": 447,
-   "total_tokens": 12623,
+   "prompt_tokens": 12472,
+   "completion_tokens": 358,
+   "total_tokens": 12830,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4796,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 83,
+    "reasoning_tokens": 0,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

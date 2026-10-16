@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"ORDER_STATUS\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_STATUS\",\"secondary\":null},{\"message_index\":4,\"primary\":\"ORDER_STATUS\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PAYMENT_CLAIM\",\"secondary\":null},{\"message_index\":6,\"primary\":\"ORDER_STATUS\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":5,\"quote\":\"I paid already\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Margaret\",\"evidence\":[{\"message_index\":4,\"quote\":\"Margaret\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9193,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9489,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 549,
-   "reasoning_tokens": 258
+   "output_tokens": 619,
+   "reasoning_tokens": 328
   },
-  "latency_ms": 6050.72582498542,
-  "cost_micros": 530,
-  "at": "2026-10-16T15:19:52.564761+00:00",
+  "latency_ms": 7175.281570001971,
+  "cost_micros": 568,
+  "at": "2026-10-16T17:10:18.432500+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9193,
-   "completion_tokens": 549,
-   "total_tokens": 9742,
+   "prompt_tokens": 9489,
+   "completion_tokens": 619,
+   "total_tokens": 10108,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1813,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 258,
+    "reasoning_tokens": 328,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

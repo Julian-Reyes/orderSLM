@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onions\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 extra large Margherita pizza\"},{\"message_index\":2,\"quote\":\"1 extra large Veggie pizza\"},{\"message_index\":2,\"quote\":\"no onions\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"delivered\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Bayview Terrace\",\"number\":\"7017\",\"unit\":\"9B\",\"reference\":null,\"raw_text\":\"7017 Bayview Terrace, unit 9B\",\"evidence\":[{\"message_index\":0,\"quote\":\"7017 Bayview Terrace, unit 9B\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Yep, that's perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onions\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"1 extra large Margherita pizza\"},{\"message_index\":2,\"quote\":\"1 extra large Veggie pizza instead\"},{\"message_index\":2,\"quote\":\"no onions\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"delivered\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Bayview Terrace\",\"number\":\"7017\",\"unit\":\"9B\",\"reference\":null,\"raw_text\":\"7017 Bayview Terrace, unit 9B\",\"evidence\":[{\"message_index\":0,\"quote\":\"7017 Bayview Terrace, unit 9B\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Yep, that's perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12336,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12632,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 497,
-   "reasoning_tokens": 79
+   "output_tokens": 556,
+   "reasoning_tokens": 137
   },
-  "latency_ms": 5158.55471699615,
-  "cost_micros": 819,
-  "at": "2026-10-16T15:24:24.514496+00:00",
+  "latency_ms": 5459.025712014409,
+  "cost_micros": 851,
+  "at": "2026-10-16T17:14:52.590065+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12336,
-   "completion_tokens": 497,
-   "total_tokens": 12833,
+   "prompt_tokens": 12632,
+   "completion_tokens": 556,
+   "total_tokens": 13188,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4956,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 79,
+    "reasoning_tokens": 137,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

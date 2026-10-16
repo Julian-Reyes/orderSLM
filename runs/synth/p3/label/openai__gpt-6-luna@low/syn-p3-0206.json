@@ -7,27 +7,27 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CANCEL_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"blueberry\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"one blueberry muffin\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Rosa\",\"evidence\":[{\"message_index\":0,\"quote\":\"I am Rosa\"}]},\"customer_decision\":{\"state\":\"cancelled\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"please cancel everything\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9980,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10276,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 314,
-   "reasoning_tokens": 0
+   "output_tokens": 415,
+   "reasoning_tokens": 95
   },
-  "latency_ms": 3033.193298993865,
-  "cost_micros": 492,
-  "at": "2026-10-16T15:19:33.561389+00:00",
+  "latency_ms": 5108.94357500365,
+  "cost_micros": 545,
+  "at": "2026-10-16T17:10:04.427908+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9980,
-   "completion_tokens": 314,
-   "total_tokens": 10294,
+   "prompt_tokens": 10276,
+   "completion_tokens": 415,
+   "total_tokens": 10691,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2600,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 0,
+    "reasoning_tokens": 95,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

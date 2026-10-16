@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"MODIFY_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"MODIFY_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"margherita_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"personal\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"remove\",\n            \"modifier_id\": \"olive_oil\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"no olive oil\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 0,\n            \"quote\": \"two personal margherita pizzas pls no olive oil on them\"\n          },\n          {\n            \"message_index\": 4,\n            \"quote\": \"2 personal margherita pizzas no olive oil\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"hawaiian_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"large\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"remove\",\n            \"modifier_id\": \"cheese\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"no house cheese blend\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"a large hawaiian pizza with no house cheese blend\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L4\",\n        \"menu_item_id\": \"veggie_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"large\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 4,\n            \"quote\": \"a large veggie pizza\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"i will pick it up\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"pay by card\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"June\",\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"june\"\n        }\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"olive_oil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no olive oil\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two personal margherita pizzas\"},{\"message_index\":0,\"quote\":\"no olive oil on them\"},{\"message_index\":4,\"quote\":\"2 personal margherita pizzas no olive oil\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no house cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a large hawaiian pizza\"},{\"message_index\":4,\"quote\":\"no house cheese blend\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a large veggie pizza\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"i will pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"June\",\"evidence\":[{\"message_index\":4,\"quote\":\"for june\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12341,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12637,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 1228,
-   "reasoning_tokens": 283
+   "output_tokens": 893,
+   "reasoning_tokens": 285
   },
-  "latency_ms": 9956.802967004478,
-  "cost_micros": 1185,
-  "at": "2026-10-16T15:16:36.707694+00:00",
+  "latency_ms": 8866.711835988099,
+  "cost_micros": 1020,
+  "at": "2026-10-16T17:07:06.339521+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12341,
-   "completion_tokens": 1228,
-   "total_tokens": 13569,
+   "prompt_tokens": 12637,
+   "completion_tokens": 893,
+   "total_tokens": 13530,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4961,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 283,
+    "reasoning_tokens": 285,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 iced teas\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no house cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"sausage\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"just sausage\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_stuffed\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"stuffed crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"4 extra large cheese pizzas\"},{\"message_index\":2,\"quote\":\"no house cheese blend\"},{\"message_index\":2,\"quote\":\"just sausage\"},{\"message_index\":2,\"quote\":\"stuffed crust\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"ham\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no ham\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add basil\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_stuffed\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"stuffed crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 large hawaiian pizzas\"},{\"message_index\":2,\"quote\":\"no ham\"},{\"message_index\":2,\"quote\":\"add basil\"},{\"message_index\":2,\"quote\":\"stuffed crust\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":0,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"yup perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 iced teas\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no house cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"sausage\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"just sausage\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"4 extra large cheese pizzas\"},{\"message_index\":2,\"quote\":\"no house cheese blend\"},{\"message_index\":2,\"quote\":\"just sausage\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"ham\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no ham\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add basil\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_stuffed\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"stuffed crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 large hawaiian pizzas\"},{\"message_index\":2,\"quote\":\"no ham\"},{\"message_index\":2,\"quote\":\"add basil\"},{\"message_index\":2,\"quote\":\"stuffed crust\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":0,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"yup perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12365,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12661,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 966,
-   "reasoning_tokens": 188
+   "output_tokens": 917,
+   "reasoning_tokens": 191
   },
-  "latency_ms": 9752.16940199607,
-  "cost_micros": 1056,
-  "at": "2026-10-16T15:24:18.042972+00:00",
+  "latency_ms": 8168.5959289898165,
+  "cost_micros": 1035,
+  "at": "2026-10-16T17:14:38.851306+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12365,
-   "completion_tokens": 966,
-   "total_tokens": 13331,
+   "prompt_tokens": 12661,
+   "completion_tokens": 917,
+   "total_tokens": 13578,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4985,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 188,
+    "reasoning_tokens": 191,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

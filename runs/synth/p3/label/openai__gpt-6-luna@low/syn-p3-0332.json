@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":null,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"some onion rings\"},{\"message_index\":2,\"quote\":\"the onion rings\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 SPRITE\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"SEND IT TO 398 FAIRMONT BLVD\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"FAIRMONT BLVD\",\"number\":\"398\",\"unit\":null,\"reference\":null,\"raw_text\":\"398 FAIRMONT BLVD\",\"evidence\":[{\"message_index\":2,\"quote\":\"398 FAIRMONT BLVD\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"PAYING CARD\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":null,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"some onion rings\"},{\"message_index\":2,\"quote\":\"the onion rings\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 SPRITE\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"SEND IT TO 398 FAIRMONT BLVD\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Fairmont Blvd\",\"number\":\"398\",\"unit\":null,\"reference\":null,\"raw_text\":\"398 FAIRMONT BLVD\",\"evidence\":[{\"message_index\":2,\"quote\":\"398 FAIRMONT BLVD\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"PAYING CARD\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9121,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9417,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 582,
-   "reasoning_tokens": 168
+   "output_tokens": 558,
+   "reasoning_tokens": 146
   },
-  "latency_ms": 6352.99696601578,
-  "cost_micros": 540,
-  "at": "2026-10-16T15:21:23.566374+00:00",
+  "latency_ms": 5855.404403002467,
+  "cost_micros": 531,
+  "at": "2026-10-16T17:11:53.850607+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9121,
-   "completion_tokens": 582,
-   "total_tokens": 9703,
+   "prompt_tokens": 9417,
+   "completion_tokens": 558,
+   "total_tokens": 9975,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1741,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 168,
+    "reasoning_tokens": 146,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

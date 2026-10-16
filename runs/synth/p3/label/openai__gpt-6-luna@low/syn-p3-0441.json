@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"diet_coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"want one pls\"},{\"message_index\":4,\"quote\":\"just teh one\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"deliver it\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Riverside way\",\"number\":\"103\",\"unit\":null,\"reference\":null,\"raw_text\":\"103 Riverside way\",\"evidence\":[{\"message_index\":5,\"quote\":\"103 Riverside way\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"diet_coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one pls\"},{\"message_index\":4,\"quote\":\"just teh one\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"deliver it\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Riverside way\",\"number\":\"103\",\"unit\":null,\"reference\":null,\"raw_text\":\"103 Riverside way\",\"evidence\":[{\"message_index\":5,\"quote\":\"103 Riverside way\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12316,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12612,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 432,
-   "reasoning_tokens": 84
+   "output_tokens": 455,
+   "reasoning_tokens": 108
   },
-  "latency_ms": 4996.942539990414,
-  "cost_micros": 784,
-  "at": "2026-10-16T15:23:45.004990+00:00",
+  "latency_ms": 5166.0148430091795,
+  "cost_micros": 799,
+  "at": "2026-10-16T17:14:14.853337+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12316,
-   "completion_tokens": 432,
-   "total_tokens": 12748,
+   "prompt_tokens": 12612,
+   "completion_tokens": 455,
+   "total_tokens": 13067,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 4936,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 84,
+    "reasoning_tokens": 108,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

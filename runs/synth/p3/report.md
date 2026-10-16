@@ -10,10 +10,10 @@ Built from the saved files in this folder (`make synth ARGS="report --batch p3"`
 | chats kept | 100/100 (100%) | 198/200 (99%) | 200/200 (100%) |
 | generation drops | 0 | invalid_output 2 | 0 |
 | repairs | trimmed_trailing_business_message 8 | trimmed_trailing_business_message 47 | trimmed_trailing_business_message 9 |
-| labels kept | 99/100 (99%) | 194/198 (98%) | 200/200 (100%) |
-| label drops | check_failed 1 | invalid_contract 2, check_failed 2 | 0 |
-| card agrees with label | 90/99 (91%) | 180/194 (93%) | 179/200 (90%) |
-| disagreement types | labels 6, items 3, item_details 1 | labels 9, items 5, item_details 1 | items 7, labels 13, item_details 2 |
+| labels kept | 99/100 (99%) | 196/198 (99%) | 199/200 (100%) |
+| label drops | check_failed 1 | check_failed 2 | check_failed 1 |
+| card agrees with label | 93/99 (94%) | 186/196 (95%) | 175/199 (88%) |
+| disagreement types | labels 5, items 1 | labels 8, items 3 | items 8, labels 16, item_details 1 |
 | card address used | 13/16 (81%) | 42/43 (98%) | 37/37 (100%) |
 
 ## Cost and tokens
@@ -24,10 +24,10 @@ Built from the saved files in this folder (`make synth ARGS="report --batch p3"`
 | generation: per 1,000 chats | $0.3832 | $0.1269 | $0.6255 |
 | generation: tokens in (cached) / out | 259,206 (0) / 24,705 | 317,759 (268,928) / 28,589 | 314,589 (0) / 30,921 |
 | generation: latency p50 ms | 2028 | 2025 | 1568 |
-| labels (luna low): cost | $0.0696 | $0.1294 | $0.1278 |
-| labels (luna low): per 1,000 chats | $0.6961 | $0.6538 | $0.6391 |
-| labels (luna low): tokens in (cached) / out | 1,067,947 (737,700) / 58,317 | 2,081,457 (1,460,646) / 105,316 | 2,096,675 (1,475,400) / 101,698 |
-| labels (luna low): latency p50 ms | 6439 | 5584 | 5447 |
+| labels (luna low): cost | $0.0698 | $0.1288 | $0.1280 |
+| labels (luna low): per 1,000 chats | $0.6982 | $0.6506 | $0.6399 |
+| labels (luna low): tokens in (cached) / out | 1,097,547 (767,300) / 58,142 | 2,140,065 (1,519,254) / 102,870 | 2,155,875 (1,534,600) / 100,806 |
+| labels (luna low): latency p50 ms | 6422 | 5652 | 5445 |
 
 ## Style of the customer text
 
@@ -51,49 +51,49 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 
 | scenario | claude-haiku-5-5@off-low | deepseek-flash@none | gemini-3.1-flash-lite@minimal |
 |---|---|---|---|
-| ambiguous_reference | 4/4 | 5/6 | 8/8 |
-| cancellation | 4/4 | 7/8 | 8/8 |
+| ambiguous_reference | 4/4 | 7/8 | 7/7 |
+| cancellation | 4/4 | 8/8 | 8/8 |
 | combo | 4/4 | 10/10 | 8/10 |
-| contextual_yes | 6/6 | 10/12 | 10/11 |
-| correction | 6/8 | 17/17 | 18/18 |
-| correction_after_confirmation | 2/5 | 6/9 | 3/9 |
+| contextual_yes | 6/6 | 10/11 | 9/11 |
+| correction | 7/8 | 16/16 | 18/18 |
+| correction_after_confirmation | 2/5 | 8/10 | 2/9 |
 | delivery_question | 2/2 | 4/4 | 4/4 |
 | half_and_half | 3/3 | 7/7 | 8/8 |
 | human_request | 2/2 | 4/4 | 4/4 |
-| implicit_category | 5/5 | 9/9 | 9/9 |
+| implicit_category | 5/5 | 10/10 | 9/9 |
 | menu_question | 2/2 | 4/4 | 3/4 |
-| missing_info | 5/6 | 11/11 | 11/12 |
-| multi_message_order | 10/10 | 19/19 | 20/20 |
+| missing_info | 5/6 | 11/11 | 12/12 |
+| multi_message_order | 10/10 | 19/19 | 19/20 |
 | off_menu | 3/4 | 6/7 | 6/8 |
 | order_problem | 2/2 | 4/4 | 4/4 |
 | out_of_scope | 2/2 | 4/4 | 4/4 |
-| payment_claim | 2/2 | 3/4 | 2/4 |
+| payment_claim | 2/2 | 3/4 | 1/4 |
 | payment_question | 2/2 | 4/4 | 4/4 |
 | refund_request | 2/2 | 4/4 | 2/4 |
 | simple_order | 14/14 | 28/28 | 26/27 |
 | small_talk | 2/2 | 4/4 | 4/4 |
-| status_question | 2/2 | 3/4 | 4/4 |
-| two_requests | 3/4 | 7/7 | 8/8 |
-| unclear_message | 1/2 | 0/4 | 1/4 |
+| status_question | 2/2 | 4/4 | 4/4 |
+| two_requests | 4/4 | 7/7 | 8/8 |
+| unclear_message | 2/2 | 0/4 | 1/4 |
 
 ## Labeled intents (primary)
 
 | intent | claude-haiku-5-5@off-low | deepseek-flash@none | gemini-3.1-flash-lite@minimal |
 |---|---|---|---|
 | CANCEL_ORDER | 4 | 9 | 10 |
-| CONFIRM_ORDER | 25 | 45 | 48 |
-| DELIVERY_QUESTION | 14 | 54 | 18 |
-| HUMAN_REQUEST | 2 | 7 | 7 |
-| MENU_QUESTION | 18 | 30 | 24 |
-| MODIFY_ORDER | 28 | 39 | 54 |
-| ORDER_PROBLEM | 6 | 13 | 12 |
-| ORDER_STATUS | 5 | 17 | 12 |
-| OUT_OF_SCOPE | 4 | 5 | 7 |
-| PAYMENT_CLAIM | 3 | 3 | 1 |
-| PAYMENT_QUESTION | 4 | 5 | 4 |
-| PLACE_ORDER | 228 | 356 | 295 |
-| REFUND_REQUEST | 1 | 3 | 0 |
-| SMALL_TALK | 89 | 128 | 105 |
-| UNKNOWN | 2 | 4 | 7 |
+| CONFIRM_ORDER | 25 | 46 | 45 |
+| DELIVERY_QUESTION | 15 | 55 | 19 |
+| HUMAN_REQUEST | 3 | 7 | 7 |
+| MENU_QUESTION | 19 | 32 | 24 |
+| MODIFY_ORDER | 28 | 43 | 43 |
+| ORDER_PROBLEM | 6 | 13 | 9 |
+| ORDER_STATUS | 6 | 18 | 14 |
+| OUT_OF_SCOPE | 3 | 6 | 6 |
+| PAYMENT_CLAIM | 2 | 3 | 0 |
+| PAYMENT_QUESTION | 4 | 4 | 4 |
+| PLACE_ORDER | 218 | 356 | 290 |
+| REFUND_REQUEST | 1 | 3 | 3 |
+| SMALL_TALK | 96 | 132 | 124 |
+| UNKNOWN | 3 | 1 | 2 |
 
 Audit sample: `audit.md` (30 chats, seed 20261016).

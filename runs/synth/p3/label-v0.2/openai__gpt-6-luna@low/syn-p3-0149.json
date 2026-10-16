@@ -1,0 +1,37 @@
+{
+ "key": "syn-p3-0149",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"DELIVERY_QUESTION\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"CONFIRM_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 5,\n      \"primary\": \"MODIFY_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 7,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"veggie_burger\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"2 veggie burgers\"\n          },\n          {\n            \"message_index\": 5,\n            \"quote\": \"1 veggie burger not 2\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"milkshake\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": \"chocolate\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"3 chocolate milkshakes\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"lemonade\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"a lemonade\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"delivery\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"relative\",\n        \"raw_text\": \"in 20 min\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 7,\n            \"quote\": \"in 20 min\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"riverside rd\",\n      \"number\": \"1019\",\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": \"1019 riverside rd\",\n      \"evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"1019 riverside rd\"\n        }\n      ]\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"payin cash\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9280,
+   "cached_input_tokens": 7377,
+   "cache_write_tokens": 0,
+   "output_tokens": 1054,
+   "reasoning_tokens": 179
+  },
+  "latency_ms": 8627.292889985256,
+  "cost_micros": 792,
+  "at": "2026-10-16T15:18:29.928393+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9280,
+   "completion_tokens": 1054,
+   "total_tokens": 10334,
+   "prompt_tokens_details": {
+    "cached_tokens": 7377,
+    "cache_write_tokens": 1900,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 179,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

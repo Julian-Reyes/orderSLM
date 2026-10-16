@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"extra large 16-inch cheese pizza\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"delivered\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 minutes\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in 20 minutes\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Oak Rd\",\"number\":\"864\",\"unit\":\"5\",\"reference\":null,\"raw_text\":\"864 Oak Rd, unit 5\",\"evidence\":[{\"message_index\":4,\"quote\":\"864 Oak Rd, unit 5\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying with cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"Yes, that is perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"extra large 16-inch cheese pizza\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"delivered\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 minutes\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in 20 minutes\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Oak Rd\",\"number\":\"864\",\"unit\":\"5\",\"reference\":null,\"raw_text\":\"864 Oak Rd, unit 5\",\"evidence\":[{\"message_index\":4,\"quote\":\"864 Oak Rd, unit 5\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying with cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"Yes, that is perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12460,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12756,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 562,
-   "reasoning_tokens": 171
+   "output_tokens": 492,
+   "reasoning_tokens": 101
   },
-  "latency_ms": 7001.476766017731,
-  "cost_micros": 864,
-  "at": "2026-10-16T15:17:08.296647+00:00",
+  "latency_ms": 5042.63921501115,
+  "cost_micros": 832,
+  "at": "2026-10-16T17:07:42.351213+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12460,
-   "completion_tokens": 562,
-   "total_tokens": 13022,
+   "prompt_tokens": 12756,
+   "completion_tokens": 492,
+   "total_tokens": 13248,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 5080,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 171,
+    "reasoning_tokens": 101,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

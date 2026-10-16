@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"banana_peppers\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"banana peppers\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"cheese pizza\"},{\"message_index\":4,\"quote\":\"small supreme pizza\"},{\"message_index\":4,\"quote\":\"banana peppers\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 cokes\"},{\"message_index\":4,\"quote\":\"2 cokes\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"2502 birch rd above the bakery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"birch rd\",\"number\":\"2502\",\"unit\":null,\"reference\":\"above the bakery\",\"raw_text\":\"2502 birch rd above the bakery\",\"evidence\":[{\"message_index\":6,\"quote\":\"2502 birch rd above the bakery\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"banana_peppers\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"banana peppers\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"cheese pizza\"},{\"message_index\":4,\"quote\":\"small supreme pizza\"},{\"message_index\":4,\"quote\":\"banana peppers\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 cokes\"},{\"message_index\":4,\"quote\":\"keep the 2 cokes\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"2502 birch rd above the bakery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"birch rd\",\"number\":\"2502\",\"unit\":null,\"reference\":\"above the bakery\",\"raw_text\":\"2502 birch rd above the bakery\",\"evidence\":[{\"message_index\":6,\"quote\":\"2502 birch rd above the bakery\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12396,
-   "cached_input_tokens": 7377,
+   "input_tokens": 12692,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 728,
-   "reasoning_tokens": 225
+   "output_tokens": 680,
+   "reasoning_tokens": 180
   },
-  "latency_ms": 7528.171793004731,
-  "cost_micros": 940,
-  "at": "2026-10-16T15:22:08.559529+00:00",
+  "latency_ms": 8161.378346005222,
+  "cost_micros": 919,
+  "at": "2026-10-16T17:12:36.851824+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12396,
-   "completion_tokens": 728,
-   "total_tokens": 13124,
+   "prompt_tokens": 12692,
+   "completion_tokens": 680,
+   "total_tokens": 13372,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 5016,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 225,
+    "reasoning_tokens": 180,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with hazelnut syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A LARGE CAPPUCCINO WITH HAZELNUT SYRUP\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"cinnamon_raisin\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 CINNAMON RAISIN BAGELS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"chocolate_chip\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A CHOCOLATE CHIP MUFFIN\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"ILL PICK IT UP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"PAYING WITH CARD\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"BEN\",\"evidence\":[{\"message_index\":6,\"quote\":\"NAME IS BEN\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with hazelnut syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A LARGE CAPPUCCINO WITH HAZELNUT SYRUP\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"cinnamon_raisin\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 CINNAMON RAISIN BAGELS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"chocolate_chip\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A CHOCOLATE CHIP MUFFIN\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"ILL PICK IT UP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"PAYING WITH CARD\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"BEN\",\"evidence\":[{\"message_index\":6,\"quote\":\"NAME IS BEN\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10121,
-   "cached_input_tokens": 7377,
+   "input_tokens": 10417,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 794,
-   "reasoning_tokens": 230
+   "output_tokens": 860,
+   "reasoning_tokens": 288
   },
-  "latency_ms": 7309.340036008507,
-  "cost_micros": 746,
-  "at": "2026-10-16T15:16:58.290488+00:00",
+  "latency_ms": 9112.811352999415,
+  "cost_micros": 782,
+  "at": "2026-10-16T17:07:30.352156+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10121,
-   "completion_tokens": 794,
-   "total_tokens": 10915,
+   "prompt_tokens": 10417,
+   "completion_tokens": 860,
+   "total_tokens": 11277,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 2741,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 230,
+    "reasoning_tokens": 288,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0

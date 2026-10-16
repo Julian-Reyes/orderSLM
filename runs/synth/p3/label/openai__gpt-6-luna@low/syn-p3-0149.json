@@ -4,30 +4,30 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"DELIVERY_QUESTION\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"CONFIRM_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 5,\n      \"primary\": \"MODIFY_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 7,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"veggie_burger\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"2 veggie burgers\"\n          },\n          {\n            \"message_index\": 5,\n            \"quote\": \"1 veggie burger not 2\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"milkshake\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": \"chocolate\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"3 chocolate milkshakes\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"lemonade\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"a lemonade\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"delivery\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"relative\",\n        \"raw_text\": \"in 20 min\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 7,\n            \"quote\": \"in 20 min\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"riverside rd\",\n      \"number\": \"1019\",\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": \"1019 riverside rd\",\n      \"evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"1019 riverside rd\"\n        }\n      ]\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"payin cash\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 veggie burgers\"},{\"message_index\":5,\"quote\":\"1 veggie burger not 2\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"chocolate\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 chocolate milkshakes\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":7,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":7,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"riverside rd\",\"number\":\"1019\",\"unit\":null,\"reference\":null,\"raw_text\":\"1019 riverside rd\",\"evidence\":[{\"message_index\":7,\"quote\":\"1019 riverside rd\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":7,\"quote\":\"payin cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9280,
-   "cached_input_tokens": 7377,
+   "input_tokens": 9576,
+   "cached_input_tokens": 7673,
    "cache_write_tokens": 0,
-   "output_tokens": 1054,
-   "reasoning_tokens": 179
+   "output_tokens": 750,
+   "reasoning_tokens": 210
   },
-  "latency_ms": 8627.292889985256,
-  "cost_micros": 792,
-  "at": "2026-10-16T15:18:29.928393+00:00",
+  "latency_ms": 7216.100544988876,
+  "cost_micros": 643,
+  "at": "2026-10-16T17:08:57.354966+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9280,
-   "completion_tokens": 1054,
-   "total_tokens": 10334,
+   "prompt_tokens": 9576,
+   "completion_tokens": 750,
+   "total_tokens": 10326,
    "prompt_tokens_details": {
-    "cached_tokens": 7377,
+    "cached_tokens": 7673,
     "cache_write_tokens": 1900,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 179,
+    "reasoning_tokens": 210,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
