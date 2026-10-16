@@ -1,0 +1,203 @@
+{
+  "jev": {
+    "intent_messages": 268,
+    "intent_agree_primary": 256,
+    "intent_agree_rate": 0.9552,
+    "intent_agree_ci95": [
+      0.9233778264856487,
+      0.9742037062893203
+    ],
+    "intent_agree_primary_or_secondary": 256,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 6
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "OUT_OF_SCOPE",
+        "provider": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CANCEL_ORDER",
+        "count": 1
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "OUT_OF_SCOPE",
+        "count": 1
+      },
+      {
+        "expected": "ORDER_PROBLEM",
+        "provider": "PAYMENT_CLAIM",
+        "count": 1
+      }
+    ],
+    "orders_expected_ok": 91,
+    "order_flagged": 11,
+    "order_flag_rate": 0.1209,
+    "planted": {
+      "added_modification": {
+        "caught": 54,
+        "of": 60,
+        "rate": 0.9
+      },
+      "dropped_modification": {
+        "caught": 8,
+        "of": 23,
+        "rate": 0.348
+      },
+      "extra_item": {
+        "caught": 64,
+        "of": 64,
+        "rate": 1.0
+      },
+      "fulfillment_flip": {
+        "caught": 48,
+        "of": 49,
+        "rate": 0.98
+      },
+      "missing_item": {
+        "caught": 43,
+        "of": 54,
+        "rate": 0.796
+      },
+      "swapped_item": {
+        "caught": 52,
+        "of": 54,
+        "rate": 0.963
+      },
+      "wrong_payment": {
+        "caught": 51,
+        "of": 53,
+        "rate": 0.962
+      },
+      "wrong_quantity": {
+        "caught": 56,
+        "of": 64,
+        "rate": 0.875
+      },
+      "wrong_size": {
+        "caught": 44,
+        "of": 52,
+        "rate": 0.846
+      }
+    },
+    "planted_catch_rate": 0.8879,
+    "errors": 0,
+    "input_tokens": 395085,
+    "cost_micros": 16875,
+    "latency_p50_ms": 253,
+    "latency_p95_ms": 349
+  },
+  "openai-decisions": {
+    "intent_messages": 268,
+    "intent_agree_primary": 258,
+    "intent_agree_rate": 0.9627,
+    "intent_agree_ci95": [
+      0.9326877732096551,
+      0.9796082109222807
+    ],
+    "intent_agree_primary_or_secondary": 259,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 3
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 1
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "expected": "REFUND_REQUEST",
+        "provider": "PAYMENT_CLAIM",
+        "count": 1
+      },
+      {
+        "expected": "PAYMENT_CLAIM",
+        "provider": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 1
+      }
+    ],
+    "orders_expected_ok": 91,
+    "order_flagged": 2,
+    "order_flag_rate": 0.022,
+    "planted": {
+      "added_modification": {
+        "caught": 37,
+        "of": 60,
+        "rate": 0.617
+      },
+      "dropped_modification": {
+        "caught": 5,
+        "of": 23,
+        "rate": 0.217
+      },
+      "extra_item": {
+        "caught": 57,
+        "of": 64,
+        "rate": 0.891
+      },
+      "fulfillment_flip": {
+        "caught": 47,
+        "of": 49,
+        "rate": 0.959
+      },
+      "missing_item": {
+        "caught": 50,
+        "of": 54,
+        "rate": 0.926
+      },
+      "swapped_item": {
+        "caught": 45,
+        "of": 54,
+        "rate": 0.833
+      },
+      "wrong_payment": {
+        "caught": 51,
+        "of": 53,
+        "rate": 0.962
+      },
+      "wrong_quantity": {
+        "caught": 57,
+        "of": 64,
+        "rate": 0.891
+      },
+      "wrong_size": {
+        "caught": 40,
+        "of": 52,
+        "rate": 0.769
+      }
+    },
+    "planted_catch_rate": 0.8224,
+    "errors": 0,
+    "input_tokens": 310379,
+    "cost_micros": 31291,
+    "latency_p50_ms": 276,
+    "latency_p95_ms": 640
+  }
+}

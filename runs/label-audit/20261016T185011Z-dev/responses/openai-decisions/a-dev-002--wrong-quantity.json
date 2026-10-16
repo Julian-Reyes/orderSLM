@@ -1,0 +1,29 @@
+{
+ "id": "a-dev-002--wrong-quantity",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.56,
+     "false": 0.43999999999999995
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 366,
+   "output_tokens": 0
+  },
+  "latency_ms": 697.1599720127415,
+  "cost_micros": 37,
+  "cached": false
+ }
+}

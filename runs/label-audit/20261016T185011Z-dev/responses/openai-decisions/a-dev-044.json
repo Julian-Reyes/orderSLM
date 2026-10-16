@@ -1,0 +1,81 @@
+{
+ "id": "a-dev-044",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "ORDER_PROBLEM",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.49,
+    "probabilities": {
+     "PLACE_ORDER": 0.11,
+     "MODIFY_ORDER": 0.07,
+     "CANCEL_ORDER": 0.02,
+     "CONFIRM_ORDER": 0.01,
+     "MENU_QUESTION": 0.01,
+     "DELIVERY_QUESTION": 0.01,
+     "PAYMENT_QUESTION": 0.01,
+     "PAYMENT_CLAIM": 0.01,
+     "ORDER_STATUS": 0.03,
+     "ORDER_PROBLEM": 0.52,
+     "REFUND_REQUEST": 0.03,
+     "HUMAN_REQUEST": 0.01,
+     "SMALL_TALK": 0.01,
+     "OUT_OF_SCOPE": 0.04,
+     "UNKNOWN": 0.11
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "ORDER_PROBLEM",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.45,
+    "probabilities": {
+     "PLACE_ORDER": 0.04,
+     "MODIFY_ORDER": 0.25,
+     "CANCEL_ORDER": 0.01,
+     "CONFIRM_ORDER": 0.01,
+     "MENU_QUESTION": 0.01,
+     "DELIVERY_QUESTION": 0.01,
+     "PAYMENT_QUESTION": 0.01,
+     "PAYMENT_CLAIM": 0.04,
+     "ORDER_STATUS": 0.01,
+     "ORDER_PROBLEM": 0.49,
+     "REFUND_REQUEST": 0.06,
+     "HUMAN_REQUEST": 0.02,
+     "SMALL_TALK": 0.01,
+     "OUT_OF_SCOPE": 0.01,
+     "UNKNOWN": 0.02
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.97,
+     "false": 0.030000000000000027
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1036,
+   "output_tokens": 0
+  },
+  "latency_ms": 362.3291940020863,
+  "cost_micros": 104,
+  "cached": false
+ }
+}

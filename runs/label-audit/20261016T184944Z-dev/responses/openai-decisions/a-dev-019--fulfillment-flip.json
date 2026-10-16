@@ -1,0 +1,29 @@
+{
+ "id": "a-dev-019--fulfillment-flip",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.05,
+     "false": 0.95
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 332,
+   "output_tokens": 0
+  },
+  "latency_ms": 1145.020347990794,
+  "cost_micros": 34,
+  "cached": true
+ }
+}

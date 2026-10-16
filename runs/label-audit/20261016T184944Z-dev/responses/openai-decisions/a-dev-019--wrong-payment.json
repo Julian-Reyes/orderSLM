@@ -1,0 +1,29 @@
+{
+ "id": "a-dev-019--wrong-payment",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.0,
+     "false": 1.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 328,
+   "output_tokens": 0
+  },
+  "latency_ms": 302.37550800666213,
+  "cost_micros": 33,
+  "cached": true
+ }
+}
