@@ -441,3 +441,24 @@ def test_substitute_counts_as_remove_plus_add_in_card_agreement():
     swapped = PlannedItem(menu_item_id="cheeseburger", quantity=1, substitute={"ketchup": "mustard"})
     menu = load_menu("corner-patty")
     assert lab._planned_detail(planned, menu) == lab._planned_detail(swapped, menu)
+
+
+def test_label_dev_scores_intents_against_gold():
+    from orderslm.eval.label_dev import score_intents
+
+    ac = next(a for a in DEV_ORDERS if len(a.gold_routing) >= 2)
+    label = TeacherLabel.model_validate(json.loads(_gold_label_json(ac)))
+    rows = score_intents(ac, label)
+    assert len(rows) == len(ac.gold_routing) and all(r["primary_ok"] for r in rows)
+    wrong = label.model_copy(
+        update={
+            "intents": [
+                label.intents[0].model_copy(update={"primary": RouterLabel.UNKNOWN, "secondary": None}),
+                *label.intents[1:],
+            ]
+        }
+    )
+    assert [r["primary_ok"] for r in score_intents(ac, wrong)][0] is (
+        ac.gold_routing[0].decision.primary is RouterLabel.UNKNOWN
+    )
+    assert not any(r["primary_ok"] for r in score_intents(ac, None))

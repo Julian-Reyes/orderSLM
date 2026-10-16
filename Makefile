@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart label-dev synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -52,6 +52,9 @@ teacher-bakeoff:
 # Chart data (before/after views, from saved outputs) + docs/figures SVG for the write-up and case study.
 bakeoff-chart:
 	$(RUN) python -m orderslm.eval.bakeoff_chart
+# The M4 label prompt scored on all dev against reviewed gold (orders + intents).
+label-dev:
+	$(RUN) python -m orderslm.eval.label_dev $(ARGS)
 # Synthetic training data (M4): plan / generate / report stages; label is its own target. See synth/run.py.
 synth:
 	$(RUN) python -m orderslm.synth.run $(ARGS)

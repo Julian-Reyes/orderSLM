@@ -8,10 +8,8 @@ _Last updated 2026-10-16._
 
 - **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
   M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Next (Julian):** audit `runs/synth/p3/audit.md` (30 chats, 10 per generator, half card-flagged) and read
-  `runs/synth/p3/report.md`; then decide the bulk generator mix. Proposed before bulk: score `teacher-label@0.2` on
-  all 91 dev chats (order + **intent** accuracy against reviewed gold; est. ~$0.06): the label prompt has not been
-  measured on gold yet, and card agreement can't check intents.
+- **Next (Julian):** audit `runs/synth/p3/audit.md` (30 chats, 10 per generator, half card-flagged), then decide the
+  bulk generator mix (my suggestion: DeepSeek as main writer + a second one for variety; decide after the audit).
 - Still open before **bulk** labeling (not needed for the pilot):
   1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
   2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
@@ -107,6 +105,15 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   - Style/diversity (customer text): Haiku most varied (distinct 3-grams 86%, distinct openers 39%), DeepSeek 78% /
     37%, Gemini 75% / 25% ("hey there" ×24) and wordiest (11.4 words/message). DeepSeek's "yo u guys open rn"
     openers make DELIVERY_QUESTION its third-largest intent (54 vs 14–18).
+
+- **Label prompt on dev (2026-10-16, $0.0569, `runs/label-dev/20261016T153544Z-openai__gpt-6-luna@low/report.md`, `make label-dev`):** `teacher-label@0.2`
+  on all 91 dev chats, scored against reviewed gold. Orders after finalize: **91/91 fully correct, items 146/146, 0
+  extra** (v0.4 extraction prompt in M3: 90/91; the miss, a-dev-049, now right through the `item_variant` flag).
+  Intents: **primary 262/268 (97.8%, CI 95.2–99.0%)**, primary + secondary 258/268 (96.3%). Mistakes are boundary
+  calls: PLACE↔MODIFY ×5 (one, a-dev-040 "make the fries large", caused by the v0.2 rule "a size not stated before is
+  PLACE_ORDER": gold says MODIFY), a missing secondary PLACE_ORDER on a change + details message ×3, "ok party order
+  incoming" as SMALL_TALK, "👍 SOUNDS GOOD" as SMALL_TALK (gold UNKNOWN). Dev numbers: the M3 prompt fixes came
+  from dev, so these are tuning results, not held out.
 
 ## M3 so far (2026-10-15)
 

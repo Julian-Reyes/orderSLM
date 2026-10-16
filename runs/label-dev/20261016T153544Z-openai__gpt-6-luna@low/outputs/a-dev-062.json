@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-062",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"LARGE HOT CHOCOLATE\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"chocolate_chip\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"PLAIN CROISSANT\"},{\"message_index\":2,\"quote\":\"SWAP THE CROISSANT FOR A CHOCOLATE CHIP MUFFIN\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"FOR PICKUP\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 10\",\"normalized_local\":\"10:00\",\"evidence\":[{\"message_index\":1,\"quote\":\"AT 10\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":3,\"quote\":\"PAY CASH\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Harold\",\"evidence\":[{\"message_index\":1,\"quote\":\"NAME IS HAROLD\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9934,
+   "cached_input_tokens": 7377,
+   "cache_write_tokens": 0,
+   "output_tokens": 646,
+   "reasoning_tokens": 178
+  },
+  "latency_ms": 6124.457371013705,
+  "cost_micros": 653,
+  "at": "2026-10-16T15:36:46.085664+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9934,
+   "completion_tokens": 646,
+   "total_tokens": 10580,
+   "prompt_tokens_details": {
+    "cached_tokens": 7377,
+    "cache_write_tokens": 2554,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 178,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}
