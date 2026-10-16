@@ -1,0 +1,80 @@
+# Kaggle plan (until the Mac mini is ready)
+
+Julian, 2026-10-16. This Mac is an Intel MacBook Pro (2017): PyTorch ≥ 2.3 has no Intel-Mac builds, and Julia-1
+(torch ≥ 2.6, transformers 5.0.x), Qwen3.5 and Gemma 4 need recent versions. So everything that needs torch runs on
+Kaggle for now. Hosted providers (OpenAI, Jev, …) keep running from this Mac.
+
+## What Kaggle gives us (checked 2026-10-16)
+
+Sources: Kaggle CLI docs on GitHub ([README](https://github.com/Kaggle/kaggle-api/blob/main/docs/README.md),
+[kernels](https://github.com/Kaggle/kaggle-api/blob/main/docs/kernels.md),
+[kernel metadata](https://github.com/Kaggle/kaggle-api/blob/main/docs/kernels_metadata.md),
+[datasets](https://github.com/Kaggle/kaggle-api/blob/main/docs/datasets.md)). Kaggle's own notebook docs page didn't
+render for us; the session and quota figures below come from a September 2026 review that quotes those docs.
+
+- **Cost:** free. **GPU:** `NvidiaTeslaT4` (2 × T4, 16 GB each, the default GPU); others (A100, L4, H100…) exist but
+  some are limited to certain competitions or admins.
+- **Session limit:** 12 h for CPU and GPU sessions (docs, via the review). **Weekly GPU quota:** not published; shown
+  in account settings, commonly ~30 h, resets weekly. Check it in settings.
+- **Internet in a notebook** (to download models from Hugging Face) needs a verified phone number.
+- **CLI** (`uv tool install kaggle`): token from kaggle.com/settings/api, stored outside the repo
+  (`~/.kaggle/access_token` or `KAGGLE_API_TOKEN`). `kaggle datasets create` makes a **private** dataset by default;
+  `kaggle kernels push -p <folder> [--accelerator NvidiaTeslaT4] [-t <seconds>]` runs a script remotely;
+  `kaggle kernels status` / `kaggle kernels output -p <dir>` fetch the results.
+- `kernel-metadata.json`: `id`, `title`, `code_file`, `language` (python), `kernel_type` (script), `is_private`
+  (default true), `enable_gpu`, `enable_internet`, `machine_shape` (e.g. `NvidiaTeslaT4`), `dataset_sources`,
+  `model_sources`, `kernel_sources`.
+
+## How we use it: everything driven from this repo
+
+No copy-pasting into notebooks. For each job:
+
+1. **Build inputs locally** with the same code as everywhere else (identical prompts and wording), write them to a
+   folder (JSONL), and upload as a **private** Kaggle dataset (`kaggle datasets create` / `version`).
+2. **Push a script kernel** from `kaggle/<job>/` (script + `kernel-metadata.json`, `is_private: true`): it pins its
+   packages, downloads the model at a pinned revision, runs, and writes raw outputs plus an environment record
+   (torch / transformers / CUDA versions, GPU, model revision, timings) to `/kaggle/working/`.
+3. **Pull the outputs** (`kaggle kernels output`) into `runs/<experiment>/<run_id>/` and **score them locally** with
+   the same scorers as the hosted runs. Every number in a report comes from these saved outputs (CLAUDE.md).
+
+Planned commands: `make kaggle-push JOB=…`, `make kaggle-pull JOB=…` (to build).
+
+### What may go to Kaggle (private datasets only)
+
+| OK | Never |
+|---|---|
+| Synthetic training chats + teacher labels (ours) | The sealed test split (Source A test), until the final eval, and then only if Julian agrees |
+| Dev conversations and menus as model input (ours) | PIZZA (CC-BY-NC-4.0, no redistribution) |
+| Prompts, built requests, our code | API keys or `.env` (no job needs a secret) |
+
+Gold answers stay local: scoring happens on this Mac.
+
+## Jobs
+
+| Job | Hardware | Needs | Est. time | Notes |
+|---|---|---|---|---|
+| **A. Julia-1 label audit (§11d)** | CPU (no GPU quota) | Julia-1 at rev `a85b1273`, torch ≥ 2.6, transformers 5.0.x | ~1 h | The same `DecisionRequest`s as Jev/Decisions (dev gold + 473 planted, then 2,356 training chats); one Julia call per question (it has no multi-question request), ≤ 20 options and 8,192 tokens per call |
+| **B. M5 student bake-off (§9)** | 1 × T4 | Qwen3.5-0.8B / 2B, Qwen3-1.7B, Gemma 4 E2B; latest transformers | ~1–2 h | ~20 dev chats zero-shot per model; JSON validity + item F1 scored locally |
+| **C. M6 LoRA training** | T4 | the chosen student(s) | 1–3 h per run | Plan after M5 |
+
+### Known risks to check in the first run
+
+- **Package conflict:** Julia-1 pins `transformers>=5.0,<5.1`; Qwen3.5 asks for the newest transformers. So separate
+  kernels, each with its own pins.
+- **T4 has no bfloat16** (fp16 / fp32 only): small models in fp16 can overflow; fall back to fp32 for 0.8–2B models
+  if outputs look broken. Gemma 4 E2B (5.1B with embeddings, ~10 GB in 16-bit) fits one T4 only in 16-bit.
+- **Kaggle's preinstalled torch** may differ from what we pin; the kernel records the versions it actually ran.
+- **Quota and session limits:** check the weekly GPU hours in settings before job B; jobs stay well under 12 h.
+- **Julia-1 on CPU speed:** Supersonic reports ~33 ms per call on an Apple M4; Kaggle CPUs are slower, so a 1-chat test
+  run comes first to time it.
+
+## Julian's setup (one time)
+
+1. Kaggle account; **verify a phone number** (needed for internet in kernels and for GPUs).
+2. kaggle.com/settings/api → **Generate New Token**, then save it outside the repo: `~/.kaggle/access_token`
+   (or tell me and I'll walk through `kaggle auth login`). Never paste it into chat or `.env`.
+3. Check the **weekly GPU quota** shown in settings.
+4. Tell me your Kaggle username (for dataset and kernel ids).
+
+Then: I install the CLI (`uv tool install kaggle`, outside the project), build job A's inputs, run a 1-chat timing
+test, then the full Julia-1 audit; then job B.

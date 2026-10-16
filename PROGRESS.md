@@ -129,6 +129,10 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   merged, clashing cheese/avocado renamed; built by `orderslm/mega.py`, tested to equal the committed file). Not a
   4th regular menu (`load_menus()` excludes it; `load_menu("food-court")` finds it). Mega batch `m1` planned: 396
   cards (~20% of ~2,000 single-menu), 264/66/66.
+- **Kaggle plan (2026-10-16, Julian: use Kaggle until the Mac mini is ready):** `docs/KAGGLE.md`. Torch jobs (A Julia-1
+  audit on CPU, B M5 bake-off on T4, C M6 LoRA) run as private script kernels driven from this repo; inputs built
+  locally and uploaded as private datasets (never test or PIZZA, no secrets); outputs pulled and scored locally.
+  Waiting on Julian: Kaggle account + phone verification, API token in `~/.kaggle/access_token`, username, GPU quota.
 - **Audit fixes (2026-10-16, Julian):** audit wording v0.3 (an earlier order the customer describes is not part of
   the record): dev false alarms Jev 5.5%, Decisions 0% (planted caught 89% / 78%). Label prompt **v0.7** (follow-ups
   keep the request's label; "did the payment go through" = PAYMENT_CLAIM; dev: 1 contract flake dropped, otherwise as
