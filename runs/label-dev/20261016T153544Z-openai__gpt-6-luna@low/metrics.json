@@ -48,14 +48,14 @@
   },
   "intent": {
     "customer_messages": 268,
-    "primary_correct": 262,
-    "primary_accuracy": 0.9776,
+    "primary_correct": 263,
+    "primary_accuracy": 0.9813,
     "primary_ci95": [
-      0.9520248432546549,
-      0.9897000435912143
+      0.9570767030396662,
+      0.9920054094846863
     ],
-    "label_set_correct": 258,
-    "label_set_accuracy": 0.9627,
+    "label_set_correct": 259,
+    "label_set_accuracy": 0.9664,
     "per_gold_label": {
       "CANCEL_ORDER": {
         "gold": 4,
@@ -113,7 +113,7 @@
         "predicted": 3
       },
       "PLACE_ORDER": {
-        "gold": 162,
+        "gold": 161,
         "correct": 158,
         "predicted": 159
       },
@@ -123,8 +123,8 @@
         "predicted": 4
       },
       "SMALL_TALK": {
-        "gold": 26,
-        "correct": 26,
+        "gold": 27,
+        "correct": 27,
         "predicted": 28
       },
       "UNKNOWN": {
@@ -147,11 +147,6 @@
       {
         "gold": "MODIFY_ORDER",
         "pred": "PLACE_ORDER",
-        "count": 1
-      },
-      {
-        "gold": "PLACE_ORDER",
-        "pred": "SMALL_TALK",
         "count": 1
       }
     ]

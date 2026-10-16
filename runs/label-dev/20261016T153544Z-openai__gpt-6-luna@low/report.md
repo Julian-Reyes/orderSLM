@@ -13,13 +13,13 @@ Dev numbers (prompt tuning), not held-out results. Built from the saved outputs 
 
 ## Intents (per customer message, against reviewed gold)
 
-- Primary label correct: 262/268 (97.8%, 95% CI (0.9520248432546549, 0.9897000435912143))
-- Primary + secondary exactly right: 258/268 (96.3%)
+- Primary label correct: 263/268 (98.1%, 95% CI (0.9570767030396662, 0.9920054094846863))
+- Primary + secondary exactly right: 259/268 (96.6%)
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 162 | 158 | 159 |
-| SMALL_TALK | 26 | 26 | 28 |
+| PLACE_ORDER | 161 | 158 | 159 |
+| SMALL_TALK | 27 | 27 | 28 |
 | MENU_QUESTION | 16 | 16 | 16 |
 | MODIFY_ORDER | 14 | 13 | 16 |
 | CONFIRM_ORDER | 8 | 8 | 8 |
@@ -39,6 +39,5 @@ Mistakes (gold → predicted):
 - PLACE_ORDER → MODIFY_ORDER: 3
 - UNKNOWN → SMALL_TALK: 1
 - MODIFY_ORDER → PLACE_ORDER: 1
-- PLACE_ORDER → SMALL_TALK: 1
 
 Cost: $0.0569

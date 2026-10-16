@@ -106,6 +106,13 @@ No results exist yet: the rules baselines have **not** been scored on anything (
     37%, Gemini 75% / 25% ("hey there" ×24) and wordiest (11.4 words/message). DeepSeek's "yo u guys open rn"
     openers make DELIVERY_QUESTION its third-largest intent (54 vs 14–18).
 
+- **Audit of p3 (2026-10-16, by Claude at Julian's request, `runs/synth/p3/audit_review.md`):** 30 chats: realistic
+  28/30, intents fully right 26/30, order right 27/30. Teacher patterns for label prompt v0.3: PLACE vs MODIFY when
+  adding a detail to an item being ordered; an answer takes the label of the request it serves; garbled text is
+  UNKNOWN with no items; no new order lines for additions to a placed order.
+- **Gold change (Julian, 2026-10-16):** a-dev-075 msg 0 "ok party order incoming" is SMALL_TALK (was PLACE_ORDER),
+  logged in data/dev/REVIEWS.jsonl. Label-dev intents now 263/268 (98.1%). The M3 bake-off reports used the old gold
+  (routing is not scored there, so their numbers are unaffected).
 - **Label prompt on dev (2026-10-16, $0.0569, `runs/label-dev/20261016T153544Z-openai__gpt-6-luna@low/report.md`, `make label-dev`):** `teacher-label@0.2`
   on all 91 dev chats, scored against reviewed gold. Orders after finalize: **91/91 fully correct, items 146/146, 0
   extra** (v0.4 extraction prompt in M3: 90/91; the miss, a-dev-049, now right through the `item_variant` flag).
