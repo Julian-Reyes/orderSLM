@@ -13,16 +13,17 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from orderslm.menus import load_menus
+from orderslm.menus import load_menu, load_menus
 from orderslm.schema.annotation import Scenario, WritingStyle
 from orderslm.schema.menu import MenuCatalog, MenuItem
 from orderslm.schema.routing import RouterLabel
 from orderslm.schema.synthetic import PlannedItem, SynthCard, SynthFeature
 
-CARDS_VERSION = "synth-cards@0.4"  # 0.2: address picked by code, no item twice in one order; 0.3: unstated
+CARDS_VERSION = "synth-cards@0.5"  # 0.2: address picked by code, no item twice in one order; 0.3: unstated
 # default size said explicitly, a greeting is no longer an expected SMALL_TALK label (often part of the order message);
 # 0.4 (p3 review): no "regular one" wording (leaked into chats), address-gap cards no longer also say "never says
-# pickup or delivery", a correction never swaps an item for itself, clearer payment-claim and unclear-message briefs
+# pickup or delivery", a correction never swaps an item for itself, clearer payment-claim and unclear-message briefs;
+# 0.5 (Julian, bulk): each non-order scenario weight 2 → 4 (non-order ≈ 35% of chats, was 22%) for the rare intents
 L = RouterLabel
 S = Scenario
 F = SynthFeature
@@ -51,17 +52,17 @@ PLANS: dict[Scenario, Plan] = {
     S.combo: Plan(5, (L.PLACE_ORDER,), (1, 3), menus=("corner-patty", "morning-crumb")),
     S.implicit_category: Plan(5, (L.PLACE_ORDER,), (1, 3)),
     S.two_requests: Plan(4, (L.PLACE_ORDER, L.MENU_QUESTION), (1, 3)),
-    S.menu_question: Plan(2, (L.MENU_QUESTION,), (1, 3), order=False),
-    S.delivery_question: Plan(2, (L.DELIVERY_QUESTION,), (1, 3), order=False),
-    S.payment_question: Plan(2, (L.PAYMENT_QUESTION,), (1, 2), order=False),
-    S.status_question: Plan(2, (L.ORDER_STATUS,), (1, 3), order=False),
-    S.order_problem: Plan(2, (L.ORDER_PROBLEM,), (1, 3), order=False),
-    S.refund_request: Plan(2, (L.REFUND_REQUEST,), (1, 3), order=False),
-    S.payment_claim: Plan(2, (L.PAYMENT_CLAIM,), (1, 3), order=False),
-    S.human_request: Plan(2, (L.HUMAN_REQUEST,), (1, 3), order=False),
-    S.small_talk: Plan(2, (L.SMALL_TALK,), (1, 2), order=False),
-    S.out_of_scope: Plan(2, (L.OUT_OF_SCOPE,), (1, 2), order=False),
-    S.unclear_message: Plan(2, (L.UNKNOWN,), (1, 2), order=False),
+    S.menu_question: Plan(4, (L.MENU_QUESTION,), (1, 3), order=False),
+    S.delivery_question: Plan(4, (L.DELIVERY_QUESTION,), (1, 3), order=False),
+    S.payment_question: Plan(4, (L.PAYMENT_QUESTION,), (1, 2), order=False),
+    S.status_question: Plan(4, (L.ORDER_STATUS,), (1, 3), order=False),
+    S.order_problem: Plan(4, (L.ORDER_PROBLEM,), (1, 3), order=False),
+    S.refund_request: Plan(4, (L.REFUND_REQUEST,), (1, 3), order=False),
+    S.payment_claim: Plan(4, (L.PAYMENT_CLAIM,), (1, 3), order=False),
+    S.human_request: Plan(4, (L.HUMAN_REQUEST,), (1, 3), order=False),
+    S.small_talk: Plan(4, (L.SMALL_TALK,), (1, 2), order=False),
+    S.out_of_scope: Plan(4, (L.OUT_OF_SCOPE,), (1, 2), order=False),
+    S.unclear_message: Plan(4, (L.UNKNOWN,), (1, 2), order=False),
 }
 
 NON_ORDER_BRIEFS: dict[Scenario, str] = {
@@ -366,7 +367,8 @@ def _card(
         for _ in range(max(n_items, 0)):
             items.append(plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id}))
         if scenario is S.off_menu:
-            items.append(PlannedItem(off_menu_text=rng.choice(OFF_MENU[menu.business_id]), quantity=1))
+            choices = OFF_MENU.get(menu.business_id) or sorted({x for v in OFF_MENU.values() for x in v})
+            items.append(PlannedItem(off_menu_text=rng.choice(choices), quantity=1))
 
         # fulfillment, payment, name
         if menu.delivery.available:
@@ -496,18 +498,38 @@ def _pattern(generators: tuple[tuple[str, int], ...]) -> list[str]:
     return out
 
 
+def _supports(menu: MenuCatalog, scenario: Scenario) -> bool:
+    """A scenario restricted to some menus also fits a menu (the mega-menu) that has what it needs."""
+    if scenario is S.half_and_half:
+        return sum(i.splittable for i in menu.items) >= 2
+    if scenario is S.combo:
+        return any(i.combo_slots for i in menu.items)
+    return False
+
+
 def plan_cards(
-    n: int, *, seed: int, batch: str, generators: tuple[tuple[str, int], ...] = GENERATORS
+    n: int,
+    *,
+    seed: int,
+    batch: str,
+    generators: tuple[tuple[str, int], ...] = GENERATORS,
+    business_ids: tuple[str, ...] | None = None,
 ) -> list[SynthCard]:
     """n cards. Generators are assigned in scenario order, so each scenario is split across them in the given
     ratio and the totals are exact when n is a multiple of the summed weights."""
     rng = random.Random(f"{CARDS_VERSION}-{seed}-{batch}")
-    menus = {b: m for b, m in load_menus().items() if not m.held_out}
+    if business_ids is None:
+        menus = {b: m for b, m in load_menus().items() if not m.held_out}
+    else:
+        menus = {b: load_menu(b) for b in business_ids}  # a held-out id is unknown here (KeyError): test-only
     scenarios = _exact({s: p.weight for s, p in PLANS.items()}, n, rng)
     styles = _exact(STYLE_WEIGHTS, n, rng)
     cards = []
     for i, (scenario, style) in enumerate(zip(scenarios, styles, strict=True), start=1):
-        allowed = PLANS[scenario].menus or tuple(sorted(menus))
+        only = PLANS[scenario].menus
+        allowed = tuple(
+            b for b in sorted(menus) if only is None or b in only or _supports(menus[b], scenario)
+        )
         cards.append(_card(i, scenario, style, menus[rng.choice(allowed)], rng, batch))
     order = list(PLANS)
     pattern = _pattern(generators)

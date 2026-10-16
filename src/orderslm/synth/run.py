@@ -110,7 +110,16 @@ def plan(args: argparse.Namespace) -> int:
     if (out / "cards.jsonl").exists() and not args.force:
         print(f"{_rel(out)}/cards.jsonl exists; --force to replace it (only before any calls).")
         return 2
-    cards = plan_cards(args.n, seed=args.seed, batch=args.batch)
+    generators = GENERATORS
+    if args.generators:
+        generators = tuple((g, int(w)) for g, w in (x.rsplit(":", 1) for x in args.generators.split(",")))
+        unknown = [g for g, _ in generators if g not in load_models()]
+        if unknown:
+            raise SystemExit(f"unknown generators {unknown}")
+    business_ids = tuple(args.menus.split(",")) if args.menus else None
+    cards = plan_cards(
+        args.n, seed=args.seed, batch=args.batch, generators=generators, business_ids=business_ids
+    )
     out.mkdir(parents=True, exist_ok=True)
     _jsonl(out / "cards.jsonl", [c.model_dump(mode="json") for c in cards])
     meta = {
@@ -119,7 +128,7 @@ def plan(args: argparse.Namespace) -> int:
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
-        "generators": dict(GENERATORS),
+        "generators": dict(generators),
         "menu_versions": {b: menu_version(load_menu(b)) for b in sorted({c.business_id for c in cards})},
         "planned_at": datetime.now(UTC).isoformat(),
         "git_commit": git_commit(),
@@ -475,6 +484,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--n", type=int, required=True)
     p.add_argument("--seed", type=int, default=SEED)
     p.add_argument("--force", action="store_true")
+    p.add_argument("--generators", help="config_id:weight,... (default: the pilot's 2:2:1)")
+    p.add_argument("--menus", help="business ids, e.g. food-court (default: the three training menus)")
     for name in ("generate", "label"):
         p = sub.add_parser(name)
         p.add_argument("--batch", required=True)

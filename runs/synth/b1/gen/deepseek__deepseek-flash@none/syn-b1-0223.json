@@ -1,0 +1,31 @@
+{
+ "key": "syn-b1-0223",
+ "config_id": "deepseek/deepseek-flash@none",
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"messages\": [\n    {\n      \"role\": \"customer\",\n      \"text\": \"Hi, I placed an order earlier and I'm just checking on it. When will it arrive?\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Hi! Could you tell me your name or order number so I can look it up?\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"It's under Sarah. I ordered a small 10-inch pizza with mushrooms, onions, and extra cheese, and a side of garlic knots.\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Thanks, Sarah! I see your order. It's in the oven now and should be out for delivery shortly. You can expect it in about 20-25 minutes.\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"Okay, thank you. I'll keep an eye out.\"\n    }\n  ]\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2123,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 203,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1902.0479720202275,
+  "cost_micros": 159,
+  "at": "2026-10-16T16:14:13.996380+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2123,
+   "completion_tokens": 203,
+   "total_tokens": 2326,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 203
+  }
+ }
+}

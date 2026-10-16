@@ -16,6 +16,9 @@ from orderslm.paths import MENUS
 from orderslm.schema.menu import MenuCatalog
 
 HELD_OUT_DIR = MENUS / "held_out"
+MEGA_DIR = (
+    MENUS / "mega"
+)  # the food-court mega-menu built from the training menus (orderslm.mega), not a 4th menu
 
 
 def _load(path: Path) -> MenuCatalog:
@@ -37,9 +40,16 @@ def load_menus(*, include_held_out: bool = False) -> dict[str, MenuCatalog]:
     return menus
 
 
+def load_mega_menus() -> dict[str, MenuCatalog]:
+    return {p.stem: _load(p) for p in sorted(MEGA_DIR.glob("*.json"))}
+
+
 def load_menu(business_id: str, *, include_held_out: bool = False) -> MenuCatalog:
     menus = load_menus(include_held_out=include_held_out)
     if business_id not in menus:
+        mega = load_mega_menus()
+        if business_id in mega:
+            return mega[business_id]
         hint = " (held-out menus need include_held_out=True)" if not include_held_out else ""
         raise KeyError(f"unknown business {business_id!r}{hint}")
     return menus[business_id]

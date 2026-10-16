@@ -114,6 +114,15 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   right). Remaining misses are run-to-run flips. **v0.4 is the bulk label prompt**; no more tuning on dev.
   Julian: "👍 SOUNDS GOOD" (a-dev-032) stays UNKNOWN. Open: a-dev-074 "hey ordering for the office" (gold
   PLACE_ORDER) is the same case as a-dev-075 (ruled SMALL_TALK).
+- **Bulk decisions (Julian, 2026-10-16):** 1,500 more single-menu chats, **DeepSeek 1,000 / Haiku 250 / Gemini 250**,
+  rebalanced toward rare intents (cards 0.5: non-order 35%, ~48 cards per rare intent); additions to a placed order
+  add no order line; no Batch API (saving ~$0.50 isn't worth the build); a-dev-074 left to Claude → SMALL_TALK like
+  a-dev-075 (logged review). Label prompt **v0.5** (order announcements are SMALL_TALK, placed-order additions add no
+  items): dev orders **91/91**, intents **265/268 (98.9%)** (one of the gains is the a-dev-074 gold change).
+- **Mega-menu (Julian: yes):** `make mega-menu` → `data/menus/mega/food-court.json` (34 items, 54 modifiers; coke/sprite
+  merged, clashing cheese/avocado renamed; built by `orderslm/mega.py`, tested to equal the committed file). Not a
+  4th regular menu (`load_menus()` excludes it; `load_menu("food-court")` finds it). Mega batch `m1` planned: 396
+  cards (~20% of ~2,000 single-menu), 264/66/66.
 - **Audit of p3 (2026-10-16, by Claude at Julian's request, `runs/synth/p3/audit_review.md`):** 30 chats: realistic
   28/30, intents fully right 26/30, order right 27/30. Teacher patterns for label prompt v0.3: PLACE vs MODIFY when
   adding a detail to an item being ordered; an answer takes the label of the request it serves; garbled text is

@@ -462,3 +462,41 @@ def test_label_dev_scores_intents_against_gold():
         ac.gold_routing[0].decision.primary is RouterLabel.UNKNOWN
     )
     assert not any(r["primary_ok"] for r in score_intents(ac, None))
+
+
+def test_mega_menu_is_built_from_the_training_menus():
+    from orderslm.mega import MEGA_ID, build
+    from orderslm.menus import load_menu as lm
+
+    mega = build()
+    assert mega.model_dump() == lm(MEGA_ID).model_dump()  # the committed file is what the builder makes
+    menus = load_menus()
+    assert MEGA_ID not in menus  # never a 4th regular menu
+    stall_items = {i.id for b in ("corner-patty", "halfmoon-pizza", "morning-crumb") for i in menus[b].items}
+    assert {i.id for i in mega.items} == stall_items
+    assert mega.item("coke").variants  # the soft drink with sizes
+    # every stall item keeps its own ingredients and add-ons, by name and price
+    for b in ("corner-patty", "halfmoon-pizza", "morning-crumb"):
+        for item in menus[b].items:
+            if item.id in ("coke", "sprite"):
+                continue
+            mine = mega.item(item.id)
+            for orig, new in zip(
+                item.ingredient_ids + item.addon_ids, mine.ingredient_ids + mine.addon_ids, strict=True
+            ):
+                a, z = menus[b].modifier(orig), mega.modifier(new)
+                assert (a.name, a.price_cents) == (z.name, z.price_cents), (b, item.id, orig, new)
+
+
+def test_mega_menu_cards():
+    cards = synth_cards.plan_cards(60, seed=3, batch="m", business_ids=("food-court",))
+    assert {c.business_id for c in cards} == {"food-court"}
+    assert any(c.scenario is Scenario.half_and_half for c in cards) and any(
+        c.scenario is Scenario.combo for c in cards
+    )
+    mega = load_menu("food-court")
+    for c in cards:
+        for p in c.items:
+            _check_planned(p, mega)
+    with pytest.raises(KeyError, match="held-out"):
+        synth_cards.plan_cards(5, seed=1, batch="h", business_ids=("lucky-lime",))

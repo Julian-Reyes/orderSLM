@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart label-dev synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -52,6 +52,9 @@ teacher-bakeoff:
 # Chart data (before/after views, from saved outputs) + docs/figures SVG for the write-up and case study.
 bakeoff-chart:
 	$(RUN) python -m orderslm.eval.bakeoff_chart
+# Food-court mega-menu from the three training menus (spec §11e): data/menus/mega/food-court.json
+mega-menu:
+	$(RUN) python -m orderslm.mega
 # The M4 label prompt scored on all dev against reviewed gold (orders + intents).
 label-dev:
 	$(RUN) python -m orderslm.eval.label_dev $(ARGS)
