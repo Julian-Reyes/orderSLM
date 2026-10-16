@@ -1,0 +1,196 @@
+{
+  "jev": {
+    "intent_messages": 8310,
+    "intent_agree_primary": 7309,
+    "intent_agree_rate": 0.8795,
+    "intent_agree_ci95": [
+      0.8723683338448738,
+      0.8863663526567309
+    ],
+    "intent_agree_primary_or_secondary": 7426,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 223
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 134
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 128
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CONFIRM_ORDER",
+        "count": 124
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 29
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 25
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 23
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "OUT_OF_SCOPE",
+        "count": 23
+      },
+      {
+        "expected": "ORDER_STATUS",
+        "provider": "PAYMENT_CLAIM",
+        "count": 22
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 22
+      },
+      {
+        "expected": "ORDER_PROBLEM",
+        "provider": "REFUND_REQUEST",
+        "count": 20
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "PLACE_ORDER",
+        "count": 16
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "MODIFY_ORDER",
+        "count": 15
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 14
+      },
+      {
+        "expected": "PAYMENT_QUESTION",
+        "provider": "PAYMENT_CLAIM",
+        "count": 14
+      }
+    ],
+    "orders_expected_ok": 2356,
+    "order_flagged": 155,
+    "order_flag_rate": 0.0658,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 4696961,
+    "cost_micros": 198409,
+    "latency_p50_ms": 260,
+    "latency_p95_ms": 354
+  },
+  "openai-decisions": {
+    "intent_messages": 8310,
+    "intent_agree_primary": 7341,
+    "intent_agree_rate": 0.8834,
+    "intent_agree_ci95": [
+      0.8763149523470503,
+      0.8901177398514636
+    ],
+    "intent_agree_primary_or_secondary": 7488,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 170
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 138
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 74
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "SMALL_TALK",
+        "count": 49
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 38
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 37
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CONFIRM_ORDER",
+        "count": 36
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 35
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 33
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 33
+      },
+      {
+        "expected": "ORDER_STATUS",
+        "provider": "PLACE_ORDER",
+        "count": 23
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 20
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "PLACE_ORDER",
+        "count": 19
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 19
+      },
+      {
+        "expected": "ORDER_STATUS",
+        "provider": "PAYMENT_CLAIM",
+        "count": 17
+      }
+    ],
+    "orders_expected_ok": 2356,
+    "order_flagged": 40,
+    "order_flag_rate": 0.017,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 3999038,
+    "cost_micros": 400859,
+    "latency_p50_ms": 348,
+    "latency_p95_ms": 1014
+  }
+}

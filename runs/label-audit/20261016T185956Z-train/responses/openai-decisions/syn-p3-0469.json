@@ -1,0 +1,55 @@
+{
+ "id": "syn-p3-0469",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "ORDER_STATUS",
+    "score": null,
+    "boolean": null,
+    "confidence": 0.57,
+    "probabilities": {
+     "PLACE_ORDER": 0.05,
+     "MODIFY_ORDER": 0.0,
+     "CANCEL_ORDER": 0.01,
+     "CONFIRM_ORDER": 0.01,
+     "MENU_QUESTION": 0.0,
+     "DELIVERY_QUESTION": 0.01,
+     "PAYMENT_QUESTION": 0.0,
+     "PAYMENT_CLAIM": 0.0,
+     "ORDER_STATUS": 0.6,
+     "ORDER_PROBLEM": 0.01,
+     "REFUND_REQUEST": 0.0,
+     "HUMAN_REQUEST": 0.0,
+     "SMALL_TALK": 0.01,
+     "OUT_OF_SCOPE": 0.01,
+     "UNKNOWN": 0.29
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.97,
+     "false": 0.030000000000000027
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 655,
+   "output_tokens": 0
+  },
+  "latency_ms": 366.48260199581273,
+  "cost_micros": 66,
+  "cached": false
+ }
+}

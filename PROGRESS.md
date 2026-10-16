@@ -129,6 +129,15 @@ No results exist yet: the rules baselines have **not** been scored on anything (
   merged, clashing cheese/avocado renamed; built by `orderslm/mega.py`, tested to equal the committed file). Not a
   4th regular menu (`load_menus()` excludes it; `load_menu("food-court")` finds it). Mega batch `m1` planned: 396
   cards (~20% of ~2,000 single-menu), 264/66/66.
+- **Label audit by Jev + OpenAI Decisions (2026-10-16; `make label-audit`; Julia-1 waits for an Apple-Silicon Mac or
+  Kaggle: this Intel Mac can't install torch ≥ 2.6).** Dev (`label-audit@0.2`, after fixing cancelled / no-order /
+  unclear-item wording on dev): intents vs gold Jev 95.5%, Decisions 96.3% (teacher 98.9%); correct orders flagged
+  Jev 12%, Decisions 2%; planted mistakes caught Jev 89%, Decisions 82% (weakest: dropped modification 22–35%).
+  Train (runs/label-audit/20261016T185956Z-train, $0.60): intents = teacher 88%; orders flagged Jev 6.6%, Decisions 1.7%; both: 31 orders,
+  425 intent messages. Hand check (`review.md` there): order flags ≈ 50% precision on chats with an order (7 real
+  teacher errors; 17 false alarms from status chats that describe an earlier order); intent flags ≈ 24–36%
+  (real: read-back "that's it" still SMALL_TALK, follow-ups in status/complaint/refund chats; the rest are Julian's
+  PLACE/MODIFY and announcement conventions). Rates: Jev 120 rpm, Decisions 300 rpm (Julian).
 - **Bulk run `b1` + mega `m1` (2026-10-16):** b1 generation $0.3714 (1,481/1,500 kept: DeepSeek 14 schema-echo
   outputs, 3 business prices, 1 exact duplicate), labels $0.9407 (1,476 kept, 5 dropped); m1 generation $0.1372
   (394/396), labels $0.4609 (391/394). Card agreement: b1 Haiku 91%, DeepSeek 95%, Gemini 92%; m1 91% / 94% / 94%.

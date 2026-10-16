@@ -1,5 +1,5 @@
 {
-  "_comment": "Hosted decision providers (spec §11, docs/PROVIDERS.md). Prices are micro-USD per 1M input tokens (both bill input only). price_verified null = not yet confirmed on the provider's own pricing page: costs computed with it are estimates.",
+  "_comment": "Hosted decision providers (spec §11, docs/PROVIDERS.md). rpm is our own pacing (Julian, 2026-10-16: Jev 120 while its limits are undocumented, OpenAI Decisions 300, far below the account's 5,000 RPM); 429s back off automatically. Prices are micro-USD per 1M input tokens (both bill input only). price_verified null = not yet confirmed on the provider's own pricing page: costs computed with it are estimates.",
   "providers": [
     {
       "name": "jev",
@@ -8,7 +8,7 @@
       "model": "jev-latest",
       "key_env": "JEV_API_KEY",
       "max_options": 255,
-      "rpm": 60,
+      "rpm": 120,
       "price_input_per_1m": 42000,
       "price_verified": null,
       "price_source": "Google search summary 2026-10-16 ($0.042/1M input, output free); not on docs.typesafe.ai/api.md"
@@ -20,7 +20,7 @@
       "model": "gpt-6-luna",
       "key_env": "OPENAI_API_KEY",
       "max_options": null,
-      "rpm": 60,
+      "rpm": 300,
       "price_input_per_1m": 100000,
       "price_verified": "2026-10-16",
       "price_source": "https://developers.openai.com/api/docs/guides/decisions ($0.10/1M input; no output or cache charges)"
