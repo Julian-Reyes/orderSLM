@@ -16,7 +16,6 @@ import argparse
 import hashlib
 import json
 import statistics
-import subprocess
 import sys
 import threading
 from collections import defaultdict
@@ -41,6 +40,7 @@ from orderslm.llm.factory import cache_mode_from_env, make_client
 from orderslm.llm.types import ChatRequest, ChatResponse, LLMError, LLMUsage
 from orderslm.menus import load_menu, menu_version
 from orderslm.paths import DEV, ROOT, RUNS
+from orderslm.runinfo import git_commit
 from orderslm.schema.annotation import AnnotatedConversation
 from orderslm.schema.common import EXTRACTION_SCHEMA_VERSION
 from orderslm.schema.conversation import Split
@@ -76,12 +76,6 @@ def estimate_micros(model: ModelConfig, chat: ChatRequest, ac: AnnotatedConversa
     # Price at peak time where it matters (DeepSeek): estimates never assume the cheaper window.
     peak = datetime(2026, 10, 13, 2, 0, tzinfo=UTC)
     return model.cost_micros(usage, peak), usage
-
-
-def _git_commit() -> str:
-    out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True)
-    dirty = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True)
-    return (out.stdout.strip() or "unknown") + ("-dirty" if dirty.stdout.strip() else "")
 
 
 def _dev_hash(ids: list[str]) -> str:
@@ -157,7 +151,7 @@ def run(args: argparse.Namespace) -> int:
         "experiment": EXPERIMENT,
         "mode": mode,
         "started_at": started.isoformat(),
-        "git_commit": _git_commit(),
+        "git_commit": git_commit(),
         "prompt_version": TEACHER_PROMPT_VERSION,
         "prompt_sha256": hashlib.sha256(prompt_text().encode()).hexdigest()[:16],
         "schema_version": EXTRACTION_SCHEMA_VERSION,

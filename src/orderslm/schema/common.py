@@ -23,6 +23,10 @@ MENU_SCHEMA_VERSION = (
     # 0.6: MenuItem.sold_as/pieces_per_order
 )
 TAXONOMY_VERSION = "taxonomy@0.1"
+# Model output for training labels (M4): order facts + ambiguity flags, intents (schema/label.py).
+LABEL_SCHEMA_VERSION = "label@0.1"
+STUDENT_SCHEMA_VERSION = "student@0.1"
+SYNTH_SCHEMA_VERSION = "synth@0.1"  # synthetic chats + their scenario cards (schema/synthetic.py)
 
 ID_PATTERN = r"^[a-z0-9][a-z0-9_-]*$"
 """Stable ids: menu items, variants, modifiers, businesses. Language-neutral by construction."""

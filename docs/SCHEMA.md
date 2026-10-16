@@ -192,6 +192,32 @@ themselves: docs/MENUS.md.
 Gold extraction is the order state after the last message (null if the conversation has no order);
 gold routing covers every customer message, in order. Format for samples, dev and test sets.
 
+## Model output for training labels (`label@0.1`, `student@0.1`; M4)
+
+`schema/label.py`, decided by Julian on 2026-10-16. A model reports what the customer said; code applies the
+rules. `ExtractionOutput` above is unchanged: it is the *finalized* order (gold, scoring, app).
+
+- **`ModelOrder`**: the order facts. These are `ExtractionOutput` without `missing_or_ambiguous` and
+  `clarification_question` (code computes both in `core/finalize.py`), plus `ambiguity_flags[]`. The flags are
+  the only judgments about missing information that need the text: `{field: item_menu_match | item_variant,
+  line_id}`. `item_menu_match` marks an unmatched item that could be several menu items, as opposed to one that
+  is off the menu. `item_variant` marks a size or flavor the customer referred to unclearly, as opposed to not
+  at all. A yes to an incomplete summary is output as `confirmed`; finalize turns it into `pending` +
+  `agreed_while_incomplete`.
+- **`TeacherLabel`**: `{intents[], order}`. Holds one `MessageIntent {message_index, primary, secondary |
+  null}` per customer message, in order, each read in the context of the chat before it.
+- **`StudentOutput`**: `{intent {primary, secondary | null}, order}`. The intent is for the latest customer
+  message (spec §4).
+- `core.finalize.finalize_order(order, menu)` turns a `ModelOrder` into a finalized `ExtractionOutput`.
+
+## Synthetic chats (`synth@0.1`; M4)
+
+`schema/synthetic.py`. `SynthCard` is the plan for one training chat: business, scenario, overlays, expected
+router labels, style and features, persona, fulfillment and payment plan, `items[]` (the order the chat ends
+with, as `PlannedItem`), `first_ask` (what a correction replaces), brief, start time and the generator model.
+`SyntheticConversation` is the generated chat (split and source `synthetic`). `LabeledConversation` is the
+teacher's label after finalize, where `extraction` is null when there are no items (like gold).
+
 ## Changing a contract
 
 Bump the version in `schema/common.py`, update this file and the samples, and note it in PROGRESS.md.

@@ -146,6 +146,13 @@ Synthetic training data mostly measures how well a model imitates the teacher, s
 - A cheap model generates conversations from combinations of (menu × customer persona × scenario × writing style). Control diversity with explicit attributes, deduplicate near-duplicates, and log the distribution.
 - Prefer a **different model for generation than for labeling**, to reduce the teacher agreeing with its own phrasing.
 - Start with a **200-conversation pilot**, audit it by hand, then scale to **1,000–2,000** conversations.
+- **Pilot decisions (Julian, October 16, 2026):** the pilot is 500 chats from three generators: DeepSeek
+  `deepseek-flash` (200), Gemini `gemini-3.1-flash-lite` (200) and Claude Haiku 5.5 at its lowest setting (100).
+  The rest of the bulk is decided after analyzing the pilot. Haiku is a deliberate, measured exception to "the
+  generator differs from Source A's author". Every chat records its generator, and results are reported per
+  generator, so any Claude-style advantage on Source A shows up in the data. Labels use the `label@0.1` contract
+  (docs/SCHEMA.md): the teacher outputs the order facts, the two ambiguity judgments and every customer message's
+  intent in one call per chat. Code computes the missing list and the clarification question (`core/finalize`).
 - The teacher labels each customer message's **router intent** (the 15 labels) along with the order, so the student can learn to output both (§4).
 - **Mega-menu conversations:** ~20% extra conversations on the combined food-court menu (§11e), teacher-labeled, for the mixed 2B student only.
 - **Training-label audit:** before training, the decision providers check the teacher's labels (intent and order); disagreements are reviewed or dropped (§11d).

@@ -30,6 +30,7 @@ from orderslm.schema.extraction import (
     MissingInfo,
     MissingReason,
 )
+from orderslm.schema.label import ModelOrder
 from orderslm.schema.menu import MenuCatalog
 
 FINALIZE_VERSION = "finalize@0.1"
@@ -110,20 +111,34 @@ def parse_and_finalize(
         if not isinstance(data, dict):
             return None, "output is not a JSON object"
         judgments = _model_judgments(data.get("missing_or_ambiguous"))
-        # Validate the facts with neutral placeholders for the three rules that tie the missing list to the rest
-        # (off-menu lines listed, no gaps on confirmed/cancelled, question iff gaps); finalize rebuilds all three
-        # and the result is validated again in full.
-        decision = CustomerDecision.model_validate(data.get("customer_decision") or {})
-        items = data.get("items") if isinstance(data.get("items"), list) else []
-        placeholder = [
-            {"field": "item_menu_match", "reason": "off_menu", "line_id": it.get("line_id")}
-            for it in items
-            if isinstance(it, dict) and it.get("unmatched_text") is not None
-        ]
-        data["missing_or_ambiguous"] = placeholder
-        data["clarification_question"] = "?" if placeholder else None
-        data["customer_decision"] = CustomerDecision().model_dump(mode="json")
-        facts = ExtractionOutput.model_validate(data).model_copy(update={"customer_decision": decision})
-        return finalize(facts, menu, judgments, lang), None
+        return finalize(_facts(data), menu, judgments, lang), None
     except (ValueError, ValidationError) as e:  # json.JSONDecodeError subclasses ValueError
         return None, str(e)
+
+
+def _facts(data: dict[str, Any]) -> ExtractionOutput:
+    """Validate the order facts with neutral placeholders for the three rules that tie the missing list to the
+    rest (off-menu lines listed, no gaps on confirmed/cancelled, question iff gaps); finalize rebuilds all three
+    and the result is validated again in full."""
+    decision = CustomerDecision.model_validate(data.get("customer_decision") or {})
+    items = data.get("items") if isinstance(data.get("items"), list) else []
+    placeholder = [
+        {"field": "item_menu_match", "reason": "off_menu", "line_id": it.get("line_id")}
+        for it in items
+        if isinstance(it, dict) and it.get("unmatched_text") is not None
+    ]
+    data = {
+        **data,
+        "missing_or_ambiguous": placeholder,
+        "clarification_question": "?" if placeholder else None,
+    }
+    data["customer_decision"] = CustomerDecision().model_dump(mode="json")
+    return ExtractionOutput.model_validate(data).model_copy(update={"customer_decision": decision})
+
+
+def finalize_order(order: ModelOrder, menu: MenuCatalog, lang: str = "en") -> ExtractionOutput:
+    """A model's order facts (schema/label.py) → the finalized ExtractionOutput. Its ambiguity flags are the
+    only text judgments taken from the model."""
+    judgments = {(f.field, MissingReason.ambiguous.value, f.line_id) for f in order.ambiguity_flags}
+    data = order.model_dump(mode="json", exclude={"ambiguity_flags"})
+    return finalize(_facts(data), menu, judgments, lang)

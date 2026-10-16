@@ -36,7 +36,7 @@ Customer claims are recorded as claims (`customer_claims_paid`), never as facts 
 - **The extractor's input never includes the router's label.** The router only decides whether the extractor
   is called. `ExtractionRequest` (menu, conversation, draft, prompt version) has no routing field, and must not
   get one.
-- **The student outputs an intent** (one of the 15 router labels) alongside the order (planned: M4 contract,
+- **The student outputs an intent** (one of the 15 router labels) alongside the order (M4 contract `student@0.1`,
   M6 training). Since it never sees the router's label, its intent is an independent second opinion: router and
   student cross-check each other (spec §11a).
 - **Architectures compared in M7** (spec §11): A) router, then extractor (the flow above); B) extractor only
@@ -75,7 +75,9 @@ orderslm/
 │   │                             fake.py, factory.py, env.py, smoke.py (one live call per model)
 │   ├── providers/                (M7) julia1.py, jev.py, openai_decisions.py (DecisionProvider adapters)
 │   ├── extractors/               (M3/M5) teacher.py (API), local.py (llama.cpp/MLX/transformers)
-│   ├── data/                     splits.py (dev/test storage, review, lock), cards.py (Source A scenario cards), pizza.py + sexp.py (PIZZA); (M4) synthetic
+│   ├── data/                     splits.py (dev/test storage, review, lock), cards.py (Source A scenario cards), pizza.py + sexp.py (PIZZA)
+│   ├── synth/                    (M4) cards.py (synthetic scenario cards), generate.py, label.py (teacher labels + card
+│   │                             agreement), dedup.py, run.py (plan / generate / label / report CLI), prompts/
 │   ├── eval/                     (M3) metrics.py, stats.py, dataset.py, teacher_bakeoff.py (runner, estimate, reports),
 │   │                             bakeoff_chart.py + bakeoff_svg.py (case-study data, chart); (M6) judge_agreement.py
 │   ├── train/                    (M6) LoRA configs and scripts (run on Colab/Kaggle)
@@ -86,7 +88,6 @@ orderslm/
 │   ├── menus/                    3 business menus, held_out/ (1 test-only menu)
 │   ├── dev/                      (M2) Source A dev: 91 Claude-written from cards.jsonl, reviewed
 │   ├── test/                     (M2) Source A test 199 (+ optional Source C), SEALED (paths.test_split_dir guard)
-│   ├── synthetic/                (M4) pilot + bulk, with distribution logs
 │   └── external/                 (M2) third-party downloads, gitignored, never committed (PIZZA: CC-BY-NC-4.0)
 ├── runs/                         (M3) committed eval outputs: manifest + raw outputs + metrics + report
 ├── web/                          Vite + Preact + TS: annotation tool (M2), demo pages in M8; `make web` builds web/dist
@@ -150,8 +151,8 @@ milestones exit with an error today. Anything that spends money prints an estima
 | 2 ✅ | `make annotate` / `make annotate-test` | Local annotation tool on 127.0.0.1:8765 (FastAPI + Vite/Preact); validates on every edit, blind relabel tab (docs/SPLITS.md). |
 | 2 ✅ | `make lock-test` / `make verify-test` / `make split-stats` | Seal the test split: hashes, counts per source/label/scenario, dedup, review coverage + correction rate (docs/SPLITS.md). |
 | 3 | `make teacher-bakeoff ARGS="--estimate"` → `ARGS="--pilot 5"` → full | Same prompt/schema across `gpt-6-luna`, `gemini-3.1-flash-lite`, `deepseek-flash` (+ optional `gemini-3.8-flash`) on ~40 dev conversations; writes `runs/teacher-bakeoff/<id>/`, report + accuracy-vs-cost chart. |
-| 4 | `make synth ARGS="--pilot 200"` | Generate pilot conversations (generator model ≠ teacher), dedup, distribution log. |
-| 4 | `make label ARGS="--pilot"` / `make label` | Teacher labels (batch API where available), consistency checks, drop-rate log, actual cost. |
+| 4 | `make synth ARGS="plan --batch p1 --n 500"`, `ARGS="generate --batch p1 [--limit 5] [--yes]"` | Scenario cards, then chats from the cards' generators; drops + dedup; everything in `runs/synth/<batch>/`. |
+| 4 | `make label ARGS="--batch p1 [--limit 5] [--yes]"`, `make synth ARGS="report --batch p1"` | Teacher labels (intents + order, finalized), consistency checks, card agreement, per-generator summary and cost. |
 | 5 | `make student-bakeoff` | Zero-shot local run of Qwen3.5-0.8B/2B, Qwen3-1.7B, Gemma 4 E2B on ~20 dev conversations (after license/tooling checks; model downloads need approval). |
 | 6 | `make train` | Prints/exports the Colab/Kaggle notebook + config; training runs there (LoRA; QLoRA only if needed). |
 | 6 | `make eval ARGS="--split test"` | Requires `ORDERSLM_UNSEAL_TEST=<reason>`; zero-shot vs few-shot vs fine-tuned vs teacher vs rules. |

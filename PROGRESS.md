@@ -2,21 +2,23 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-15 (end of session)._
+_Last updated 2026-10-16._
 
 ## Start here next session
 
-- **State:** M0–M3 done. `milestone-3` merged into local `main`; **not pushed** (ask Julian first; run a secrets check).
-  Old local branches `milestone-2`, `m2-eval-data` are fully contained in main (delete only if Julian wants).
-- **Next: M4** (synthetic generation + teacher labeling, spec §7 "Synthetic training data", §11d label audit). Open
-  items to settle before bulk labeling, all from M3:
-  1. Contract for the labels: add `intent` (spec §4); decide whether the model still outputs
-     `missing_or_ambiguous`/`clarification_question` (code computes them now via `core/finalize`) or only flags the
-     text judgments (ambiguous item / ambiguous size).
-  2. Label pipeline runs through `core/finalize`; chats with no items are stored as "no order" (null), like gold.
-  3. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
-  4. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7, required before bulk labeling).
-  5. Generator model ≠ teacher (spec §7); 200-conversation pilot first, Julian audits it.
+- **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
+  M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
+- **Next: M4 step 2**, the priced mini-pilot: re-verify the four prices on the official pages, then
+  `make synth ARGS="generate --batch p1 --limit 5 --yes"` (15 chats, est. $0.02) and
+  `make label ARGS="--batch p1 --limit 5 --yes"` (est. $0.04). Read the chats and labels, then re-project the full
+  500 from measured tokens; ask Julian if it is over $2. Then step 3: the full pilot, the analysis, Julian's audit.
+- Still open before **bulk** labeling (not needed for the pilot):
+  1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
+  2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
+     and Anthropic as generators as well as OpenAI as teacher.
+  3. Per-prefix training rows (the intent at every customer turn plus the order at that point): decide after the
+     pilot how to label the order at earlier turns.
+  4. Mega-menu cards (~20% for the mixed student, spec §11e) are not planned yet.
 - **Case study:** every experiment records all numbers per model/setting (accuracy counts, tokens, run cost and per
   1,000, latency, before/after views) in `runs/<experiment>/` + a summary/chart-data JSON (Julian, 2026-10-15).
 
@@ -28,7 +30,7 @@ _Last updated 2026-10-15 (end of session)._
 | 1 | Menus (3 + held-out), pricing engine, order state, rules baselines | ✅ Done 2026-10-07 |
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
-| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Not started |
+| 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | In progress: step 1 (contract, cards, prompts, checks, CLI) done 2026-10-16; no spend yet |
 | 5 | Student bake-off | Not started |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
@@ -37,6 +39,38 @@ _Last updated 2026-10-15 (end of session)._
 **Spend to date: $0.8011** (docs/COSTS.md): M3 smoke tests, teacher bake-off pilot, second bake-off, head-to-head. No model downloads,
 training or deployment so far.
 No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
+
+## M4 so far (2026-10-16)
+
+- **Julian's decisions (2026-10-16):** pilot = **DeepSeek flash 200, Gemini flash-lite 200, Haiku 5.5 lowest 100**,
+  decide the rest after the analysis (recorded in spec §7). The writer is kept different from the teacher and from
+  Source A's author because a model reads its own text the way it meant it (its label errors line up with its
+  writing), and because training on Claude-style chats could inflate Source A scores. Haiku is the measured
+  exception: results are reported per generator. Contract: **drop the missing list and question from model output,
+  keep ambiguity flags**. Intents: **per customer message, one call per chat**. Estimate given before starting:
+  about $1.2–1.7 (upper bound).
+- **Contract** `label@0.1` / `student@0.1` (`schema/label.py`, docs/SCHEMA.md): `ModelOrder` = order facts + 2
+  ambiguity flags; `TeacherLabel` = intents per customer message + order; `StudentOutput` = latest intent + order.
+  `ExtractionOutput` is unchanged (`extraction@0.4`). `core.finalize.finalize_order` builds the finalized order.
+  Tested: every dev gold → label contract → finalize gives back gold's missing list and decision.
+- **Cards** (`synth/cards.py`, `synth-cards@0.1`): seeded plan from 24 scenarios (≈78% build an order, 22% the
+  non-order intents), 5 styles, 24 personas written for this (none from Source A), 3 training menus (never the
+  held-out one). Each card names the final order (menu ids, sizes, removals, add-ons, swaps, combo picks, half-and-
+  half, off-menu dish) so the label can be checked against it. Generators assigned in scenario order: exactly
+  200/200/100. Batch `p1` planned: `runs/synth/p1/cards.jsonl` + `plan.json` (distribution).
+- **Generator** (`synth/generate.py`, prompt `synth-write@0.1`): menu without prices or ids, card in words; code adds
+  indices and seeded timestamps. Drops: invalid JSON, last message not the customer's, a business message with a
+  price. Dedup (`synth/dedup.py`): customer-text word 3-gram Jaccard ≥ 0.8 within the batch and against dev.
+- **Labels** (`synth/label.py`, prompt `teacher-label@0.1` = v0.4 minus the missing list and question, plus flags and
+  intents with the label descriptions from `LABEL_DESCRIPTIONS`): drops for contract errors, intents not covering
+  each customer message, finalize errors, failed grounding checks, evidence citing a business message. **Card
+  agreement** (items, item details, expected labels, decision) is flagged for the audit, not dropped.
+- **CLI** `make synth` / `make label` (`synth/run.py`): estimate first, $2 guard, `--max-cost`, record/replay cache,
+  `calls/<time>-<stage>.json` per live stage, `report` → `summary.json` per generator (kept/drops, labels/drops,
+  card agreement, tokens, cost per 1k, latency).
+- **Estimates for the full p1 pilot** (chars/3, peak price, no caching): generation $0.76 (DeepSeek $0.33,
+  Gemini $0.36, Haiku $0.07); labeling ~$1.20 (luna `low`, $0.0024/chat). M3's measured luna cost was $0.57–0.63
+  per 1,000 with caching, so expect less. Total ≤ ~$1.96.
 
 ## M3 so far (2026-10-15)
 

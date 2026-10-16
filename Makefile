@@ -52,8 +52,11 @@ teacher-bakeoff:
 # Chart data (before/after views, from saved outputs) + docs/figures SVG for the write-up and case study.
 bakeoff-chart:
 	$(RUN) python -m orderslm.eval.bakeoff_chart
-synth:            ; $(call not_yet,4)
-label:            ; $(call not_yet,4)
+# Synthetic training data (M4): plan / generate / report stages; label is its own target. See synth/run.py.
+synth:
+	$(RUN) python -m orderslm.synth.run $(ARGS)
+label:
+	$(RUN) python -m orderslm.synth.run label $(ARGS)
 student-bakeoff:  ; $(call not_yet,5)
 train:            ; $(call not_yet,6)
 eval:             ; $(call not_yet,6)

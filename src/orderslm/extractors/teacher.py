@@ -15,7 +15,9 @@ from typing import Any
 from orderslm.interfaces.decision import Usage
 from orderslm.interfaces.extractor import ExtractionRequest, ExtractionResult, parse_model_output
 from orderslm.llm.types import ChatClient, ChatMessage, ChatRequest, ChatResponse
+from orderslm.schema.conversation import Conversation
 from orderslm.schema.extraction import ExtractionOutput
+from orderslm.schema.menu import MenuCatalog
 
 TEACHER_PROMPT_VERSION = "teacher-extract@0.4"  # 0.2: half-and-half line shape; 0.3: no items for
 # past orders; 0.4: plain pending decision has no evidence
@@ -72,6 +74,16 @@ def portable_schema(model: type = ExtractionOutput) -> dict[str, Any]:
     return walk(full, ())
 
 
+def conversation_prompt(menu: MenuCatalog, conversation: Conversation) -> str:
+    """The menu and the conversation as every teacher prompt shows them."""
+    lines = [f"[{m.index}] {m.role.value} {m.sent_at.isoformat()}: {m.text}" for m in conversation.messages]
+    return (
+        f"Menu (JSON):\n{menu.model_dump_json(exclude_none=True)}\n\n"
+        f"Conversation (language {conversation.language}; [message_index] role time: text):\n"
+        + "\n".join(lines)
+    )
+
+
 def build_chat_request(request: ExtractionRequest, schema: dict[str, Any] | None = None) -> ChatRequest:
     schema = schema if schema is not None else portable_schema()
     system = (
@@ -80,15 +92,8 @@ def build_chat_request(request: ExtractionRequest, schema: dict[str, Any] | None
         + json.dumps(schema, separators=(",", ":"))
         + "\n"
     )
-    menu = request.menu.model_dump_json(exclude_none=True)
-    lines = [
-        f"[{m.index}] {m.role.value} {m.sent_at.isoformat()}: {m.text}" for m in request.conversation.messages
-    ]
-    user = (
-        f"Menu (JSON):\n{menu}\n\n"
-        f"Conversation (language {request.conversation.language}; [message_index] role time: text):\n"
-        + "\n".join(lines)
-        + "\n\nReturn the order after the last message as one JSON object."
+    user = conversation_prompt(request.menu, request.conversation) + (
+        "\n\nReturn the order after the last message as one JSON object."
     )
     if request.draft is not None:
         user += f"\n\nCurrent draft order (JSON):\n{request.draft.model_dump_json()}"
