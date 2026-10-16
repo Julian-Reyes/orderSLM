@@ -43,6 +43,7 @@ def _mod_key(m: Modification) -> tuple:
 
 
 def item_key(item: ItemProposal) -> tuple:
+    # Sorted by repr: modifier ids can be None (off-menu requests, kitchen notes), which plain sorting can't compare.
     if item.unmatched_text is not None:
         return ("off_menu", item.quantity)
     if item.halves is not None:
@@ -50,7 +51,8 @@ def item_key(item: ItemProposal) -> tuple:
             "halves",
             tuple(
                 sorted(
-                    (h.menu_item_id, tuple(sorted(_mod_key(m) for m in h.modifications))) for h in item.halves
+                    (h.menu_item_id, tuple(sorted((_mod_key(m) for m in h.modifications), key=repr)))
+                    for h in item.halves
                 )
             ),
         )
@@ -60,8 +62,8 @@ def item_key(item: ItemProposal) -> tuple:
         identity,
         item.quantity,
         item.variant_id,
-        tuple(sorted(_mod_key(m) for m in item.modifications)),
-        tuple(sorted((c.slot_id, c.menu_item_id, c.variant_id) for c in item.combo_selections)),
+        tuple(sorted((_mod_key(m) for m in item.modifications), key=repr)),
+        tuple(sorted(((c.slot_id, c.menu_item_id, c.variant_id) for c in item.combo_selections), key=repr)),
     )
 
 

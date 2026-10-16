@@ -1,0 +1,29 @@
+{
+  "_comment": "Hosted decision providers (spec §11, docs/PROVIDERS.md). Prices are micro-USD per 1M input tokens (both bill input only). price_verified null = not yet confirmed on the provider's own pricing page: costs computed with it are estimates.",
+  "providers": [
+    {
+      "name": "jev",
+      "api": "typesafe_systemone",
+      "url": "https://api.typesafe.ai/v1/systemone",
+      "model": "jev-latest",
+      "key_env": "JEV_API_KEY",
+      "max_options": 255,
+      "rpm": 60,
+      "price_input_per_1m": 42000,
+      "price_verified": null,
+      "price_source": "Google search summary 2026-10-16 ($0.042/1M input, output free); not on docs.typesafe.ai/api.md"
+    },
+    {
+      "name": "openai-decisions",
+      "api": "openai_decisions",
+      "url": "https://api.openai.com/v1/decisions",
+      "model": "gpt-6-luna",
+      "key_env": "OPENAI_API_KEY",
+      "max_options": null,
+      "rpm": 60,
+      "price_input_per_1m": 100000,
+      "price_verified": "2026-10-16",
+      "price_source": "https://developers.openai.com/api/docs/guides/decisions ($0.10/1M input; no output or cache charges)"
+    }
+  ]
+}

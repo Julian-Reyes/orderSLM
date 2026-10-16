@@ -35,6 +35,9 @@ Source: [developers.openai.com/api/docs/guides/decisions](https://developers.ope
 - Limits on questions, choices or input size: **not documented** (test early with all 15 labels).
 - Price: **$0.10 per 1M input tokens; no output, cache-read or cache-write charges.** Regional and long-context
   multipliers apply. Rate limits not stated. ZDR/HIPAA for eligible customers.
+- Smoke test 2026-10-16 (`runs/decisions-smoke/20261016T183457Z`): works on the existing OrderSLM OpenAI key (no
+  beta signup), HTTP 200, 1.6 s, 396 input / 0 output tokens for one 15-label choice; gold label, confidence 1.0.
+  `usage` = `{input_tokens, input_tokens_details, output_tokens, …}`.
 
 ### Jev (TypeSafe): hosted
 Source: [docs.typesafe.ai/api.md](https://docs.typesafe.ai/api.md) (HTTP API reference). The vendor's agent

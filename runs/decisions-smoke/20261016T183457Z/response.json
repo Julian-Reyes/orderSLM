@@ -1,0 +1,162 @@
+{
+ "status": 200,
+ "latency_ms": 1609,
+ "request": {
+  "model": "gpt-6-luna",
+  "input": "[0] customer: hi i got charged twice for my order last nite, can i get one of those refunded",
+  "questions": [
+   {
+    "type": "choice",
+    "name": "intent",
+    "instructions": "What does customer message [0] do, in the context of the messages before it?",
+    "choices": [
+     {
+      "value": "PLACE_ORDER",
+      "description": "Customer starts an order, adds items, or gives first details like time, address or payment."
+     },
+     {
+      "value": "MODIFY_ORDER",
+      "description": "Customer changes something already stated: items, sizes, extras, time, address or payment."
+     },
+     {
+      "value": "CANCEL_ORDER",
+      "description": "Customer cancels the whole order."
+     },
+     {
+      "value": "CONFIRM_ORDER",
+      "description": "Customer agrees the order summary is correct."
+     },
+     {
+      "value": "MENU_QUESTION",
+      "description": "Question about menu items, ingredients, sizes, prices or availability."
+     },
+     {
+      "value": "DELIVERY_QUESTION",
+      "description": "Question about delivery area, fee, pickup, or opening hours."
+     },
+     {
+      "value": "PAYMENT_QUESTION",
+      "description": "Question about how to pay or which payment methods work."
+     },
+     {
+      "value": "PAYMENT_CLAIM",
+      "description": "Customer says they already paid or sent payment."
+     },
+     {
+      "value": "ORDER_STATUS",
+      "description": "Customer asks where a placed order is or when it will arrive."
+     },
+     {
+      "value": "ORDER_PROBLEM",
+      "description": "Complaint about a received order: missing, wrong, late, cold or damaged."
+     },
+     {
+      "value": "REFUND_REQUEST",
+      "description": "Customer asks for their money back or a refund."
+     },
+     {
+      "value": "HUMAN_REQUEST",
+      "description": "Customer asks to talk to a person or staff member."
+     },
+     {
+      "value": "SMALL_TALK",
+      "description": "Greeting, thanks, or chit-chat with no request."
+     },
+     {
+      "value": "OUT_OF_SCOPE",
+      "description": "Request unrelated to ordering food from this business."
+     },
+     {
+      "value": "UNKNOWN",
+      "description": "Too unclear to tell what the customer wants."
+     }
+    ]
+   }
+  ]
+ },
+ "response": {
+  "model": "gpt-6-luna",
+  "answers": [
+   {
+    "type": "choice",
+    "name": "intent",
+    "choice": "REFUND_REQUEST",
+    "probabilities": [
+     {
+      "value": "PLACE_ORDER",
+      "probability": 0.0
+     },
+     {
+      "value": "MODIFY_ORDER",
+      "probability": 0.0
+     },
+     {
+      "value": "CANCEL_ORDER",
+      "probability": 0.0
+     },
+     {
+      "value": "CONFIRM_ORDER",
+      "probability": 0.0
+     },
+     {
+      "value": "MENU_QUESTION",
+      "probability": 0.0
+     },
+     {
+      "value": "DELIVERY_QUESTION",
+      "probability": 0.0
+     },
+     {
+      "value": "PAYMENT_QUESTION",
+      "probability": 0.0
+     },
+     {
+      "value": "PAYMENT_CLAIM",
+      "probability": 0.0
+     },
+     {
+      "value": "ORDER_STATUS",
+      "probability": 0.0
+     },
+     {
+      "value": "ORDER_PROBLEM",
+      "probability": 0.0
+     },
+     {
+      "value": "REFUND_REQUEST",
+      "probability": 1.0
+     },
+     {
+      "value": "HUMAN_REQUEST",
+      "probability": 0.0
+     },
+     {
+      "value": "SMALL_TALK",
+      "probability": 0.0
+     },
+     {
+      "value": "OUT_OF_SCOPE",
+      "probability": 0.0
+     },
+     {
+      "value": "UNKNOWN",
+      "probability": 0.0
+     }
+    ],
+    "confidence": 1.0
+   }
+  ],
+  "usage": {
+   "input_tokens": 396,
+   "input_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 396
+  }
+ }
+}
