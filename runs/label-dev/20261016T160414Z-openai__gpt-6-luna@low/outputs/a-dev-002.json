@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-002",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no cheese\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"lemonade\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"cb combo\"},{\"message_index\":0,\"quote\":\"onion rings\"},{\"message_index\":0,\"quote\":\"a lemonade\"},{\"message_index\":0,\"quote\":\"no cheese\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a sprite\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"deliver to 412 maple ave\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Maple Ave\",\"number\":\"412\",\"unit\":null,\"reference\":null,\"raw_text\":\"412 maple ave\",\"evidence\":[{\"message_index\":1,\"quote\":\"412 maple ave\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"payin cash\"},{\"message_index\":2,\"quote\":\"change for a 20\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9289,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 611,
+   "reasoning_tokens": 86
+  },
+  "latency_ms": 6299.101740005426,
+  "cost_micros": 1235,
+  "at": "2026-10-16T16:04:15.089457+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9289,
+   "completion_tokens": 611,
+   "total_tokens": 9900,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 9286,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 86,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

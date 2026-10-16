@@ -106,6 +106,14 @@ No results exist yet: the rules baselines have **not** been scored on anything (
     37%, Gemini 75% / 25% ("hey there" ×24) and wordiest (11.4 words/message). DeepSeek's "yo u guys open rn"
     openers make DELIVERY_QUESTION its third-largest intent (54 vs 14–18).
 
+- **Label prompt v0.3 → v0.4 (2026-10-16, Julian approved fixes 1–3 from the audit; dev re-checks $0.0577 + $0.0578):**
+  v0.3 (PLACE = adds, MODIFY = changes; answers take the request's label; garbled text → UNKNOWN, no items): intents
+  263/268, orders 91/91, but "a name for a lookup" was over-applied (complaint/refund names → ORDER_STATUS). v0.4
+  (an answer keeps its own request's label: status/complaint/refund; additions after a confirm are MODIFY):
+  **intents 264/268 (98.5%), orders 90/91** (a-dev-038 "whatever i had to drink" varies between runs; v0.2 had it
+  right). Remaining misses are run-to-run flips. **v0.4 is the bulk label prompt**; no more tuning on dev.
+  Julian: "👍 SOUNDS GOOD" (a-dev-032) stays UNKNOWN. Open: a-dev-074 "hey ordering for the office" (gold
+  PLACE_ORDER) is the same case as a-dev-075 (ruled SMALL_TALK).
 - **Audit of p3 (2026-10-16, by Claude at Julian's request, `runs/synth/p3/audit_review.md`):** 30 chats: realistic
   28/30, intents fully right 26/30, order right 27/30. Teacher patterns for label prompt v0.3: PLACE vs MODIFY when
   adding a detail to an item being ordered; an answer takes the label of the request it serves; garbled text is

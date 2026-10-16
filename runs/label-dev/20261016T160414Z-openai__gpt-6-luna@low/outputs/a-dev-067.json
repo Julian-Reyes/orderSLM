@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-067",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\"message_index\": 0, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 1, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 2, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 4, \"primary\": \"CONFIRM_ORDER\", \"secondary\": null},\n    {\"message_index\": 5, \"primary\": \"MODIFY_ORDER\", \"secondary\": null}\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"cheeseburger\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"double\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 0, \"quote\": \"cheeseburger\"},\n          {\"message_index\": 5, \"quote\": \"the burger be a double\"}\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"fries\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"regular\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 1, \"quote\": \"regular fries\"}\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"lemonade\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 1, \"quote\": \"a lemonade\"}\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\"message_index\": 2, \"quote\": \"deliver\"}\n      ],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"hill st\",\n      \"number\": \"16\",\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": \"16 hill st\",\n      \"evidence\": [\n        {\"message_index\": 2, \"quote\": \"16 hill st\"}\n      ]\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\"message_index\": 2, \"quote\": \"card\"}\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9394,
+   "cached_input_tokens": 7583,
+   "cache_write_tokens": 0,
+   "output_tokens": 851,
+   "reasoning_tokens": 82
+  },
+  "latency_ms": 7558.419054985279,
+  "cost_micros": 683,
+  "at": "2026-10-16T16:05:21.913160+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9394,
+   "completion_tokens": 851,
+   "total_tokens": 10245,
+   "prompt_tokens_details": {
+    "cached_tokens": 7583,
+    "cache_write_tokens": 1808,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 82,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

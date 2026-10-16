@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-087",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"ORDER_STATUS\",\"secondary\":null}],\"order\":{\"items\":[],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9979,
+   "cached_input_tokens": 7531,
+   "cache_write_tokens": 0,
+   "output_tokens": 333,
+   "reasoning_tokens": 139
+  },
+  "latency_ms": 4073.5576710139867,
+  "cost_micros": 487,
+  "at": "2026-10-16T16:03:36.187165+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9979,
+   "completion_tokens": 333,
+   "total_tokens": 10312,
+   "prompt_tokens_details": {
+    "cached_tokens": 7531,
+    "cache_write_tokens": 2445,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 139,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

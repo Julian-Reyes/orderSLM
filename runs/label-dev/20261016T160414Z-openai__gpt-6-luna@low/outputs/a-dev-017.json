@@ -1,0 +1,37 @@
+{
+ "conversation_id": "a-dev-017",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"cheese_pizza\",\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mushrooms\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"mushroom\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"olives\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"olives\",\"not_on_menu\":false,\"kitchen_note\":false}]},{\"menu_item_id\":\"cheese_pizza\",\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"sausage\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"sausage\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapenos\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"jalapenos\",\"not_on_menu\":false,\"kitchen_note\":false}]}],\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"xl pizza half mushroom n olives, half sausage n jalapenos\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"2 orders of garlic knots\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12395,
+   "cached_input_tokens": 7583,
+   "cache_write_tokens": 0,
+   "output_tokens": 550,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 4987.610419979319,
+  "cost_micros": 833,
+  "at": "2026-10-16T16:04:31.088456+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12395,
+   "completion_tokens": 550,
+   "total_tokens": 12945,
+   "prompt_tokens_details": {
+    "cached_tokens": 7583,
+    "cache_write_tokens": 4809,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

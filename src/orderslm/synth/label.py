@@ -25,7 +25,7 @@ from orderslm.schema.menu import MenuCatalog
 from orderslm.schema.routing import LABEL_DESCRIPTIONS
 from orderslm.schema.synthetic import LabeledConversation, PlannedItem, SynthCard
 
-LABEL_PROMPT_VERSION = "teacher-label@0.2"  # 0.2: answering a size question is PLACE_ORDER
+LABEL_PROMPT_VERSION = "teacher-label@0.4"  # 0.2: answering a size question is PLACE_ORDER; 0.3 (p3 audit): PLACE vs MODIFY by "adds vs changes", answers take the request's label, garbled text is UNKNOWN with no items; 0.4: an answer keeps its own request's label, additions after a confirm are MODIFY
 TEACHER = "openai/gpt-6-luna@low"  # Julian, 2026-10-15 (docs/TEACHER_BAKEOFF.md)
 MAX_OUTPUT_TOKENS = 16000
 
