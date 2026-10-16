@@ -6,23 +6,24 @@ _Last updated 2026-10-16._
 
 ## Start here next session
 
-- **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
-  M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Training data (2026-10-16):** single-menu **1,965** (p3 494 + b1 1,471) and mega-menu **391** (m1); labels
-  `teacher-label@0.5`, with the 354 chats hit by the v0.6 rule (Julian: a yes to any read-back is CONFIRM_ORDER;
-  details after a confirm stay PLACE_ORDER) relabeled with **v0.6** (dev: orders 91/91, intents 265/268). Every saved
-  response now records its prompt versions (backfilled for p1–m1 from the batch history; rebuilding refuses records
-  without one). Facts on providers and students: `docs/PROVIDERS.md` (Julia-1 downloaded to `models/julia-1`, rev
-  a85b1273; OpenAI Decisions and Jev contracts from official docs; Jev smoke test OK, 715 tokens/15-label call;
-  student licenses all Apache 2.0). **Next:** §11d label audit (needs Julian's OK to add torch + transformers for
-  Julia-1); then M5. Disk: 15 GB free (student downloads ~1.8/4/4/10 GB).
-- Still open before **bulk** labeling (not needed for the pilot):
-  1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
-  2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google
-     and Anthropic as generators as well as OpenAI as teacher.
-  3. Per-prefix training rows (the intent at every customer turn plus the order at that point): decide after the
-     pilot how to label the order at earlier turns.
-  4. Mega-menu cards (~20% for the mixed student, spec §11e) are not planned yet.
+_Updated 2026-10-16 (end of session)._
+
+- **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
+  pushed**: ask Julian before any push, run a secrets check first).
+- **Spend:** $5.80 of $10 (docs/COSTS.md). M4 so far: data generation, labeling, relabels, audits.
+- **M4 state:** training data done: **1,963 single-menu + 391 mega-menu** labeled chats (`runs/synth/{p3,b1,m1}`,
+  exclusions in `runs/synth/excluded.json`); label prompt `teacher-label@0.7`; label audit by Jev + OpenAI Decisions
+  done (`runs/label-audit/`); every drop / repair / flag / catch rate: `make m4-report` → `runs/m4-report/`.
+- **First thing next session (overdue):** write **`docs/TERMS.md`**: each provider's terms on using outputs to train
+  models (OpenAI teacher; DeepSeek, Google, Anthropic generators; Jev, OpenAI Decisions auditors). Spec §7 required this
+  *before* bulk labeling; it was missed. Check official terms pages; if any provider forbids it, tell Julian before M6.
+- **Then: Kaggle** (`docs/KAGGLE.md`; this Intel Mac can't run torch ≥ 2.3). Waiting on Julian: Kaggle account +
+  phone verification, API token in `~/.kaggle/access_token`, username, weekly GPU quota. Then: install the CLI
+  (`uv tool install kaggle`), job A (Julia-1 label audit: 1-chat timing test, then dev + train), job B (M5 student
+  bake-off), later job C (M6 LoRA). The Mac mini will replace Kaggle for inference when ready.
+- **Still open:** per-prefix training rows (the intent at every customer turn + the order at that point): decide before
+  M6. Julian's preferences: end every task with a plain-English summary (changes + why, files, direct answers); record
+  every drop and catch rate for the reports/dashboard.
 - **Case study:** every experiment records all numbers per model/setting (accuracy counts, tokens, run cost and per
   1,000, latency, before/after views) in `runs/<experiment>/` + a summary/chart-data JSON (Julian, 2026-10-15).
 
