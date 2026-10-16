@@ -1,0 +1,40 @@
+{
+ "key": "syn-b1-0011",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"veggie_pizza\",\"modifications\":[]},{\"menu_item_id\":\"pepperoni_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a large half veggie half pepperoni pizza\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an extra large supreme\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Dev\",\"evidence\":[{\"message_index\":4,\"quote\":\"name's Dev\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12635,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 575,
+   "reasoning_tokens": 122
+  },
+  "latency_ms": 5422.042529011378,
+  "cost_micros": 861,
+  "at": "2026-10-16T16:29:56.751887+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12635,
+   "completion_tokens": 575,
+   "total_tokens": 13210,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 4959,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 122,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.5"
+ }
+}

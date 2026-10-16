@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":13,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 orders of garlic knots\"},{\"message_index\":3,\"quote\":\"6 pieces each\"},{\"message_index\":10,\"quote\":\"2 orders\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"grilled_chicken\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no grilled chicken\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a small bbq chicken pizza\"},{\"message_index\":5,\"quote\":\"no grilled chicken\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"3 dr peppers, the 2 liter bottles\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":11,\"quote\":\"its delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"bayview blvd\",\"number\":\"7710\",\"unit\":null,\"reference\":null,\"raw_text\":\"7710 bayview blvd\",\"evidence\":[{\"message_index\":11,\"quote\":\"7710 bayview blvd\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":13,\"quote\":\"perfect thx u!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":13,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 orders of garlic knots\"},{\"message_index\":10,\"quote\":\"change the knots to 2 orders\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"grilled_chicken\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no grilled chicken\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a small bbq chicken pizza\"},{\"message_index\":5,\"quote\":\"no grilled chicken\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"3 dr peppers, the 2 liter bottles\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":11,\"quote\":\"its delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"bayview blvd\",\"number\":\"7710\",\"unit\":null,\"reference\":null,\"raw_text\":\"7710 bayview blvd\",\"evidence\":[{\"message_index\":11,\"quote\":\"7710 bayview blvd\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":13,\"quote\":\"perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12906,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12966,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 930,
-   "reasoning_tokens": 223
+   "output_tokens": 1007,
+   "reasoning_tokens": 311
   },
-  "latency_ms": 9766.055228014011,
-  "cost_micros": 1066,
-  "at": "2026-10-16T16:51:18.484116+00:00",
+  "latency_ms": 10882.45154201286,
+  "cost_micros": 1105,
+  "at": "2026-10-16T17:38:31.670918+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12906,
-   "completion_tokens": 930,
-   "total_tokens": 13836,
+   "prompt_tokens": 12966,
+   "completion_tokens": 1007,
+   "total_tokens": 13973,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 5230,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 223,
+    "reasoning_tokens": 311,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

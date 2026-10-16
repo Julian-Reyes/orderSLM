@@ -1,0 +1,40 @@
+{
+ "key": "syn-m1-0156",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese_halfmoon\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"anchovies\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add anchovies\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two meat lovers pizzas\"},{\"message_index\":3,\"quote\":\"extra large\"},{\"message_index\":4,\"quote\":\"no cheese blend on those\"},{\"message_index\":5,\"quote\":\"add anchovies\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":7,\"quote\":\"picking it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":7,\"quote\":\"paying by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Luis\",\"evidence\":[{\"message_index\":7,\"quote\":\"Luis\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 16122,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 613,
+   "reasoning_tokens": 122
+  },
+  "latency_ms": 5923.394175013527,
+  "cost_micros": 1229,
+  "at": "2026-10-16T16:37:09.737372+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 16122,
+   "completion_tokens": 613,
+   "total_tokens": 16735,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 8446,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 122,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.5"
+ }
+}

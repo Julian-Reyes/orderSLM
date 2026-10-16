@@ -1,0 +1,40 @@
+{
+ "key": "syn-b1-0881",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mozzarella\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"fresh mozzarella added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 Veggie Pizza, medium 12-inch, with fresh mozzarella added\"},{\"message_index\":4,\"quote\":\"change that to 4 Veggie Pizzas instead? Same thing, medium 12-inch, fresh mozzarella on each\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"water\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"2 Bottled Waters\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"ham\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ham added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"2 Supreme Pizzas, personal 8-inch, with ham added\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"I'd like delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 9:45\",\"normalized_local\":\"21:45\",\"evidence\":[{\"message_index\":8,\"quote\":\"at 9:45\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Easton Ln\",\"number\":\"424\",\"unit\":\"5C\",\"reference\":null,\"raw_text\":\"424 Easton Ln, unit 5C\",\"evidence\":[{\"message_index\":8,\"quote\":\"424 Easton Ln, unit 5C\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"That's correct\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12822,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 946,
+   "reasoning_tokens": 274
+  },
+  "latency_ms": 8336.343584000133,
+  "cost_micros": 1065,
+  "at": "2026-10-16T16:44:04.546732+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12822,
+   "completion_tokens": 946,
+   "total_tokens": 13768,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 5146,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 274,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.5"
+ }
+}

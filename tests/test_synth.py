@@ -522,3 +522,28 @@ def test_removing_an_add_on_the_item_does_not_include_is_flagged():
     )  # not in check_all
     for a in DEV_ORDERS:  # never fires on dev gold
         assert not check_removals(a.gold_extraction, load_menu(a.conversation.business_id))
+
+
+def test_every_saved_response_records_its_prompt_version(tmp_path, monkeypatch):
+    """Rebuilding labels must use the prompt version the call was made with, never the current constant."""
+    monkeypatch.setattr(run, "batch_dir", lambda batch: tmp_path / batch)
+    monkeypatch.setattr(run, "make_client", lambda cid, cache_mode=None: _FakeClient(cid))
+    run.main(["plan", "--batch", "v", "--n", "6"])
+    run.main(["generate", "--batch", "v", "--limit", "1", "--yes"])
+    run.main(["label", "--batch", "v", "--yes"])
+    recs = [json.loads(p.read_text()) for p in (tmp_path / "v").glob("*/*/*.json")]
+    assert recs and all(r["versions"] for r in recs)
+    label_file = next((tmp_path / "v" / "label").glob("*/*.json"))
+    rec = json.loads(label_file.read_text())
+    rec["versions"]["label_prompt"] = "teacher-label@0.1"  # an old call
+    label_file.write_text(json.dumps(rec))
+    run.collect_labels("v", rec["config_id"])
+    stamped = {
+        r["conversation_id"]: r["label_prompt_version"]
+        for r in run._read_jsonl(tmp_path / "v" / "labels.jsonl")
+    }
+    assert stamped[label_file.stem] == "teacher-label@0.1"
+    del rec["versions"]
+    label_file.write_text(json.dumps(rec))
+    with pytest.raises(SystemExit, match="no label_prompt version"):
+        run.collect_labels("v", rec["config_id"])

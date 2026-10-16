@@ -8,8 +8,8 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$3.9790** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266) |
-| Remaining (of $10 ceiling) | $6.0210 |
+| Spent to date | **$4.3447** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657) |
+| Remaining (of $10 ceiling) | $5.6553 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
@@ -42,6 +42,11 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-16 | M4 | DeepSeek / Haiku / Gemini | Mega-menu generation, 396 chats (cards 0.5, `synth-write@0.2`) | 1,298,916 / 62,957 | 0.137161 | recorded usage × verified price | `runs/synth/m1` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Mega-menu labels, 394 chats (`teacher-label@0.5`) | 6,333,646 / 198,771 | 0.460865 | recorded usage × verified price | `runs/synth/m1` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel pilot p3 with `teacher-label@0.5` (498 chats; v0.2 labels kept in `label-v0.2/`) | see calls log | 0.326613 | recorded usage × verified price | `runs/synth/p3` |
+| 2026-10-16 | M4 | TypeSafe jev-latest (= jev-1.13.0) | Smoke test: 1 choice call, 15 intent labels, dev a-dev-053 msg 0 | 715 / 160 | 0.000031 (estimate) | 715 × $0.042/1M input (price from a Google summary, **not yet verified on TypeSafe's pricing page**; output reported free) | `runs/jev-smoke/20261016T174016Z` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | `teacher-label@0.6` scored on all 91 dev | see manifest | 0.058087 | recorded usage × verified price | `runs/label-dev/20261016T173049Z-openai__gpt-6-luna@low` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel p3 chats hit by the v0.6 rule (`teacher-label@0.6`, ids in `relabel_v0.6_ids.json`) | see calls log | 0.064876 | recorded usage × verified price | `runs/synth/p3/calls/20261016T173321Z-label.json` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel b1 chats hit by the v0.6 rule (`teacher-label@0.6`, ids in `relabel_v0.6_ids.json`) | see calls log | 0.149907 | recorded usage × verified price | `runs/synth/b1/calls/20261016T173516Z-label.json` |
+| 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel m1 chats hit by the v0.6 rule (`teacher-label@0.6`, ids in `relabel_v0.6_ids.json`) | see calls log | 0.092768 | recorded usage × verified price | `runs/synth/m1/calls/20261016T173914Z-label.json` |
 
 ## Prepaid credit (purchases, not spend)
 

@@ -1,0 +1,40 @@
+{
+ "key": "syn-m1-0386",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"mushrooms\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO MUSHROOMS\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"banana_peppers\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD BANANA PEPPERS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A VEGGIE PIZZA EXTRA LARGE 16 INCH\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in like 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"wexford terrace\",\"number\":\"62\",\"unit\":null,\"reference\":null,\"raw_text\":\"62 wexford terrace\",\"evidence\":[{\"message_index\":4,\"quote\":\"62 wexford terrace\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 16093,
+   "cached_input_tokens": 7673,
+   "cache_write_tokens": 0,
+   "output_tokens": 718,
+   "reasoning_tokens": 261
+  },
+  "latency_ms": 8332.083749992307,
+  "cost_micros": 1278,
+  "at": "2026-10-16T16:40:52.087109+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 16093,
+   "completion_tokens": 718,
+   "total_tokens": 16811,
+   "prompt_tokens_details": {
+    "cached_tokens": 7673,
+    "cache_write_tokens": 8417,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 261,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.5"
+ }
+}

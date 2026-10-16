@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 small drip coffees w vanilla syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 small americanos\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"1 medium cappuccino\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Sam\",\"evidence\":[{\"message_index\":8,\"quote\":\"sam\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\"message_index\": 0, \"primary\": \"DELIVERY_QUESTION\", \"secondary\": null},\n    {\"message_index\": 2, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 4, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 6, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 8, \"primary\": \"PLACE_ORDER\", \"secondary\": null}\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"drip_coffee\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": \"small\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"vanilla_syrup\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"vanilla syrup\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 2, \"quote\": \"3 small drip coffees w vanilla syrup\"}\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"americano\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": \"small\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 4, \"quote\": \"3 small americanos\"}\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"cappuccino\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 6, \"quote\": \"1 medium cappuccino\"}\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\"message_index\": 8, \"quote\": \"pick it up\"}\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"asap\",\n        \"raw_text\": \"asap\",\n        \"normalized_local\": null,\n        \"evidence\": [\n          {\"message_index\": 8, \"quote\": \"asap\"}\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\"message_index\": 8, \"quote\": \"payin by card\"}\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"Sam\",\n      \"evidence\": [\n        {\"message_index\": 8, \"quote\": \"sam\"}\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10392,
-   "cached_input_tokens": 7673,
+   "input_tokens": 10452,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 646,
-   "reasoning_tokens": 89
+   "output_tokens": 905,
+   "reasoning_tokens": 65
   },
-  "latency_ms": 6168.705384974601,
-  "cost_micros": 672,
-  "at": "2026-10-16T16:33:01.754377+00:00",
+  "latency_ms": 9013.417623995338,
+  "cost_micros": 802,
+  "at": "2026-10-16T17:35:33.851278+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10392,
-   "completion_tokens": 646,
-   "total_tokens": 11038,
+   "prompt_tokens": 10452,
+   "completion_tokens": 905,
+   "total_tokens": 11357,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 2716,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 89,
+    "reasoning_tokens": 65,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

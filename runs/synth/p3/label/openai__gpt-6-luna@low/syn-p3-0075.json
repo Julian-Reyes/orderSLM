@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"hazelnut syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"large cappuccino\"},{\"message_index\":3,\"quote\":\"medium drip coffee\"},{\"message_index\":4,\"quote\":\"hazelnut syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"tomato\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"With tomato\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a breakfast sandwich\"},{\"message_index\":7,\"quote\":\"With tomato\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"2 medium americanos\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\"message_index\": 0, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 1, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 2, \"primary\": \"SMALL_TALK\", \"secondary\": null},\n    {\"message_index\": 3, \"primary\": \"MODIFY_ORDER\", \"secondary\": null},\n    {\"message_index\": 4, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 6, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 7, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 8, \"primary\": \"PLACE_ORDER\", \"secondary\": null},\n    {\"message_index\": 10, \"primary\": \"CONFIRM_ORDER\", \"secondary\": null}\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"drip_coffee\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"hazelnut_syrup\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"Add hazelnut syrup\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 1, \"quote\": \"a large cappuccino\"},\n          {\"message_index\": 3, \"quote\": \"a medium drip coffee\"},\n          {\"message_index\": 4, \"quote\": \"Add hazelnut syrup\"}\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"breakfast_sandwich\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"tomato\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"With tomato\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 6, \"quote\": \"a breakfast sandwich\"},\n          {\"message_index\": 7, \"quote\": \"With tomato\"}\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"americano\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\"message_index\": 8, \"quote\": \"2 medium americanos\"}\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"unknown\",\n      \"method_evidence\": [],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_mentioned\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"confirmed\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": [\n        {\"message_index\": 10, \"quote\": \"That's it, thanks!\"}\n      ]\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10416,
-   "cached_input_tokens": 7673,
+   "input_tokens": 10476,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 981,
-   "reasoning_tokens": 337
+   "output_tokens": 1184,
+   "reasoning_tokens": 199
   },
-  "latency_ms": 9833.522214990808,
-  "cost_micros": 842,
-  "at": "2026-10-16T17:07:48.350209+00:00",
+  "latency_ms": 11866.154456016375,
+  "cost_micros": 944,
+  "at": "2026-10-16T17:33:35.507672+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10416,
-   "completion_tokens": 981,
-   "total_tokens": 11397,
+   "prompt_tokens": 10476,
+   "completion_tokens": 1184,
+   "total_tokens": 11660,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 2740,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 337,
+    "reasoning_tokens": 199,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

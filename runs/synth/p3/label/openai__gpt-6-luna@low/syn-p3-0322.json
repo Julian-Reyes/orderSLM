@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 large supremes\"},{\"message_index\":3,\"quote\":\"thick crust on those\"},{\"message_index\":6,\"quote\":\"make it 1 supreme not 2\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":7,\"quote\":\"add a personal bbq chicken\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":9,\"quote\":\"delivery pls\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap pls\",\"normalized_local\":null,\"evidence\":[{\"message_index\":11,\"quote\":\"asap pls\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"riverside rd\",\"number\":\"77\",\"unit\":\"21c\",\"reference\":null,\"raw_text\":\"77 riverside rd unit 21c\",\"evidence\":[{\"message_index\":9,\"quote\":\"77 riverside rd unit 21c\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":11,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 large supremes\"},{\"message_index\":3,\"quote\":\"thick crust\"},{\"message_index\":6,\"quote\":\"make it 1 supreme not 2\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":7,\"quote\":\"a personal bbq chicken\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":9,\"quote\":\"delivery pls\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":11,\"quote\":\"asap pls\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Riverside Rd\",\"number\":\"77\",\"unit\":\"21c\",\"reference\":null,\"raw_text\":\"77 riverside rd unit 21c\",\"evidence\":[{\"message_index\":9,\"quote\":\"77 riverside rd unit 21c\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12804,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12864,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 861,
-   "reasoning_tokens": 247
+   "output_tokens": 772,
+   "reasoning_tokens": 165
   },
-  "latency_ms": 8939.620517019648,
-  "cost_micros": 1021,
-  "at": "2026-10-16T17:11:49.429910+00:00",
+  "latency_ms": 7487.347631977173,
+  "cost_micros": 977,
+  "at": "2026-10-16T17:34:18.144259+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12804,
-   "completion_tokens": 861,
-   "total_tokens": 13665,
+   "prompt_tokens": 12864,
+   "completion_tokens": 772,
+   "total_tokens": 13636,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 5128,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 247,
+    "reasoning_tokens": 165,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

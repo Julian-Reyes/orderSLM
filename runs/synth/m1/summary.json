@@ -1,6 +1,6 @@
 {
   "batch": "m1",
-  "built_at": "2026-10-16T17:15:57.447773+00:00",
+  "built_at": "2026-10-16T17:42:39.954878+00:00",
   "dedup_threshold": 0.8,
   "by_generator": {
     "anthropic/claude-haiku-5-5@off-low": {
@@ -18,9 +18,9 @@
       },
       "card_agreement": {
         "labeled": 65,
-        "all_agree": 59,
+        "all_agree": 60,
         "flags": {
-          "labels": 4,
+          "labels": 3,
           "items": 2
         }
       },
@@ -37,13 +37,13 @@
       },
       "label_usage": {
         "calls": 66,
-        "input_tokens": 1061608,
-        "cached_input_tokens": 506418,
-        "output_tokens": 34214,
-        "reasoning_tokens": 9751,
-        "cost_micros": 77723,
-        "cost_per_1k_usd": 1.1776,
-        "latency_p50_ms": 6022
+        "input_tokens": 1062748,
+        "cached_input_tokens": 507558,
+        "output_tokens": 35052,
+        "reasoning_tokens": 10467,
+        "cost_micros": 78155,
+        "cost_per_1k_usd": 1.1842,
+        "latency_p50_ms": 6173
       },
       "style": {
         "chats": 66,
@@ -90,9 +90,9 @@
       },
       "card_agreement": {
         "labeled": 261,
-        "all_agree": 246,
+        "all_agree": 245,
         "flags": {
-          "items": 4,
+          "items": 5,
           "labels": 9,
           "item_details": 4
         }
@@ -110,13 +110,13 @@
       },
       "label_usage": {
         "calls": 262,
-        "input_tokens": 4212981,
-        "cached_input_tokens": 2010326,
-        "output_tokens": 131407,
-        "reasoning_tokens": 33888,
-        "cost_micros": 306207,
-        "cost_per_1k_usd": 1.1687,
-        "latency_p50_ms": 5468
+        "input_tokens": 4215741,
+        "cached_input_tokens": 2013086,
+        "output_tokens": 132119,
+        "reasoning_tokens": 33849,
+        "cost_micros": 306589,
+        "cost_per_1k_usd": 1.1702,
+        "latency_p50_ms": 5514
       },
       "style": {
         "chats": 262,
@@ -161,9 +161,9 @@
       },
       "card_agreement": {
         "labeled": 65,
-        "all_agree": 61,
+        "all_agree": 62,
         "flags": {
-          "labels": 3,
+          "labels": 2,
           "items": 1
         }
       },
@@ -180,12 +180,12 @@
       },
       "label_usage": {
         "calls": 66,
-        "input_tokens": 1059057,
-        "cached_input_tokens": 506418,
-        "output_tokens": 33150,
-        "reasoning_tokens": 7930,
-        "cost_micros": 76935,
-        "cost_per_1k_usd": 1.1657,
+        "input_tokens": 1059477,
+        "cached_input_tokens": 506838,
+        "output_tokens": 33730,
+        "reasoning_tokens": 8401,
+        "cost_micros": 77230,
+        "cost_per_1k_usd": 1.1702,
         "latency_p50_ms": 5719
       },
       "style": {
@@ -218,11 +218,11 @@
     }
   },
   "labeled_intents": {
-    "PLACE_ORDER": 600,
-    "SMALL_TALK": 262,
-    "MODIFY_ORDER": 102,
-    "DELIVERY_QUESTION": 92,
-    "CONFIRM_ORDER": 82,
+    "PLACE_ORDER": 609,
+    "SMALL_TALK": 257,
+    "CONFIRM_ORDER": 102,
+    "DELIVERY_QUESTION": 91,
+    "MODIFY_ORDER": 79,
     "MENU_QUESTION": 70,
     "ORDER_PROBLEM": 42,
     "ORDER_STATUS": 32,
@@ -415,7 +415,7 @@
     "contextual_yes": {
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 4,
-        "agree": 3
+        "agree": 4
       },
       "deepseek/deepseek-flash@none": {
         "labeled": 12,
@@ -499,7 +499,7 @@
     "correction": {
       "deepseek/deepseek-flash@none": {
         "labeled": 19,
-        "agree": 18
+        "agree": 17
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 5,
@@ -605,7 +605,7 @@
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 2,
-        "agree": 0
+        "agree": 1
       }
     },
     "payment_claim": {
@@ -653,12 +653,12 @@
   },
   "intents_by_generator": {
     "deepseek/deepseek-flash@none": {
-      "PLACE_ORDER": 391,
-      "SMALL_TALK": 190,
-      "DELIVERY_QUESTION": 67,
-      "MODIFY_ORDER": 61,
-      "MENU_QUESTION": 56,
-      "CONFIRM_ORDER": 51,
+      "PLACE_ORDER": 396,
+      "SMALL_TALK": 186,
+      "CONFIRM_ORDER": 66,
+      "DELIVERY_QUESTION": 66,
+      "MENU_QUESTION": 55,
+      "MODIFY_ORDER": 47,
       "ORDER_PROBLEM": 28,
       "ORDER_STATUS": 21,
       "HUMAN_REQUEST": 18,
@@ -670,10 +670,10 @@
       "UNKNOWN": 6
     },
     "google/gemini-3.1-flash-lite@minimal": {
-      "PLACE_ORDER": 86,
-      "SMALL_TALK": 36,
-      "MODIFY_ORDER": 21,
-      "CONFIRM_ORDER": 16,
+      "PLACE_ORDER": 90,
+      "SMALL_TALK": 34,
+      "CONFIRM_ORDER": 20,
+      "MODIFY_ORDER": 15,
       "DELIVERY_QUESTION": 11,
       "MENU_QUESTION": 6,
       "ORDER_STATUS": 5,
@@ -688,12 +688,12 @@
     },
     "anthropic/claude-haiku-5-5@off-low": {
       "PLACE_ORDER": 123,
-      "SMALL_TALK": 36,
-      "MODIFY_ORDER": 20,
-      "CONFIRM_ORDER": 15,
+      "SMALL_TALK": 37,
+      "MODIFY_ORDER": 17,
+      "CONFIRM_ORDER": 16,
       "DELIVERY_QUESTION": 14,
       "ORDER_PROBLEM": 10,
-      "MENU_QUESTION": 8,
+      "MENU_QUESTION": 9,
       "ORDER_STATUS": 6,
       "HUMAN_REQUEST": 4,
       "CANCEL_ORDER": 2,
@@ -705,35 +705,35 @@
     }
   },
   "audit_sample": [
-    "syn-m1-0024",
+    "syn-m1-0019",
     "syn-m1-0030",
     "syn-m1-0038",
+    "syn-m1-0043",
     "syn-m1-0044",
-    "syn-m1-0069",
+    "syn-m1-0074",
     "syn-m1-0079",
     "syn-m1-0115",
-    "syn-m1-0116",
     "syn-m1-0130",
-    "syn-m1-0143",
     "syn-m1-0145",
     "syn-m1-0146",
+    "syn-m1-0154",
+    "syn-m1-0158",
     "syn-m1-0171",
-    "syn-m1-0189",
-    "syn-m1-0194",
-    "syn-m1-0246",
+    "syn-m1-0197",
+    "syn-m1-0244",
     "syn-m1-0248",
+    "syn-m1-0252",
+    "syn-m1-0259",
     "syn-m1-0260",
     "syn-m1-0273",
-    "syn-m1-0275",
-    "syn-m1-0277",
     "syn-m1-0281",
-    "syn-m1-0293",
-    "syn-m1-0296",
-    "syn-m1-0312",
-    "syn-m1-0314",
-    "syn-m1-0318",
-    "syn-m1-0340",
-    "syn-m1-0347",
+    "syn-m1-0298",
+    "syn-m1-0303",
+    "syn-m1-0311",
+    "syn-m1-0316",
+    "syn-m1-0319",
+    "syn-m1-0341",
+    "syn-m1-0369",
     "syn-m1-0370"
   ]
 }

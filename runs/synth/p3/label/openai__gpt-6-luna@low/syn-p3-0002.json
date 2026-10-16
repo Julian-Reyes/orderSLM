@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"skim_milk\",\"amount\":\"normal\",\"raw_text\":\"skim instead of whole\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"large latte\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"medium cappuccino\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"gonna pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 10\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in like 10\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"cash\"},{\"message_index\":4,\"quote\":\"i only have a 50\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"luis\",\"evidence\":[{\"message_index\":6,\"quote\":\"luis\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"skim_milk\",\"amount\":\"normal\",\"raw_text\":\"skim instead of whole\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a large latte w skim instead of whole\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a medium cappuccino\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"gonna pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 10\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in like 10\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"cash\"},{\"message_index\":4,\"quote\":\"a 50\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"luis\",\"evidence\":[{\"message_index\":6,\"quote\":\"luis\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"yea thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10354,
-   "cached_input_tokens": 7673,
+   "input_tokens": 10414,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 619,
-   "reasoning_tokens": 134
+   "output_tokens": 749,
+   "reasoning_tokens": 245
   },
-  "latency_ms": 7356.451275991276,
-  "cost_micros": 655,
-  "at": "2026-10-16T17:06:36.024581+00:00",
+  "latency_ms": 8204.62135001435,
+  "cost_micros": 720,
+  "at": "2026-10-16T17:33:21.301669+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10354,
-   "completion_tokens": 619,
-   "total_tokens": 10973,
+   "prompt_tokens": 10414,
+   "completion_tokens": 749,
+   "total_tokens": 11163,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 2678,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 134,
+    "reasoning_tokens": 245,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

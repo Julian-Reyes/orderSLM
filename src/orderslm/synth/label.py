@@ -25,7 +25,7 @@ from orderslm.schema.menu import MenuCatalog
 from orderslm.schema.routing import LABEL_DESCRIPTIONS
 from orderslm.schema.synthetic import LabeledConversation, PlannedItem, SynthCard
 
-LABEL_PROMPT_VERSION = "teacher-label@0.5"  # 0.2: answering a size question is PLACE_ORDER; 0.3 (p3 audit): PLACE vs MODIFY by "adds vs changes", answers take the request's label, garbled text is UNKNOWN with no items; 0.4: an answer keeps its own request's label, additions after a confirm are MODIFY; 0.5 (Julian): order announcements are SMALL_TALK, additions to a placed order add no items
+LABEL_PROMPT_VERSION = "teacher-label@0.6"  # 0.2: answering a size question is PLACE_ORDER; 0.3 (p3 audit): PLACE vs MODIFY by "adds vs changes", answers take the request's label, garbled text is UNKNOWN with no items; 0.4: an answer keeps its own request's label, additions after a confirm are MODIFY; 0.5 (Julian): order announcements are SMALL_TALK, additions to a placed order add no items; 0.6 (Julian): a yes to any read-back is CONFIRM, details after a confirm stay PLACE
 TEACHER = "openai/gpt-6-luna@low"  # Julian, 2026-10-15 (docs/TEACHER_BAKEOFF.md)
 MAX_OUTPUT_TOKENS = 16000
 
@@ -67,7 +67,12 @@ def _customer_evidence(output: ExtractionOutput, conversation: Conversation) -> 
 
 
 def parse_label(
-    text: str, conversation: Conversation, menu: MenuCatalog, teacher: str
+    text: str,
+    conversation: Conversation,
+    menu: MenuCatalog,
+    teacher: str,
+    *,
+    prompt_version: str = LABEL_PROMPT_VERSION,
 ) -> tuple[LabeledConversation | None, str | None]:
     """(label, None) or (None, drop reason). Never raises."""
     try:
@@ -92,7 +97,7 @@ def parse_label(
         LabeledConversation(
             conversation_id=conversation.id,
             teacher=teacher,
-            label_prompt_version=LABEL_PROMPT_VERSION,
+            label_prompt_version=prompt_version,
             finalize_version=FINALIZE_VERSION,
             intents=label.intents,
             extraction=extraction if extraction.items else None,

@@ -94,7 +94,9 @@ def _strip_fences(text: str) -> str:
     return t.strip()
 
 
-def to_conversation(card: SynthCard, text: str) -> tuple[SyntheticConversation | None, str | None]:
+def to_conversation(
+    card: SynthCard, text: str, *, prompt_version: str = GENERATOR_PROMPT_VERSION
+) -> tuple[SyntheticConversation | None, str | None]:
     """(conversation, None) or (None, drop reason). Never raises."""
     try:
         chat = GeneratedChat.model_validate(json.loads(_strip_fences(text)))
@@ -131,7 +133,7 @@ def to_conversation(card: SynthCard, text: str) -> tuple[SyntheticConversation |
             conversation=conv,
             card_id=card.id,
             generator=card.generator,
-            generator_prompt_version=GENERATOR_PROMPT_VERSION,
+            generator_prompt_version=prompt_version,
             repairs=repairs,
         ),
         None,

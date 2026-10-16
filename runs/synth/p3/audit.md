@@ -118,7 +118,7 @@ Card check: items
 - 1 business: hey! not sure yet, let me check on that for u. anything else i can get started on?
 - 2 customer: k lemme get a single cheeseburger and a lemonade pls **[PLACE_ORDER]**
 - 3 business: got it! one single patty cheeseburger and a lemonade. just to make sure, is that everything so far?
-- 4 customer: yea thats it thx **[SMALL_TALK]**
+- 4 customer: yea thats it thx **[CONFIRM_ORDER]**
 
   - L1: 1 × cheeseburger single
   - L2: 1 × lemonade
@@ -137,7 +137,7 @@ Card check: labels (expected labels not found: CONFIRM_ORDER)
 - 3 business: Got it. Let me confirm: 4 x Diet Coke (Can 12 oz). Is that right?
 - 4 customer: yea but wait make that three thx **[MODIFY_ORDER]**
 - 5 business: No problem, 3 x Diet Coke (Can 12 oz). Anything else?
-- 6 customer: nah thats it. im gonna pick it up, its dev, ready in like 20 min **[PLACE_ORDER]**
+- 6 customer: nah thats it. im gonna pick it up, its dev, ready in like 20 min **[PLACE_ORDER + SMALL_TALK]**
 - 7 business: Sounds good Dev, see you in about 20 min!
 - 8 customer: k thx. paying w card when i get there **[PLACE_ORDER]**
 
@@ -189,32 +189,38 @@ Card check: labels (expected labels not found: CONFIRM_ORDER)
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0271: two_requests, gemini-3.1-flash-lite@minimal, corner-patty
-Card: Orders: 2 × Cheeseburger (no size mentioned by anyone: the regular one). In the same message as the first item, also asks a question about the menu. Wants delivery to 89 Spruce St, apt 19A (written the way the customer would type it). Never says how they'll pay.
-Card check: agrees
+## syn-p3-0236: menu_question, gemini-3.1-flash-lite@minimal, corner-patty
+Card: Only asks one or two questions about the menu (what comes on something, sizes, what's good, whether they have something). Does not order.
+Card check: items
 
-- 0 customer: hey u guys do milkshakes? **[MENU_QUESTION]**
-- 1 customer: can we get two cheeseburgers **[PLACE_ORDER]**
-- 2 business: Hi! Yes, we have vanilla, chocolate, and strawberry milkshakes. I have those two cheeseburgers down for you.
-- 3 customer: thx! pls deliver to 89 spruce st, apt 19A **[PLACE_ORDER]**
+- 0 business: Hi there! Welcome to Corner Patty. How can we help you today?
+- 1 customer: hey **[SMALL_TALK]**
+- 2 customer: my head is pounding **[SMALL_TALK]**
+- 3 customer: do you guys have milkshakes? **[MENU_QUESTION]**
+- 4 business: We sure do! We have vanilla, chocolate, and strawberry.
+- 5 customer: cool **[SMALL_TALK]**
+- 6 customer: and the veggie burger **[PLACE_ORDER]**
+- 7 customer: what comes on that? **[MENU_QUESTION]**
 
-  - L1: 2 × cheeseburger single
-  - fulfillment delivery, address provided, payment unknown, name –, decision pending
-  - missing: payment_method/missing
+  - L1: 1 × veggie_burger
+  - fulfillment unknown, address not_mentioned, payment unknown, name –, decision pending
+  - missing: fulfillment_method/missing, payment_method/missing
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0280: refund_request, gemini-3.1-flash-lite@minimal, corner-patty
-Card: Got an earlier order (not in this chat) where the onion rings was the wrong one, and asks for their money back.
-Card check: items
+## syn-p3-0283: correction_after_confirmation, gemini-3.1-flash-lite@minimal, halfmoon-pizza
+Card: First orders 1 order of Breadsticks (4 pieces each) (plus anything else below). The business reads the order back (no prices); the customer confirms, then changes the quantity to 4. Final order: 4 orders of Breadsticks (4 pieces each). Will pick it up. Pays cash. Says when they want it: a relative time (like 'in 20 min').
+Card check: labels (expected labels not found: CONFIRM_ORDER)
 
-- 0 customer: HEY CORNER PATTY! MY LAST ORDER HAD THE WRONG ONION RINGS, I NEED A REFUND FOR THOSE ASAP! **[ORDER_PROBLEM + REFUND_REQUEST]**
-- 1 business: Hi there! I am so sorry about that mix-up. Please let me process that refund for you right now.
-- 2 customer: THANKS! ALSO CAN I GET THREE CHEESEBURGER COMBOS WITH FRIES AND COKES FOR THE TEAM PLEASE!!! **[PLACE_ORDER + SMALL_TALK]**
+- 0 customer: Hey! Hosting a movie night, can I get one order of breadsticks pls? 🍿 **[PLACE_ORDER]**
+- 1 business: Hi! Sure thing, one order of breadsticks. Anything else for you?
+- 2 customer: Actually wait, lemme change that to 4 orders of breadsticks please! Thx :) **[MODIFY_ORDER]**
+- 3 business: No problem! I have updated that to 4 orders of breadsticks for you. When would you like to swing by to pick them up?
+- 4 customer: In 20 min works! Gonna pay cash when I get there, see ya soon! 🍕 **[PLACE_ORDER]**
 
-  - L1: 3 × cheeseburger_combo   side=fries, drink=coke
-  - fulfillment unknown, address not_mentioned, payment unknown, name –, decision pending
-  - missing: fulfillment_method/missing, payment_method/missing
+  - L1: 4 × breadsticks
+  - fulfillment pickup, address not_applicable, payment cash, name –, decision pending
+  - missing: nothing
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
@@ -237,17 +243,18 @@ Card check: labels (expected labels not found: CONFIRM_ORDER)
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0310: simple_order, gemini-3.1-flash-lite@minimal, halfmoon-pizza
-Card: Orders: 1 × Meat Lovers Pizza (Extra large 16-inch), no Sausage, add Gluten-free crust. Will pick it up. Pays cash. Gives their name: Sam.
+## syn-p3-0309: combo, gemini-3.1-flash-lite@minimal, corner-patty
+Card: Orders: 1 × Cheeseburger Combo, side: Onion Rings, drink: Coke; 2 × Cheeseburger (Double patty). Picks every combo choice. Wants delivery to 5107 Orchard St (written the way the customer would type it). Pays cash. Asks a menu question partway through.
 Card check: agrees
 
-- 0 customer: Hello, this is Sam. I would like to place an order for one extra large Meat Lovers pizza. **[PLACE_ORDER]**
-- 1 business: Hello Sam! We can certainly get that started for you. Would you like to customize your Meat Lovers pizza at all?
-- 2 customer: Yes, please remove the sausage and add a gluten-free crust to that. Thanks! **[PLACE_ORDER]**
+- 0 customer: yo, tryin u guys out for the first time. can i get a cheeseburger combo w onion rings and a coke? also what kind of burgers u have? **[PLACE_ORDER + MENU_QUESTION]**
+- 1 business: hey there! welcome. we have cheeseburgers, bacon burgers, and veggie burgers.
+- 2 customer: k cool, add two double patty cheeseburgers to that order too pls. delivering to 5107 orchard st and paying cash thx **[PLACE_ORDER]**
 
-  - L1: 1 × meat_lovers_pizza extra_large remove sausage, add crust_gluten_free
-  - fulfillment unknown, address not_mentioned, payment unknown, name Sam, decision pending
-  - missing: fulfillment_method/missing, payment_method/missing
+  - L1: 1 × cheeseburger_combo   side=onion_rings, drink=coke
+  - L2: 2 × cheeseburger double
+  - fulfillment delivery, address provided, payment cash, name –, decision pending
+  - missing: nothing
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
@@ -275,21 +282,6 @@ Card check: agrees
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0361: simple_order, gemini-3.1-flash-lite@minimal, morning-crumb
-Card: Orders: 1 × Bagel (Cinnamon raisin); 1 × Drip Coffee (Small 8 oz). Will pick it up. Never says how they'll pay. Gives their name: Tom. Asks a menu question partway through.
-Card check: item_details
-
-- 0 customer: Hi! Can we order for pickup? Also do you guys have avocado for the bagels? 🥯 **[DELIVERY_QUESTION + MENU_QUESTION]**
-- 1 business: Hi Tom! Yes, we do offer avocado for our bagels. Ready to take your order!
-- 2 customer: Awesome, thanks! We'll take one cinnamon raisin bagel with avocado and a small drip coffee. The name is Tom! ☕️ **[PLACE_ORDER]**
-
-  - L1: 1 × bagel cinnamon_raisin add avocado
-  - L2: 1 × drip_coffee small
-  - fulfillment unknown, address not_mentioned, payment unknown, name Tom, decision pending
-  - missing: fulfillment_method/missing, payment_method/missing
-
-Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
-
 ## syn-p3-0402: cancellation, claude-haiku-5-5@off-low, morning-crumb
 Card: Orders: 1 × Cappuccino (Large 16 oz), Almond milk instead of Whole milk; 1 × Breakfast Sandwich (On a bagel), add Avocado. Then cancels the whole order before it is placed (the last customer message is the cancellation). Will pick it up. Pays by card. Gives their name: Ana.
 Card check: agrees
@@ -306,7 +298,7 @@ Card check: agrees
 - 9 business: Sure, breakfast sandwich on a bagel with avocado. Want me to read back the whole order?
 - 10 customer: nah wait **[SMALL_TALK]**
 - 11 customer: cancel it all **[CANCEL_ORDER]**
-- 12 customer: sorry, ana btw **[SMALL_TALK]**
+- 12 customer: sorry, ana btw **[PLACE_ORDER]**
 
   - L1: 1 × cappuccino large substitute whole_milk→almond_milk
   - L2: 1 × breakfast_sandwich bagel add avocado
@@ -315,18 +307,16 @@ Card check: agrees
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0424: ambiguous_reference, gemini-3.1-flash-lite@minimal, morning-crumb
-Card: Refers to the first item vaguely at first ('the usual'); the business asks which one, and the customer names it. Final order: 1 × Latte (Large 16 oz); 2 × Bagel (Everything). Will pick it up. Pays by card. Gives their name: Omar.
+## syn-p3-0420: off_menu, gemini-3.1-flash-lite@minimal, halfmoon-pizza
+Card: Orders: 1 order of Breadsticks (4 pieces each); 1 × cannoli (not on the menu). The item marked 'not on the menu' is asked for as if the customer thinks they have it; the chat ends before the business answers about it. Wants delivery to 63 Lakeview Ln (written the way the customer would type it). Pays cash. Says when they want it: a relative time (like 'in 20 min').
 Card check: agrees
 
-- 0 customer: hey there its omar, can i get the usual please **[PLACE_ORDER]**
-- 1 business: hi omar! sounds good, just to make sure, which drink is your usual?
-- 2 customer: oh sorry its a large latte and i also need two everything bagels pls, gonna pick it up and pay by card **[PLACE_ORDER]**
+- 0 customer: hey can i get some breadsticks and a cannoli pls? to 63 lakeview ln in like 20 mins **[PLACE_ORDER]**
 
-  - L2: 1 × latte large
-  - L3: 2 × bagel everything
-  - fulfillment pickup, address not_applicable, payment card, name Omar, decision pending
-  - missing: nothing
+  - L1: 1 × breadsticks
+  - L2: 1 × off-menu 'cannoli'
+  - fulfillment delivery, address provided, payment unknown, name –, decision pending
+  - missing: item_menu_match/off_menu, payment_method/missing
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
@@ -469,18 +459,51 @@ Card check: labels (expected labels not found: UNKNOWN)
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
-## syn-p3-0475: two_requests, gemini-3.1-flash-lite@minimal, halfmoon-pizza
-Card: Orders: 2 × Cheese Pizza (Extra large 16-inch); 1 × Pepperoni Pizza (Extra large 16-inch), no House cheese blend. In the same message as the first item, also asks a question about the menu. Will pick it up. Pays cash.
+## syn-p3-0467: multi_message_order, gemini-3.1-flash-lite@minimal, halfmoon-pizza
+Card: Builds the order over several messages, a thing or two at a time: 3 × Supreme Pizza (Small 10-inch); 1 × Pepperoni Pizza (Medium 12-inch), no House cheese blend. Will pick it up. Pays by card. Gives their name: Maya. Says when they want it: a clock time (like 'at 6:30').
 Card check: agrees
 
-- 0 customer: hey u guys do salads or jus pizza rn? also can i get 2 xl cheese pizzas and a xl pepperoni with no cheese blend pls **[PLACE_ORDER + MENU_QUESTION]**
-- 1 business: hi! we only serve pizzas and sides, no salads. just to confirm, that is two extra large cheese pizzas and one extra large pepperoni with no cheese blend?
-- 2 customer: yep thats it thx **[CONFIRM_ORDER]**
+- 0 customer: HEY WE NEED FOOD!! CAN WE GET 3 SMALL SUPREME PIZZAS PLEASE??? **[PLACE_ORDER]**
+- 1 business: Hi! We can definitely get those 3 Small Supreme pizzas ready for you. Anything else?
+- 2 customer: YES ADD A MEDIUM PEPPERONI PIZZA TO THAT!! BUT PLEASE NO HOUSE CHEESE BLEND ON THE PEPPERONI ONE!! **[PLACE_ORDER]**
+- 3 business: Got it. So that is 3 Small Supreme pizzas and 1 Medium Pepperoni pizza without the house cheese blend. Is that right?
+- 4 customer: YES THATS PERFECT!! WE WILL PICK IT UP AT 6:30!! WE ARE PAYING BY CARD!! MY NAME IS MAYA!! **[CONFIRM_ORDER + PLACE_ORDER]**
 
-  - L1: 2 × cheese_pizza extra_large
-  - L2: 1 × pepperoni_pizza extra_large remove cheese
-  - fulfillment unknown, address not_mentioned, payment unknown, name –, decision pending
-  - missing: fulfillment_method/missing, payment_method/missing
+  - L1: 3 × supreme_pizza small
+  - L2: 1 × pepperoni_pizza medium remove cheese
+  - fulfillment pickup, address not_applicable, payment card, name Maya, decision confirmed
+  - missing: nothing
+
+Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
+
+## syn-p3-0470: contextual_yes, gemini-3.1-flash-lite@minimal, corner-patty
+Card: Orders: 2 × Sprite; 1 × Coke. The business reads the order back (no prices) and asks if it's right; the customer's last message is only a short yes ('yep', 'that's it', a thumbs up). Wants delivery to 58 Willow Creek Rd (across from the park) (written the way the customer would type it). Never says how they'll pay. Says when they want it: a relative time (like 'in 20 min').
+Card check: agrees
+
+- 0 customer: hey! can i get 2 sprites and a coke? **[PLACE_ORDER]**
+- 1 customer: need that delivered **[PLACE_ORDER]**
+- 2 customer: to 58 willow creek rd, right across from the park **[PLACE_ORDER]**
+- 3 customer: think you can get it here in like 20 min? **[PLACE_ORDER]**
+- 4 business: Hey there! We can get that over to you. Just to confirm: 2 Sprites and 1 Coke for delivery to 58 Willow Creek Rd in 20 minutes. Does that look right?
+- 5 customer: yep **[CONFIRM_ORDER]**
+
+  - L1: 2 × sprite
+  - L2: 1 × coke
+  - fulfillment delivery, address provided, payment unknown, name –, decision pending
+  - missing: payment_method/missing
+
+Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
+
+## syn-p3-0483: menu_question, gemini-3.1-flash-lite@minimal, corner-patty
+Card: Only asks one or two questions about the menu (what comes on something, sizes, what's good, whether they have something). Does not order.
+Card check: agrees
+
+- 0 business: Hi! Welcome to Corner Patty, how can we help you?
+- 1 customer: hey! my friend is feeling super sick rn so i'm trying to grab them some food. what comes on the veggie burger by default? **[MENU_QUESTION]**
+- 2 business: Hey there! The veggie burger comes with lettuce, tomato, onions, pickles, and mayo.
+- 3 customer: gotcha, thanks so much! also do you guys have any milkshakes? just wondering what flavors u have 🥤 **[MENU_QUESTION]**
+
+  - no order
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 
@@ -500,27 +523,11 @@ Card check: agrees
 - 9 customer: delivery to 80 franklin way **[PLACE_ORDER]**
 - 10 business: Got it, 80 Franklin Way. So 1 order of breadsticks, 4 pieces, delivered. Is that right?
 - 11 customer: yep thx **[CONFIRM_ORDER]**
-- 12 customer: paying cash **[MODIFY_ORDER]**
+- 12 customer: paying cash **[PLACE_ORDER]**
 
   - L1: 1 × breadsticks
-  - fulfillment delivery, address provided, payment cash, name –, decision pending
+  - fulfillment delivery, address provided, payment cash, name –, decision confirmed
   - missing: nothing
-
-Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
-
-## syn-p3-0489: simple_order, gemini-3.1-flash-lite@minimal, morning-crumb
-Card: Opens with a greeting before ordering. Orders: 1 × Americano (Large 16 oz), add Caramel syrup, add Almond milk. Will pick it up. Pays by card. Gives their name: Eli.
-Card check: agrees
-
-- 0 customer: Hello, I hope your morning is going well. **[SMALL_TALK]**
-- 1 business: Hi there! How can we help you today?
-- 2 customer: I would like to order one large Americano with caramel syrup and almond milk, please. **[PLACE_ORDER]**
-- 3 business: Sure thing. Just to confirm, that is one large Americano with caramel syrup and almond milk?
-- 4 customer: Yes, that is correct. My name is Eli. **[CONFIRM_ORDER + PLACE_ORDER]**
-
-  - L1: 1 × americano large add caramel_syrup, add almond_milk
-  - fulfillment unknown, address not_mentioned, payment unknown, name Eli, decision pending
-  - missing: fulfillment_method/missing, payment_method/missing
 
 Audit: ☐ chat realistic ☐ card followed ☐ intents right ☐ order right. Notes:
 

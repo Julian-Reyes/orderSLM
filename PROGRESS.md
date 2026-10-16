@@ -8,10 +8,14 @@ _Last updated 2026-10-16._
 
 - **State:** M0–M3 done and merged into local `main` (**not pushed**: ask Julian first, run a secrets check).
   M4 step 1 (code, no spend) done on branch `milestone-4`; see "M4 so far".
-- **Training data (2026-10-16), all labeled with `teacher-label@0.5`:** single-menu **1,967** (p3 494 relabeled +
-  b1 1,473) and mega-menu **391** (m1). Spot check of b1/m1: `runs/synth/spot_check_b1_m1.md`. **Next:** the §11d
-  training-label audit by the decision providers (Julian: do it now; needs Julia-1 download approval, Jev access and
-  pricing, OpenAI Decisions beta), then M5 student bake-off.
+- **Training data (2026-10-16):** single-menu **1,965** (p3 494 + b1 1,471) and mega-menu **391** (m1); labels
+  `teacher-label@0.5`, with the 354 chats hit by the v0.6 rule (Julian: a yes to any read-back is CONFIRM_ORDER;
+  details after a confirm stay PLACE_ORDER) relabeled with **v0.6** (dev: orders 91/91, intents 265/268). Every saved
+  response now records its prompt versions (backfilled for p1–m1 from the batch history; rebuilding refuses records
+  without one). Facts on providers and students: `docs/PROVIDERS.md` (Julia-1 downloaded to `models/julia-1`, rev
+  a85b1273; OpenAI Decisions and Jev contracts from official docs; Jev smoke test OK, 715 tokens/15-label call;
+  student licenses all Apache 2.0). **Next:** §11d label audit (needs Julian's OK to add torch + transformers for
+  Julia-1); then M5. Disk: 15 GB free (student downloads ~1.8/4/4/10 GB).
 - Still open before **bulk** labeling (not needed for the pilot):
   1. Check whether OpenAI bills `cache_write_tokens`; plan the OpenAI Batch API (half price) for bulk labeling.
   2. `docs/TERMS.md`: each provider's terms on training with outputs (spec §7). Now this covers DeepSeek, Google

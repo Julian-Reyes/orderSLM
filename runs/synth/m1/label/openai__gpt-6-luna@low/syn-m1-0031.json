@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no basil\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"parmesan\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add parmesan\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a medium margherita\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickin it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"June\",\"evidence\":[{\"message_index\":2,\"quote\":\"name's june\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no basil\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"parmesan\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add parmesan\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a medium margherita no basil add parmesan\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickin it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"June\",\"evidence\":[{\"message_index\":2,\"quote\":\"name's june\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"thats all\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 16085,
-   "cached_input_tokens": 7673,
+   "input_tokens": 16145,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 489,
-   "reasoning_tokens": 75
+   "output_tokens": 530,
+   "reasoning_tokens": 101
   },
-  "latency_ms": 6061.630039010197,
-  "cost_micros": 1163,
-  "at": "2026-10-16T16:34:42.107773+00:00",
+  "latency_ms": 5590.632478997577,
+  "cost_micros": 1184,
+  "at": "2026-10-16T17:39:17.343262+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 16085,
-   "completion_tokens": 489,
-   "total_tokens": 16574,
+   "prompt_tokens": 16145,
+   "completion_tokens": 530,
+   "total_tokens": 16675,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 8409,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 75,
+    "reasoning_tokens": 101,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

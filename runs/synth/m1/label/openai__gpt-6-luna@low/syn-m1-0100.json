@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"3 medium lattes\"},{\"message_index\":3,\"quote\":\"change the lattes to 2 instead of 3\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"everything\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"4 everything bagels\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"deliver it\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"hawthorne way\",\"number\":\"2125\",\"unit\":null,\"reference\":null,\"raw_text\":\"2125 hawthorne way\",\"evidence\":[{\"message_index\":5,\"quote\":\"2125 hawthorne way\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MODIFY_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"3 medium lattes\"},{\"message_index\":3,\"quote\":\"change the lattes to 2 instead of 3\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"everything\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"4 everything bagels\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"Please deliver it\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"hawthorne way\",\"number\":\"2125\",\"unit\":null,\"reference\":null,\"raw_text\":\"2125 hawthorne way\",\"evidence\":[{\"message_index\":5,\"quote\":\"2125 hawthorne way\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":5,\"quote\":\"That's everything\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 16102,
-   "cached_input_tokens": 7673,
+   "input_tokens": 16162,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 538,
-   "reasoning_tokens": 96
+   "output_tokens": 695,
+   "reasoning_tokens": 239
   },
-  "latency_ms": 5442.3643029876985,
-  "cost_micros": 1189,
-  "at": "2026-10-16T16:36:08.108019+00:00",
+  "latency_ms": 7018.865596997784,
+  "cost_micros": 1268,
+  "at": "2026-10-16T17:39:36.878461+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 16102,
-   "completion_tokens": 538,
-   "total_tokens": 16640,
+   "prompt_tokens": 16162,
+   "completion_tokens": 695,
+   "total_tokens": 16857,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 8426,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 96,
+    "reasoning_tokens": 239,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

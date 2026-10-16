@@ -12,8 +12,8 @@ Built from the saved files in this folder (`make synth ARGS="report --batch m1"`
 | repairs | trimmed_trailing_business_message 8 | trimmed_trailing_business_message 58 | trimmed_trailing_business_message 3 |
 | labels kept | 65/66 (98%) | 261/262 (100%) | 65/66 (98%) |
 | label drops | check_failed 1 | check_failed 1 | invalid_contract 1 |
-| card agrees with label | 59/65 (91%) | 246/261 (94%) | 61/65 (94%) |
-| disagreement types | labels 4, items 2 | items 4, labels 9, item_details 4 | labels 3, items 1 |
+| card agrees with label | 60/65 (92%) | 245/261 (94%) | 62/65 (95%) |
+| disagreement types | labels 3, items 2 | items 5, labels 9, item_details 4 | labels 2, items 1 |
 | card address used | 16/19 (84%) | 59/60 (98%) | 16/16 (100%) |
 
 ## Cost and tokens
@@ -24,10 +24,10 @@ Built from the saved files in this folder (`make synth ARGS="report --batch m1"`
 | generation: per 1,000 chats | $0.609 | $0.125 | $0.9693 |
 | generation: tokens in (cached) / out | 326,416 (0) / 15,041 | 779,938 (724,864) / 37,373 | 192,562 (0) / 10,543 |
 | generation: latency p50 ms | 1802 | 1904 | 1712 |
-| labels (luna low): cost | $0.0777 | $0.3062 | $0.0769 |
-| labels (luna low): per 1,000 chats | $1.1776 | $1.1687 | $1.1657 |
-| labels (luna low): tokens in (cached) / out | 1,061,608 (506,418) / 34,214 | 4,212,981 (2,010,326) / 131,407 | 1,059,057 (506,418) / 33,150 |
-| labels (luna low): latency p50 ms | 6022 | 5468 | 5719 |
+| labels (luna low): cost | $0.0782 | $0.3066 | $0.0772 |
+| labels (luna low): per 1,000 chats | $1.1842 | $1.1702 | $1.1702 |
+| labels (luna low): tokens in (cached) / out | 1,062,748 (507,558) / 35,052 | 4,215,741 (2,013,086) / 132,119 | 1,059,477 (506,838) / 33,730 |
+| labels (luna low): latency p50 ms | 6173 | 5514 | 5719 |
 
 ## Style of the customer text
 
@@ -54,9 +54,9 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 | ambiguous_reference | 0/1 | 9/9 | 2/2 |
 | cancellation | 2/2 | 9/9 | 2/2 |
 | combo | 3/3 | 10/10 | 3/3 |
-| contextual_yes | 2/3 | 12/12 | 3/4 |
-| correction | 5/5 | 18/19 | 4/4 |
-| correction_after_confirmation | 0/2 | 5/11 | 1/3 |
+| contextual_yes | 2/3 | 12/12 | 4/4 |
+| correction | 5/5 | 17/19 | 4/4 |
+| correction_after_confirmation | 1/2 | 5/11 | 1/3 |
 | delivery_question | 2/2 | 9/9 | 2/2 |
 | half_and_half | 2/2 | 9/9 | 2/2 |
 | human_request | 2/2 | 9/9 | 2/2 |
@@ -81,19 +81,19 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 | intent | claude-haiku-5-5@off-low | deepseek-flash@none | gemini-3.1-flash-lite@minimal |
 |---|---|---|---|
 | CANCEL_ORDER | 2 | 9 | 2 |
-| CONFIRM_ORDER | 15 | 51 | 16 |
-| DELIVERY_QUESTION | 14 | 67 | 11 |
+| CONFIRM_ORDER | 16 | 66 | 20 |
+| DELIVERY_QUESTION | 14 | 66 | 11 |
 | HUMAN_REQUEST | 4 | 18 | 2 |
-| MENU_QUESTION | 8 | 56 | 6 |
-| MODIFY_ORDER | 20 | 61 | 21 |
+| MENU_QUESTION | 9 | 55 | 6 |
+| MODIFY_ORDER | 17 | 47 | 15 |
 | ORDER_PROBLEM | 10 | 28 | 4 |
 | ORDER_STATUS | 6 | 21 | 5 |
 | OUT_OF_SCOPE | 2 | 10 | 2 |
 | PAYMENT_CLAIM | 1 | 15 | 1 |
 | PAYMENT_QUESTION | 2 | 15 | 2 |
-| PLACE_ORDER | 123 | 391 | 86 |
+| PLACE_ORDER | 123 | 396 | 90 |
 | REFUND_REQUEST | 2 | 10 | 3 |
-| SMALL_TALK | 36 | 190 | 36 |
+| SMALL_TALK | 37 | 186 | 34 |
 | UNKNOWN | 1 | 6 | 4 |
 
 Audit sample: `audit.md` (30 chats, seed 20261016).

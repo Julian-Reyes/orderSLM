@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO HOUSE CHEESE BLEND\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"bbq_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD BBQ SAUCE\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"FOUR SUPREME PIZZAS SMALL 10 INCH\"},{\"message_index\":0,\"quote\":\"NO HOUSE CHEESE BLEND\"},{\"message_index\":0,\"quote\":\"ADD BBQ SAUCE\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]},{\"menu_item_id\":\"pepperoni_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"ONE PERSONAL 8 INCH HALF AND HALF PIZZA, ONE HALF BBQ CHICKEN ONE HALF PEPPERONI\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A 2 LITER DR PEPPER\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"IN TWENTY MIN\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"IN TWENTY MIN\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Easton Blvd\",\"number\":\"358\",\"unit\":null,\"reference\":null,\"raw_text\":\"358 EASTON BLVD\",\"evidence\":[{\"message_index\":4,\"quote\":\"358 EASTON BLVD\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"WE PAY CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO HOUSE CHEESE BLEND\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"bbq_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD BBQ SAUCE\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"FOUR SUPREME PIZZAS SMALL 10 INCH\"},{\"message_index\":0,\"quote\":\"NO HOUSE CHEESE BLEND\"},{\"message_index\":0,\"quote\":\"ADD BBQ SAUCE\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":null,\"halves\":[{\"menu_item_id\":\"bbq_chicken_pizza\",\"modifications\":[]},{\"menu_item_id\":\"pepperoni_pizza\",\"modifications\":[]}],\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"ONE PERSONAL 8 INCH HALF AND HALF PIZZA, ONE HALF BBQ CHICKEN ONE HALF PEPPERONI\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A 2 LITER DR PEPPER\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"IN TWENTY MIN\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"IN TWENTY MIN\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Easton Blvd\",\"number\":\"358\",\"unit\":null,\"reference\":null,\"raw_text\":\"358 EASTON BLVD\",\"evidence\":[{\"message_index\":4,\"quote\":\"358 EASTON BLVD\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"WE PAY CASH\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"THATS IT!!!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12675,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12735,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 817,
-   "reasoning_tokens": 144
+   "output_tokens": 981,
+   "reasoning_tokens": 287
   },
-  "latency_ms": 7620.304283016594,
-  "cost_micros": 986,
-  "at": "2026-10-16T16:40:19.337652+00:00",
+  "latency_ms": 11347.187854000367,
+  "cost_micros": 1069,
+  "at": "2026-10-16T17:36:57.171353+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12675,
-   "completion_tokens": 817,
-   "total_tokens": 13492,
+   "prompt_tokens": 12735,
+   "completion_tokens": 981,
+   "total_tokens": 13716,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 4999,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 144,
+    "reasoning_tokens": 287,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

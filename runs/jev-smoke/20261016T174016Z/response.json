@@ -1,0 +1,72 @@
+{
+ "at": "2026-10-16T17:40:16.813029+00:00",
+ "status": 200,
+ "latency_ms": 343,
+ "request": {
+  "model": "jev-latest",
+  "state": {
+   "conversation": [
+    {
+     "role": "customer",
+     "text": "hi i got charged twice for my order last nite, can i get one of those refunded"
+    }
+   ],
+   "latest_customer_message_index": 0
+  },
+  "questions": {
+   "intent": {
+    "type": "choice",
+    "instructions": "What does the latest customer message do?",
+    "criteria": {
+     "PLACE_ORDER": "Customer starts an order, adds items, or gives first details like time, address or payment.",
+     "MODIFY_ORDER": "Customer changes something already stated: items, sizes, extras, time, address or payment.",
+     "CANCEL_ORDER": "Customer cancels the whole order.",
+     "CONFIRM_ORDER": "Customer agrees the order summary is correct.",
+     "MENU_QUESTION": "Question about menu items, ingredients, sizes, prices or availability.",
+     "DELIVERY_QUESTION": "Question about delivery area, fee, pickup, or opening hours.",
+     "PAYMENT_QUESTION": "Question about how to pay or which payment methods work.",
+     "PAYMENT_CLAIM": "Customer says they already paid or sent payment.",
+     "ORDER_STATUS": "Customer asks where a placed order is or when it will arrive.",
+     "ORDER_PROBLEM": "Complaint about a received order: missing, wrong, late, cold or damaged.",
+     "REFUND_REQUEST": "Customer asks for their money back or a refund.",
+     "HUMAN_REQUEST": "Customer asks to talk to a person or staff member.",
+     "SMALL_TALK": "Greeting, thanks, or chit-chat with no request.",
+     "OUT_OF_SCOPE": "Request unrelated to ordering food from this business.",
+     "UNKNOWN": "Too unclear to tell what the customer wants."
+    }
+   }
+  }
+ },
+ "gold": "REFUND_REQUEST",
+ "response": {
+  "model": "jev-1.13.0",
+  "answers": {
+   "intent": {
+    "type": "choice",
+    "choice": "REFUND_REQUEST",
+    "confidence": 1.0,
+    "probabilities": {
+     "PLACE_ORDER": 0.0,
+     "MODIFY_ORDER": 0.0,
+     "CANCEL_ORDER": 0.0,
+     "CONFIRM_ORDER": 0.0,
+     "MENU_QUESTION": 0.0,
+     "DELIVERY_QUESTION": 0.0,
+     "PAYMENT_QUESTION": 0.0,
+     "PAYMENT_CLAIM": 0.0,
+     "ORDER_STATUS": 0.0,
+     "ORDER_PROBLEM": 0.0,
+     "REFUND_REQUEST": 1.0,
+     "HUMAN_REQUEST": 0.0,
+     "SMALL_TALK": 0.0,
+     "OUT_OF_SCOPE": 0.0,
+     "UNKNOWN": 0.0
+    }
+   }
+  },
+  "usage": {
+   "input_tokens": 715,
+   "output_tokens": 160
+  }
+ }
+}

@@ -207,7 +207,7 @@ def _call_all(
         for key, cid, req, path in group:
             if stop.is_set():
                 return
-            out: dict[str, Any] = {"key": key, "config_id": cid}
+            out: dict[str, Any] = {"key": key, "config_id": cid, "versions": versions}
             try:
                 resp = make_client(cid, cache_mode=cache_mode).complete(req)
                 out["response"] = resp.model_dump(mode="json")
@@ -287,7 +287,10 @@ def collect(batch: str) -> None:
             drops.append({"card_id": card.id, "generator": card.generator, "reason": "call_error"})
             continue
         resp = ChatResponse.model_validate(rec["response"])
-        conv, reason = gen.to_conversation(card, resp.text)
+        version = rec.get("versions", {}).get("generator_prompt")
+        if version is None:
+            raise SystemExit(f"{path}: no generator_prompt version recorded (backfill it first)")
+        conv, reason = gen.to_conversation(card, resp.text, prompt_version=version)
         if reason is None and resp.finish_reason in ("length", "max_tokens", "refusal"):
             reason = f"finish_reason={resp.finish_reason}"
         if conv is None or reason is not None:
@@ -330,6 +333,16 @@ def label(args: argparse.Namespace) -> int:
     if args.limit is not None:
         keep = {c.id for c in _first_per_generator([cards[s.card_id] for s in convs], args.limit)}
         convs = [s for s in convs if s.card_id in keep]
+    if args.only:
+        only = set(json.loads(Path(args.only).read_text()))
+        convs = [s for s in convs if s.card_id in only]
+        # keep the previous raw labels of the chats being relabeled (label-v<old>/), for provenance
+        backup = batch_dir(args.batch) / f"label-{args.keep_previous_as}" / _slug(teacher)
+        for s in convs if args.yes else []:
+            old = batch_dir(args.batch) / "label" / _slug(teacher) / f"{s.card_id}.json"
+            if old.exists() and not (backup / old.name).exists():
+                backup.mkdir(parents=True, exist_ok=True)
+                (backup / old.name).write_text(old.read_text())
     jobs, est = [], 0
     for s in convs:
         req = lab.build_request(s.conversation, load_menu(s.conversation.business_id))
@@ -364,7 +377,10 @@ def collect_labels(batch: str, teacher: str) -> None:
             continue
         resp = ChatResponse.model_validate(rec["response"])
         menu = load_menu(s.conversation.business_id)
-        lc, reason = lab.parse_label(resp.text, s.conversation, menu, teacher)
+        version = rec.get("versions", {}).get("label_prompt")
+        if version is None:
+            raise SystemExit(f"{path}: no label_prompt version recorded (backfill it first)")
+        lc, reason = lab.parse_label(resp.text, s.conversation, menu, teacher, prompt_version=version)
         if lc is None:
             drops.append({"card_id": s.card_id, "generator": s.generator, "reason": reason})
             continue
@@ -498,6 +514,10 @@ def main(argv: list[str] | None = None) -> int:
         )
         if name == "label":
             p.add_argument("--teacher", default=lab.TEACHER)
+            p.add_argument("--only", help="JSON list of card ids to (re)label")
+            p.add_argument(
+                "--keep-previous-as", default="previous", help="folder suffix for the replaced raw labels"
+            )
     p = sub.add_parser("report")
     p.add_argument("--batch", required=True)
     p.add_argument("--audit-per-generator", type=int, default=10)

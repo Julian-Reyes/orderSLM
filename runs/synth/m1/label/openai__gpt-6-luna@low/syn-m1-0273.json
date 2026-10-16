@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a medium latte w vanilla syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":\"cannoli\",\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"two of em\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in like 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Fairmont Ct\",\"number\":\"4\",\"unit\":null,\"reference\":null,\"raw_text\":\"4 fairmont ct\",\"evidence\":[{\"message_index\":4,\"quote\":\"4 fairmont ct\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a medium latte\"}]},{\"line_id\":\"L2\",\"menu_item_id\":null,\"unmatched_text\":\"cannoli\",\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a cannoli\"},{\"message_index\":4,\"quote\":\"two of em\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"can u deliver to 4 fairmont ct\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in like 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Fairmont Ct\",\"number\":\"4\",\"unit\":null,\"reference\":null,\"raw_text\":\"4 fairmont ct\",\"evidence\":[{\"message_index\":4,\"quote\":\"4 fairmont ct\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 16075,
-   "cached_input_tokens": 7673,
+   "input_tokens": 16135,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 652,
-   "reasoning_tokens": 206
+   "output_tokens": 644,
+   "reasoning_tokens": 172
   },
-  "latency_ms": 7237.898102990584,
-  "cost_micros": 1243,
-  "at": "2026-10-16T16:38:35.663368+00:00",
+  "latency_ms": 6538.5432389739435,
+  "cost_micros": 1240,
+  "at": "2026-10-16T17:40:10.285505+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 16075,
-   "completion_tokens": 652,
-   "total_tokens": 16727,
+   "prompt_tokens": 16135,
+   "completion_tokens": 644,
+   "total_tokens": 16779,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 8399,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 206,
+    "reasoning_tokens": 172,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

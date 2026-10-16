@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no basil\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"spinach\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add spinach\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 SMALL 10-INCH MARGHERITA PIZZAS\"},{\"message_index\":2,\"quote\":\"no basil\"},{\"message_index\":2,\"quote\":\"add SPINACH\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 EXTRA LARGE 16-INCH PEPPERONI PIZZA\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying with a 50 dollar bill\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO BASIL\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"spinach\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD SPINACH\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 SMALL 10-INCH MARGHERITA PIZZAS\"},{\"message_index\":2,\"quote\":\"NO BASIL\"},{\"message_index\":2,\"quote\":\"ADD SPINACH\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 EXTRA LARGE 16-INCH PEPPERONI PIZZA\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"paying with a 50 dollar bill\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"YES!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 16123,
-   "cached_input_tokens": 7673,
+   "input_tokens": 16183,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 717,
-   "reasoning_tokens": 190
+   "output_tokens": 786,
+   "reasoning_tokens": 244
   },
-  "latency_ms": 6995.603106013732,
-  "cost_micros": 1281,
-  "at": "2026-10-16T16:38:19.738517+00:00",
+  "latency_ms": 7979.064686980564,
+  "cost_micros": 1316,
+  "at": "2026-10-16T17:39:48.700161+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 16123,
-   "completion_tokens": 717,
-   "total_tokens": 16840,
+   "prompt_tokens": 16183,
+   "completion_tokens": 786,
+   "total_tokens": 16969,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 8447,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 190,
+    "reasoning_tokens": 244,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

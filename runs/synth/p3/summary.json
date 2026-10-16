@@ -1,6 +1,6 @@
 {
   "batch": "p3",
-  "built_at": "2026-10-16T17:15:18.951246+00:00",
+  "built_at": "2026-10-16T17:42:11.324224+00:00",
   "dedup_threshold": 0.8,
   "by_generator": {
     "anthropic/claude-haiku-5-5@off-low": {
@@ -37,13 +37,13 @@
       },
       "label_usage": {
         "calls": 100,
-        "input_tokens": 1097547,
-        "cached_input_tokens": 767300,
-        "output_tokens": 58142,
-        "reasoning_tokens": 16529,
-        "cost_micros": 69821,
-        "cost_per_1k_usd": 0.6982,
-        "latency_p50_ms": 6422
+        "input_tokens": 1099407,
+        "cached_input_tokens": 769160,
+        "output_tokens": 58131,
+        "reasoning_tokens": 16593,
+        "cost_micros": 69836,
+        "cost_per_1k_usd": 0.6984,
+        "latency_p50_ms": 6579
       },
       "style": {
         "chats": 100,
@@ -109,13 +109,13 @@
       },
       "label_usage": {
         "calls": 198,
-        "input_tokens": 2140065,
-        "cached_input_tokens": 1519254,
-        "output_tokens": 102870,
-        "reasoning_tokens": 24163,
-        "cost_micros": 128818,
-        "cost_per_1k_usd": 0.6506,
-        "latency_p50_ms": 5652
+        "input_tokens": 2142165,
+        "cached_input_tokens": 1521354,
+        "output_tokens": 103795,
+        "reasoning_tokens": 24848,
+        "cost_micros": 129301,
+        "cost_per_1k_usd": 0.653,
+        "latency_p50_ms": 5717
       },
       "style": {
         "chats": 198,
@@ -160,10 +160,10 @@
       },
       "card_agreement": {
         "labeled": 199,
-        "all_agree": 175,
+        "all_agree": 177,
         "flags": {
           "items": 8,
-          "labels": 16,
+          "labels": 14,
           "item_details": 1
         }
       },
@@ -180,13 +180,13 @@
       },
       "label_usage": {
         "calls": 200,
-        "input_tokens": 2155875,
-        "cached_input_tokens": 1534600,
-        "output_tokens": 100806,
-        "reasoning_tokens": 24207,
-        "cost_micros": 127974,
-        "cost_per_1k_usd": 0.6399,
-        "latency_p50_ms": 5445
+        "input_tokens": 2157075,
+        "cached_input_tokens": 1535800,
+        "output_tokens": 100331,
+        "reasoning_tokens": 23963,
+        "cost_micros": 127748,
+        "cost_per_1k_usd": 0.6387,
+        "latency_p50_ms": 5506
       },
       "style": {
         "chats": 200,
@@ -218,12 +218,12 @@
     }
   },
   "labeled_intents": {
-    "PLACE_ORDER": 864,
-    "SMALL_TALK": 352,
-    "CONFIRM_ORDER": 116,
-    "MODIFY_ORDER": 114,
-    "DELIVERY_QUESTION": 89,
-    "MENU_QUESTION": 75,
+    "PLACE_ORDER": 871,
+    "SMALL_TALK": 347,
+    "CONFIRM_ORDER": 137,
+    "MODIFY_ORDER": 94,
+    "DELIVERY_QUESTION": 88,
+    "MENU_QUESTION": 73,
     "ORDER_STATUS": 38,
     "ORDER_PROBLEM": 28,
     "CANCEL_ORDER": 23,
@@ -481,7 +481,7 @@
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 9,
-        "agree": 2
+        "agree": 3
       }
     },
     "menu_question": {
@@ -547,7 +547,7 @@
       },
       "google/gemini-3.1-flash-lite@minimal": {
         "labeled": 11,
-        "agree": 9
+        "agree": 10
       },
       "anthropic/claude-haiku-5-5@off-low": {
         "labeled": 6,
@@ -655,11 +655,11 @@
   },
   "intents_by_generator": {
     "google/gemini-3.1-flash-lite@minimal": {
-      "PLACE_ORDER": 290,
-      "SMALL_TALK": 124,
-      "CONFIRM_ORDER": 45,
-      "MODIFY_ORDER": 43,
-      "MENU_QUESTION": 24,
+      "PLACE_ORDER": 288,
+      "SMALL_TALK": 123,
+      "CONFIRM_ORDER": 52,
+      "MODIFY_ORDER": 40,
+      "MENU_QUESTION": 23,
       "DELIVERY_QUESTION": 19,
       "ORDER_STATUS": 14,
       "CANCEL_ORDER": 10,
@@ -671,10 +671,10 @@
       "UNKNOWN": 2
     },
     "anthropic/claude-haiku-5-5@off-low": {
-      "PLACE_ORDER": 218,
-      "SMALL_TALK": 96,
-      "MODIFY_ORDER": 28,
-      "CONFIRM_ORDER": 25,
+      "PLACE_ORDER": 223,
+      "SMALL_TALK": 95,
+      "CONFIRM_ORDER": 29,
+      "MODIFY_ORDER": 20,
       "MENU_QUESTION": 19,
       "DELIVERY_QUESTION": 15,
       "ORDER_STATUS": 6,
@@ -688,12 +688,12 @@
       "REFUND_REQUEST": 1
     },
     "deepseek/deepseek-flash@none": {
-      "PLACE_ORDER": 356,
-      "SMALL_TALK": 132,
-      "DELIVERY_QUESTION": 55,
-      "CONFIRM_ORDER": 46,
-      "MODIFY_ORDER": 43,
-      "MENU_QUESTION": 32,
+      "PLACE_ORDER": 360,
+      "SMALL_TALK": 129,
+      "CONFIRM_ORDER": 56,
+      "DELIVERY_QUESTION": 54,
+      "MODIFY_ORDER": 34,
+      "MENU_QUESTION": 31,
       "ORDER_STATUS": 18,
       "ORDER_PROBLEM": 13,
       "CANCEL_ORDER": 9,
@@ -717,14 +717,13 @@
     "syn-p3-0148",
     "syn-p3-0160",
     "syn-p3-0205",
-    "syn-p3-0271",
-    "syn-p3-0280",
+    "syn-p3-0236",
+    "syn-p3-0283",
     "syn-p3-0292",
-    "syn-p3-0310",
+    "syn-p3-0309",
     "syn-p3-0313",
-    "syn-p3-0361",
     "syn-p3-0402",
-    "syn-p3-0424",
+    "syn-p3-0420",
     "syn-p3-0425",
     "syn-p3-0427",
     "syn-p3-0434",
@@ -733,8 +732,9 @@
     "syn-p3-0446",
     "syn-p3-0452",
     "syn-p3-0464",
-    "syn-p3-0475",
-    "syn-p3-0487",
-    "syn-p3-0489"
+    "syn-p3-0467",
+    "syn-p3-0470",
+    "syn-p3-0483",
+    "syn-p3-0487"
   ]
 }

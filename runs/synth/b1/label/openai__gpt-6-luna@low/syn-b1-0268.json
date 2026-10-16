@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no lettuce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two Cheeseburger Combos\"},{\"message_index\":0,\"quote\":\"no lettuce\"},{\"message_index\":2,\"quote\":\"side Onion Rings\"},{\"message_index\":2,\"quote\":\"drink Coke\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one Bacon Burger\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cheeseburger_combo\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"lettuce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no lettuce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[{\"slot_id\":\"side\",\"menu_item_id\":\"onion_rings\",\"variant_id\":null},{\"slot_id\":\"drink\",\"menu_item_id\":\"coke\",\"variant_id\":null}],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two Cheeseburger Combos\"},{\"message_index\":0,\"quote\":\"no lettuce\"},{\"message_index\":2,\"quote\":\"the side Onion Rings\"},{\"message_index\":2,\"quote\":\"the drink Coke\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one Bacon Burger\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 9563,
-   "cached_input_tokens": 7673,
+   "input_tokens": 9623,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 626,
-   "reasoning_tokens": 123
+   "output_tokens": 591,
+   "reasoning_tokens": 86
   },
-  "latency_ms": 7423.467383021489,
-  "cost_micros": 579,
-  "at": "2026-10-16T16:34:12.583916+00:00",
+  "latency_ms": 6129.755442991154,
+  "cost_micros": 562,
+  "at": "2026-10-16T17:35:55.272116+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 9563,
-   "completion_tokens": 626,
-   "total_tokens": 10189,
+   "prompt_tokens": 9623,
+   "completion_tokens": 591,
+   "total_tokens": 10214,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 1887,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 123,
+    "reasoning_tokens": 86,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

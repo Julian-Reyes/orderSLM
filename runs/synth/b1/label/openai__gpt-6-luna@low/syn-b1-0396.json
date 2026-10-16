@@ -7,31 +7,34 @@
   "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 iced tea\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 12568,
-   "cached_input_tokens": 7673,
+   "input_tokens": 12628,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 361,
-   "reasoning_tokens": 56
+   "output_tokens": 373,
+   "reasoning_tokens": 68
   },
-  "latency_ms": 5353.382752015023,
-  "cost_micros": 747,
-  "at": "2026-10-16T16:36:18.649122+00:00",
+  "latency_ms": 4144.678743003169,
+  "cost_micros": 754,
+  "at": "2026-10-16T17:36:13.501437+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 12568,
-   "completion_tokens": 361,
-   "total_tokens": 12929,
+   "prompt_tokens": 12628,
+   "completion_tokens": 373,
+   "total_tokens": 13001,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 4892,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 56,
+    "reasoning_tokens": 68,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }

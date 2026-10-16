@@ -4,34 +4,37 @@
  "response": {
   "config_id": "openai/gpt-6-luna@low",
   "model": "gpt-6-luna",
-  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a croissant\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"skim_milk\",\"amount\":\"normal\",\"raw_text\":\"skim milk instead of whole\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a small cappuccino with skim milk instead of whole\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"cinnamon_raisin\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"cream_cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with cream cheese\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a cinnamon raisin bagel with cream cheese\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Picking this up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"soon\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"soon\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Ana\",\"evidence\":[{\"message_index\":0,\"quote\":\"It's Ana\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a croissant\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"skim_milk\",\"amount\":\"normal\",\"raw_text\":\"skim milk instead of whole\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a small cappuccino\"},{\"message_index\":0,\"quote\":\"skim milk instead of whole\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"cinnamon_raisin\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"cream_cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with cream cheese\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a cinnamon raisin bagel\"},{\"message_index\":0,\"quote\":\"with cream cheese\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Picking this up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"soon\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"soon\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Ana\",\"evidence\":[{\"message_index\":0,\"quote\":\"It's Ana\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"That's everything for now\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
   "finish_reason": "stop",
   "usage": {
-   "input_tokens": 10249,
-   "cached_input_tokens": 7673,
+   "input_tokens": 10309,
+   "cached_input_tokens": 7733,
    "cache_write_tokens": 0,
-   "output_tokens": 777,
-   "reasoning_tokens": 223
+   "output_tokens": 879,
+   "reasoning_tokens": 289
   },
-  "latency_ms": 7652.26483400329,
-  "cost_micros": 723,
-  "at": "2026-10-16T16:51:24.487324+00:00",
+  "latency_ms": 8895.98035500967,
+  "cost_micros": 775,
+  "at": "2026-10-16T17:38:21.759804+00:00",
   "cached": false,
   "raw_usage": {
-   "prompt_tokens": 10249,
-   "completion_tokens": 777,
-   "total_tokens": 11026,
+   "prompt_tokens": 10309,
+   "completion_tokens": 879,
+   "total_tokens": 11188,
    "prompt_tokens_details": {
-    "cached_tokens": 7673,
+    "cached_tokens": 7733,
     "cache_write_tokens": 2573,
     "audio_tokens": 0
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 223,
+    "reasoning_tokens": 289,
     "audio_tokens": 0,
     "accepted_prediction_tokens": 0,
     "rejected_prediction_tokens": 0
    }
   }
+ },
+ "versions": {
+  "label_prompt": "teacher-label@0.6"
  }
 }
