@@ -37,7 +37,15 @@ No copy-pasting into notebooks. For each job:
 3. **Pull the outputs** (`kaggle kernels output`) into `runs/<experiment>/<run_id>/` and **score them locally** with
    the same scorers as the hosted runs. Every number in a report comes from these saved outputs (CLAUDE.md).
 
-Planned commands: `make kaggle-push JOB=…`, `make kaggle-pull JOB=…` (to build).
+Commands (`src/orderslm/kaggle_jobs.py`): `make kaggle-push JOB=<folder>` (new version of the staged private dataset,
+waits until ready, pushes the kernel), `make kaggle-status JOB=…`, `make kaggle-pull JOB=…` (output →
+`kaggle/<job>/output/`, gitignored). The kernel slug must differ from its dataset's slug: Kaggle answers
+`409 Conflict` otherwise (found 2026-10-19), so kernels are named `<dataset>-run`.
+
+**Job A commands:** `make julia-audit ARGS="export --set dev|train [--limit N]"` (stages `kaggle/julia-audit/upload/`
+and a run dir `runs/label-audit/<time>-julia-<set>/`), `make kaggle-push JOB=julia-audit`, then after it finishes
+`make kaggle-pull JOB=julia-audit` and `make julia-audit ARGS="import runs/label-audit/<id>"` (writes
+`responses/julia-1/`, `kernel/` (env.json, outputs, log), `metrics.json`, `report.md`: the same scoring as Jev/Decisions).
 
 ### What may go to Kaggle (private datasets only)
 
@@ -53,7 +61,7 @@ Gold answers stay local: scoring happens on this Mac.
 
 | Job | Hardware | Needs | Est. time | Notes |
 |---|---|---|---|---|
-| **A. Julia-1 label audit (§11d)** | CPU (no GPU quota) | Julia-1 at rev `a85b1273`, torch ≥ 2.6, transformers 5.0.x | ~1 h | The same `DecisionRequest`s as Jev/Decisions (dev gold + 473 planted, then 2,356 training chats); one Julia call per question (it has no multi-question request), ≤ 20 options and 8,192 tokens per call |
+| **A. Julia-1 label audit (§11d)** | CPU (no GPU quota) | Julia-1 at rev `a85b1273`, torch ≥ 2.6, transformers 5.0.x | ~1 h | The same `DecisionRequest`s as Jev/Decisions (dev gold + 473 planted, then 2,356 training chats); one `predict(state, questions)` call per chat (the named-question API scores each question as its own row); ≤ 20 options, ≤ 48 tokens per option, 8,192 tokens per row. Checked at export (2026-10-19): longest option 19 tokens, longest row 624 tokens, so nothing is truncated (strict encoding on) |
 | **B. M5 student bake-off (§9)** | 1 × T4 | Qwen3.5-0.8B / 2B, Qwen3-1.7B, Gemma 4 E2B; latest transformers | ~1–2 h | ~20 dev chats zero-shot per model; JSON validity + item F1 scored locally |
 | **C. M6 LoRA training** | T4 | the chosen student(s) | 1–3 h per run | Plan after M5 |
 

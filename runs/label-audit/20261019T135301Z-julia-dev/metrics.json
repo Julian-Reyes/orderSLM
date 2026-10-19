@@ -1,0 +1,145 @@
+{
+  "julia-1": {
+    "intent_messages": 268,
+    "intent_agree_primary": 146,
+    "intent_agree_rate": 0.5448,
+    "intent_agree_ci95": [
+      0.4849402512239235,
+      0.6033464569178767
+    ],
+    "intent_agree_primary_or_secondary": 151,
+    "intent_confusions": [
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 20
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 13
+      },
+      {
+        "expected": "MENU_QUESTION",
+        "provider": "PLACE_ORDER",
+        "count": 12
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CANCEL_ORDER",
+        "count": 9
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "UNKNOWN",
+        "count": 8
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 7
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 7
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CANCEL_ORDER",
+        "count": 4
+      },
+      {
+        "expected": "ORDER_STATUS",
+        "provider": "CANCEL_ORDER",
+        "count": 4
+      },
+      {
+        "expected": "PAYMENT_QUESTION",
+        "provider": "CANCEL_ORDER",
+        "count": 3
+      },
+      {
+        "expected": "REFUND_REQUEST",
+        "provider": "UNKNOWN",
+        "count": 3
+      },
+      {
+        "expected": "OUT_OF_SCOPE",
+        "provider": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "CANCEL_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "HUMAN_REQUEST",
+        "provider": "CANCEL_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "HUMAN_REQUEST",
+        "provider": "MENU_QUESTION",
+        "count": 2
+      }
+    ],
+    "orders_expected_ok": 91,
+    "order_flagged": 41,
+    "order_flag_rate": 0.4505,
+    "planted": {
+      "added_modification": {
+        "caught": 29,
+        "of": 60,
+        "rate": 0.483
+      },
+      "dropped_modification": {
+        "caught": 12,
+        "of": 23,
+        "rate": 0.522
+      },
+      "extra_item": {
+        "caught": 38,
+        "of": 64,
+        "rate": 0.594
+      },
+      "fulfillment_flip": {
+        "caught": 24,
+        "of": 49,
+        "rate": 0.49
+      },
+      "missing_item": {
+        "caught": 28,
+        "of": 54,
+        "rate": 0.519
+      },
+      "swapped_item": {
+        "caught": 27,
+        "of": 54,
+        "rate": 0.5
+      },
+      "wrong_payment": {
+        "caught": 20,
+        "of": 53,
+        "rate": 0.377
+      },
+      "wrong_quantity": {
+        "caught": 32,
+        "of": 64,
+        "rate": 0.5
+      },
+      "wrong_size": {
+        "caught": 24,
+        "of": 52,
+        "rate": 0.462
+      }
+    },
+    "planted_catch_rate": 0.4947,
+    "errors": 0,
+    "input_tokens": 243749,
+    "cost_micros": 0,
+    "latency_p50_ms": 270,
+    "latency_p95_ms": 1421
+  }
+}

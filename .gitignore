@@ -22,3 +22,7 @@ models/
 # Frontend build output and dependencies (web/package-lock.json is committed).
 web/node_modules/
 web/dist/
+
+# Kaggle jobs: staged dataset uploads and raw kernel output (imported into runs/ by each job's import step).
+kaggle/*/upload/
+kaggle/*/output/

@@ -19,6 +19,12 @@ _Updated 2026-10-19._
   label (audit use only is fine); OpenAI, Anthropic, Google forbid models that *compete* with theirs (our reading: a
   narrow order extractor doesn't). **Julian, 2026-10-19: option (b) or (c)** (no public weights trained on OpenAI labels); pick b vs c before M6 training, since (c) = relabel first. OpenAI's safe-harbour for classifiers needs the
   model *not distributed*, but §17 plans a Hugging Face release of weights (options a–d in TERMS.md).
+- **Julia-1 dev audit on Kaggle (2026-10-19, free):** `runs/label-audit/20261019T135301Z-julia-dev` (same requests as
+  Jev/Decisions, `label-audit@0.3`). Intents = gold **54.5%** (Jev 95.9%, Decisions 96.3%); correct orders flagged
+  **45%** (Jev 5.5%, Decisions 0%); planted caught **49%** (Jev 89%, Decisions 78%): the order check is at chance, so
+  Julia-1 is not useful as a label auditor with this wording. Top confusions: SMALL_TALK→PLACE_ORDER ×20,
+  MODIFY→PLACE ×13, MENU_QUESTION→PLACE ×12. 5.3 min on 4 CPUs (p50 270 ms per chat). Train run: Julian to decide.
+  Pipeline: `make julia-audit` export/import, `make kaggle-push/status/pull JOB=julia-audit`.
 - **Kaggle ready (2026-10-19):** user `JReyes33`, token works, CLI 2.2.4 installed, GPU quota 30 h/week. Next: build
   `kaggle/` + `make kaggle-push/pull`, job A (Julia-1 audit: 1-chat timing test, then dev + train), then job B (M5).
 - **Still open:** per-prefix training rows (the intent at every customer turn + the order at that point): decide before
