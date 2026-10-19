@@ -2,11 +2,11 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-16._
+_Last updated 2026-10-19._
 
 ## Start here next session
 
-_Updated 2026-10-16 (end of session)._
+_Updated 2026-10-19._
 
 - **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
   pushed**: ask Julian before any push, run a secrets check first).
@@ -14,13 +14,13 @@ _Updated 2026-10-16 (end of session)._
 - **M4 state:** training data done: **1,963 single-menu + 391 mega-menu** labeled chats (`runs/synth/{p3,b1,m1}`,
   exclusions in `runs/synth/excluded.json`); label prompt `teacher-label@0.7`; label audit by Jev + OpenAI Decisions
   done (`runs/label-audit/`); every drop / repair / flag / catch rate: `make m4-report` → `runs/m4-report/`.
-- **First thing next session (overdue):** write **`docs/TERMS.md`**: each provider's terms on using outputs to train
-  models (OpenAI teacher; DeepSeek, Google, Anthropic generators; Jev, OpenAI Decisions auditors). Spec §7 required this
-  *before* bulk labeling; it was missed. Check official terms pages; if any provider forbids it, tell Julian before M6.
-- **Then: Kaggle** (`docs/KAGGLE.md`; this Intel Mac can't run torch ≥ 2.3). Waiting on Julian: Kaggle account +
-  phone verification, API token in `~/.kaggle/access_token`, username, weekly GPU quota. Then: install the CLI
-  (`uv tool install kaggle`), job A (Julia-1 label audit: 1-chat timing test, then dev + train), job B (M5 student
-  bake-off), later job C (M6 LoRA). The Mac mini will replace Kaggle for inference when ready.
+- **TERMS.md done (2026-10-19, late: spec §7 wanted it before bulk labeling):** `docs/TERMS.md`. DeepSeek and Julia-1
+  allow training on outputs; Jev (TypeSafe MCA §2.3(b)) forbids distillation/imitation, so Jev output never becomes a
+  label (audit use only is fine); OpenAI, Anthropic, Google forbid models that *compete* with theirs (our reading: a
+  narrow order extractor doesn't). **Julian to decide before M6/M8:** OpenAI's safe-harbour for classifiers needs the
+  model *not distributed*, but §17 plans a Hugging Face release of weights (options a–d in TERMS.md).
+- **Kaggle ready (2026-10-19):** user `JReyes33`, token works, CLI 2.2.4 installed, GPU quota 30 h/week. Next: build
+  `kaggle/` + `make kaggle-push/pull`, job A (Julia-1 audit: 1-chat timing test, then dev + train), then job B (M5).
 - **Still open:** per-prefix training rows (the intent at every customer turn + the order at that point): decide before
   M6. Julian's preferences: end every task with a plain-English summary (changes + why, files, direct answers); record
   every drop and catch rate for the reports/dashboard.

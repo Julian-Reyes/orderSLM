@@ -70,6 +70,10 @@ Gold answers stay local: scoring happens on this Mac.
 
 ## Julian's setup (one time)
 
+**Done 2026-10-19:** account `JReyes33`, token in `~/.kaggle/access_token` (works: `kaggle datasets list --mine`),
+weekly GPU quota 30 h, CLI installed (`kaggle` 2.2.4 via `uv tool install kaggle`). Phone verification: assumed done
+(the token was issued); the first internet-enabled kernel will confirm it.
+
 1. Kaggle account; **verify a phone number** (needed for internet in kernels and for GPUs).
 2. kaggle.com/settings/api → **Generate New Token**, then save it outside the repo: `~/.kaggle/access_token`
    (or tell me and I'll walk through `kaggle auth login`). Never paste it into chat or `.env`.
