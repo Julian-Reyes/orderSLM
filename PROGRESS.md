@@ -24,6 +24,11 @@ _Updated 2026-10-19._
   **45%** (Jev 5.5%, Decisions 0%); planted caught **49%** (Jev 89%, Decisions 78%): the order check is at chance, so
   Julia-1 is not useful as a label auditor with this wording. Top confusions: SMALL_TALK→PLACE_ORDER ×20,
   MODIFY→PLACE ×13, MENU_QUESTION→PLACE ×12. 5.3 min on 4 CPUs (p50 270 ms per chat). Train run: Julian to decide.
+  Sanity check (`runs/label-audit/20261019T140603Z-julia-sanity`, 33 made-up clear cases): model card example right
+  (billing, p 0.85), so the setup works; one-message intents 7/12 alone but 4/12 in the audit's chat format
+  ("customer message [0]"); strong pull toward PLACE_ORDER ("thanks so much" → PLACE_ORDER); yes/no order checks 6/8
+  with weak probabilities. Julian: Julia should work eventually (free); same wording for all providers unless an
+  API-only field, which is reported as a separate "Julia-1 tuned" setting. (b) yes/no descriptions: on hold.
   Pipeline: `make julia-audit` export/import, `make kaggle-push/status/pull JOB=julia-audit`.
 - **Kaggle ready (2026-10-19):** user `JReyes33`, token works, CLI 2.2.4 installed, GPU quota 30 h/week. Next: build
   `kaggle/` + `make kaggle-push/pull`, job A (Julia-1 audit: 1-chat timing test, then dev + train), then job B (M5).

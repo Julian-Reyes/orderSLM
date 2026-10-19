@@ -50,6 +50,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 | 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on dev, `label-audit@0.3` | see metrics.json | 0.049218 | input × price (Jev unverified) | `runs/label-audit/20261016T194620Z-dev` |
 | 2026-10-19 | M4 | Julia-1 @a85b1273 on Kaggle (CPU, free) | Timing test, 1 dev chat (`label-audit@0.3`) | 977 / 0 | 0 | free (Kaggle CPU kernel, no GPU quota) | `runs/label-audit/20261019T134926Z-julia-dev-limit1` |
 | 2026-10-19 | M4 | Julia-1 @a85b1273 on Kaggle (CPU, free) | Label audit on dev, `label-audit@0.3`: 91 gold + 473 planted | 243,749 / 0 | 0 | free (Kaggle CPU kernel, 318 s) | `runs/label-audit/20261019T135301Z-julia-dev` |
+| 2026-10-19 | M4 | Julia-1 @a85b1273 on Kaggle (CPU, free) | Sanity check, 33 made-up cases (`julia-sanity@0.1`) | see metrics.json | 0 | free (Kaggle CPU kernel) | `runs/label-audit/20261019T140603Z-julia-sanity` |
 | 2026-10-16 | M4 | Jev + OpenAI Decisions | Label audit on training labels, `label-audit@0.3` (after fixes) | see metrics.json | 0.606092 | input × price (Jev unverified) | `runs/label-audit/20261016T195605Z-train` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | `teacher-label@0.7` scored on all 91 dev | see manifest | 0.057745 | recorded usage × verified price | `runs/label-dev/20261016T195121Z-openai__gpt-6-luna@low` |
 | 2026-10-16 | M4 | openai/gpt-6-luna@low | Relabel 67 audit-flagged chats with `teacher-label@0.7` | see calls logs | 0.051157 | recorded usage × verified price | `runs/synth/*/calls/20261016T195*-label.json` |

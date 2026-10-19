@@ -143,6 +143,8 @@ def audits() -> list[dict[str, Any]]:
         if not (d / "metrics.json").exists():
             continue
         manifest = json.loads((d / "manifest.json").read_text())
+        if manifest["set"] == "sanity":  # Julia-1 setup check (julia_audit.py), not an audit of labels
+            continue
         metrics = json.loads((d / "metrics.json").read_text())
         row: dict[str, Any] = {
             "run": str(d.relative_to(ROOT)),

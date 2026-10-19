@@ -74,3 +74,11 @@ def test_kernel_pins_the_same_model_and_stays_private():
     meta = json.loads((ROOT / "kaggle" / "julia-audit" / "kernel-metadata.json").read_text())
     assert meta["is_private"] is True and meta["dataset_sources"] == [ja.DATASET]
     assert not meta["enable_gpu"]
+
+
+def test_sanity_cases_cover_every_group_and_convert():
+    jobs = ja.sanity_jobs()
+    ids = [j["id"] for j in jobs]
+    assert len(ids) == len(set(ids)) and "card-example" in ids
+    assert {i.split("-")[0] for i in ids} == {"card", "plain", "chat", "order"}
+    assert all(ja.to_julia(j["request"])["questions"] for j in jobs)

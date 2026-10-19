@@ -1,0 +1,257 @@
+{
+  "groups": {
+    "card": {
+      "right": 1,
+      "of": 1
+    },
+    "plain": {
+      "right": 7,
+      "of": 12
+    },
+    "chat": {
+      "right": 4,
+      "of": 12
+    },
+    "order-simple": {
+      "right": 3,
+      "of": 4
+    },
+    "order-audit": {
+      "right": 3,
+      "of": 4
+    }
+  },
+  "cases": [
+    {
+      "id": "card-example",
+      "expected": "billing",
+      "got": "billing",
+      "p_expected": 0.854466872346031,
+      "ok": true
+    },
+    {
+      "id": "plain-00",
+      "expected": "PLACE_ORDER",
+      "got": "MENU_QUESTION",
+      "p_expected": 0.00031306781278908705,
+      "ok": false
+    },
+    {
+      "id": "chat-00",
+      "expected": "PLACE_ORDER",
+      "got": "MENU_QUESTION",
+      "p_expected": 0.010010781677543728,
+      "ok": false
+    },
+    {
+      "id": "plain-01",
+      "expected": "CANCEL_ORDER",
+      "got": "CANCEL_ORDER",
+      "p_expected": 0.9992586564674457,
+      "ok": true
+    },
+    {
+      "id": "chat-01",
+      "expected": "CANCEL_ORDER",
+      "got": "CANCEL_ORDER",
+      "p_expected": 0.9984556920432301,
+      "ok": true
+    },
+    {
+      "id": "plain-02",
+      "expected": "MENU_QUESTION",
+      "got": "MENU_QUESTION",
+      "p_expected": 0.9853063515940029,
+      "ok": true
+    },
+    {
+      "id": "chat-02",
+      "expected": "MENU_QUESTION",
+      "got": "MENU_QUESTION",
+      "p_expected": 0.9921992941108254,
+      "ok": true
+    },
+    {
+      "id": "plain-03",
+      "expected": "DELIVERY_QUESTION",
+      "got": "UNKNOWN",
+      "p_expected": 0.01750692411704642,
+      "ok": false
+    },
+    {
+      "id": "chat-03",
+      "expected": "DELIVERY_QUESTION",
+      "got": "CANCEL_ORDER",
+      "p_expected": 0.00025256129973342606,
+      "ok": false
+    },
+    {
+      "id": "plain-04",
+      "expected": "PAYMENT_QUESTION",
+      "got": "PAYMENT_QUESTION",
+      "p_expected": 0.9795341087935663,
+      "ok": true
+    },
+    {
+      "id": "chat-04",
+      "expected": "PAYMENT_QUESTION",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.11051403970325002,
+      "ok": false
+    },
+    {
+      "id": "plain-05",
+      "expected": "PAYMENT_CLAIM",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.11711928675708913,
+      "ok": false
+    },
+    {
+      "id": "chat-05",
+      "expected": "PAYMENT_CLAIM",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.00026453777001114856,
+      "ok": false
+    },
+    {
+      "id": "plain-06",
+      "expected": "ORDER_STATUS",
+      "got": "ORDER_STATUS",
+      "p_expected": 0.6597231552813158,
+      "ok": true
+    },
+    {
+      "id": "chat-06",
+      "expected": "ORDER_STATUS",
+      "got": "ORDER_STATUS",
+      "p_expected": 0.9700969844459008,
+      "ok": true
+    },
+    {
+      "id": "plain-07",
+      "expected": "ORDER_PROBLEM",
+      "got": "ORDER_PROBLEM",
+      "p_expected": 0.9917310893652042,
+      "ok": true
+    },
+    {
+      "id": "chat-07",
+      "expected": "ORDER_PROBLEM",
+      "got": "ORDER_PROBLEM",
+      "p_expected": 0.9752222082730901,
+      "ok": true
+    },
+    {
+      "id": "plain-08",
+      "expected": "REFUND_REQUEST",
+      "got": "REFUND_REQUEST",
+      "p_expected": 0.9703982324332315,
+      "ok": true
+    },
+    {
+      "id": "chat-08",
+      "expected": "REFUND_REQUEST",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.005906224179517064,
+      "ok": false
+    },
+    {
+      "id": "plain-09",
+      "expected": "HUMAN_REQUEST",
+      "got": "HUMAN_REQUEST",
+      "p_expected": 0.9656797150480028,
+      "ok": true
+    },
+    {
+      "id": "chat-09",
+      "expected": "HUMAN_REQUEST",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.00031269571372237345,
+      "ok": false
+    },
+    {
+      "id": "plain-10",
+      "expected": "SMALL_TALK",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.008656852724476825,
+      "ok": false
+    },
+    {
+      "id": "chat-10",
+      "expected": "SMALL_TALK",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.0006973798313783913,
+      "ok": false
+    },
+    {
+      "id": "plain-11",
+      "expected": "OUT_OF_SCOPE",
+      "got": "PLACE_ORDER",
+      "p_expected": 0.012525349035817956,
+      "ok": false
+    },
+    {
+      "id": "chat-11",
+      "expected": "OUT_OF_SCOPE",
+      "got": "PLACE_ORDER",
+      "p_expected": 6.746104277119518e-05,
+      "ok": false
+    },
+    {
+      "id": "order-0-simple",
+      "expected": true,
+      "got": true,
+      "p_expected": 0.8863879391129023,
+      "ok": true
+    },
+    {
+      "id": "order-0-audit",
+      "expected": true,
+      "got": false,
+      "p_expected": 0.2893147309240889,
+      "ok": false
+    },
+    {
+      "id": "order-1-simple",
+      "expected": false,
+      "got": false,
+      "p_expected": 0.9184358901049365,
+      "ok": true
+    },
+    {
+      "id": "order-1-audit",
+      "expected": false,
+      "got": false,
+      "p_expected": 0.8449101255310065,
+      "ok": true
+    },
+    {
+      "id": "order-2-simple",
+      "expected": true,
+      "got": false,
+      "p_expected": 0.38328855742074935,
+      "ok": false
+    },
+    {
+      "id": "order-2-audit",
+      "expected": true,
+      "got": true,
+      "p_expected": 0.5344033553617167,
+      "ok": true
+    },
+    {
+      "id": "order-3-simple",
+      "expected": false,
+      "got": false,
+      "p_expected": 0.9702010380149197,
+      "ok": true
+    },
+    {
+      "id": "order-3-audit",
+      "expected": false,
+      "got": false,
+      "p_expected": 0.5370950917586174,
+      "ok": true
+    }
+  ]
+}

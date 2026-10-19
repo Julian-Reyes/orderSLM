@@ -89,14 +89,131 @@ def from_julia(request: DecisionRequest, rec: dict[str, Any]) -> DecisionRespons
     return resp
 
 
+# ---------------------------------------------------------------- sanity check (is our setup right?)
+
+# Made up for this check (not from dev, test or PIZZA). The model card's own example, then clear one-message cases
+# asked two ways: the message alone, and in the audit's chat format (INTENT_PROMPT); then plain yes/no order checks.
+_ONE_MESSAGE = [
+    ("can i get 2 large pepperoni pizzas for delivery", "PLACE_ORDER"),
+    ("actually cancel the whole order, sorry", "CANCEL_ORDER"),
+    ("do you have any vegan options?", "MENU_QUESTION"),
+    ("what time do you close tonight?", "DELIVERY_QUESTION"),
+    ("can i pay with apple pay?", "PAYMENT_QUESTION"),
+    ("i already sent the money on venmo", "PAYMENT_CLAIM"),
+    ("where is my order? it's been an hour", "ORDER_STATUS"),
+    ("my burger came cold and the fries were missing", "ORDER_PROBLEM"),
+    ("i want my money back for that order", "REFUND_REQUEST"),
+    ("can i talk to a real person please", "HUMAN_REQUEST"),
+    ("thanks so much, have a good one!", "SMALL_TALK"),
+    ("can you help me with my math homework", "OUT_OF_SCOPE"),
+]
+_ORDER_CHECKS = [
+    (
+        "2 large pepperoni pizzas for delivery please",
+        "2 × Pepperoni Pizza (Large)\nFulfillment: delivery",
+        True,
+    ),
+    (
+        "2 large pepperoni pizzas for delivery please",
+        "1 × Margherita Pizza (Small)\nFulfillment: pickup",
+        False,
+    ),
+    ("one cheeseburger, no pickles, pickup", "1 × Cheeseburger: no Pickles\nFulfillment: pickup", True),
+    ("one cheeseburger, no pickles, pickup", "3 × Cheeseburger\nFulfillment: delivery", False),
+]
+
+
+def sanity_jobs() -> list[dict[str, Any]]:
+    from orderslm.interfaces.decision import Option, Question
+
+    def job(jid: str, state: str, q: Question, expected: Any) -> dict[str, Any]:
+        req = DecisionRequest(request_id=jid, input=state, questions=[q], prompt_version="julia-sanity@0.1")
+        return {"id": jid, "kind": "sanity", "request": req, "expected": {q.name: expected}}
+
+    team = Question(
+        name="team",
+        type=QuestionType.choice,
+        prompt="Which team should handle this request?",
+        options=[
+            Option(id="billing", description="Billing and payment disputes"),
+            Option(id="shipping", description="Shipping and delivery"),
+            Option(id="access", description="Account access and login"),
+        ],
+    )
+    jobs = [job("card-example", "I was charged twice for the same order.", team, "billing")]
+    for k, (msg, label) in enumerate(_ONE_MESSAGE):
+        plain = Question(
+            name="intent",
+            type=QuestionType.choice,
+            prompt="What does this customer message do?",
+            options=label_audit.LABEL_OPTIONS,
+        )
+        jobs.append(job(f"plain-{k:02d}", msg, plain, label))
+        chat = Question(
+            name="intent_m0",
+            type=QuestionType.choice,
+            prompt=label_audit.INTENT_PROMPT.format(i=0),
+            options=label_audit.LABEL_OPTIONS,
+        )
+        state = f"A text chat between a customer and a restaurant:\n[0] customer: {msg}"
+        jobs.append(job(f"chat-{k:02d}", state, chat, label))
+    for k, (msg, record, ok) in enumerate(_ORDER_CHECKS):
+        state = f"A text chat between a customer and a restaurant:\n[0] customer: {msg}\n\nThe order as recorded:\n{record}"
+        for name, prompt in [
+            ("simple", "Does the recorded order match what the customer asked for?"),
+            ("audit", label_audit.ORDER_PROMPT),
+        ]:
+            q = Question(name="order_ok", type=QuestionType.boolean, prompt=prompt)
+            jobs.append(job(f"order-{k}-{name}", state, q, ok))
+    return jobs
+
+
+def sanity_report(run_dir: Path, jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    rows, groups = [], {}
+    for j in jobs:
+        rec = json.loads((run_dir / "responses" / PROVIDER / f"{j['id']}.json").read_text())
+        ((name, expected),) = j["expected"].items()
+        if "error" in rec:
+            got, p, ok = "error", None, False
+        else:
+            a = DecisionResponse.model_validate(rec["response"]).answers[name]
+            got = a.choice if a.type is QuestionType.choice else a.boolean
+            p = (a.probabilities or {}).get(str(expected).lower() if isinstance(expected, bool) else expected)
+            ok = got == expected
+        jid = j["id"]
+        group = "order-" + jid.rsplit("-", 1)[1] if jid.startswith("order") else jid.split("-")[0]
+        g = groups.setdefault(group, [0, 0])
+        g[0] += ok
+        g[1] += 1
+        rows.append({"id": j["id"], "expected": expected, "got": got, "p_expected": p, "ok": ok})
+    summary = {"groups": {k: {"right": r, "of": n} for k, (r, n) in groups.items()}, "cases": rows}
+    (run_dir / "metrics.json").write_text(json.dumps(summary, indent=2) + "\n")
+    L = ["# Julia-1 sanity check", "", "| group | right |", "|---|---|"]
+    L += [f"| {k} | {r}/{n} |" for k, (r, n) in groups.items()]
+    L += ["", "| case | expected | got | P(expected) |", "|---|---|---|---|"]
+    L += [
+        f"| {r['id']} | {r['expected']} | {r['got']} | {'' if r['p_expected'] is None else round(r['p_expected'], 3)} |"
+        for r in rows
+    ]
+    (run_dir / "report.md").write_text("\n".join(L) + "\n")
+    return summary
+
+
 def _jobs(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    if manifest["set"] == "sanity":
+        return sanity_jobs()
     jobs = label_audit._load_jobs(manifest)
     keep = set(manifest["job_ids"])
     return [j for j in jobs if j["id"] in keep]
 
 
 def export(args: argparse.Namespace) -> Path:
-    jobs = label_audit.dev_jobs() if args.set == "dev" else label_audit.train_jobs(args.batches.split(","))
+    if args.set == "sanity":
+        jobs = sanity_jobs()
+    elif args.set == "dev":
+        jobs = label_audit.dev_jobs()
+    else:
+        jobs = label_audit.train_jobs(args.batches.split(","))
     if args.limit:
         jobs = jobs[: args.limit]
     started = datetime.now(UTC)
@@ -151,7 +268,8 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
     env = json.loads((output_dir / "env.json").read_text()) if (output_dir / "env.json").exists() else {}
     if env and env.get("run_dir") != run_dir.name:
         raise SystemExit(f"kernel output is for {env.get('run_dir')}, not {run_dir.name}")
-    requests = {j["id"]: j["request"] for j in _jobs(manifest)}
+    requests_jobs = _jobs(manifest)
+    requests = {j["id"]: j["request"] for j in requests_jobs}
     resp_dir = run_dir / "responses" / PROVIDER
     resp_dir.mkdir(parents=True, exist_ok=True)
     seen = set()
@@ -177,7 +295,10 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
         kernel_env=env,
     )
     (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    metrics = label_audit.report(run_dir)
+    if manifest["set"] == "sanity":
+        metrics = sanity_report(run_dir, list(requests_jobs))
+    else:
+        metrics = label_audit.report(run_dir)
     print((run_dir / "report.md").read_text())
     return metrics
 
@@ -186,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("export")
-    e.add_argument("--set", choices=["dev", "train"], default="dev")
+    e.add_argument("--set", choices=["sanity", "dev", "train"], default="dev")
     e.add_argument("--batches", default="p3,b1,m1")
     e.add_argument("--limit", type=int)
     i = sub.add_parser("import")
