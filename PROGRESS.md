@@ -17,7 +17,7 @@ _Updated 2026-10-19._
 - **TERMS.md done (2026-10-19, late: spec §7 wanted it before bulk labeling):** `docs/TERMS.md`. DeepSeek and Julia-1
   allow training on outputs; Jev (TypeSafe MCA §2.3(b)) forbids distillation/imitation, so Jev output never becomes a
   label (audit use only is fine); OpenAI, Anthropic, Google forbid models that *compete* with theirs (our reading: a
-  narrow order extractor doesn't). **Julian to decide before M6/M8:** OpenAI's safe-harbour for classifiers needs the
+  narrow order extractor doesn't). **Julian, 2026-10-19: option (b) or (c)** (no public weights trained on OpenAI labels); pick b vs c before M6 training, since (c) = relabel first. OpenAI's safe-harbour for classifiers needs the
   model *not distributed*, but §17 plans a Hugging Face release of weights (options a–d in TERMS.md).
 - **Kaggle ready (2026-10-19):** user `JReyes33`, token works, CLI 2.2.4 installed, GPU quota 30 h/week. Next: build
   `kaggle/` + `make kaggle-push/pull`, job A (Julia-1 audit: 1-chat timing test, then dev + train), then job B (M5).

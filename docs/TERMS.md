@@ -40,7 +40,8 @@ date. This is our reading of the text, not legal advice.
 4. **The OpenAI risk is the M8 release.** OpenAI's safe-harbour (Permitted Exception (a)) covers classifier-type models
    only **if they are not distributed**. The plan (spec §17) releases LoRA adapters and quantized models on Hugging Face.
    Once released, we rely only on the "does not compete" reading, and OpenAI's labels are the training targets.
-   **Julian decides before M6/M8.** Options:
+   **Decided (Julian, 2026-10-19): (b) or (c), not (a) or (d).** No weights trained on OpenAI labels go public. Which
+   of the two is still open: (c) means relabeling before M6 so the model is trained only once. Options were:
    - (a) Go ahead on the "narrow extractor doesn't compete" reading and say so in the model card (outputs from a
      commercial teacher; trained for one task).
    - (b) Release the code, data recipe, menus and eval sets, but keep the trained weights private (inside the

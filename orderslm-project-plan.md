@@ -414,7 +414,7 @@ Record what was ported, from which path, and what changed in `docs/AGENTDESK_REU
 ## 17. Deliverables
 
 - Reproducible repo with a `Makefile`: `make menus`, `make annotate`, `make teacher-bakeoff`, `make synth`, `make label`, `make student-bakeoff`, `make train`, `make eval`, `make router-bench`, `make demo`.
-- Hugging Face release: LoRA adapters + quantized models, model cards, the menus, and the Source A (and C, if written) evaluation sets. Never PIZZA data (CC-BY-NC, no redistribution).
+- Hugging Face release (Julian, 2026-10-19, docs/TERMS.md): **no public weights trained on OpenAI labels**. Either (b) release code, data recipe, menus and eval sets with weights kept private, or (c) relabel the training set with a teacher whose terms allow distillation and release those weights. If released: LoRA adapters + quantized models, model cards, the menus, and the Source A (and C, if written) evaluation sets. Never PIZZA data (CC-BY-NC, no redistribution).
 - `REPORT.md`: problem, data strategy (synthetic training vs. evaluation Sources A/B/C, review correction rate), the four experiments with results tables and charts, error analysis, cost comparison, limitations.
 - Tests: schema validation, deterministic pricing, menu matching, evidence checking, order-state logic, metrics.
 
