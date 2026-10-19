@@ -29,6 +29,13 @@ _Updated 2026-10-19._
   ("customer message [0]"); strong pull toward PLACE_ORDER ("thanks so much" → PLACE_ORDER); yes/no order checks 6/8
   with weak probabilities. Julian: Julia should work eventually (free); same wording for all providers unless an
   API-only field, which is reported as a separate "Julia-1 tuned" setting. (b) yes/no descriptions: on hold.
+  **Tuning test on dev** (`runs/label-audit/20261019T141916Z-julia-variants-dev`, `make julia-variants`, one change
+  each, same job): baseline 54.5% intents (rerun identical); short context (business msg before + customer msg) 19%;
+  3 shuffled option orders 16–18% (averaged 17%); yes/no with descriptions: catches 57% but flags 57% of correct
+  orders (still chance). Why: the baseline's 54.5% is mostly a PLACE_ORDER habit (picked 73% of the time; gold is
+  60% PLACE_ORDER); its choices change with the option order (two shuffles agree on 34% of messages; all three on
+  16%) and mean P(match) is 0.52 for correct vs 0.49 for planted orders. Verdict: Julia-1 doesn't read our 15 labels
+  reliably; not usable as an auditor here.
   Pipeline: `make julia-audit` export/import, `make kaggle-push/status/pull JOB=julia-audit`.
 - **Kaggle ready (2026-10-19):** user `JReyes33`, token works, CLI 2.2.4 installed, GPU quota 30 h/week. Next: build
   `kaggle/` + `make kaggle-push/pull`, job A (Julia-1 audit: 1-chat timing test, then dev + train), then job B (M5).

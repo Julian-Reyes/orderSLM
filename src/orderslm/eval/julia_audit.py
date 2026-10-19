@@ -243,23 +243,29 @@ def export(args: argparse.Namespace) -> Path:
     }
     out_dir.mkdir(parents=True)
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    stage(out_dir, [to_julia(j["request"]) for j in jobs])
+    return out_dir
+
+
+def stage(out_dir: Path, julia_requests: list[dict[str, Any]]) -> None:
+    """Write the requests + run.json + dataset metadata that `make kaggle-push JOB=julia-audit` uploads."""
     if STAGE.exists():
         shutil.rmtree(STAGE)
     STAGE.mkdir(parents=True)
     with (STAGE / "requests.jsonl").open("w") as f:
-        for j in jobs:
-            f.write(json.dumps(to_julia(j["request"]), ensure_ascii=False) + "\n")
-    (STAGE / "run.json").write_text(json.dumps({"run_dir": out_dir.name, "requests": len(jobs)}) + "\n")
+        for r in julia_requests:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    run = {"run_dir": out_dir.name, "requests": len(julia_requests)}
+    (STAGE / "run.json").write_text(json.dumps(run) + "\n")
     (STAGE / "dataset-metadata.json").write_text(
         json.dumps(
             {"title": "orderslm-julia-audit", "id": DATASET, "licenses": [{"name": "unknown"}]}, indent=2
         )
         + "\n"
     )
-    questions = sum(len(j["request"].questions) for j in jobs)
-    print(f"Staged {len(jobs)} requests ({questions} questions) in {STAGE.relative_to(ROOT)}/")
+    questions = sum(len(r["questions"]) for r in julia_requests)
+    print(f"Staged {len(julia_requests)} requests ({questions} questions) in {STAGE.relative_to(ROOT)}/")
     print(f"Run dir: {out_dir.relative_to(ROOT)}/")
-    return out_dir
 
 
 def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:

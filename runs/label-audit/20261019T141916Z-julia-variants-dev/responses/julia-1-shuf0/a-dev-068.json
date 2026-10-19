@@ -1,0 +1,81 @@
+{
+ "id": "a-dev-068",
+ "response": {
+  "provider": "julia-1-shuf0",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "ORDER_PROBLEM": 0.03956688598224582,
+     "OUT_OF_SCOPE": 0.0060507894635937086,
+     "REFUND_REQUEST": 0.008158192200913251,
+     "MENU_QUESTION": 0.07037635552566177,
+     "DELIVERY_QUESTION": 0.011821353275654032,
+     "SMALL_TALK": 0.018565152798898,
+     "PLACE_ORDER": 0.059667516951930254,
+     "CONFIRM_ORDER": 0.026104172996854264,
+     "CANCEL_ORDER": 0.34077299345702666,
+     "UNKNOWN": 0.359281046184207,
+     "PAYMENT_CLAIM": 0.009634579519755682,
+     "MODIFY_ORDER": 0.0260510765025552,
+     "PAYMENT_QUESTION": 0.006491029486641672,
+     "HUMAN_REQUEST": 0.006639157540867539,
+     "ORDER_STATUS": 0.010819698113195102
+    },
+    "refused": false
+   },
+   "intent_m2": {
+    "name": "intent_m2",
+    "type": "choice",
+    "choice": "PLACE_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "MENU_QUESTION": 0.0430064601800412,
+     "PLACE_ORDER": 0.8253953308319065,
+     "UNKNOWN": 0.036945693678313796,
+     "SMALL_TALK": 0.0030370633693058034,
+     "HUMAN_REQUEST": 0.002225453687948275,
+     "CONFIRM_ORDER": 0.0038653580058208114,
+     "CANCEL_ORDER": 0.005883936690379963,
+     "PAYMENT_QUESTION": 0.0021193184000020005,
+     "DELIVERY_QUESTION": 0.009676282858165956,
+     "REFUND_REQUEST": 0.004080331290888041,
+     "PAYMENT_CLAIM": 0.006365050450218068,
+     "MODIFY_ORDER": 0.020830189765776497,
+     "ORDER_STATUS": 0.0033030454582358973,
+     "ORDER_PROBLEM": 0.003558856931709178,
+     "OUT_OF_SCOPE": 0.02970762840128801
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.5804783351538552,
+     "false": 0.41952166484614484
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1529,
+   "output_tokens": 0
+  },
+  "latency_ms": 1473.8800049999554,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

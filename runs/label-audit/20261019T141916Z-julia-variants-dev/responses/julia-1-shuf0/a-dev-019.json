@@ -1,0 +1,81 @@
+{
+ "id": "a-dev-019",
+ "response": {
+  "provider": "julia-1-shuf0",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PAYMENT_QUESTION": 0.0020370272489562587,
+     "DELIVERY_QUESTION": 0.002158471918067856,
+     "CONFIRM_ORDER": 0.000835150419749725,
+     "OUT_OF_SCOPE": 0.26537331925887314,
+     "ORDER_PROBLEM": 0.0005639384054439331,
+     "HUMAN_REQUEST": 0.001072056808053328,
+     "SMALL_TALK": 0.0012875040554521917,
+     "PLACE_ORDER": 0.021367161744148173,
+     "CANCEL_ORDER": 0.008481925393545852,
+     "MODIFY_ORDER": 0.002999537828042893,
+     "REFUND_REQUEST": 0.0012913382192551804,
+     "UNKNOWN": 0.6865554202434753,
+     "MENU_QUESTION": 0.004334577700956874,
+     "PAYMENT_CLAIM": 0.0009159788999280557,
+     "ORDER_STATUS": 0.0007265918560512127
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "UNKNOWN": 0.3549854811559465,
+     "ORDER_PROBLEM": 0.06666202216598811,
+     "HUMAN_REQUEST": 0.0033739298199960592,
+     "PAYMENT_CLAIM": 0.005510933801251168,
+     "ORDER_STATUS": 0.009060277626153196,
+     "CONFIRM_ORDER": 0.008480901967520297,
+     "MENU_QUESTION": 0.32540166384371494,
+     "SMALL_TALK": 0.009411661076777867,
+     "DELIVERY_QUESTION": 0.01575672687706591,
+     "OUT_OF_SCOPE": 0.01209894991843728,
+     "PAYMENT_QUESTION": 0.006514649306537807,
+     "CANCEL_ORDER": 0.016633058810062096,
+     "REFUND_REQUEST": 0.009517336968016732,
+     "PLACE_ORDER": 0.14915601879963303,
+     "MODIFY_ORDER": 0.007436387862899042
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.9793792811455834,
+     "false": 0.02062071885441663
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1714,
+   "output_tokens": 0
+  },
+  "latency_ms": 1644.4275739999057,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

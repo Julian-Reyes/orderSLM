@@ -1,0 +1,34 @@
+# Label audit `dev` (label-audit@0.3, plant@0.1)
+
+Dev = tuning data, not held out. Intents compared with reviewed gold; gold orders should be judged matching, planted copies not.
+
+| | julia-1 | julia-1-short | julia-1-shuf0 | julia-1-shuf1 | julia-1-shuf2 | julia-1-shuf-avg | julia-1-yesno |
+|---|---|---|---|---|---|---|---|
+| intent = gold (primary) | 146/268 (0.5448) | 52/268 (0.194) | 48/268 (0.1791) | 48/268 (0.1791) | 44/268 (0.1642) | 46/268 (0.1716) | 146/268 (0.5448) |
+| intent 95% CI | (0.4849402512239235, 0.6033464569178767) | (0.1511451397748256, 0.24556235458953954) | (0.13783207491463004, 0.22944651673580171) | (0.13783207491463004, 0.22944651673580171) | (0.12463327455597084, 0.21321641438052752) | (0.13121769146488443, 0.22134644882858062) | (0.4849402512239235, 0.6033464569178767) |
+| intent = gold primary or secondary | 151 | 52 | 51 | 51 | 47 | 49 | 151 |
+| correct orders judged NOT matching | 41/91 (0.4505) | 41/91 (0.4505) | 41/91 (0.4505) | 41/91 (0.4505) | 41/91 (0.4505) | 41/91 (0.4505) | 52/91 (0.5714) |
+| planted mistakes caught | 0.4947 | 0.4947 | 0.4947 | 0.4947 | 0.4947 | 0.4947 | 0.5708 |
+| … added_modification | 29/60 | 29/60 | 29/60 | 29/60 | 29/60 | 29/60 | 35/60 |
+| … dropped_modification | 12/23 | 12/23 | 12/23 | 12/23 | 12/23 | 12/23 | 11/23 |
+| … extra_item | 38/64 | 38/64 | 38/64 | 38/64 | 38/64 | 38/64 | 41/64 |
+| … fulfillment_flip | 24/49 | 24/49 | 24/49 | 24/49 | 24/49 | 24/49 | 29/49 |
+| … missing_item | 28/54 | 28/54 | 28/54 | 28/54 | 28/54 | 28/54 | 25/54 |
+| … swapped_item | 27/54 | 27/54 | 27/54 | 27/54 | 27/54 | 27/54 | 31/54 |
+| … wrong_payment | 20/53 | 20/53 | 20/53 | 20/53 | 20/53 | 20/53 | 32/53 |
+| … wrong_quantity | 32/64 | 32/64 | 32/64 | 32/64 | 32/64 | 32/64 | 35/64 |
+| … wrong_size | 24/52 | 24/52 | 24/52 | 24/52 | 24/52 | 24/52 | 31/52 |
+| errors | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| input tokens | 243,749 | 307,820 | 342,241 | 342,241 | 342,241 | 539,225 | 389,006 |
+| cost (USD) | $0.0000 | $0.0000 | $0.0000 | $0.0000 | $0.0000 | $0.0000 | $0.0000 |
+| latency p50 / p95 ms | 282 / 1485 | 282 / 2295 | 282 / 2605 | 282 / 2652 | 282 / 2695 | 282 / 4996 | 613 / 1840 |
+
+Jev's price ($0.042/1M input) is not yet verified on TypeSafe's pricing page: its cost is an estimate.
+
+Top intent disagreements, julia-1: SMALL_TALK→PLACE_ORDER ×20; MODIFY_ORDER→PLACE_ORDER ×13; MENU_QUESTION→PLACE_ORDER ×12; PLACE_ORDER→CANCEL_ORDER ×9; PLACE_ORDER→UNKNOWN ×8; PLACE_ORDER→MENU_QUESTION ×7; CONFIRM_ORDER→PLACE_ORDER ×7; SMALL_TALK→CANCEL_ORDER ×4
+Top intent disagreements, julia-1-short: PLACE_ORDER→OUT_OF_SCOPE ×72; PLACE_ORDER→CANCEL_ORDER ×37; PLACE_ORDER→MENU_QUESTION ×19; SMALL_TALK→OUT_OF_SCOPE ×19; MODIFY_ORDER→OUT_OF_SCOPE ×6; CONFIRM_ORDER→CANCEL_ORDER ×6; SMALL_TALK→CANCEL_ORDER ×5; UNKNOWN→OUT_OF_SCOPE ×3
+Top intent disagreements, julia-1-shuf0: PLACE_ORDER→UNKNOWN ×56; PLACE_ORDER→MENU_QUESTION ×36; PLACE_ORDER→OUT_OF_SCOPE ×17; SMALL_TALK→UNKNOWN ×12; PLACE_ORDER→CANCEL_ORDER ×11; MENU_QUESTION→UNKNOWN ×9; SMALL_TALK→MENU_QUESTION ×7; MODIFY_ORDER→UNKNOWN ×6
+Top intent disagreements, julia-1-shuf1: PLACE_ORDER→UNKNOWN ×60; PLACE_ORDER→MENU_QUESTION ×31; PLACE_ORDER→OUT_OF_SCOPE ×16; PLACE_ORDER→CANCEL_ORDER ×14; SMALL_TALK→UNKNOWN ×8; MENU_QUESTION→UNKNOWN ×7; MODIFY_ORDER→UNKNOWN ×7; SMALL_TALK→MENU_QUESTION ×6
+Top intent disagreements, julia-1-shuf2: PLACE_ORDER→UNKNOWN ×57; PLACE_ORDER→MENU_QUESTION ×34; PLACE_ORDER→OUT_OF_SCOPE ×15; PLACE_ORDER→CANCEL_ORDER ×13; SMALL_TALK→UNKNOWN ×8; MENU_QUESTION→UNKNOWN ×8; SMALL_TALK→MENU_QUESTION ×6; PLACE_ORDER→DELIVERY_QUESTION ×5
+Top intent disagreements, julia-1-shuf-avg: PLACE_ORDER→UNKNOWN ×73; PLACE_ORDER→MENU_QUESTION ×33; SMALL_TALK→UNKNOWN ×10; PLACE_ORDER→CANCEL_ORDER ×10; MENU_QUESTION→UNKNOWN ×8; MODIFY_ORDER→UNKNOWN ×8; PLACE_ORDER→OUT_OF_SCOPE ×8; SMALL_TALK→MENU_QUESTION ×7
+Top intent disagreements, julia-1-yesno: SMALL_TALK→PLACE_ORDER ×20; MODIFY_ORDER→PLACE_ORDER ×13; MENU_QUESTION→PLACE_ORDER ×12; PLACE_ORDER→CANCEL_ORDER ×9; PLACE_ORDER→UNKNOWN ×8; PLACE_ORDER→MENU_QUESTION ×7; CONFIRM_ORDER→PLACE_ORDER ×7; SMALL_TALK→CANCEL_ORDER ×4

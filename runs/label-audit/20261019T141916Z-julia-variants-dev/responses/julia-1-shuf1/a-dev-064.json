@@ -1,0 +1,133 @@
+{
+ "id": "a-dev-064",
+ "response": {
+  "provider": "julia-1-shuf1",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PAYMENT_QUESTION": 0.0020540762026354277,
+     "SMALL_TALK": 0.04951648240394203,
+     "UNKNOWN": 0.5583473175278043,
+     "OUT_OF_SCOPE": 0.007621803343203702,
+     "PAYMENT_CLAIM": 0.0024676315142493654,
+     "CANCEL_ORDER": 0.008860894922207312,
+     "MENU_QUESTION": 0.2591174627760906,
+     "ORDER_STATUS": 0.019450339061436415,
+     "REFUND_REQUEST": 0.0031628982341102723,
+     "PLACE_ORDER": 0.05027328295461644,
+     "CONFIRM_ORDER": 0.002912398207597016,
+     "ORDER_PROBLEM": 0.0067249350405870064,
+     "DELIVERY_QUESTION": 0.011325899160950269,
+     "MODIFY_ORDER": 0.005909026757177629,
+     "HUMAN_REQUEST": 0.012255551893392214
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "ORDER_STATUS": 0.04945548852874406,
+     "CONFIRM_ORDER": 0.002759884299605691,
+     "HUMAN_REQUEST": 0.002523010354303459,
+     "PAYMENT_QUESTION": 0.002372048339256889,
+     "MODIFY_ORDER": 0.001499926453982384,
+     "PAYMENT_CLAIM": 0.005264777792264748,
+     "DELIVERY_QUESTION": 0.026121352262317838,
+     "OUT_OF_SCOPE": 0.014345912916514285,
+     "CANCEL_ORDER": 0.26463147840946494,
+     "UNKNOWN": 0.4735303080174136,
+     "PLACE_ORDER": 0.0036599890060984405,
+     "MENU_QUESTION": 0.14148528359268547,
+     "REFUND_REQUEST": 0.001233516424604183,
+     "ORDER_PROBLEM": 0.009198877504607362,
+     "SMALL_TALK": 0.0019181460981365576
+    },
+    "refused": false
+   },
+   "intent_m3": {
+    "name": "intent_m3",
+    "type": "choice",
+    "choice": "ORDER_STATUS",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "CANCEL_ORDER": 0.018457224794893704,
+     "OUT_OF_SCOPE": 0.044443134581395316,
+     "REFUND_REQUEST": 0.05526323794872108,
+     "MODIFY_ORDER": 0.021393304304333238,
+     "HUMAN_REQUEST": 0.007331848139742238,
+     "PAYMENT_QUESTION": 0.005968327049799789,
+     "DELIVERY_QUESTION": 0.02623067926205416,
+     "ORDER_STATUS": 0.30217756587944283,
+     "CONFIRM_ORDER": 0.013702046364177586,
+     "MENU_QUESTION": 0.18257986907372675,
+     "PAYMENT_CLAIM": 0.0070214176078476015,
+     "ORDER_PROBLEM": 0.01708680435487964,
+     "PLACE_ORDER": 0.04027266908285578,
+     "UNKNOWN": 0.2399207345721013,
+     "SMALL_TALK": 0.018151136984029006
+    },
+    "refused": false
+   },
+   "intent_m4": {
+    "name": "intent_m4",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "DELIVERY_QUESTION": 0.08863614027152425,
+     "MENU_QUESTION": 0.05345323405778956,
+     "MODIFY_ORDER": 0.03560423656663043,
+     "ORDER_PROBLEM": 0.03827686455488143,
+     "OUT_OF_SCOPE": 0.033609421853331635,
+     "CANCEL_ORDER": 0.17129096242174455,
+     "UNKNOWN": 0.3223650264685282,
+     "SMALL_TALK": 0.02679574178539989,
+     "HUMAN_REQUEST": 0.00872018561239657,
+     "PAYMENT_QUESTION": 0.005627587557267552,
+     "PLACE_ORDER": 0.1696468861996375,
+     "ORDER_STATUS": 0.014642261486831855,
+     "PAYMENT_CLAIM": 0.00929476952897571,
+     "REFUND_REQUEST": 0.009245288871163746,
+     "CONFIRM_ORDER": 0.012791392763897149
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.627092901982705,
+     "false": 0.37290709801729505
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 3305,
+   "output_tokens": 0
+  },
+  "latency_ms": 3042.9864050001925,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

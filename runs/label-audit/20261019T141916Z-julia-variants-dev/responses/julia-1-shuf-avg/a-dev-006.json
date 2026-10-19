@@ -1,0 +1,133 @@
+{
+ "id": "a-dev-006",
+ "response": {
+  "provider": "julia-1-shuf-avg",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "MENU_QUESTION",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "MODIFY_ORDER": 0.0009019666425339432,
+     "OUT_OF_SCOPE": 0.015019856080927468,
+     "SMALL_TALK": 0.0036979019161560546,
+     "REFUND_REQUEST": 0.000673063815844932,
+     "CANCEL_ORDER": 0.2736379190177096,
+     "ORDER_PROBLEM": 0.018743546762999646,
+     "MENU_QUESTION": 0.3534698908975099,
+     "HUMAN_REQUEST": 0.001991103622740882,
+     "CONFIRM_ORDER": 0.0006359641975437519,
+     "ORDER_STATUS": 0.0005696141718255942,
+     "PLACE_ORDER": 0.002231285893962328,
+     "PAYMENT_QUESTION": 0.0003891398918994015,
+     "DELIVERY_QUESTION": 0.006905833939362285,
+     "UNKNOWN": 0.32060373414962834,
+     "PAYMENT_CLAIM": 0.0005291789993557234
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "MENU_QUESTION",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "MENU_QUESTION": 0.34330489327090374,
+     "MODIFY_ORDER": 0.003376372717144095,
+     "OUT_OF_SCOPE": 0.17766196722543193,
+     "REFUND_REQUEST": 0.0019416548400315514,
+     "ORDER_STATUS": 0.004304836578780325,
+     "ORDER_PROBLEM": 0.017949763271554668,
+     "HUMAN_REQUEST": 0.004064861648367547,
+     "CONFIRM_ORDER": 0.01848786623094229,
+     "DELIVERY_QUESTION": 0.14162537155346772,
+     "PAYMENT_QUESTION": 0.0024691995349596313,
+     "CANCEL_ORDER": 0.009987764832397274,
+     "PLACE_ORDER": 0.030523962107167686,
+     "PAYMENT_CLAIM": 0.004111885463674287,
+     "UNKNOWN": 0.23038941865585205,
+     "SMALL_TALK": 0.00980018206932526
+    },
+    "refused": false
+   },
+   "intent_m2": {
+    "name": "intent_m2",
+    "type": "choice",
+    "choice": "MENU_QUESTION",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "SMALL_TALK": 0.004948471508176374,
+     "UNKNOWN": 0.3730526065247994,
+     "CANCEL_ORDER": 0.0024578011800740884,
+     "MODIFY_ORDER": 0.0019301668091223979,
+     "CONFIRM_ORDER": 0.0016348856295169988,
+     "ORDER_PROBLEM": 0.005939933084473202,
+     "OUT_OF_SCOPE": 0.0076896798462550275,
+     "ORDER_STATUS": 0.0010577964215717807,
+     "PAYMENT_QUESTION": 0.0010727658164687369,
+     "MENU_QUESTION": 0.48004118736907947,
+     "PAYMENT_CLAIM": 0.001024629492490964,
+     "PLACE_ORDER": 0.02396035843993698,
+     "DELIVERY_QUESTION": 0.09352817617164985,
+     "REFUND_REQUEST": 0.0009129071071080215,
+     "HUMAN_REQUEST": 0.0007486345992766916
+    },
+    "refused": false
+   },
+   "intent_m3": {
+    "name": "intent_m3",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "SMALL_TALK": 0.0005725166678950335,
+     "OUT_OF_SCOPE": 0.002102313187940432,
+     "PAYMENT_QUESTION": 0.0001876163231741093,
+     "PLACE_ORDER": 0.057262188395889875,
+     "REFUND_REQUEST": 0.0003005762412789524,
+     "MENU_QUESTION": 0.0914972998351599,
+     "PAYMENT_CLAIM": 0.0002546048056637735,
+     "HUMAN_REQUEST": 0.00049002341794568,
+     "MODIFY_ORDER": 0.0009688046918191919,
+     "UNKNOWN": 0.6044494893406944,
+     "CONFIRM_ORDER": 0.00029437282660167973,
+     "ORDER_STATUS": 0.00032909757026109267,
+     "CANCEL_ORDER": 0.0014795540200298783,
+     "ORDER_PROBLEM": 0.23766695600157747,
+     "DELIVERY_QUESTION": 0.002144586674068582
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.8022102344357793,
+     "false": 0.19778976556422068
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 5844,
+   "output_tokens": 0
+  },
+  "latency_ms": 5270.765780000033,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "a-dev-040",
+ "response": {
+  "provider": "julia-1-shuf2",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "CANCEL_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "CONFIRM_ORDER": 0.009436147482899861,
+     "HUMAN_REQUEST": 0.003574395349536157,
+     "ORDER_STATUS": 0.0036428193745240123,
+     "CANCEL_ORDER": 0.3886087287577169,
+     "SMALL_TALK": 0.051187107540831236,
+     "MODIFY_ORDER": 0.0029609303473452065,
+     "PLACE_ORDER": 0.08503031953638733,
+     "ORDER_PROBLEM": 0.003331547127007839,
+     "MENU_QUESTION": 0.040846598741598766,
+     "REFUND_REQUEST": 0.002322981723421519,
+     "DELIVERY_QUESTION": 0.009344971891326785,
+     "PAYMENT_QUESTION": 0.0039400103203605695,
+     "UNKNOWN": 0.10746886936841338,
+     "PAYMENT_CLAIM": 0.00298871869487974,
+     "OUT_OF_SCOPE": 0.28531585374375074
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "ORDER_PROBLEM": 0.005635052527519026,
+     "MODIFY_ORDER": 0.0019790820019043964,
+     "REFUND_REQUEST": 0.002257194917700511,
+     "SMALL_TALK": 0.02012303318904781,
+     "ORDER_STATUS": 0.0037328240926886064,
+     "DELIVERY_QUESTION": 0.007908555768996251,
+     "CONFIRM_ORDER": 0.004200514714166046,
+     "MENU_QUESTION": 0.01409531191802228,
+     "UNKNOWN": 0.8793278573960797,
+     "HUMAN_REQUEST": 0.017866553714595012,
+     "OUT_OF_SCOPE": 0.013740604863419891,
+     "PAYMENT_CLAIM": 0.0023640315145119434,
+     "PAYMENT_QUESTION": 0.001294833996715597,
+     "PLACE_ORDER": 0.011071442618569103,
+     "CANCEL_ORDER": 0.01440310676606377
+    },
+    "refused": false
+   },
+   "intent_m3": {
+    "name": "intent_m3",
+    "type": "choice",
+    "choice": "UNKNOWN",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "OUT_OF_SCOPE": 0.008503028788273739,
+     "REFUND_REQUEST": 0.0005189141920207362,
+     "ORDER_PROBLEM": 0.004640561734792744,
+     "UNKNOWN": 0.9533811401497388,
+     "MODIFY_ORDER": 0.0007276026190513016,
+     "HUMAN_REQUEST": 0.0005673875083530785,
+     "PAYMENT_CLAIM": 0.0009013941932242269,
+     "MENU_QUESTION": 0.01283756806528981,
+     "PLACE_ORDER": 0.003441079021794578,
+     "SMALL_TALK": 0.0032125445572541347,
+     "DELIVERY_QUESTION": 0.0072699608327292525,
+     "CANCEL_ORDER": 0.0008171689125102913,
+     "ORDER_STATUS": 0.0012643397928912465,
+     "CONFIRM_ORDER": 0.0007105586353958064,
+     "PAYMENT_QUESTION": 0.0012067509966801728
+    },
+    "refused": false
+   },
+   "intent_m4": {
+    "name": "intent_m4",
+    "type": "choice",
+    "choice": "OUT_OF_SCOPE",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "SMALL_TALK": 0.0019015122624822531,
+     "MENU_QUESTION": 0.005564014524390756,
+     "CANCEL_ORDER": 0.0024383928364577504,
+     "ORDER_PROBLEM": 0.01780805559214685,
+     "MODIFY_ORDER": 0.0025994358889755193,
+     "PAYMENT_QUESTION": 0.0014399791559487696,
+     "DELIVERY_QUESTION": 0.004215681019323759,
+     "HUMAN_REQUEST": 0.0004719751720625573,
+     "PLACE_ORDER": 0.43134437097617234,
+     "ORDER_STATUS": 0.0028989678016942614,
+     "CONFIRM_ORDER": 0.0011153474736933294,
+     "UNKNOWN": 0.009622367965653023,
+     "PAYMENT_CLAIM": 0.0008562764400717836,
+     "REFUND_REQUEST": 0.0007280435508684097,
+     "OUT_OF_SCOPE": 0.5169955793400587
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.5386895430009666,
+     "false": 0.4613104569990334
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 3107,
+   "output_tokens": 0
+  },
+  "latency_ms": 3170.46713000002,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

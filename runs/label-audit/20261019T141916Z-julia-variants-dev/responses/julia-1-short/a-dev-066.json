@@ -1,0 +1,107 @@
+{
+ "id": "a-dev-066",
+ "response": {
+  "provider": "julia-1-short",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "MENU_QUESTION",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.18405232517526599,
+     "MODIFY_ORDER": 0.0011838026100393834,
+     "CANCEL_ORDER": 0.1863442789216394,
+     "CONFIRM_ORDER": 0.0006399664738421063,
+     "MENU_QUESTION": 0.5597011321864317,
+     "DELIVERY_QUESTION": 0.0005786193530474251,
+     "PAYMENT_QUESTION": 0.00027707760836708455,
+     "PAYMENT_CLAIM": 0.0003399559191793355,
+     "ORDER_STATUS": 0.0009522786146043042,
+     "ORDER_PROBLEM": 0.0017750554765690305,
+     "REFUND_REQUEST": 0.001595216817905213,
+     "HUMAN_REQUEST": 0.00022094387506476845,
+     "SMALL_TALK": 0.000668384284861188,
+     "OUT_OF_SCOPE": 0.019940163843959455,
+     "UNKNOWN": 0.0417307988392236
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "OUT_OF_SCOPE",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.1991926263185672,
+     "MODIFY_ORDER": 0.011619727902345956,
+     "CANCEL_ORDER": 0.022064294471965104,
+     "CONFIRM_ORDER": 0.004771133122335735,
+     "MENU_QUESTION": 0.047086072352717064,
+     "DELIVERY_QUESTION": 0.012202003635892184,
+     "PAYMENT_QUESTION": 0.001408226114911329,
+     "PAYMENT_CLAIM": 0.0029779014873174345,
+     "ORDER_STATUS": 0.008770620923971255,
+     "ORDER_PROBLEM": 0.004535810568788128,
+     "REFUND_REQUEST": 0.007860854186669467,
+     "HUMAN_REQUEST": 0.0017831278580684347,
+     "SMALL_TALK": 0.0031234758568545813,
+     "OUT_OF_SCOPE": 0.5742990610595229,
+     "UNKNOWN": 0.09830506414007334
+    },
+    "refused": false
+   },
+   "intent_m2": {
+    "name": "intent_m2",
+    "type": "choice",
+    "choice": "OUT_OF_SCOPE",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.08733491567983347,
+     "MODIFY_ORDER": 0.0056012536675428635,
+     "CANCEL_ORDER": 0.05967350367722852,
+     "CONFIRM_ORDER": 0.0029132119481509442,
+     "MENU_QUESTION": 0.011860579776405086,
+     "DELIVERY_QUESTION": 0.03977283238916641,
+     "PAYMENT_QUESTION": 0.0033492449025579693,
+     "PAYMENT_CLAIM": 0.0020339553065711613,
+     "ORDER_STATUS": 0.005844842230543689,
+     "ORDER_PROBLEM": 0.007624441887644301,
+     "REFUND_REQUEST": 0.003065600519909969,
+     "HUMAN_REQUEST": 0.0014910651976998215,
+     "SMALL_TALK": 0.003194464028899876,
+     "OUT_OF_SCOPE": 0.7029581108538239,
+     "UNKNOWN": 0.06328197793402206
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.2272989893502578,
+     "false": 0.7727010106497422
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2005,
+   "output_tokens": 0
+  },
+  "latency_ms": 1901.8165429999954,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

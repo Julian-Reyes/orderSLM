@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -64,6 +64,9 @@ label-audit:
 # Julia-1 label audit on Kaggle (docs/KAGGLE.md job A): export requests / import the kernel's output.
 julia-audit:
 	$(RUN) python -m orderslm.eval.julia_audit $(ARGS)
+# Julia-1 tuning on dev: one change at a time from the audit baseline (same Kaggle job).
+julia-variants:
+	$(RUN) python -m orderslm.eval.julia_variants $(ARGS)
 # Kaggle script kernels driven from the repo (docs/KAGGLE.md): JOB = folder under kaggle/.
 kaggle-push:
 	$(RUN) python -m orderslm.kaggle_jobs push $(JOB)

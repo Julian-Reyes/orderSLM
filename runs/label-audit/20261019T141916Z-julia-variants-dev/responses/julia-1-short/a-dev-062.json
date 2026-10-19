@@ -1,0 +1,133 @@
+{
+ "id": "a-dev-062",
+ "response": {
+  "provider": "julia-1-short",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "OUT_OF_SCOPE",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.12028584883863087,
+     "MODIFY_ORDER": 0.002438995006040846,
+     "CANCEL_ORDER": 0.023764743619640833,
+     "CONFIRM_ORDER": 0.002150439955547549,
+     "MENU_QUESTION": 0.16398189228333446,
+     "DELIVERY_QUESTION": 0.0013196900834130314,
+     "PAYMENT_QUESTION": 0.0011638729496597927,
+     "PAYMENT_CLAIM": 0.0011840460758073853,
+     "ORDER_STATUS": 0.0035403741139731692,
+     "ORDER_PROBLEM": 0.00933058831996772,
+     "REFUND_REQUEST": 0.0017406657435373733,
+     "HUMAN_REQUEST": 0.0011013108128269304,
+     "SMALL_TALK": 0.006040757348531898,
+     "OUT_OF_SCOPE": 0.5946727317273486,
+     "UNKNOWN": 0.06728404312173968
+    },
+    "refused": false
+   },
+   "intent_m1": {
+    "name": "intent_m1",
+    "type": "choice",
+    "choice": "OUT_OF_SCOPE",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.241910902728884,
+     "MODIFY_ORDER": 0.0015357735920543457,
+     "CANCEL_ORDER": 0.09491600415109575,
+     "CONFIRM_ORDER": 0.000252624840645153,
+     "MENU_QUESTION": 0.003857386496886437,
+     "DELIVERY_QUESTION": 0.0007522603932418517,
+     "PAYMENT_QUESTION": 0.00012329270710695258,
+     "PAYMENT_CLAIM": 0.00017894182031092127,
+     "ORDER_STATUS": 0.00024156351561281688,
+     "ORDER_PROBLEM": 0.001677192567419649,
+     "REFUND_REQUEST": 0.0009312219770623869,
+     "HUMAN_REQUEST": 0.00014832279896815438,
+     "SMALL_TALK": 0.0005141068162716078,
+     "OUT_OF_SCOPE": 0.6515405198729961,
+     "UNKNOWN": 0.0014198857214437989
+    },
+    "refused": false
+   },
+   "intent_m2": {
+    "name": "intent_m2",
+    "type": "choice",
+    "choice": "CANCEL_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.027032300064631663,
+     "MODIFY_ORDER": 0.0033126762050431167,
+     "CANCEL_ORDER": 0.7764030366216905,
+     "CONFIRM_ORDER": 0.0023124045729227753,
+     "MENU_QUESTION": 0.024973374751403377,
+     "DELIVERY_QUESTION": 0.0013239746507378066,
+     "PAYMENT_QUESTION": 0.0006907130656464703,
+     "PAYMENT_CLAIM": 0.0013773409055863235,
+     "ORDER_STATUS": 0.0030508753247319516,
+     "ORDER_PROBLEM": 0.033790488755910834,
+     "REFUND_REQUEST": 0.0031777649095090428,
+     "HUMAN_REQUEST": 0.0008132149313088179,
+     "SMALL_TALK": 0.0024617273148692348,
+     "OUT_OF_SCOPE": 0.06585480600925307,
+     "UNKNOWN": 0.053425301916754875
+    },
+    "refused": false
+   },
+   "intent_m3": {
+    "name": "intent_m3",
+    "type": "choice",
+    "choice": "PLACE_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.39834875965810085,
+     "MODIFY_ORDER": 0.017344742833962607,
+     "CANCEL_ORDER": 0.18106968416635272,
+     "CONFIRM_ORDER": 0.01036321386741036,
+     "MENU_QUESTION": 0.01334408060039836,
+     "DELIVERY_QUESTION": 0.005680744686890899,
+     "PAYMENT_QUESTION": 0.02861571584966688,
+     "PAYMENT_CLAIM": 0.007669908823092639,
+     "ORDER_STATUS": 0.007118926632505013,
+     "ORDER_PROBLEM": 0.00932696815867708,
+     "REFUND_REQUEST": 0.017650137983802036,
+     "HUMAN_REQUEST": 0.003076534933273876,
+     "SMALL_TALK": 0.009167072457788032,
+     "OUT_OF_SCOPE": 0.2002588823392689,
+     "UNKNOWN": 0.0909646270088098
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.7585100862243694,
+     "false": 0.24148991377563056
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2704,
+   "output_tokens": 0
+  },
+  "latency_ms": 2642.9336430005606,
+  "cost_micros": 0,
+  "cached": false
+ }
+}

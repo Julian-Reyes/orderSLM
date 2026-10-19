@@ -1,0 +1,55 @@
+{
+ "id": "a-dev-077",
+ "response": {
+  "provider": "julia-1-yesno",
+  "model": "SupersonicLabs/Julia-1@a85b1273",
+  "answers": {
+   "intent_m0": {
+    "name": "intent_m0",
+    "type": "choice",
+    "choice": "PLACE_ORDER",
+    "score": null,
+    "boolean": null,
+    "confidence": null,
+    "probabilities": {
+     "PLACE_ORDER": 0.9422108562780177,
+     "MODIFY_ORDER": 0.0012059276469567229,
+     "CANCEL_ORDER": 0.024200381174294346,
+     "CONFIRM_ORDER": 0.0008168559432643661,
+     "MENU_QUESTION": 0.009353865632285439,
+     "DELIVERY_QUESTION": 0.0018981279397266295,
+     "PAYMENT_QUESTION": 0.0005040981496333391,
+     "PAYMENT_CLAIM": 0.0005413963339233414,
+     "ORDER_STATUS": 0.0013228770085161132,
+     "ORDER_PROBLEM": 0.0009163056543736509,
+     "REFUND_REQUEST": 0.0008963129248984369,
+     "HUMAN_REQUEST": 0.0003407481627370206,
+     "SMALL_TALK": 0.0008669419613581236,
+     "OUT_OF_SCOPE": 0.003475491961844583,
+     "UNKNOWN": 0.011449813228170187
+    },
+    "refused": false
+   },
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.05353749916152747,
+     "false": 0.9464625008384725
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 685,
+   "output_tokens": 0
+  },
+  "latency_ms": 831.4194310000858,
+  "cost_micros": 0,
+  "cached": false
+ }
+}
