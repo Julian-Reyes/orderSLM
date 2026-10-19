@@ -1,0 +1,78 @@
+{
+  "teacher": "qwen3.5-2b",
+  "label_prompt_version": "teacher-label@0.7",
+  "scorer_version": "scorer@0.2",
+  "finalize_version": "finalize@0.1",
+  "order": {
+    "conversations": 1,
+    "conversations_with_order": 0,
+    "json_valid": 0,
+    "json_validity_rate": 0.0,
+    "item": {
+      "gold_items": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "exact_match": 0,
+    "exact_match_rate": 0.0,
+    "exact_match_ci95": [
+      0.0,
+      0.7934567085261071
+    ],
+    "field_accuracy": {
+      "method": null,
+      "time": null,
+      "address": null,
+      "payment": null,
+      "name": null,
+      "decision": null,
+      "missing": null
+    },
+    "correction": {
+      "conversations": 0,
+      "exact_match_rate": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "grounding": {
+      "conversations_with_issues": 0,
+      "rate": null,
+      "issues": {}
+    },
+    "unclassified_requests": 0
+  },
+  "intent": {
+    "customer_messages": 2,
+    "primary_correct": 0,
+    "primary_accuracy": 0.0,
+    "primary_ci95": [
+      0.0,
+      0.6576280471103807
+    ],
+    "label_set_correct": 0,
+    "label_set_accuracy": 0.0,
+    "per_gold_label": {
+      "OUT_OF_SCOPE": {
+        "gold": 2,
+        "correct": 0,
+        "predicted": 0
+      }
+    },
+    "confusions": [
+      {
+        "gold": "OUT_OF_SCOPE",
+        "pred": null,
+        "count": 2
+      }
+    ]
+  },
+  "synthetic_pipeline_drops": {
+    "invalid_contract": 1
+  },
+  "cost_micros": 0
+}

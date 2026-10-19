@@ -1,0 +1,191 @@
+{
+  "qwen3.5-0.8b": {
+    "outputs": 1,
+    "run_errors": 0,
+    "raw_json_valid": 0,
+    "json_valid_after_fence_strip": 0,
+    "hit_token_limit": 1,
+    "latency_p50_ms": 212469,
+    "input_tokens": 8170,
+    "output_tokens": 3072,
+    "load": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "11.1GiB",
+        "1": "11.1GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 25.3,
+      "model_class": "Qwen3_5ForConditionalGeneration",
+      "parameters": 852985920,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        2.83,
+        0.58
+      ],
+      "max_memory_gb": [
+        4.14,
+        1.74
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": null,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 0,
+    "conversations": 1,
+    "intent_primary_correct": 0,
+    "intent_messages": 2
+  },
+  "qwen3.5-2b": {
+    "outputs": 1,
+    "run_errors": 0,
+    "raw_json_valid": 1,
+    "json_valid_after_fence_strip": 1,
+    "hit_token_limit": 0,
+    "latency_p50_ms": 22488,
+    "input_tokens": 8170,
+    "output_tokens": 213,
+    "load": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "11.1GiB",
+        "1": "11.1GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 38.8,
+      "model_class": "Qwen3_5ForConditionalGeneration",
+      "parameters": 2213241664,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        6.58,
+        2.28
+      ],
+      "max_memory_gb": [
+        7.95,
+        3.54
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": null,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 0,
+    "conversations": 1,
+    "intent_primary_correct": 0,
+    "intent_messages": 2
+  },
+  "qwen3-1.7b": {
+    "outputs": 1,
+    "run_errors": 0,
+    "raw_json_valid": 1,
+    "json_valid_after_fence_strip": 1,
+    "hit_token_limit": 0,
+    "latency_p50_ms": 130087,
+    "input_tokens": 8109,
+    "output_tokens": 981,
+    "load": {
+      "repo": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "11.1GiB",
+        "1": "11.1GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 25.8,
+      "model_class": "Qwen3ForCausalLM",
+      "parameters": 1720574976,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        4.67,
+        2.21
+      ],
+      "max_memory_gb": [
+        6.68,
+        3.76
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": null,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 0,
+    "conversations": 1,
+    "intent_primary_correct": 0,
+    "intent_messages": 2
+  },
+  "gemma-4-e2b-it": {
+    "outputs": 1,
+    "run_errors": 0,
+    "raw_json_valid": 0,
+    "json_valid_after_fence_strip": 0,
+    "hit_token_limit": 0,
+    "latency_p50_ms": 556599,
+    "input_tokens": 8529,
+    "output_tokens": 208,
+    "load": {
+      "repo": "google/gemma-4-E2B-it",
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "11.1GiB",
+        "1": "11.1GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 67.8,
+      "model_class": "Gemma4ForConditionalGeneration",
+      "parameters": 5104297504,
+      "devices": [
+        "cuda:0",
+        "cuda:1",
+        "meta"
+      ],
+      "memory_after_load_gb": [
+        2.43,
+        7.31
+      ],
+      "max_memory_gb": [
+        12.54,
+        9.16
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": null,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 0,
+    "conversations": 1,
+    "intent_primary_correct": 0,
+    "intent_messages": 2
+  },
+  "teacher-gpt-6-luna@low": {
+    "note": "saved M4 dev outputs, same chats",
+    "contract_valid": 1,
+    "item_f1": null,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 1,
+    "conversations": 1,
+    "intent_primary_correct": 2,
+    "intent_messages": 2
+  }
+}

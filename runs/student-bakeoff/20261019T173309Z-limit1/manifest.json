@@ -1,0 +1,148 @@
+{
+  "experiment": "student-bakeoff",
+  "label_prompt_version": "teacher-label@0.7",
+  "seed": 20261019,
+  "conversation_ids": [
+    "a-dev-001"
+  ],
+  "candidates": [
+    {
+      "name": "qwen3.5-0.8b",
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "loader": "multimodal",
+      "template_kwargs": {}
+    },
+    {
+      "name": "qwen3.5-2b",
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "loader": "multimodal",
+      "template_kwargs": {}
+    },
+    {
+      "name": "qwen3-1.7b",
+      "repo": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "loader": "causal",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    {
+      "name": "gemma-4-e2b-it",
+      "repo": "google/gemma-4-E2B-it",
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "loader": "multimodal",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  ],
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 3072,
+    "dtype": "float32"
+  },
+  "teacher_run": "runs/label-dev/20261016T195121Z-openai__gpt-6-luna@low",
+  "exported_at": "2026-10-19T17:33:09.581623+00:00",
+  "git_commit": "4aba7c97c5bb6104009341b1398d749955a68aa8-dirty",
+  "kaggle_dataset": "JReyes33/orderslm-student-bakeoff",
+  "cost_micros": 0,
+  "imported_at": "2026-10-19T17:42:22.531847+00:00",
+  "kernel_env": {
+    "run_dir": "20261019T173309Z-limit1",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.1",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 3072,
+      "dtype": "float32"
+    },
+    "process_per_model": true,
+    "models": {
+      "qwen3.5-0.8b": {
+        "repo": "Qwen/Qwen3.5-0.8B",
+        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+        "load_seconds": 31.7,
+        "model_class": "Qwen3_5ForConditionalGeneration",
+        "parameters": 852985920,
+        "devices": [
+          "cuda:0",
+          "cuda:1"
+        ],
+        "memory_after_load_gb": [
+          2.83,
+          0.58
+        ],
+        "max_memory_gb": [
+          8.5,
+          6.14
+        ]
+      },
+      "qwen3.5-2b": {
+        "repo": "Qwen/Qwen3.5-2B",
+        "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+        "load_seconds": 30.2,
+        "model_class": "Qwen3_5ForConditionalGeneration",
+        "parameters": 2213241664,
+        "devices": [
+          "cuda:0",
+          "cuda:1"
+        ],
+        "memory_after_load_gb": [
+          6.58,
+          2.28
+        ],
+        "max_memory_gb": [
+          12.31,
+          7.94
+        ]
+      },
+      "qwen3-1.7b": {
+        "repo": "Qwen/Qwen3-1.7B",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "load_seconds": 32.0,
+        "model_class": "Qwen3ForCausalLM",
+        "parameters": 1720574976,
+        "devices": [
+          "cuda:0",
+          "cuda:1"
+        ],
+        "memory_after_load_gb": [
+          4.67,
+          2.21
+        ],
+        "max_memory_gb": [
+          15.35,
+          2.3
+        ]
+      },
+      "gemma-4-e2b-it": {
+        "repo": "google/gemma-4-E2B-it",
+        "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+        "load_seconds": 71.8,
+        "model_class": "Gemma4ForConditionalGeneration",
+        "parameters": 5104297504,
+        "devices": [
+          "cuda:0",
+          "cuda:1"
+        ],
+        "memory_after_load_gb": [
+          6.09,
+          14.33
+        ],
+        "max_memory_gb": [
+          6.41,
+          15.26
+        ]
+      }
+    }
+  }
+}

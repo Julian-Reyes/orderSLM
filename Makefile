@@ -82,7 +82,9 @@ synth:
 	$(RUN) python -m orderslm.synth.run $(ARGS)
 label:
 	$(RUN) python -m orderslm.synth.run label $(ARGS)
-student-bakeoff:  ; $(call not_yet,5)
+# M5 student bake-off on Kaggle (docs/KAGGLE.md job B): export requests / import the kernel's output.
+student-bakeoff:
+	$(RUN) python -m orderslm.eval.student_bakeoff $(ARGS)
 train:            ; $(call not_yet,6)
 eval:             ; $(call not_yet,6)
 router-bench:     ; $(call not_yet,7)
