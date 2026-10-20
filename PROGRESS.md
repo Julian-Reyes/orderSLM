@@ -14,7 +14,16 @@ _Updated 2026-10-20._
   teacher), Gemma 4 E2B 0.73 but JSON broken 9/20 and ~15 min per answer (fp32 offload), Qwen3-1.7B 0.47 (wrong
   structure), Qwen3.5-0.8B loops to the token limit 20/20. M6 risk: if the 0.8B still fails after LoRA, Qwen3-1.7B is
   the fallback. **Julian, 2026-10-20: release option (b) for now** (train on the luna labels, weights private).
-  Next: M6 (per-prefix rows still to decide).
+- **M6 step 1, training data (2026-10-20, free):** `make student-data` → `runs/student-data/student-data@0.1/`
+  (manifest committed; jsonl gitignored, sha256 in the manifest). Julian: **full chats only** (no per-prefix rows
+  unless the student struggles mid-chat); **two students, Qwen3.5-0.8B + 2B**, the 2B trained twice (single vs
+  mixed, §11e). Prompt `student-extract@0.1` (~1.1k chars of instructions vs the teacher's ~23k + schema) + menu +
+  chat; target `StudentOutput` = last customer message's intent + the teacher's raw `ModelOrder`. Sets: `single`
+  (p3 + b1) 1,865 train / 98 valid; `mixed` (+ m1) 2,236 / 118; same valid chats (seeded 5%); 2 audit exclusions
+  left out. Row size p50 ~11.2k chars (~3k tokens), max 33k (food-court menu); answer p50 1.2k chars. Format:
+  `{"messages": [...]}` (Unsloth/TRL and MLX-LM). Note: one row per chat means the intent target is the *last*
+  message's (40% PLACE_ORDER, 18% CONFIRM, 17% SMALL_TALK; UNKNOWN 14 rows). Next: a short training test (Kaggle
+  T4 or the Mac mini, Julian may have it ~noon ET 2026-10-20), then the real runs.
 
 - **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
   pushed**: ask Julian before any push, run a secrets check first).
@@ -63,7 +72,7 @@ _Updated 2026-10-20._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

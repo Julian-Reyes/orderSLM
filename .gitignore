@@ -26,3 +26,6 @@ web/dist/
 # Kaggle jobs: staged dataset uploads and raw kernel output (imported into runs/ by each job's import step).
 kaggle/*/upload/
 kaggle/*/output/
+
+# M6 training data (src/orderslm/train/data.py): rebuilt from the committed labels
+runs/student-data/*/*/*.jsonl

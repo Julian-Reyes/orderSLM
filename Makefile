@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -85,6 +85,10 @@ label:
 # M5 student bake-off on Kaggle (docs/KAGGLE.md job B): export requests / import the kernel's output.
 student-bakeoff:
 	$(RUN) python -m orderslm.eval.student_bakeoff $(ARGS)
+# M6 training rows from the M4 labels (free, local): runs/student-data/<version>/{single,mixed}/
+student-data:
+	$(RUN) python -m orderslm.train.data $(ARGS)
+
 train:            ; $(call not_yet,6)
 eval:             ; $(call not_yet,6)
 router-bench:     ; $(call not_yet,7)
