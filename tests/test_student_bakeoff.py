@@ -62,3 +62,13 @@ def test_kernel_is_private_gpu_and_reads_its_dataset():
     meta = json.loads((ROOT / "kaggle" / "student-bakeoff" / "kernel-metadata.json").read_text())
     assert meta["is_private"] and meta["enable_gpu"] and meta["dataset_sources"] == [sb.DATASET]
     assert meta["id"] != sb.DATASET
+
+
+def test_diagnose_counts_item_ids_and_contract_errors():
+    teacher = {"c": json.dumps({"order": {"items": [{"menu_item_id": "a"}, {"menu_item_id": "b"}]}})}
+    student = {"c": json.dumps({"order": {"items": [{"menu_item_id": "a"}, {"menu_item_id": "z"}]}})}
+    d = sb.diagnose(student, teacher)
+    assert d["item_ids_vs_teacher"] == {"right": 1, "extra": 1, "missed": 1, "f1": 0.5}
+    assert d["contract_errors"]  # not a valid label
+    d = sb.diagnose({"c": "not json"}, teacher)
+    assert d["contract_errors"] == {"(not JSON)": 1} and d["item_ids_vs_teacher"]["missed"] == 2

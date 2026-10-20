@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":\"xl\",\"variant_id\":\"large\",\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"combo_selections\":[]},\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"notes\":[],\"evidence\":[{\"message_index\":0,\"quote\":\"wiat do u hav xl lattes now\"},{\"message_index\":1,\"quote\":\"or still just s m l\"}]},\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":\"now\",\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[{\"field\":\"item_variant\",\"line_id\":\"L1\"}],\"evidence\":[{\"message_index\":0,\"quote\":\"wiat do u hav xl lattes now\"},{\"message_index\":1,\"quote\":\"or still just s m l\"}]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":\"xl\",\"variant_id\":\"large\",\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"combo_selections\":[]},\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"notes\":[],\"evidence\":[{\"message_index\":0,\"quote\":\"wiat do u hav xl lattes now\"},{\"message_index\":1,\"quote\":\"or still just s m l\"}]},\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":\"now\",\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[{\"field\":\"item_variant\",\"line_id\":\"L1\"}],\"evidence\":[{\"message_index\":0,\"quote\":\"wiat do u hav xl lattes now\"},{\"message_index\":1,\"quote\":\"or still just s m l\"}]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8444,
+   "output_tokens": 369
+  },
+  "latency_ms": 907277.104801,
+  "cost_micros": 0,
+  "at": "2026-10-19T21:08:19.693039+00:00"
+ }
+}

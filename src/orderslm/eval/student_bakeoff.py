@@ -19,15 +19,19 @@ import json
 import random
 import shutil
 import sys
+from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 from statistics import median
 from typing import Any
 
+from pydantic import ValidationError
+
 from orderslm.menus import load_menu
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
 from orderslm.schema.conversation import Split
+from orderslm.schema.label import TeacherLabel
 from orderslm.synth import label as lab
 
 from . import label_dev
@@ -99,6 +103,53 @@ def _json_ok(text: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def _menu_item_ids(obj: Any, out: Counter) -> Counter:
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k == "menu_item_id" and isinstance(v, str):
+                out[v] += 1
+            else:
+                _menu_item_ids(v, out)
+    elif isinstance(obj, list):
+        for v in obj:
+            _menu_item_ids(v, out)
+    return out
+
+
+def diagnose(texts: dict[str, str], teacher_texts: dict[str, str]) -> dict[str, Any]:
+    """Diagnostics, NOT contract scores: why labels fail the contract (field: error type, counted per error), and
+    the menu_item_ids anywhere in the parsed JSON vs the teacher's (multiset), ignoring structure. Shows how close a
+    zero-shot student is when every label is invalid."""
+    errors: Counter = Counter()
+    tp = fp = fn = 0
+    for cid, text in texts.items():
+        teacher = _menu_item_ids(json.loads(teacher_texts[cid]), Counter())
+        try:
+            obj = json.loads(text)
+        except ValueError:
+            errors["(not JSON)"] += 1
+            fn += sum(teacher.values())
+            continue
+        try:
+            TeacherLabel.model_validate(obj)
+        except ValidationError as e:
+            for x in e.errors():
+                errors[".".join(str(p) for p in x["loc"] if not isinstance(p, int)) + ": " + x["type"]] += 1
+        ids = _menu_item_ids(obj, Counter())
+        tp += sum((ids & teacher).values())
+        fp += sum((ids - teacher).values())
+        fn += sum((teacher - ids).values())
+    return {
+        "contract_errors": dict(errors.most_common()),
+        "item_ids_vs_teacher": {
+            "right": tp,
+            "extra": fp,
+            "missed": fn,
+            "f1": round(2 * tp / (2 * tp + fp + fn), 3) if tp + fp + fn else None,
+        },
+    }
 
 
 def export(args: argparse.Namespace) -> Path:
@@ -175,6 +226,11 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
     for line in (output_dir / "outputs.jsonl").read_text().splitlines():
         r = json.loads(line)
         by_model.setdefault(r["model"], {})[r["id"]] = r
+    teacher: dict[str, dict] = {
+        cid: json.loads((ROOT / manifest["teacher_run"] / "outputs" / f"{cid}.json").read_text())
+        for cid in ids
+    }
+    teacher_texts = {cid: r["response"]["text"] for cid, r in teacher.items()}
     summary: dict[str, Any] = {}
     for cand in manifest["candidates"]:
         name = cand["name"]
@@ -206,6 +262,7 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                 },
             }
         m = label_dev.report(_write_model_dir(run_dir, name, ids, records, manifest["label_prompt_version"]))
+        texts = {cid: v["response"]["text"] for cid, v in records.items() if "response" in v}
         summary[name] = {
             "outputs": sum("response" in v for v in records.values()),
             "run_errors": sum("error" in v for v in records.values()),
@@ -217,10 +274,8 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
             "output_tokens": out_tok,
             "load": env.get("models", {}).get(name),
             **_headline(m),
+            **diagnose(texts, teacher_texts),
         }
-    teacher = {}
-    for cid in ids:
-        teacher[cid] = json.loads((ROOT / manifest["teacher_run"] / "outputs" / f"{cid}.json").read_text())
     tm = label_dev.report(
         _write_model_dir(run_dir, "teacher-gpt-6-luna@low", ids, teacher, manifest["label_prompt_version"])
     )
@@ -275,6 +330,20 @@ def _write_report(run_dir: Path, manifest: dict, summary: dict) -> None:
             f" {s['items_found']}/{s['items_extra']}/{s['items_missed']} | {s['exact_orders']}/{n} |"
             f" {s['intent_primary_correct']}/{s['intent_messages']} | {lim} | {err} | {p50} |"
         )
+    L += [
+        "",
+        "Diagnostics (not contract scores): menu_item_ids anywhere in the parsed JSON vs the teacher's, ignoring"
+        " structure; most frequent contract errors (field: type, per error).",
+        "",
+        "| model | item ids right/extra/missed | F1 vs teacher | top contract errors |",
+        "|---|---|---|---|",
+    ]
+    for name, s in summary.items():
+        if "item_ids_vs_teacher" not in s:
+            continue
+        d = s["item_ids_vs_teacher"]
+        top = "; ".join(f"{k} ×{v}" for k, v in list(s["contract_errors"].items())[:3]) or "–"
+        L.append(f"| {name} | {d['right']}/{d['extra']}/{d['missed']} | {d['f1']} | {top} |")
     L += [
         "",
         "Run errors (out of memory, load failure) score as invalid; the message is in `<model>/outputs/`.",

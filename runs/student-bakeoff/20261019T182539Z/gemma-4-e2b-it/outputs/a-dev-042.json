@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":{}},{\"line_id\":\"L2\",\"menu_item_id\":\"diet_coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":{}}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"delivered to 12 oak st\"}]},\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":\"2026-10-05T18:30:00-05:00\",\"normalized_local\":null,\"evidence\":[]},\"address\":{\"state\":\"provided\",\"street\":null,\"number\":\"12\",\"unit\":null,\"reference\":\"oak st\",\"raw_text\":\"12 oak st\",\"evidence\":[{\"message_index\":0,\"quote\":\"delivered to 12 oak st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":{}},{\"line_id\":\"L2\",\"menu_item_id\":\"diet_coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":{}}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"delivered to 12 oak st\"}]},\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":\"2026-10-05T18:30:00-05:00\",\"normalized_local\":null,\"evidence\":[]},\"address\":{\"state\":\"provided\",\"street\":null,\"number\":\"12\",\"unit\":null,\"reference\":\"oak st\",\"raw_text\":\"12 oak st\",\"evidence\":[{\"message_index\":0,\"quote\":\"delivered to 12 oak st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11005,
+   "output_tokens": 372
+  },
+  "latency_ms": 931547.6851580024,
+  "cost_micros": 0,
+  "at": "2026-10-19T23:24:07.282261+00:00"
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_PROBLEM\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"unmatched_text\",\"menu_item_id\":null,\"unmatched_text\":\"3rd n pine\",\"halves\":null,\"quantity\":null,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":{},\"combo_selections\":{},\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"to like 3rd n pine\"}]},\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Sorry, we're pickup only! You can order ahead here and grab it at the counter.\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":\"to like 3rd n pine\",\"evidence\":[{\"message_index\":1,\"quote\":\"to like 3rd n pine\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":null,\"ambiguity_flags\":[{\"field\":\"item_menu_match\",\"line_id\":\"unmatched_text\"}]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"ORDER_PROBLEM\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"unmatched_text\",\"menu_item_id\":null,\"unmatched_text\":\"3rd n pine\",\"halves\":null,\"quantity\":null,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":{},\"combo_selections\":{},\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"to like 3rd n pine\"}]},\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Sorry, we're pickup only! You can order ahead here and grab it at the counter.\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":\"to like 3rd n pine\",\"evidence\":[{\"message_index\":1,\"quote\":\"to like 3rd n pine\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":null,\"ambiguity_flags\":[{\"field\":\"item_menu_match\",\"line_id\":\"unmatched_text\"}]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8493,
+   "output_tokens": 376
+  },
+  "latency_ms": 924484.434943999,
+  "cost_micros": 0,
+  "at": "2026-10-19T22:21:32.999202+00:00"
+ }
+}

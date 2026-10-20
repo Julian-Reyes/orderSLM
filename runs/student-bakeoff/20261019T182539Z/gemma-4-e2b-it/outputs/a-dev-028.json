@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"combo_selections\":[]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"modifications\":{\"add\":{\"modifier_id\":\"avocado\"},\"amount\":\"normal\"}}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickup at 9:30\"}]},\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"9:30\",\"normalized_local\":\"09:30\",\"evidence\":[{\"message_index\":2,\"quote\":\"pickup at 9:30\"}]},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Mia\",\"evidence\":[{\"message_index\":2,\"quote\":\"name's Mia\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"modifications\":{\"add\":{\"modifier_id\":\"oat_milk\"},\"amount\":\"normal\"},\"combo_selections\":[]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"modifications\":{\"add\":{\"modifier_id\":\"avocado\"},\"amount\":\"normal\"}}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"pickup at 9:30\"}]},\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"9:30\",\"normalized_local\":\"09:30\",\"evidence\":[{\"message_index\":2,\"quote\":\"pickup at 9:30\"}]},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Mia\",\"evidence\":[{\"message_index\":2,\"quote\":\"name's Mia\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 8494,
+   "output_tokens": 372
+  },
+  "latency_ms": 913600.0678060008,
+  "cost_micros": 0,
+  "at": "2026-10-19T22:06:08.483836+00:00"
+ }
+}

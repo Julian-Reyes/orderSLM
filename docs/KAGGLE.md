@@ -62,10 +62,14 @@ Gold answers stay local: scoring happens on this Mac.
 | Job | Hardware | Needs | Est. time | Notes |
 |---|---|---|---|---|
 | **A. Julia-1 label audit (§11d)** | CPU (no GPU quota) | Julia-1 at rev `a85b1273`, torch ≥ 2.6, transformers 5.0.x | ~1 h | The same `DecisionRequest`s as Jev/Decisions (dev gold + 473 planted, then 2,356 training chats); one `predict(state, questions)` call per chat (the named-question API scores each question as its own row); ≤ 20 options, ≤ 48 tokens per option, 8,192 tokens per row. Checked at export (2026-10-19): longest option 19 tokens, longest row 624 tokens, so nothing is truncated (strict encoding on) |
-| **B. M5 student bake-off (§9)** | 1 × T4 | Qwen3.5-0.8B / 2B, Qwen3-1.7B, Gemma 4 E2B; latest transformers | ~1–2 h | ~20 dev chats zero-shot per model; JSON validity + item F1 scored locally |
+| **B. M5 student bake-off (§9)** | 2 × T4 | Qwen3.5-0.8B / 2B, Qwen3-1.7B, Gemma 4 E2B; latest transformers | **actual 7.2 h** (Gemma 5.2 h of it) | Done 2026-10-20: `docs/STUDENT_BAKEOFF.md`. 20 dev chats zero-shot per model; scored locally. One process per model; SDPA `enable_gqa` off (else math-kernel OOM at ~8k tokens in fp32); per-GPU caps (total − 2 GiB) |
 | **C. M6 LoRA training** | T4 | the chosen student(s) | 1–3 h per run | Plan after M5 |
 
 ### Known risks to check in the first run
+
+- **Stuck in the queue (seen 2026-10-19):** a GPU version sat "queued" for 2 h while a fresh push started at once
+  (twice). Rule: if queued > 20 min, push again and cancel the old version on the website (the CLI can't cancel, and
+  `kernels status`/`output` only see the latest version; a `/<version>` suffix is ignored).
 
 - **Package conflict:** Julia-1 pins `transformers>=5.0,<5.1`; Qwen3.5 asks for the newest transformers. So separate
   kernels, each with its own pins.

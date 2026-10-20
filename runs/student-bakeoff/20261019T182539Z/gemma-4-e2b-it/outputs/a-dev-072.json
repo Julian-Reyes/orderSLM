@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":{}},\"notes\":[{\"text\":\"I already paid when I called earlier \ud83d\udcde\u2705\",\"evidence\":{\"message_index\":1,\"quote\":\"I already paid when I called earlier \ud83d\udcde\u2705\"}}],\"evidence\":[{\"message_index\":1,\"quote\":\"1 veggie burger no mayo for pickup, I already paid when I called earlier \ud83d\udcde\u2705\"}]},\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"for pickup\"}]},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":1,\"quote\":\"I already paid when I called earlier \ud83d\udcde\u2705\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":{}},\"notes\":[{\"text\":\"I already paid when I called earlier \ud83d\udcde\u2705\",\"evidence\":{\"message_index\":1,\"quote\":\"I already paid when I called earlier \ud83d\udcde\u2705\"}}],\"evidence\":[{\"message_index\":1,\"quote\":\"1 veggie burger no mayo for pickup, I already paid when I called earlier \ud83d\udcde\u2705\"}]},\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"for pickup\"}]},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":true,\"evidence\":[{\"message_index\":1,\"quote\":\"I already paid when I called earlier \ud83d\udcde\u2705\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 7660,
+   "output_tokens": 346
+  },
+  "latency_ms": 846460.0342839985,
+  "cost_micros": 0,
+  "at": "2026-10-20T01:08:20.439830+00:00"
+ }
+}

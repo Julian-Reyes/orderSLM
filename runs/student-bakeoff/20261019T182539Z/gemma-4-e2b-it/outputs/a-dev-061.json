@@ -1,0 +1,16 @@
+{
+ "raw_text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"modifications\":{}},{\"line_id\":\"L2\",\"menu_item_id\":\"two_liter\",\"unmatched_text\":null,\"modifications\":{}}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"pickup\"}]},\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"pickup\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"pickup\"}]},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+ "response": {
+  "config_id": "gemma-4-e2b-it",
+  "model": "google/gemma-4-E2B-it@3e22461f",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"pepperoni_pizza\",\"unmatched_text\":null,\"modifications\":{}},{\"line_id\":\"L2\",\"menu_item_id\":\"two_liter\",\"unmatched_text\":null,\"modifications\":{}}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"pickup\"}]},\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"pickup\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"pickup\"}]},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":1,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 11028,
+   "output_tokens": 294
+  },
+  "latency_ms": 741580.8605509992,
+  "cost_micros": 0,
+  "at": "2026-10-20T00:27:25.065874+00:00"
+ }
+}

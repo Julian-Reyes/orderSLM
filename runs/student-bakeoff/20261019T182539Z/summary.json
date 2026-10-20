@@ -1,0 +1,284 @@
+{
+  "qwen3.5-0.8b": {
+    "outputs": 20,
+    "run_errors": 0,
+    "raw_json_valid": 0,
+    "json_valid_after_fence_strip": 0,
+    "hit_token_limit": 20,
+    "latency_p50_ms": 184921,
+    "input_tokens": 171494,
+    "output_tokens": 61440,
+    "load": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "12.6GiB",
+        "1": "12.6GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 22.2,
+      "model_class": "Qwen3_5ForConditionalGeneration",
+      "parameters": 852985920,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        2.83,
+        0.58
+      ],
+      "max_memory_gb": [
+        4.54,
+        2.1
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": 0.0,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 29,
+    "exact_orders": 0,
+    "conversations": 20,
+    "intent_primary_correct": 0,
+    "intent_messages": 54,
+    "contract_errors": {
+      "(not JSON)": 20
+    },
+    "item_ids_vs_teacher": {
+      "right": 0,
+      "extra": 0,
+      "missed": 27,
+      "f1": 0.0
+    }
+  },
+  "qwen3.5-2b": {
+    "outputs": 20,
+    "run_errors": 0,
+    "raw_json_valid": 19,
+    "json_valid_after_fence_strip": 19,
+    "hit_token_limit": 1,
+    "latency_p50_ms": 58961,
+    "input_tokens": 171494,
+    "output_tokens": 16665,
+    "load": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "12.6GiB",
+        "1": "12.6GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 28.9,
+      "model_class": "Qwen3_5ForConditionalGeneration",
+      "parameters": 2213241664,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        6.58,
+        2.28
+      ],
+      "max_memory_gb": [
+        8.37,
+        3.93
+      ]
+    },
+    "contract_valid": 3,
+    "item_f1": 0.0,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 29,
+    "exact_orders": 3,
+    "conversations": 20,
+    "intent_primary_correct": 5,
+    "intent_messages": 54,
+    "contract_errors": {
+      "order.items.combo_selections: list_type": 22,
+      "order.items.notes: string_type": 20,
+      "order.fulfillment: value_error": 3,
+      "order.payment: value_error": 1,
+      "order.items.modifications: value_error": 1,
+      "order.fulfillment.requested_time: value_error": 1,
+      "order.fulfillment: missing": 1,
+      "order.address: missing": 1,
+      "order.payment: missing": 1,
+      "order.customer_name: missing": 1,
+      "order.notes: list_type": 1,
+      "order.quantity: extra_forbidden": 1,
+      "order.variant_id: extra_forbidden": 1,
+      "order.unmatched_variant_text: extra_forbidden": 1,
+      "order.unmatched_text: extra_forbidden": 1,
+      "order.halves: extra_forbidden": 1,
+      "order.modifications: extra_forbidden": 1,
+      "order.combo_selections: extra_forbidden": 1,
+      "order.evidence: extra_forbidden": 1,
+      "fulfillment: extra_forbidden": 1,
+      "order.items.quantity: greater_than_equal": 1,
+      "order: value_error": 1,
+      "(not JSON)": 1
+    },
+    "item_ids_vs_teacher": {
+      "right": 20,
+      "extra": 6,
+      "missed": 7,
+      "f1": 0.755
+    }
+  },
+  "qwen3-1.7b": {
+    "outputs": 20,
+    "run_errors": 0,
+    "raw_json_valid": 20,
+    "json_valid_after_fence_strip": 20,
+    "hit_token_limit": 0,
+    "latency_p50_ms": 86575,
+    "input_tokens": 170189,
+    "output_tokens": 14008,
+    "load": {
+      "repo": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "12.6GiB",
+        "1": "12.6GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 30.9,
+      "model_class": "Qwen3ForCausalLM",
+      "parameters": 1720574976,
+      "devices": [
+        "cuda:0",
+        "cuda:1"
+      ],
+      "memory_after_load_gb": [
+        4.67,
+        2.21
+      ],
+      "max_memory_gb": [
+        7.3,
+        4.24
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": 0.0,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 29,
+    "exact_orders": 0,
+    "conversations": 20,
+    "intent_primary_correct": 0,
+    "intent_messages": 54,
+    "contract_errors": {
+      "order.quantity: extra_forbidden": 20,
+      "order.variant_id: extra_forbidden": 20,
+      "order.unmatched_variant_text: extra_forbidden": 20,
+      "order.modifications: extra_forbidden": 20,
+      "order.combo_selections: extra_forbidden": 20,
+      "order.evidence: extra_forbidden": 20,
+      "order.items.evidence: missing": 18,
+      "order.items.halves: too_short": 17,
+      "order.items.notes: string_type": 14,
+      "order.fulfillment: missing": 12,
+      "order.address: missing": 12,
+      "order.payment: missing": 12,
+      "order.customer_name: missing": 12,
+      "order.fulfillment.requested_time: value_error": 7,
+      "order.items.modifications.amount: enum": 6,
+      "order.payment: value_error": 5,
+      "order.customer_decision: value_error": 3,
+      "order.items.unmatched_variant_text: string_too_short": 3,
+      "order.address: value_error": 2,
+      "order.customer_name: value_error": 2,
+      "order.fulfillment.method: enum": 1,
+      "intents: value_error": 1
+    },
+    "item_ids_vs_teacher": {
+      "right": 14,
+      "extra": 19,
+      "missed": 13,
+      "f1": 0.467
+    }
+  },
+  "gemma-4-e2b-it": {
+    "outputs": 20,
+    "run_errors": 0,
+    "raw_json_valid": 11,
+    "json_valid_after_fence_strip": 11,
+    "hit_token_limit": 0,
+    "latency_p50_ms": 923376,
+    "input_tokens": 179134,
+    "output_tokens": 7593,
+    "load": {
+      "repo": "google/gemma-4-E2B-it",
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "sdpa_gqa_flag_off": true,
+      "max_memory": {
+        "0": "12.6GiB",
+        "1": "12.6GiB",
+        "cpu": "20GiB"
+      },
+      "load_seconds": 69.5,
+      "model_class": "Gemma4ForConditionalGeneration",
+      "parameters": 5104297504,
+      "devices": [
+        "cuda:0",
+        "cuda:1",
+        "meta"
+      ],
+      "memory_after_load_gb": [
+        4.07,
+        5.66
+      ],
+      "max_memory_gb": [
+        14.42,
+        7.82
+      ]
+    },
+    "contract_valid": 0,
+    "item_f1": 0.0,
+    "items_found": 0,
+    "items_extra": 0,
+    "items_missed": 29,
+    "exact_orders": 0,
+    "conversations": 20,
+    "intent_primary_correct": 0,
+    "intent_messages": 54,
+    "contract_errors": {
+      "order.items.modifications: list_type": 18,
+      "order.items.evidence: missing": 17,
+      "(not JSON)": 9,
+      "order.fulfillment.requested_time: missing": 8,
+      "order.requested_time: extra_forbidden": 6,
+      "order.items.quantity: missing": 4,
+      "order.notes: list_type": 2,
+      "order.items.combo_selections: list_type": 2,
+      "order.items.notes: string_type": 2,
+      "order.evidence: extra_forbidden": 1,
+      "order.quantity: extra_forbidden": 1,
+      "order.variant_id: extra_forbidden": 1,
+      "order.unmatched_variant_text: extra_forbidden": 1,
+      "order.modifications: extra_forbidden": 1,
+      "order.combo_selections: extra_forbidden": 1
+    },
+    "item_ids_vs_teacher": {
+      "right": 18,
+      "extra": 4,
+      "missed": 9,
+      "f1": 0.735
+    }
+  },
+  "teacher-gpt-6-luna@low": {
+    "note": "saved M4 dev outputs, same chats",
+    "contract_valid": 20,
+    "item_f1": 1.0,
+    "items_found": 29,
+    "items_extra": 0,
+    "items_missed": 0,
+    "exact_orders": 20,
+    "conversations": 20,
+    "intent_primary_correct": 54,
+    "intent_messages": 54
+  }
+}

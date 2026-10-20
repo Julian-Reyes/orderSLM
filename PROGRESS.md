@@ -2,11 +2,18 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-19._
+_Last updated 2026-10-20._
 
 ## Start here next session
 
-_Updated 2026-10-19._
+_Updated 2026-10-20._
+
+- **M5 student bake-off done (2026-10-20, free on Kaggle 2 × T4):** `docs/STUDENT_BAKEOFF.md`, run
+  `runs/student-bakeoff/20261019T182539Z/`. **Decision: keep Qwen3.5-0.8B + 2B** (no candidate clearly better, tooling
+  works). Zero-shot nobody writes valid labels; Qwen3.5-2B is closest (JSON 19/20, type slips, item ids F1 0.75 vs
+  teacher), Gemma 4 E2B 0.73 but JSON broken 9/20 and ~15 min per answer (fp32 offload), Qwen3-1.7B 0.47 (wrong
+  structure), Qwen3.5-0.8B loops to the token limit 20/20. M6 risk: if the 0.8B still fails after LoRA, Qwen3-1.7B is
+  the fallback. Next: M6 (decide b vs c and per-prefix rows first).
 
 - **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
   pushed**: ask Julian before any push, run a secrets check first).
@@ -54,7 +61,7 @@ _Updated 2026-10-19._
 | 2 | Annotation tool; PIZZA conversion; scenario cards → Claude-written dev/test (Source A); Julian's review; lock | ✅ Done 2026-10-14: dev 91/91 reviewed, test 58/199 reviewed (0 changed), test split locked (199, sha256 `3f09234131e3825d`); see "Test review and lock" |
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
-| 5 | Student bake-off | Not started |
+| 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
 | 6 | LoRA training (intent + order) + distillation eval; order checker | Not started |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
