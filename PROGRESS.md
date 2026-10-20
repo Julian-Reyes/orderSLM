@@ -22,8 +22,11 @@ _Updated 2026-10-20._
   (p3 + b1) 1,865 train / 98 valid; `mixed` (+ m1) 2,236 / 118; same valid chats (seeded 5%); 2 audit exclusions
   left out. Row size p50 ~11.2k chars (~3k tokens), max 33k (food-court menu); answer p50 1.2k chars. Format:
   `{"messages": [...]}` (Unsloth/TRL and MLX-LM). Note: one row per chat means the intent target is the *last*
-  message's (40% PLACE_ORDER, 18% CONFIRM, 17% SMALL_TALK; UNKNOWN 14 rows). Next: a short training test (Kaggle
-  T4 or the Mac mini, Julian may have it ~noon ET 2026-10-20), then the real runs.
+  message's (40% PLACE_ORDER, 18% CONFIRM, 17% SMALL_TALK; UNKNOWN 14 rows). **Julian, 2026-10-20: keep it as
+  is** (the order often can't be labeled until the end; the student labels each message as it arrives). After
+  training, **score the student at every customer message of dev** (dev gold has a box per message); if mid-chat
+  boxes are weak, add the free box-only rows from the teacher's per-message intents and retrain. Next: training
+  test on the **Mac mini** (Julian sets it up ~2–3 h after 2026-10-20 morning; Kaggle is the fallback).
 
 - **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
   pushed**: ask Julian before any push, run a secrets check first).
