@@ -13,7 +13,8 @@ _Updated 2026-10-20._
   works). Zero-shot nobody writes valid labels; Qwen3.5-2B is closest (JSON 19/20, type slips, item ids F1 0.75 vs
   teacher), Gemma 4 E2B 0.73 but JSON broken 9/20 and ~15 min per answer (fp32 offload), Qwen3-1.7B 0.47 (wrong
   structure), Qwen3.5-0.8B loops to the token limit 20/20. M6 risk: if the 0.8B still fails after LoRA, Qwen3-1.7B is
-  the fallback. Next: M6 (decide b vs c and per-prefix rows first).
+  the fallback. **Julian, 2026-10-20: release option (b) for now** (train on the luna labels, weights private).
+  Next: M6 (per-prefix rows still to decide).
 
 - **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
   pushed**: ask Julian before any push, run a secrets check first).

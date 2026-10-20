@@ -1,15 +1,16 @@
 # OrderSLM walkthrough (for learning the project)
 
-First written 2026-10-07; updated 2026-10-13 (dev review) and 2026-10-15 (M3, the teacher bake-off).
-The only measurements so far are M3's, on the **dev** practice set: they guided prompt and code fixes, so they are
-tuning results, not final scores (those come from the sealed test set at the end). Elsewhere, output shown on this
+First written 2026-10-07; updated 2026-10-13 (dev review), 2026-10-15 (M3, the teacher bake-off) and 2026-10-20
+(M4, the training data; M5, the student bake-off).
+Every measurement so far is on the **dev** practice set: they guided choices and fixes, so they are tuning results,
+not final scores (those come from the sealed test set at the end). Elsewhere, output shown on this
 page is real output from running the code on a sample conversation, not a measurement.
 
 **Two ways to read it.** §0 explains the whole project in plain English, with no coding knowledge needed.
 §1 onward is the technical walkthrough, for learning how the code works.
 
 Contents: 0 The project in plain English · 1 Big picture · 2 Milestones so far · 3 Repo map ·
-4 One order traced through the code · 5 Glossary · 6 Commands to try · 7 Ten questions (answers at the end)
+4 One order traced through the code · 5 Glossary · 6 Commands to try · 7 Questions (answers at the end)
 
 ---
 
@@ -104,7 +105,7 @@ it should produce and the box each message belongs in.
   B = 199 real human-written pizza orders from a public dataset (PIZZA), C = optionally, ~30 Julian writes. A
   has a single author, so B and C check that results hold up on real human writing.
 
-### Where things stand (2026-10-15)
+### Where things stand (2026-10-20)
 
 | Milestone | What | Status |
 |---|---|---|
@@ -112,11 +113,14 @@ it should produce and the box each message belongs in.
 | M1 | The code half: menus, prices, missing-info rules, simple keyword versions | Done |
 | M2 | The answer keys: the annotation tool, PIZZA, recipe cards, conversations, Julian's review | **Done (2026-10-14).** 91 practice conversations reviewed; 199 final-exam conversations written, 58 reviewed, and the final exam **locked** |
 | M3 | Teacher bake-off | **Done (2026-10-15).** The teacher is **OpenAI gpt-6-luna with reasoning "low"** |
-| M4–M7 | Training data, student, training, decision providers | Not started (M4 next) |
+| M4 | Training data: made-up chats, labeled by the teacher, then audited | **Done (2026-10-19).** 1,963 single-menu + 391 big-menu chats labeled; audited by Jev and OpenAI Decisions; Julia-1 tried and set aside |
+| M5 | Student bake-off | **Done (2026-10-20).** Keep **Qwen3.5-0.8B and Qwen3.5-2B** |
+| M6 | Train the students (LoRA) and score them | Next |
+| M7 | Decision providers | Not started |
 | M8 | Demo and report | Not started |
 
-**$0.96 spent** so far (of a $10 budget), all on M3. The final exam is locked: any later change to it is logged with
-a reason.
+**$5.80 spent** so far (of a $10 budget): $0.96 on M3, the rest on M4's data and labels. M5 was free (Kaggle's GPUs).
+The final exam is locked: any later change to it is logged with a reason.
 
 ### What the teacher bake-off found (M3)
 
@@ -137,6 +141,61 @@ filled in the order form. Each answer was compared with the answer key.
   90 of 91 whole orders right, in two separate runs.
 - **Every number is saved**, per model and setting (accuracy counts, tokens, cost of the run and per 1,000 chats,
   before and after the fixes), for the case study: `docs/TEACHER_BAKEOFF.md` and `runs/teacher-bakeoff/`.
+
+### What the training-data step found (M4)
+
+The student needs examples to learn from: lots of chats, each with the right answer. Real customer chats are off
+limits, so other AI models **wrote made-up chats** from recipe cards ("a customer orders 2 burgers, changes one,
+pays cash"), and the teacher **labeled** them (filled in the order form and the box for each message).
+
+- **Writers:** DeepSeek, Gemini and Claude Haiku, never the teacher itself, so the teacher's mistakes aren't hidden
+  by reading its own writing. Claude wrote the practice and exam chats, so Haiku (also Claude) is kept to a small,
+  measured share. Results are kept per writer.
+- **Code checks every label** and drops broken ones (a quote that isn't in the chat, an answer that doesn't fit the
+  form). It also compares each label with the recipe card; disagreements were read by hand and were mostly the
+  *writer* drifting from the card, not the teacher getting it wrong.
+- **391 extra chats (about 20% on top) use a "big menu"** (all three restaurants combined into one food-court menu), for an experiment on whether the student
+  can cope with a large menu.
+- **The audit:** two decision tools (Jev and OpenAI Decisions) double-checked the teacher's labels. To see whether
+  they'd notice a mistake, code planted known mistakes into correct answers: Jev caught 89%, Decisions 78%, and each
+  agreed with the answer key's boxes about 96% of the time. **Julia-1** (free, runs on our own machine) only agreed
+  54% of the time and couldn't tell right from planted-wrong orders (about a coin flip), even after three wording
+  tweaks, so it isn't used for this audit. Making it work (fewer options per question) is saved for M7.
+- **Terms of use** were checked for every provider (`docs/TERMS.md`). One consequence: the teacher is OpenAI, whose
+  terms don't allow giving away a model trained on its answers as a competing product. **Julian's decision: keep the
+  trained student private for now** (see "Trained weights" below).
+
+### What the student bake-off found (M5)
+
+Four small models were given the exact task the teacher was given, with **no training** ("zero-shot"), on 20
+practice chats, to check the planned starting point before training.
+
+| Model | Valid answers | Menu items found (of 27) | Speed per chat |
+|---|---|---|---|
+| Qwen3.5-0.8B | 0 of 20 (it got stuck repeating a word) | 0 | 3 min |
+| **Qwen3.5-2B** | **3 of 20** (its other answers had small formatting slips) | **20** | **1 min** |
+| Qwen3-1.7B | 0 of 20 (fields in the wrong place) | 14 | 1.5 min |
+| Gemma 4 E2B | 0 of 20 (half its answers weren't even readable) | 18 | 15 min |
+
+None of them can do the job yet, which is expected: that's what training is for. The plan said to keep the two
+Qwen3.5 models unless another was clearly better or wouldn't work with the training tools; neither happened, so they
+stay. Qwen3.5-2B is the closest. If the 0.8B still can't write valid answers after training, Qwen3-1.7B is the backup.
+
+**Where it ran:** on Kaggle, a free website that lends you two graphics cards (GPUs) for up to 30 hours a week,
+because Julian's laptop is too old for this software. The run took about 7 hours, mostly Gemma, which is too big
+for those GPUs at full precision. Write-up: `docs/STUDENT_BAKEOFF.md`.
+
+### Trained weights, and why they stay private
+
+A model is a huge list of numbers, its **weights** (Qwen3.5-2B has about 2 billion). Every answer is computed from
+the input words and those numbers. **Training** nudges the numbers, example by example, so the model's answer moves
+closer to the teacher's; after thousands of examples it has learned the task.
+
+We'll use **LoRA**: the original numbers stay frozen, and a small set of extra numbers (an **adapter**, tens of MB
+instead of GBs) is trained and added on top. The adapter is the part that's ours. "Keeping the weights private"
+means not uploading the adapter (or a merged copy of the model) for anyone to download; the code, the recipe for
+making the data, the menus, the results and the write-up can still be shared. If we want to publish a model later,
+we'd relabel the data with a teacher whose terms allow it (e.g. DeepSeek) and train again.
 
 ### What changed during Julian's review of the practice set
 
@@ -407,8 +466,53 @@ and situation type is covered) and changed none; the test split was then locked 
 - **Statistical honesty:** with 35–91 chats the top settings' confidence intervals overlap; the choice rests on cost
   and a clean record, not on a significant accuracy win. These dev numbers are tuning results.
 
-**Where M3 stands:** done and merged into `main`. Next: M4, synthetic chats labeled by luna (see PROGRESS.md "Start
-here").
+**Where M3 stands:** done and merged into `main`.
+
+### Milestone 4: training data (branch `milestone-4`, 2026-10-16 … 10-19)
+
+**Built:**
+- **Training contract** (`schema/label.py`, `label@0.1`): `TeacherLabel` = an intent for every customer message +
+  `ModelOrder` (the order facts and two ambiguity flags; the missing list and question come from code, M3's
+  `core/finalize`). `StudentOutput` = the latest intent + the order. Tested: every dev gold → label → finalize gives
+  back gold's missing list and decision.
+- **Cards → chats → labels** (`synth/`): `cards.py` plans scenarios, styles, personas and the final order;
+  `generate.py` has a writer model write the chat (prompt `synth-write@0.N`), with drops for broken output and
+  `dedup.py` against near-duplicates and dev; `label.py` asks the teacher (prompt `teacher-label@0.7`) and drops
+  labels that fail the contract, the grounding checks or finalize; card agreement is flagged, not dropped. `make
+  synth` / `make label` estimate first, guard spend at $2 and replay from the cache.
+- **Label audit** (`eval/label_audit.py`): the same `DecisionRequest` for every decision provider: an intent
+  question per customer message plus an `order_ok` yes/no, on dev gold and on planted-mistake copies, then on the
+  training labels. `eval/m4_report.py` gathers every drop, repair, flag and catch rate (`make m4-report`).
+- **Kaggle driver** (`kaggle_jobs.py`, `kaggle/<job>/`): stages a private dataset from the repo, pushes a private
+  script kernel, pulls its output (`make kaggle-push/status/pull JOB=…`). Job A ran Julia-1 on CPU
+  (`eval/julia_audit.py`, plus `julia_variants.py` for the one-change-at-a-time tuning test).
+
+**Key decisions and trade-offs:**
+- **Writers differ from the teacher and from Source A's author,** because a model reads its own text the way it meant
+  it, and training on Claude-style chats could inflate Source A scores. Results are reported per writer.
+- **The model outputs facts; code outputs rules** (as in M3): no missing list or question in the label.
+- **Same wording for every decision provider.** A setting only one API supports (descriptions on yes/no answers) is
+  reported separately as a "tuned" row, not swapped in.
+- **Julia-1 was diagnosed, not just scored:** a 33-case sanity check (the setup works; the model card's example is
+  right), then shuffled option orders, which showed its choices depend on option order. That's why it was set aside.
+
+### Milestone 5: the student bake-off (2026-10-19 … 10-20)
+
+**Built:** `eval/student_bakeoff.py` stages the exact teacher-label request for 20 seeded dev chats and, after the
+run, scores each model with the teacher's own scorer (`label_dev.report`), the teacher's saved answers alongside.
+`kaggle/student-bakeoff/run.py` runs on 2 × T4: each model in its own process, fp32, greedy, up to 3,072 tokens.
+Besides the contract scores, `diagnose()` reports the most common contract errors and the menu item ids found
+regardless of structure, because every item-bearing answer was invalid.
+
+**Key decisions and trade-offs:**
+- **Same request and scorer as the teacher,** so zero-shot students and the teacher are compared like for like.
+  The only clean-up is stripping a ```json fence (none of them used one).
+- **fp32 on T4** (no bf16 there; fp16 can overflow). Two memory fixes were needed: transformers' `enable_gqa` flag
+  sent attention to PyTorch's slow math kernel (out of memory at ~8k tokens), so it's switched off (same result,
+  memory-efficient kernel); and per-GPU caps. Gemma 4 E2B (~20 GB in fp32) still spilled to CPU memory: 15 min per answer.
+- **Decision:** keep Qwen3.5-0.8B + 2B (spec §9's rule). Full write-up: `docs/STUDENT_BAKEOFF.md`.
+
+**Where M5 stands:** done, on `milestone-4`, not pushed. Next: M6, LoRA training (see PROGRESS.md "Start here").
 
 ---
 
@@ -455,7 +559,15 @@ here").
 | `docs/TEACHER_BAKEOFF.md`, `docs/figures/` | The M3 write-up and its accuracy-vs-cost chart | 3 |
 | `docs/PRICING.md`, `MENUS.md` | Pricing rules; the menus and why they're shaped that way | 1 |
 | `docs/PIZZA.md`, `SPLITS.md` | The PIZZA benchmark; sources, cards, review, lock | 2 |
-| `tests/` | 395 tests in 22 files, one per area (`test_pricing.py`, `test_llm.py`, `test_finalize.py`, ...) | 0–3 |
+| `src/orderslm/schema/label.py` | The training contract: `TeacherLabel`, `ModelOrder`, `StudentOutput` | 4 |
+| `src/orderslm/synth/` | Training data: `cards.py`, `generate.py`, `dedup.py`, `label.py`, `run.py` (`make synth` / `make label`), prompts | 4 |
+| `src/orderslm/eval/label_dev.py`, `label_audit.py`, `m4_report.py` | The label prompt scored on dev; the decision-provider audit; the M4 report | 4 |
+| `src/orderslm/eval/julia_audit.py`, `julia_variants.py` | Julia-1 on Kaggle: the audit, the sanity check, the tuning test | 4 |
+| `src/orderslm/eval/student_bakeoff.py` | M5: export, import, scoring, diagnostics | 5 |
+| `src/orderslm/kaggle_jobs.py`, `kaggle/<job>/` | Push/pull Kaggle kernels; each job's `run.py` + `kernel-metadata.json` (inputs/outputs gitignored) | 4, 5 |
+| `runs/synth/`, `runs/label-dev/`, `runs/label-audit/`, `runs/m4-report/`, `runs/student-bakeoff/` | M4 and M5 saved outputs and reports | 4, 5 |
+| `docs/TERMS.md`, `KAGGLE.md`, `STUDENT_BAKEOFF.md` | Provider terms and the release decision; the Kaggle setup; the M5 write-up | 4, 5 |
+| `tests/` | 448 tests, one file per area (`test_pricing.py`, `test_llm.py`, `test_student_bakeoff.py`, ...) | 0–5 |
 
 ---
 
@@ -589,6 +701,15 @@ needed, and why the metrics look at fields as well as items.
 | **Extractor** | Turns a conversation into an `ExtractionOutput`. The teacher and the students are both extractors. |
 | **Teacher / student / distillation** | Teacher = a big hosted model that labels training data. Student = a small local model trained (LoRA) on those labels. Distillation = that training, measured against the teacher. |
 | **LoRA** | A cheap way to fine-tune: train small add-on matrices instead of the whole model. |
+| **Weights / parameters** | The numbers inside a model that turn input into output (Qwen3.5-2B: ~2 billion). Training changes them. |
+| **Adapter** | The small set of extra numbers LoRA trains; added on top of the frozen base model. The part we'd publish or keep private. |
+| **Zero-shot** | A model asked to do a task with instructions only: no examples, no training. M5 was zero-shot. |
+| **Valid label (contract valid)** | An answer that parses as JSON *and* passes every rule of `TeacherLabel` (types, evidence where required). Invalid answers score as nothing. |
+| **Synthetic chat** | A made-up conversation written by a model from a recipe card, for training only (never evaluation). |
+| **Label audit** | Decision providers re-checking the teacher's labels, with planted mistakes to measure their catch rate. |
+| **Kaggle kernel** | A script Kaggle runs on its machines (CPU, or GPUs like 2 × T4); ours are private and driven by `make kaggle-push`. |
+| **fp32 / fp16 / bf16** | Number precision: 32-bit is exact but uses twice the memory of 16-bit. T4 GPUs lack bf16, so M5 ran in fp32. |
+| **Token limit** | The maximum answer length (3,072 tokens in M5); a model that never stops is cut off there. |
 | **Baseline (rules baseline)** | A no-model solution (regex + keyword rules). It sets the floor a model must beat. |
 | **Dev split** | Data used while building: prompt tuning, bake-offs. Allowed to look at. |
 | **Test split** | Data used only for final results. |
@@ -634,7 +755,7 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 
 | Command | What you'll see / what to look for |
 |---|---|
-| `make check` | Ruff lint + format check, then 395 tests. Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
+| `make check` | Ruff lint + format check, then 448 tests. Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
 | `uv run pytest tests/test_pricing.py -vv` | Each pricing rule as a named test (`-vv` because the config adds `-q`), e.g. `test_half_and_half_costs_the_dearer_half_plus_half_priced_toppings`. The test names read as the spec. |
 | `make menus` | Each menu validated, with its content hash (`halfmoon-pizza@44183959594b`) and item/variant/modifier counts. Lucky Lime is marked HELD OUT. |
 | `make annotate`, then open http://127.0.0.1:8765 | The annotation tool. Click **New conversation**, type a message, select some words to make evidence, use **+ item line**, and watch the check panel: findings, "rules say missing", and the computed quote. `?open=<id>` opens one directly. |
@@ -648,6 +769,8 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 | `make teacher-bakeoff` | The bake-off's cost estimate per setting; no calls without `--yes`. |
 | `make teacher-bakeoff ARGS="--report runs/teacher-bakeoff/20261015T182916Z-full-skip5 --postprocess finalize"` | Rebuilds the 12-setting report "with code rules" from the saved answers: no API calls, $0. |
 | `make bakeoff-chart` | Regenerates `runs/teacher-bakeoff/chart-data.json` and `docs/figures/teacher-bakeoff-accuracy-cost.svg` from the saved answers. |
+| `make m4-report` | Every M4 drop, repair, flag and audit catch rate, rebuilt from saved runs into `runs/m4-report/`. |
+| `make student-bakeoff ARGS="import runs/student-bakeoff/20261019T182539Z"` | Re-scores the M5 bake-off from the saved Kaggle output (needs `kaggle/student-bakeoff/output/`, i.e. `make kaggle-pull JOB=student-bakeoff` first); prints the two tables. |
 
 To trace an order yourself, adapt §4: load `sample-005.json`, call `extract_rules(menu, messages[:k])` for
 k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing().quote`.
@@ -669,6 +792,9 @@ k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing(
 11. Why was luna "low" chosen over Haiku "on-medium", which scored as high or higher?
 12. Why does code, not the model, decide what's still missing?
 13. Why are M3's numbers called tuning results, and what would make them held-out results?
+14. Why are the training chats written by DeepSeek, Gemini and Haiku rather than by the teacher?
+15. In M5 every student scored 0 item F1. Why keep Qwen3.5-0.8B and 2B anyway, and what does the diagnostic table add?
+16. Why can't we publish the trained student on Hugging Face right now?
 
 ### Answers
 
@@ -716,3 +842,13 @@ k = 1..6, and print `diff_orders`, `required_missing` and `DeterministicPricing(
 13. The dev chats showed the problems that the prompt fixes and the code rules then fixed, so scoring on the same chats
     flatters them. Held-out results come from data nobody looked at while building: the sealed test set (Sources A, B,
     C) at the end of the project, or fresh unused PIZZA orders for checking a specific fix.
+14. A model reads its own writing the way it meant it, so a teacher labeling its own chats would make fewer
+    mistakes than it would on real customers' text, hiding its weaknesses. And Claude wrote Source A's test chats,
+    so training on Claude-style chats could flatter Source A scores. Results are kept per writer to check this.
+15. Zero-shot, no model writes valid labels, so the strict scores can't separate them; the spec keeps the default
+    pair unless another model is clearly better or the training tools fail, and neither happened. The diagnostic
+    shows *how close* each is: Qwen3.5-2B found 20 of 27 menu items and its errors were small type slips, the kind of
+    thing training fixes; Gemma was similar on items but broke its JSON half the time and was 15× slower.
+16. The teacher is OpenAI, and OpenAI's terms only clearly allow a model trained on its answers if that model isn't
+    distributed. Julian chose option (b): train on luna's labels and keep the weights private. Publishing later
+    would mean relabeling with a teacher whose terms allow it (option c) and training again.
