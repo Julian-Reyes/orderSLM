@@ -50,3 +50,10 @@ def test_phases_try_torch_then_fla_then_2b():
     names = [p["name"] for p in ks.PHASES]
     assert names[0] == "0.8b-torch-fp16" and names[1] == "0.8b-fla-fp16" and names[-1].startswith("2b")
     assert all(p["dtype"] == "float16" for p in ks.PHASES if p.get("if") != "fp16_unstable")
+
+
+def test_summary_reports_a_compile_step_separately():
+    steps = [step(1), step(2)] + [step(n) for n in range(3, 8)] + [step(8, seconds=5.0)]
+    s = ks.phase_summary(steps, total_tokens=3_600_000, n_rows=1800)
+    assert s["compile_outliers"] == [{"step": 8, "tokens": 1000, "seconds": 5.0}]
+    assert s["tokens_per_second_excl_outliers"] == 1000.0 and s["single_pass_hours_excl_outliers"] == 1.0

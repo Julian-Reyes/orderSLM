@@ -35,6 +35,10 @@ JOB_DIR = ROOT / "kaggle" / EXPERIMENT
 STAGE = JOB_DIR / "upload"  # gitignored
 DATASET = "JReyes33/orderslm-student-data"
 WARMUP_STEPS = 2  # first steps include CUDA/Triton compilation; left out of the throughput
+# A steady step slower than this × the median seconds per token is a one-off compile (fla's Triton kernels compile
+# again for a new length range: 0.8B step 8, 5,835 tokens, 30 s vs ~9 s for its neighbours). It is reported, and the
+# estimate is given with and without such steps.
+COMPILE_OUTLIER = 2.0
 # Same revisions as M5 (runs/student-bakeoff/20261019T182539Z/manifest.json).
 MODELS = {
     "0.8b": {"repo": "Qwen/Qwen3.5-0.8B", "revision": "2fc06364715b967f1860aea9cf38778875588b17"},
@@ -142,6 +146,19 @@ def phase_summary(steps: list[dict], total_tokens: int, n_rows: int) -> dict[str
         ],
     }
     if steady:
+        per_k = sorted(s["seconds"] / s["tokens"] * 1000 for s in steady)
+        median = per_k[len(per_k) // 2]
+        slow = [s for s in steady if s["seconds"] / s["tokens"] * 1000 > COMPILE_OUTLIER * median]
+        kept = [s for s in steady if s not in slow]
+        k_secs, k_toks = sum(s["seconds"] for s in kept), sum(s["tokens"] for s in kept)
+        out |= {
+            "seconds_per_1k_tokens_median": round(median, 3),
+            "compile_outliers": [
+                {"step": s["step"], "tokens": s["tokens"], "seconds": s["seconds"]} for s in slow
+            ],
+            "tokens_per_second_excl_outliers": round(k_toks / k_secs, 1),
+            "single_pass_hours_excl_outliers": round(total_tokens / (k_toks / k_secs) / 3600, 2),
+        }
         secs, toks = sum(s["seconds"] for s in steady), sum(s["tokens"] for s in steady)
         out |= {
             "steady_steps": len(steady),
@@ -203,7 +220,7 @@ def _write_report(run_dir: Path, summary: dict) -> None:
         "One GPU per phase, batch 1, gradient checkpointing, LoRA r 8 on all linear layers, answer-only loss.",
         "",
         "| Phase | Delta rule | Steady tok/s | s/step (mean row tokens) | Peak GB (random) | Non-finite loss | "
-        "Longest rows (tokens: s, GB) | One pass single/train, 1 T4 |",
+        "Longest rows (tokens: s, GB) | One pass single/train, 1 T4 (excl. compile steps) |",
         "|---|---|---:|---:|---:|---:|---|---:|",
     ]
     for name, p in summary["phases"].items():
@@ -217,7 +234,8 @@ def _write_report(run_dir: Path, summary: dict) -> None:
             row = (
                 f"| {name} | {rule} | {p['tokens_per_second']:,} | {p['step_seconds_mean']} "
                 f"({p['steady_row_tokens_mean']:,}) | {p['peak_memory_gb_max_random']} | "
-                f"{p['nonfinite_loss_steps']}/{p['steps']} | {longest} | {p['single_pass_hours_by_tokens']} h |"
+                f"{p['nonfinite_loss_steps']}/{p['steps']} | {longest} | {p['single_pass_hours_by_tokens']} h "
+                f"({p['single_pass_hours_excl_outliers']} h) |"
             )
         else:
             row = f"| {name} | {rule} | failed: {(p.get('error') or 'no steps')[:120]} | | | | | |"

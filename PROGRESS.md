@@ -6,7 +6,7 @@ _Last updated 2026-10-21._
 
 ## Start here next session
 
-_Updated 2026-10-21._
+_Updated 2026-10-21 (Kaggle smoke test done)._
 
 - **M5 student bake-off done (2026-10-20, free on Kaggle 2 × T4):** `docs/STUDENT_BAKEOFF.md`, run
   `runs/student-bakeoff/20261019T182539Z/`. **Decision: keep Qwen3.5-0.8B + 2B** (no candidate clearly better, tooling
@@ -47,17 +47,38 @@ _Updated 2026-10-21._
   (Julian, 2026-10-21): Kaggle is the primary training path**; probe re-run and the 12 h check not done.
   Deployment note: mlx-lm's `--export-gguf` covers only Llama/Mistral-style fp16, so Qwen3.5 GGUF needs llama.cpp's
   `convert_hf_to_gguf.py` on the fused HF-format model (check its Qwen3.5 support when we get there).
-- **Kaggle LoRA smoke test (job C, 2026-10-21, $0): staged, not yet pushed.** `make train-smoke ARGS=export` →
-  `runs/train-smoke/20261021T145441Z/` + `kaggle/train-smoke/upload/` (private dataset `JReyes33/orderslm-student-data`:
-  single + mixed train rows); kernel `kaggle/train-smoke/run.py`. Phases (each its own process, 1 T4, fp16 base +
-  fp32 LoRA r 8 all-linear, GradScaler, grad checkpointing, answer-only logits via `logits_to_keep`): 0.8B without
-  fla (transformers' PyTorch chunked path) 20 random rows + longest single (6.3k) + longest mixed (9.8k); 0.8B with
-  `fla-core==0.5.2` (Triton; numeric check vs PyTorch on the T4 first); fp32 rerun only if fp16 goes non-finite; 2B
-  10 + 2 rows on the faster path. Records which delta-rule function ran, per-step s/tokens/peak GB/loss/grad norm;
-  import → `summary.json` + `report.md` with one-pass single/train estimates. `causal-conv1d` not installed
-  (source-only, CUDA build). **Blocked: no Kaggle token on the Mac mini** (`~/.kaggle/access_token` missing; CLI
-  2.2.4 installed via `uv tool`, `~/.local/bin` not on PATH yet). Then: `make kaggle-push JOB=train-smoke`,
-  `make kaggle-pull JOB=train-smoke`, `make train-smoke ARGS="import runs/train-smoke/20261021T145441Z"`.
+- **Kaggle LoRA smoke test (job C, 2026-10-21, $0, ~0.5 h GPU): done; Kaggle is the training path.**
+  `make train-smoke` (`src/orderslm/train/kaggle_smoke.py`, kernel `kaggle/train-smoke/run.py`), run
+  `runs/train-smoke/20261021T145441Z/` (`report.md`, `summary.json`, `kernel/`; `attempt-1/` = first push, every
+  phase failed on import: peft 0.21.2 refuses Kaggle's torchao 0.10, so the kernel now uninstalls torchao). Private
+  dataset `JReyes33/orderslm-student-data` (single + mixed train rows). Setup: 1 T4 per phase, fp16 base + fp32
+  LoRA r 8 / alpha 16 on all linear layers (0.8B 5.4M trainable, 2B 8.4M), AdamW 1e-4, GradScaler, grad
+  checkpointing, batch 1, answer-only logits (`logits_to_keep`). torch 2.11, transformers 5.20.2, peft 0.21.2,
+  triton 3.6, fla-core 0.5.2 (`--no-deps`). Mac mini's Kaggle token + CLI set up (`~/.local/bin/kaggle`).
+  - **Kernels:** without fla, transformers falls back to its PyTorch `torch_chunk_gated_delta_rule` (recorded from
+    the wrapper); with fla installed it calls `fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule`, which **runs
+    on the T4** (sm 7.5) and matches the PyTorch version to 5.5e-4 in fp16 (outputs and q/k/v gradients). First call
+    compiles for ~4 min; a new length range compiles again once (0.8B step 8: 30 s instead of ~9 s).
+    `causal-conv1d` not installed (source-only; the conv stays on PyTorch).
+  - **fp16:** stable. No non-finite loss in 56 steps; the GradScaler skipped the first 7 updates of each run
+    (overflowing gradients while its scale fell 65,536 → 512; 2B also skipped 2 more at steps 8–9), normal dynamic
+    loss scaling. Loss on the rows seen fell 1.8 → 0.3–0.4 (0.8B) and 1.6 → 0.66 (2B).
+  - **Speed / memory** (steady = random rows after 2 warm-up steps; per-token cost from the same rows):
+
+    | Run | s per 1k tokens (median) | Peak GB, random rows | 6,323 tokens | 9,805 tokens | One pass single/train (7,085,224 tokens), 1 T4 |
+    |---|---:|---:|---|---|---:|
+    | 0.8B, PyTorch delta rule | 1.74 (grows with length: ~1.6 at 2–3k, ~2.2 at 5.8k) | 3.76 | 14.6 s, 4.0 GB | 30.9 s, 5.2 GB | **3.7 h** |
+    | 0.8B, fla | 1.61 (flat ~1.55 at 2–6k) | 3.72 | 9.7 s, 3.7 GB | 39.0 s*, 4.0 GB | **3.1 h** excl. the one compile step (3.7 h incl.) |
+    | 2B, fla | 2.04 | 6.15 | 11.9 s, 6.3 GB | 20.2 s, 7.2 GB | **3.9 h** |
+
+    \* probably a compile for a new length range (the 2B's 9.8k step took 20 s); to confirm in the first real run.
+    Everything fits easily in a T4's 15 GB, so the two T4s can train the 0.8B and the 2B side by side in one session
+    (the session limit is 12 h). Mixed (10.48M tokens) ≈ 1.5 × single. Estimates scale measured speed to total
+    tokens; they are not a measured full run.
+  - **MLX:** parked (patch kept and verified; see above).
+- **Next (M6 training):** a full LoRA run on Kaggle, recommended: fla, fp16, the 0.8B and the 2B (single) in
+  parallel on the two T4s, then the 2B mixed; settings (epochs, LoRA rank/targets, lr schedule, eval cadence on
+  valid) to agree with Julian first.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -110,7 +131,7 @@ _Updated 2026-10-21._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; Kaggle smoke test staged (primary path) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

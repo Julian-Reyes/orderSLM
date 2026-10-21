@@ -1,0 +1,272 @@
+{
+  "env": {
+    "run_dir": "20261021T145441Z",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "accelerate": "1.14.0",
+    "cuda": "12.8",
+    "capability": [
+      7,
+      5
+    ],
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torchao_uninstall": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "started_at": "2026-10-21T15:43:40.294309+00:00",
+    "triton": "3.6.0",
+    "finished_at": "2026-10-21T16:00:06.443772+00:00"
+  },
+  "phases": {
+    "0.8b-torch-fp16": {
+      "kernels": {
+        "chunk_gated_delta_rule": "transformers.models.qwen3_5.modeling_qwen3_5.torch_chunk_gated_delta_rule",
+        "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+      },
+      "fla_check": null,
+      "model_class": "Qwen3_5ForCausalLM",
+      "parameters": 752393024,
+      "trainable_parameters": 5411328,
+      "memory_after_load_gb": 1.53,
+      "single_train_tokens": {
+        "rows": 1865,
+        "tokens": 7085224,
+        "max": 6323
+      },
+      "mixed_train_tokens": {
+        "rows": 2236,
+        "tokens": 10484161,
+        "max": 9805
+      },
+      "error": null,
+      "exit_code": null,
+      "steps": 22,
+      "errors": [],
+      "nonfinite_loss_steps": 0,
+      "nonfinite_grad_steps": 7,
+      "loss_first": [
+        1.8213,
+        1.0818,
+        1.9219
+      ],
+      "loss_last": [
+        0.5756,
+        0.269,
+        0.4262
+      ],
+      "longest": [
+        {
+          "split": "single",
+          "tokens": 6323,
+          "seconds": 14.551,
+          "peak_memory_gb": 3.96,
+          "loss": 0.3348921835422516,
+          "error": null
+        },
+        {
+          "split": "mixed",
+          "tokens": 9805,
+          "seconds": 30.912,
+          "peak_memory_gb": 5.15,
+          "loss": 0.3272486627101898,
+          "error": null
+        }
+      ],
+      "seconds_per_1k_tokens_median": 1.739,
+      "compile_outliers": [],
+      "tokens_per_second_excl_outliers": 525.9,
+      "single_pass_hours_excl_outliers": 3.74,
+      "steady_steps": 18,
+      "steady_row_tokens_mean": 3621,
+      "tokens_per_second": 525.9,
+      "step_seconds_mean": 6.89,
+      "peak_memory_gb_max_random": 3.76,
+      "single_pass_hours_by_tokens": 3.74,
+      "single_pass_hours_by_steps": 3.57
+    },
+    "0.8b-fla-fp16": {
+      "kernels": {
+        "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+        "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+      },
+      "fla_check": {
+        "shape": [
+          1,
+          2048,
+          16,
+          128
+        ],
+        "y_rel_l2": 0.0005505328881554306,
+        "grad_rel_l2": [
+          0.0005510030896402895,
+          0.000589666364248842,
+          0.0005128236953169107
+        ],
+        "finite": true,
+        "seconds_first_call": {
+          "torch": 0.265,
+          "fla": 253.308
+        }
+      },
+      "model_class": "Qwen3_5ForCausalLM",
+      "parameters": 752393024,
+      "trainable_parameters": 5411328,
+      "memory_after_load_gb": 1.54,
+      "single_train_tokens": {
+        "rows": 1865,
+        "tokens": 7085224,
+        "max": 6323
+      },
+      "mixed_train_tokens": {
+        "rows": 2236,
+        "tokens": 10484161,
+        "max": 9805
+      },
+      "error": null,
+      "exit_code": null,
+      "steps": 22,
+      "errors": [],
+      "nonfinite_loss_steps": 0,
+      "nonfinite_grad_steps": 7,
+      "loss_first": [
+        1.8212,
+        1.0817,
+        1.9214
+      ],
+      "loss_last": [
+        0.587,
+        0.2789,
+        0.4284
+      ],
+      "longest": [
+        {
+          "split": "single",
+          "tokens": 6323,
+          "seconds": 9.724,
+          "peak_memory_gb": 3.66,
+          "loss": 0.3366509974002838,
+          "error": null
+        },
+        {
+          "split": "mixed",
+          "tokens": 9805,
+          "seconds": 39.005,
+          "peak_memory_gb": 3.98,
+          "loss": 0.3203991651535034,
+          "error": null
+        }
+      ],
+      "seconds_per_1k_tokens_median": 1.608,
+      "compile_outliers": [
+        {
+          "step": 8,
+          "tokens": 5835,
+          "seconds": 30.407
+        }
+      ],
+      "tokens_per_second_excl_outliers": 634.8,
+      "single_pass_hours_excl_outliers": 3.1,
+      "steady_steps": 18,
+      "steady_row_tokens_mean": 3621,
+      "tokens_per_second": 526.1,
+      "step_seconds_mean": 6.88,
+      "peak_memory_gb_max_random": 3.72,
+      "single_pass_hours_by_tokens": 3.74,
+      "single_pass_hours_by_steps": 3.57
+    },
+    "2b-fla-fp16": {
+      "kernels": {
+        "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+        "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+      },
+      "fla_check": {
+        "shape": [
+          1,
+          2048,
+          16,
+          128
+        ],
+        "y_rel_l2": 0.0005505328881554306,
+        "grad_rel_l2": [
+          0.0005510030896402895,
+          0.000589666364248842,
+          0.0005128236953169107
+        ],
+        "finite": true,
+        "seconds_first_call": {
+          "torch": 0.262,
+          "fla": 1.389
+        }
+      },
+      "model_class": "Qwen3_5ForCausalLM",
+      "parameters": 1881825088,
+      "trainable_parameters": 8409600,
+      "memory_after_load_gb": 3.81,
+      "single_train_tokens": {
+        "rows": 1865,
+        "tokens": 7085224,
+        "max": 6323
+      },
+      "mixed_train_tokens": {
+        "rows": 2236,
+        "tokens": 10484161,
+        "max": 9805
+      },
+      "error": null,
+      "exit_code": null,
+      "steps": 12,
+      "errors": [],
+      "nonfinite_loss_steps": 0,
+      "nonfinite_grad_steps": 7,
+      "loss_first": [
+        1.6105,
+        0.947,
+        1.7263
+      ],
+      "loss_last": [
+        0.9055,
+        1.4247,
+        1.0088
+      ],
+      "longest": [
+        {
+          "split": "single",
+          "tokens": 6323,
+          "seconds": 11.908,
+          "peak_memory_gb": 6.29,
+          "loss": 0.8230557441711426,
+          "error": null
+        },
+        {
+          "split": "mixed",
+          "tokens": 9805,
+          "seconds": 20.163,
+          "peak_memory_gb": 7.23,
+          "loss": 0.6565006971359253,
+          "error": null
+        }
+      ],
+      "seconds_per_1k_tokens_median": 2.04,
+      "compile_outliers": [],
+      "tokens_per_second_excl_outliers": 504.7,
+      "single_pass_hours_excl_outliers": 3.9,
+      "steady_steps": 8,
+      "steady_row_tokens_mean": 3081,
+      "tokens_per_second": 504.7,
+      "step_seconds_mean": 6.1,
+      "peak_memory_gb_max_random": 6.15,
+      "single_pass_hours_by_tokens": 3.9,
+      "single_pass_hours_by_steps": 3.16
+    }
+  }
+}

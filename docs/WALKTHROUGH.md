@@ -115,7 +115,7 @@ it should produce and the box each message belongs in.
 | M3 | Teacher bake-off | **Done (2026-10-15).** The teacher is **OpenAI gpt-6-luna with reasoning "low"** |
 | M4 | Training data: made-up chats, labeled by the teacher, then audited | **Done (2026-10-19).** 1,963 single-menu + 391 big-menu chats labeled; audited by Jev and OpenAI Decisions; Julia-1 tried and set aside |
 | M5 | Student bake-off | **Done (2026-10-20).** Keep **Qwen3.5-0.8B and Qwen3.5-2B** |
-| M6 | Train the students (LoRA) and score them | Next |
+| M6 | Train the students (LoRA) and score them | **Started.** Training data built (2026-10-20); training tested on the Mac mini (too slow) and on Kaggle (works, ~3–4 h per pass) |
 | M7 | Decision providers | Not started |
 | M8 | Demo and report | Not started |
 
@@ -184,6 +184,30 @@ stay. Qwen3.5-2B is the closest. If the 0.8B still can't write valid answers aft
 **Where it ran:** on Kaggle, a free website that lends you two graphics cards (GPUs) for up to 30 hours a week,
 because Julian's laptop is too old for this software. The run took about 7 hours, mostly Gemma, which is too big
 for those GPUs at full precision. Write-up: `docs/STUDENT_BAKEOFF.md`.
+
+### Getting ready to train (M6, 2026-10-21)
+
+Before spending hours training, we ran a short **smoke test** (a few dozen training steps, to see that it runs and
+how fast) on two machines.
+
+**The Mac mini (Apple M1, 16 GB):** it couldn't train our students as-is. Qwen3.5 reads text with a special kind of
+layer (a "linear-attention" or Gated DeltaNet layer) that Apple's MLX library can only train one word at a time,
+keeping a big note for every word. At about 1,500 tokens it already needed more memory than the Mac has, and our
+typical chat is 3,200 tokens. We borrowed a fix someone wrote for MLX (an open pull request that processes the text
+in blocks of 64 instead, credited in `src/orderslm/train/gated_delta_patch.py`), fixed one bug in it for long
+chats, and checked it gives the same numbers as the original (to about 1 part in a million in full precision). It
+works, but the Mac would still be slow, so it's parked.
+
+**Kaggle (free NVIDIA T4 GPUs): this is where we'll train.** On a T4 the fast version of that layer (a library
+called flash-linear-attention) works, and training in half precision (fp16, which the T4 is fast at) is stable.
+
+| Student | Time for one pass over the 1,865 training chats (one GPU) | Memory on the longest chat (9,805 tokens) |
+|---|---|---|
+| Qwen3.5-0.8B | about 3.1 hours | 4.0 GB of the T4's 15 GB |
+| Qwen3.5-2B | about 3.9 hours | 7.2 GB |
+
+Kaggle lends two T4s at once, so both students can train side by side in one session. Write-up:
+`runs/train-smoke/20261021T145441Z/report.md` (Kaggle) and `runs/mlx-smoke/NOTES.md` (Mac).
 
 ### Trained weights, and why they stay private
 
@@ -514,6 +538,28 @@ regardless of structure, because every item-bearing answer was invalid.
 
 **Where M5 stands:** done, on `milestone-4`, not pushed. Next: M6, LoRA training (see PROGRESS.md "Start here").
 
+### Milestone 6 so far: training rows and smoke tests (2026-10-20 … 10-21)
+
+**Built:** `train/data.py` (`make student-data`): one row per labeled synthetic chat, the short student prompt
+`student-extract@0.1` + menu + chat → the teacher's `StudentOutput`. `train/mlx_smoke.py` (`make mlx-smoke`): LoRA
+steps on the Mac with mlx-lm, a `--probe` (one step per length) and a `--check` (patched vs stock on real rows).
+`train/gated_delta_patch.py`: the chunkwise gated delta rule from mlx-lm PR #1870 (vendored, MIT, attributed) with
+an 8×8 base block. `train/kaggle_smoke.py` + `kaggle/train-smoke/run.py` (`make train-smoke`): the Kaggle smoke test.
+
+**Key decisions and trade-offs:**
+- **Stock mlx-lm can't train Qwen3.5 here:** the Gated DeltaNet Metal kernel has no backward pass, so training uses a
+  per-token loop (~9.6 MB per token on the 0.8B; 1,536 tokens = 14.3 GB, 74 s per step).
+- **The patch is verified, then parked:** fp32 logits within 3e-6 of the stock loop, LoRA gradients within 7e-6; the
+  1.7% difference in bf16 is the same as between mlx's own inference kernel and the loop (rounding). Julian moved
+  training to Kaggle because the Mac is much slower.
+- **Kaggle T4:** with `fla-core` installed, transformers uses fla's Triton kernel (it otherwise falls back to a slower
+  PyTorch version whose cost per token grows with length). fp16 base weights + fp32 LoRA + GradScaler: no
+  non-finite loss. **Answer-only logits** (`logits_to_keep`): the same loss as masking the prompt without building a
+  9.8k × 248k logits table. Kaggle's torchao 0.10 had to be uninstalled (peft 0.21.2 refuses it).
+
+**Where M6 stands:** training data and smoke tests done; next is the first full LoRA run on Kaggle (settings to
+agree with Julian).
+
 ---
 
 ## 3. Repo map
@@ -567,7 +613,9 @@ regardless of structure, because every item-bearing answer was invalid.
 | `src/orderslm/kaggle_jobs.py`, `kaggle/<job>/` | Push/pull Kaggle kernels; each job's `run.py` + `kernel-metadata.json` (inputs/outputs gitignored) | 4, 5 |
 | `runs/synth/`, `runs/label-dev/`, `runs/label-audit/`, `runs/m4-report/`, `runs/student-bakeoff/` | M4 and M5 saved outputs and reports | 4, 5 |
 | `docs/TERMS.md`, `KAGGLE.md`, `STUDENT_BAKEOFF.md` | Provider terms and the release decision; the Kaggle setup; the M5 write-up | 4, 5 |
-| `tests/` | 448 tests, one file per area (`test_pricing.py`, `test_llm.py`, `test_student_bakeoff.py`, ...) | 0–5 |
+| `src/orderslm/train/` | M6: `data.py` (training rows), `kaggle_smoke.py` (Kaggle smoke test export/import), `mlx_smoke.py` + `gated_delta_patch.py` (Mac/MLX, parked) | 6 |
+| `kaggle/train-smoke/`, `runs/student-data/`, `runs/train-smoke/`, `runs/mlx-smoke/` | The Kaggle training smoke kernel; the training-row manifest; smoke test outputs and notes | 6 |
+| `tests/` | 480 tests (18 of them need the `mlx` group and are skipped without it), one file per area (`test_pricing.py`, `test_llm.py`, `test_kaggle_smoke.py`, ...) | 0–6 |
 
 ---
 
@@ -755,7 +803,7 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 
 | Command | What you'll see / what to look for |
 |---|---|
-| `make check` | Ruff lint + format check, then 448 tests. Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
+| `make check` | Ruff lint + format check, then 480 tests (462 without the `mlx` group). Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
 | `uv run pytest tests/test_pricing.py -vv` | Each pricing rule as a named test (`-vv` because the config adds `-q`), e.g. `test_half_and_half_costs_the_dearer_half_plus_half_priced_toppings`. The test names read as the spec. |
 | `make menus` | Each menu validated, with its content hash (`halfmoon-pizza@44183959594b`) and item/variant/modifier counts. Lucky Lime is marked HELD OUT. |
 | `make annotate`, then open http://127.0.0.1:8765 | The annotation tool. Click **New conversation**, type a message, select some words to make evidence, use **+ item line**, and watch the check panel: findings, "rules say missing", and the computed quote. `?open=<id>` opens one directly. |
@@ -770,6 +818,8 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 | `make teacher-bakeoff ARGS="--report runs/teacher-bakeoff/20261015T182916Z-full-skip5 --postprocess finalize"` | Rebuilds the 12-setting report "with code rules" from the saved answers: no API calls, $0. |
 | `make bakeoff-chart` | Regenerates `runs/teacher-bakeoff/chart-data.json` and `docs/figures/teacher-bakeoff-accuracy-cost.svg` from the saved answers. |
 | `make m4-report` | Every M4 drop, repair, flag and audit catch rate, rebuilt from saved runs into `runs/m4-report/`. |
+| `make student-data` | Rebuilds the M6 training rows from the M4 labels; counts and sha256 should match `runs/student-data/student-data@0.1/manifest.json` |
+| `make train-smoke ARGS="import runs/train-smoke/20261021T145441Z"` | Rebuilds the Kaggle smoke test's report from the saved kernel output (needs `make kaggle-pull JOB=train-smoke` first) |
 | `make student-bakeoff ARGS="import runs/student-bakeoff/20261019T182539Z"` | Re-scores the M5 bake-off from the saved Kaggle output (needs `kaggle/student-bakeoff/output/`, i.e. `make kaggle-pull JOB=student-bakeoff` first); prints the two tables. |
 
 To trace an order yourself, adapt §4: load `sample-005.json`, call `extract_rules(menu, messages[:k])` for

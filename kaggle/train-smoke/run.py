@@ -277,6 +277,11 @@ def main() -> None:
     run = json.loads((src / "run.json").read_text())
     pins = run["packages"]
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", *pins["main"]])
+    # peft 0.21.2 raises ImportError whenever torchao < 0.16 is installed (Kaggle ships 0.10, attempt 1); we don't use
+    # it (it is for quantized LoRA), so remove it.
+    torchao = subprocess.run(
+        [sys.executable, "-m", "pip", "uninstall", "-y", "-q", "torchao"], capture_output=True, text=True
+    )
     fla = subprocess.run(
         [sys.executable, "-m", "pip", "install", "-q", "--no-deps", "--target", FLA_SITE, *pins["fla"]],
         capture_output=True,
@@ -299,6 +304,7 @@ def main() -> None:
         "gpus": gpus,
         "python": sys.version.split()[0],
         "fla_install": {"returncode": fla.returncode, "stderr": fla.stderr[-2000:]},
+        "torchao_uninstall": {"returncode": torchao.returncode, "stderr": torchao.stderr[-500:]},
         "started_at": datetime.now(UTC).isoformat(),
         "phases": {},
     }

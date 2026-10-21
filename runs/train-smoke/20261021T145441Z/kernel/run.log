@@ -1,0 +1,67 @@
+15:43:40 run 20261021T145441Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+15:43:40 phase 0.8b-torch-fp16
+15:44:02 0.8b-torch-fp16: Qwen3_5ForCausalLM 752,393,024 params, 5,411,328 trainable, kernels {'chunk_gated_delta_rule': 'transformers.models.qwen3_5.modeling_qwen3_5.torch_chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}
+15:45:11 0.8b-torch-fp16 1/22 single#1118 2323 tok: 6.374s loss 1.8213 gn nan peak 2.43 GB
+15:45:16 0.8b-torch-fp16 2/22 single#788 3206 tok: 5.59s loss 1.0818 gn nan peak 3.33 GB
+15:45:20 0.8b-torch-fp16 3/22 single#1188 2258 tok: 3.509s loss 1.9219 gn nan peak 2.4 GB
+15:45:25 0.8b-torch-fp16 4/22 single#1744 2902 tok: 4.684s loss 1.0904 gn nan peak 3.72 GB
+15:45:28 0.8b-torch-fp16 5/22 single#22 2350 tok: 3.638s loss 1.7198 gn nan peak 2.71 GB
+15:45:32 0.8b-torch-fp16 6/22 single#780 2373 tok: 3.76s loss 1.5521 gn nan peak 2.96 GB
+15:45:36 0.8b-torch-fp16 7/22 single#828 2411 tok: 4.026s loss 1.6032 gn nan peak 3.0 GB
+15:45:49 0.8b-torch-fp16 8/22 single#643 5835 tok: 12.791s loss 1.1863 gn 2.68 peak 3.73 GB
+15:45:55 0.8b-torch-fp16 9/22 single#1306 3123 tok: 5.313s loss 1.6865 gn 3.91 peak 2.73 GB
+15:46:01 0.8b-torch-fp16 10/22 single#1317 3394 tok: 6.176s loss 1.1276 gn 2 peak 3.29 GB
+15:46:05 0.8b-torch-fp16 11/22 single#477 2306 tok: 3.805s loss 1.2447 gn 2.91 peak 2.71 GB
+15:46:10 0.8b-torch-fp16 12/22 single#986 3206 tok: 5.089s loss 1.0676 gn 2.7 peak 2.81 GB
+15:46:16 0.8b-torch-fp16 13/22 single#817 3385 tok: 6.022s loss 0.7844 gn 1.98 peak 3.0 GB
+15:46:22 0.8b-torch-fp16 14/22 single#830 3218 tok: 5.778s loss 0.8265 gn 2.59 peak 2.83 GB
+15:46:36 0.8b-torch-fp16 15/22 single#0 5890 tok: 13.521s loss 0.5935 gn 2.21 peak 3.75 GB
+15:46:49 0.8b-torch-fp16 16/22 single#1860 5801 tok: 12.732s loss 0.6020 gn 2.22 peak 3.76 GB
+15:47:01 0.8b-torch-fp16 17/22 single#449 5677 tok: 12.419s loss 0.5861 gn 2.74 peak 3.68 GB
+15:47:04 0.8b-torch-fp16 18/22 single#37 2258 tok: 3.017s loss 0.5756 gn 4.25 peak 2.45 GB
+15:47:16 0.8b-torch-fp16 19/22 single#110 5513 tok: 11.951s loss 0.2690 gn 2.56 peak 3.61 GB
+15:47:22 0.8b-torch-fp16 20/22 single#1395 3280 tok: 5.704s loss 0.4262 gn 3.02 peak 3.07 GB
+15:47:37 0.8b-torch-fp16 21/22 single#665 6323 tok: 14.551s loss 0.3349 gn 3.55 peak 3.96 GB
+15:48:08 0.8b-torch-fp16 22/22 mixed#2097 9805 tok: 30.912s loss 0.3272 gn 4.15 peak 5.15 GB
+15:48:13 phase 0.8b-fla-fp16
+15:52:39 0.8b-fla-fp16: fla check {"shape": [1, 2048, 16, 128], "y_rel_l2": 0.0005505328881554306, "grad_rel_l2": [0.0005510030896402895, 0.000589666364248842, 0.0005128236953169107], "finite": true, "seconds_first_call": {"torch": 0.265, "fla": 253.308}}
+15:52:42 0.8b-fla-fp16: Qwen3_5ForCausalLM 752,393,024 params, 5,411,328 trainable, kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}
+15:53:46 0.8b-fla-fp16 1/22 single#1118 2323 tok: 4.251s loss 1.8212 gn nan peak 2.41 GB
+15:53:51 0.8b-fla-fp16 2/22 single#788 3206 tok: 5.022s loss 1.0817 gn nan peak 3.33 GB
+15:53:55 0.8b-fla-fp16 3/22 single#1188 2258 tok: 3.662s loss 1.9214 gn nan peak 2.28 GB
+15:54:00 0.8b-fla-fp16 4/22 single#1744 2902 tok: 4.665s loss 1.0908 gn nan peak 3.72 GB
+15:54:04 0.8b-fla-fp16 5/22 single#22 2350 tok: 3.85s loss 1.7197 gn nan peak 2.71 GB
+15:54:08 0.8b-fla-fp16 6/22 single#780 2373 tok: 3.976s loss 1.5519 gn nan peak 2.96 GB
+15:54:12 0.8b-fla-fp16 7/22 single#828 2411 tok: 3.979s loss 1.6035 gn nan peak 3.0 GB
+15:54:42 0.8b-fla-fp16 8/22 single#643 5835 tok: 30.407s loss 1.1868 gn 2.67 peak 3.41 GB
+15:54:47 0.8b-fla-fp16 9/22 single#1306 3123 tok: 4.791s loss 1.6886 gn 3.86 peak 2.37 GB
+15:54:53 0.8b-fla-fp16 10/22 single#1317 3394 tok: 5.287s loss 1.1275 gn 2.01 peak 3.29 GB
+15:54:56 0.8b-fla-fp16 11/22 single#477 2306 tok: 3.732s loss 1.2468 gn 2.82 peak 2.71 GB
+15:55:01 0.8b-fla-fp16 12/22 single#986 3206 tok: 4.773s loss 1.0724 gn 2.7 peak 2.7 GB
+15:55:07 0.8b-fla-fp16 13/22 single#817 3385 tok: 5.419s loss 0.7859 gn 1.98 peak 3.0 GB
+15:55:12 0.8b-fla-fp16 14/22 single#830 3218 tok: 5.282s loss 0.8340 gn 2.58 peak 2.82 GB
+15:55:22 0.8b-fla-fp16 15/22 single#0 5890 tok: 9.48s loss 0.6009 gn 2.18 peak 3.12 GB
+15:55:31 0.8b-fla-fp16 16/22 single#1860 5801 tok: 9.092s loss 0.6086 gn 2.24 peak 3.45 GB
+15:55:40 0.8b-fla-fp16 17/22 single#449 5677 tok: 8.76s loss 0.5885 gn 2.74 peak 3.21 GB
+15:55:43 0.8b-fla-fp16 18/22 single#37 2258 tok: 3.209s loss 0.5870 gn 4.3 peak 2.39 GB
+15:55:51 0.8b-fla-fp16 19/22 single#110 5513 tok: 8.454s loss 0.2789 gn 2.53 peak 3.0 GB
+15:55:57 0.8b-fla-fp16 20/22 single#1395 3280 tok: 5.079s loss 0.4284 gn 2.95 peak 3.07 GB
+15:56:06 0.8b-fla-fp16 21/22 single#665 6323 tok: 9.724s loss 0.3367 gn 3.41 peak 3.66 GB
+15:56:46 0.8b-fla-fp16 22/22 mixed#2097 9805 tok: 39.005s loss 0.3204 gn 4.01 peak 3.98 GB
+15:56:47 0.8b-torch-fp32: skipped (0.8b-torch-fp16 was stable)
+15:56:47 phase 2b-fla-fp16
+15:56:59 2b-fla-fp16: fla check {"shape": [1, 2048, 16, 128], "y_rel_l2": 0.0005505328881554306, "grad_rel_l2": [0.0005510030896402895, 0.000589666364248842, 0.0005128236953169107], "finite": true, "seconds_first_call": {"torch": 0.262, "fla": 1.389}}
+15:57:29 2b-fla-fp16: Qwen3_5ForCausalLM 1,881,825,088 params, 8,409,600 trainable, kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}
+15:58:36 2b-fla-fp16 1/12 single#1118 2323 tok: 5.069s loss 1.6105 gn nan peak 4.8 GB
+15:58:43 2b-fla-fp16 2/12 single#788 3206 tok: 6.317s loss 0.9470 gn nan peak 5.77 GB
+15:58:47 2b-fla-fp16 3/12 single#1188 2258 tok: 4.606s loss 1.7263 gn nan peak 4.67 GB
+15:58:53 2b-fla-fp16 4/12 single#1744 2902 tok: 6.096s loss 0.9882 gn nan peak 6.15 GB
+15:58:58 2b-fla-fp16 5/12 single#22 2350 tok: 4.794s loss 1.4908 gn nan peak 5.11 GB
+15:59:03 2b-fla-fp16 6/12 single#780 2373 tok: 4.918s loss 1.4341 gn 2.15 peak 5.35 GB
+15:59:08 2b-fla-fp16 7/12 single#828 2411 tok: 4.792s loss 1.2938 gn 1.79 peak 5.46 GB
+15:59:20 2b-fla-fp16 8/12 single#643 5835 tok: 11.42s loss 0.9055 gn nan peak 6.06 GB
+15:59:26 2b-fla-fp16 9/12 single#1306 3123 tok: 5.831s loss 1.4247 gn nan peak 4.95 GB
+15:59:32 2b-fla-fp16 10/12 single#1317 3394 tok: 6.376s loss 1.0088 gn 1.48 peak 5.76 GB
+15:59:44 2b-fla-fp16 11/12 single#665 6323 tok: 11.908s loss 0.8231 gn 1.47 peak 6.29 GB
+16:00:04 2b-fla-fp16 12/12 mixed#2097 9805 tok: 20.163s loss 0.6565 gn 1.31 peak 7.23 GB
+16:00:06 done

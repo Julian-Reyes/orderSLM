@@ -1,0 +1,11 @@
+15:34:14 run 20261021T145441Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+15:34:14 phase 0.8b-torch-fp16
+15:34:37 0.8b-torch-fp16: failed: ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
+15:34:45 phase 0.8b-fla-fp16
+15:39:28 0.8b-fla-fp16: fla check {"shape": [1, 2048, 16, 128], "y_rel_l2": 0.0005505328881554306, "grad_rel_l2": [0.0005510030896402895, 0.000589666364248842, 0.0005128236953169107], "finite": true, "seconds_first_call": {"torch": 0.898, "fla": 267.762}}
+15:39:30 0.8b-fla-fp16: failed: ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
+15:39:32 phase 0.8b-torch-fp32
+15:39:43 0.8b-torch-fp32: failed: ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
+15:39:44 phase 2b-torch-fp16
+15:40:24 2b-torch-fp16: failed: ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
+15:40:26 done
