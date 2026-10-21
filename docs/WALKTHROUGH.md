@@ -209,6 +209,48 @@ called flash-linear-attention) works, and training in half precision (fp16, whic
 Kaggle lends two T4s at once, so both students can train side by side in one session. Write-up:
 `runs/train-smoke/20261021T145441Z/report.md` (Kaggle) and `runs/mlx-smoke/NOTES.md` (Mac).
 
+### The training plan (M6, agreed 2026-10-21)
+
+**What training does, step by step.** The student reads one training chat (the short instructions, the menu and the
+chat) and is asked for the teacher's answer, one word at a time. For every word of the answer we measure how
+surprised it was by the teacher's word (the **loss**: lower is better) and nudge the adapter's numbers so it would be
+a little less surprised next time. The instructions and the chat aren't graded, only the answer. We average the
+nudges over **8 chats** before applying them (the **batch**), which makes each step steadier.
+
+| Setting | Value | In plain words |
+|---|---|---|
+| Passes over the data (**epochs**) | up to 2 | Each training chat is seen twice. |
+| Check-ups | every half pass | The student answers the 98 **validation** chats it never trains on; only its loss is measured. If it stops improving, it's starting to memorise instead of learn. |
+| What we keep | the check-up with the lowest validation loss | Not necessarily the last one. |
+| Adapter size (**LoRA rank**) | r 16, alpha 32 | How many extra numbers the adapter has per layer (0.8B: ~11M; 2B: ~17M, about 1% of the model). |
+| Where the adapter goes | every linear layer, including the new Gated DeltaNet ones | Attention, the feed-forward part and the linear-attention projections all learn. |
+| **Dropout** | 0.05 | 5% of the adapter's signals are randomly switched off while training, so it can't lean on any one of them. |
+| **Learning rate** | 2e-4 (0.8B), 1e-4 (2B) | How big each nudge is. The bigger model gets smaller nudges. It warms up over the first 5% of steps and then slowly falls to zero (a **cosine** curve). |
+| Precision | fp16 | Half-size numbers, which a T4 is fast at; the adapter itself is kept at full precision. |
+| Seed | 20261021 | The same chat order for every student, so they're compared on equal terms. |
+
+**Sessions.** A Kaggle session can last 12 hours, and it only keeps its files if it ends on its own. So each run
+stops itself at 11¼ hours, saves everything it needs (adapter, optimizer, position in the data, random-number state)
+and the next session carries on from exactly that point. Tested on a tiny model: a run paused and resumed ends with
+exactly the same numbers as a run that never stopped.
+
+| Session | T4 #1 | T4 #2 |
+|---|---|---|
+| 1 | Qwen3.5-0.8B on the single-menu chats (~6.5 h) | Qwen3.5-2B on the single-menu chats (~8 h) |
+| 2 | Qwen3.5-2B on the mixed chats (~11.7 h, so it may pause and need a session 3) | Dev scoring of the two session-1 students |
+
+**Scoring on dev at every customer message.** The students were trained on whole chats, but a real chat arrives one
+message at a time. So for each of the 91 practice chats, the student is asked once per customer message (268 times),
+seeing the chat only up to that message, as it would live. Each answer's intent is checked against Julian's label for
+that message; the order is checked at the last message (the practice set's answer key has the final order only);
+and every answer must be valid JSON in the right format, mid-chat too. The scorer was checked by feeding it the
+teacher's own answers: it gives back exactly the teacher's scores.
+
+**Where the spec allows choices** (§10, §13): different learning rates per student are allowed if written down (they
+are, above); the spec suggests TRL or Unsloth, and we use the same Hugging Face libraries underneath (transformers +
+PEFT) with our own short training loop, so the answer-only loss, the 11¼-hour stop and the exact resume are under our
+control; the spec's "3 seeds if time allows" is for the final configuration, so this first round uses one.
+
 ### Trained weights, and why they stay private
 
 A model is a huge list of numbers, its **weights** (Qwen3.5-2B has about 2 billion). Every answer is computed from
@@ -557,8 +599,26 @@ an 8×8 base block. `train/kaggle_smoke.py` + `kaggle/train-smoke/run.py` (`make
   non-finite loss. **Answer-only logits** (`logits_to_keep`): the same loss as masking the prompt without building a
   9.8k × 248k logits table. Kaggle's torchao 0.10 had to be uninstalled (peft 0.21.2 refuses it).
 
-**Where M6 stands:** training data and smoke tests done; next is the first full LoRA run on Kaggle (settings to
-agree with Julian).
+**Training and dev scoring (built 2026-10-21):** `train/kaggle_train.py` (`make train ARGS="export …"` /
+`import`) stages a session (jobs, settings, seeds, data version, sha256 of every staged file) and imports its
+output; `kaggle/m6/run.py` runs the jobs, one process per T4. `eval/student_dev.py` builds the 268 dev requests
+(the chat cut after each customer message, built by the same code as the training rows) and scores them.
+
+- **Loop:** own loop on transformers + PEFT rather than TRL/Unsloth (spec §13 names those), to keep answer-only
+  logits, the time budget and exact resume in our hands. Each row's mean token loss weighs the same in a batch of 8.
+  The scheduler doesn't advance on a step the GradScaler skips.
+- **Resume:** `last/state.pt` (LoRA weights, AdamW, scheduler, scaler, data position, Python/torch RNG) every 20
+  optimizer steps and at the 11¼ h stop. A local CPU test on a tiny random Qwen3.5 (real tokenizer and rows, scratch
+  venv: torch 2.14.1 CPU, transformers 5.20.2, peft 0.21.2): paused at step 2 and resumed, the 62 LoRA tensors and the
+  validation curve are bit-identical to an uninterrupted run.
+- **Best checkpoint:** validation loss (token-weighted, answer tokens only) at steps 0, ½, 1, 1½ and 2 epochs; step 0
+  is the base model's reference, never kept. `best/` = PEFT adapter.
+- **Weights:** imported into gitignored `models/m6/<student>/{best,last}`; `runs/train/<session>/` keeps configs,
+  step logs, validation history and adapter sha256 (weights private, option b).
+- **Scorer check:** the teacher's saved dev labels turned into per-message student answers score exactly the
+  teacher's dev numbers (`tests/test_student_dev.py`).
+
+**Where M6 stands:** session 1 staged (`runs/train/20261021T170010Z/`), waiting for Julian's OK to push.
 
 ---
 
@@ -613,9 +673,11 @@ agree with Julian).
 | `src/orderslm/kaggle_jobs.py`, `kaggle/<job>/` | Push/pull Kaggle kernels; each job's `run.py` + `kernel-metadata.json` (inputs/outputs gitignored) | 4, 5 |
 | `runs/synth/`, `runs/label-dev/`, `runs/label-audit/`, `runs/m4-report/`, `runs/student-bakeoff/` | M4 and M5 saved outputs and reports | 4, 5 |
 | `docs/TERMS.md`, `KAGGLE.md`, `STUDENT_BAKEOFF.md` | Provider terms and the release decision; the Kaggle setup; the M5 write-up | 4, 5 |
-| `src/orderslm/train/` | M6: `data.py` (training rows), `kaggle_smoke.py` (Kaggle smoke test export/import), `mlx_smoke.py` + `gated_delta_patch.py` (Mac/MLX, parked) | 6 |
+| `src/orderslm/train/` | M6: `data.py` (training rows), `kaggle_train.py` (training sessions: export/import), `kaggle_smoke.py` (Kaggle smoke test), `mlx_smoke.py` + `gated_delta_patch.py` (Mac/MLX, parked) | 6 |
+| `src/orderslm/eval/student_dev.py` | M6: dev requests at every customer message; scoring of the trained students | 6 |
+| `kaggle/m6/` | The training + scoring kernel (`run.py`) | 6 |
 | `kaggle/train-smoke/`, `runs/student-data/`, `runs/train-smoke/`, `runs/mlx-smoke/` | The Kaggle training smoke kernel; the training-row manifest; smoke test outputs and notes | 6 |
-| `tests/` | 480 tests (18 of them need the `mlx` group and are skipped without it), one file per area (`test_pricing.py`, `test_llm.py`, `test_kaggle_smoke.py`, ...) | 0–6 |
+| `tests/` | 484 tests (18 of them need the `mlx` group and are skipped without it), one file per area (`test_pricing.py`, `test_llm.py`, `test_kaggle_smoke.py`, ...) | 0–6 |
 
 ---
 
@@ -803,7 +865,7 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 
 | Command | What you'll see / what to look for |
 |---|---|
-| `make check` | Ruff lint + format check, then 480 tests (462 without the `mlx` group). Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
+| `make check` | Ruff lint + format check, then 484 tests (466 without the `mlx` group). Everything should pass. The one warning (Starlette suggesting `httpx2`) is known and accepted. |
 | `uv run pytest tests/test_pricing.py -vv` | Each pricing rule as a named test (`-vv` because the config adds `-q`), e.g. `test_half_and_half_costs_the_dearer_half_plus_half_priced_toppings`. The test names read as the spec. |
 | `make menus` | Each menu validated, with its content hash (`halfmoon-pizza@44183959594b`) and item/variant/modifier counts. Lucky Lime is marked HELD OUT. |
 | `make annotate`, then open http://127.0.0.1:8765 | The annotation tool. Click **New conversation**, type a message, select some words to make evidence, use **+ item line**, and watch the check panel: findings, "rules say missing", and the computed quote. `?open=<id>` opens one directly. |
@@ -819,6 +881,8 @@ Run these from the repo root. None of them spends money or calls a model (the M3
 | `make bakeoff-chart` | Regenerates `runs/teacher-bakeoff/chart-data.json` and `docs/figures/teacher-bakeoff-accuracy-cost.svg` from the saved answers. |
 | `make m4-report` | Every M4 drop, repair, flag and audit catch rate, rebuilt from saved runs into `runs/m4-report/`. |
 | `make student-data` | Rebuilds the M6 training rows from the M4 labels; counts and sha256 should match `runs/student-data/student-data@0.1/manifest.json` |
+| `make train ARGS="export --train qwen3.5-0.8b-single,qwen3.5-2b-single"` | Stages a training session in `kaggle/m6/upload/` and a run dir in `runs/train/`; prints which job runs on which T4. No upload until `make kaggle-push JOB=m6` |
+| `make student-dev ARGS="report runs/student-dev/<id>"` | Rebuilds a trained student's dev report from its saved answers |
 | `make train-smoke ARGS="import runs/train-smoke/20261021T145441Z"` | Rebuilds the Kaggle smoke test's report from the saved kernel output (needs `make kaggle-pull JOB=train-smoke` first) |
 | `make student-bakeoff ARGS="import runs/student-bakeoff/20261019T182539Z"` | Re-scores the M5 bake-off from the saved Kaggle output (needs `kaggle/student-bakeoff/output/`, i.e. `make kaggle-pull JOB=student-bakeoff` first); prints the two tables. |
 

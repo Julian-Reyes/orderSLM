@@ -76,9 +76,31 @@ _Updated 2026-10-21 (Kaggle smoke test done)._
     (the session limit is 12 h). Mixed (10.48M tokens) ≈ 1.5 × single. Estimates scale measured speed to total
     tokens; they are not a measured full run.
   - **MLX:** parked (patch kept and verified; see above).
-- **Next (M6 training):** a full LoRA run on Kaggle, recommended: fla, fp16, the 0.8B and the 2B (single) in
-  parallel on the two T4s, then the 2B mixed; settings (epochs, LoRA rank/targets, lr schedule, eval cadence on
-  valid) to agree with Julian first.
+- **M6 full LoRA training (Julian, 2026-10-21): built, session 1 staged, waiting for Julian's OK to push.**
+  Settings: fla + fp16; up to 2 epochs, validation loss every half epoch (and at step 0 as the base reference), best
+  checkpoint by validation loss; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP, Gated
+  DeltaNet `in_proj_qkv/z/a/b`, `out_proj`; confirmed in the local test); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup,
+  cosine; effective batch 8 (grad accumulation; each row's mean token loss weighs the same); AdamW, no weight decay,
+  clip 1.0; seed 20261021 (same data order for all students). Spec check: no conflict; documented differences: LR
+  per student (§10 allows with documentation), own loop on transformers + PEFT instead of TRL/Unsloth (§13), one
+  seed (§10's 3 seeds are for the final config, "if time allows").
+  - Code: `make train ARGS="export --train … [--score …]"` / `import runs/train/<id>` (`train/kaggle_train.py`),
+    kernel `kaggle/m6/run.py` (dataset `JReyes33/orderslm-m6`, kernel `JReyes33/orderslm-m6-run`), dev scoring
+    `eval/student_dev.py` (`make student-dev ARGS="report …"`). Each session stops itself at 11.25 h (Kaggle keeps
+    output only when a session ends normally), saving `last/` (LoRA, AdamW, scheduler, scaler, data position, RNG)
+    every 20 steps and at the stop; the next export stages `last/` and resumes exactly. Weights go to gitignored
+    `models/m6/<student>/{best,last}`; `runs/train/<session>/` keeps config, steps, validation, adapter sha256.
+  - Tests: local CPU run of the real kernel on a tiny random Qwen3.5 (real tokenizer + rows; scratch venv torch
+    2.14.1 CPU): paused at step 2 + resumed = bit-identical LoRA tensors and validation curve vs uninterrupted;
+    scoring ran in parallel. Scorer positive control: the teacher's dev labels as per-message answers reproduce its
+    dev numbers exactly (`tests/test_student_dev.py`). 484 tests pass.
+  - Dev scoring: 268 requests (every customer message; chat cut after it, same builder as the training rows);
+    intents vs gold per message (split last vs earlier), order at the last customer message (3 dev chats end on a
+    business message: the call stops at the last customer message, as in training), contract validity everywhere;
+    greedy, max 1,536 new tokens.
+  - Plan: **session 1** = `runs/train/20261021T170010Z/` (T4 #0 0.8B single ~6.5 h, T4 #1 2B single ~8 h);
+    **session 2** = `export --train qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-single`; session 3 if
+    the mixed run pauses (+ its scoring). Secrets check on the staged upload + kernel: clean (0 hits).
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).

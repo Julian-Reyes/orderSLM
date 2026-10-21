@@ -1,0 +1,316 @@
+"""M6 LoRA training on Kaggle (2 × T4) and dev scoring of the trained students (docs/KAGGLE.md job C). Free.
+
+Settings agreed with Julian (2026-10-21): fla + fp16; up to 2 epochs with validation loss every half epoch, the best
+checkpoint by validation loss kept; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP and
+the Gated DeltaNet projections); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup, cosine decay; effective batch 8 by gradient
+accumulation. Sessions: (1) 0.8B + 2B single side by side, one per T4; (2) 2B mixed, and dev scoring of the
+session-1 students on the other T4; more sessions resume whatever paused (Kaggle's 12 h limit).
+
+    make train ARGS="export --train qwen3.5-0.8b-single,qwen3.5-2b-single"
+    make train ARGS="export --train qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-single"
+    make kaggle-push JOB=m6        # (ask Julian first; secrets check)
+    make kaggle-pull JOB=m6
+    make train ARGS="import runs/train/<id>"
+
+Export stages kaggle/m6/upload/ (gitignored): run.json (jobs, settings, seeds, versions), the training rows each job
+needs, `last/` of any job that paused (resumed exactly), the best adapters to score, and dev requests
+(`eval/student_dev.build_requests`). Import writes per job `runs/train/<id>/<job>/` (config, steps, validation
+history, status, adapter sha256) and keeps the weights in gitignored `models/m6/<job>/{best,last}` (weights stay
+private, docs/TERMS.md option b); score jobs land in `runs/student-dev/<id>-<job>/` and are scored there.
+"""
+
+import argparse
+import hashlib
+import json
+import shutil
+import sys
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+from orderslm.eval import student_dev
+from orderslm.paths import ROOT, RUNS
+from orderslm.runinfo import git_commit
+from orderslm.train.data import DATA_VERSION, OUT, STUDENT_PROMPT_VERSION
+
+EXPERIMENT = "train"
+JOB_DIR = ROOT / "kaggle" / "m6"
+STAGE = JOB_DIR / "upload"  # gitignored
+DATASET = "JReyes33/orderslm-m6"
+WEIGHTS = ROOT / "models" / "m6"  # gitignored
+SEED = 20261021
+DEADLINE_HOURS = (
+    11.25  # stop, save and exit cleanly before Kaggle's 12 h session limit (output is kept only then)
+)
+MODELS = {  # same revisions as M5 and the smoke test
+    "0.8b": {"repo": "Qwen/Qwen3.5-0.8B", "revision": "2fc06364715b967f1860aea9cf38778875588b17"},
+    "2b": {"repo": "Qwen/Qwen3.5-2B", "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"},
+}
+PACKAGES = {  # as in the smoke test (runs/train-smoke/20261021T145441Z)
+    "main": ["transformers==5.20.2", "peft==0.21.2", "accelerate"],
+    "fla": ["fla-core==0.5.2"],
+}
+STUDENTS = {
+    "qwen3.5-0.8b-single": {"model": "0.8b", "data": "single", "lr": 2e-4},
+    "qwen3.5-2b-single": {"model": "2b", "data": "single", "lr": 1e-4},
+    "qwen3.5-2b-mixed": {"model": "2b", "data": "mixed", "lr": 1e-4},
+}
+TRAIN = {
+    "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"},
+    "epochs": 2,
+    "effective_batch": 8,  # gradient accumulation, batch 1 per forward pass
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,  # optimizer steps (~160 rows, ~10–15 min)
+    "dtype": "float16",
+}
+GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training answer 2,562 chars (~800 tokens)
+
+
+def assign_gpus(train: list[str], score: list[str]) -> list[tuple[str, str, int]]:
+    """(kind, name, gpu): training jobs one per GPU; scoring on a GPU no training uses, else after the training."""
+    if len(train) > 2:
+        raise SystemExit("at most two training jobs per session (one per T4)")
+    jobs = [("train", n, g) for g, n in enumerate(train)]
+    free = [g for g in (0, 1) if g >= len(train)] or [
+        len(train) - 1 - i % len(train) for i in range(len(score))
+    ]
+    for i, n in enumerate(score):
+        jobs.append(("score", n, free[i % len(free)]))
+    return jobs
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def export(args: argparse.Namespace) -> Path:
+    train = [n for n in (args.train or "").split(",") if n]
+    score = [n for n in (args.score or "").split(",") if n]
+    for n in train + score:
+        if n not in STUDENTS:
+            raise SystemExit(f"unknown student {n}; known: {sorted(STUDENTS)}")
+    started = datetime.now(UTC)
+    session = f"{started:%Y%m%dT%H%M%SZ}"
+    out_dir = RUNS / EXPERIMENT / session
+    data_dir = OUT / DATA_VERSION
+    data_manifest = json.loads((data_dir / "manifest.json").read_text())
+    if STAGE.exists():
+        shutil.rmtree(STAGE)
+    STAGE.mkdir(parents=True)
+    jobs, files = [], {}
+    for kind, name, gpu in assign_gpus(train, score):
+        s = STUDENTS[name]
+        if kind == "train":
+            for part in ("train", "valid"):
+                f = f"{s['data']}-{part}.jsonl"
+                if f not in files:
+                    shutil.copy(data_dir / s["data"] / f"{part}.jsonl", STAGE / f)
+                    files[f] = _sha256(STAGE / f)
+            job = {
+                "kind": "train",
+                "name": name,
+                "model": s["model"],
+                "data": s["data"],
+                "gpu": gpu,
+                "lr": s["lr"],
+                "epochs": TRAIN["epochs"],
+                "seed": SEED,
+                "dtype": TRAIN["dtype"],
+                "train_file": f"{s['data']}-train.jsonl",
+                "valid_file": f"{s['data']}-valid.jsonl",
+                "resume": None,
+            }
+            last = WEIGHTS / name / "last"
+            if (last / "status.json").exists():
+                st = json.loads((last / "status.json").read_text())
+                if st["status"] == "done":
+                    raise SystemExit(f"{name} already finished training ({last}); nothing to resume")
+                shutil.copytree(last, STAGE / "resume" / name)
+                job["resume"] = f"resume/{name}"
+                job["resumed_at_step"] = st["opt_step"]
+        else:
+            best = WEIGHTS / name / "best"
+            if not (best / "adapter_config.json").exists():
+                raise SystemExit(f"no best adapter for {name} in {best}: import its training first")
+            shutil.copytree(best, STAGE / "adapters" / name)
+            if "dev-requests.jsonl" not in files:
+                reqs = student_dev.build_requests()
+                (STAGE / "dev-requests.jsonl").write_text(
+                    "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in reqs)
+                )
+                files["dev-requests.jsonl"] = _sha256(STAGE / "dev-requests.jsonl")
+            job = {
+                "kind": "score",
+                "name": f"score-{name}",
+                "student": name,
+                "model": s["model"],
+                "gpu": gpu,
+                "adapter": f"adapters/{name}",
+                "adapter_sha256": _sha256(best / "adapter_model.safetensors"),
+                "requests": "dev-requests.jsonl",
+            }
+        jobs.append(job)
+    run = {
+        "session": session,
+        "data_version": DATA_VERSION,
+        "prompt_version": STUDENT_PROMPT_VERSION,
+        "models": MODELS,
+        "packages": PACKAGES,
+        "train": TRAIN,
+        "generation": GENERATION,
+        "deadline_hours": DEADLINE_HOURS,
+        "jobs": jobs,
+    }
+    (STAGE / "run.json").write_text(json.dumps(run, indent=2) + "\n")
+    (STAGE / "dataset-metadata.json").write_text(
+        json.dumps({"title": "orderslm-m6", "id": DATASET, "licenses": [{"name": "unknown"}]}) + "\n"
+    )
+    manifest = {
+        "experiment": EXPERIMENT,
+        **run,
+        "seed": SEED,
+        "staged_files_sha256": files,
+        "data_manifest_sha256": {
+            k: data_manifest["sets"][k][p]["sha256"] for k in ("single", "mixed") for p in ("train",)
+        },
+        "data_built_at_commit": data_manifest["git_commit"],
+        "exported_at": started.isoformat(),
+        "git_commit": git_commit(),
+        "kaggle_dataset": DATASET,
+        "cost_usd": 0.0,
+    }
+    out_dir.mkdir(parents=True)
+    (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    for j in jobs:
+        print(
+            f"  gpu{j['gpu']} {j['kind']:5} {j['name']}"
+            + (f" (resume @ {j['resumed_at_step']})" if j.get("resume") else "")
+        )
+    print(f"Staged {STAGE.relative_to(ROOT)}/; run dir {out_dir.relative_to(ROOT)}/")
+    return out_dir
+
+
+def _copy(src: Path, dst: Path, names: tuple[str, ...]) -> None:
+    dst.mkdir(parents=True, exist_ok=True)
+    for n in names:
+        if (src / n).exists():
+            shutil.copy(src / n, dst / n)
+
+
+def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
+    manifest = json.loads((run_dir / "manifest.json").read_text())
+    env = json.loads((output_dir / "env.json").read_text())
+    if env.get("session") != manifest["session"]:
+        raise SystemExit(f"kernel output is for session {env.get('session')}, not {manifest['session']}")
+    summary: dict[str, Any] = {"env": {k: v for k, v in env.items() if k != "jobs"}, "jobs": {}}
+    for job in manifest["jobs"]:
+        name, src = job["name"], output_dir / job["name"]
+        status = (
+            json.loads((src / "status.json").read_text())
+            if (src / "status.json").exists()
+            else {"status": "missing"}
+        )
+        if job["kind"] == "train":
+            dst = run_dir / name
+            _copy(src, dst, ("config.json", "steps.jsonl", "val.jsonl", "status.json"))
+            weights = WEIGHTS / name
+            for part in ("best", "last"):
+                if (src / part).exists():
+                    shutil.rmtree(weights / part, ignore_errors=True)
+                    shutil.copytree(src / part, weights / part)
+            val = (
+                [json.loads(x) for x in (src / "val.jsonl").read_text().splitlines()]
+                if (src / "val.jsonl").exists()
+                else []
+            )
+            best = weights / "best" / "adapter_model.safetensors"
+            info = {
+                "status": status,
+                "val": val,
+                "best_adapter_sha256": _sha256(best) if best.exists() else None,
+                "best": json.loads((weights / "best" / "best.json").read_text())
+                if (weights / "best" / "best.json").exists()
+                else None,
+            }
+            if (src / "best" / "adapter_config.json").exists():
+                shutil.copy(src / "best" / "adapter_config.json", dst / "best_adapter_config.json")
+            steps = (
+                [json.loads(x) for x in (src / "steps.jsonl").read_text().splitlines()]
+                if (src / "steps.jsonl").exists()
+                else []
+            )
+            if steps:
+                secs = sum(s["seconds"] for s in steps)
+                info |= {
+                    "steps_logged": len(steps),
+                    "skipped_updates": sum(s["skipped"] for s in steps),
+                    "train_hours_logged": round(secs / 3600, 2),
+                    "peak_memory_gb": max((s["peak_memory_gb"] or 0) for s in steps),
+                    "tokens_per_second": round(sum(s["tokens"] for s in steps) / secs, 1),
+                }
+            (dst / "summary.json").write_text(json.dumps(info, indent=2) + "\n")
+            summary["jobs"][name] = info
+        else:
+            dev_dir = RUNS / student_dev.EXPERIMENT / f"{manifest['session']}-{job['student']}"
+            _copy(src, dev_dir, ("outputs.jsonl", "config.json", "status.json"))
+            (dev_dir / "manifest.json").write_text(
+                json.dumps(
+                    {
+                        "experiment": student_dev.EXPERIMENT,
+                        "student": job["student"],
+                        "adapter_sha256": job["adapter_sha256"],
+                        "session": manifest["session"],
+                        "data_version": manifest["data_version"],
+                        "prompt_version": manifest["prompt_version"],
+                        "generation": manifest["generation"],
+                        "model": manifest["models"][job["model"]],
+                        "kernel_env": summary["env"],
+                        "cost_usd": 0.0,
+                    },
+                    indent=2,
+                )
+                + "\n"
+            )
+            m = student_dev.report(dev_dir) if (dev_dir / "outputs.jsonl").exists() else None
+            summary["jobs"][name] = {"status": status, "dev_run": str(dev_dir.relative_to(ROOT))}
+            if m:
+                summary["jobs"][name] |= {
+                    "intent_all": m["intent"]["all"],
+                    "intent_earlier": m["intent"]["earlier_messages"],
+                    "items_f1": m["order"]["item"]["f1"],
+                    "exact": f"{m['order']['exact_match']}/{m['order']['conversations']}",
+                    "contract_valid": m["contract_valid"],
+                }
+    kernel = run_dir / "kernel"
+    _copy(output_dir, kernel, ("env.json", "run.log"))
+    manifest["imported_at"] = datetime.now(UTC).isoformat()
+    (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (run_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    print(json.dumps(summary["jobs"], indent=2))
+    return summary
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    e = sub.add_parser("export")
+    e.add_argument("--train", help="students to train (comma-separated, ≤ 2)")
+    e.add_argument("--score", help="students to score on dev (their best adapter)")
+    i = sub.add_parser("import")
+    i.add_argument("run_dir", type=Path)
+    i.add_argument("--output", type=Path, default=JOB_DIR / "output")
+    args = ap.parse_args(argv)
+    if args.cmd == "export":
+        export(args)
+    else:
+        import_(args.run_dir, args.output)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

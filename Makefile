@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train student-dev eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -95,7 +95,12 @@ train-smoke:
 mlx-smoke:
 	$(RUN) --group mlx python -m orderslm.train.mlx_smoke $(ARGS)
 
-train:            ; $(call not_yet,6)
+# M6 LoRA training + dev scoring on Kaggle (docs/KAGGLE.md job C): export a session / import its output
+train:
+	$(RUN) python -m orderslm.train.kaggle_train $(ARGS)
+# M6 students on dev at every customer message: rebuild metrics + report from saved outputs
+student-dev:
+	$(RUN) python -m orderslm.eval.student_dev $(ARGS)
 eval:             ; $(call not_yet,6)
 router-bench:     ; $(call not_yet,7)
 demo:             ; $(call not_yet,8)
