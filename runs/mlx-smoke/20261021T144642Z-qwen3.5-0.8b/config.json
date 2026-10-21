@@ -1,0 +1,25 @@
+{
+  "experiment": "mlx-smoke check",
+  "model": "models/qwen3.5-0.8b",
+  "data_version": "student-data@0.1",
+  "seed": 20261021,
+  "lora": {
+    "rank": 8,
+    "dropout": 0.0,
+    "scale": 20.0
+  },
+  "num_layers": 16,
+  "machine": {
+    "chip": "Apple M1",
+    "memory_gb": 16,
+    "macos": "15.6.1",
+    "python": "3.13.5",
+    "mlx": "0.32.4",
+    "mlx_lm": "0.32.2"
+  },
+  "git_commit": "e00dac04d57085504ac13820a992733e54ff60e4-dirty",
+  "patch": "mlx-lm PR #1870",
+  "pr_commit": "3b04b9f1992fb83c4210228f7eb1c9dc72827e49",
+  "base_block": 8,
+  "chunk_size": 64
+}

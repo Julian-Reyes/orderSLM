@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -88,6 +88,9 @@ student-bakeoff:
 # M6 training rows from the M4 labels (free, local): runs/student-data/<version>/{single,mixed}/
 student-data:
 	$(RUN) python -m orderslm.train.data $(ARGS)
+# M6 LoRA smoke test on Kaggle T4 (docs/KAGGLE.md job C): export rows / import the kernel's output
+train-smoke:
+	$(RUN) python -m orderslm.train.kaggle_smoke $(ARGS)
 # M6 MLX LoRA smoke test (Apple Silicon only, needs the mlx group): runs/mlx-smoke/<time>-<model>/
 mlx-smoke:
 	$(RUN) --group mlx python -m orderslm.train.mlx_smoke $(ARGS)

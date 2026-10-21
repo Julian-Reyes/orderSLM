@@ -1,0 +1,98 @@
+{
+  "experiment": "train-smoke",
+  "run_dir": "20261021T145441Z",
+  "data_version": "student-data@0.1",
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ]
+  },
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": "all-linear"
+  },
+  "learning_rate": 0.0001,
+  "random_rows": [
+    1118,
+    788,
+    1188,
+    1744,
+    22,
+    780,
+    828,
+    643,
+    1306,
+    1317,
+    477,
+    986,
+    817,
+    830,
+    0,
+    1860,
+    449,
+    37,
+    110,
+    1395
+  ],
+  "phases": [
+    {
+      "name": "0.8b-torch-fp16",
+      "model": "0.8b",
+      "backend": "torch",
+      "dtype": "float16",
+      "steps": 20
+    },
+    {
+      "name": "0.8b-fla-fp16",
+      "model": "0.8b",
+      "backend": "fla",
+      "dtype": "float16",
+      "steps": 20,
+      "if": "fla_installed"
+    },
+    {
+      "name": "0.8b-torch-fp32",
+      "model": "0.8b",
+      "backend": "torch",
+      "dtype": "float32",
+      "steps": 5,
+      "if": "fp16_unstable",
+      "after": "0.8b-torch-fp16"
+    },
+    {
+      "name": "2b-best-fp16",
+      "model": "2b",
+      "backend": "best",
+      "dtype": "float16",
+      "steps": 10
+    }
+  ],
+  "seed": 20261021,
+  "warmup_steps": 2,
+  "train_sha256": {
+    "single": "2196f96f874dd42f3608419df97942c720f95ac8bc73e17f2e6392ffde80f7ac",
+    "mixed": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40"
+  },
+  "exported_at": "2026-10-21T14:54:41.446101+00:00",
+  "git_commit": "e00dac04d57085504ac13820a992733e54ff60e4-dirty",
+  "kaggle_dataset": "JReyes33/orderslm-student-data",
+  "cost_usd": 0.0
+}

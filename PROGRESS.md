@@ -38,11 +38,26 @@ _Updated 2026-10-21._
   our rows: p50 3.2k, max 6.3k (single) / 9.8k (mixed) tokens. Cause: the Gated DeltaNet Metal kernel has no backward,
   so training uses a per-token Python loop that keeps a 1 MB state per token per layer (~9.6 MB/token). Known
   upstream (mlx-lm #1956, PR #1870 chunkwise training path; mlx #3539). Details: `runs/mlx-smoke/NOTES.md`.
-  Token counts (Qwen3.5 tokenizer): single train 7.09M tokens/epoch, mixed 10.48M. **Waiting on Julian:** how to
-  train (options in the session summary: port the chunked delta rule into MLX ourselves, train on Kaggle T4 with
-  HF/PEFT's chunked torch path, or a standard-attention student such as Qwen3-1.7B on MLX). 2B not downloaded.
+  Token counts (Qwen3.5 tokenizer): single train 7.09M tokens/epoch, mixed 10.48M. 2B not downloaded.
+  **MLX patch (Julian: option 1, from PR #1870):** `src/orderslm/train/gated_delta_patch.py` vendors the PR's
+  chunkwise gated delta rule (commit `3b04b9f1`, MIT, attributed) with the 8×8 base-block fix for the ~8k-token
+  Metal resource limit; 18 unit tests; real-row check (`--check`, `runs/mlx-smoke/20261021T144642Z-…/check.json`):
+  forward 3× faster than stock at 9.8k tokens (17 s vs 66 s, 7.8 vs 12.7 GB); bf16 logits differ 1.7% from stock,
+  the same as the inference kernel vs stock (rounding); **fp32: 3e-6 logits, 7e-6 LoRA gradients**. **Parked
+  (Julian, 2026-10-21): Kaggle is the primary training path**; probe re-run and the 12 h check not done.
   Deployment note: mlx-lm's `--export-gguf` covers only Llama/Mistral-style fp16, so Qwen3.5 GGUF needs llama.cpp's
   `convert_hf_to_gguf.py` on the fused HF-format model (check its Qwen3.5 support when we get there).
+- **Kaggle LoRA smoke test (job C, 2026-10-21, $0): staged, not yet pushed.** `make train-smoke ARGS=export` →
+  `runs/train-smoke/20261021T145441Z/` + `kaggle/train-smoke/upload/` (private dataset `JReyes33/orderslm-student-data`:
+  single + mixed train rows); kernel `kaggle/train-smoke/run.py`. Phases (each its own process, 1 T4, fp16 base +
+  fp32 LoRA r 8 all-linear, GradScaler, grad checkpointing, answer-only logits via `logits_to_keep`): 0.8B without
+  fla (transformers' PyTorch chunked path) 20 random rows + longest single (6.3k) + longest mixed (9.8k); 0.8B with
+  `fla-core==0.5.2` (Triton; numeric check vs PyTorch on the T4 first); fp32 rerun only if fp16 goes non-finite; 2B
+  10 + 2 rows on the faster path. Records which delta-rule function ran, per-step s/tokens/peak GB/loss/grad norm;
+  import → `summary.json` + `report.md` with one-pass single/train estimates. `causal-conv1d` not installed
+  (source-only, CUDA build). **Blocked: no Kaggle token on the Mac mini** (`~/.kaggle/access_token` missing; CLI
+  2.2.4 installed via `uv tool`, `~/.local/bin` not on PATH yet). Then: `make kaggle-push JOB=train-smoke`,
+  `make kaggle-pull JOB=train-smoke`, `make train-smoke ARGS="import runs/train-smoke/20261021T145441Z"`.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -95,7 +110,7 @@ _Updated 2026-10-21._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: Qwen3.5 doesn't fit with stock mlx-lm (decision open) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; Kaggle smoke test staged (primary path) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

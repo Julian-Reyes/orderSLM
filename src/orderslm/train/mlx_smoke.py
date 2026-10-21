@@ -12,6 +12,11 @@ grows a little with length, so it is an estimate, not a measurement).
 
     make mlx-smoke ARGS="--model models/qwen3.5-0.8b"     # → runs/mlx-smoke/<time>-<model>/
 
+Qwen3.5's linear-attention layers train through the vendored chunkwise gated delta rule (`gated_delta_patch`, from
+mlx-lm PR #1870); `--recurrence stock` keeps mlx-lm's per-token loop (out of memory above ~1.2k tokens on 16 GB).
+`--check` compares the two on real rows (loss, answer logits, LoRA gradients) instead of training;
+`--probe 1024,3072` times one train step per length on random tokens.
+
 Needs the `mlx` dependency group (`uv run --group mlx`, Apple Silicon only); `make check` never imports this file.
 Writes `config.json`, `steps.jsonl` (one record per step / validation), `summary.json` and the LoRA adapter (gitignored
 safetensors) to the run directory. Free: local compute only. Only synthetic training rows: never dev, test or PIZZA.
@@ -198,6 +203,98 @@ def probe(model_path: str, lengths: list[int], out: Path) -> list[dict[str, Any]
     return results
 
 
+def check(model_path: str, rows: dict[str, list[int]], offsets: dict[str, int], out: Path) -> list[dict]:
+    """Patched (chunkwise) vs stock (per-token loop) on real rows, model in training mode (the ops path).
+
+    Per row (bf16, as trained): masked answer loss and answer-position logits from one forward pass each way, plus
+    the inference Metal kernel (`model.eval()`) as a reference for how much two correct bf16 paths differ.
+    Gradients of the LoRA parameters on the last 1,024 tokens of the shortest row (the stock backward doesn't fit
+    longer). Then the same on the shortest row with the model cast to fp32 (gradients on its last 512 tokens), where
+    rounding no longer hides an algorithm error.
+    """
+    import mlx.core as mx
+    import mlx.nn as nn
+    from mlx.utils import tree_flatten
+    from mlx_lm.models import gated_delta
+    from mlx_lm.tuner.trainer import default_loss
+    from mlx_lm.tuner.utils import linear_to_lora_layers
+    from mlx_lm.utils import load
+
+    from orderslm.train import gated_delta_patch
+
+    model, _ = load(model_path)
+    model.freeze()
+    linear_to_lora_layers(model, NUM_LAYERS, dict(LORA))
+    paths = {"chunkwise": gated_delta.gated_delta_ops, "stock": gated_delta_patch.sequential()}
+    results = []
+
+    def rel(a, b) -> float:
+        return (mx.linalg.norm((a - b).astype(mx.float32)) / mx.linalg.norm(b.astype(mx.float32))).item()
+
+    def save(r: dict) -> None:
+        results.append(r)
+        print(json.dumps(r), flush=True)
+        out.write_text(json.dumps(results, indent=2) + "\n")
+
+    def forward_row(name: str, tokens: list[int], offset: int, dtype: str) -> None:
+        x = mx.array([tokens])
+        r: dict[str, Any] = {
+            "row": name,
+            "dtype": dtype,
+            "tokens": len(tokens),
+            "answer_tokens": len(tokens) - offset,
+        }
+        got = {}
+        for path in ("chunkwise", "stock", "kernel"):
+            gated_delta.gated_delta_ops = paths.get(path, paths["chunkwise"])
+            model.eval() if path == "kernel" else model.train()
+            mx.clear_cache()
+            mx.reset_peak_memory()
+            t0 = time.perf_counter()
+            logits = model(x[:, :-1])[0, offset - 1 :].astype(mx.float32)
+            loss = nn.losses.cross_entropy(logits, x[0, offset:]).mean()
+            mx.eval(logits, loss)
+            got[path] = logits
+            r[f"{path}_loss"] = round(loss.item(), 6)
+            r[f"{path}_forward_seconds"] = round(time.perf_counter() - t0, 1)
+            r[f"{path}_forward_peak_gb"] = round(mx.get_peak_memory() / 1e9, 2)
+        for a, b in (("chunkwise", "stock"), ("kernel", "stock"), ("chunkwise", "kernel")):
+            r[f"logits_rel_l2_{a}_vs_{b}"] = rel(got[a], got[b])
+            r[f"argmax_agree_{a}_vs_{b}"] = mx.mean(got[a].argmax(-1) == got[b].argmax(-1)).item()
+        model.train()
+        save(r)
+
+    def grad_row(name: str, tokens: list[int], offset: int, window: int, dtype: str) -> None:
+        cut = tokens[-window:]
+        off = max(1, offset - (len(tokens) - len(cut)))
+        x, lengths = mx.array([cut]), mx.array([[off, len(cut)]])
+        loss_and_grad = nn.value_and_grad(model, default_loss)
+        grads = {}
+        for path, fn in paths.items():
+            gated_delta.gated_delta_ops = fn
+            mx.clear_cache()
+            (loss, _), g = loss_and_grad(model, x, lengths)
+            flat = mx.concatenate([v.reshape(-1).astype(mx.float32) for _, v in tree_flatten(g)])
+            mx.eval(loss, flat)
+            grads[path] = (loss.item(), flat)
+        r = {"row": f"{name} (last {window:,} tokens)", "dtype": dtype, "tokens": len(cut)}
+        r |= {"answer_tokens": len(cut) - off, "chunkwise_loss": round(grads["chunkwise"][0], 6)}
+        r |= {"stock_loss": round(grads["stock"][0], 6)}
+        r["lora_grad_rel_l2"] = rel(grads["chunkwise"][1], grads["stock"][1])
+        save(r)
+
+    model.train()
+    for name, tokens in rows.items():
+        forward_row(name, tokens, offsets[name], "bfloat16")
+    shortest = min(rows, key=lambda n: len(rows[n]))
+    grad_row(shortest, rows[shortest], offsets[shortest], 1024, "bfloat16")
+    model.set_dtype(mx.float32)
+    forward_row(shortest, rows[shortest], offsets[shortest], "float32")
+    grad_row(shortest, rows[shortest], offsets[shortest], 512, "float32")
+    gated_delta.gated_delta_ops = paths["chunkwise"]
+    return results
+
+
 def machine() -> dict[str, Any]:
     def sysctl(key: str) -> str:
         return subprocess.run(["sysctl", "-n", key], capture_output=True, text=True).stdout.strip()
@@ -226,7 +323,17 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument(
         "--probe", help="comma-separated token lengths: one train step each instead of the phases"
     )
+    ap.add_argument("--check", action="store_true", help="chunkwise vs stock recurrence on real rows")
+    ap.add_argument("--recurrence", default="chunkwise", choices=["chunkwise", "stock"])
     a = ap.parse_args(argv)
+    if a.recurrence == "chunkwise" or a.check:
+        from orderslm.train import gated_delta_patch
+
+        gated_delta_patch.install()
+    recurrence = {"recurrence": a.recurrence}
+    if a.recurrence == "chunkwise":
+        recurrence |= {"patch": "mlx-lm PR #1870", "pr_commit": gated_delta_patch.PR_COMMIT}
+        recurrence |= {"base_block": gated_delta_patch.BASE_BLOCK, "chunk_size": gated_delta_patch.CHUNK_SIZE}
 
     data_dir = OUT / DATA_VERSION
     train = read_rows(data_dir / a.data / "train.jsonl")
@@ -239,6 +346,7 @@ def main(argv: list[str] | None = None) -> int:
     if a.probe:
         info = {"experiment": "mlx-smoke probe", "model": a.model, "lora": LORA, "num_layers": NUM_LAYERS}
         info |= {"grad_checkpoint": True, "seed": SEED, "machine": machine(), "git_commit": git_commit()}
+        info |= recurrence
         (run_dir / "config.json").write_text(json.dumps(info, indent=2) + "\n")
         probe(a.model, [int(x) for x in a.probe.split(",")], run_dir / "probe.json")
         print(f"→ {run_dir.relative_to(ROOT)}")
@@ -249,6 +357,30 @@ def main(argv: list[str] | None = None) -> int:
     tok = AutoTokenizer.from_pretrained(a.model)
     train_len = token_lengths(tok, train)
     long_len = token_lengths(tok, long_pool)
+    if a.check:
+        picks = {
+            f"{a.data}/train shortest": (train, min(range(len(train)), key=train_len.__getitem__)),
+            f"{a.data}/train median": (
+                train,
+                sorted(range(len(train)), key=train_len.__getitem__)[len(train) // 2],
+            ),
+            f"{a.data}/train longest": (train, longest_rows(train_len, 1)[0]),
+            f"{a.longest_from}/train longest": (long_pool, longest_rows(long_len, 1)[0]),
+        }
+        rows, offsets = {}, {}
+        for name, (pool, i) in picks.items():
+            msgs = pool[i]["messages"]
+            rows[f"{name} #{i}"] = tok.apply_chat_template(msgs, return_dict=False)
+            prompt = tok.apply_chat_template(msgs[:-1], add_generation_prompt=True, return_dict=False)
+            offsets[f"{name} #{i}"] = len(prompt)
+        info = {"experiment": "mlx-smoke check", "model": a.model, "data_version": DATA_VERSION, "seed": SEED}
+        info |= {"lora": LORA, "num_layers": NUM_LAYERS, "machine": machine(), "git_commit": git_commit()}
+        info |= {"patch": "mlx-lm PR #1870", "pr_commit": gated_delta_patch.PR_COMMIT}
+        info |= {"base_block": gated_delta_patch.BASE_BLOCK, "chunk_size": gated_delta_patch.CHUNK_SIZE}
+        (run_dir / "config.json").write_text(json.dumps(info, indent=2) + "\n")
+        check(a.model, rows, offsets, run_dir / "check.json")
+        print(f"→ {run_dir.relative_to(ROOT)}")
+        return 0
     picked = pick_rows(train_len, a.steps, SEED)
     longest = longest_rows(long_len, a.longest)
     val_picked = pick_rows([0] * len(valid), a.val_rows, SEED)
@@ -268,6 +400,7 @@ def main(argv: list[str] | None = None) -> int:
         "grad_checkpoint": True,
         "mask_prompt": True,
         "max_seq_length": MAX_SEQ_LENGTH,
+        **recurrence,
         "throughput_rows": picked,
         "throughput_row_tokens": [train_len[i] for i in picked],
         "longest_rows": longest,
