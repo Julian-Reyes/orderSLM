@@ -2,11 +2,11 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-20._
+_Last updated 2026-10-21._
 
 ## Start here next session
 
-_Updated 2026-10-20._
+_Updated 2026-10-21._
 
 - **M5 student bake-off done (2026-10-20, free on Kaggle 2 × T4):** `docs/STUDENT_BAKEOFF.md`, run
   `runs/student-bakeoff/20261019T182539Z/`. **Decision: keep Qwen3.5-0.8B + 2B** (no candidate clearly better, tooling
@@ -25,11 +25,25 @@ _Updated 2026-10-20._
   message's (40% PLACE_ORDER, 18% CONFIRM, 17% SMALL_TALK; UNKNOWN 14 rows). **Julian, 2026-10-20: keep it as
   is** (the order often can't be labeled until the end; the student labels each message as it arrives). After
   training, **score the student at every customer message of dev** (dev gold has a box per message); if mid-chat
-  boxes are weak, add the free box-only rows from the teacher's per-message intents and retrain. Next: training
-  test on the **Mac mini** (Julian sets it up ~2–3 h after 2026-10-20 morning; Kaggle is the fallback).
+  boxes are weak, add the free box-only rows from the teacher's per-message intents and retrain.
+- **Mac mini ready (2026-10-21):** Apple **M1, 16 GB**, macOS 15.6.1, 84 GB free. Clone at
+  `~/Documents/GitHub/orderslm` on `milestone-4`, hooks + postBuffer set, `uv sync` + `make check` pass,
+  `make student-data` rebuilt: counts and sha256 match this clone. Julian runs Claude Code on the Mac mini from now.
+- **Next: MLX smoke test on the Mac mini (approved by Julian 2026-10-21, $0):** add `mlx-lm[train]` as an optional
+  dependency group (Mac only; `make check` must not need it). Checked 2026-10-21: mlx-lm 0.32.2 (MIT, Python ≥3.11)
+  has `qwen3_5.py`; reads `{"messages": [...]}`; `--mask-prompt`, `--grad-checkpoint`, `--batch-size`. Download
+  **only Qwen/Qwen3.5-0.8B** (1.8 GB, Apache-2.0) for now; 2B (4.6 GB) after the smoke test. Run ~20–50 LoRA steps
+  on `single/train.jsonl`, batch 1, grad checkpointing; measure it/s, peak memory, loss trend and whether the
+  longest rows (~9k tokens) fit; then estimate full-run times. Save to `runs/`, record in the case-study notes.
+  Deployment note: mlx-lm's `--export-gguf` covers only Llama/Mistral-style fp16, so Qwen3.5 GGUF needs llama.cpp's
+  `convert_hf_to_gguf.py` on the fused HF-format model (check its Qwen3.5 support when we get there).
+- **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
+  first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
+  task with a plain-English summary (changes + why, files, direct answers).
 
-- **Git:** M0–M3 merged into local `main`. All M4 work is on branch **`milestone-4`** (committed, not merged, **not
-  pushed**: ask Julian before any push, run a secrets check first).
+- **Git:** M0–M3 on `main` (GitHub's `main` matches local). M4, M5 and M6 so far are on branch **`milestone-4`**,
+  **pushed 2026-10-20** after a secrets check (not merged; merge after M6). Ask Julian before every push, secrets
+  check first. Large pushes need `git config http.postBuffer 524288000` (set in this clone).
 - **Spend:** $5.80 of $10 (docs/COSTS.md). M4 so far: data generation, labeling, relabels, audits.
 - **M4 state:** training data done: **1,963 single-menu + 391 mega-menu** labeled chats (`runs/synth/{p3,b1,m1}`,
   exclusions in `runs/synth/excluded.json`); label prompt `teacher-label@0.7`; label audit by Jev + OpenAI Decisions
