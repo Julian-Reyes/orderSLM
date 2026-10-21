@@ -29,12 +29,18 @@ _Updated 2026-10-21._
 - **Mac mini ready (2026-10-21):** Apple **M1, 16 GB**, macOS 15.6.1, 84 GB free. Clone at
   `~/Documents/GitHub/orderslm` on `milestone-4`, hooks + postBuffer set, `uv sync` + `make check` pass,
   `make student-data` rebuilt: counts and sha256 match this clone. Julian runs Claude Code on the Mac mini from now.
-- **Next: MLX smoke test on the Mac mini (approved by Julian 2026-10-21, $0):** add `mlx-lm[train]` as an optional
-  dependency group (Mac only; `make check` must not need it). Checked 2026-10-21: mlx-lm 0.32.2 (MIT, Python ≥3.11)
-  has `qwen3_5.py`; reads `{"messages": [...]}`; `--mask-prompt`, `--grad-checkpoint`, `--batch-size`. Download
-  **only Qwen/Qwen3.5-0.8B** (1.8 GB, Apache-2.0) for now; 2B (4.6 GB) after the smoke test. Run ~20–50 LoRA steps
-  on `single/train.jsonl`, batch 1, grad checkpointing; measure it/s, peak memory, loss trend and whether the
-  longest rows (~9k tokens) fit; then estimate full-run times. Save to `runs/`, record in the case-study notes.
+- **MLX smoke test (2026-10-21, $0): stock mlx-lm can't train Qwen3.5 on our rows on the M1 16 GB.** Added the
+  optional `mlx` dependency group (`mlx-lm[train]==0.32.2`, Apple Silicon only; `make check` doesn't need it),
+  `make mlx-smoke` (`src/orderslm/train/mlx_smoke.py`: throughput + longest-row phases, `--probe` lengths).
+  Qwen3.5-0.8B downloaded to `models/qwen3.5-0.8b` (rev `2fc06364`, sha256 matches HF). Validation forward works
+  (loss 1.533 on 2 rows), but the **first training step runs out of GPU memory**. Probe (one step, random tokens):
+  128 → 2.7 s / 2.5 GB, 512 → 11.6 s / 5.0 GB, 1,024 → 32 s / 9.3 GB, 1,536 → 74 s / 14.3 GB (GPU limit 11.45 GB);
+  our rows: p50 3.2k, max 6.3k (single) / 9.8k (mixed) tokens. Cause: the Gated DeltaNet Metal kernel has no backward,
+  so training uses a per-token Python loop that keeps a 1 MB state per token per layer (~9.6 MB/token). Known
+  upstream (mlx-lm #1956, PR #1870 chunkwise training path; mlx #3539). Details: `runs/mlx-smoke/NOTES.md`.
+  Token counts (Qwen3.5 tokenizer): single train 7.09M tokens/epoch, mixed 10.48M. **Waiting on Julian:** how to
+  train (options in the session summary: port the chunked delta rule into MLX ourselves, train on Kaggle T4 with
+  HF/PEFT's chunked torch path, or a standard-attention student such as Qwen3-1.7B on MLX). 2B not downloaded.
   Deployment note: mlx-lm's `--export-gguf` covers only Llama/Mistral-style fp16, so Qwen3.5 GGUF needs llama.cpp's
   `convert_hf_to_gguf.py` on the fused HF-format model (check its Qwen3.5 support when we get there).
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
@@ -89,7 +95,7 @@ _Updated 2026-10-21._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: Qwen3.5 doesn't fit with stock mlx-lm (decision open) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

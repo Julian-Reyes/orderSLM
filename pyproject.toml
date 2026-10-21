@@ -17,6 +17,11 @@ dev = [
     "pytest>=8",
     "ruff>=0.6",
 ]
+# M6 LoRA training on Apple Silicon (the Mac mini). Not installed by default; `make check` doesn't need it.
+# Use with `uv run --group mlx ...` (the Makefile's smoke/train targets do this).
+mlx = [
+    "mlx-lm[train]==0.32.2; sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
 
 [build-system]
 requires = ["hatchling"]

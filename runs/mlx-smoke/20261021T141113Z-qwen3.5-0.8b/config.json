@@ -1,0 +1,21 @@
+{
+  "experiment": "mlx-smoke probe",
+  "model": "models/qwen3.5-0.8b",
+  "lora": {
+    "rank": 8,
+    "dropout": 0.0,
+    "scale": 20.0
+  },
+  "num_layers": 16,
+  "grad_checkpoint": true,
+  "seed": 20261021,
+  "machine": {
+    "chip": "Apple M1",
+    "memory_gb": 16,
+    "macos": "15.6.1",
+    "python": "3.13.5",
+    "mlx": "0.32.4",
+    "mlx_lm": "0.32.2"
+  },
+  "git_commit": "8225fb1df35fcb9f359af7a0cb8b5b6a0a17b5d6-dirty"
+}

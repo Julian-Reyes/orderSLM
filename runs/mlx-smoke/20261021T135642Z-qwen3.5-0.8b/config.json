@@ -1,0 +1,54 @@
+{
+  "experiment": "mlx-smoke",
+  "model": "models/qwen3.5-0.8b",
+  "model_config": [
+    "Qwen3_5ForConditionalGeneration"
+  ],
+  "data_version": "student-data@0.1",
+  "prompt_version": "student-extract@0.1",
+  "data": "single",
+  "longest_from": "mixed",
+  "seed": 20261021,
+  "lora": {
+    "rank": 8,
+    "dropout": 0.0,
+    "scale": 20.0
+  },
+  "learning_rate": 0.0001,
+  "num_layers": 16,
+  "batch_size": 1,
+  "grad_checkpoint": true,
+  "mask_prompt": true,
+  "max_seq_length": 10240,
+  "throughput_rows": [
+    788,
+    1118,
+    1188
+  ],
+  "throughput_row_tokens": [
+    3206,
+    2323,
+    2258
+  ],
+  "longest_rows": [
+    2097
+  ],
+  "longest_row_tokens": [
+    9805
+  ],
+  "valid_rows": [
+    49,
+    69
+  ],
+  "machine": {
+    "chip": "Apple M1",
+    "memory_gb": 16,
+    "macos": "15.6.1",
+    "python": "3.13.5",
+    "mlx": "0.32.4",
+    "mlx_lm": "0.32.2"
+  },
+  "git_commit": "8225fb1df35fcb9f359af7a0cb8b5b6a0a17b5d6-dirty",
+  "started_at": "2026-10-21T13:56:58.137476+00:00",
+  "cost_usd": 0.0
+}
