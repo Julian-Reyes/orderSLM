@@ -68,6 +68,9 @@ Gold answers stay local: scoring happens on this Mac.
 
 ### Known risks to check in the first run
 
+- **Process killed with exit −9 (seen 2026-10-22, M6 session 1):** the 0.8B training was SIGKILLed after ~2 h while the
+  2B trained on the other T4; no Python error, GPU memory normal. Most likely host RAM (unconfirmed). The m6 kernel now
+  logs host memory (`memory.jsonl`, per-step `rss_gb`); training resumes from `last/` (every 20 steps).
 - **Stuck in the queue (seen 2026-10-19):** a GPU version sat "queued" for 2 h while a fresh push started at once
   (twice). Rule: if queued > 20 min, push again and cancel the old version on the website (the CLI can't cancel, and
   `kernels status`/`output` only see the latest version; a `/<version>` suffix is ignored).

@@ -14,7 +14,8 @@ different GPUs run in parallel (one process each, `CUDA_VISIBLE_DEVICES`), jobs 
 - `score`: greedy generation for each request (dev prefixes) with base + adapter; raw text out, scored on the Mac.
 
 Output (/kaggle/working): `<job>/` (config.json, steps.jsonl, val.jsonl, status.json, best/, last/ for train;
-outputs.jsonl, status.json for score), env.json, run.log. Paths can be moved for a local test with ORDERSLM_KAGGLE_IN
+outputs.jsonl, status.json for score), env.json, run.log, memory.jsonl (host RAM every 30 s: free, tmpfs, cgroup,
+each GPU's process tree). Paths can be moved for a local test with ORDERSLM_KAGGLE_IN
 / ORDERSLM_KAGGLE_OUT; a model entry with "path" is loaded from disk instead of the Hub.
 """
 
@@ -59,6 +60,87 @@ def write_json(path: Path, obj) -> None:
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(obj, indent=2) + "\n")
     tmp.replace(path)
+
+
+# ---------------------------------------------------------------- host memory
+# Session 20261021T170010Z: the 0.8B job was SIGKILLed (exit -9) after step 147 with GPU memory normal, most likely
+# the host running out of RAM. These readings (Linux /proc and cgroup files; empty elsewhere) show where it goes.
+
+GB = 1e9
+MEMORY_EVERY = 30  # seconds between host-memory samples in memory.jsonl
+
+
+def _read(path: str) -> str | None:
+    try:
+        return Path(path).read_text()
+    except OSError:
+        return None
+
+
+def parse_meminfo(text: str) -> dict:
+    """GB values of the /proc/meminfo fields that matter here (Shmem includes files on tmpfs, which live in RAM)."""
+    want = {"MemTotal", "MemAvailable", "Shmem", "Cached", "SwapFree"}
+    out = {}
+    for line in text.splitlines():
+        k, _, v = line.partition(":")
+        if k in want:
+            out[k] = round(int(v.split()[0]) * 1024 / GB, 2)
+    return out
+
+
+def rss_gb(pid: int | str = "self") -> float | None:
+    for line in (_read(f"/proc/{pid}/status") or "").splitlines():
+        if line.startswith("VmRSS:"):
+            return round(int(line.split()[1]) * 1024 / GB, 2)
+    return None
+
+
+def cgroup_memory() -> dict:
+    """The container's memory use and limit in GB (cgroup v2, else v1)."""
+    for cur, lim in (
+        ("/sys/fs/cgroup/memory.current", "/sys/fs/cgroup/memory.max"),
+        ("/sys/fs/cgroup/memory/memory.usage_in_bytes", "/sys/fs/cgroup/memory/memory.limit_in_bytes"),
+    ):
+        if (c := _read(cur)) is not None:
+            m = (_read(lim) or "").strip()
+            return {
+                "current": round(int(c) / GB, 2),
+                "max": round(int(m) / GB, 2) if m.isdigit() else m or None,
+            }
+    return {}
+
+
+def descendants(pid: int) -> list[int]:
+    """pid and every process below it (from /proc/*/stat)."""
+    parent = {}
+    for p in Path("/proc").glob("[0-9]*"):
+        if stat := _read(str(p / "stat")):
+            parent[int(p.name)] = int(stat.rsplit(")", 1)[1].split()[1])
+    tree, todo = [], [pid]
+    while todo:
+        q = todo.pop()
+        tree.append(q)
+        todo += [c for c, pp in parent.items() if pp == q]
+    return tree
+
+
+def host_memory(procs: dict | None = None) -> dict:
+    rec = {"meminfo": parse_meminfo(_read("/proc/meminfo") or ""), "cgroup": cgroup_memory()}
+    if procs:
+        rec["rss_gb"] = {
+            f"gpu{g}": round(sum(rss_gb(q) or 0 for q in descendants(p.pid)), 2) for g, p in procs.items()
+        }
+    return rec
+
+
+def mount_types(text: str, paths: tuple[str, ...] = ("/tmp", "/kaggle/working")) -> dict:
+    """Filesystem type of the mount holding each path (from /proc/mounts text)."""
+    table = [m for m in (x.split() for x in text.splitlines()) if len(m) > 2]
+    out = {}
+    for path in paths:
+        hits = [m for m in table if path == m[1] or path.startswith(m[1].rstrip("/") + "/")]
+        out[path] = max(hits, key=lambda m: len(m[1]))[2] if hits else None
+    return out
 
 
 def no_gqa_flag() -> bool:
@@ -315,7 +397,7 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
                 s, k = row_loss(ids, offset)
                 loss = s / k / len(rows)
                 scaler.scale(loss).backward()
-                loss_sum += float(loss)
+                loss_sum += float(loss.detach())
                 tokens += len(ids)
             scaler.unscale_(opt)
             grad_norm = float(torch.nn.utils.clip_grad_norm_(params, cfg["max_grad_norm"]))
@@ -349,6 +431,8 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
             "skipped": bool(skipped),
             "seconds": round(time.perf_counter() - t0, 2),
             "peak_memory_gb": round(torch.cuda.max_memory_allocated(0) / 1e9, 2) if cuda else None,
+            "rss_gb": rss_gb(),
+            "mem_available_gb": parse_meminfo(_read("/proc/meminfo") or "").get("MemAvailable"),
         }
         with (out / "steps.jsonl").open("a") as f:
             f.write(json.dumps(rec) + "\n")
@@ -482,6 +566,8 @@ def main() -> None:
         "cuda": torch.version.cuda,
         "gpus": [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())],
         "python": sys.version.split()[0],
+        "mounts": mount_types(_read("/proc/mounts") or ""),
+        "host_memory_at_start": host_memory(),
     }
     log(
         f"session {run['session']}: torch {env['torch']}, transformers {env['transformers']}, GPUs {env['gpus']}"
@@ -492,8 +578,17 @@ def main() -> None:
     for j in run["jobs"]:
         by_gpu.setdefault(j["gpu"], []).append(j)
     procs = {g: run_jobs_on_gpu(g, js, start, child_env) for g, js in sorted(by_gpu.items())}
+    with (OUT / "memory.jsonl").open("a") as mem:
+        while any(p.poll() is None for p in procs.values()):
+            try:  # a failed reading must never end the session (Kaggle would kill the jobs with it)
+                rec = {"t": round(time.time() - start), **host_memory(procs)}
+            except Exception as e:
+                rec = {"t": round(time.time() - start), "error": f"{type(e).__name__}: {e}"[:300]}
+            mem.write(json.dumps(rec) + "\n")
+            mem.flush()
+            time.sleep(MEMORY_EVERY)
     for g, p in procs.items():
-        env["jobs"][f"gpu{g}"] = {"jobs": [j["name"] for j in by_gpu[g]], "exit_code": p.wait()}
+        env["jobs"][f"gpu{g}"] = {"jobs": [j["name"] for j in by_gpu[g]], "exit_code": p.returncode}
     for j in run["jobs"]:
         st = OUT / j["name"] / "status.json"
         env["jobs"][j["name"]] = json.loads(st.read_text()) if st.exists() else {"status": "failed"}

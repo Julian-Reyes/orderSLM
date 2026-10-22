@@ -3,11 +3,12 @@
 Settings agreed with Julian (2026-10-21): fla + fp16; up to 2 epochs with validation loss every half epoch, the best
 checkpoint by validation loss kept; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP and
 the Gated DeltaNet projections); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup, cosine decay; effective batch 8 by gradient
-accumulation. Sessions: (1) 0.8B + 2B single side by side, one per T4; (2) 2B mixed, and dev scoring of the
-session-1 students on the other T4; more sessions resume whatever paused (Kaggle's 12 h limit).
+accumulation. Sessions: (1) 0.8B + 2B single side by side, one per T4 (the 0.8B was killed at step 147, probably
+host RAM); (2) 2B mixed on T4 #0, the 0.8B resumed and then the 2B single's dev scoring on T4 #1 (the training list's
+order sets the GPUs; scoring follows the last one); more sessions resume whatever paused (Kaggle's 12 h limit).
 
     make train ARGS="export --train qwen3.5-0.8b-single,qwen3.5-2b-single"
-    make train ARGS="export --train qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-single"
+    make train ARGS="export --train qwen3.5-2b-mixed,qwen3.5-0.8b-single --score qwen3.5-2b-single"
     make kaggle-push JOB=m6        # (ask Julian first; secrets check)
     make kaggle-pull JOB=m6
     make train ARGS="import runs/train/<id>"
@@ -202,6 +203,29 @@ def _copy(src: Path, dst: Path, names: tuple[str, ...]) -> None:
             shutil.copy(src / n, dst / n)
 
 
+def memory_summary(samples: list[dict]) -> dict[str, Any]:
+    """Lowest free host RAM, most tmpfs/shared memory and largest process-tree RSS per GPU over the session."""
+    errors = sum("error" in s for s in samples)
+    samples = [s for s in samples if "meminfo" in s]
+    if not samples:
+        return {"errors": errors} if errors else {}
+    avail = [s["meminfo"]["MemAvailable"] for s in samples if "MemAvailable" in s["meminfo"]]
+    shmem = [s["meminfo"]["Shmem"] for s in samples if "Shmem" in s["meminfo"]]
+    rss: dict[str, float] = {}
+    for s in samples:
+        for g, v in s.get("rss_gb", {}).items():
+            rss[g] = max(rss.get(g, 0.0), v)
+    return {
+        "samples": len(samples),
+        "total_gb": samples[0]["meminfo"].get("MemTotal"),
+        "min_available_gb": min(avail) if avail else None,
+        "max_shmem_gb": max(shmem) if shmem else None,
+        "max_rss_gb": rss,
+        "cgroup_max_gb": samples[0].get("cgroup", {}).get("max"),
+        "errors": errors,
+    }
+
+
 def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
     manifest = json.loads((run_dir / "manifest.json").read_text())
     env = json.loads((output_dir / "env.json").read_text())
@@ -287,7 +311,11 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                     "contract_valid": m["contract_valid"],
                 }
     kernel = run_dir / "kernel"
-    _copy(output_dir, kernel, ("env.json", "run.log"))
+    _copy(output_dir, kernel, ("env.json", "run.log", "memory.jsonl"))
+    if (kernel / "memory.jsonl").exists():
+        summary["host_memory"] = memory_summary(
+            [json.loads(x) for x in (kernel / "memory.jsonl").read_text().splitlines() if x.strip()]
+        )
     manifest["imported_at"] = datetime.now(UTC).isoformat()
     (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     (run_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")

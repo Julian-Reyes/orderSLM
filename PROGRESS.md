@@ -2,11 +2,11 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-21._
+_Last updated 2026-10-22._
 
 ## Start here next session
 
-_Updated 2026-10-21 (Kaggle smoke test done)._
+_Updated 2026-10-22 (M6 session 1 imported)._
 
 - **M5 student bake-off done (2026-10-20, free on Kaggle 2 × T4):** `docs/STUDENT_BAKEOFF.md`, run
   `runs/student-bakeoff/20261019T182539Z/`. **Decision: keep Qwen3.5-0.8B + 2B** (no candidate clearly better, tooling
@@ -76,7 +76,8 @@ _Updated 2026-10-21 (Kaggle smoke test done)._
     (the session limit is 12 h). Mixed (10.48M tokens) ≈ 1.5 × single. Estimates scale measured speed to total
     tokens; they are not a measured full run.
   - **MLX:** parked (patch kept and verified; see above).
-- **M6 full LoRA training (Julian, 2026-10-21): built, session 1 staged, waiting for Julian's OK to push.**
+- **M6 full LoRA training (Julian, 2026-10-21): session 1 ran 2026-10-21 17:40 → 2026-10-22 01:47 UTC, imported
+  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 next.**
   Settings: fla + fp16; up to 2 epochs, validation loss every half epoch (and at step 0 as the base reference), best
   checkpoint by validation loss; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP, Gated
   DeltaNet `in_proj_qkv/z/a/b`, `out_proj`; confirmed in the local test); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup,
@@ -101,6 +102,29 @@ _Updated 2026-10-21 (Kaggle smoke test done)._
   - Plan: **session 1** = `runs/train/20261021T170010Z/` (T4 #0 0.8B single ~6.5 h, T4 #1 2B single ~8 h);
     **session 2** = `export --train qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-single`; session 3 if
     the mixed run pauses (+ its scoring). Secrets check on the staged upload + kernel: clean (0 hits).
+  - **Session 1 result** (`runs/train/20261021T170010Z/`, `summary.json`; $0; weights in `models/m6/`):
+    - **2B single: done**, 468/468 steps (2 epochs), 7.76 h of steps, 507 tokens/s, peak GPU 6.7 GB, 6 skipped
+      updates (GradScaler warm-up). Validation loss 1.329 (base) → 0.0154 / 0.0113 / 0.0093 / **0.0089** at
+      0.5 / 1 / 1.5 / 2 epochs: best = last (adapter sha256 `2366b279…`).
+    - **0.8B single: killed after step 147** (~0.63 epoch, ~2 h in, 19:50 UTC): exit −9 (SIGKILL; one job per GPU, so
+      bash had exec'd Python), no Python error, GPU peak 3.4–4.0 GB (normal). Most likely the host's out-of-memory
+      killer; **not confirmed** (session 1 logged no host RAM). Not the data: step 148's rows are ordinary
+      (7.7k–19.3k chars, rebuilt from the seed). Validation 1.479 (base) → **0.0162** at 0.5 epoch; 625 tokens/s;
+      `last/` at step 140 (steps 141–147 get redone on resume).
+    - Validation loss is next-token loss on the teacher's labels for the 98 held-back training chats: it shows the
+      format is learned, not dev accuracy. Dev scoring is the result.
+  - **Host-RAM logging added to the kernel (2026-10-22):** `memory.jsonl` every 30 s (MemAvailable, Shmem = tmpfs,
+    cgroup use/limit, RSS of each GPU's process tree), `rss_gb` + `mem_available_gb` per step, `/tmp` and
+    `/kaggle/working` filesystem types in env.json (models download to `/tmp/models`: if that is tmpfs, ~6.4 GB of
+    model files sit in RAM; unverified). A failed reading is logged and never ends the session. Import copies
+    `memory.jsonl` and summarizes it (`host_memory` in summary.json). Tests: `tests/test_m6_kernel.py`; the `/proc`
+    readers are only exercised on Kaggle (no Linux here).
+  - **Session 2 (staged, not pushed):** `export --train qwen3.5-2b-mixed,qwen3.5-0.8b-single --score
+    qwen3.5-2b-single` → T4 #0 2B mixed (~21M tokens at 507 tok/s ≈ 11.5 h + validation: pauses at the 11.25 h stop
+    near ~1.8 epochs); T4 #1 0.8B resumed at step 140 (~4.7 h), then dev scoring of the 2B single (268 requests,
+    untimed; guess 1–3 h). Same two-trainings-at-once setup as the kill, so it may repeat; checkpoints every 20 steps
+    bound the loss and the new logging should show the cause. **Session 3:** finish 2B mixed (~1 h) + score the
+    0.8B and 2B mixed. GPU quota 30 h/week: session 1 ≈ 8.1 h, session 2 ≈ 11.3 h (check the remaining quota first).
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -153,7 +177,7 @@ _Updated 2026-10-21 (Kaggle smoke test done)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147 (resume in session 2) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
