@@ -77,7 +77,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     tokens; they are not a measured full run.
   - **MLX:** parked (patch kept and verified; see above).
 - **M6 full LoRA training (Julian, 2026-10-21): session 1 ran 2026-10-21 17:40 → 2026-10-22 01:47 UTC, imported
-  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 next.**
+  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 running; when it ends
+  (≤ 11.25 h, ~00:00 UTC 2026-10-23): `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261022T123143Z"`.**
   Settings: fla + fp16; up to 2 epochs, validation loss every half epoch (and at step 0 as the base reference), best
   checkpoint by validation loss; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP, Gated
   DeltaNet `in_proj_qkv/z/a/b`, `out_proj`; confirmed in the local test); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup,
@@ -119,7 +120,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     model files sit in RAM; unverified). A failed reading is logged and never ends the session. Import copies
     `memory.jsonl` and summarizes it (`host_memory` in summary.json). Tests: `tests/test_m6_kernel.py`; the `/proc`
     readers are only exercised on Kaggle (no Linux here).
-  - **Session 2 (staged, not pushed):** `export --train qwen3.5-2b-mixed,qwen3.5-0.8b-single --score
+  - **Session 2 = `runs/train/20261022T123143Z/`, pushed to Kaggle 2026-10-22 ~12:35 UTC (kernel version 2, RUNNING;
+    secrets check clean, dev requests all Source A dev):** `export --train qwen3.5-2b-mixed,qwen3.5-0.8b-single --score
     qwen3.5-2b-single` → T4 #0 2B mixed (~21M tokens at 507 tok/s ≈ 11.5 h + validation: pauses at the 11.25 h stop
     near ~1.8 epochs); T4 #1 0.8B resumed at step 140 (~4.7 h), then dev scoring of the 2B single (268 requests,
     untimed; guess 1–3 h). Same two-trainings-at-once setup as the kill, so it may repeat; checkpoints every 20 steps
