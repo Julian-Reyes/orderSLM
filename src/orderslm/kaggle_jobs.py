@@ -9,6 +9,8 @@ whatever the job's own export staged in `upload/` (never test or PIZZA data, nev
 """
 
 import argparse
+import csv
+import io
 import json
 import shutil
 import subprocess
@@ -34,6 +36,24 @@ def _dataset_status(dataset: str) -> str:
     return (r.stdout + r.stderr).strip().lower()
 
 
+def _dataset_files(dataset: str) -> set[str]:
+    out = _kaggle("datasets", "files", dataset, "-v", "--page-size", "200").stdout
+    rows = [r for r in csv.reader(io.StringIO(out)) if r]
+    if not rows or rows[0][0] != "name":
+        raise SystemExit(f"unexpected file listing for {dataset}: {out[:500]}")
+    return {r[0] for r in rows[1:]}
+
+
+def missing_uploads(stage: Path, listed: set[str]) -> list[str]:
+    """Staged files (subfolders included) the published dataset doesn't list; Kaggle's own metadata excluded."""
+    staged = sorted(
+        p.relative_to(stage).as_posix()
+        for p in stage.rglob("*")
+        if p.is_file() and p.name != "dataset-metadata.json"
+    )
+    return [f for f in staged if f not in listed]
+
+
 def push(job: str) -> None:
     job_dir = KAGGLE_DIR / job
     stage = job_dir / "upload"
@@ -46,12 +66,22 @@ def push(job: str) -> None:
     if dataset not in meta["dataset_sources"]:
         raise SystemExit(f"{job}: kernel does not read the staged dataset {dataset}")
     status = _dataset_status(dataset)
+    # --dir-mode zip: the CLI's default skips subfolders (session 20261022T123143Z lost resume/ and adapters/)
     if "ready" in status:
         print(f"New version of {dataset}")
-        _kaggle("datasets", "version", "-p", str(stage), "-m", f"staged {time.strftime('%Y-%m-%dT%H:%M:%S')}")
+        _kaggle(
+            "datasets",
+            "version",
+            "-p",
+            str(stage),
+            "-r",
+            "zip",
+            "-m",
+            f"staged {time.strftime('%Y-%m-%dT%H:%M:%S')}",
+        )
     else:
         print(f"Creating private dataset {dataset}")
-        _kaggle("datasets", "create", "-p", str(stage))
+        _kaggle("datasets", "create", "-p", str(stage), "-r", "zip")
     time.sleep(10)  # the status call can lag behind the upload
     for _ in range(60):
         if "ready" in (status := _dataset_status(dataset)):
@@ -59,6 +89,11 @@ def push(job: str) -> None:
         time.sleep(10)
     else:
         raise SystemExit(f"{dataset} not ready after 10 min: {status}")
+    listed = _dataset_files(dataset)
+    if missing := missing_uploads(stage, listed):
+        raise SystemExit(
+            f"{dataset} lacks staged files {missing} (listed: {sorted(listed)}); kernel not started"
+        )
     r = _kaggle("kernels", "push", "-p", str(job_dir))
     print(r.stdout.strip())
 

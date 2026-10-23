@@ -40,7 +40,9 @@ No copy-pasting into notebooks. For each job:
 Commands (`src/orderslm/kaggle_jobs.py`): `make kaggle-push JOB=<folder>` (new version of the staged private dataset,
 waits until ready, pushes the kernel), `make kaggle-status JOB=…`, `make kaggle-pull JOB=…` (output →
 `kaggle/<job>/output/`, gitignored). The kernel slug must differ from its dataset's slug: Kaggle answers
-`409 Conflict` otherwise (found 2026-10-19), so kernels are named `<dataset>-run`.
+`409 Conflict` otherwise (found 2026-10-19), so kernels are named `<dataset>-run`. The CLI skips subfolders of the
+dataset unless given `--dir-mode` (M6 session 2 lost `resume/` and `adapters/` this way, 2026-10-22): push uploads with
+`--dir-mode zip`, then checks Kaggle lists every staged file before it starts the kernel.
 
 **Job A commands:** `make julia-audit ARGS="export --set dev|train [--limit N]"` (stages `kaggle/julia-audit/upload/`
 and a run dir `runs/label-audit/<time>-julia-<set>/`), `make kaggle-push JOB=julia-audit`, then after it finishes
@@ -70,7 +72,10 @@ Gold answers stay local: scoring happens on this Mac.
 
 - **Process killed with exit −9 (seen 2026-10-22, M6 session 1):** the 0.8B training was SIGKILLed after ~2 h while the
   2B trained on the other T4; no Python error, GPU memory normal. Most likely host RAM (unconfirmed). The m6 kernel now
-  logs host memory (`memory.jsonl`, per-step `rss_gb`); training resumes from `last/` (every 20 steps).
+  logs host memory (`memory.jsonl`, per-step `rss_gb`); training resumes from `last/` (every 20 steps). Session 2's
+  log: one 2B training's process grows ~10 MB per new training row through epoch 1 (4 → 26 GB), then stays flat, so
+  two trainings at once run the 32 GB host out. Cause of the growth not confirmed (likely a per-length kernel cache).
+  The kernel now pauses a training when free RAM < 2 GB; plan sessions so two first-epoch trainings don't overlap.
 - **Stuck in the queue (seen 2026-10-19):** a GPU version sat "queued" for 2 h while a fresh push started at once
   (twice). Rule: if queued > 20 min, push again and cancel the old version on the website (the CLI can't cancel, and
   `kernels status`/`output` only see the latest version; a `/<version>` suffix is ignored).

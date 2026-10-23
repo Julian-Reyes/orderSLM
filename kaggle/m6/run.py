@@ -10,8 +10,13 @@ different GPUs run in parallel (one process each, `CUDA_VISIBLE_DEVICES`), jobs 
   and before step 1), best adapter by validation loss in `<job>/best/`, full training state in `<job>/last/` every
   `checkpoint_every` steps. Kaggle keeps /kaggle/working only when a session ends normally, so a job stops itself
   at `deadline_hours` after the session start, saves `last/` and reports `paused`; the next session resumes from it
-  exactly (same data order, optimizer, scheduler, scaler, RNG).
+  exactly (same data order, optimizer, scheduler, scaler, RNG). It also pauses that way when free host RAM drops
+  below MIN_FREE_GB (the host grows ~10 MB per new training row; two trainings at once ran it out in session 1).
 - `score`: greedy generation for each request (dev prefixes) with base + adapter; raw text out, scored on the Mac.
+  With `after_train`, the adapter is that job's best from this session, scored only if its training finished.
+
+Before any job starts, every input file run.json names must exist (session 2 lost its resume and adapter folders in
+the upload), else the session ends at once.
 
 Output (/kaggle/working): `<job>/` (config.json, steps.jsonl, val.jsonl, status.json, best/, last/ for train;
 outputs.jsonl, status.json for score), env.json, run.log, memory.jsonl (host RAM every 30 s: free, tmpfs, cgroup,
@@ -19,6 +24,7 @@ each GPU's process tree). Paths can be moved for a local test with ORDERSLM_KAGG
 / ORDERSLM_KAGGLE_OUT; a model entry with "path" is loaded from disk instead of the Hub.
 """
 
+import hashlib
 import json
 import math
 import os
@@ -45,6 +51,21 @@ def log(msg: str) -> None:
     LOG.flush()
 
 
+def missing_inputs(run: dict, src: Path) -> list[str]:
+    """Input files the jobs need that the dataset doesn't have (in-session adapters come later, from OUT)."""
+    need = []
+    for j in run["jobs"]:
+        if j["kind"] == "train":
+            need += [j["train_file"], j["valid_file"]]
+            if j.get("resume"):
+                need += [f"{j['resume']}/{f}" for f in ("state.pt", "status.json")]
+        else:
+            need.append(j["requests"])
+            if j.get("adapter") and not j.get("after_train"):
+                need += [f"{j['adapter']}/{f}" for f in ("adapter_config.json", "adapter_model.safetensors")]
+    return [f for f in dict.fromkeys(need) if not (src / f).is_file()]
+
+
 def find_input() -> Path:
     hits = sorted(IN.rglob("run.json"))
     if len(hits) != 1:
@@ -68,6 +89,9 @@ def write_json(path: Path, obj) -> None:
 
 GB = 1e9
 MEMORY_EVERY = 30  # seconds between host-memory samples in memory.jsonl
+# Session 20261022T123143Z: one 2B training's process grew 4 → 25.9 GB over its first epoch (~10 MB per new row),
+# then stayed flat; a training pauses (saving last/) rather than be killed when free RAM falls below this.
+MIN_FREE_GB = 2.0
 
 
 def _read(path: str) -> str | None:
@@ -378,12 +402,17 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
 
     model.train()
     maybe_eval()
-    status = "done"
+    status, reason = "done", None
     deadline = start + run["deadline_hours"] * 3600
     session_steps, stop_after = 0, job.get("stop_after_steps")  # stop_after_steps: for the local resume test
     while state["opt_step"] < total_steps:
         if time.time() > deadline or (stop_after is not None and session_steps >= stop_after):
             status = "paused"
+            break
+        free = parse_meminfo(_read("/proc/meminfo") or "").get("MemAvailable")
+        if free is not None and free < MIN_FREE_GB:
+            status, reason = "paused", f"low host memory: {free} GB available"
+            log(f"{name}: {reason}")
             break
         order = epoch_order(len(train), seed, state["epoch"])
         rows = order[state["pos"] : state["pos"] + batch]
@@ -445,13 +474,26 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
         if state["opt_step"] % cfg["checkpoint_every"] == 0:
             save_last("running")
     save_last(status)
-    write_json(out / "status.json", {"status": status, **state, "finished_at": datetime.now(UTC).isoformat()})
+    write_json(
+        out / "status.json",
+        {"status": status, **state, "finished_at": datetime.now(UTC).isoformat()}
+        | ({"reason": reason} if reason else {}),
+    )
     log(
         f"{name}: {status} at step {state['opt_step']}/{total_steps}, best val {state['best_val']} @ {state['best_step']}"
     )
 
 
 # ---------------------------------------------------------------- score
+
+
+def unfinished_training(job: dict) -> str | None:
+    """Why a score job with `after_train` can't run yet (its training didn't finish this session), else None."""
+    if not job.get("after_train"):
+        return None
+    st = OUT / job["after_train"] / "status.json"
+    trained = json.loads(st.read_text())["status"] if st.exists() else "missing"
+    return None if trained == "done" else f"{job['after_train']} is {trained}"
 
 
 def score_job(job: dict, run: dict, src: Path, start: float) -> None:
@@ -462,6 +504,10 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
     name = job["name"]
     out = OUT / name
     out.mkdir(exist_ok=True)
+    if reason := unfinished_training(job):
+        write_json(out / "status.json", {"status": "skipped", "reason": reason})
+        log(f"{name}: skipped ({reason})")
+        return
     cuda = torch.cuda.is_available()
     dev = torch.device("cuda:0" if cuda else "cpu")
     dtype = torch.float16 if cuda else torch.float32
@@ -472,6 +518,9 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
     if job.get("adapter"):
         adapter = src / job["adapter"] if (src / job["adapter"]).exists() else OUT / job["adapter"]
         info["adapter_path"] = str(adapter)
+        info["adapter_sha256"] = hashlib.sha256(
+            (adapter / "adapter_model.safetensors").read_bytes()
+        ).hexdigest()
         model = PeftModel.from_pretrained(model, adapter).merge_and_unload()
     model.eval()
     write_json(out / "config.json", info)
@@ -540,6 +589,10 @@ def main() -> None:
     start = time.time()
     src = find_input()
     run = json.loads((src / "run.json").read_text())
+    if missing := missing_inputs(run, src):
+        write_json(OUT / "env.json", {"session": run["session"], "missing_inputs": missing})
+        log(f"session {run['session']}: missing inputs, nothing run: {missing}")
+        raise SystemExit(1)
     pins = run["packages"]
     env: dict = {"session": run["session"], "started_at": datetime.now(UTC).isoformat(), "jobs": {}}
     if not run.get("local_test"):

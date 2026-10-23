@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-22._
+_Last updated 2026-10-23._
 
 ## Start here next session
 
@@ -77,8 +77,10 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     tokens; they are not a measured full run.
   - **MLX:** parked (patch kept and verified; see above).
 - **M6 full LoRA training (Julian, 2026-10-21): session 1 ran 2026-10-21 17:40 → 2026-10-22 01:47 UTC, imported
-  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 running; when it ends
-  (≤ 11.25 h, ~00:00 UTC 2026-10-23): `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261022T123143Z"`.**
+  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 ran 2026-10-22 12:33 →
+  23:49 UTC, imported 2026-10-23 (only the 2B mixed ran; see below). **Session 3 staged, not pushed** (waiting for
+  Julian's OK): `make kaggle-push JOB=m6`; when it ends: `make kaggle-pull JOB=m6`,
+  `make train ARGS="import runs/train/20261023T114452Z"`.**
   Settings: fla + fp16; up to 2 epochs, validation loss every half epoch (and at step 0 as the base reference), best
   checkpoint by validation loss; LoRA r 16 / alpha 32 / dropout 0.05 on all linear layers (attention, MLP, Gated
   DeltaNet `in_proj_qkv/z/a/b`, `out_proj`; confirmed in the local test); LR 2e-4 (0.8B) / 1e-4 (2B), 5% warmup,
@@ -127,6 +129,35 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     untimed; guess 1–3 h). Same two-trainings-at-once setup as the kill, so it may repeat; checkpoints every 20 steps
     bound the loss and the new logging should show the cause. **Session 3:** finish 2B mixed (~1 h) + score the
     0.8B and 2B mixed. GPU quota 30 h/week: session 1 ≈ 8.1 h, session 2 ≈ 11.3 h (check the remaining quota first).
+  - **Session 2 result** (`runs/train/20261022T123143Z/`, `summary.json`; $0):
+    - **2B mixed: paused at the 11.25 h stop at step 534/560** (epoch 1.91), 10.84 h of steps, 514 tokens/s, peak GPU
+      7.6 GB, 6 skipped updates. Validation loss 1.335 (base) → 0.0154 / 0.0114 / **0.0098** at 0.5 / 1 / 1.5 epochs
+      (best = step 420, adapter sha256 `a5c9a74c…`); the 2-epoch validation comes with the last 26 steps.
+    - **T4 #1 did nothing (our bug):** the 0.8B resume and the 2B single's scoring both failed within 2 minutes because
+      the published dataset had **no `resume/` or `adapters/` folders**. The Kaggle CLI skips subfolders unless given
+      `--dir-mode` (session 1 had none, so it didn't show). The import left `models/m6/qwen3.5-0.8b-single/` (session
+      1's step-140 checkpoint) untouched. Cost: ~11 h of one T4, no data lost.
+    - **Host RAM (new logging):** the 2B mixed's process grew **4.1 → 25.9 GB** through its first epoch (~10 MB per
+      new training row, steady), then stayed flat through epoch 2 (rows repeat); lowest free RAM 6.5 GB of 33.7
+      (cgroup limit 32.2). Our loop keeps nothing per row, so the growth follows new input lengths: most likely a
+      kernel compile/autotune cache (fla/Triton). **Not confirmed.** This explains session 1's kill: two trainings
+      growing at once pass 32 GB around the step where the 0.8B died (very likely; session 1 had no RAM log).
+  - **Fixes (2026-10-23):** (1) `make kaggle-push` uploads subfolders (`--dir-mode zip`), then checks that Kaggle
+    lists every staged file and refuses to start the kernel if any is missing. (2) The kernel checks every input
+    run.json names before any job starts and ends at once if one is missing. (3) A training pauses cleanly (saving
+    `last/`, status `paused` + `reason`) when free host RAM drops below 2 GB, rather than being killed. (4) `--score`
+    may name a student trained in the same session: it is scored right after its training on the same GPU, from
+    that session's best adapter, only if the training finished (else `skipped`). The kernel records the scored
+    adapter's sha256 and the import checks it against the imported best. Tests: `tests/test_m6_kernel.py`;
+    `make check` **474 passed** (the "484" above was a miscount: 470 at the previous commit).
+  - **Session 3 = `runs/train/20261023T114452Z/`, staged (not pushed):** `export --train
+    qwen3.5-0.8b-single,qwen3.5-2b-mixed --score qwen3.5-2b-single,qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0:
+    0.8B resumed at step 140 (328 steps, ~4.5–5 h), then scores the 0.8B; T4 #1: 2B mixed's last 26 steps + final
+    validation (~40 min), then scores the 2B single and the 2B mixed (268 dev requests each, untimed; guess 1–3 h
+    each). Only one training runs for most of the session, so it shouldn't run out of RAM; if it does, the 0.8B pauses
+    and scoring continues. Checked: kernel input check passes on the staged folder; secrets scan 0 hits; 268 dev
+    requests, all Source A dev (`a-dev-*`), byte-identical to session 2's. GPU quota: ~19.4 h used this week of 30
+    (check the remaining quota on Kaggle before pushing; this session needs ≤ ~8 h).
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -179,7 +210,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147 (resume in session 2) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3 staged |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

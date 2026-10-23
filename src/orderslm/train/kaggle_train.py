@@ -73,15 +73,18 @@ GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training an
 
 
 def assign_gpus(train: list[str], score: list[str]) -> list[tuple[str, str, int]]:
-    """(kind, name, gpu): training jobs one per GPU; scoring on a GPU no training uses, else after the training."""
+    """(kind, name, gpu): training jobs one per GPU; a student trained this session is scored after its training on
+    the same GPU; other scoring on a GPU no training uses, else after the trainings."""
     if len(train) > 2:
         raise SystemExit("at most two training jobs per session (one per T4)")
     jobs = [("train", n, g) for g, n in enumerate(train)]
+    other = [n for n in score if n not in train]
     free = [g for g in (0, 1) if g >= len(train)] or [
-        len(train) - 1 - i % len(train) for i in range(len(score))
+        len(train) - 1 - i % len(train) for i in range(len(other))
     ]
-    for i, n in enumerate(score):
-        jobs.append(("score", n, free[i % len(free)]))
+    for n in score:
+        gpu = train.index(n) if n in train else free[other.index(n) % len(free)]
+        jobs.append(("score", n, gpu))
     return jobs
 
 
@@ -136,9 +139,15 @@ def export(args: argparse.Namespace) -> Path:
                 job["resumed_at_step"] = st["opt_step"]
         else:
             best = WEIGHTS / name / "best"
-            if not (best / "adapter_config.json").exists():
+            if (
+                name in train
+            ):  # scored after this session's training, from its best adapter, only if it finished
+                adapter, adapter_sha256 = f"{name}/best", None
+            elif not (best / "adapter_config.json").exists():
                 raise SystemExit(f"no best adapter for {name} in {best}: import its training first")
-            shutil.copytree(best, STAGE / "adapters" / name)
+            else:
+                shutil.copytree(best, STAGE / "adapters" / name)
+                adapter, adapter_sha256 = f"adapters/{name}", _sha256(best / "adapter_model.safetensors")
             if "dev-requests.jsonl" not in files:
                 reqs = student_dev.build_requests()
                 (STAGE / "dev-requests.jsonl").write_text(
@@ -151,8 +160,9 @@ def export(args: argparse.Namespace) -> Path:
                 "student": name,
                 "model": s["model"],
                 "gpu": gpu,
-                "adapter": f"adapters/{name}",
-                "adapter_sha256": _sha256(best / "adapter_model.safetensors"),
+                "adapter": adapter,
+                "adapter_sha256": adapter_sha256,
+                "after_train": name if name in train else None,
                 "requests": "dev-requests.jsonl",
             }
         jobs.append(job)
@@ -282,12 +292,23 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
         else:
             dev_dir = RUNS / student_dev.EXPERIMENT / f"{manifest['session']}-{job['student']}"
             _copy(src, dev_dir, ("outputs.jsonl", "config.json", "status.json"))
+            scored = (
+                json.loads((src / "config.json").read_text()).get("adapter_sha256")
+                if (src / "config.json").exists()
+                else None
+            )
+            # an in-session training's best adapter: the kernel's hash must match the imported weights
+            expected = job["adapter_sha256"] or summary["jobs"].get(job.get("after_train"), {}).get(
+                "best_adapter_sha256"
+            )
+            if scored and expected and scored != expected:
+                raise SystemExit(f"{name} scored adapter {scored[:12]}…, expected {expected[:12]}…")
             (dev_dir / "manifest.json").write_text(
                 json.dumps(
                     {
                         "experiment": student_dev.EXPERIMENT,
                         "student": job["student"],
-                        "adapter_sha256": job["adapter_sha256"],
+                        "adapter_sha256": scored or expected,
                         "session": manifest["session"],
                         "data_version": manifest["data_version"],
                         "prompt_version": manifest["prompt_version"],

@@ -1,0 +1,15 @@
+{
+  "status": {
+    "status": "failed",
+    "error": "Traceback (most recent call last):\n  File \"/kaggle/src/script.py\", line 606, in child\n    (train_job if job[\"kind\"] == \"train\" else score_job)(job, run, src, start)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/src/script.py\", line 284, in train_job\n    ck = torch.load(src / resume / \"state.pt\", map_location=dev, weights_only=False)\n  File \"/usr/local/lib/python3.13/dist-packages/torch/serialization.py\", line 1530, in load\n    with _open_file_like(f, \"rb\") as opened_file:\n         ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/serialization.py\", line 795, in _open_file_like\n    return _open_file(name_or_buffer, mode)\n  File \"/usr/local/lib/python3.13/dist-packages/torch/serialization.py\", line 776, in __init__\n    super().__init__(open(name, mode))  # noqa: SIM115\n                     ~~~~^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/kaggle/input/datasets/jreyes33/orderslm-m6/resume/qwen3.5-0.8b-single/state.pt'\n"
+  },
+  "val": [],
+  "best_adapter_sha256": "9f0d826bae39670cf5773c5c8d79e8df543ef6cfac6357772a600831d9519d5b",
+  "best": {
+    "val_loss": 0.01623311804893034,
+    "val_tokens": 31770,
+    "seconds": 155.5,
+    "opt_step": 117,
+    "epoch": 0.5
+  }
+}

@@ -1,0 +1,63 @@
+12:33:48 session 20261022T123143Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+12:35:08 qwen3.5-0.8b-single: failed: FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/input/datasets/jreyes33/orderslm-m6/resume/qwen3.5-0.8b-single/state.pt'
+12:35:25 qwen3.5-2b-mixed: Qwen3_5ForCausalLM 16,819,200 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2236 rows, 560 steps (280/epoch), evals at [0, 140, 280, 420, 560]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 0
+12:35:28 score-qwen3.5-2b-single: failed: ValueError: Can't find 'adapter_config.json' at '/kaggle/working/adapters/qwen3.5-2b-single'
+12:42:51 qwen3.5-2b-mixed: val step 0 loss 1.3347 (446.3 s)
+12:58:09 qwen3.5-2b-mixed: step 10/560 loss 1.2970 lr 1.79e-05 54.16 s/step, 27126 tok
+13:10:47 qwen3.5-2b-mixed: step 20/560 loss 0.6247 lr 5.36e-05 55.45 s/step, 28252 tok
+13:22:28 qwen3.5-2b-mixed: step 30/560 loss 0.1135 lr 8.93e-05 65.71 s/step, 32996 tok
+13:33:21 qwen3.5-2b-mixed: step 40/560 loss 0.0381 lr 1.00e-04 51.41 s/step, 26543 tok
+13:44:26 qwen3.5-2b-mixed: step 50/560 loss 0.0237 lr 9.98e-05 69.07 s/step, 35102 tok
+13:57:22 qwen3.5-2b-mixed: step 60/560 loss 0.0244 lr 9.94e-05 71.36 s/step, 36791 tok
+14:10:05 qwen3.5-2b-mixed: step 70/560 loss 0.0168 lr 9.89e-05 88.08 s/step, 44281 tok
+14:22:13 qwen3.5-2b-mixed: step 80/560 loss 0.0249 lr 9.82e-05 98.02 s/step, 48855 tok
+14:35:25 qwen3.5-2b-mixed: step 90/560 loss 0.0126 lr 9.73e-05 82.55 s/step, 42112 tok
+14:49:01 qwen3.5-2b-mixed: step 100/560 loss 0.0134 lr 9.63e-05 68.38 s/step, 34246 tok
+15:01:39 qwen3.5-2b-mixed: step 110/560 loss 0.0169 lr 9.50e-05 58.94 s/step, 29994 tok
+15:12:50 qwen3.5-2b-mixed: step 120/560 loss 0.0298 lr 9.37e-05 48.5 s/step, 25407 tok
+15:25:51 qwen3.5-2b-mixed: step 130/560 loss 0.0142 lr 9.22e-05 67.41 s/step, 34436 tok
+15:38:54 qwen3.5-2b-mixed: step 140/560 loss 0.0243 lr 9.05e-05 66.51 s/step, 34555 tok
+15:43:59 qwen3.5-2b-mixed: val step 140 loss 0.0154 (304.4 s) best
+15:57:28 qwen3.5-2b-mixed: step 150/560 loss 0.0175 lr 8.87e-05 59.41 s/step, 30843 tok
+16:09:11 qwen3.5-2b-mixed: step 160/560 loss 0.0121 lr 8.68e-05 49.93 s/step, 25917 tok
+16:22:06 qwen3.5-2b-mixed: step 170/560 loss 0.0328 lr 8.47e-05 79.48 s/step, 40754 tok
+16:33:44 qwen3.5-2b-mixed: step 180/560 loss 0.0097 lr 8.25e-05 62.39 s/step, 31901 tok
+16:47:28 qwen3.5-2b-mixed: step 190/560 loss 0.0248 lr 8.02e-05 96.85 s/step, 48845 tok
+16:59:08 qwen3.5-2b-mixed: step 200/560 loss 0.0177 lr 7.78e-05 73.81 s/step, 37655 tok
+17:11:58 qwen3.5-2b-mixed: step 210/560 loss 0.0099 lr 7.53e-05 71.6 s/step, 36934 tok
+17:25:07 qwen3.5-2b-mixed: step 220/560 loss 0.0184 lr 7.28e-05 80.23 s/step, 41395 tok
+17:37:05 qwen3.5-2b-mixed: step 230/560 loss 0.0124 lr 7.01e-05 61.56 s/step, 31265 tok
+17:48:45 qwen3.5-2b-mixed: step 240/560 loss 0.0056 lr 6.73e-05 81.19 s/step, 41942 tok
+17:59:19 qwen3.5-2b-mixed: step 250/560 loss 0.0071 lr 6.45e-05 69.33 s/step, 35538 tok
+18:11:11 qwen3.5-2b-mixed: step 260/560 loss 0.0118 lr 6.17e-05 96.37 s/step, 48758 tok
+18:23:39 qwen3.5-2b-mixed: step 270/560 loss 0.0058 lr 5.88e-05 59.23 s/step, 30290 tok
+18:33:58 qwen3.5-2b-mixed: step 280/560 loss 0.0097 lr 5.59e-05 26.55 s/step, 13323 tok
+18:39:03 qwen3.5-2b-mixed: val step 280 loss 0.0114 (304.7 s) best
+18:51:45 qwen3.5-2b-mixed: step 290/560 loss 0.0087 lr 5.30e-05 65.71 s/step, 34302 tok
+19:04:02 qwen3.5-2b-mixed: step 300/560 loss 0.0087 lr 5.00e-05 69.51 s/step, 36546 tok
+19:15:30 qwen3.5-2b-mixed: step 310/560 loss 0.0045 lr 4.70e-05 74.16 s/step, 39075 tok
+19:25:34 qwen3.5-2b-mixed: step 320/560 loss 0.0052 lr 4.41e-05 63.2 s/step, 33781 tok
+19:37:33 qwen3.5-2b-mixed: step 330/560 loss 0.0069 lr 4.12e-05 50.42 s/step, 27238 tok
+19:49:56 qwen3.5-2b-mixed: step 340/560 loss 0.0096 lr 3.83e-05 85.93 s/step, 44657 tok
+20:01:22 qwen3.5-2b-mixed: step 350/560 loss 0.0086 lr 3.55e-05 77.61 s/step, 40570 tok
+20:13:49 qwen3.5-2b-mixed: step 360/560 loss 0.0068 lr 3.27e-05 74.39 s/step, 38286 tok
+20:25:57 qwen3.5-2b-mixed: step 370/560 loss 0.0075 lr 2.99e-05 93.33 s/step, 47884 tok
+20:38:48 qwen3.5-2b-mixed: step 380/560 loss 0.0124 lr 2.72e-05 99.83 s/step, 51421 tok
+20:50:06 qwen3.5-2b-mixed: step 390/560 loss 0.0087 lr 2.47e-05 74.01 s/step, 38415 tok
+21:01:35 qwen3.5-2b-mixed: step 400/560 loss 0.0088 lr 2.22e-05 54.46 s/step, 29285 tok
+21:12:40 qwen3.5-2b-mixed: step 410/560 loss 0.0106 lr 1.98e-05 91.38 s/step, 46372 tok
+21:24:55 qwen3.5-2b-mixed: step 420/560 loss 0.0051 lr 1.75e-05 63.89 s/step, 33616 tok
+21:30:00 qwen3.5-2b-mixed: val step 420 loss 0.0098 (304.8 s) best
+21:41:49 qwen3.5-2b-mixed: step 430/560 loss 0.0106 lr 1.53e-05 71.02 s/step, 37298 tok
+21:53:06 qwen3.5-2b-mixed: step 440/560 loss 0.0072 lr 1.32e-05 68.83 s/step, 36194 tok
+22:05:13 qwen3.5-2b-mixed: step 450/560 loss 0.0121 lr 1.13e-05 63.32 s/step, 33919 tok
+22:17:01 qwen3.5-2b-mixed: step 460/560 loss 0.0097 lr 9.48e-06 55.45 s/step, 29163 tok
+22:29:00 qwen3.5-2b-mixed: step 470/560 loss 0.0064 lr 7.82e-06 74.21 s/step, 38762 tok
+22:41:13 qwen3.5-2b-mixed: step 480/560 loss 0.0047 lr 6.31e-06 63.76 s/step, 33853 tok
+22:53:24 qwen3.5-2b-mixed: step 490/560 loss 0.0120 lr 4.95e-06 68.41 s/step, 35795 tok
+23:06:14 qwen3.5-2b-mixed: step 500/560 loss 0.0085 lr 3.75e-06 91.76 s/step, 47209 tok
+23:18:36 qwen3.5-2b-mixed: step 510/560 loss 0.0038 lr 2.71e-06 64.9 s/step, 34193 tok
+23:32:06 qwen3.5-2b-mixed: step 520/560 loss 0.0084 lr 1.83e-06 69.16 s/step, 36167 tok
+23:44:00 qwen3.5-2b-mixed: step 530/560 loss 0.0096 lr 1.13e-06 78.51 s/step, 41112 tok
+23:48:58 qwen3.5-2b-mixed: paused at step 534/560, best val 0.009797500859012372 @ 420
+23:49:21 done
