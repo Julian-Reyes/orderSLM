@@ -153,11 +153,13 @@ _Updated 2026-10-22 (M6 session 1 imported)._
   - **Kaggle GPU quota (checked by Julian 2026-10-23 ~12:00 UTC): 27.36 of 30 h used**, resets ~21:00 local today.
     The 19.4 h estimate above missed other GPU runs this week (smoke test, M5). Check the quota on the site before
     every push (the CLI can't show it): a session cut off by the quota likely loses all its output.
-  - **Session 3a = `runs/train/20261023T115559Z/`** (fits the 2.6 h left; `export --train qwen3.5-2b-mixed --score
+  - **Session 3a = `runs/train/20261023T115559Z/`, pushed 2026-10-23 12:00 UTC (kernel version 3, RUNNING; ends by
+    ~13:50 UTC)** (fits the 2.6 h left; `export --train qwen3.5-2b-mixed --score
     qwen3.5-2b-single,qwen3.5-2b-mixed --deadline-hours 1.75`): T4 #0 finishes the 2B mixed (26 steps + 2-epoch
     validation, ~45 min) then scores it; T4 #1 scores the 2B single. Jobs stop at 1.75 h; scoring that doesn't
     finish still gives measured per-request timing (scoring doesn't resume across sessions). New export option
-    `--deadline-hours` (default 11.25). Secrets scan 0 hits; input check passes. Next, after the reset: the 0.8B
+    `--deadline-hours` (default 11.25). Upload check worked: Kaggle lists all 16 staged files with their subfolders
+    (`adapters/…`, `resume/…`); its first run tripped on a CLI warning line (fixed). Secrets scan 0 hits; input check passes. Next, after the reset: the 0.8B
     resume (step 140) + its scoring, and any scoring 3a didn't finish. (A first session-3 staging,
     `20261023T114452Z`, was replaced before pushing.)
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
