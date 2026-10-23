@@ -156,3 +156,15 @@ def test_push_check_finds_staged_files_kaggle_did_not_list(tmp_path):
     ]
     listed = {"run.json", "resume/a/state.pt", "adapters/b/adapter_config.json"}
     assert kaggle_jobs.missing_uploads(tmp_path, listed) == []
+
+
+def test_file_listing_skips_cli_warnings():
+    from orderslm import kaggle_jobs
+
+    out = (
+        "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4)\n"
+        "name,size,creationDate\n"
+        "adapters/b/README.md,5182,2026-10-23 11:57:55.679000\n"
+        "run.json,2060,2026-10-23 11:57:55.675000\n"
+    )
+    assert kaggle_jobs.parse_file_listing(out) == {"adapters/b/README.md", "run.json"}

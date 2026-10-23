@@ -10,7 +10,6 @@ whatever the job's own export staged in `upload/` (never test or PIZZA data, nev
 
 import argparse
 import csv
-import io
 import json
 import shutil
 import subprocess
@@ -37,11 +36,16 @@ def _dataset_status(dataset: str) -> str:
 
 
 def _dataset_files(dataset: str) -> set[str]:
-    out = _kaggle("datasets", "files", dataset, "-v", "--page-size", "200").stdout
-    rows = [r for r in csv.reader(io.StringIO(out)) if r]
-    if not rows or rows[0][0] != "name":
-        raise SystemExit(f"unexpected file listing for {dataset}: {out[:500]}")
-    return {r[0] for r in rows[1:]}
+    return parse_file_listing(_kaggle("datasets", "files", dataset, "-v", "--page-size", "200").stdout)
+
+
+def parse_file_listing(out: str) -> set[str]:
+    """File names from `kaggle datasets files -v` (CSV); lines before the header (CLI warnings) are skipped."""
+    lines = out.splitlines()
+    head = next((i for i, x in enumerate(lines) if x.startswith("name,size")), None)
+    if head is None:
+        raise SystemExit(f"unexpected dataset file listing: {out[:500]}")
+    return {r[0] for r in csv.reader(lines[head + 1 :]) if r}
 
 
 def missing_uploads(stage: Path, listed: set[str]) -> list[str]:
