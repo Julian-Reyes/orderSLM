@@ -1,0 +1,8 @@
+13:24:25 session 20261023T132003Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+13:26:00 qwen3.5-2b-mixed: Qwen3_5ForCausalLM 16,819,200 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2236 rows, 560 steps (280/epoch), evals at [0, 140, 280, 420, 560]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 534
+13:38:03 qwen3.5-2b-mixed: step 540/560 loss 0.0064 lr 5.88e-07 58.53 s/step, 30101 tok
+13:49:38 qwen3.5-2b-mixed: step 550/560 loss 0.0067 lr 2.23e-07 67.48 s/step, 34611 tok
+14:01:26 qwen3.5-2b-mixed: step 560/560 loss 0.0123 lr 3.14e-08 27.4 s/step, 14342 tok
+14:06:53 qwen3.5-2b-mixed: val step 560 loss 0.0095 (326.9 s) best
+14:06:54 qwen3.5-2b-mixed: done at step 560/560, best val 0.009498626005490658 @ 560
+14:07:26 done

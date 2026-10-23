@@ -175,14 +175,15 @@ _Updated 2026-10-22 (M6 session 1 imported)._
       Biggest intent losses: 9 PLACE_ORDER and 2 MODIFY_ORDER messages with an invalid answer (no label), MODIFY_ORDER →
       PLACE_ORDER ×4, OUT_OF_SCOPE 1/5, UNKNOWN 1/4. Order fields: missing-list 0.81, time 0.93, payment 0.93.
   - **Pushed to GitHub 2026-10-23 10:20 Brasília** (`milestone-4` at `8d10c194`; secrets check on the diff: 0 hits).
-  - **Session 3b = `runs/train/20261023T132003Z/`, pushed 10:21 Brasília (kernel version 4):** only the 2B mixed's
-    last 26 steps + 2-epoch validation (~40 min), capped at `--deadline-hours 1.0` to fit the ~1.4 h of quota left
-    before the 21:00 reset (pauses cleanly if slow). First real test of the RNG fix. No scoring (66 min wouldn't fit).
-    When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261023T132003Z"`.
-  - **Next, after the 21:00 Brasília reset:** `export --train qwen3.5-0.8b-single --score
-    qwen3.5-0.8b-single,qwen3.5-2b-mixed` (0.8B resumed at step 140, ~4.5–5 h, then scored; the 2B mixed scored on
-    the other T4, ~1.1 h), or include `--train qwen3.5-2b-mixed` again if 3b didn't finish. (A session-4 staging,
-    `20261023T131430Z`, was replaced before pushing.)
+  - **Session 3b = `runs/train/20261023T132003Z/`** (10:21 → 11:08 Brasília, ~47 min of quota; `--deadline-hours
+    1.0`): **2B mixed done**, resumed at 534 → 560/560 (RNG fix works on CUDA), 509 tokens/s, host RAM peak 7.5 GB
+    (only ~200 new rows). Validation 1.335 (base) → 0.0154 / 0.0114 / 0.0098 / **0.0095** at 0.5 / 1 / 1.5 / 2
+    epochs: best = last (step 560, adapter sha256 `a72fc3a8…`). 6 skipped updates in total (GradScaler warm-up).
+  - **Session 4 = `runs/train/20261023T140955Z/`, staged (not pushed; waits for the 21:00 Brasília quota reset):**
+    `export --train qwen3.5-0.8b-single --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B resumed at step
+    140 (~4.5–5 h), then scored; T4 #1: 2B mixed scored (adapter `a72fc3a8…`, ~1.1 h). Expected ~6 h. Only one
+    training, so host RAM should hold. Input check passes; secrets scan 0 hits. When it ends: `make kaggle-pull
+    JOB=m6`, `make train ARGS="import runs/train/20261023T140955Z"`. Then all three M6 students are trained and scored.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -235,7 +236,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); session 4 staged |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; session 4 (0.8B + scoring) staged |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
