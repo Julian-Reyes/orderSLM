@@ -174,7 +174,7 @@ def export(args: argparse.Namespace) -> Path:
         "packages": PACKAGES,
         "train": TRAIN,
         "generation": GENERATION,
-        "deadline_hours": DEADLINE_HOURS,
+        "deadline_hours": args.deadline_hours,
         "jobs": jobs,
     }
     (STAGE / "run.json").write_text(json.dumps(run, indent=2) + "\n")
@@ -350,6 +350,12 @@ def main(argv: list[str] | None = None) -> int:
     e = sub.add_parser("export")
     e.add_argument("--train", help="students to train (comma-separated, ≤ 2)")
     e.add_argument("--score", help="students to score on dev (their best adapter)")
+    e.add_argument(
+        "--deadline-hours",
+        type=float,
+        default=DEADLINE_HOURS,
+        help="jobs stop themselves this long after the session start (lower it to fit the remaining GPU quota)",
+    )
     i = sub.add_parser("import")
     i.add_argument("run_dir", type=Path)
     i.add_argument("--output", type=Path, default=JOB_DIR / "output")

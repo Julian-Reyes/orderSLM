@@ -150,14 +150,16 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     that session's best adapter, only if the training finished (else `skipped`). The kernel records the scored
     adapter's sha256 and the import checks it against the imported best. Tests: `tests/test_m6_kernel.py`;
     `make check` **474 passed** (the "484" above was a miscount: 470 at the previous commit).
-  - **Session 3 = `runs/train/20261023T114452Z/`, staged (not pushed):** `export --train
-    qwen3.5-0.8b-single,qwen3.5-2b-mixed --score qwen3.5-2b-single,qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0:
-    0.8B resumed at step 140 (328 steps, ~4.5–5 h), then scores the 0.8B; T4 #1: 2B mixed's last 26 steps + final
-    validation (~40 min), then scores the 2B single and the 2B mixed (268 dev requests each, untimed; guess 1–3 h
-    each). Only one training runs for most of the session, so it shouldn't run out of RAM; if it does, the 0.8B pauses
-    and scoring continues. Checked: kernel input check passes on the staged folder; secrets scan 0 hits; 268 dev
-    requests, all Source A dev (`a-dev-*`), byte-identical to session 2's. GPU quota: ~19.4 h used this week of 30
-    (check the remaining quota on Kaggle before pushing; this session needs ≤ ~8 h).
+  - **Kaggle GPU quota (checked by Julian 2026-10-23 ~12:00 UTC): 27.36 of 30 h used**, resets ~21:00 local today.
+    The 19.4 h estimate above missed other GPU runs this week (smoke test, M5). Check the quota on the site before
+    every push (the CLI can't show it): a session cut off by the quota likely loses all its output.
+  - **Session 3a = `runs/train/20261023T115559Z/`** (fits the 2.6 h left; `export --train qwen3.5-2b-mixed --score
+    qwen3.5-2b-single,qwen3.5-2b-mixed --deadline-hours 1.75`): T4 #0 finishes the 2B mixed (26 steps + 2-epoch
+    validation, ~45 min) then scores it; T4 #1 scores the 2B single. Jobs stop at 1.75 h; scoring that doesn't
+    finish still gives measured per-request timing (scoring doesn't resume across sessions). New export option
+    `--deadline-hours` (default 11.25). Secrets scan 0 hits; input check passes. Next, after the reset: the 0.8B
+    resume (step 140) + its scoring, and any scoring 3a didn't finish. (A first session-3 staging,
+    `20261023T114452Z`, was replaced before pushing.)
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -210,7 +212,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3 staged |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a (2B mixed finish + 2B scoring, 1.75 h cap) |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

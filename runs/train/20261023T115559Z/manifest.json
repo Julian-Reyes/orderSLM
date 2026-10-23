@@ -1,6 +1,6 @@
 {
   "experiment": "train",
-  "session": "20261023T114452Z",
+  "session": "20261023T115559Z",
   "data_version": "student-data@0.1",
   "prompt_version": "student-extract@0.1",
   "models": {
@@ -45,29 +45,14 @@
     "do_sample": false,
     "max_new_tokens": 1536
   },
-  "deadline_hours": 11.25,
+  "deadline_hours": 1.75,
   "jobs": [
-    {
-      "kind": "train",
-      "name": "qwen3.5-0.8b-single",
-      "model": "0.8b",
-      "data": "single",
-      "gpu": 0,
-      "lr": 0.0002,
-      "epochs": 2,
-      "seed": 20261021,
-      "dtype": "float16",
-      "train_file": "single-train.jsonl",
-      "valid_file": "single-valid.jsonl",
-      "resume": "resume/qwen3.5-0.8b-single",
-      "resumed_at_step": 140
-    },
     {
       "kind": "train",
       "name": "qwen3.5-2b-mixed",
       "model": "2b",
       "data": "mixed",
-      "gpu": 1,
+      "gpu": 0,
       "lr": 0.0001,
       "epochs": 2,
       "seed": 20261021,
@@ -90,21 +75,10 @@
     },
     {
       "kind": "score",
-      "name": "score-qwen3.5-0.8b-single",
-      "student": "qwen3.5-0.8b-single",
-      "model": "0.8b",
-      "gpu": 0,
-      "adapter": "qwen3.5-0.8b-single/best",
-      "adapter_sha256": null,
-      "after_train": "qwen3.5-0.8b-single",
-      "requests": "dev-requests.jsonl"
-    },
-    {
-      "kind": "score",
       "name": "score-qwen3.5-2b-mixed",
       "student": "qwen3.5-2b-mixed",
       "model": "2b",
-      "gpu": 1,
+      "gpu": 0,
       "adapter": "qwen3.5-2b-mixed/best",
       "adapter_sha256": null,
       "after_train": "qwen3.5-2b-mixed",
@@ -113,8 +87,6 @@
   ],
   "seed": 20261021,
   "staged_files_sha256": {
-    "single-train.jsonl": "2196f96f874dd42f3608419df97942c720f95ac8bc73e17f2e6392ffde80f7ac",
-    "single-valid.jsonl": "cbc3085ecc6efe80df9bdb87fc26d53e8833cc5b1dbfe4df1f5d0a14c30f1b52",
     "mixed-train.jsonl": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40",
     "mixed-valid.jsonl": "9467939c83d24c0a57a484d2da3dc749c57eec61ae653a8d51e39f59212b4dde",
     "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b"
@@ -124,8 +96,8 @@
     "mixed": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40"
   },
   "data_built_at_commit": "2b4064f505be6fa6dd0697d4320ede37c82fa131",
-  "exported_at": "2026-10-23T11:44:52.288280+00:00",
-  "git_commit": "87478b6a89bfcd56ab975b941ba55a2447675348-dirty",
+  "exported_at": "2026-10-23T11:55:59.645155+00:00",
+  "git_commit": "b89ddd8871bf7fe5319c489dddcf040b58e275b4-dirty",
   "kaggle_dataset": "JReyes33/orderslm-m6",
   "cost_usd": 0.0
 }
