@@ -184,6 +184,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     140 (~4.5–5 h), then scored; T4 #1: 2B mixed scored (adapter `a72fc3a8…`, ~1.1 h). Expected ~6 h. Only one
     training, so host RAM should hold. Input check passes; secrets scan 0 hits. When it ends: `make kaggle-pull
     JOB=m6`, `make train ARGS="import runs/train/20261023T140955Z"`. Then all three M6 students are trained and scored.
+    **Push it from the MacBook (Julian, 2026-10-23):** the weights (`models/m6/`, 850 MB) and the staged upload
+    (`kaggle/m6/upload/`) are gitignored and only on the MacBook. Check the Kaggle quota reset first.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
