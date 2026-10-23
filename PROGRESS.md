@@ -153,15 +153,32 @@ _Updated 2026-10-22 (M6 session 1 imported)._
   - **Kaggle GPU quota (checked by Julian 2026-10-23 ~12:00 UTC): 27.36 of 30 h used**, resets ~21:00 local today.
     The 19.4 h estimate above missed other GPU runs this week (smoke test, M5). Check the quota on the site before
     every push (the CLI can't show it): a session cut off by the quota likely loses all its output.
-  - **Session 3a = `runs/train/20261023T115559Z/`, pushed 2026-10-23 12:00 UTC (kernel version 3, RUNNING; ends by
-    ~13:50 UTC)** (fits the 2.6 h left; `export --train qwen3.5-2b-mixed --score
-    qwen3.5-2b-single,qwen3.5-2b-mixed --deadline-hours 1.75`): T4 #0 finishes the 2B mixed (26 steps + 2-epoch
-    validation, ~45 min) then scores it; T4 #1 scores the 2B single. Jobs stop at 1.75 h; scoring that doesn't
-    finish still gives measured per-request timing (scoring doesn't resume across sessions). New export option
-    `--deadline-hours` (default 11.25). Upload check worked: Kaggle lists all 16 staged files with their subfolders
-    (`adapters/…`, `resume/…`); its first run tripped on a CLI warning line (fixed). Secrets scan 0 hits; input check passes. Next, after the reset: the 0.8B
-    resume (step 140) + its scoring, and any scoring 3a didn't finish. (A first session-3 staging,
-    `20261023T114452Z`, was replaced before pushing.)
+  - **Session 3a = `runs/train/20261023T115559Z/`** (12:00 → 13:12 UTC, ~1.2 h of quota; `--deadline-hours 1.75`;
+    first use of the upload check: Kaggle listed all 16 files with subfolders; its first run tripped on a CLI warning
+    line, fixed):
+    - **2B mixed resume failed at once (our bug):** `torch.load(map_location=cuda)` moved the saved CPU RNG state to
+      the GPU and `torch.set_rng_state` needs a CPU ByteTensor. The local resume test ran on CPU, so it never showed;
+      session 2's 0.8B resume would have hit it too. Fixed (`.cpu()` on both RNG states); reproduced and fix checked
+      with real torch on MPS standing in for CUDA (scratch venv, torch 2.2.2): as-is fails with the same error, with
+      `.cpu()` the state restores exactly. Its scoring was skipped as designed; `models/m6/qwen3.5-2b-mixed/last`
+      (step 534) untouched.
+    - **2B single dev scoring: done**, 268/268 in 66 min on one T4 (p50 15.2 s, p95 23.9 s per request; output p50
+      310 tokens; 0 hit the token limit; $0). `runs/student-dev/20261023T115559Z-qwen3.5-2b-single/` (`report.md`,
+      `metrics.json`). Dev numbers (tuning, not held-out), Source A:
+      | | 2B single (LoRA) | teacher (reference) | 2B base, M5 (20 chats) |
+      |---|---|---|---|
+      | intents, all customer messages | **236/268 (88.1%, CI 83.6–91.4%)** | 259/268 | 5/54 |
+      | intents, last / earlier messages | 80/91 / 156/177 | | |
+      | fully correct orders | **59/91 (64.8%)** | 90/91 | 3/20 (no-item chats) |
+      | items | F1 0.763 (103 found / 21 extra / 43 missed) | F1 0.993 | 0.0 |
+      | valid answers, last / earlier | 86/91 / 169/177 | 90/91 | 3/20 |
+      Biggest intent losses: 9 PLACE_ORDER and 2 MODIFY_ORDER messages with an invalid answer (no label), MODIFY_ORDER →
+      PLACE_ORDER ×4, OUT_OF_SCOPE 1/5, UNKNOWN 1/4. Order fields: missing-list 0.81, time 0.93, payment 0.93.
+  - **Session 4 = `runs/train/20261023T131430Z/`, staged (not pushed; waits for the quota reset ~21:00 local):**
+    `export --train qwen3.5-0.8b-single,qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B
+    resumed at step 140 (~4.5–5 h), then scores it; T4 #1: 2B mixed's last 26 steps + 2-epoch validation (~40 min),
+    then scores it (~1.1 h at the 2B single's speed). Expected ≤ ~6.5 h. First real test of the RNG fix: if it still
+    fails, both trainings fail in the first minutes (check the log early). Input check passes; secrets scan 0 hits.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -214,7 +231,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a (2B mixed finish + 2B scoring, 1.75 h cap) |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); session 4 staged |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

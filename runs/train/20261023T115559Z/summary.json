@@ -1,0 +1,113 @@
+{
+  "env": {
+    "session": "20261023T115559Z",
+    "started_at": "2026-10-23T12:00:42.550050+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.85,
+        "Cached": 4.89,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.9,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-10-23T13:12:15.431347+00:00"
+  },
+  "jobs": {
+    "qwen3.5-2b-mixed": {
+      "status": {
+        "status": "failed",
+        "error": "Traceback (most recent call last):\n  File \"/kaggle/src/script.py\", line 659, in child\n    (train_job if job[\"kind\"] == \"train\" else score_job)(job, run, src, start)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/src/script.py\", line 316, in train_job\n    torch.set_rng_state(ck[\"rng\"][\"torch\"])\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/random.py\", line 19, in set_rng_state\n    default_generator.set_state(new_state)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nTypeError: RNG state must be a torch.ByteTensor\n"
+      },
+      "val": [],
+      "best_adapter_sha256": "a5c9a74c598a84c966531944e3ed6f202ad7a5a58c24d407c748a162f74e15a1",
+      "best": {
+        "val_loss": 0.009797500859012372,
+        "val_tokens": 38165,
+        "seconds": 304.8,
+        "opt_step": 420,
+        "epoch": 1.5
+      }
+    },
+    "score-qwen3.5-2b-single": {
+      "status": {
+        "status": "done",
+        "answered": 268
+      },
+      "dev_run": "runs/student-dev/20261023T115559Z-qwen3.5-2b-single",
+      "intent_all": {
+        "messages": 268,
+        "primary_correct": 236,
+        "primary_accuracy": 0.8806,
+        "primary_ci95": [
+          0.8362977565302094,
+          0.9141392626750924
+        ],
+        "label_set_correct": 228
+      },
+      "intent_earlier": {
+        "messages": 177,
+        "primary_correct": 156,
+        "primary_accuracy": 0.8814,
+        "primary_ci95": [
+          0.825432780177237,
+          0.9210768724690568
+        ],
+        "label_set_correct": 153
+      },
+      "items_f1": 0.762962962962963,
+      "exact": "59/91",
+      "contract_valid": {
+        "last": {
+          "valid": 86,
+          "of": 91
+        },
+        "earlier": {
+          "valid": 169,
+          "of": 177
+        }
+      }
+    },
+    "score-qwen3.5-2b-mixed": {
+      "status": {
+        "status": "skipped",
+        "reason": "qwen3.5-2b-mixed is failed"
+      },
+      "dev_run": "runs/student-dev/20261023T115559Z-qwen3.5-2b-mixed"
+    }
+  },
+  "host_memory": {
+    "samples": 141,
+    "total_gb": 33.66,
+    "min_available_gb": 28.56,
+    "max_shmem_gb": 0.03,
+    "max_rss_gb": {
+      "gpu0": 1.8,
+      "gpu1": 3.87
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}

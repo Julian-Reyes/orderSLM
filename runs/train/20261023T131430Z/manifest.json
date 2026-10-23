@@ -1,0 +1,120 @@
+{
+  "experiment": "train",
+  "session": "20261023T131430Z",
+  "data_version": "student-data@0.1",
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "deadline_hours": 11.25,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single",
+      "model": "0.8b",
+      "data": "single",
+      "gpu": 0,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "single-train.jsonl",
+      "valid_file": "single-valid.jsonl",
+      "resume": "resume/qwen3.5-0.8b-single",
+      "resumed_at_step": 140
+    },
+    {
+      "kind": "train",
+      "name": "qwen3.5-2b-mixed",
+      "model": "2b",
+      "data": "mixed",
+      "gpu": 1,
+      "lr": 0.0001,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "mixed-train.jsonl",
+      "valid_file": "mixed-valid.jsonl",
+      "resume": "resume/qwen3.5-2b-mixed",
+      "resumed_at_step": 534
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single",
+      "student": "qwen3.5-0.8b-single",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single",
+      "requests": "dev-requests.jsonl"
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-2b-mixed",
+      "student": "qwen3.5-2b-mixed",
+      "model": "2b",
+      "gpu": 1,
+      "adapter": "qwen3.5-2b-mixed/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-2b-mixed",
+      "requests": "dev-requests.jsonl"
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "single-train.jsonl": "2196f96f874dd42f3608419df97942c720f95ac8bc73e17f2e6392ffde80f7ac",
+    "single-valid.jsonl": "cbc3085ecc6efe80df9bdb87fc26d53e8833cc5b1dbfe4df1f5d0a14c30f1b52",
+    "mixed-train.jsonl": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40",
+    "mixed-valid.jsonl": "9467939c83d24c0a57a484d2da3dc749c57eec61ae653a8d51e39f59212b4dde",
+    "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b"
+  },
+  "data_manifest_sha256": {
+    "single": "2196f96f874dd42f3608419df97942c720f95ac8bc73e17f2e6392ffde80f7ac",
+    "mixed": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40"
+  },
+  "data_built_at_commit": "2b4064f505be6fa6dd0697d4320ede37c82fa131",
+  "exported_at": "2026-10-23T13:14:30.316484+00:00",
+  "git_commit": "730d7d72eb8232764baf96d4218b0cdc1f70ae85-dirty",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}

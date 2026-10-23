@@ -1,0 +1,15 @@
+{
+  "status": {
+    "status": "failed",
+    "error": "Traceback (most recent call last):\n  File \"/kaggle/src/script.py\", line 659, in child\n    (train_job if job[\"kind\"] == \"train\" else score_job)(job, run, src, start)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/src/script.py\", line 316, in train_job\n    torch.set_rng_state(ck[\"rng\"][\"torch\"])\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/dist-packages/torch/random.py\", line 19, in set_rng_state\n    default_generator.set_state(new_state)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nTypeError: RNG state must be a torch.ByteTensor\n"
+  },
+  "val": [],
+  "best_adapter_sha256": "a5c9a74c598a84c966531944e3ed6f202ad7a5a58c24d407c748a162f74e15a1",
+  "best": {
+    "val_loss": 0.009797500859012372,
+    "val_tokens": 38165,
+    "seconds": 304.8,
+    "opt_step": 420,
+    "epoch": 1.5
+  }
+}

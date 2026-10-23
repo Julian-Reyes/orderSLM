@@ -313,9 +313,10 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
             scaler.load_state_dict(ck["scaler"])
         state = ck["state"]
         random.setstate(ck["rng"]["python"])
-        torch.set_rng_state(ck["rng"]["torch"])
+        # map_location moved these to the GPU; set_rng_state takes CPU ByteTensors (session 20261023T115559Z failed here)
+        torch.set_rng_state(ck["rng"]["torch"].cpu())
         if cuda:
-            torch.cuda.set_rng_state(ck["rng"]["cuda"])
+            torch.cuda.set_rng_state(ck["rng"]["cuda"].cpu())
         for f in ("steps.jsonl", "val.jsonl"):  # keep the history in this session's output
             if (src / resume / f).exists():
                 shutil.copy(src / resume / f, out / f)
