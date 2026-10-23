@@ -174,11 +174,15 @@ _Updated 2026-10-22 (M6 session 1 imported)._
       | valid answers, last / earlier | 86/91 / 169/177 | 90/91 | 3/20 |
       Biggest intent losses: 9 PLACE_ORDER and 2 MODIFY_ORDER messages with an invalid answer (no label), MODIFY_ORDER →
       PLACE_ORDER ×4, OUT_OF_SCOPE 1/5, UNKNOWN 1/4. Order fields: missing-list 0.81, time 0.93, payment 0.93.
-  - **Session 4 = `runs/train/20261023T131430Z/`, staged (not pushed; waits for the quota reset at 21:00 Brasília):**
-    `export --train qwen3.5-0.8b-single,qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B
-    resumed at step 140 (~4.5–5 h), then scores it; T4 #1: 2B mixed's last 26 steps + 2-epoch validation (~40 min),
-    then scores it (~1.1 h at the 2B single's speed). Expected ≤ ~6.5 h. First real test of the RNG fix: if it still
-    fails, both trainings fail in the first minutes (check the log early). Input check passes; secrets scan 0 hits.
+  - **Pushed to GitHub 2026-10-23 10:20 Brasília** (`milestone-4` at `8d10c194`; secrets check on the diff: 0 hits).
+  - **Session 3b = `runs/train/20261023T132003Z/`, pushed 10:21 Brasília (kernel version 4):** only the 2B mixed's
+    last 26 steps + 2-epoch validation (~40 min), capped at `--deadline-hours 1.0` to fit the ~1.4 h of quota left
+    before the 21:00 reset (pauses cleanly if slow). First real test of the RNG fix. No scoring (66 min wouldn't fit).
+    When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261023T132003Z"`.
+  - **Next, after the 21:00 Brasília reset:** `export --train qwen3.5-0.8b-single --score
+    qwen3.5-0.8b-single,qwen3.5-2b-mixed` (0.8B resumed at step 140, ~4.5–5 h, then scored; the 2B mixed scored on
+    the other T4, ~1.1 h), or include `--train qwen3.5-2b-mixed` again if 3b didn't finish. (A session-4 staging,
+    `20261023T131430Z`, was replaced before pushing.)
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
