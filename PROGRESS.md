@@ -77,8 +77,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     tokens; they are not a measured full run.
   - **MLX:** parked (patch kept and verified; see above).
 - **M6 full LoRA training (Julian, 2026-10-21): session 1 ran 2026-10-21 17:40 → 2026-10-22 01:47 UTC, imported
-  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 ran 2026-10-22 12:33 →
-  23:49 UTC, imported 2026-10-23 (only the 2B mixed ran; see below). **Session 3 staged, not pushed** (waiting for
+  2026-10-22 (on the MacBook; Julian: either machine, once the other has pushed). Session 2 ran 2026-10-22 09:33 →
+  20:49 Brasília, imported 2026-10-23 (only the 2B mixed ran; see below). **Session 3 staged, not pushed** (waiting for
   Julian's OK): `make kaggle-push JOB=m6`; when it ends: `make kaggle-pull JOB=m6`,
   `make train ARGS="import runs/train/20261023T114452Z"`.**
   Settings: fla + fp16; up to 2 epochs, validation loss every half epoch (and at step 0 as the base reference), best
@@ -150,10 +150,10 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     that session's best adapter, only if the training finished (else `skipped`). The kernel records the scored
     adapter's sha256 and the import checks it against the imported best. Tests: `tests/test_m6_kernel.py`;
     `make check` **474 passed** (the "484" above was a miscount: 470 at the previous commit).
-  - **Kaggle GPU quota (checked by Julian 2026-10-23 ~12:00 UTC): 27.36 of 30 h used**, resets ~21:00 local today.
+  - **Kaggle GPU quota (checked by Julian 2026-10-23 ~09:00 Brasília): 27.36 of 30 h used**, resets 21:00 Brasília today.
     The 19.4 h estimate above missed other GPU runs this week (smoke test, M5). Check the quota on the site before
     every push (the CLI can't show it): a session cut off by the quota likely loses all its output.
-  - **Session 3a = `runs/train/20261023T115559Z/`** (12:00 → 13:12 UTC, ~1.2 h of quota; `--deadline-hours 1.75`;
+  - **Session 3a = `runs/train/20261023T115559Z/`** (09:00 → 10:12 Brasília, ~1.2 h of quota; `--deadline-hours 1.75`;
     first use of the upload check: Kaggle listed all 16 files with subfolders; its first run tripped on a CLI warning
     line, fixed):
     - **2B mixed resume failed at once (our bug):** `torch.load(map_location=cuda)` moved the saved CPU RNG state to
@@ -174,7 +174,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
       | valid answers, last / earlier | 86/91 / 169/177 | 90/91 | 3/20 |
       Biggest intent losses: 9 PLACE_ORDER and 2 MODIFY_ORDER messages with an invalid answer (no label), MODIFY_ORDER →
       PLACE_ORDER ×4, OUT_OF_SCOPE 1/5, UNKNOWN 1/4. Order fields: missing-list 0.81, time 0.93, payment 0.93.
-  - **Session 4 = `runs/train/20261023T131430Z/`, staged (not pushed; waits for the quota reset ~21:00 local):**
+  - **Session 4 = `runs/train/20261023T131430Z/`, staged (not pushed; waits for the quota reset at 21:00 Brasília):**
     `export --train qwen3.5-0.8b-single,qwen3.5-2b-mixed --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B
     resumed at step 140 (~4.5–5 h), then scores it; T4 #1: 2B mixed's last 26 steps + 2-epoch validation (~40 min),
     then scores it (~1.1 h at the 2B single's speed). Expected ≤ ~6.5 h. First real test of the RNG fix: if it still
