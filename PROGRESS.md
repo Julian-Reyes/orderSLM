@@ -179,7 +179,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     1.0`): **2B mixed done**, resumed at 534 → 560/560 (RNG fix works on CUDA), 509 tokens/s, host RAM peak 7.5 GB
     (only ~200 new rows). Validation 1.335 (base) → 0.0154 / 0.0114 / 0.0098 / **0.0095** at 0.5 / 1 / 1.5 / 2
     epochs: best = last (step 560, adapter sha256 `a72fc3a8…`). 6 skipped updates in total (GradScaler warm-up).
-  - **Session 4 = `runs/train/20261023T140955Z/`, staged (not pushed; waits for the 21:00 Brasília quota reset):**
+  - **Session 4 = `runs/train/20261023T140955Z/`, pushed 2026-10-23 21:36 Brasília (kernel version 5, RUNNING;
+    expected to end ~03:30 Brasília):**
     `export --train qwen3.5-0.8b-single --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B resumed at step
     140 (~4.5–5 h), then scored; T4 #1: 2B mixed scored (adapter `a72fc3a8…`, ~1.1 h). Expected ~6 h. Only one
     training, so host RAM should hold. Input check passes; secrets scan 0 hits. When it ends: `make kaggle-pull
