@@ -217,6 +217,20 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     wide, so smaller real differences can't be seen on dev. Dev only (tuning). `student_dev report` now also writes
     `order_rows.jsonl` (per-chat order scores; metrics/report unchanged, checked byte-identical on all three runs) and
     no longer crashes on a relative run path when printing.
+  - **Error review (2026-10-25): `docs/STUDENT_ERRORS.md`**, run `runs/student-errors/20261025T193609Z/`
+    (`make student-errors ARGS="<dev runs>"`, `eval/student_errors.py`, `student-errors@0.1`; free, local; tests
+    `tests/test_student_errors.py`). Every dev mistake classified (invalid rule, item missing/extra/wrong part,
+    field, intent), with the teacher as reference; matches the scorer's counts exactly (27 / 32 / 26 / 1 chats).
+    **Mistakes are shared:** 19 chats wrong for all three students (teacher right on all), 10 for one only.
+    **Cause: thin training data** for the patterns that fail: same dish on 2+ lines 1 of 1,865 training answers
+    (dev 4.7% of orders), 4+ line orders 0.5% (dev 7.8%), ambiguity flags 0.3% and only `item_menu_match` (dev has
+    quantity/variant ambiguity), `MODIFY_ORDER` 2.9% of rows vs `PLACE_ORDER` 39.8% (→ "make the fries large" read as
+    `PLACE_ORDER` by all three), `UNKNOWN` 0.8%. Also: late corrections ignored, time of day ("10:30" at 21:05 →
+    22:30), off-menu add-ons mapped to real modifiers, out-of-scope → `MENU_QUESTION`. Invalid answers mostly the
+    2B's (an item with no identity; "no pickles" as an off-menu item with a modification). **Open decisions for
+    Julian:** targeted synthetic data for these patterns (written from pattern descriptions, never dev chats; costs
+    money: ask first), per-prefix intent rows (free, longer training), measure any fix on fresh data (dev is now
+    "used for fixes").
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
@@ -270,7 +284,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; next: error review, order checker |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; next: Julian's call on targeted data / per-prefix rows; order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

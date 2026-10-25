@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train student-dev student-compare eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train student-dev student-compare student-errors eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -104,6 +104,9 @@ student-dev:
 # M6 students paired on the same dev requests (bootstrap over chats, McNemar on exact orders)
 student-compare:
 	$(RUN) python -m orderslm.eval.student_compare $(ARGS)
+# M6 error review: every dev mistake per student (+ teacher) in categories
+student-errors:
+	$(RUN) python -m orderslm.eval.student_errors $(ARGS)
 eval:             ; $(call not_yet,6)
 router-bench:     ; $(call not_yet,7)
 demo:             ; $(call not_yet,8)
