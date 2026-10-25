@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0154",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey do you guys have bagels rn\"},{\"role\":\"business\",\"text\":\"We do! Sesame, plain, everything, cinnamon raisin. What can I get you?\"},{\"role\":\"customer\",\"text\":\"ok three sesame bagels, two plain and one with avocado\"},{\"role\":\"customer\",\"text\":\"and a croissant\"},{\"role\":\"business\",\"text\":\"Got it: 3 sesame bagels (2 plain, 1 with avocado) and a croissant. When would you like that?\"},{\"role\":\"customer\",\"text\":\"around nine thirty pls, card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1437,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 131,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1398.8551209913567,
+  "cost_micros": 144,
+  "at": "2026-10-25T21:36:03.147719+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1437,
+   "completion_tokens": 131,
+   "total_tokens": 1568,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 413
+  }
+ }
+}

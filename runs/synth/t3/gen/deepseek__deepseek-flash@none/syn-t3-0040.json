@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0040",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey u guys still open? need food for a movie night asap\"},{\"role\":\"business\",\"text\":\"yep we're open til 10! what can i get u\"},{\"role\":\"customer\",\"text\":\"ok so 3 cheeseburgers, 1 of em no american cheese\"},{\"role\":\"business\",\"text\":\"got it - 3 cheeseburgers, one with no american cheese. anything else?\"},{\"role\":\"customer\",\"text\":\"does the bacon burger come w bacon already or is it extra\"},{\"role\":\"business\",\"text\":\"it comes with bacon already, no extra charge\"},{\"role\":\"customer\",\"text\":\"perfect lemme get 1 bacon burger and 4 onion rings too\"},{\"role\":\"business\",\"text\":\"sounds good! so that's 3 cheeseburgers (1 no american), 1 bacon burger, 4 onion rings\"},{\"role\":\"customer\",\"text\":\"and a sprite pls. delivery to 68 franklin dr, payin by card. thx!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1306,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 222,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2114.600619999692,
+  "cost_micros": 179,
+  "at": "2026-10-25T21:32:08.656489+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1306,
+   "completion_tokens": 222,
+   "total_tokens": 1528,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 282
+  }
+ }
+}

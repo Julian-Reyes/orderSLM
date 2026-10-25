@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0447",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! need to order some food for a meeting 😊 can i get the garlic knots and the pizza i always get\"},{\"role\":\"business\",\"text\":\"Hey! Happy to help 🙂 Which pizza is the one you always get? We've got a few favorites.\"},{\"role\":\"customer\",\"text\":\"oh sorry lol the pepperoni one 😅 medium 12 inch, but no house cheese blend pls, and thick crust\"},{\"role\":\"business\",\"text\":\"Got it — medium pepperoni, no house cheese blend, thick crust. Anything else?\"},{\"role\":\"customer\",\"text\":\"yep! two small veggie pizzas, no green peppers, add sausage and thick crust too. and a couple of sprite bottles (20 oz) pls. we're gonna pick it up, thx! 🍕\"},{\"role\":\"business\",\"text\":\"Perfect! So that's 1 garlic knots, 1 medium pepperoni (no house cheese, thick crust), 2 small veggie (no green peppers, add sausage, thick crust), and 2 sprite bottles 20 oz — for pickup. See you soon! 😊\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2322,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 244,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2645.716422004625,
+  "cost_micros": 194,
+  "at": "2026-10-25T21:45:52.852593+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2322,
+   "completion_tokens": 244,
+   "total_tokens": 2566,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 274
+  }
+ }
+}

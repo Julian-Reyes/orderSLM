@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0424",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"parmesan\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add Parmesan\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"3 extra large Margherita pizzas\"},{\"message_index\":0,\"quote\":\"add Parmesan\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one Coke in a 12 oz can\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no house cheese blend\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an extra large Hawaiian pizza\"},{\"message_index\":2,\"quote\":\"no house cheese blend\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 extra large Meat Lovers\"},{\"message_index\":4,\"quote\":\"no tomato sauce\"},{\"message_index\":4,\"quote\":\"thick crust\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one extra large Cheese\"},{\"message_index\":4,\"quote\":\"no tomato sauce\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Dev\",\"evidence\":[{\"message_index\":4,\"quote\":\"name is Dev\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"That's correct\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12909,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1077,
+   "reasoning_tokens": 167
+  },
+  "latency_ms": 8617.00136703439,
+  "cost_micros": 1125,
+  "at": "2026-10-25T22:34:53.928569+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12909,
+   "completion_tokens": 1077,
+   "total_tokens": 13986,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5071,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 167,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

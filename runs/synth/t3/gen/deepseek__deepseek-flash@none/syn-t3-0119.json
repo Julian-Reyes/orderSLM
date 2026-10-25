@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0119",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'm picking up an order for a friend who isn't feeling well. I'd like 4 breakfast sandwiches on croissants, 3 of them with no egg. Also a small cappuccino and a large latte with skim milk instead of whole milk. Name's Tom, and I'd like it ready as soon as possible.\"},{\"role\":\"business\",\"text\":\"Got it, Tom! 4 breakfast sandwiches on croissants (3 no egg), 1 small cappuccino, and 1 large latte with skim milk. Ready asap. We'll have it waiting for pickup.\"},{\"role\":\"customer\",\"text\":\"Thank you, that's perfect.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1447,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 151,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1696.445731970016,
+  "cost_micros": 158,
+  "at": "2026-10-25T21:34:51.594696+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1447,
+   "completion_tokens": 151,
+   "total_tokens": 1598,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 423
+  }
+ }
+}

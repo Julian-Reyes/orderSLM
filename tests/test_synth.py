@@ -233,6 +233,17 @@ def test_trailing_business_messages_are_trimmed_and_logged():
     assert sc.repairs == ["trimmed_trailing_business_message"] * 2
 
 
+def test_echoed_schema_type_key_is_removed_and_logged():
+    """DeepSeek flash appends `"type": "object"` from the schema; only that exact key/value is repaired."""
+    chat = json.loads(_chat(("customer", "2 hot chocolates"), ("customer", "actually make it a small")))
+    sc, reason = gen.to_conversation(CARDS[0], json.dumps(chat | {"type": "object"}))
+    assert reason is None and sc.repairs == ["removed_schema_type_key"]
+    assert [m.text for m in sc.conversation.messages] == ["2 hot chocolates", "actually make it a small"]
+    for other in ({"type": "chat"}, {"type": "object", "note": "x"}, {"kind": "object"}):
+        bad, reason = gen.to_conversation(CARDS[0], json.dumps(chat | other))
+        assert bad is None and reason.startswith("invalid_output")
+
+
 def test_cards_pick_varied_addresses_and_never_repeat_an_item():
     addresses = [c.address for c in CARDS if c.address]
     assert len(addresses) > 50 and len(set(addresses)) == len(addresses)

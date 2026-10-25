@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0464",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys delivering rn\"},{\"role\":\"business\",\"text\":\"hey! yes we're delivering. what can we get you?\"},{\"role\":\"customer\",\"text\":\"cool lemme get a veggie burger no lettuce add mustard and a bacon burger, for 7pm pls. delivery to 4964 easton blvd, paying by card\"},{\"role\":\"business\",\"text\":\"got it: 1 veggie burger no lettuce add mustard, 1 bacon burger, delivery to 4964 Easton Blvd for 7:00, pay by card. anything else?\"},{\"role\":\"customer\",\"text\":\"nah thats it thx. can u make it 8pm instead\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1224,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 152,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1836.0536030377261,
+  "cost_micros": 125,
+  "at": "2026-10-25T21:46:28.094022+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1224,
+   "completion_tokens": 152,
+   "total_tokens": 1376,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 200
+  }
+ }
+}

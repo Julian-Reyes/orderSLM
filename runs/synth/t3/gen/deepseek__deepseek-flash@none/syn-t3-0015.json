@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0015",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can i get an americano w caramel syrup pls\"}, {\"role\": \"business\", \"text\": \"sure! what size would u like?\"}, {\"role\": \"customer\", \"text\": \"my mom said it was ok lol\"}, {\"role\": \"business\", \"text\": \"haha ok. just to confirm, 1 americano with caramel syrup, and it's a pickup order. can i get a name?\"}, {\"role\": \"customer\", \"text\": \"yep thats it n its ben thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1372,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 127,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2471.235921024345,
+  "cost_micros": 132,
+  "at": "2026-10-25T21:31:15.201153+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1372,
+   "completion_tokens": 127,
+   "total_tokens": 1499,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 348
+  }
+ }
+}

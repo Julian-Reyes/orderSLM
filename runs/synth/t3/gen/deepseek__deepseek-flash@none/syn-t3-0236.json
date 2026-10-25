@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0236",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get three banana nut muffins and two plain croissants pls\"},{\"role\":\"business\",\"text\":\"got it — 3 banana nut muffins and 2 plain croissants. anything else?\"},{\"role\":\"customer\",\"text\":\"yeah its for pickup and ill pay by card. name is luis\"},{\"role\":\"business\",\"text\":\"thanks luis! 3 banana nut muffins and 2 plain croissants for pickup, paying by card. sound right?\"},{\"role\":\"customer\",\"text\":\"yep but can u add butter to the croissants too thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1422,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 134,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1781.287132005673,
+  "cost_micros": 125,
+  "at": "2026-10-25T21:38:45.824175+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1422,
+   "completion_tokens": 134,
+   "total_tokens": 1556,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 270
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0412",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"some garlic knots\"},{\"message_index\":2,\"quote\":\"one order\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"picking this up myself\"},{\"message_index\":6,\"quote\":\"pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 8:15\",\"normalized_local\":\"20:15\",\"evidence\":[{\"message_index\":6,\"quote\":\"at 8:15\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"That is correct\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12899,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 514,
+   "reasoning_tokens": 124
+  },
+  "latency_ms": 4507.72200000938,
+  "cost_micros": 842,
+  "at": "2026-10-25T22:33:46.909596+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12899,
+   "completion_tokens": 514,
+   "total_tokens": 13413,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5061,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 124,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

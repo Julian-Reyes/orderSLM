@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0540",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey\"},{\"role\":\"customer\",\"text\":\"4 lg bbq chicken pizzas, 3 of em thick crust\"},{\"role\":\"business\",\"text\":\"Got it — 4 large BBQ chicken, 3 with thick crust. Anything else?\"},{\"role\":\"customer\",\"text\":\"4 sprite bottles, a dr pepper, and garlic knots\"},{\"role\":\"business\",\"text\":\"So that's 4 large BBQ chicken (3 thick crust), 4 bottled Sprites, 1 Dr Pepper, and an order of garlic knots. When do you need it?\"},{\"role\":\"customer\",\"text\":\"in 20 min, picking up\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2315,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 139,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1559.4515329576097,
+  "cost_micros": 130,
+  "at": "2026-10-25T21:48:55.168230+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2315,
+   "completion_tokens": 139,
+   "total_tokens": 2454,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 267
+  }
+ }
+}

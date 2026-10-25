@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0322",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, good morning.\"},{\"role\":\"business\",\"text\":\"Good morning! How can we help you today?\"},{\"role\":\"customer\",\"text\":\"I'd like to place an order for a meeting: two plain bagels and two small drip coffees with caramel syrup. I'll pick it up, and it's for Maya, at 2.\"},{\"role\":\"business\",\"text\":\"Got it, Maya: 2 plain bagels and 2 small drip coffees with caramel syrup, for pickup at 2. Sound right?\"},{\"role\":\"customer\",\"text\":\"That's correct, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1375,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 133,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1818.800562992692,
+  "cost_micros": 136,
+  "at": "2026-10-25T21:41:41.850544+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1375,
+   "completion_tokens": 133,
+   "total_tokens": 1508,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 351
+  }
+ }
+}

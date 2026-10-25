@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0018",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"1 milkshake\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"1 veggie burger\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"at 56 sycamore ave apt 25A\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"sycamore ave\",\"number\":\"56\",\"unit\":\"apt 25A\",\"reference\":null,\"raw_text\":\"56 sycamore ave apt 25A\",\"evidence\":[{\"message_index\":2,\"quote\":\"56 sycamore ave apt 25A\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9553,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 520,
+   "reasoning_tokens": 75
+  },
+  "latency_ms": 4796.262106974609,
+  "cost_micros": 511,
+  "at": "2026-10-25T21:52:35.279422+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9553,
+   "completion_tokens": 520,
+   "total_tokens": 10073,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1715,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 75,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

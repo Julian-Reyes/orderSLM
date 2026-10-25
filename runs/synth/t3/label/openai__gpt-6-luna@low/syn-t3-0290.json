@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0290",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":\"CONFIRM_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"plain\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a plain bagel\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w hazelnut syrup\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w whole milk\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a large americano w hazelnut syrup\"},{\"message_index\":2,\"quote\":\"make the americano w whole milk too\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"pickup\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"8:30\",\"normalized_local\":\"08:30\",\"evidence\":[{\"message_index\":0,\"quote\":\"8:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"payin cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"luis\",\"evidence\":[{\"message_index\":0,\"quote\":\"name luis\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10380,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 860,
+   "reasoning_tokens": 348
+  },
+  "latency_ms": 8214.220180001575,
+  "cost_micros": 763,
+  "at": "2026-10-25T22:21:03.942801+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10380,
+   "completion_tokens": 860,
+   "total_tokens": 11240,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2542,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 348,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

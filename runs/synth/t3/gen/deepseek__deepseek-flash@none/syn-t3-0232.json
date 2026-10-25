@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0232",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello! I'd like to place an order for delivery, please.\"},{\"role\":\"business\",\"text\":\"Hi there! Happy to help. What would you like to order?\"},{\"role\":\"customer\",\"text\":\"I'd like three large Meat Lovers pizzas, please. Two of them as they come, and the third one with a thick crust.\"},{\"role\":\"business\",\"text\":\"Got it: 3 large Meat Lovers, two regular and one with thick crust. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, one medium Supreme pizza with a stuffed crust, please.\"},{\"role\":\"customer\",\"text\":\"And an order of breadsticks, plus a bottle of water.\"},{\"role\":\"business\",\"text\":\"Thank you! So that's 3 large Meat Lovers (one thick crust), 1 medium Supreme with stuffed crust, breadsticks, and a bottled water. Where should we deliver?\"},{\"role\":\"customer\",\"text\":\"Please deliver to 30 Hawthorne Ln. Thank you very much!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2311,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 217,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2048.6379449721426,
+  "cost_micros": 176,
+  "at": "2026-10-25T21:38:37.826809+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2311,
+   "completion_tokens": 217,
+   "total_tokens": 2528,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 263
+  }
+ }
+}

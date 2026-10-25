@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0103",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello there, good morning!\"}, {\"role\": \"business\", \"text\": \"Good morning! What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"I'd like a medium cappuccino with vanilla syrup, and a drip coffee with whole milk please.\"}, {\"role\": \"business\", \"text\": \"Sounds good. So that's a medium cappuccino with vanilla syrup and a drip coffee with whole milk. Anything else?\"}, {\"role\": \"customer\", \"text\": \"Yes that's right, that's everything for now. I'll be paying with cash, and could you have change ready for a twenty?\"}, {\"role\": \"business\", \"text\": \"Got it, cash and change for a twenty. See you soon!\"}, {\"role\": \"customer\", \"text\": \"Actually can you add three chocolate croissants to that as well, thanks!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1477,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 205,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2039.9323650053702,
+  "cost_micros": 195,
+  "at": "2026-10-25T21:34:19.197337+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1477,
+   "completion_tokens": 205,
+   "total_tokens": 1682,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 453
+  }
+ }
+}

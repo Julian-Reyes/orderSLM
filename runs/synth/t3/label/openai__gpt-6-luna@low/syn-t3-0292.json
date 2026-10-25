@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0292",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 MEDIUM VEGGIE PIZZAS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"mushrooms\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO MUSHROOMS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 MEDIUM VEGGIE PIZZAS\"},{\"message_index\":2,\"quote\":\"2 OF EM NO MUSHROOMS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"THICK CRUST\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"1 XL HAWAIIAN\"},{\"message_index\":3,\"quote\":\"THICK CRUST\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Oak Dr\",\"number\":\"42\",\"unit\":null,\"reference\":null,\"raw_text\":\"42 OAK DR\",\"evidence\":[{\"message_index\":5,\"quote\":\"42 OAK DR\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"PERFECT\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12929,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 789,
+   "reasoning_tokens": 122
+  },
+  "latency_ms": 6447.24997295998,
+  "cost_micros": 983,
+  "at": "2026-10-25T22:21:18.203474+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12929,
+   "completion_tokens": 789,
+   "total_tokens": 13718,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5091,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 122,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

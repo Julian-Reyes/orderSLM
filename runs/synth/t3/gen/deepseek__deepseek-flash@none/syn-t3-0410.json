@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0410",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good afternoon. I'm ordering for an office meeting and would like to place an order for delivery.\"},{\"role\":\"business\",\"text\":\"Good afternoon! Happy to help. What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"I'd like 2 extra large Cheese Pizzas with no tomato sauce and grilled chicken added. Also 3 small Margherita Pizzas, and 1 personal BBQ Chicken Pizza with no grilled chicken and bacon added.\"},{\"role\":\"business\",\"text\":\"Let me read that back: 2 Extra large 16-inch Cheese Pizzas with no Tomato sauce and added Grilled chicken, 3 Small 10-inch Margherita Pizzas, and 1 Personal 8-inch BBQ Chicken Pizza with no Grilled chicken and added Bacon. Does that look right?\"},{\"role\":\"customer\",\"text\":\"Yes, that's correct.\"},{\"role\":\"customer\",\"text\":\"Delivery to 912 Magnolia Ct, and I'll be paying by card.\"},{\"role\":\"customer\",\"text\":\"One last change, please make the Cheese Pizzas thick crust.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2324,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 235,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1884.8834449891,
+  "cost_micros": 189,
+  "at": "2026-10-25T21:44:33.939880+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2324,
+   "completion_tokens": 235,
+   "total_tokens": 2559,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 276
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0562",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo just finished my exam lol\"},{\"role\":\"customer\",\"text\":\"lemme get a breakfast sandwich on an english muffin pls\"},{\"role\":\"business\",\"text\":\"nice! on an english muffin got it. it comes with egg, cheddar and bacon — want all that?\"},{\"role\":\"customer\",\"text\":\"skip the egg on that one\"},{\"role\":\"business\",\"text\":\"sure thing. so one breakfast sandwich on an english muffin, no egg — that's it?\"},{\"role\":\"customer\",\"text\":\"yep thats it. gonna pay by card\"},{\"role\":\"business\",\"text\":\"cool, card works. when do u want it?\"},{\"role\":\"customer\",\"text\":\"at 12:45 thx\"}],\"role\":\"customer\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1394,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 163,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3454.053833964281,
+  "cost_micros": 138,
+  "at": "2026-10-25T21:49:37.314351+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1394,
+   "completion_tokens": 163,
+   "total_tokens": 1557,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 242
+  }
+ }
+}

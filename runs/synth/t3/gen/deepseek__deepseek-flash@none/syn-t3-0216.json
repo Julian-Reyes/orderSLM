@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0216",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey are u guys open rn\"},{\"role\":\"business\",\"text\":\"yep we're open till 3! what can i get u?\"},{\"role\":\"customer\",\"text\":\"ok so lemme get two large cappuccinos w vanilla syrup pls\"},{\"role\":\"customer\",\"text\":\"and one choc chip muffin\"},{\"role\":\"business\",\"text\":\"got it! 2 large cappuccinos with vanilla syrup and a chocolate chip muffin. name for the order?\"},{\"role\":\"customer\",\"text\":\"keisha, and im gonna pick it up. ill pay cash\"},{\"role\":\"business\",\"text\":\"perfect keisha, see u soon!\"},{\"role\":\"customer\",\"text\":\"actually can i switch that to card instead of cash thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1430,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 167,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1890.0555970030837,
+  "cost_micros": 165,
+  "at": "2026-10-25T21:38:05.772614+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1430,
+   "completion_tokens": 167,
+   "total_tokens": 1597,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 406
+  }
+ }
+}

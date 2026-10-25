@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0425",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey hey! 😊\"},{\"role\":\"business\",\"text\":\"Hi there! What can I get for you today?\"},{\"role\":\"customer\",\"text\":\"just a croissant please, picking it up at 1 🙂\"},{\"role\":\"business\",\"text\":\"You got it — 1 croissant for pickup at 1. Can I get a name for the order?\"},{\"role\":\"customer\",\"text\":\"Keisha! and I'll pay by card 💳\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1352,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 106,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1282.5513679999858,
+  "cost_micros": 116,
+  "at": "2026-10-25T21:45:05.012153+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1352,
+   "completion_tokens": 106,
+   "total_tokens": 1458,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 328
+  }
+ }
+}

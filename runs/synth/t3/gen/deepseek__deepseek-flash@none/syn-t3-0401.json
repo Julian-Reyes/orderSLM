@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0401",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello. I need to order some hot chocolate for a friend who isn't feeling well.\"},{\"role\":\"business\",\"text\":\"Sure, happy to help. How many would you like?\"},{\"role\":\"customer\",\"text\":\"Three, please. Medium size, and could you add caramel syrup to all of them?\"},{\"role\":\"business\",\"text\":\"Got it: three medium hot chocolates with caramel syrup. Anything else?\"},{\"role\":\"customer\",\"text\":\"That's everything. I'll pay in cash, and I'd like to get them at 12:45.\"},{\"role\":\"business\",\"text\":\"Perfect. Three medium hot chocolates with caramel syrup, cash, ready at 12:45. See you then!\"},{\"role\":\"customer\",\"text\":\"Thank you, see you at 12:45.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1359,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 175,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1909.079961013049,
+  "cost_micros": 159,
+  "at": "2026-10-25T21:44:17.194439+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1359,
+   "completion_tokens": 175,
+   "total_tokens": 1534,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 335
+  }
+ }
+}

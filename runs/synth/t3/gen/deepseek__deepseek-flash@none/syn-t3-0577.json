@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0577",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello. I need to place an order for pickup.\"},{\"role\":\"business\",\"text\":\"Sure, what can I get for you?\"},{\"role\":\"customer\",\"text\":\"I would like five bacon burgers, with mayo on two of them.\"},{\"role\":\"business\",\"text\":\"Got it, five bacon burgers, two with mayo. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, one chocolate milkshake and an order of fries.\"},{\"role\":\"business\",\"text\":\"Sounds good. So that's five bacon burgers, two with mayo, a chocolate milkshake and an order of fries.\"},{\"role\":\"customer\",\"text\":\"That's correct. I will pay by card when I pick it up.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1209,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 157,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1701.064258988481,
+  "cost_micros": 126,
+  "at": "2026-10-25T21:50:10.530739+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1209,
+   "completion_tokens": 157,
+   "total_tokens": 1366,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 185
+  }
+ }
+}

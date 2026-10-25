@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0580",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"cappuccino\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"almond_milk\",\"amount\":\"normal\",\"raw_text\":\"almond milk instead of whole milk\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two large cappuccinos\"},{\"message_index\":6,\"quote\":\"the cappuccinos with almond milk instead of whole milk\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"caramel_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with caramel syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three large americanos with caramel syrup\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"gonna pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"eli\",\"evidence\":[{\"message_index\":4,\"quote\":\"eli\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10497,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 618,
+   "reasoning_tokens": 75
+  },
+  "latency_ms": 5503.932737978175,
+  "cost_micros": 654,
+  "at": "2026-10-25T22:50:11.318035+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10497,
+   "completion_tokens": 618,
+   "total_tokens": 11115,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2659,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 75,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0234",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'd like to place an order for pickup.\"},{\"role\":\"business\",\"text\":\"Sure, what can I get for you?\"},{\"role\":\"customer\",\"text\":\"I'll take two Bacon Burgers and a Lemonade.\"},{\"role\":\"business\",\"text\":\"Two Bacon Burgers and one Lemonade. Anything else?\"},{\"role\":\"customer\",\"text\":\"Could I get sriracha on both Bacon Burgers? I'll pick it up at 6:30 and pay by card.\"},{\"role\":\"business\",\"text\":\"Got it: two Bacon Burgers with sriracha and a Lemonade, pickup at 6:30, paying by card. See you then!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1160,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 152,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2025.707712979056,
+  "cost_micros": 115,
+  "at": "2026-10-25T21:38:42.034653+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1160,
+   "completion_tokens": 152,
+   "total_tokens": 1312,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 136
+  }
+ }
+}

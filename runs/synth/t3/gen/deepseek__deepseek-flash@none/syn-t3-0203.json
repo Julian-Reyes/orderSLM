@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0203",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey!\"},{\"role\":\"business\",\"text\":\"Hey there! What can we get you?\"},{\"role\":\"customer\",\"text\":\"got two hungry kids w me rn\"},{\"role\":\"customer\",\"text\":\"need three milkshakes pls\"},{\"role\":\"customer\",\"text\":\"and two veggie burgers\"},{\"role\":\"customer\",\"text\":\"one cheeseburger too, single patty\"},{\"role\":\"business\",\"text\":\"Got it: 3 milkshakes, 2 veggie burgers, 1 single cheeseburger. Anything else?\"},{\"role\":\"customer\",\"text\":\"thats it thx. gonna pick it up\"},{\"role\":\"business\",\"text\":\"Sounds good! Name for the order?\"},{\"role\":\"customer\",\"text\":\"jordan. paying cash\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1213,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 171,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1787.2549319872633,
+  "cost_micros": 135,
+  "at": "2026-10-25T21:37:41.147461+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1213,
+   "completion_tokens": 171,
+   "total_tokens": 1384,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 189
+  }
+ }
+}

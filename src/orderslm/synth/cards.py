@@ -24,6 +24,9 @@ CARDS_VERSION = "synth-cards@0.5"  # 0.2: address picked by code, no item twice 
 # 0.4 (p3 review): no "regular one" wording (leaked into chats), address-gap cards no longer also say "never says
 # pickup or delivery", a correction never swaps an item for itself, clearer payment-claim and unclear-message briefs;
 # 0.5 (Julian, bulk): each non-order scenario weight 2 → 4 (non-order ≈ 35% of chats, was 22%) for the rare intents
+# Targeted batch (M6 error review, docs/STUDENT_ERRORS.md): patterns the students miss and the training data barely
+# has. Written from those pattern descriptions, never from dev chats (Source A is evaluation only).
+TARGETS_VERSION = "synth-targets@0.1"
 L = RouterLabel
 S = Scenario
 F = SynthFeature
@@ -162,6 +165,37 @@ LANDMARKS = [
 ]
 VAGUE = ["the usual", "one of those", "same as last time", "the one I always get", "that thing from before"]
 PROBLEMS = ["missing", "cold", "the wrong one", "squashed", "undercooked"]
+# Toppings / add-ins none of the training menus has (checked against modifier names and aliases in tests).
+OFF_MENU_ADDONS = {
+    "corner-patty": ["a fried egg", "grilled mushrooms", "sriracha", "coleslaw", "chili"],
+    "halfmoon-pizza": ["capers", "arugula", "eggplant", "truffle oil", "shrimp"],
+    "morning-crumb": ["coconut milk", "matcha powder", "honey", "cinnamon", "lavender syrup"],
+}
+TARGET_WEIGHTS = {  # Julian, 2026-10-25: 600 chats, same writers and teacher as M4
+    "split_lines": 10,  # the same dish on two lines ("4 cheeseburgers, 2 no onion"): 1 of 1,865 training answers
+    "big_order": 10,  # 4–6 lines, half with a clarifying question midway: 10 of 1,865
+    "modify_last": 16,  # a change in the last customer message (MODIFY_ORDER): 2.9% of training rows
+    "size_unstated": 6,  # an item whose size is never said
+    "unclear": 6,  # UNKNOWN: 14 training rows
+    "trivia": 4,  # general-knowledge questions (OUT_OF_SCOPE, read as MENU_QUESTION)
+    "bare_time": 4,  # "at 8:30" with no am/pm, meaning the later one
+    "offmenu_addon": 4,  # a topping the menu doesn't have, on a menu item
+}
+# Kinds of change in the 160 modify_last chats, weighted toward what all three students got wrong on dev (Julian,
+# 2026-10-25: "the whole point is to help the students on what they got wrong"): size changes ("make the fries
+# large"), option swaps ("make the latte oat milk"), time/payment changes, removals, additions after confirming.
+MODIFY_KIND_WEIGHTS = {
+    "size": 30,
+    "option_swap": 25,
+    "time": 10,
+    "payment": 10,
+    "remove_item": 18,
+    "add_mod": 15,
+    "add_item": 15,  # only after a confirmation (before one, a new item is more ordering, not a change)
+    "swap_item": 13,
+    "remove_mod": 12,
+    "quantity": 12,
+}
 GENERATORS = (  # Julian, 2026-10-16: pilot 200 / 200 / 100
     ("deepseek/deepseek-flash@none", 2),
     ("google/gemini-3.1-flash-lite@minimal", 2),
@@ -321,9 +355,181 @@ def _features(style: WritingStyle, rng: random.Random) -> list[SynthFeature]:
     return sorted(f)
 
 
+def _split(menu: MenuCatalog, rng: random.Random, items: list[PlannedItem]) -> None:
+    """Make one dish two lines: N of it, K of them with one change (a removal or an add-on)."""
+
+    def changeable(i: MenuItem) -> bool:
+        return bool(i.ingredient_ids or i.addon_ids) and not i.combo_slots
+
+    pool = [i for i in menu.items if i.available and changeable(i)]
+    base = plan_item(menu, rng, pool=pool, exclude={p.menu_item_id for p in items if p.menu_item_id})
+    item = menu.item(base.menu_item_id or "")
+    assert item is not None
+    total = rng.choice([2, 3, 4, 4, 5, 6])
+    k = rng.randint(1, total - 1)
+    plain = base.model_copy(update={"quantity": total - k, "remove": [], "add": [], "substitute": {}})
+    changed = plain.model_copy(update={"quantity": k, "remove": [], "add": []})
+    probe = PlannedItem(menu_item_id=item.id, quantity=1)
+    for _ in range(20):  # _mods draws at random; keep the first draw with one removal or one add-on
+        probe = PlannedItem(menu_item_id=item.id, quantity=1)
+        _mods(menu, item, rng, probe)
+        if probe.remove or probe.add:
+            break
+    if probe.remove:
+        changed.remove.append(probe.remove[0])
+    elif probe.add:
+        changed.add.append(probe.add[0])
+    else:
+        changed.add.append(rng.choice(item.addon_ids or item.ingredient_ids))
+    items.insert(0, changed)
+    items.insert(0, plain)
+
+
+def _modify_last(
+    menu: MenuCatalog, rng: random.Random, items: list[PlannedItem], kind: str, payment: str
+) -> tuple[str, str]:
+    """The change in the last customer message, of an assigned kind (MODIFY_KIND_WEIGHTS); `items` becomes the final
+    order, and gets an item the change can apply to when it has none. Returns (what the customer says first, the
+    change). "time" and "payment" kinds change a detail instead of an item."""
+    exclusive = set(menu.exclusive_groups)
+    taken = {p.menu_item_id for p in items if p.menu_item_id}
+
+    def group(mid: str) -> str:
+        m = menu.modifier(mid)
+        return m.group if m else ""
+
+    def mname(mid: str) -> str:
+        m = menu.modifier(mid)
+        return m.name if m else mid
+
+    def holder(fits) -> tuple[PlannedItem, MenuItem]:
+        """An order line whose item fits, else a new one added to the order."""
+        for p in items:
+            item = menu.item(p.menu_item_id) if p.menu_item_id and not p.combo else None
+            if item and fits(item, p):
+                return p, item
+        pool = [i for i in menu.items if i.available and not i.combo_slots and fits(i, None)]
+        p = plan_item(menu, rng, pool=pool, exclude=taken)
+        p.remove, p.add, p.substitute = [], [], {}
+        items.append(p)
+        return p, menu.item(p.menu_item_id)  # type: ignore[return-value]
+
+    changed = "First orders the items below, but with the earlier version of the changed one."
+    if kind == "size":
+        p, item = holder(lambda i, p: len(i.variants) >= 2)
+        if p.variant_id is None:
+            p.variant_id = rng.choice(item.variants).id
+        old = rng.choice([v for v in item.variants if v.id != p.variant_id])
+        new = item.variant(p.variant_id)
+        return (
+            changed,
+            f"changes the size of the {item.name} from {old.name} to {new.name} (like 'make it a {new.name.split()[0].lower()}').",
+        )  # type: ignore[union-attr]
+    if kind == "option_swap":
+
+        def swaps(i: MenuItem) -> list[tuple[str | None, str]]:
+            """(the ingredient it replaces, the option): milk swaps out whole milk; a crust (no crust ingredient on
+            the pizza menu) is a pick, so it replaces nothing."""
+            out: list[tuple[str | None, str]] = []
+            for a in i.addon_ids:
+                if group(a) in exclusive:
+                    same = [ing for ing in i.ingredient_ids if group(ing) == group(a)]
+                    out += [(ing, a) for ing in same if ing != a] if same else [(None, a)]
+            return out
+
+        p, item = holder(lambda i, p: bool(swaps(i)))
+        old, new = rng.choice(swaps(item))
+        if old is None:
+            p.add = [x for x in p.add if group(x) != group(new)] + [new]
+            return (
+                changed,
+                f"asks for the {item.name} with {mname(new)} (like 'make it {mname(new).lower()}').",
+            )
+        p.remove = [r for r in p.remove if r != old]
+        p.substitute = {old: new}
+        return changed, f"asks for the {item.name} with {mname(new)} instead of {mname(old)}."
+    if kind == "add_mod":
+        p, item = holder(lambda i, p: any(group(a) not in exclusive for a in i.addon_ids))
+        a = rng.choice([a for a in item.addon_ids if group(a) not in exclusive])
+        if a not in p.add:
+            p.add.append(a)
+        return changed, f"adds {mname(a)} to the {item.name}."
+    if kind == "remove_mod":
+
+        def removable(i: MenuItem) -> list[str]:
+            return [r for r in i.ingredient_ids if group(r) not in exclusive | NOT_REMOVABLE_GROUPS]
+
+        p, item = holder(lambda i, p: bool(removable(i)))
+        r = rng.choice(removable(item))
+        if r not in p.remove:
+            p.remove.append(r)
+        p.substitute.pop(r, None)
+        return changed, f"asks for the {item.name} without {mname(r)}."
+    if kind == "remove_item":
+        dropped = plan_item(menu, rng, exclude=taken)
+        return (
+            f"First orders the items below plus {item_text(dropped, menu)}.",
+            f"removes the {item_text(dropped, menu)} from the order.",
+        )
+    if kind == "add_item":
+        added = plan_item(menu, rng, exclude=taken)
+        items.append(added)
+        return (
+            "First orders the items below except the one added at the end.",
+            f"adds {item_text(added, menu)} (not asked for before).",
+        )
+    if kind == "quantity":
+        p, item = holder(lambda i, p: True)
+        before = p.quantity % 4 + 1
+        return changed, f"changes the {item.name} from {before} to {p.quantity}."
+    if kind == "swap_item":
+        p, item = holder(lambda i, p: True)
+        old = plan_item(menu, rng, exclude=taken | {p.menu_item_id})
+        return (
+            f"First orders the items below, but {item_text(old, menu)} instead of {item_text(p, menu)}.",
+            f"swaps the {item_text(old, menu)} for {item_text(p, menu)}.",
+        )
+    if kind == "payment" and payment in ("card", "cash"):
+        before = "cash" if payment == "card" else "card"
+        return (
+            f"First orders the items below and says they'll pay by {before}.",
+            f"switches the payment to {payment} instead of {before}.",
+        )
+    # "time" (and "payment" when the card has no payment to change)
+    h, m = rng.choice([(12, 0), (12, 30), (13, 15), (18, 0), (18, 30), (19, 0), (19, 45)])
+    later = (h * 60 + m + rng.choice([30, 45, 60])) % (24 * 60)
+    return (
+        f"First orders the items below for a clock time ({h:02d}:{m:02d}, said the way a customer would).",
+        f"moves the time to {later // 60:02d}:{later % 60:02d} (like 'can you make it X instead').",
+    )
+
+
+def _bare_time(menu: MenuCatalog, rng: random.Random) -> tuple[datetime, str]:
+    """A start late in the opening hours and a time 30–90 min later, said on a 12-hour clock without am/pm."""
+    tz = ZoneInfo(menu.timezone)
+    day = datetime(2026, 10, 1, tzinfo=tz) + timedelta(days=rng.randrange(28))
+    closes = menu.closes_at.hour * 60 + menu.closes_at.minute
+    start = rng.randrange(max(closes - 240, menu.opens_at.hour * 60 + 60), closes - 100)
+    at = start + rng.choice([30, 45, 60, 75, 90])
+    at -= at % 15
+    h, m = divmod(at, 60)
+    said = f"{(h - 1) % 12 + 1}:{m:02d}" if m else f"{(h - 1) % 12 + 1}"
+    sentence = f"Says when they want it as a bare clock time with no am/pm: 'at {said}' (meaning {h:02d}:{m:02d} today)."
+    return (day + timedelta(minutes=start)).astimezone(UTC), sentence
+
+
 def _card(
-    n: int, scenario: Scenario, style: WritingStyle, menu: MenuCatalog, rng: random.Random, batch: str
+    n: int,
+    scenario: Scenario,
+    style: WritingStyle,
+    menu: MenuCatalog,
+    rng: random.Random,
+    batch: str,
+    target: str | None = None,
+    modify_kind: str | None = None,
 ) -> SynthCard:
+    """target (a TARGET_WEIGHTS key) adds a targeted pattern, modify_kind (MODIFY_KIND_WEIGHTS) the change for
+    "modify_last"; without a target, the random draws are as before."""
     plan = PLANS[scenario]
     labels = list(plan.labels)
     lo, hi = plan.messages
@@ -333,6 +539,7 @@ def _card(
     items: list[PlannedItem] = []
     first_ask: PlannedItem | None = None
     fulfillment, payment, name, address = "not_applicable", "not_applicable", None, None
+    start_at: datetime | None = None  # set early only for target "bare_time"
 
     if plan.order:
         if rng.random() < 0.25:
@@ -350,6 +557,8 @@ def _card(
             ]
             gaps += ["size"] if sizeable else []
             gap = rng.choice(gaps)
+            if target == "size_unstated" and sizeable:
+                gap = "size"
         n_items = rng.choices([1, 2, 3], weights=[45, 35, 20])[0]
         if scenario is S.half_and_half:
             items.append(_half_and_half(menu, rng))
@@ -366,6 +575,11 @@ def _card(
             n_items -= 1
         for _ in range(max(n_items, 0)):
             items.append(plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id}))
+        if target == "split_lines":
+            _split(menu, rng, items)
+        if target == "big_order":
+            while len(items) < rng.randint(4, 6):
+                items.append(plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id}))
         if scenario is S.off_menu:
             choices = OFF_MENU.get(menu.business_id) or sorted({x for v in OFF_MENU.values() for x in v})
             items.append(PlannedItem(off_menu_text=rng.choice(choices), quantity=1))
@@ -380,6 +594,8 @@ def _card(
             fulfillment = "unstated"
         if gap == "payment":
             payment = "unstated"
+        if modify_kind == "payment" and payment == "unstated":  # a payment change needs a payment to change
+            payment = rng.choice(["card", "cash"])
         if gap == "address":
             fulfillment = "delivery"
         if fulfillment == "pickup" and (menu.name_required_for_pickup or rng.random() < 0.5):
@@ -402,14 +618,25 @@ def _card(
             S.two_requests: "Orders: {items}. In the same message as the first item, also asks a question about "
             "the menu.",
         }
-        if scenario in (S.correction, S.correction_after_confirmation):
-            target = items[0]
-            if rng.random() < 0.5 and target.menu_item_id:
-                first_ask = target.model_copy(update={"quantity": target.quantity % 4 + 1})
-                change = f"changes the quantity to {target.quantity}"
+        if target == "modify_last":
+            confirmed = scenario is S.correction_after_confirmation
+            first, change = _modify_last(menu, rng, items, modify_kind or "quantity", payment)
+            first += " "
+            if confirmed:
+                first += "The business reads the order back (no prices) and the customer confirms. "
+            brief.append(
+                first
+                + f"Then, in the very last customer message, {change} Their other details come before that change; "
+                "nothing comes after it. Final order: {items}."
+            )
+        elif scenario in (S.correction, S.correction_after_confirmation):
+            target_item = items[0]
+            if rng.random() < 0.5 and target_item.menu_item_id:
+                first_ask = target_item.model_copy(update={"quantity": target_item.quantity % 4 + 1})
+                change = f"changes the quantity to {target_item.quantity}"
             else:
                 first_ask = plan_item(menu, rng, exclude={p.menu_item_id for p in items if p.menu_item_id})
-                change = f"swaps it for {item_text(target, menu)}"
+                change = f"swaps it for {item_text(target_item, menu)}"
             if scenario is S.correction:
                 brief.append(
                     f"First asks for {item_text(first_ask, menu)} (plus anything else below), then {change}. "
@@ -440,7 +667,9 @@ def _card(
             brief.append("Will pick it up.")
         else:
             brief.append("Never says whether it's pickup or delivery.")
-        if payment == "cash":
+        if modify_kind == "payment" and payment in ("card", "cash"):
+            pass  # the change sentence says both payments
+        elif payment == "cash":
             brief.append(
                 "Pays cash"
                 + (", and asks for change for a bill (a 20 or a 50)." if rng.random() < 0.3 else ".")
@@ -451,19 +680,53 @@ def _card(
             brief.append("Never says how they'll pay.")
         if name:
             brief.append(f"Gives their name: {name}.")
-        if rng.random() < 0.3:
+        if target == "split_lines":
+            brief.append(
+                "The first two lines are the same item: says them as one request with a count and how many get "
+                "the change (like '4 burgers, 2 of them no onions')."
+            )
+        if target == "bare_time":
+            start_at, time_sentence = _bare_time(menu, rng)
+            brief.append(time_sentence)
+        elif modify_kind not in ("time", "payment") and rng.random() < 0.3:
             brief.append(f"Says when they want it: {rng.choice(TIMES)}.")
+        if target == "offmenu_addon":
+            host = next(
+                (p for p in items if p.menu_item_id and menu.item(p.menu_item_id).addon_ids),  # type: ignore[union-attr]
+                None,
+            )
+            if host is None:  # only drinks so far: add a dish that takes add-ons
+                takes = [i for i in menu.items if i.available and i.addon_ids and not i.combo_slots]
+                host = plan_item(
+                    menu, rng, pool=takes, exclude={p.menu_item_id for p in items if p.menu_item_id}
+                )
+                items.append(host)
+            addon = rng.choice(OFF_MENU_ADDONS[menu.business_id])
+            host_name = menu.item(host.menu_item_id or "").name  # type: ignore[union-attr]
+            brief.append(
+                f"Asks for {addon} on the {host_name}, as if the place has it (it isn't on the menu)."
+            )
         if "greets_first" in extras:
             brief.insert(0, "Opens with a greeting before ordering.")
         if "asks_menu_mid_order" in extras:
             brief.append("Asks a menu question partway through.")
     else:
         sample = rng.choice([i for i in menu.items if not i.combo_slots])
-        brief.append(
-            NON_ORDER_BRIEFS[scenario].format(item=sample.name.lower(), problem=rng.choice(PROBLEMS))
-        )
+        if target == "trivia":
+            brief.append(
+                "Asks one or two general-knowledge or trivia questions that have nothing to do with the restaurant "
+                "(history, geography, sports, a fun fact, settling a bet). Does not order."
+            )
+        else:
+            brief.append(
+                NON_ORDER_BRIEFS[scenario].format(item=sample.name.lower(), problem=rng.choice(PROBLEMS))
+            )
 
     text = " ".join(brief).replace("{items}", _items_text(items, menu))
+    if target == "modify_last":
+        labels.append(L.MODIFY_ORDER)
+    if target:
+        extras.append(f"target:{target}")
     return SynthCard(
         id=f"syn-{batch}-{n:04d}",
         generator="unassigned",
@@ -482,7 +745,7 @@ def _card(
         items=items,
         first_ask=first_ask,
         brief=text,
-        start_at=_start(menu, rng),
+        start_at=start_at if target == "bare_time" else _start(menu, rng),  # drawn last, as before targets
     )
 
 
@@ -534,6 +797,51 @@ def plan_cards(
     order = list(PLANS)
     pattern = _pattern(generators)
     ranked = sorted(range(n), key=lambda i: (order.index(cards[i].scenario), i))
+    for j, i in enumerate(ranked):
+        cards[i] = cards[i].model_copy(update={"generator": pattern[j % len(pattern)]})
+    return cards
+
+
+TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
+    "split_lines": (S.simple_order, S.multi_message_order),
+    "big_order": (S.multi_message_order, S.ambiguous_reference),
+    "modify_last": (S.correction, S.correction_after_confirmation),
+    "size_unstated": (S.missing_info,),
+    "unclear": (S.unclear_message,),
+    "trivia": (S.out_of_scope,),
+    "bare_time": (S.simple_order, S.multi_message_order),
+    "offmenu_addon": (S.simple_order, S.multi_message_order),
+}
+
+
+def plan_targeted_cards(
+    n: int,
+    *,
+    seed: int,
+    batch: str,
+    generators: tuple[tuple[str, int], ...] = GENERATORS,
+) -> list[SynthCard]:
+    """n cards for the targeted batch (TARGET_WEIGHTS over the three training menus), generators assigned in target
+    order as in plan_cards."""
+    rng = random.Random(f"{TARGETS_VERSION}-{seed}-{batch}")
+    menus = {b: m for b, m in load_menus().items() if not m.held_out}
+    targets = _exact(TARGET_WEIGHTS, n, rng)
+    styles = _exact(STYLE_WEIGHTS, n, rng)
+    kinds = iter(_exact(MODIFY_KIND_WEIGHTS, targets.count("modify_last"), rng))
+    cards = []
+    for i, (target, style) in enumerate(zip(targets, styles, strict=True), start=1):
+        kind = next(kinds) if target == "modify_last" else None
+        scenario = rng.choice(TARGET_SCENARIOS[target])
+        if kind == "add_item":  # a new item is a change only once the order was confirmed
+            scenario = S.correction_after_confirmation
+        allowed = sorted(menus)
+        if kind == "option_swap":  # milk (bakery) or crust (pizza): the burger place has no such choice
+            allowed = [b for b in allowed if menus[b].exclusive_groups]
+        menu = menus[rng.choice(allowed)]
+        cards.append(_card(i, scenario, style, menu, rng, batch, target=target, modify_kind=kind))
+    order = list(TARGET_WEIGHTS)
+    pattern = _pattern(generators)
+    ranked = sorted(range(n), key=lambda i: (order.index(cards[i].extras[-1].removeprefix("target:")), i))
     for j, i in enumerate(ranked):
         cards[i] = cards[i].model_copy(update={"generator": pattern[j % len(pattern)]})
     return cards

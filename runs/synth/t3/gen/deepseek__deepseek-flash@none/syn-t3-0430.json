@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0430",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey u guys open rn?\"}, {\"role\": \"business\", \"text\": \"Yep, we're open until 3! What can we get you?\"}, {\"role\": \"customer\", \"text\": \"bout to grab food between shifts so need it quick\"}, {\"role\": \"customer\", \"text\": \"2 medium americanos pls\"}, {\"role\": \"customer\", \"text\": \"n 2 small lattes\"}, {\"role\": \"customer\", \"text\": \"name's Rosa, pickup asap thx\"}, {\"role\": \"business\", \"text\": \"Got it Rosa: 2 medium Americanos with whole milk and 2 small Lattes, for pickup asap. Sound right?\"}, {\"role\": \"customer\", \"text\": \"yep\"}, {\"role\": \"customer\", \"text\": \"wait make the americanos skim milk pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1438,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 199,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1897.4765879684128,
+  "cost_micros": 166,
+  "at": "2026-10-25T21:45:17.776001+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1438,
+   "completion_tokens": 199,
+   "total_tokens": 1637,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 286
+  }
+ }
+}

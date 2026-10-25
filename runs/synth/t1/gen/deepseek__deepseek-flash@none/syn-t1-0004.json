@@ -1,0 +1,35 @@
+{
+ "key": "syn-t1-0004",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! 😊 quick one — can u deliver a coke to 3306 birch ln pls? payin by card\"},{\"role\":\"business\",\"text\":\"Hey! Sure thing — one Coke, delivery to 3306 Birch Ln, card on arrival. When would u like it?\"},{\"role\":\"customer\",\"text\":\"at 9 pls 🙏 thx so much!\"},{\"role\":\"business\",\"text\":\"Got it — 1 Coke, delivery to 3306 Birch Ln, card, at 9. See u then! 😊\"},{\"role\":\"customer\",\"text\":\"perfect thx!! 😄\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1163,
+   "cached_input_tokens": 512,
+   "cache_write_tokens": 0,
+   "output_tokens": 141,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1999.850570980925,
+  "cost_micros": 184,
+  "at": "2026-10-25T21:06:32.107667+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1163,
+   "completion_tokens": 141,
+   "total_tokens": 1304,
+   "prompt_tokens_details": {
+    "cached_tokens": 512
+   },
+   "prompt_cache_hit_tokens": 512,
+   "prompt_cache_miss_tokens": 651
+  }
+ }
+}

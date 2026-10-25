@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0112",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"YO! WE'RE SPLITTING AN ORDER TONIGHT\"},{\"role\":\"customer\",\"text\":\"3 VEGGIE BURGERS, 2 OF EM NO ONIONS! AND 3 SPRITES!!\"},{\"role\":\"business\",\"text\":\"Got it! 3 veggie burgers (2 no onions) and 3 Sprites. Anything else?\"},{\"role\":\"customer\",\"text\":\"YA ALSO 2 CHEESEBURGERS SINGLE PATTYS, NO LETTUCE. WE'LL GRAB IT AT 6:30, PAYIN CARD\"},{\"role\":\"business\",\"text\":\"Sounds good — 2 single cheeseburgers with no lettuce, pickup at 6:30, paying by card. See you then!\"},{\"role\":\"customer\",\"text\":\"PERFECT THANKS!!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1242,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 185,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1889.8243239964359,
+  "cost_micros": 147,
+  "at": "2026-10-25T21:34:38.680605+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1242,
+   "completion_tokens": 185,
+   "total_tokens": 1427,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 218
+  }
+ }
+}

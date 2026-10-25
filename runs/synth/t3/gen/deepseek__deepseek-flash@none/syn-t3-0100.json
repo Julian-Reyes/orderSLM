@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0100",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys open rn?\"},{\"role\":\"business\",\"text\":\"Hey! Yep, we're open until 11.\"},{\"role\":\"customer\",\"text\":\"cool my friend's sick so lemme get a veggie pizza\"},{\"role\":\"customer\",\"text\":\"no house cheese blend on it pls\"},{\"role\":\"customer\",\"text\":\"gonna pick it up myself\"},{\"role\":\"business\",\"text\":\"Got it — 1 Veggie Pizza, no house cheese blend, for pickup. Anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it thx, paying by card\"},{\"role\":\"customer\",\"text\":\"can i get it asap?\"},{\"role\":\"business\",\"text\":\"For sure, we'll have it ready asap. See you soon!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2203,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 170,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2084.0036579756998,
+  "cost_micros": 132,
+  "at": "2026-10-25T21:34:13.844816+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2203,
+   "completion_tokens": 170,
+   "total_tokens": 2373,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 155
+  }
+ }
+}

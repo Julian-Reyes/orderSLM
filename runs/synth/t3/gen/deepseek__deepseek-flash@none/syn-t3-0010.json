@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0010",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need two mediums lattes pls\"},{\"role\":\"business\",\"text\":\"Hey! Two medium lattes, got it. Anything else?\"},{\"role\":\"customer\",\"text\":\"yeah lemme get two everything bagels too\"},{\"role\":\"business\",\"text\":\"So that's 2 medium lattes and 2 everything bagels. Sound right?\"},{\"role\":\"customer\",\"text\":\"yep thx\"},{\"role\":\"customer\",\"text\":\"gonna pay by card btw\"},{\"role\":\"business\",\"text\":\"Got it, card it is 👍\"},{\"role\":\"customer\",\"text\":\"oh wait add butter on the bagels pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1436,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 152,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1669.024734001141,
+  "cost_micros": 157,
+  "at": "2026-10-25T21:26:24.087319+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 152,
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 412,
+   "prompt_tokens": 1436,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "total_tokens": 1588
+  }
+ }
+}

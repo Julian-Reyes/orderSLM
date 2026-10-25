@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0412",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello, I would like to order some garlic knots.\"}, {\"role\": \"business\", \"text\": \"Hi there! Sounds good. One order of garlic knots coming up. Anything else?\"}, {\"role\": \"customer\", \"text\": \"Yes, just one order is enough. I believe that comes with six pieces, correct?\"}, {\"role\": \"business\", \"text\": \"That's right, six pieces per order.\"}, {\"role\": \"customer\", \"text\": \"Perfect. I will be picking this up myself.\"}, {\"role\": \"business\", \"text\": \"Great, we'll have it ready for pickup. What time would you like it?\"}, {\"role\": \"customer\", \"text\": \"I would like to pick it up at 8:15.\"}, {\"role\": \"business\", \"text\": \"Got it. Just to confirm: one order of garlic knots, six pieces, for pickup at 8:15.\"}, {\"role\": \"customer\", \"text\": \"That is correct, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2186,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 230,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1945.1502139563672,
+  "cost_micros": 165,
+  "at": "2026-10-25T21:44:38.134508+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2186,
+   "completion_tokens": 230,
+   "total_tokens": 2416,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 138
+  }
+ }
+}

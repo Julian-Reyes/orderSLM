@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0298",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey orderin for my friend who's sick rn\"}, {\"role\": \"customer\", \"text\": \"can i get a hot chocolate no whipped cream add caramel syrup pls, and a breakfast sandwich on an english muffin. also u got cinnamon for the hot chocolate?\"}, {\"role\": \"business\", \"text\": \"sure thing! we dont have cinnamon but i can do the hot chocolate no whip with caramel. one breakfast sandwich on an english muffin too. whats the name for the order?\"}, {\"role\": \"customer\", \"text\": \"luis, gonna pick it up and pay by card thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1407,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 143,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1619.1744949901477,
+  "cost_micros": 147,
+  "at": "2026-10-25T21:40:50.761814+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1407,
+   "completion_tokens": 143,
+   "total_tokens": 1550,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 383
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0060",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get 4 diet cokes in cans and an order of garlic knots\"},{\"role\":\"customer\",\"text\":\"also 3 personal meat lovers pizzas pls. can u put capers on those? picking up, name's june thx\"},{\"role\":\"business\",\"text\":\"hey june! we don't have capers, sorry about that. so that's 4 diet cokes (12 oz cans), 1 garlic knots, and 3 personal 8-inch meat lovers pizzas — sound right?\"},{\"role\":\"customer\",\"text\":\"aw ok no worries, yeah thats it thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2255,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 139,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1752.8636519564316,
+  "cost_micros": 121,
+  "at": "2026-10-25T21:32:49.306023+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2255,
+   "completion_tokens": 139,
+   "total_tokens": 2394,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 207
+  }
+ }
+}

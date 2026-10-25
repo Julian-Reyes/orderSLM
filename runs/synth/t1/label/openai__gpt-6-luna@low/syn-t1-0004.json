@@ -1,0 +1,42 @@
+{
+ "key": "syn-t1-0004",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"a coke\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"deliver\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 9\",\"normalized_local\":\"21:00\",\"evidence\":[{\"message_index\":2,\"quote\":\"at 9\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Birch Ln\",\"number\":\"3306\",\"unit\":null,\"reference\":null,\"raw_text\":\"3306 birch ln\",\"evidence\":[{\"message_index\":0,\"quote\":\"3306 birch ln\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"perfect\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9636,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 543,
+   "reasoning_tokens": 183
+  },
+  "latency_ms": 5171.712217968889,
+  "cost_micros": 530,
+  "at": "2026-10-25T21:07:06.765439+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9636,
+   "completion_tokens": 543,
+   "total_tokens": 10179,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1798,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 183,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

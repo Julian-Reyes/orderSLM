@@ -1,0 +1,88 @@
+{
+  "batch": "t1",
+  "n": 600,
+  "seed": 20261016,
+  "cards_version": "synth-cards@0.5",
+  "targets_version": "synth-targets@0.1",
+  "synth_schema_version": "synth@0.1",
+  "generators": {
+    "deepseek/deepseek-flash@none": 4,
+    "google/gemini-3.1-flash-lite@minimal": 1,
+    "anthropic/claude-haiku-5-5@off-low": 1
+  },
+  "menu_versions": {
+    "corner-patty": "corner-patty@882e409e5aa8",
+    "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+    "morning-crumb": "morning-crumb@c8f57ec59225"
+  },
+  "planned_at": "2026-10-25T21:06:13.917768+00:00",
+  "git_commit": "00dde5ce02214f714c919c9f54850f0f85d2882c-dirty",
+  "distribution": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 400,
+      "anthropic/claude-haiku-5-5@off-low": 100,
+      "google/gemini-3.1-flash-lite@minimal": 100
+    },
+    "scenario": {
+      "multi_message_order": 137,
+      "simple_order": 91,
+      "correction": 82,
+      "correction_after_confirmation": 78,
+      "unclear_message": 60,
+      "missing_info": 60,
+      "ambiguous_reference": 52,
+      "out_of_scope": 40
+    },
+    "business": {
+      "halfmoon-pizza": 203,
+      "corner-patty": 202,
+      "morning-crumb": 195
+    },
+    "style": {
+      "texting": 180,
+      "rapid_fire": 120,
+      "emoji": 120,
+      "clean": 120,
+      "shouty": 60
+    },
+    "fulfillment": {
+      "pickup": 253,
+      "delivery": 135,
+      "unstated": 112,
+      "not_applicable": 100
+    },
+    "payment": {
+      "card": 237,
+      "cash": 134,
+      "unstated": 129,
+      "not_applicable": 100
+    },
+    "items": {
+      "1": 124,
+      "3": 123,
+      "2": 101,
+      "0": 100,
+      "4": 71,
+      "5": 57,
+      "6": 24
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 500,
+      "MODIFY_ORDER": 160,
+      "MENU_QUESTION": 81,
+      "CONFIRM_ORDER": 78,
+      "UNKNOWN": 60,
+      "OUT_OF_SCOPE": 40
+    },
+    "target": {
+      "modify_last": 160,
+      "big_order": 100,
+      "split_lines": 100,
+      "unclear": 60,
+      "size_unstated": 60,
+      "bare_time": 40,
+      "offmenu_addon": 40,
+      "trivia": 40
+    }
+  }
+}

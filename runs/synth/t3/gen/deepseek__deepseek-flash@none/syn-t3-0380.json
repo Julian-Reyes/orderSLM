@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0380",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"heyy quick q 😅 two lg pep and a couple of—\"},{\"role\":\"business\",\"text\":\"Hey! Sorry, I think that got cut off — could you finish that for me? 😊\"},{\"role\":\"customer\",\"text\":\"sry meant the thng w the xtra chese n the— hold on my pager just went off brb\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2158,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 88,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1887.4483539839275,
+  "cost_micros": 95,
+  "at": "2026-10-25T21:43:37.124724+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2158,
+   "completion_tokens": 88,
+   "total_tokens": 2246,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 238
+  }
+ }
+}

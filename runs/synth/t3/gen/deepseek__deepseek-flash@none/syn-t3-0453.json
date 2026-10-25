@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0453",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can i do a lg americano and a lg cappuccino pls\"}, {\"role\": \"business\", \"text\": \"sure thing! large americano and large cappuccino. anything else?\"}, {\"role\": \"customer\", \"text\": \"yeah 4 breakfast sandwiches too... and 2 plain bagels\"}, {\"role\": \"business\", \"text\": \"got it, 4 breakfast sandwiches and 2 plain bagels. want anything on the bagels?\"}, {\"role\": \"customer\", \"text\": \"no just plain thx. also a lg latte. gonna pik it up in 20 min, name's tara, paying by card\"}, {\"role\": \"business\", \"text\": \"perfect tara! so that's a large americano, large cappuccino, large latte, 4 breakfast sandwiches, and 2 plain bagels, pickup in 20 min. see you then!\"}, {\"role\": \"customer\", \"text\": \"yep thats it thx!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1465,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 229,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2148.0716180521995,
+  "cost_micros": 207,
+  "at": "2026-10-25T21:46:04.894613+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1465,
+   "completion_tokens": 229,
+   "total_tokens": 1694,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 441
+  }
+ }
+}

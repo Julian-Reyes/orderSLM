@@ -1,0 +1,41 @@
+{
+ "key": "syn-t2-0010",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"HI!! I NEED A HOT CHOCOLATE FOR MY KID RIGHT NOW!!\"}, {\"role\": \"business\", \"text\": \"Hi there! Sure, one Hot Chocolate. What size would you like: small, medium or large?\"}, {\"role\": \"customer\", \"text\": \"CAN YOU ADD MATCHA POWDER TO IT!!! MY KIDS LOVE MATCHA!!! my name is LUIS and i will come pick it up!!\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 2045,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 182,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2613.6233389843255,
+  "cost_micros": 296,
+  "at": "2026-10-25T21:10:09.484043+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 2045,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 182,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

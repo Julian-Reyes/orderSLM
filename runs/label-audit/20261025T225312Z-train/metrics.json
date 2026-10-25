@@ -1,0 +1,196 @@
+{
+  "jev": {
+    "intent_messages": 2420,
+    "intent_agree_primary": 2152,
+    "intent_agree_rate": 0.8893,
+    "intent_agree_ci95": [
+      0.8761307355367806,
+      0.9011477796929276
+    ],
+    "intent_agree_primary_or_secondary": 2189,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 57
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 46
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 41
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "CONFIRM_ORDER",
+        "count": 18
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 17
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 13
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 11
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "PLACE_ORDER",
+        "count": 11
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "OUT_OF_SCOPE",
+        "count": 10
+      },
+      {
+        "expected": "MENU_QUESTION",
+        "provider": "MODIFY_ORDER",
+        "count": 6
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "MENU_QUESTION",
+        "count": 6
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "MENU_QUESTION",
+        "count": 5
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 4
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "DELIVERY_QUESTION",
+        "count": 4
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 3
+      }
+    ],
+    "orders_expected_ok": 568,
+    "order_flagged": 54,
+    "order_flag_rate": 0.0951,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 1343207,
+    "cost_micros": 56598,
+    "latency_p50_ms": 269,
+    "latency_p95_ms": 696
+  },
+  "openai-decisions": {
+    "intent_messages": 2420,
+    "intent_agree_primary": 2145,
+    "intent_agree_rate": 0.8864,
+    "intent_agree_ci95": [
+      0.8731016434976725,
+      0.8984009167356365
+    ],
+    "intent_agree_primary_or_secondary": 2198,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 46
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 41
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 38
+      },
+      {
+        "expected": "CONFIRM_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 15
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "SMALL_TALK",
+        "count": 15
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "SMALL_TALK",
+        "count": 14
+      },
+      {
+        "expected": "MODIFY_ORDER",
+        "provider": "PLACE_ORDER",
+        "count": 13
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 12
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MENU_QUESTION",
+        "count": 11
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "CONFIRM_ORDER",
+        "count": 11
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "PLACE_ORDER",
+        "count": 9
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "PLACE_ORDER",
+        "count": 8
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 6
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "OUT_OF_SCOPE",
+        "count": 5
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "MENU_QUESTION",
+        "count": 4
+      }
+    ],
+    "orders_expected_ok": 568,
+    "order_flagged": 21,
+    "order_flag_rate": 0.037,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 1152824,
+    "cost_micros": 115368,
+    "latency_p50_ms": 295,
+    "latency_p95_ms": 649
+  }
+}

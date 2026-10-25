@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0107",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"HEY! QUICK QUESTION BEFORE I ORDER\"}, {\"role\": \"business\", \"text\": \"Hey! Go ahead, ask away\"}, {\"role\": \"customer\", \"text\": \"DO THE BREADSTICKS COME WITH ANY DIP OR SAUCE??\"}, {\"role\": \"business\", \"text\": \"They come on their own, no dip included. You can add sauces from the menu though\"}, {\"role\": \"customer\", \"text\": \"OK COOL. SO I WANT 3 SMALL MARGHERITA PIZZAS, BUT NO BASIL ON ANY OF THEM! NONE!!\"}, {\"role\": \"business\", \"text\": \"Got it, 3 small Margheritas with no basil. Anything else?\"}, {\"role\": \"customer\", \"text\": \"YES! ONE ORDER OF BREADSTICKS AND A 20 OZ BOTTLE OF DR PEPPER! PICKING IT UP MYSELF\"}, {\"role\": \"business\", \"text\": \"So that's 3 small Margherita pizzas with no basil, 1 order of breadsticks, and a 20 oz bottle of Dr Pepper, for pickup. Sound right?\"}, {\"role\": \"customer\", \"text\": \"YEP THATS IT!\"}, {\"role\": \"customer\", \"text\": \"ACTUALLY MAKE THE DR PEPPER A CAN, NOT THE BOTTLE!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2292,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 310,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2746.8135230010375,
+  "cost_micros": 229,
+  "at": "2026-10-25T21:34:26.463240+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2292,
+   "completion_tokens": 310,
+   "total_tokens": 2602,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 244
+  }
+ }
+}

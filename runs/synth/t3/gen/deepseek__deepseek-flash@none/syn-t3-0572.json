@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0572",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys open rn? need food for the shop\"},{\"role\":\"business\",\"text\":\"yep we're open til 10! what can i get u\"},{\"role\":\"customer\",\"text\":\"4 cheeseburgers pls, 3 of em no pickles. also a veggie burger no mayo n a lemonade thx\"},{\"role\":\"business\",\"text\":\"got it: 4 cheeseburgers (3 no pickles), 1 veggie burger no mayo, 1 lemonade. that all?\"},{\"role\":\"customer\",\"text\":\"yep thats it thanks\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1261,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 135,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2089.5467590307817,
+  "cost_micros": 120,
+  "at": "2026-10-25T21:50:00.699195+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1261,
+   "completion_tokens": 135,
+   "total_tokens": 1396,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 237
+  }
+ }
+}

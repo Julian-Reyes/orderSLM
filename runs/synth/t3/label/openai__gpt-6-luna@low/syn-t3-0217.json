@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0217",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 XL HAWAIIANS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"green_peppers\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD GREEN PEPPERS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 XL HAWAIIANS\"},{\"message_index\":2,\"quote\":\"ONE OF EM ADD GREEN PEPPERS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_stuffed\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"STUFFED CRUST\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 XL SUPREME W STUFFED CRUST\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"A 2 LITER DR PEPPER\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Brookside Ave\",\"number\":\"631\",\"unit\":null,\"reference\":null,\"raw_text\":\"631 BROOKSIDE AVE\",\"evidence\":[{\"message_index\":4,\"quote\":\"631 BROOKSIDE AVE\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12808,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 835,
+   "reasoning_tokens": 152
+  },
+  "latency_ms": 8373.316709999926,
+  "cost_micros": 994,
+  "at": "2026-10-25T22:13:57.396947+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12808,
+   "completion_tokens": 835,
+   "total_tokens": 13643,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4970,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 152,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

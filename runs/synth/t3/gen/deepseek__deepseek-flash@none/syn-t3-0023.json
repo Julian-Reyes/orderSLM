@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0023",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey\"},{\"role\":\"customer\",\"text\":\"rough morning lol\"},{\"role\":\"customer\",\"text\":\"can i get two small hawaiian pizzas pls\"},{\"role\":\"business\",\"text\":\"Hey! Sure thing — two small Hawaiian pizzas. Anything else?\"},{\"role\":\"customer\",\"text\":\"nah thats it\"},{\"role\":\"customer\",\"text\":\"pickup btw\"},{\"role\":\"customer\",\"text\":\"payin by card\"},{\"role\":\"business\",\"text\":\"Got it — 2 small Hawaiian pizzas, pickup, paying by card. Can I get a name for the order?\"},{\"role\":\"customer\",\"text\":\"keisha\"},{\"role\":\"business\",\"text\":\"Thanks Keisha! So that's 2 small Hawaiian pizzas for pickup, paying by card. Sound right?\"},{\"role\":\"customer\",\"text\":\"yep\"},{\"role\":\"customer\",\"text\":\"oh wait — make em gluten-free crust pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2277,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 203,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2265.2770819840953,
+  "cost_micros": 163,
+  "at": "2026-10-25T21:31:32.911284+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2277,
+   "completion_tokens": 203,
+   "total_tokens": 2480,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 229
+  }
+ }
+}

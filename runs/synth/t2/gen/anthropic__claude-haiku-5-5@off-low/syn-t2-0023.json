@@ -1,0 +1,41 @@
+{
+ "key": "syn-t2-0023",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey lemme get 3 milkshakes pls 🙏 one hand is busy w baby lol\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 1674,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 56,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 956.8762020207942,
+  "cost_micros": 196,
+  "at": "2026-10-25T21:10:15.857537+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 1674,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 56,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

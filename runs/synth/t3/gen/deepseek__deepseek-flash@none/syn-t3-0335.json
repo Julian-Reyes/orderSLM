@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0335",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get the usual\"},{\"role\":\"business\",\"text\":\"hey! which one's the usual? we got a few pizzas on the go\"},{\"role\":\"customer\",\"text\":\"cheese one small 10 inch pls. and breadsticks\"},{\"role\":\"business\",\"text\":\"got it - small cheese pizza and breadsticks. anything else?\"},{\"role\":\"customer\",\"text\":\"yea 4 margherita xl with grilled chicken n thick crust, 2 hawaiian medium with stuffed crust, 2 coke 2 liter, 2 iced tea cans\"},{\"role\":\"business\",\"text\":\"so that's 1 small cheese, breadsticks, 4 XL margherita w grilled chicken + thick crust, 2 medium hawaiian w stuffed crust, 2 coke 2L and 2 iced tea cans. how do u want it?\"},{\"role\":\"customer\",\"text\":\"delivery to 3 cedar hill way pls asap. payin by card thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2361,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 220,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2141.9993070303462,
+  "cost_micros": 186,
+  "at": "2026-10-25T21:42:05.346339+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2361,
+   "completion_tokens": 220,
+   "total_tokens": 2581,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 313
+  }
+ }
+}

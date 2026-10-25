@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0229",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, I'm putting in a pickup order for Sam. Can I get a 2-liter Dr Pepper and a small Hawaiian pizza with feta added?\"},{\"role\":\"business\",\"text\":\"Got it, Sam! 2-liter Dr Pepper and a small Hawaiian with feta. What else?\"},{\"role\":\"customer\",\"text\":\"Add an order of garlic knots and an iced tea. Then an extra large veggie pizza and a medium supreme with no black olives.\"},{\"role\":\"business\",\"text\":\"Sounds good. Let me read that back: 2-liter Dr Pepper, small Hawaiian with feta, garlic knots, iced tea, extra large veggie, and a medium supreme with no black olives. Pickup for Sam, right?\"},{\"role\":\"customer\",\"text\":\"Yes, that's everything.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2297,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 175,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1503.5464449902065,
+  "cost_micros": 149,
+  "at": "2026-10-25T21:38:32.524588+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2297,
+   "completion_tokens": 175,
+   "total_tokens": 2472,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 249
+  }
+ }
+}

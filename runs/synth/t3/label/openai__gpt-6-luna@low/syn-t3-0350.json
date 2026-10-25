@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0350",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"the meat lovers. 2 of em, small\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a coke 2 liter\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":7,\"quote\":\"an iced tea\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"2 dr peppers 2 liters\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":10,\"quote\":\"gonna pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"payin card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"yep thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12937,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 795,
+   "reasoning_tokens": 172
+  },
+  "latency_ms": 6998.099393968005,
+  "cost_micros": 987,
+  "at": "2026-10-25T22:26:43.601122+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12937,
+   "completion_tokens": 795,
+   "total_tokens": 13732,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5099,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 172,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

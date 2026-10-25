@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0240",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey good morning\"},{\"role\":\"business\",\"text\":\"morning! what can I get you?\"},{\"role\":\"customer\",\"text\":\"rough sunday lol. lemme get four large cappuccinos, two of em with caramel syrup pls\"},{\"role\":\"business\",\"text\":\"got it, 4 large cappuccinos, 2 with caramel. anything else?\"},{\"role\":\"customer\",\"text\":\"also do u do the americanos with almond milk or is that extra\"},{\"role\":\"business\",\"text\":\"yep, we can add almond milk to the americanos no problem\"},{\"role\":\"customer\",\"text\":\"ok cool, then two large americanos with almond milk\"},{\"role\":\"business\",\"text\":\"2 large americanos with almond milk, got it\"},{\"role\":\"customer\",\"text\":\"and two everything bagels thx\"},{\"role\":\"business\",\"text\":\"so that's 4 large cappuccinos (2 with caramel), 2 large americanos with almond milk, and 2 everything bagels. sound right?\"},{\"role\":\"customer\",\"text\":\"yep thats it thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1501,
+   "cached_input_tokens": 1280,
+   "cache_write_tokens": 0,
+   "output_tokens": 240,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2412.614353990648,
+  "cost_micros": 181,
+  "at": "2026-10-25T21:38:52.434688+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1501,
+   "completion_tokens": 240,
+   "total_tokens": 1741,
+   "prompt_tokens_details": {
+    "cached_tokens": 1280
+   },
+   "prompt_cache_hit_tokens": 1280,
+   "prompt_cache_miss_tokens": 221
+  }
+ }
+}

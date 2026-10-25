@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0156",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey morning crumb, can u do two medium americanos with skim milk pls? also add a breakfast sandwich on a bagel. gonna pick it up, paying by card. name's jordan\"}, {\"role\": \"business\", \"text\": \"got it jordan! so that's 2 medium americanos with skim milk, 1 breakfast sandwich on a bagel, pickup, pay by card. sound right?\"}, {\"role\": \"customer\", \"text\": \"yep thats rite thx\"}, {\"role\": \"customer\", \"text\": \"actually scratch the breakfast sandwich, just the two americanos pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1435,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 145,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2111.0433629946783,
+  "cost_micros": 152,
+  "at": "2026-10-25T21:36:06.279980+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1435,
+   "completion_tokens": 145,
+   "total_tokens": 1580,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 411
+  }
+ }
+}

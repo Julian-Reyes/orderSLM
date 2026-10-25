@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0398",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys open rn\"},{\"role\":\"customer\",\"text\":\"borger wit teh\"},{\"role\":\"business\",\"text\":\"hey! yeah we're open til 10. did you mean you wanted to order a burger? your message cut off a bit\"},{\"role\":\"customer\",\"text\":\"lol my bad pocket was typin i guess\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1154,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 83,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1916.2008159910329,
+  "cost_micros": 92,
+  "at": "2026-10-25T21:44:11.305373+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1154,
+   "completion_tokens": 83,
+   "total_tokens": 1237,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 258
+  }
+ }
+}

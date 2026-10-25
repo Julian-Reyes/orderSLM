@@ -1,0 +1,42 @@
+{
+ "key": "syn-t1-0005",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"SMALL_TALK\"},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a veggie burger\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an order of fries\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"vanilla\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a vanilla milkshake\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9673,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 771,
+   "reasoning_tokens": 282
+  },
+  "latency_ms": 7116.6459179949015,
+  "cost_micros": 648,
+  "at": "2026-10-25T21:07:11.961501+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9673,
+   "completion_tokens": 771,
+   "total_tokens": 10444,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1835,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 282,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

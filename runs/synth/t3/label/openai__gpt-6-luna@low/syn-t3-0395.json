@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0395",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"PAYMENT_QUESTION\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a muffin\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"when i come grab it\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Priya\",\"evidence\":[{\"message_index\":4,\"quote\":\"priya\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10396,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 536,
+   "reasoning_tokens": 203
+  },
+  "latency_ms": 6498.974783986341,
+  "cost_micros": 603,
+  "at": "2026-10-25T22:31:50.948044+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10396,
+   "completion_tokens": 536,
+   "total_tokens": 10932,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2558,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 203,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

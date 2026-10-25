@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0256",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey 😅 rough morning over here, need pizza stat\"},{\"role\":\"business\",\"text\":\"Haha been there! What can we get started for you? 🍕\"},{\"role\":\"customer\",\"text\":\"ok so 6 medium margheritas, 2 of them regular and 4 with no basil. plus an extra large pepperoni with no tomato sauce, and a medium BBQ chicken 🙏\"},{\"role\":\"business\",\"text\":\"Got it! Just to confirm: 2 Medium Margherita, 4 Medium Margherita no basil, 1 Extra Large Pepperoni no tomato sauce, and 1 Medium BBQ Chicken. That all?\"},{\"role\":\"customer\",\"text\":\"yep that's it! picking it up and paying by card 💳\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2269,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 168,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1919.5629979949445,
+  "cost_micros": 141,
+  "at": "2026-10-25T21:39:27.933705+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2269,
+   "completion_tokens": 168,
+   "total_tokens": 2437,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 221
+  }
+ }
+}

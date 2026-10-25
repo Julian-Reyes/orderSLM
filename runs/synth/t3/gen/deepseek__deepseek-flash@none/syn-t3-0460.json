@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0460",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey random q but is it true that alaska is both the westernmost and easternmost state in the us\"}, {\"role\": \"business\", \"text\": \"haha yes! the aleutian islands cross the 180° line so technically it's both\"}, {\"role\": \"customer\", \"text\": \"lol ty that settles a bet, appreciate it\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2171,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 91,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2138.840319006704,
+  "cost_micros": 99,
+  "at": "2026-10-25T21:46:18.415945+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2171,
+   "completion_tokens": 91,
+   "total_tokens": 2262,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 251
+  }
+ }
+}

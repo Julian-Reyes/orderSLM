@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0014",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey!\"},{\"role\":\"customer\",\"text\":\"ordering for me n my roommate rn\"},{\"role\":\"customer\",\"text\":\"gonna get a bacon burger\"},{\"role\":\"customer\",\"text\":\"no pickles pls\"},{\"role\":\"customer\",\"text\":\"and a veggie burger, no onions\"},{\"role\":\"customer\",\"text\":\"also does the veggie burger come w cheese? 🤔\"},{\"role\":\"business\",\"text\":\"Hey! The veggie burger comes with lettuce, tomato, onions, pickles and mayo — cheese is an add-on if you want it.\"},{\"role\":\"customer\",\"text\":\"cool thx. lemme add three cheeseburgers too\"},{\"role\":\"customer\",\"text\":\"paying by card btw\"},{\"role\":\"business\",\"text\":\"Got it: 1 bacon burger no pickles, 1 veggie burger no onions, 3 cheeseburgers, paying by card. Anything else?\"},{\"role\":\"customer\",\"text\":\"actually scratch the three cheeseburgers, just the two burgers thx\"}],\"satisfies\":\"The customer greets first, asks a menu question, orders the bacon burger (no pickles), veggie burger (no onions) and three cheeseburgers, mentions card payment, then in the last message removes the cheeseburgers; never states pickup/delivery or a size.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1248,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 291,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2641.9253980275244,
+  "cost_micros": 231,
+  "at": "2026-10-25T21:31:12.538551+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1248,
+   "completion_tokens": 291,
+   "total_tokens": 1539,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 352
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0329",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey there\"}, {\"role\": \"customer\", \"text\": \"need a pickup order for a meeting\"}, {\"role\": \"customer\", \"text\": \"2 medium meat lovers, no bacon\"}, {\"role\": \"customer\", \"text\": \"2 cokes and 2 diet cokes\"}, {\"role\": \"customer\", \"text\": \"name's Maya, paying cash\"}, {\"role\": \"business\", \"text\": \"Got it! So that's 2 Medium 12-inch Meat Lovers Pizzas with no bacon, plus 2 Cokes and 2 Diet Cokes. Pickup under Maya, paying cash. Correct?\"}, {\"role\": \"customer\", \"text\": \"yep that's it\"}, {\"role\": \"customer\", \"text\": \"oh and add banana peppers to both meat lovers\"}], \"quantity\": 1}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2296,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 188,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1977.2454620106146,
+  "cost_micros": 157,
+  "at": "2026-10-25T21:41:55.517753+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2296,
+   "completion_tokens": 188,
+   "total_tokens": 2484,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 248
+  }
+ }
+}

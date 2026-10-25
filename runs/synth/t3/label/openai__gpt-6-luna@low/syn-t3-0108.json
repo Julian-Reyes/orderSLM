@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0108",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":12,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 drip coffees\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"hazelnut\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"almond_milk\",\"amount\":\"normal\",\"raw_text\":\"almond milk instead of whole milk\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one hot chocolate medium w hazelnut and almond milk instead of whole milk\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"2 americanos medium\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"bagel\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheddar\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no cheddar\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"1 breakfast sandwich on a bagel no cheddar\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"butter\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w butter\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":10,\"quote\":\"a croissant w butter\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":10,\"quote\":\"we'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"payin cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"dev\",\"evidence\":[{\"message_index\":10,\"quote\":\"name's dev\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":12,\"quote\":\"yep thats everything\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10753,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1063,
+   "reasoning_tokens": 185
+  },
+  "latency_ms": 11336.083816015162,
+  "cost_micros": 902,
+  "at": "2026-10-25T22:01:31.897136+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10753,
+   "completion_tokens": 1063,
+   "total_tokens": 11816,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2915,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 185,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

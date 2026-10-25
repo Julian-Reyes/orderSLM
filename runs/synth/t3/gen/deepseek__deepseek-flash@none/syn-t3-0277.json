@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0277",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, can I get the usual to start? I completely forgot to eat today.\"},{\"role\":\"business\",\"text\":\"Happy to help! Which drink is the usual for you?\"},{\"role\":\"customer\",\"text\":\"The latte. Actually let me just do the whole order: 2 large lattes with whipped cream, a small americano with vanilla syrup, 2 drip coffees with caramel syrup, 2 hot chocolates with vanilla syrup, and a croissant. I'll pick it up.\"},{\"role\":\"business\",\"text\":\"Got it. I have 2 large lattes with whipped cream, 1 small americano with vanilla syrup, 2 drip coffees with caramel, 2 hot chocolates with vanilla, and 1 croissant for pickup. Name for the order?\"},{\"role\":\"customer\",\"text\":\"Jordan. I'll pay cash, and could I get change for a 20?\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1498,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 196,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1814.3379079992883,
+  "cost_micros": 192,
+  "at": "2026-10-25T21:40:09.309145+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1498,
+   "completion_tokens": 196,
+   "total_tokens": 1694,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 474
+  }
+ }
+}

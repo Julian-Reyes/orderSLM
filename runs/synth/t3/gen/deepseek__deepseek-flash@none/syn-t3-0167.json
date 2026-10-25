@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0167",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey its sam im a delivery driver n im starvin lol can i get a muffin asap pls thx\"},{\"role\":\"business\",\"text\":\"hey sam! got it — 1 muffin, ready asap. name's sam, see u soon ☕\"},{\"role\":\"customer\",\"text\":\"thx u rock\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1371,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 79,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2137.8320909570903,
+  "cost_micros": 84,
+  "at": "2026-10-25T21:36:30.342194+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1371,
+   "completion_tokens": 79,
+   "total_tokens": 1450,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 219
+  }
+ }
+}

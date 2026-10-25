@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0476",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can i get a medium hawaiian pizza pls\"}, {\"role\": \"business\", \"text\": \"got it! 1 medium hawaiian pizza. anything else?\"}, {\"role\": \"customer\", \"text\": \"thats it for now, delivery to 1 brookside ave pls, payin cash and can u have change for a 20\"}, {\"role\": \"business\", \"text\": \"sure thing — 1 medium hawaiian pizza, delivery to 1 brookside ave, cash with change for a 20. sound right?\"}, {\"role\": \"customer\", \"text\": \"actually make it 4 medium hawaiians pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2241,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 161,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1983.679807977751,
+  "cost_micros": 132,
+  "at": "2026-10-25T21:46:52.349964+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2241,
+   "completion_tokens": 161,
+   "total_tokens": 2402,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 193
+  }
+ }
+}

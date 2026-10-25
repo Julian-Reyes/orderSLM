@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0468",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"yo\"}, {\"role\": \"customer\", \"text\": \"need a big order for the shop\"}, {\"role\": \"business\", \"text\": \"Hey! Happy to help — what can I get you?\"}, {\"role\": \"customer\", \"text\": \"2 croissants\"}, {\"role\": \"customer\", \"text\": \"4 hot chocolates, oat milk instead of whole\"}, {\"role\": \"customer\", \"text\": \"and 2 banana nut muffins\"}, {\"role\": \"business\", \"text\": \"Got it: 2 croissants, 4 hot chocolates with oat milk, and 2 banana nut muffins. Anything else?\"}, {\"role\": \"customer\", \"text\": \"can u do coconut milk on the croissants?\"}, {\"role\": \"business\", \"text\": \"Sorry, we don't have coconut milk on the menu. Anything else you'd like to add?\"}, {\"role\": \"customer\", \"text\": \"all good then\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1417,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 218,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1940.3335779788904,
+  "cost_micros": 193,
+  "at": "2026-10-25T21:46:36.377166+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1417,
+   "completion_tokens": 218,
+   "total_tokens": 1635,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 393
+  }
+ }
+}

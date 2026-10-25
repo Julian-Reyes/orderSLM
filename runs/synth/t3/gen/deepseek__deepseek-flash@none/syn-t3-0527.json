@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0527",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I would like to place an order for pickup.\"},{\"role\":\"business\",\"text\":\"Sounds good! What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"I would like 4 Bacon Burgers, but please make one of them without tomato.\"},{\"role\":\"business\",\"text\":\"Got it, 4 Bacon Burgers with one no tomato. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, could I also get 2 Vanilla Milkshakes and 3 Lemonades?\"},{\"role\":\"business\",\"text\":\"So that is 4 Bacon Burgers with one no tomato, 2 Vanilla Milkshakes, and 3 Lemonades. How soon would you like it?\"},{\"role\":\"customer\",\"text\":\"In about 20 minutes please. And I will pay by card when I pick it up.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1212,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 185,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1880.1138129783794,
+  "cost_micros": 143,
+  "at": "2026-10-25T21:48:30.242751+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1212,
+   "completion_tokens": 185,
+   "total_tokens": 1397,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 188
+  }
+ }
+}

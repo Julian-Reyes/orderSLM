@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0008",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need a personal cheese pizza\"},{\"role\":\"customer\",\"text\":\"no house cheese blend tho\"},{\"role\":\"customer\",\"text\":\"stuffed crust instead\"},{\"role\":\"business\",\"text\":\"Got it! One Personal 8-inch Cheese Pizza, no house cheese blend, stuffed crust. Anything else?\"},{\"role\":\"customer\",\"text\":\"yeah 3 dr peppers too\"},{\"role\":\"business\",\"text\":\"So that's 1 Personal Cheese Pizza (no house cheese blend, stuffed crust) and 3 Dr Peppers. Sound right?\"},{\"role\":\"customer\",\"text\":\"yep\"},{\"role\":\"customer\",\"text\":\"pickup btw\"},{\"role\":\"customer\",\"text\":\"name's Ivy, paying card\"},{\"role\":\"customer\",\"text\":\"actually scratch the pizza, just the 3 dr peppers\"}],\"type\":\"object\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2277,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 188,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1859.775218006689,
+  "cost_micros": 173,
+  "at": "2026-10-25T21:26:20.185364+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 188,
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 357,
+   "prompt_tokens": 2277,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "total_tokens": 2465
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0403",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hi there! Hope you're doing well tonight.\"},{\"role\":\"business\",\"text\":\"Hey! Thanks, doing great. What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"I'm picking up for a friend who's under the weather, so I'll keep it simple. Can I get one extra large pepperoni pizza please?\"},{\"role\":\"business\",\"text\":\"You got it, one extra large pepperoni. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, and a Diet Coke to go with it.\"},{\"role\":\"business\",\"text\":\"Got it. One extra large pepperoni pizza and a Diet Coke. When would you like to pick it up?\"},{\"role\":\"customer\",\"text\":\"I'll come grab it at 9. Thanks so much!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2224,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 170,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1780.5193189997226,
+  "cost_micros": 135,
+  "at": "2026-10-25T21:44:20.639763+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2224,
+   "completion_tokens": 170,
+   "total_tokens": 2394,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 176
+  }
+ }
+}

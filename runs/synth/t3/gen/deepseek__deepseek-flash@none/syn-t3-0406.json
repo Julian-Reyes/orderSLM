@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0406",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good evening. Can I get 2 orders of the breadsticks, 4 pieces each, and 2 Dr Peppers in the 12 oz cans? Delivery to 20 Juniper Terrace, and I'd like it as soon as possible.\"},{\"role\":\"business\",\"text\":\"Evening! Just to read that back: 2 orders of breadsticks (4 pieces each) and 2 Dr Pepper cans (12 oz), delivery to 20 Juniper Terrace, asap. Sound right?\"},{\"role\":\"customer\",\"text\":\"Yes, that's correct.\"},{\"role\":\"customer\",\"text\":\"Actually, make the Dr Peppers 2-liter bottles instead of the cans.\"},{\"role\":\"business\",\"text\":\"Got it — 2 orders of breadsticks and 2 Dr Pepper 2-liter bottles, delivery to 20 Juniper Terrace, asap. Thanks!\"},{\"role\":\"customer\",\"text\":\"Perfect, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2264,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 200,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1662.7615810139105,
+  "cost_micros": 159,
+  "at": "2026-10-25T21:44:25.594028+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2264,
+   "completion_tokens": 200,
+   "total_tokens": 2464,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 216
+  }
+ }
+}

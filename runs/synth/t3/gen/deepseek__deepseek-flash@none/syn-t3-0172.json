@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0172",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, I just finished my exam and I'm starving. Can I get 1 order of onion rings, 3 regular fries, and 2 bacon burgers? I'll pick it up.\"},{\"role\":\"business\",\"text\":\"Nice, congrats on finishing! Just to check — 1 onion rings, 3 regular fries, and 2 bacon burgers, pickup. Anything else?\"},{\"role\":\"customer\",\"text\":\"Oh and can you add coleslaw on the bacon burgers? Also I'll pay by card when I come get it.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1152,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 123,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1691.0321679897606,
+  "cost_micros": 115,
+  "at": "2026-10-25T21:36:40.125189+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1152,
+   "completion_tokens": 123,
+   "total_tokens": 1275,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 256
+  }
+ }
+}

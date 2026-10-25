@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0445",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey first time here whats good\"},{\"role\":\"business\",\"text\":\"welcome in! everything bagels and the muffins are pretty popular. what can i get u?\"},{\"role\":\"customer\",\"text\":\"5 everything bagels pls, 1 plain and 4 with butter\"},{\"role\":\"customer\",\"text\":\"also a large cappuccino and a chocolate chip muffin\"},{\"role\":\"business\",\"text\":\"got it: 5 everything bagels (1 plain, 4 with butter), 1 large cappuccino, 1 choc chip muffin. pickup right? whats the name?\"},{\"role\":\"customer\",\"text\":\"yep pickup, name's grace thx!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1446,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 152,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1910.183103987947,
+  "cost_micros": 139,
+  "at": "2026-10-25T21:45:49.220874+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1446,
+   "completion_tokens": 152,
+   "total_tokens": 1598,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 294
+  }
+ }
+}

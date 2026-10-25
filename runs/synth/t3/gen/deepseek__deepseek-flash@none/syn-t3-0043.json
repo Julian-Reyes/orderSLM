@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0043",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Morning! Hope your day's going well.\"}, {\"role\": \"business\", \"text\": \"Good morning! Thanks, you too. What can I get started for you?\"}, {\"role\": \"customer\", \"text\": \"I need three large hot chocolates, and one of them should have caramel syrup added.\"}, {\"role\": \"business\", \"text\": \"Got it — three large hot chocolates, one with caramel. Anything else?\"}, {\"role\": \"customer\", \"text\": \"Quick question, do the americanos come with milk already, or is that something you add on?\"}, {\"role\": \"business\", \"text\": \"They come just as espresso and water, so milk is an add-on you can choose.\"}, {\"role\": \"customer\", \"text\": \"Perfect. Then I'll take two small americanos with oat milk.\"}, {\"role\": \"business\", \"text\": \"Sounds good. So that's three large hot chocolates — one with caramel — and two small americanos with oat milk. Can I get a name for the order?\"}, {\"role\": \"customer\", \"text\": \"Rosa. I'll be picking it up.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1450,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 259,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2692.3015950014815,
+  "cost_micros": 223,
+  "at": "2026-10-25T21:32:15.033058+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1450,
+   "completion_tokens": 259,
+   "total_tokens": 1709,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 426
+  }
+ }
+}

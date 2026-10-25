@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0541",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, I just finished my exam and I'm starving. Can I get 4 cheeseburgers, 3 of them with no lettuce, plus 2 bacon burgers and a Coke?\"},{\"role\":\"business\",\"text\":\"Congrats on finishing! Just to confirm: 4 cheeseburgers (3 no lettuce), 2 bacon burgers, and 1 Coke. Is that for pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"Pickup please, in about 20 min. And I'll pay cash.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1230,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 118,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1423.296218039468,
+  "cost_micros": 105,
+  "at": "2026-10-25T21:48:56.746542+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1230,
+   "completion_tokens": 118,
+   "total_tokens": 1348,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 206
+  }
+ }
+}

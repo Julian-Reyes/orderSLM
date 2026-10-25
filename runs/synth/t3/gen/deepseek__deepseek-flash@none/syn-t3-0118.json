@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0118",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey yall\"},{\"role\":\"business\",\"text\":\"hey hey! what can we get started for ya?\"},{\"role\":\"customer\",\"text\":\"gonna need five cheeseburgers pls, three of em with mustard, then two veggie burgers no pickles. picking up, paying card. name's tom thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1261,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 79,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1435.5191349750385,
+  "cost_micros": 87,
+  "at": "2026-10-25T21:34:50.144784+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1261,
+   "completion_tokens": 79,
+   "total_tokens": 1340,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 237
+  }
+ }
+}

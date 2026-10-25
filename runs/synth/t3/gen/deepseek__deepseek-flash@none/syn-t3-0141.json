@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0141",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey r u guys still doin the coffee and pastry combo rn\"}, {\"role\": \"business\", \"text\": \"yep we do! drip coffee, latte or americano with a croissant or muffin\"}, {\"role\": \"customer\", \"text\": \"ok cool im gonna do a pickup order for eli - 6 medium lattes, 5 of em w hazelnut, 2 large drip coffees and a large cappuccino w hazelnut too pls\"}, {\"role\": \"business\", \"text\": \"got it eli! 6 medium lattes (5 with hazelnut), 2 large drip coffees, and 1 large cappuccino with hazelnut, for pickup. thx!\"}, {\"role\": \"customer\", \"text\": \"perfect thx so much\"}], \"type\": \"object\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1486,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 193,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2442.8539859945886,
+  "cost_micros": 189,
+  "at": "2026-10-25T21:35:37.073370+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1486,
+   "completion_tokens": 193,
+   "total_tokens": 1679,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 462
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0104",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"HEY! NEED 1 MEDIUM DRIP COFEE AND 3 PLAIN BAGELS! PICKIN UP AT 1, PAYIN CASH. NAME'S JUNE!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1371,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 52,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1403.7506579770707,
+  "cost_micros": 87,
+  "at": "2026-10-25T21:34:21.249833+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1371,
+   "completion_tokens": 52,
+   "total_tokens": 1423,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 347
+  }
+ }
+}

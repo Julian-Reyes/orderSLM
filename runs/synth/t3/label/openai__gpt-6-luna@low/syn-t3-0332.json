@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0332",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"grilled_chicken\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add grilled chicken\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"large Hawaiian pizza\"},{\"message_index\":4,\"quote\":\"no tomato sauce\"},{\"message_index\":4,\"quote\":\"add grilled chicken\"},{\"message_index\":8,\"quote\":\"just the grilled chicken\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"bottle_20oz\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a bottle of iced tea\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"That's fine\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12920,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1037,
+   "reasoning_tokens": 495
+  },
+  "latency_ms": 8494.756383006461,
+  "cost_micros": 1106,
+  "at": "2026-10-25T22:25:01.167794+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12920,
+   "completion_tokens": 1037,
+   "total_tokens": 13957,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5082,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 495,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

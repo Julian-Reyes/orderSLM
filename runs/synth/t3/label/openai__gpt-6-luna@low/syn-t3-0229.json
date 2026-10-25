@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0229",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2-liter Dr Pepper\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"feta_cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"feta added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"small Hawaiian pizza\"},{\"message_index\":0,\"quote\":\"feta added\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an order of garlic knots\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an iced tea\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"an extra large veggie pizza\"}]},{\"line_id\":\"L6\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"olives\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no black olives\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a medium supreme\"},{\"message_index\":2,\"quote\":\"no black olives\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"pickup order\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Sam\",\"evidence\":[{\"message_index\":0,\"quote\":\"for Sam\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"Yes, that's everything.\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12812,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 905,
+   "reasoning_tokens": 105
+  },
+  "latency_ms": 6517.627690976951,
+  "cost_micros": 1029,
+  "at": "2026-10-25T22:15:06.604553+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12812,
+   "completion_tokens": 905,
+   "total_tokens": 13717,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4974,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 105,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

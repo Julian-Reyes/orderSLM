@@ -231,6 +231,25 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     Julian:** targeted synthetic data for these patterns (written from pattern descriptions, never dev chats; costs
     money: ask first), per-prefix intent rows (free, longer training), measure any fix on fresh data (dev is now
     "used for fixes").
+  - **Targeted batch t3 (2026-10-25, Julian: no per-prefix rows; targeted chats for what the students missed; all
+    written by DeepSeek flash; labeler/auditors/students unchanged).** `make synth ARGS="plan --targeted ..."`,
+    cards `synth-targets@0.1` (`cards.py`: `TARGET_WEIGHTS`, `MODIFY_KIND_WEIGHTS` rebalanced toward the dev misses:
+    size changes and option swaps; adding an item counts as `MODIFY_ORDER` only after a confirmation); untargeted
+    planning draws unchanged (m1 re-plans identically, tested in `tests/test_targeted_cards.py`). Pilots t1/t2
+    (3 writers) and t3's 10-card pilot are records only. Generate repair: DeepSeek's echoed schema `"type":
+    "object"` key is removed and logged. **t3: 600 cards → 578 written ($0.0876; 21 invalid, 1 duplicate; 8 schema
+    key repairs) → 568 labeled ($0.4261, 10 dropped by contract/checks).** Kept per target: modify_last 153,
+    big_order 92, split_lines 90, size_unstated 60, unclear 59, trivia 39, bare_time 38, offmenu_addon 37.
+    modify_last: 144 of 153 end on a teacher `MODIFY_ORDER` (old training set: 54 rows in all). Card disagreements
+    71 (12.5%): unclear 32 of 59 (DeepSeek wrote understandable orders instead of garbled text: off target, labels
+    fine), modify_last 24, split_lines 8, big_order 6. **Audit** (`runs/label-audit/20261025T225312Z-train`,
+    $0.1720): intents = teacher 88.9% Jev / 88.6% Decisions (M4: 88%); orders flagged Jev 9.5%, Decisions 3.7%
+    (M4: 6.6% / 1.7%); both: 16 orders. Hand check of the 16: 5 real teacher errors (invented coffee, dropped
+    quantities, removed lattes kept, "plain" read as no toppings, one ambiguous chat); a scan of all offmenu_addon
+    chats found 6 more where the teacher keeps an add-on the business declined and the customer accepted (22 others
+    correctly drop it). **11 t3 chats excluded** (`runs/synth/excluded.json`) → 557 usable. Note: only ~14
+    offmenu_addon chats end with the add-on still open (`not_on_menu`), since the writer usually has the business
+    decline it. Next (Julian's OK): training data v0.2 (old + t3), retrain on Kaggle, measure on fresh data.
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
@@ -284,7 +303,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; next: Julian's call on targeted data / per-prefix rows; order checker |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 568 labeled, audited, 11 excluded → 557 usable ($0.73 incl. pilots)**; next: training data v0.2 + retrain (Julian's OK); order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

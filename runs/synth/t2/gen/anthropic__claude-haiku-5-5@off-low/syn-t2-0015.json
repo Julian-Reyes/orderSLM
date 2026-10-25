@@ -1,0 +1,41 @@
+{
+ "key": "syn-t2-0015",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can we get 3 veggie burgers and 1 of them no lettuce thx\"}, {\"role\": \"business\", \"text\": \"Sure! So that's 3 Veggie Burgers, one with no lettuce. Anything else?\"}, {\"role\": \"customer\", \"text\": \"yea lemme think rn. also a sprite and a cheeseburger w jalapeños pls\"}, {\"role\": \"business\", \"text\": \"Got it. Anything to drink besides the sprite?\"}, {\"role\": \"customer\", \"text\": \"oh and add a coke too. thats all i think, we'll pick it up\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 1833,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 210,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1598.0572749977,
+  "cost_micros": 289,
+  "at": "2026-10-25T21:10:12.108990+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 1833,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 210,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0239",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello, I would like to get the usual, but could I start with one of those veggie options you have?\"}, {\"role\": \"business\", \"text\": \"Hi there! Just to confirm, do you mean the Veggie Burger?\"}, {\"role\": \"customer\", \"text\": \"Yes, the Veggie Burger. I will also take an order of onion rings, an order of fries, and a Cheeseburger. I would like to pay by card and pick it up at 6:30.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1220,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 123,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1561.343086999841,
+  "cost_micros": 107,
+  "at": "2026-10-25T21:38:50.862998+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1220,
+   "completion_tokens": 123,
+   "total_tokens": 1343,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 196
+  }
+ }
+}

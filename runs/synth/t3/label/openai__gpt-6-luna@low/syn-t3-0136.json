@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0136",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 VEGGIE BURGERS\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO ONIONS\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 VEGGIE BURGERS\"},{\"message_index\":2,\"quote\":\"1 OF THEM NO ONIONS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 BACON BURGER\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"FRIES\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"4 LEMONADES\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"DELIVER\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"ALDER TERRACE\",\"number\":\"26\",\"unit\":\"28\",\"reference\":null,\"raw_text\":\"26 ALDER TERRACE UNIT 28\",\"evidence\":[{\"message_index\":6,\"quote\":\"26 ALDER TERRACE UNIT 28\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9724,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1037,
+   "reasoning_tokens": 341
+  },
+  "latency_ms": 9077.122916991357,
+  "cost_micros": 786,
+  "at": "2026-10-25T22:05:29.739386+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9724,
+   "completion_tokens": 1037,
+   "total_tokens": 10761,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1886,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 341,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

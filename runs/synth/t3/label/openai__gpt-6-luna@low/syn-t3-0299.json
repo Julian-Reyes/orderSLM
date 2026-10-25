@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0299",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"CONFIRM_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"pepperoni_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"personal\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"crust_gluten_free\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"gluten-free crust\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 0,\n            \"quote\": \"personal 8-inch pepperoni pizza\"\n          },\n          {\n            \"message_index\": 0,\n            \"quote\": \"gluten-free crust\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 2,\n          \"quote\": \"Delivery please\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"clock_time\",\n        \"raw_text\": \"9:30\",\n        \"normalized_local\": \"21:30\",\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"at 9:30\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"Delancey Terrace\",\n      \"number\": \"71\",\n      \"unit\": \"1\",\n      \"reference\": null,\n      \"raw_text\": \"71 Delancey Terrace, # 1\",\n      \"evidence\": [\n        {\n          \"message_index\": 2,\n          \"quote\": \"71 Delancey Terrace, # 1\"\n        }\n      ]\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 2,\n          \"quote\": \"I'll pay by card\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"confirmed\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"No, that's everything.\"\n        }\n      ]\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12812,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 836,
+   "reasoning_tokens": 129
+  },
+  "latency_ms": 5877.7539919829,
+  "cost_micros": 995,
+  "at": "2026-10-25T22:21:59.237217+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12812,
+   "completion_tokens": 836,
+   "total_tokens": 13648,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4974,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 129,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

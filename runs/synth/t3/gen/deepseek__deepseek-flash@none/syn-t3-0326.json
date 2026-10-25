@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0326",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, good evening.\"},{\"role\":\"customer\",\"text\":\"I'd like to order two medium Supreme pizzas, no black olives, with red onions added. And a 2-liter Dr Pepper. I'll pay with cash.\"},{\"role\":\"business\",\"text\":\"Got it: 2 medium Supreme pizzas, no black olives, add red onions, plus a 2-liter Dr Pepper. Anything else?\"},{\"role\":\"customer\",\"text\":\"That's everything. We'll be picking it up. Quick question, does the Supreme already come with mushrooms?\"},{\"role\":\"business\",\"text\":\"Yes, the Supreme comes with mushrooms along with pepperoni, sausage, green peppers, onions and black olives.\"},{\"role\":\"customer\",\"text\":\"Perfect, thanks for confirming. I'd like to switch the payment to card instead of cash.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2230,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 178,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1793.6650039628148,
+  "cost_micros": 141,
+  "at": "2026-10-25T21:41:50.366035+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2230,
+   "completion_tokens": 178,
+   "total_tokens": 2408,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 182
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0506",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo first time here\"},{\"role\":\"customer\",\"text\":\"what kinda muffins u got?\"},{\"role\":\"business\",\"text\":\"Welcome! We've got blueberry, chocolate chip, and banana nut.\"},{\"role\":\"customer\",\"text\":\"bet. lemme get 3 muffins pls\"},{\"role\":\"customer\",\"text\":\"need em asap\"},{\"role\":\"business\",\"text\":\"Sure thing — 3 muffins, as soon as possible. Anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it\"},{\"role\":\"business\",\"text\":\"Got it! 3 muffins, ready asap. See ya soon!\"},{\"role\":\"customer\",\"text\":\"paying cash btw thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1373,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 153,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2084.791127999779,
+  "cost_micros": 148,
+  "at": "2026-10-25T21:47:51.072307+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1373,
+   "completion_tokens": 153,
+   "total_tokens": 1526,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 349
+  }
+ }
+}

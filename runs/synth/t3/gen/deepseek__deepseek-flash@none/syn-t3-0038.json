@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0038",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"yo\"}, {\"role\": \"customer\", \"text\": \"u guys open rn?\"}, {\"role\": \"business\", \"text\": \"Yep, we're open till 10! What can I get you?\"}, {\"role\": \"customer\", \"text\": \"bet\"}, {\"role\": \"customer\", \"text\": \"two single cheeseburgers w bacon\"}, {\"role\": \"customer\", \"text\": \"three onion rings and a veggie burger\"}, {\"role\": \"customer\", \"text\": \"pickup, name's Omar, paying card\"}, {\"role\": \"business\", \"text\": \"Got it Omar: 2 single cheeseburgers with bacon, 3 onion rings, and 1 veggie burger. Picking up, paying by card. Sound right?\"}, {\"role\": \"customer\", \"text\": \"yup\"}, {\"role\": \"customer\", \"text\": \"actually make the cheeseburgers a double\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1258,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 213,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2037.727328017354,
+  "cost_micros": 166,
+  "at": "2026-10-25T21:32:04.636968+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1258,
+   "completion_tokens": 213,
+   "total_tokens": 1471,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 234
+  }
+ }
+}

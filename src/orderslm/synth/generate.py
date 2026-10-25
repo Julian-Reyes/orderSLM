@@ -2,7 +2,8 @@
 
 The generator sees the menu without prices and the card without ids (names only), and returns the messages.
 Code adds the indices and timestamps (seeded from the card, starting at the card's start time), trims business
-messages after the last customer message (logged in `repairs`), and drops chats that break a rule the label
+messages after the last customer message and removes a top-level `"type": "object"` the model echoes from the
+schema (both logged in `repairs`), and drops chats that break a rule the label
 can't repair: invalid JSON, no customer message, a business message that states a price.
 """
 
@@ -98,12 +99,17 @@ def to_conversation(
     card: SynthCard, text: str, *, prompt_version: str = GENERATOR_PROMPT_VERSION
 ) -> tuple[SyntheticConversation | None, str | None]:
     """(conversation, None) or (None, drop reason). Never raises."""
+    repairs = []
     try:
-        chat = GeneratedChat.model_validate(json.loads(_strip_fences(text)))
+        raw = json.loads(_strip_fences(text))
+        # DeepSeek flash sometimes appends the schema's own `"type": "object"` (t3 pilot: 2 of 10, 2026-10-25)
+        if isinstance(raw, dict) and raw.get("type") == "object" and set(raw) == {"messages", "type"}:
+            del raw["type"]
+            repairs.append("removed_schema_type_key")
+        chat = GeneratedChat.model_validate(raw)
     except (ValueError, ValidationError) as e:
         return None, f"invalid_output: {str(e)[:200]}"
     msgs = list(chat.messages)
-    repairs = []
     while msgs and msgs[-1].role is not Role.customer:  # the label is "after the last customer message"
         msgs.pop()
         repairs.append("trimmed_trailing_business_message")

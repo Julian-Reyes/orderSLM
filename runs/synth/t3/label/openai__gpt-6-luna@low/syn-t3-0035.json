@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0035",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two cokes\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"water\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a bottled water\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a large cheese pizza\"},{\"message_index\":4,\"quote\":\"thick crust\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a medium veggie one\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"anchovies\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"anchovies\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a personal supreme\"},{\"message_index\":6,\"quote\":\"add anchovies\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"delivery to 65 cedar hill blvd\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"asap\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Cedar Hill Blvd\",\"number\":\"65\",\"unit\":null,\"reference\":null,\"raw_text\":\"65 cedar hill blvd\",\"evidence\":[{\"message_index\":8,\"quote\":\"65 cedar hill blvd\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"cash\"},{\"message_index\":10,\"quote\":\"change for a 50\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 13005,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1028,
+   "reasoning_tokens": 228
+  },
+  "latency_ms": 8775.196988950484,
+  "cost_micros": 1110,
+  "at": "2026-10-25T21:54:17.824914+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 13005,
+   "completion_tokens": 1028,
+   "total_tokens": 14033,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5167,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 228,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0101",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey quick order for pickup\"},{\"role\":\"customer\",\"text\":\"1 americano\"},{\"role\":\"customer\",\"text\":\"1 drip coffee w vanilla syrup\"},{\"role\":\"customer\",\"text\":\"and 2 hot chocolates\"},{\"role\":\"business\",\"text\":\"Got it! What name should I put this under?\"},{\"role\":\"customer\",\"text\":\"priya, in 20 min pls\"},{\"role\":\"business\",\"text\":\"Thanks Priya! Just to confirm: 1 Americano, 1 Drip Coffee with vanilla syrup, and 2 Hot Chocolates. Anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it, paying by card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1424,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 148,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1648.1222599977627,
+  "cost_micros": 152,
+  "at": "2026-10-25T21:34:15.938258+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1424,
+   "completion_tokens": 148,
+   "total_tokens": 1572,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 400
+  }
+ }
+}

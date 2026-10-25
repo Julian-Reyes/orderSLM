@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0021",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey! 👋\"}, {\"role\": \"customer\", \"text\": \"ordering for my friend who's stuck at home sick 🤒 could I get 2 veggie burgers with american cheese on both? deliver to 204 glenwood ct, paying by card 🙏\"}, {\"role\": \"business\", \"text\": \"Hey! Got it — 2 Veggie Burgers with American cheese, delivery to 204 Glenwood Ct, card payment. Anything else for you?\"}, {\"role\": \"customer\", \"text\": \"oh wait also ketchup on the veggie burgers please! 😊\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1183,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 140,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1748.252559977118,
+  "cost_micros": 130,
+  "at": "2026-10-25T21:31:28.179776+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1183,
+   "completion_tokens": 140,
+   "total_tokens": 1323,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 287
+  }
+ }
+}

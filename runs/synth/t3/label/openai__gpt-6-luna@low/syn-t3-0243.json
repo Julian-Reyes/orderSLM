@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0243",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"oat_milk\",\"amount\":\"normal\",\"raw_text\":\"oat milk instead of whole\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a latte\"},{\"message_index\":1,\"quote\":\"oat milk instead of whole\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two drip coffees\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":5,\"quote\":\"picking up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"paying by card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":5,\"quote\":\"Maya\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10455,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 705,
+   "reasoning_tokens": 181
+  },
+  "latency_ms": 6273.978375014849,
+  "cost_micros": 693,
+  "at": "2026-10-25T22:16:32.883521+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10455,
+   "completion_tokens": 705,
+   "total_tokens": 11160,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2617,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 181,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

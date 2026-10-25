@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0251",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"ham\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"get ham on em\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three large bbq chicken pizzas total\"},{\"message_index\":2,\"quote\":\"two of em get ham on em\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three large bbq chicken pizzas total\"},{\"message_index\":2,\"quote\":\"only two of em get ham on em\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"two sprite cans\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"i want it delivered\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"alder ave\",\"number\":\"93\",\"unit\":null,\"reference\":\"right across from the park\",\"raw_text\":\"93 alder ave right across from the park\",\"evidence\":[{\"message_index\":6,\"quote\":\"93 alder ave right across from the park\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"yep thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12892,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 781,
+   "reasoning_tokens": 169
+  },
+  "latency_ms": 6424.530467018485,
+  "cost_micros": 975,
+  "at": "2026-10-25T22:17:15.200354+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12892,
+   "completion_tokens": 781,
+   "total_tokens": 13673,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5054,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 169,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

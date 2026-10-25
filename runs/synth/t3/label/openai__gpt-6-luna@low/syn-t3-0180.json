@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0180",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"pineapple\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"throw pineapple on it\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"the veggie one pls, extra large, and throw pineapple on it\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 orders of garlic knots\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"tomatoes\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"tomatoes\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_thin\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thin crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a personal supreme w tomatoes + thin crust\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"2 sprite 2-liters\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"pay by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"yep thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12875,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 939,
+   "reasoning_tokens": 241
+  },
+  "latency_ms": 7877.567026996985,
+  "cost_micros": 1052,
+  "at": "2026-10-25T22:10:11.841154+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12875,
+   "completion_tokens": 939,
+   "total_tokens": 13814,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5037,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 241,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

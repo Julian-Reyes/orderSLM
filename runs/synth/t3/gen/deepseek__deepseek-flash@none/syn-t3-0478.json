@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0478",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello! I'd like to place an order for delivery, please.\"},{\"role\":\"business\",\"text\":\"Hi there! Happy to help. What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"We'd like 2 Pepperoni Pizzas with banana peppers added, and 3 Medium Supreme Pizzas.\"},{\"role\":\"business\",\"text\":\"Got it: 2 Pepperoni Pizzas with banana peppers, and 3 Medium Supreme Pizzas. Can I get the delivery address?\"},{\"role\":\"customer\",\"text\":\"53 Glenwood Ave. And we'll pay by card.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2204,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 135,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1715.1780860149302,
+  "cost_micros": 111,
+  "at": "2026-10-25T21:46:56.545532+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2204,
+   "completion_tokens": 135,
+   "total_tokens": 2339,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 156
+  }
+ }
+}

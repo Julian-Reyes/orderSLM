@@ -8,14 +8,18 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$5.8007** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642) |
-| Remaining (of $10 ceiling) | $4.1993 |
+| Spent to date | **$6.5278** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642; M6 targeted pilots $0.0415; M6 targeted batch t3 write + label + audit $0.6857) |
+| Remaining (of $10 ceiling) | $3.4722 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
 
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | M6 | Jev + OpenAI Decisions | Label audit on t3 teacher labels, `label-audit@0.3` (568 chats × 2) | Jev 1,343,207 in; Decisions 1,152,824 in | 0.172000 | input × price (Jev unverified) | `runs/label-audit/20261025T225312Z-train` |
+| 2026-10-25 | M6 | openai/gpt-6-luna@low | Label targeted batch t3 (578 chats), `teacher-label@0.7` | see calls log | 0.426073 | recorded usage × verified price | `runs/synth/t3/calls/20261025T215143Z-label.json` |
+| 2026-10-25 | M6 | deepseek/deepseek-flash@none | Write targeted batch t3 (600 cards, `synth-targets@0.1`) | see calls log | 0.087583 | recorded usage × verified price | `runs/synth/t3/calls/20261025T213106Z-generate.json` |
+| 2026-10-25 | M6 | DeepSeek / Gemini / Haiku writers + gpt-6-luna@low labels | Targeted-card pilots t1 (15), t2 (15), t3 (10): write + label | see calls logs | 0.041459 | recorded usage × verified price | `runs/synth/t1/calls/`, `runs/synth/t2/calls/`, `runs/synth/t3/calls/20261025T2126*` |
 | 2026-10-07 | M0 | none | No API calls, downloads or training in M0 | 0 / 0 | 0.00 | — | — |
 | 2026-10-15 | M3 | 4 teacher candidates, 1 call each | Smoke test (`smoke@0.1`): keys, endpoints, JSON output | 456 / 71 | 0.000107 | recorded usage × verified price | `runs/smoke/20261015T173802Z` |
 | 2026-10-15 | M3 | anthropic/claude-haiku-5-5 | Smoke re-run after fixing Haiku's lowest setting (thinking disabled, effort low) | 272 / 21 | 0.000038 | recorded usage × verified price | `runs/smoke/20261015T174904Z` |

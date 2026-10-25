@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0026",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get a cheeseburger no american cheese and add bacon pls\"},{\"role\":\"customer\",\"text\":\"and a coke too\"},{\"role\":\"business\",\"text\":\"got it - one cheeseburger no american cheese add bacon, and a coke. pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"pickup pls, paying by card\"},{\"role\":\"business\",\"text\":\"sounds good. can i grab a name for the order?\"},{\"role\":\"customer\",\"text\":\"tom\"},{\"role\":\"business\",\"text\":\"thx tom! so thats one cheeseburger no american cheese add bacon and one coke, for pickup\"},{\"role\":\"customer\",\"text\":\"yep thats it. oh and lemme add mustard too on the burger thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1242,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 168,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1623.030201997608,
+  "cost_micros": 156,
+  "at": "2026-10-25T21:31:39.713647+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1242,
+   "completion_tokens": 168,
+   "total_tokens": 1410,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 346
+  }
+ }
+}

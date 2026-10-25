@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0271",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"business\",\"text\":\"hey there! what can i get u?\"},{\"role\":\"customer\",\"text\":\"lemme get 2 lg americanos, 3 breakfast sandwiches on english muffins, picking up, card, name dev, asap pls thx\"},{\"role\":\"business\",\"text\":\"got it dev — 2 large americanos and 3 breakfast sandwiches on english muffins, pickup, pay by card, asap. sound right?\"},{\"role\":\"customer\",\"text\":\"actually scratch the sandwiches, just the 2 lg americanos thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1413,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 128,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1773.9796179812402,
+  "cost_micros": 139,
+  "at": "2026-10-25T21:39:57.130919+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1413,
+   "completion_tokens": 128,
+   "total_tokens": 1541,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 389
+  }
+ }
+}

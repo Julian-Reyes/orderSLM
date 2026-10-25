@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0557",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can i get a muffin and 2 small drip coffees with caramel syrup plus 2 small cappuccinos pls. name's ben, gonna pick up and pay by card thx\"}, {\"role\": \"business\", \"text\": \"got it ben! 1 muffin, 2 small drip coffees with caramel, 2 small cappuccinos. see u when u get here\"}, {\"role\": \"customer\", \"text\": \"perfect thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1413,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 113,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1363.194361969363,
+  "cost_micros": 130,
+  "at": "2026-10-25T21:49:28.394830+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1413,
+   "completion_tokens": 113,
+   "total_tokens": 1526,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 389
+  }
+ }
+}

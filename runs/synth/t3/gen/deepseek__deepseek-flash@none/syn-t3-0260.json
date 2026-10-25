@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0260",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"HELLO?? CAN YOU HEAR ME\"},{\"role\":\"business\",\"text\":\"Hi! Yes, we're here. What can I get for you?\"},{\"role\":\"business\",\"text\":\"Sorry, not sure I caught that — could you retype your order?\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2156,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 66,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1273.9476260030642,
+  "cost_micros": 81,
+  "at": "2026-10-16T16:17:14.999600+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 66,
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 236,
+   "prompt_tokens": 2156,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "total_tokens": 2222
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0011",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"SMALL_TALK\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 5,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 7,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"drip_coffee\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"small\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"hazelnut_syrup\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"hazelnut\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"drip coffee\"\n          },\n          {\n            \"message_index\": 4,\n            \"quote\": \"small\"\n          },\n          {\n            \"message_index\": 4,\n            \"quote\": \"hazelnut\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"bagel\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"plain\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 5,\n            \"quote\": \"2 plain bagels\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"muffin\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"banana_nut\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 5,\n            \"quote\": \"a banana nut muffin\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L4\",\n        \"menu_item_id\": \"latte\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"small\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"substitute\",\n            \"modifier_id\": \"whole_milk\",\n            \"replacement_modifier_id\": \"oat_milk\",\n            \"amount\": \"normal\",\n            \"raw_text\": \"oat milk instead of whole\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 5,\n            \"quote\": \"2 small lattes\"\n          },\n          {\n            \"message_index\": 5,\n            \"quote\": \"oat milk instead of whole\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L5\",\n        \"menu_item_id\": \"croissant\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 7,\n            \"quote\": \"one croissant\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"pick it all up\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"card\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 7,\n          \"quote\": \"paying by card\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"Grace\",\n      \"evidence\": [\n        {\n          \"message_index\": 0,\n          \"quote\": \"grace\"\n        }\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10529,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1440,
+   "reasoning_tokens": 200
+  },
+  "latency_ms": 9858.28456300078,
+  "cost_micros": 1068,
+  "at": "2026-10-25T21:51:56.662051+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10529,
+   "completion_tokens": 1440,
+   "total_tokens": 11969,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2691,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 200,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

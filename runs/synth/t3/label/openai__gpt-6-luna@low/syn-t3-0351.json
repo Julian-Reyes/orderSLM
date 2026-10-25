@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0351",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"3 veggie burgers\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"regular\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 regular fries\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"strawberry\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 strawberry milkshake\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mustard\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with mustard\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 cheeseburger with mustard (no size needed)\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 sprite\"}]},{\"line_id\":\"L6\",\"menu_item_id\":\"lemonade\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 lemonade\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"brookside pl\",\"number\":\"60\",\"unit\":null,\"reference\":null,\"raw_text\":\"60 brookside pl\",\"evidence\":[{\"message_index\":2,\"quote\":\"60 brookside pl\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"},{\"message_index\":2,\"quote\":\"make change for a 50\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9597,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 989,
+   "reasoning_tokens": 249
+  },
+  "latency_ms": 7323.953388025984,
+  "cost_micros": 750,
+  "at": "2026-10-25T22:26:50.614479+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9597,
+   "completion_tokens": 989,
+   "total_tokens": 10586,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1759,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 249,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

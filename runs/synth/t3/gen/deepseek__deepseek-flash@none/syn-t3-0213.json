@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0213",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"yo u open rn?\"}, {\"role\": \"business\", \"text\": \"Yep, we're open till 11!\"}, {\"role\": \"customer\", \"text\": \"cool\"}, {\"role\": \"customer\", \"text\": \"lemme get a meat lovers\"}, {\"role\": \"customer\", \"text\": \"medium 12 inch\"}, {\"role\": \"customer\", \"text\": \"gonna pick it up, payin card\"}, {\"role\": \"customer\", \"text\": \"name's Dev thx\"}, {\"role\": \"business\", \"text\": \"Got it Dev — 1 Meat Lovers, Medium 12-inch, pickup, paying by card. Correct?\"}, {\"role\": \"customer\", \"text\": \"yep. actually make it a small pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2253,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 179,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1914.6050230483525,
+  "cost_micros": 145,
+  "at": "2026-10-25T21:37:59.457280+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2253,
+   "completion_tokens": 179,
+   "total_tokens": 2432,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 205
+  }
+ }
+}

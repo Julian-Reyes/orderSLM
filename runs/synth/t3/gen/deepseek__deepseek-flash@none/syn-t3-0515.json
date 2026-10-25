@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0515",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey u guys open rn?\"},{\"role\":\"business\",\"text\":\"yep, open till 3! what can we get started for you?\"},{\"role\":\"customer\",\"text\":\"cool lemme get 2 medium hot chocolates pls. no whipped cream and use almond milk insted of whole milk\"},{\"role\":\"business\",\"text\":\"got it: 2 medium hot chocolates, no whipped cream, almond milk instead of whole milk. anything else?\"},{\"role\":\"customer\",\"text\":\"do u have honey? could u add some to the hot chocolates if so thx\"},{\"role\":\"business\",\"text\":\"we don't have honey on the menu, sorry! want me to leave them as is?\"},{\"role\":\"customer\",\"text\":\"no worries yeah leave em. thx! gonna pay by card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1387,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 179,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2062.585076026153,
+  "cost_micros": 165,
+  "at": "2026-10-25T21:48:06.527898+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1387,
+   "completion_tokens": 179,
+   "total_tokens": 1566,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 363
+  }
+ }
+}

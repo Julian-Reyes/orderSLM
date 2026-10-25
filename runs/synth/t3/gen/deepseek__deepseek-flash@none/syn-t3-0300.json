@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0300",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"HEY! NEED COFFEE ASAP, WORKING FROM HOME AND DYING HERE\"},{\"role\":\"business\",\"text\":\"Morning! What can I get started for you?\"},{\"role\":\"customer\",\"text\":\"OK SO ONE MEDIUM HOT CHOC, NO WHIP, AND MAKE IT WITH OAT MILK PLEASEEE\"},{\"role\":\"business\",\"text\":\"Got it — a medium hot chocolate, no whipped cream, with oat milk. Name for the order?\"},{\"role\":\"customer\",\"text\":\"ELI! AND I'LL GRAB IT MYSELF, PICKING IT UP. PAYING WITH CARD\"},{\"role\":\"business\",\"text\":\"Thanks Eli! One medium hot chocolate, no whip, oat milk — pickup, paying by card. When do you want it?\"},{\"role\":\"customer\",\"text\":\"ASAP PLS!! like ten mins if you can. and srry, change of plans — can you do the hot chocolate with OAT MILK instead of whole milk? no whip still!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1440,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 221,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2802.972189965658,
+  "cost_micros": 199,
+  "at": "2026-10-25T21:40:54.399654+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1440,
+   "completion_tokens": 221,
+   "total_tokens": 1661,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 416
+  }
+ }
+}

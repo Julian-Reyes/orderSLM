@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0130",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey whats up\"},{\"role\":\"business\",\"text\":\"hey! what can we get started for you?\"},{\"role\":\"customer\",\"text\":\"can i get a lg supreme pizza, no onions, add fresh mozzarella pls\"},{\"role\":\"business\",\"text\":\"sure thing — 1 large supreme, no onions, add fresh mozzarella\"},{\"role\":\"customer\",\"text\":\"yep thats it. deliver to 4050 glenwood pl, payin by card, need it asap\"},{\"role\":\"business\",\"text\":\"got it, large supreme no onions extra fresh mozz, delivery to 4050 Glenwood Pl, asap\"},{\"role\":\"customer\",\"text\":\"k thx. one thing tho, make it thin crust\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2297,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 167,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2025.6911719916388,
+  "cost_micros": 144,
+  "at": "2026-10-25T21:35:12.820072+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2297,
+   "completion_tokens": 167,
+   "total_tokens": 2464,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 249
+  }
+ }
+}

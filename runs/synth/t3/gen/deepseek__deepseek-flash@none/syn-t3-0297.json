@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0297",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get 2 onion rings n 3 lemonades rn pls\"},{\"role\":\"business\",\"text\":\"got it! 2 onion rings and 3 lemonades. anything else?\"},{\"role\":\"customer\",\"text\":\"ya one cheeseburger single patty w grilled mushrooms on it pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1193,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 78,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1373.2628339785151,
+  "cost_micros": 76,
+  "at": "2026-10-25T21:40:49.375518+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1193,
+   "completion_tokens": 78,
+   "total_tokens": 1271,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 169
+  }
+ }
+}

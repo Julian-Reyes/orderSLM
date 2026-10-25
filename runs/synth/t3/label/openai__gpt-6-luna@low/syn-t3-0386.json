@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0386",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"ketchup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO KETCHUP\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"mustard\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD MUSTARD\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 BACON BURGERS\"},{\"message_index\":2,\"quote\":\"NO KETCHUP\"},{\"message_index\":2,\"quote\":\"ADD MUSTARD\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"LG FRIES\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"onion_rings\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"ONION RINGS\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"DELIVERY\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"at 6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":4,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Bayview Way\",\"number\":\"4026\",\"unit\":\"Apt 3\",\"reference\":null,\"raw_text\":\"4026 BAYVIEW WAY APT 3\",\"evidence\":[{\"message_index\":4,\"quote\":\"4026 BAYVIEW WAY APT 3\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"PAYING BY CARD\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"PERFECT\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9745,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 958,
+   "reasoning_tokens": 312
+  },
+  "latency_ms": 10209.806957980618,
+  "cost_micros": 749,
+  "at": "2026-10-25T22:30:42.487301+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9745,
+   "completion_tokens": 958,
+   "total_tokens": 10703,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1907,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 312,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0273",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can u do the cheeseburge\"}, {\"role\": \"customer\", \"text\": \"no onoin n no pikle but liek extra\"}, {\"role\": \"business\", \"text\": \"Hey! Sorry, I think your message got cut off — extra what? And which burger were you after?\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1145,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 80,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1760.035935032647,
+  "cost_micros": 89,
+  "at": "2026-10-25T21:40:00.922343+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1145,
+   "completion_tokens": 80,
+   "total_tokens": 1225,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 249
+  }
+ }
+}

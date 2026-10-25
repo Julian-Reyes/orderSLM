@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0371",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapenos\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add jalapeños\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"usual Margherita\"},{\"message_index\":2,\"quote\":\"small ten-inch Margherita\"},{\"message_index\":2,\"quote\":\"no tomato sauce\"},{\"message_index\":2,\"quote\":\"add jalapeños\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"bottle_20oz\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two iced teas in the twenty-ounce bottles\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"water\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two bottled waters\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one Coke\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two twelve-ounce cans of Dr Pepper\"}]},{\"line_id\":\"L6\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"one personal eight-inch BBQ Chicken Pizza\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"Delivery to 5358 Ridgecrest Way\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Ridgecrest Way\",\"number\":\"5358\",\"unit\":null,\"reference\":null,\"raw_text\":\"5358 Ridgecrest Way\",\"evidence\":[{\"message_index\":2,\"quote\":\"5358 Ridgecrest Way\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"paying cash\"},{\"message_index\":2,\"quote\":\"make change for a fifty\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12763,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 955,
+   "reasoning_tokens": 119
+  },
+  "latency_ms": 6929.766156012192,
+  "cost_micros": 1049,
+  "at": "2026-10-25T22:29:05.884515+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12763,
+   "completion_tokens": 955,
+   "total_tokens": 13718,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4925,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 119,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

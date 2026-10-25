@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0600",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys open rn\"},{\"role\":\"business\",\"text\":\"yep, we're open till 11! what can i get u?\"},{\"role\":\"customer\",\"text\":\"sweet. lemme get a cheese pizza w bbq sauce on it, an iced tea, and 2 dr peppers pls\"},{\"role\":\"business\",\"text\":\"got it: 1 cheese pizza with bbq sauce, 1 iced tea, 2 dr peppers. that for pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"pickup pls, thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2258,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 129,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1587.5397910131142,
+  "cost_micros": 116,
+  "at": "2026-10-25T21:50:55.403074+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2258,
+   "completion_tokens": 129,
+   "total_tokens": 2387,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 210
+  }
+ }
+}

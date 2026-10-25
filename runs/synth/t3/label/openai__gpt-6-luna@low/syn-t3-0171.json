@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0171",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"cheddar\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO CHEDDAR\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"tomato\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"ADD TOMATO\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"THE SANDWICH I ALWAYS GET FIRST\"},{\"message_index\":4,\"quote\":\"YES THAT ONE\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"W WHOLE MILK\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"A MEDIUM AMERICANO\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"substitute\",\"modifier_id\":\"whole_milk\",\"replacement_modifier_id\":\"oat_milk\",\"amount\":\"normal\",\"raw_text\":\"W OAT MILK\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"A DRIP COFFEE\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"muffin\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"blueberry\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"TWO BLUEBERRY MUFFINS\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"plain\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"THREE PLAIN CROISSANTS\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"I'M PAYIN CASH\"},{\"message_index\":4,\"quote\":\"MAKE CHANGE FOR A TWENTY\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10480,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1033,
+   "reasoning_tokens": 221
+  },
+  "latency_ms": 9556.400145054795,
+  "cost_micros": 860,
+  "at": "2026-10-25T22:09:10.988607+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10480,
+   "completion_tokens": 1033,
+   "total_tokens": 11513,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2642,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 221,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

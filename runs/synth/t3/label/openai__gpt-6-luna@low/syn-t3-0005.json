@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0005",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"HAZELNUT SYRUP\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"LATTE\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"english_muffin\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"2 BREAKFAST SANDWICHES ON ENGLISH MUFFINS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"caramel_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"CARAMEL SYRUP\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"remove\",\"modifier_id\":\"whipped_cream\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO WHIPPED CREAM\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"A SMALL HOT CHOCOLATE\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"I'LL PICK IT UP\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"PAY BY CARD\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Maya\",\"evidence\":[{\"message_index\":0,\"quote\":\"MAYA\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"PERFECT\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10425,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 795,
+   "reasoning_tokens": 167
+  },
+  "latency_ms": 7226.486773986835,
+  "cost_micros": 735,
+  "at": "2026-10-25T21:26:52.158135+00:00",
+  "cached": true,
+  "raw_usage": {
+   "completion_tokens": 795,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 0,
+    "audio_tokens": 0,
+    "reasoning_tokens": 167,
+    "rejected_prediction_tokens": 0
+   },
+   "prompt_tokens": 10425,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cache_write_tokens": 2587,
+    "cached_tokens": 7835
+   },
+   "total_tokens": 11220
+  }
+ }
+}

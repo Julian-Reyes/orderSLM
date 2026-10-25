@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0421",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey its tara again, same usual pls\"},{\"role\":\"customer\",\"text\":\"xl pepperoni, medium cheese, and a small veggie - no tomato sauce on that one, thick crust\"},{\"role\":\"business\",\"text\":\"hey tara! got it: xl pepperoni, medium cheese, small veggie no tomato sauce with thick crust. that right?\"},{\"role\":\"customer\",\"text\":\"yep thats it, pickin it up and payin by card as always\"},{\"role\":\"business\",\"text\":\"perfect, we'll have it ready for pickup. card at the counter then\"},{\"role\":\"customer\",\"text\":\"thx! oh and can u add mushrooms to the pepperoni pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2327,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 158,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2292.38499305211,
+  "cost_micros": 143,
+  "at": "2026-10-25T21:44:55.569479+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2327,
+   "completion_tokens": 158,
+   "total_tokens": 2485,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 279
+  }
+ }
+}

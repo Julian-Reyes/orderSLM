@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0428",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hello there, hope u r having a good day\"},{\"role\":\"business\",\"text\":\"hi! thanks, you too :) what can we get started for you?\"},{\"role\":\"customer\",\"text\":\"i'd like that thing from before pls, 3 of them\"},{\"role\":\"business\",\"text\":\"happy to help! which item was it? we've got a few burgers on the menu\"},{\"role\":\"customer\",\"text\":\"oh sorry, the veggie burger. 3 of those pls\"},{\"role\":\"business\",\"text\":\"got it, 3 veggie burgers. anything else?\"},{\"role\":\"customer\",\"text\":\"quick q - does the veggie burger come with cheese already or is that extra\"},{\"role\":\"business\",\"text\":\"it comes with lettuce, tomato, onions, pickles and mayo - american cheese is an add-on if you want it\"},{\"role\":\"customer\",\"text\":\"thx for clearing that up. no cheese then. also a strawberry milkshake, a coke and a lemonade pls\"},{\"role\":\"business\",\"text\":\"sounds good! delivery or pickup?\"},{\"role\":\"customer\",\"text\":\"delivery pls to 36 dover terrace # 15. gonna pay by card\"},{\"role\":\"business\",\"text\":\"perfect, so that's 3 veggie burgers, 1 strawberry milkshake, 1 coke and 1 lemonade, delivered to 36 Dover Terrace #15, paying by card. all correct?\"},{\"role\":\"customer\",\"text\":\"yes thats right, thank u so much!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1225,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 333,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2931.121814996004,
+  "cost_micros": 234,
+  "at": "2026-10-25T21:45:12.120860+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1225,
+   "completion_tokens": 333,
+   "total_tokens": 1558,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 201
+  }
+ }
+}

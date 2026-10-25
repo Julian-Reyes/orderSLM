@@ -1,0 +1,42 @@
+{
+ "key": "syn-t1-0017",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mushrooms\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with mushrooms\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two extra large hawaiian pizzas\"},{\"message_index\":0,\"quote\":\"with mushrooms\"},{\"message_index\":2,\"quote\":\"make it one hawaiian pizza instead of two\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"easton dr\",\"number\":\"84\",\"unit\":\"apt 4a\",\"reference\":null,\"raw_text\":\"84 easton dr apt 4a\",\"evidence\":[{\"message_index\":0,\"quote\":\"84 easton dr apt 4a\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"pay with card\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Mark\",\"evidence\":[{\"message_index\":0,\"quote\":\"mark\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12735,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 522,
+   "reasoning_tokens": 109
+  },
+  "latency_ms": 5448.0654069921,
+  "cost_micros": 830,
+  "at": "2026-10-25T21:07:44.040361+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12735,
+   "completion_tokens": 522,
+   "total_tokens": 13257,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4897,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 109,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0090",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, my mom said I could order dinner tonight. Could I get the same as last time?\"},{\"role\":\"business\",\"text\":\"Hi! Happy to help. Which pizza was it that you got last time?\"},{\"role\":\"customer\",\"text\":\"It was the Hawaiian pizza, personal size, with thin crust. Also a bottle of water and a personal Supreme pizza.\"},{\"role\":\"business\",\"text\":\"Got it: 1 personal Hawaiian with thin crust, 1 bottled water, and 1 personal Supreme. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, 4 small Margherita pizzas and a 2-liter Sprite. I'll pay by card and we'd like it in about 20 minutes.\"},{\"role\":\"business\",\"text\":\"Thanks for confirming! That's 1 personal Hawaiian with thin crust, 1 bottled water, 1 personal Supreme, 4 small Margheritas, and a 2-liter Sprite, ready in about 20 minutes. See you then!\"},{\"role\":\"customer\",\"text\":\"Perfect, thank you!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2277,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 228,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2055.103388032876,
+  "cost_micros": 178,
+  "at": "2026-10-25T21:33:52.079632+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2277,
+   "completion_tokens": 228,
+   "total_tokens": 2505,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 229
+  }
+ }
+}

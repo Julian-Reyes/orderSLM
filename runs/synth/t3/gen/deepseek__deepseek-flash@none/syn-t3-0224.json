@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0224",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello! I'm picking up an order for a sick friend and wanted to get a few warm drinks.\"},{\"role\":\"customer\",\"text\":\"Could I get 1 small cappuccino and 3 hot chocolates please?\"},{\"role\":\"customer\",\"text\":\"Quick question, do the hot chocolates come with whipped cream already?\"},{\"role\":\"business\",\"text\":\"Hi! Happy to help. Yes, our hot chocolates come with whole milk and whipped cream.\"},{\"role\":\"customer\",\"text\":\"Perfect, thats great. It'll be pickup and I'll pay by card.\"},{\"role\":\"business\",\"text\":\"Got it, pickup and card. Just to read it back: 1 small cappuccino and 3 hot chocolates. Does that look right?\"},{\"role\":\"customer\",\"text\":\"Yes that's right. My name is Ivy for the order.\"},{\"role\":\"customer\",\"text\":\"Sorry, one more thing, can you make the cappuccino a medium instead?\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1432,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 213,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2412.855626025703,
+  "cost_micros": 193,
+  "at": "2026-10-25T21:38:21.698773+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1432,
+   "completion_tokens": 213,
+   "total_tokens": 1645,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 408
+  }
+ }
+}

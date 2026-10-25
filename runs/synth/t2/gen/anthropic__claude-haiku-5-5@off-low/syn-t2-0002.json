@@ -1,0 +1,41 @@
+{
+ "key": "syn-t2-0002",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"business\", \"text\": \"Hi, thanks for reaching out to Halfmoon Pizza! What can I get started for you today? 🍕\"}, {\"role\": \"customer\", \"text\": \"hey! 😊 can I get one order of breadsticks, 4 pieces each\"}, {\"role\": \"business\", \"text\": \"Sure! One order of breadsticks (4 pieces) coming up. Anything else?\"}, {\"role\": \"customer\", \"text\": \"yes! also add a large pepperoni pizza, 14 inch 🍕\"}, {\"role\": \"business\", \"text\": \"Got it. Pepperoni Pizza, large 14-inch. Want any add-ons or a crust?\"}, {\"role\": \"customer\", \"text\": \"add banana peppers and stuffed crust pls 🙌 that's all for now, thanks!!\"}, {\"role\": \"business\", \"text\": \"Perfect, so far we have breadsticks plus a large pepperoni with banana peppers and stuffed crust. Anything else?\"}, {\"role\": \"customer\", \"text\": \"oh wait, actually scratch the breadsticks, just do the pepperoni pizza, a couple of extras and I'm good 😅\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 3825,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 391,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2399.664284021128,
+  "cost_micros": 578,
+  "at": "2026-10-25T21:10:07.073925+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 3825,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 391,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

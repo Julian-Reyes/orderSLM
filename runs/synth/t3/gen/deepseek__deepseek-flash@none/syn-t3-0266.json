@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0266",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'd like to get one of those large lattes with skim milk to start.\"},{\"role\":\"business\",\"text\":\"Hi! Happy to help. Which drink would you like — a latte, cappuccino, americano, or something else?\"},{\"role\":\"customer\",\"text\":\"A latte, please. Actually I need three large lattes, all with skim milk instead of whole.\"},{\"role\":\"business\",\"text\":\"Three large lattes with skim milk. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes. One medium americano with whole milk, two sesame bagels with egg, one chocolate croissant with butter, and two chocolate chip muffins. I'll pick it up and pay by card. Name's Priya.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1457,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 163,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1810.2455019834451,
+  "cost_micros": 166,
+  "at": "2026-10-25T21:39:47.592091+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1457,
+   "completion_tokens": 163,
+   "total_tokens": 1620,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 433
+  }
+ }
+}

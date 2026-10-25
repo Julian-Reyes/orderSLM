@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0343",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey morning crumb, priya here - can u do a medium drip w skim milk, two medium cappuccinos w caramel syrup and oat milk instead of whole milk, plus two medium lattes pls\"},{\"role\":\"business\",\"text\":\"morning priya! quick read back: 1 medium drip coffee with skim milk, 2 medium cappuccinos with caramel syrup and oat milk instead of whole milk, and 2 medium lattes. that right?\"},{\"role\":\"customer\",\"text\":\"yep thats it, gonna pick it up and pay by card thx\"},{\"role\":\"business\",\"text\":\"got it, pickup and card at the counter. see you soon!\"},{\"role\":\"customer\",\"text\":\"actually scratch the two lattes, just the drip and the capps thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1489,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 177,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1753.205902990885,
+  "cost_micros": 161,
+  "at": "2026-10-25T21:42:22.036970+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1489,
+   "completion_tokens": 177,
+   "total_tokens": 1666,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 337
+  }
+ }
+}

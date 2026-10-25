@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0181",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello there!\"},{\"role\":\"business\",\"text\":\"Hi! What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"I would like four single cheeseburgers, three of them with jalapeños, please.\"},{\"role\":\"customer\",\"text\":\"Also one bacon burger but without the bacon, and three veggie burgers.\"},{\"role\":\"business\",\"text\":\"Got it: four single cheeseburgers (three with jalapeños), one bacon burger with no bacon, and three veggie burgers. Anything else?\"},{\"role\":\"customer\",\"text\":\"That is everything. I will pick it up by card in about twenty minutes, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1239,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 146,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1458.786331990268,
+  "cost_micros": 123,
+  "at": "2026-10-25T21:36:58.578604+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1239,
+   "completion_tokens": 146,
+   "total_tokens": 1385,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 215
+  }
+ }
+}

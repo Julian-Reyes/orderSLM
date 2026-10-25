@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0591",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey\"},{\"role\":\"customer\",\"text\":\"u guys still open?\"},{\"role\":\"business\",\"text\":\"Yep, open till 10! What can I get you?\"},{\"role\":\"customer\",\"text\":\"ok one veggie burger\"},{\"role\":\"customer\",\"text\":\"no pickles pls\"},{\"role\":\"customer\",\"text\":\"add bacon\"},{\"role\":\"business\",\"text\":\"Veggie burger, no pickles, add bacon. Got it.\"},{\"role\":\"customer\",\"text\":\"also do the shakes come in strawberry?\"},{\"role\":\"business\",\"text\":\"They do — vanilla, chocolate, strawberry.\"},{\"role\":\"customer\",\"text\":\"perfect strawberry shake then\"},{\"role\":\"customer\",\"text\":\"and onion rings\"},{\"role\":\"customer\",\"text\":\"2 large fries too\"},{\"role\":\"customer\",\"text\":\"plus a coke and a lemonade\"},{\"role\":\"business\",\"text\":\"So that's 1 veggie burger no pickles add bacon, 1 onion rings, 1 strawberry shake, 2 large fries, 1 coke, 1 lemonade. All good?\"},{\"role\":\"customer\",\"text\":\"yep thats it, card pls\"},{\"role\":\"business\",\"text\":\"You got it! We'll have that ready for you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1222,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 269,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2200.3371720202267,
+  "cost_micros": 195,
+  "at": "2026-10-25T21:50:36.763649+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1222,
+   "completion_tokens": 269,
+   "total_tokens": 1491,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 198
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0055",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! just survived my exam 😅 can I get 5 small lattes, 2 of them with whipped cream?\"},{\"role\":\"customer\",\"text\":\"and a large americano with oat milk please 🙏 name's Eli, I'll come pick it up\"},{\"role\":\"business\",\"text\":\"Got it Eli! 5 small lattes (2 with whipped cream) and a large americano with oat milk, for pickup. See you soon! ☕😊\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1415,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 109,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1750.1429240219295,
+  "cost_micros": 128,
+  "at": "2026-10-25T21:32:38.104398+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1415,
+   "completion_tokens": 109,
+   "total_tokens": 1524,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 391
+  }
+ }
+}

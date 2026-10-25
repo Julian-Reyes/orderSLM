@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0519",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"},{\"message_index\":8,\"primary\":\"SMALL_TALK\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"iced_tea\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"ONE ICED TEA\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce on it\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"EXTRA LARGE VEGGIE PIZZA\"},{\"message_index\":2,\"quote\":\"no tomato sauce on it\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"an order of breadsticks\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"two_liter\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"a two liter sprite\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"garlic_knots\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"garlic knots\"}]},{\"line_id\":\"L6\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"personal\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"a personal margherita\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"ILL PICK IT UP\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"6:30\",\"normalized_local\":\"18:30\",\"evidence\":[{\"message_index\":6,\"quote\":\"at 6:30\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"PAYING CASH\"},{\"message_index\":6,\"quote\":\"change for a fifty\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":6,\"quote\":\"THATS IT!\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12943,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1103,
+   "reasoning_tokens": 264
+  },
+  "latency_ms": 9419.665568973869,
+  "cost_micros": 1141,
+  "at": "2026-10-25T22:44:23.024537+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12943,
+   "completion_tokens": 1103,
+   "total_tokens": 14046,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5105,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 264,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0365",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey quick question r u guys open rn\"}, {\"role\": \"business\", \"text\": \"yep we're open till 3 today!\"}, {\"role\": \"customer\", \"text\": \"cool thx also random but who won the world cup in 2018 lol me n my friend r arguing\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1343,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 80,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1552.19307099469,
+  "cost_micros": 99,
+  "at": "2026-10-25T21:43:06.251650+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1343,
+   "completion_tokens": 80,
+   "total_tokens": 1423,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 319
+  }
+ }
+}

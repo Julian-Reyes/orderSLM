@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0243",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need a latte w oat milk instead of whole\"},{\"role\":\"customer\",\"text\":\"and two drip coffees\"},{\"role\":\"customer\",\"text\":\"one more thing\"},{\"role\":\"business\",\"text\":\"Hey! Got it — one latte with oat milk and two drip coffees. What else?\"},{\"role\":\"customer\",\"text\":\"picking up, name's Maya\"},{\"role\":\"customer\",\"text\":\"and I'll be there at 6:30, paying by card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1411,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 118,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1892.123029974755,
+  "cost_micros": 132,
+  "at": "2026-10-25T21:38:59.247123+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1411,
+   "completion_tokens": 118,
+   "total_tokens": 1529,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 387
+  }
+ }
+}

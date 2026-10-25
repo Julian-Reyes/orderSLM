@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0277",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"latte\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"whipped_cream\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with whipped cream\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 large lattes with whipped cream\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"americano\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a small americano with vanilla syrup\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"drip_coffee\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"caramel_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with caramel syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 drip coffees with caramel syrup\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"vanilla_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with vanilla syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 hot chocolates with vanilla syrup\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"a croissant\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":2,\"quote\":\"I'll pick it up\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":2000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"I'll pay cash\"},{\"message_index\":4,\"quote\":\"change for a 20\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Jordan\",\"evidence\":[{\"message_index\":4,\"quote\":\"Jordan\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10499,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 957,
+   "reasoning_tokens": 152
+  },
+  "latency_ms": 6857.135716010816,
+  "cost_micros": 824,
+  "at": "2026-10-25T22:19:58.312899+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10499,
+   "completion_tokens": 957,
+   "total_tokens": 11456,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2661,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 152,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0110",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"},{\"message_index\":10,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"pepperoni\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"pepperoni added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"small hawaiian\"},{\"message_index\":2,\"quote\":\"pepperoni added\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no tomato sauce\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"sausage\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add sausage\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_gluten_free\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"gluten free crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 extra large cheese pizzas\"},{\"message_index\":4,\"quote\":\"no tomato sauce\"},{\"message_index\":4,\"quote\":\"add sausage\"},{\"message_index\":4,\"quote\":\"gluten free crust\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"a coke\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"2 small bbq chicken pizzas\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"its delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Delancey Ct\",\"number\":\"297\",\"unit\":\"apt 24c\",\"reference\":null,\"raw_text\":\"297 delancey ct apt 24c\",\"evidence\":[{\"message_index\":8,\"quote\":\"297 delancey ct apt 24c\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"yes thats it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 13017,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1002,
+   "reasoning_tokens": 167
+  },
+  "latency_ms": 8712.585853994824,
+  "cost_micros": 1098,
+  "at": "2026-10-25T22:01:51.360157+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 13017,
+   "completion_tokens": 1002,
+   "total_tokens": 14019,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5179,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 167,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

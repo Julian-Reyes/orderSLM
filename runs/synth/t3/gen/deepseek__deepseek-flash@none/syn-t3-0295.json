@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0295",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, I'm working from home and short on time. Can I get a small cheese pizza with no tomato sauce?\"},{\"role\":\"business\",\"text\":\"Sure thing! A 10-inch cheese pizza with no tomato sauce. Anything else?\"},{\"role\":\"customer\",\"text\":\"Quick question — do you have eggplant as a topping? I'd love some on that pizza.\"},{\"role\":\"business\",\"text\":\"Sorry, we don't have eggplant on the menu. We've got mushrooms, spinach, tomatoes, and a bunch of other veggies though.\"},{\"role\":\"customer\",\"text\":\"No worries, I'll skip the eggplant then. Let me add three 2-liter Diet Cokes.\"},{\"role\":\"business\",\"text\":\"Got it — one small cheese pizza with no tomato sauce, and three 2-liter Diet Cokes. Anything else?\"},{\"role\":\"customer\",\"text\":\"That's everything. Delivery to 173 Riverside Dr, and I'll pay by card.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2225,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 205,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2236.3480469794013,
+  "cost_micros": 156,
+  "at": "2026-10-25T21:40:45.487156+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2225,
+   "completion_tokens": 205,
+   "total_tokens": 2430,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 177
+  }
+ }
+}

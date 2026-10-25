@@ -1,0 +1,236 @@
+{
+  "batch": "t3",
+  "built_at": "2026-10-25T22:52:32.501906+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "deepseek/deepseek-flash@none": {
+      "cards": 600,
+      "generated": 600,
+      "kept": 578,
+      "repairs": {
+        "removed_schema_type_key": 8,
+        "trimmed_trailing_business_message": 100
+      },
+      "gen_drops": {
+        "invalid_output": 21,
+        "near_duplicate_of": 1
+      },
+      "label_attempted": 578,
+      "labeled": 568,
+      "label_drops": {
+        "invalid_contract": 4,
+        "check_failed": 5,
+        "finalize": 1
+      },
+      "card_agreement": {
+        "labeled": 568,
+        "all_agree": 497,
+        "flags": {
+          "items": 35,
+          "labels": 40,
+          "item_details": 10
+        }
+      },
+      "customer_messages_mean": 4.28,
+      "generation_usage": {
+        "calls": 600,
+        "input_tokens": 986122,
+        "cached_input_tokens": 821888,
+        "output_tokens": 103444,
+        "reasoning_tokens": 0,
+        "cost_micros": 89474,
+        "cost_per_1k_usd": 0.1491,
+        "latency_p50_ms": 1989
+      },
+      "label_usage": {
+        "calls": 578,
+        "input_tokens": 6383637,
+        "cached_input_tokens": 4528630,
+        "output_tokens": 401737,
+        "reasoning_tokens": 105037,
+        "cost_micros": 431935,
+        "cost_per_1k_usd": 0.7473,
+        "latency_p50_ms": 6268
+      },
+      "style": {
+        "chats": 578,
+        "customer_messages_per_chat": 4.28,
+        "business_messages_per_chat": 2.26,
+        "words_per_customer_message": 9.9,
+        "share_lowercase_messages": 0.699,
+        "share_all_caps_messages": 0.076,
+        "share_messages_with_emoji": 0.15,
+        "share_uppercase_letters": 0.107,
+        "distinct_openers": 0.235,
+        "top_openers": {
+          "yo u": 49,
+          "hey can": 35,
+          "hey quick": 30,
+          "yo": 30,
+          "hey": 24
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.079,
+        "max_nearest_similarity": 0.263,
+        "distinct_3gram_share": 0.642
+      },
+      "addresses": {
+        "cards_with_address": 130,
+        "card_address_used": 129
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 1332,
+    "SMALL_TALK": 413,
+    "CONFIRM_ORDER": 201,
+    "MODIFY_ORDER": 172,
+    "DELIVERY_QUESTION": 113,
+    "MENU_QUESTION": 80,
+    "OUT_OF_SCOPE": 63,
+    "UNKNOWN": 42,
+    "PAYMENT_QUESTION": 4
+  },
+  "planned": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 600
+    },
+    "scenario": {
+      "multi_message_order": 144,
+      "simple_order": 90,
+      "correction_after_confirmation": 83,
+      "correction": 77,
+      "missing_info": 60,
+      "unclear_message": 60,
+      "ambiguous_reference": 46,
+      "out_of_scope": 40
+    },
+    "business": {
+      "morning-crumb": 225,
+      "halfmoon-pizza": 206,
+      "corner-patty": 169
+    },
+    "style": {
+      "texting": 180,
+      "rapid_fire": 120,
+      "emoji": 120,
+      "clean": 120,
+      "shouty": 60
+    },
+    "fulfillment": {
+      "pickup": 264,
+      "delivery": 138,
+      "not_applicable": 100,
+      "unstated": 98
+    },
+    "payment": {
+      "card": 228,
+      "cash": 137,
+      "unstated": 135,
+      "not_applicable": 100
+    },
+    "items": {
+      "3": 123,
+      "1": 110,
+      "2": 109,
+      "0": 100,
+      "4": 81,
+      "5": 56,
+      "6": 21
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 500,
+      "MODIFY_ORDER": 160,
+      "MENU_QUESTION": 96,
+      "CONFIRM_ORDER": 83,
+      "UNKNOWN": 60,
+      "OUT_OF_SCOPE": 40
+    },
+    "target": {
+      "modify_last": 160,
+      "big_order": 100,
+      "split_lines": 100,
+      "size_unstated": 60,
+      "unclear": 60,
+      "trivia": 40,
+      "offmenu_addon": 40,
+      "bare_time": 40
+    }
+  },
+  "agreement_by_scenario": {
+    "out_of_scope": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 39,
+        "agree": 39
+      }
+    },
+    "multi_message_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 133,
+        "agree": 127
+      }
+    },
+    "correction_after_confirmation": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 78,
+        "agree": 62
+      }
+    },
+    "missing_info": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 60,
+        "agree": 60
+      }
+    },
+    "correction": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 75,
+        "agree": 67
+      }
+    },
+    "ambiguous_reference": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 41,
+        "agree": 38
+      }
+    },
+    "simple_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 83,
+        "agree": 77
+      }
+    },
+    "unclear_message": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 59,
+        "agree": 27
+      }
+    }
+  },
+  "intents_by_generator": {
+    "deepseek/deepseek-flash@none": {
+      "PLACE_ORDER": 1332,
+      "SMALL_TALK": 413,
+      "CONFIRM_ORDER": 201,
+      "MODIFY_ORDER": 172,
+      "DELIVERY_QUESTION": 113,
+      "MENU_QUESTION": 80,
+      "OUT_OF_SCOPE": 63,
+      "UNKNOWN": 42,
+      "PAYMENT_QUESTION": 4
+    }
+  },
+  "audit_sample": [
+    "syn-t3-0062",
+    "syn-t3-0107",
+    "syn-t3-0187",
+    "syn-t3-0270",
+    "syn-t3-0333",
+    "syn-t3-0364",
+    "syn-t3-0439",
+    "syn-t3-0441",
+    "syn-t3-0552",
+    "syn-t3-0578"
+  ]
+}

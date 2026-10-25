@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0439",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, good morning.\"},{\"role\":\"business\",\"text\":\"Good morning! What can I get started for you?\"},{\"role\":\"customer\",\"text\":\"I'm ordering for a few players after practice. Could I get three medium lattes to start?\"},{\"role\":\"business\",\"text\":\"Three medium lattes, got it. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, three hot chocolates as well.\"},{\"role\":\"customer\",\"text\":\"And two breakfast sandwiches on bagels.\"},{\"role\":\"business\",\"text\":\"Three hot chocolates and two breakfast sandwiches on bagels. Go on.\"},{\"role\":\"customer\",\"text\":\"One large americano with hazelnut syrup.\"},{\"role\":\"customer\",\"text\":\"Lastly, three banana nut muffins. That should be everything.\"},{\"role\":\"business\",\"text\":\"So that's three medium lattes, three hot chocolates, two breakfast sandwiches on bagels, one large americano with hazelnut, and three banana nut muffins. Can I get a name for the order?\"},{\"role\":\"customer\",\"text\":\"Nico. I'll pick it up.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1440,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 236,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1971.778220962733,
+  "cost_micros": 208,
+  "at": "2026-10-25T21:45:36.575014+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1440,
+   "completion_tokens": 236,
+   "total_tokens": 1676,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 416
+  }
+ }
+}

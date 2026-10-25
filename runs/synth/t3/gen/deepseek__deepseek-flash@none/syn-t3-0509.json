@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0509",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Good evening. I'd like to place my usual order.\"}, {\"role\": \"business\", \"text\": \"Evening! Happy to help. What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"I'll take two extra large Meat Lovers pizzas.\"}, {\"role\": \"business\", \"text\": \"Two extra large Meat Lovers, got it. Anything else on those?\"}, {\"role\": \"customer\", \"text\": \"Please add grilled chicken to both of them.\"}, {\"role\": \"business\", \"text\": \"Sure thing — two extra large Meat Lovers with grilled chicken added. How would you like to pay, and when do you want it?\"}, {\"role\": \"customer\", \"text\": \"I'll pay cash. And I'd like it at 8:45.\"}, {\"role\": \"business\", \"text\": \"Perfect. So that's 2 extra large Meat Lovers pizzas with grilled chicken, cash, ready at 8:45. Sound right?\"}, {\"role\": \"customer\", \"text\": \"That's correct, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2200,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 248,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2538.6327120359056,
+  "cost_micros": 178,
+  "at": "2026-10-25T21:47:56.692684+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2200,
+   "completion_tokens": 248,
+   "total_tokens": 2448,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 152
+  }
+ }
+}

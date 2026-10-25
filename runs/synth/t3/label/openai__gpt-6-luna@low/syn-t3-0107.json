@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0107",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":9,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"small\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"basil\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO BASIL ON ANY OF THEM! NONE!!\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 SMALL MARGHERITA PIZZAS\"},{\"message_index\":4,\"quote\":\"NO BASIL ON ANY OF THEM! NONE!!\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"ONE ORDER OF BREADSTICKS\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"dr_pepper\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"A 20 OZ BOTTLE OF DR PEPPER\"},{\"message_index\":9,\"quote\":\"MAKE THE DR PEPPER A CAN, NOT THE BOTTLE\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":6,\"quote\":\"PICKING IT UP MYSELF\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12979,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 802,
+   "reasoning_tokens": 199
+  },
+  "latency_ms": 9590.180855011567,
+  "cost_micros": 994,
+  "at": "2026-10-25T22:01:22.290153+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12979,
+   "completion_tokens": 802,
+   "total_tokens": 13781,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5141,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 199,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0595",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two bacon burgers\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mayo\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with mayo\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two bacon burgers\"},{\"message_index\":2,\"quote\":\"one of them with mayo\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"bacon\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"bacon added\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"two veggie burgers w bacon added\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":3,\"quote\":\"a sprite\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":3,\"quote\":\"delivery to 186 Larkin Ave\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Larkin Ave\",\"number\":\"186\",\"unit\":null,\"reference\":null,\"raw_text\":\"186 Larkin Ave\",\"evidence\":[{\"message_index\":3,\"quote\":\"186 Larkin Ave\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":3,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":5,\"quote\":\"yep that's it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9679,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 839,
+   "reasoning_tokens": 164
+  },
+  "latency_ms": 6643.117526022252,
+  "cost_micros": 683,
+  "at": "2026-10-25T22:51:38.013731+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9679,
+   "completion_tokens": 839,
+   "total_tokens": 10518,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1841,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 164,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

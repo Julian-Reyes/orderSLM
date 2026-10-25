@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0385",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo can i get a margherita pizza and a coke rn pls\"},{\"role\":\"business\",\"text\":\"Hey! Sure thing. What size for the can of Coke? And is that for pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"can of coke and im gonna pick it up, payin by card. name's Tara, thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2231,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 86,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1571.0460710106418,
+  "cost_micros": 86,
+  "at": "2026-10-25T21:43:46.406874+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2231,
+   "completion_tokens": 86,
+   "total_tokens": 2317,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 183
+  }
+ }
+}

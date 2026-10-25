@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0482",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello there!\"},{\"role\":\"business\",\"text\":\"Hi! Good morning. What can I get started for you?\"},{\"role\":\"customer\",\"text\":\"I'm ordering for a friend who's under the weather, so I'd like two drip coffees, a medium cappuccino, and a breakfast sandwich, please.\"},{\"role\":\"customer\",\"text\":\"Also, could I add one plain bagel with avocado?\"},{\"role\":\"business\",\"text\":\"Let me read that back: two drip coffees, one medium cappuccino, one breakfast sandwich, and one plain bagel with avocado. Does that sound right?\"},{\"role\":\"customer\",\"text\":\"Yes, that's correct.\"},{\"role\":\"customer\",\"text\":\"Actually, please remove the plain bagel with avocado from the order. Everything else is fine.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1449,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 177,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1530.3156370064244,
+  "cost_micros": 174,
+  "at": "2026-10-25T21:47:05.233376+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1449,
+   "completion_tokens": 177,
+   "total_tokens": 1626,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 425
+  }
+ }
+}

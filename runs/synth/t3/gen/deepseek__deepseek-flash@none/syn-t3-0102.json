@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0102",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good afternoon. I'd like to order for delivery to 3441 Chestnut St, the one with the blue door. Can I get a vanilla milkshake and a single cheeseburger with no lettuce but add mayo, please? I'll pay with cash.\"},{\"role\":\"business\",\"text\":\"Got it — one vanilla milkshake and one single cheeseburger, no lettuce, add mayo, delivered to 3441 Chestnut St (blue door).\"},{\"role\":\"customer\",\"text\":\"Actually, I'd like to switch that to card instead of cash.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1198,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 130,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1587.3664749669842,
+  "cost_micros": 108,
+  "at": "2026-10-25T21:34:17.596570+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1198,
+   "completion_tokens": 130,
+   "total_tokens": 1328,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 174
+  }
+ }
+}

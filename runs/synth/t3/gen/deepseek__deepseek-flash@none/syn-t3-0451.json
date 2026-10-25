@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0451",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good morning. I would like to order one of those hot chocolates, please.\"},{\"role\":\"business\",\"text\":\"Good morning! Happy to help. We have Hot Chocolate in Small 8 oz, Medium 12 oz, and Large 16 oz. Which size would you like?\"},{\"role\":\"customer\",\"text\":\"The Hot Chocolate, please. I would like three of them with vanilla syrup. Also four plain croissants with butter, two small Americanos with vanilla syrup, one medium cappuccino, and a chocolate chip muffin.\"},{\"role\":\"business\",\"text\":\"Thank you! Just to confirm: 3 Hot Chocolates with vanilla syrup, 4 plain croissants with butter, 2 small Americanos with vanilla syrup, 1 medium cappuccino, and 1 chocolate chip muffin. Will that be pickup?\"},{\"role\":\"customer\",\"text\":\"Yes, pickup please. I will pay cash, and my name is Jordan. Thank you very much.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1450,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 213,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1928.9791489718482,
+  "cost_micros": 195,
+  "at": "2026-10-25T21:46:01.303579+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1450,
+   "completion_tokens": 213,
+   "total_tokens": 1663,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 426
+  }
+ }
+}

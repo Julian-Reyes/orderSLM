@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0193",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"MENU_QUESTION\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a milkshake\"},{\"message_index\":5,\"quote\":\"the milkshake\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a veggie burger with no onions\"},{\"message_index\":5,\"quote\":\"the veggie burger without onions\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"a Coke\"},{\"message_index\":5,\"quote\":\"the Coke\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":1,\"quote\":\"Delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"as soon as possible\",\"normalized_local\":null,\"evidence\":[{\"message_index\":1,\"quote\":\"as soon as possible\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Quincy Way\",\"number\":\"38\",\"unit\":null,\"reference\":null,\"raw_text\":\"38 Quincy Way\",\"evidence\":[{\"message_index\":1,\"quote\":\"38 Quincy Way\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9710,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 793,
+   "reasoning_tokens": 227
+  },
+  "latency_ms": 7608.227466000244,
+  "cost_micros": 663,
+  "at": "2026-10-25T22:11:35.697926+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9710,
+   "completion_tokens": 793,
+   "total_tokens": 10503,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1872,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 227,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

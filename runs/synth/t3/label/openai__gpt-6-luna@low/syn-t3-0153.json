@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0153",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mayo\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with mayo\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"BACON BURGER!! GET 2 OF THOSE\"},{\"message_index\":2,\"quote\":\"with MAYO\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"veggie_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"pickle\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"NO PICKLES\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 VEGGIE BURGERS\"},{\"message_index\":2,\"quote\":\"NO PICKLES\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"fries\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"regular\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"3 REGULAR FRIES\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"vanilla\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"A VANILLA SHAKE\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"sprite\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"2 SPRITES\"}]},{\"line_id\":\"L6\",\"menu_item_id\":\"coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"A COKE\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"DELIVERED\"},{\"message_index\":6,\"quote\":\"SEND IT TO 8234 MAGNOLIA PL APT 3A\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"IN LIKE 20 MIN\",\"normalized_local\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"IN LIKE 20 MIN\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"MAGNOLIA PL\",\"number\":\"8234\",\"unit\":\"APT 3A\",\"reference\":null,\"raw_text\":\"8234 MAGNOLIA PL APT 3A\",\"evidence\":[{\"message_index\":6,\"quote\":\"8234 MAGNOLIA PL APT 3A\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9747,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 863,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 6664.080986985937,
+  "cost_micros": 702,
+  "at": "2026-10-25T22:07:16.699991+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9747,
+   "completion_tokens": 863,
+   "total_tokens": 10610,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1909,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

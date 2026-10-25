@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0194",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello, I'd like to try your place for the first time.\"}, {\"role\": \"business\", \"text\": \"Welcome! What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"I would like one Bacon Burger, but please leave off the lettuce. I'll pick it up at 9.\"}, {\"role\": \"business\", \"text\": \"Got it — one Bacon Burger with no lettuce, for pickup at 9. See you then!\"}, {\"role\": \"customer\", \"text\": \"That's correct, thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1141,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 134,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1560.2451149607077,
+  "cost_micros": 120,
+  "at": "2026-10-25T21:37:22.063300+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1141,
+   "completion_tokens": 134,
+   "total_tokens": 1275,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 245
+  }
+ }
+}

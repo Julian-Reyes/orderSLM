@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0345",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I would like to place an order for pickup, please. I need four Bacon Burgers, but two of them should come with no lettuce.\"},{\"role\":\"customer\",\"text\":\"I would also like one Double patty Cheeseburger with mayo added. My name is Grace, and I will be paying by card.\"},{\"role\":\"business\",\"text\":\"Thanks Grace! Just to confirm: 4 Bacon Burgers (2 with no lettuce), and 1 Double patty Cheeseburger with mayo added. Pickup, paying by card. That all correct?\"},{\"role\":\"customer\",\"text\":\"Yes, that is correct. Thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1195,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 145,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1670.563385996502,
+  "cost_micros": 116,
+  "at": "2026-10-25T21:42:26.036565+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1195,
+   "completion_tokens": 145,
+   "total_tokens": 1340,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 171
+  }
+ }
+}

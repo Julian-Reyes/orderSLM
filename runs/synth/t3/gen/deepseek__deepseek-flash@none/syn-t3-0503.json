@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0503",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hello there!\"}, {\"role\": \"business\", \"text\": \"Hi! What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"I will start with the usual, please.\"}, {\"role\": \"business\", \"text\": \"Happy to help. Which pizza are you thinking of?\"}, {\"role\": \"customer\", \"text\": \"The Meat Lovers Pizza, large 14-inch, no ground beef, and please add feta.\"}, {\"role\": \"business\", \"text\": \"Got it. Anything else?\"}, {\"role\": \"customer\", \"text\": \"Yes, I would also like a small 10-inch Pepperoni Pizza with feta and a thin crust, plus a large 14-inch Supreme Pizza with stuffed crust, and an extra large 16-inch Cheese Pizza. Also three Iced Teas.\"}, {\"role\": \"business\", \"text\": \"Sounds good. Delivery or pickup?\"}, {\"role\": \"customer\", \"text\": \"Delivery to 1637 Juniper Ave, and I will pay by card.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2330,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 237,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2092.958784021903,
+  "cost_micros": 191,
+  "at": "2026-10-25T21:47:44.388358+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2330,
+   "completion_tokens": 237,
+   "total_tokens": 2567,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 282
+  }
+ }
+}

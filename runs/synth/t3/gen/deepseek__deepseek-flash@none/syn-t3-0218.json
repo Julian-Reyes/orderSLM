@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0218",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey morning\"},{\"role\":\"business\",\"text\":\"morning! what can we get for you?\"},{\"role\":\"customer\",\"text\":\"ok so i need coffee bad lol. lemme get a small americano\"},{\"role\":\"business\",\"text\":\"small americano got it\"},{\"role\":\"customer\",\"text\":\"and 2 plain croissants and a breakfast sandwich pls\"},{\"role\":\"business\",\"text\":\"2 plain croissants and a breakfast sandwich, sure\"},{\"role\":\"customer\",\"text\":\"also 2 banana nut muffins thx\"},{\"role\":\"business\",\"text\":\"2 banana nut muffins added\"},{\"role\":\"customer\",\"text\":\"and 2 small cappuccinos w vanilla syrup and almond milk instead of whole pls\"},{\"role\":\"business\",\"text\":\"2 small cappuccinos, vanilla, almond milk instead of whole. want to confirm the whole list: 1 small americano, 2 plain croissants, 1 breakfast sandwich, 2 banana nut muffins, 2 small cappuccinos with vanilla and almond milk. is that right?\"},{\"role\":\"customer\",\"text\":\"yep thats it. name's dev, gonna pick it up in 20 min\"},{\"role\":\"business\",\"text\":\"perfect dev, we'll have it ready in about 20\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1498,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 279,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2318.6263210373,
+  "cost_micros": 242,
+  "at": "2026-10-25T21:38:09.769960+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1498,
+   "completion_tokens": 279,
+   "total_tokens": 1777,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 474
+  }
+ }
+}

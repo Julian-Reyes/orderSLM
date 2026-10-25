@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0095",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello! This is my first time ordering from you. Can I get a large Hawaiian pizza please?\"},{\"role\":\"business\",\"text\":\"Sure thing! One large Hawaiian pizza. Anything else?\"},{\"role\":\"customer\",\"text\":\"Yes, a bottled water to go with it. I'll be picking it up and paying cash.\"},{\"role\":\"business\",\"text\":\"Got it - a large Hawaiian pizza and a bottled water, for pickup, cash. What time would you like to grab it?\"},{\"role\":\"customer\",\"text\":\"at 8:45 please, thanks!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2210,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 126,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1897.7246460272,
+  "cost_micros": 107,
+  "at": "2026-10-25T21:34:03.619408+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2210,
+   "completion_tokens": 126,
+   "total_tokens": 2336,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 162
+  }
+ }
+}

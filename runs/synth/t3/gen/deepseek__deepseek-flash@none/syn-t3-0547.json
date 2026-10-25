@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0547",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hey there, I'm grabbing food for a few of my players after practice. Can I get one extra large BBQ Chicken Pizza and two small Veggie Pizzas?\"}, {\"role\": \"business\", \"text\": \"Got it! So that's 1 Extra large 16-inch BBQ Chicken Pizza and 2 Small 10-inch Veggie Pizzas. Does that sound right?\"}, {\"role\": \"customer\", \"text\": \"Yes that's correct, thanks for reading it back.\"}, {\"role\": \"customer\", \"text\": \"Oh and can you add 2 Diet Cokes, the 12 oz cans. Sorry, forgot those.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2264,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 150,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2181.272903981153,
+  "cost_micros": 129,
+  "at": "2026-10-25T21:49:08.375658+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2264,
+   "completion_tokens": 150,
+   "total_tokens": 2414,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 216
+  }
+ }
+}

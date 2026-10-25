@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0495",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":\"MENU_QUESTION\"},{\"message_index\":8,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":10,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bacon_burger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"mustard\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"w mustard\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":null,\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"grilled mushrooms\",\"not_on_menu\":true,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"4 bacon burgers\"},{\"message_index\":4,\"quote\":\"w mustard\"},{\"message_index\":6,\"quote\":\"grilled mushrooms\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"cheeseburger\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onion\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"bacon\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"add bacon\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"a cheeseburger, no onions, add bacon\"}]}],\"fulfillment\":{\"method\":\"unknown\",\"method_evidence\":[],\"requested_time\":{\"state\":\"provided\",\"kind\":\"asap\",\"raw_text\":\"asap\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"asap\"},{\"message_index\":8,\"quote\":\"asap pls\"}]}},\"address\":{\"state\":\"not_mentioned\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"card yeah\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":10,\"quote\":\"yep that's it\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9785,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 908,
+   "reasoning_tokens": 236
+  },
+  "latency_ms": 6892.080769001041,
+  "cost_micros": 728,
+  "at": "2026-10-25T22:42:02.514879+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9785,
+   "completion_tokens": 908,
+   "total_tokens": 10693,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1947,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 236,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

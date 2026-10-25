@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0457",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hwy is the burge\"},{\"role\":\"business\",\"text\":\"hey! looks like that message got cut off — what were you asking about the burgers?\"},{\"role\":\"customer\",\"text\":\"oh god soryr pocket typed that lol i totally forgot to eat tday and was gonna ask abt the menu but my brain is fried rn\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1155,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 82,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1795.211968012154,
+  "cost_micros": 91,
+  "at": "2026-10-25T21:46:12.796825+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1155,
+   "completion_tokens": 82,
+   "total_tokens": 1237,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 259
+  }
+ }
+}

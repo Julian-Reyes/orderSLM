@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0193",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good afternoon!\"},{\"role\":\"customer\",\"text\":\"I'm in a bit of a rush, so I'd like to order a milkshake, a veggie burger with no onions, and a Coke. Delivery to 38 Quincy Way, please, as soon as possible.\"},{\"role\":\"business\",\"text\":\"Afternoon! Got it: one milkshake, one veggie burger no onions, and a Coke, delivered to 38 Quincy Way, asap. Any questions before we get that going?\"},{\"role\":\"customer\",\"text\":\"Yes, quick one: does the veggie burger come with cheese, or is that something I'd need to add?\"},{\"role\":\"business\",\"text\":\"It doesn't come with cheese by default, but you can add American cheese if you'd like.\"},{\"role\":\"customer\",\"text\":\"That's fine, I'll leave it as is. So just the milkshake, the veggie burger without onions, and the Coke, please.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1205,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 214,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1944.9931290000677,
+  "cost_micros": 159,
+  "at": "2026-10-25T21:37:20.105769+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1205,
+   "completion_tokens": 214,
+   "total_tokens": 1419,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 181
+  }
+ }
+}

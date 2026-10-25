@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0159",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey can i get 4 large bbq chicken pizzas, 2 of em with black olives pls\"}, {\"role\": \"business\", \"text\": \"sure thing! 4 large bbq chicken pizzas, 2 with black olives. anything else?\"}, {\"role\": \"customer\", \"text\": \"ya also 2 breadsticks (4 pc each), a small veggie pizza and a medium hawaiian\"}, {\"role\": \"business\", \"text\": \"got it: 4 lg bbq chicken (2 w/ black olives), 2 breadsticks, 1 sm veggie, 1 med hawaiian. that everything?\"}, {\"role\": \"customer\", \"text\": \"yep tht's it, delivery to 975 brookside terrace (across from the park) thx\"}], \"type\": \"json_object\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2333,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 194,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2095.4161900444888,
+  "cost_micros": 166,
+  "at": "2026-10-25T21:36:12.330984+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2333,
+   "completion_tokens": 194,
+   "total_tokens": 2527,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 285
+  }
+ }
+}

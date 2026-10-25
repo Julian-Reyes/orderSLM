@@ -1,0 +1,35 @@
+{
+ "key": "syn-t1-0005",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo u guys open rn\"},{\"role\":\"business\",\"text\":\"yep we're open till 10!\"},{\"role\":\"customer\",\"text\":\"cool lemme get a veggie burger and an order of fries pls\"},{\"role\":\"business\",\"text\":\"got it - one veggie burger and one fries. anything else?\"},{\"role\":\"customer\",\"text\":\"nah thats it for now im payin by card and can i get it at 6:30\"},{\"role\":\"business\",\"text\":\"sounds good, card at 6:30 it is. see ya then!\"},{\"role\":\"customer\",\"text\":\"oh wait also add a vanilla milkshake pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1280,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 153,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1958.0404320149682,
+  "cost_micros": 153,
+  "at": "2026-10-25T21:06:34.127763+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1280,
+   "completion_tokens": 153,
+   "total_tokens": 1433,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 384
+  }
+ }
+}

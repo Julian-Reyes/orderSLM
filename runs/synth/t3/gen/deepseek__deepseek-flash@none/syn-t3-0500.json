@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0500",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey quick q 😊 what's the capital of australia? my friend says sydney and i say it's not lol\"},{\"role\":\"business\",\"text\":\"Haha neither of you — it's Canberra 😄\"},{\"role\":\"customer\",\"text\":\"ha! knew it wasn't sydney, thanks 🙌\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2140,
+   "cached_input_tokens": 1920,
+   "cache_write_tokens": 0,
+   "output_tokens": 77,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1182.079718040768,
+  "cost_micros": 85,
+  "at": "2026-10-25T21:47:39.222873+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2140,
+   "completion_tokens": 77,
+   "total_tokens": 2217,
+   "prompt_tokens_details": {
+    "cached_tokens": 1920
+   },
+   "prompt_cache_hit_tokens": 1920,
+   "prompt_cache_miss_tokens": 220
+  }
+ }
+}

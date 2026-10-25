@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0025",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey hey 😄 hope you're having a good one!\"}, {\"role\": \"business\", \"text\": \"Hey! Thanks, you too 😊 What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"ok so: 1 medium cheese pizza w parmesan on top, 2 orders of garlic knots, and 1 extra large hawaiian 😋\"}, {\"role\": \"customer\", \"text\": \"oh and add 1 extra large veggie too pls 🥗\"}, {\"role\": \"business\", \"text\": \"Got it so far: 1 Medium 12-inch Cheese Pizza with Parmesan, 2 Garlic Knots, 1 Extra large 16-inch Hawaiian, and 1 Extra large 16-inch Veggie. Can I confirm the rest for you?\"}, {\"role\": \"customer\", \"text\": \"yep that's right! 🙌 delivery to 2758 lakeview ln, paying by card\"}, {\"role\": \"business\", \"text\": \"Perfect, delivery to 2758 Lakeview Ln, card payment. Anything else before I finalize?\"}, {\"role\": \"customer\", \"text\": \"actually scratch the veggie pizza pls, keep everything else the same 🙏\"}], \"type\": \"object\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2269,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 282,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2841.8693189742044,
+  "cost_micros": 209,
+  "at": "2026-10-25T21:31:36.850860+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2269,
+   "completion_tokens": 282,
+   "total_tokens": 2551,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 221
+  }
+ }
+}

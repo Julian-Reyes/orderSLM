@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0200",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Good morning!\"},{\"role\":\"customer\",\"text\":\"Hope u r having a nice day\"},{\"role\":\"customer\",\"text\":\"Could I pls get a medium hot chocolate w hazelnut syrup\"},{\"role\":\"customer\",\"text\":\"Gonna pick it up\"},{\"role\":\"customer\",\"text\":\"Paying by card thx\"},{\"role\":\"customer\",\"text\":\"Oh n its under Ivy\"},{\"role\":\"business\",\"text\":\"Morning Ivy! So that's 1 medium hot chocolate with hazelnut syrup, pickup, paying by card. Sound right?\"},{\"role\":\"customer\",\"text\":\"Yes thats perfect thx\"},{\"role\":\"customer\",\"text\":\"Actually lemme change that rn - make it a large pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1429,
+   "cached_input_tokens": 1280,
+   "cache_write_tokens": 0,
+   "output_tokens": 160,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2125.985490041785,
+  "cost_micros": 123,
+  "at": "2026-10-25T21:37:35.231601+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1429,
+   "completion_tokens": 160,
+   "total_tokens": 1589,
+   "prompt_tokens_details": {
+    "cached_tokens": 1280
+   },
+   "prompt_cache_hit_tokens": 1280,
+   "prompt_cache_miss_tokens": 149
+  }
+ }
+}

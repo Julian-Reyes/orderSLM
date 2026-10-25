@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0366",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"SMALL_TALK\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 1,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 3,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": \"MENU_QUESTION\"\n    },\n    {\n      \"message_index\": 5,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"margherita_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"large\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 1,\n            \"quote\": \"2 plain\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"margherita_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"large\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": \"grilled_chicken\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"with grilled chicken on it\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 1,\n            \"quote\": \"1 with grilled chicken on it\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L3\",\n        \"menu_item_id\": \"pepperoni_pizza\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"medium\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 3,\n            \"quote\": \"a medium pepperoni\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"delivery\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 5,\n          \"quote\": \"Delivery please\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"provided\",\n        \"kind\": \"clock_time\",\n        \"raw_text\": \"at 6:30\",\n        \"normalized_local\": \"18:30\",\n        \"evidence\": [\n          {\n            \"message_index\": 5,\n            \"quote\": \"at 6:30\"\n          }\n        ]\n      }\n    },\n    \"address\": {\n      \"state\": \"provided\",\n      \"street\": \"Fairmont Ct\",\n      \"number\": \"88\",\n      \"unit\": \"24A\",\n      \"reference\": null,\n      \"raw_text\": \"88 Fairmont Ct, # 24A\",\n      \"evidence\": [\n        {\n          \"message_index\": 5,\n          \"quote\": \"88 Fairmont Ct, # 24A\"\n        }\n      ]\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12873,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1114,
+   "reasoning_tokens": 220
+  },
+  "latency_ms": 9423.532728978898,
+  "cost_micros": 1140,
+  "at": "2026-10-25T22:28:22.052686+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12873,
+   "completion_tokens": 1114,
+   "total_tokens": 13987,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5035,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 220,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

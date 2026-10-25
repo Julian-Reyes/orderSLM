@@ -1,0 +1,388 @@
+{
+  "batch": "t1",
+  "built_at": "2026-10-25T21:08:27.086942+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "anthropic/claude-haiku-5-5@off-low": {
+      "cards": 100,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 4,
+        "flags": {
+          "items": 1
+        }
+      },
+      "customer_messages_mean": 3.6,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 12959,
+        "cached_input_tokens": 0,
+        "output_tokens": 1260,
+        "reasoning_tokens": 0,
+        "cost_micros": 1928,
+        "cost_per_1k_usd": 0.3856,
+        "latency_p50_ms": 2292
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 55321,
+        "cached_input_tokens": 39175,
+        "output_tokens": 2862,
+        "reasoning_tokens": 685,
+        "cost_micros": 3439,
+        "cost_per_1k_usd": 0.6878,
+        "latency_p50_ms": 5740
+      },
+      "style": {
+        "chats": 5,
+        "customer_messages_per_chat": 3.6,
+        "business_messages_per_chat": 1.8,
+        "words_per_customer_message": 10.1,
+        "share_lowercase_messages": 0.389,
+        "share_all_caps_messages": 0.444,
+        "share_messages_with_emoji": 0.0,
+        "share_uppercase_letters": 0.523,
+        "distinct_openers": 0.8,
+        "top_openers": {
+          "hey i": 2,
+          "hi can": 1,
+          "hi it's": 1,
+          "hey": 1
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.005,
+        "max_nearest_similarity": 0.013,
+        "distinct_3gram_share": 0.994
+      },
+      "addresses": {
+        "cards_with_address": 1,
+        "card_address_used": 1
+      }
+    },
+    "deepseek/deepseek-flash@none": {
+      "cards": 400,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 5,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 5,
+        "all_agree": 3,
+        "flags": {
+          "items": 1,
+          "labels": 1
+        }
+      },
+      "customer_messages_mean": 3.8,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 6698,
+        "cached_input_tokens": 3456,
+        "output_tokens": 755,
+        "reasoning_tokens": 0,
+        "cost_micros": 952,
+        "cost_per_1k_usd": 0.1904,
+        "latency_p50_ms": 2449
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 50691,
+        "cached_input_tokens": 31340,
+        "output_tokens": 3489,
+        "reasoning_tokens": 954,
+        "cost_micros": 3995,
+        "cost_per_1k_usd": 0.799,
+        "latency_p50_ms": 6952
+      },
+      "style": {
+        "chats": 5,
+        "customer_messages_per_chat": 3.8,
+        "business_messages_per_chat": 2.2,
+        "words_per_customer_message": 9.3,
+        "share_lowercase_messages": 0.842,
+        "share_all_caps_messages": 0.0,
+        "share_messages_with_emoji": 0.421,
+        "share_uppercase_letters": 0.009,
+        "distinct_openers": 1.0,
+        "top_openers": {
+          "hey morning": 1,
+          "heyyy quick": 1,
+          "hey quick": 1,
+          "yo u": 1,
+          "yo can": 1
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.009,
+        "max_nearest_similarity": 0.016,
+        "distinct_3gram_share": 0.987
+      },
+      "addresses": {
+        "cards_with_address": 1,
+        "card_address_used": 1
+      }
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "cards": 100,
+      "generated": 5,
+      "kept": 5,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 5,
+      "labeled": 4,
+      "label_drops": {
+        "check_failed": 1
+      },
+      "card_agreement": {
+        "labeled": 4,
+        "all_agree": 4,
+        "flags": {}
+      },
+      "customer_messages_mean": 2.8,
+      "generation_usage": {
+        "calls": 5,
+        "input_tokens": 9378,
+        "cached_input_tokens": 0,
+        "output_tokens": 764,
+        "reasoning_tokens": 0,
+        "cost_micros": 3493,
+        "cost_per_1k_usd": 0.6986,
+        "latency_p50_ms": 1747
+      },
+      "label_usage": {
+        "calls": 5,
+        "input_tokens": 58302,
+        "cached_input_tokens": 39175,
+        "output_tokens": 2940,
+        "reasoning_tokens": 660,
+        "cost_micros": 3778,
+        "cost_per_1k_usd": 0.7556,
+        "latency_p50_ms": 5768
+      },
+      "style": {
+        "chats": 5,
+        "customer_messages_per_chat": 2.8,
+        "business_messages_per_chat": 1.4,
+        "words_per_customer_message": 12.9,
+        "share_lowercase_messages": 0.714,
+        "share_all_caps_messages": 0.286,
+        "share_messages_with_emoji": 0.0,
+        "share_uppercase_letters": 0.3,
+        "distinct_openers": 0.8,
+        "top_openers": {
+          "hey its": 2,
+          "hey are": 1,
+          "hi i": 1,
+          "hey just": 1
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.015,
+        "max_nearest_similarity": 0.023,
+        "distinct_3gram_share": 0.976
+      },
+      "addresses": {
+        "cards_with_address": 2,
+        "card_address_used": 2
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 30,
+    "SMALL_TALK": 6,
+    "UNKNOWN": 4,
+    "CONFIRM_ORDER": 3,
+    "MODIFY_ORDER": 3,
+    "DELIVERY_QUESTION": 3
+  },
+  "planned": {
+    "generator": {
+      "deepseek/deepseek-flash@none": 400,
+      "anthropic/claude-haiku-5-5@off-low": 100,
+      "google/gemini-3.1-flash-lite@minimal": 100
+    },
+    "scenario": {
+      "multi_message_order": 137,
+      "simple_order": 91,
+      "correction": 82,
+      "correction_after_confirmation": 78,
+      "unclear_message": 60,
+      "missing_info": 60,
+      "ambiguous_reference": 52,
+      "out_of_scope": 40
+    },
+    "business": {
+      "halfmoon-pizza": 203,
+      "corner-patty": 202,
+      "morning-crumb": 195
+    },
+    "style": {
+      "texting": 180,
+      "rapid_fire": 120,
+      "emoji": 120,
+      "clean": 120,
+      "shouty": 60
+    },
+    "fulfillment": {
+      "pickup": 253,
+      "delivery": 135,
+      "unstated": 112,
+      "not_applicable": 100
+    },
+    "payment": {
+      "card": 237,
+      "cash": 134,
+      "unstated": 129,
+      "not_applicable": 100
+    },
+    "items": {
+      "1": 124,
+      "3": 123,
+      "2": 101,
+      "0": 100,
+      "4": 71,
+      "5": 57,
+      "6": 24
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 500,
+      "MODIFY_ORDER": 160,
+      "MENU_QUESTION": 81,
+      "CONFIRM_ORDER": 78,
+      "UNKNOWN": 60,
+      "OUT_OF_SCOPE": 40
+    },
+    "target": {
+      "modify_last": 160,
+      "big_order": 100,
+      "split_lines": 100,
+      "unclear": 60,
+      "size_unstated": 60,
+      "bare_time": 40,
+      "offmenu_addon": 40,
+      "trivia": 40
+    }
+  },
+  "agreement_by_scenario": {
+    "ambiguous_reference": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "unclear_message": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 1,
+        "agree": 0
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "correction_after_confirmation": {
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 0
+      }
+    },
+    "simple_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "correction": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 1,
+        "agree": 0
+      },
+      "google/gemini-3.1-flash-lite@minimal": {
+        "labeled": 1,
+        "agree": 1
+      },
+      "anthropic/claude-haiku-5-5@off-low": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "multi_message_order": {
+      "deepseek/deepseek-flash@none": {
+        "labeled": 1,
+        "agree": 1
+      }
+    }
+  },
+  "intents_by_generator": {
+    "deepseek/deepseek-flash@none": {
+      "PLACE_ORDER": 15,
+      "SMALL_TALK": 1,
+      "UNKNOWN": 1,
+      "CONFIRM_ORDER": 1,
+      "DELIVERY_QUESTION": 1
+    },
+    "anthropic/claude-haiku-5-5@off-low": {
+      "PLACE_ORDER": 8,
+      "SMALL_TALK": 4,
+      "MODIFY_ORDER": 2,
+      "UNKNOWN": 2,
+      "CONFIRM_ORDER": 1,
+      "DELIVERY_QUESTION": 1
+    },
+    "google/gemini-3.1-flash-lite@minimal": {
+      "PLACE_ORDER": 7,
+      "MODIFY_ORDER": 1,
+      "DELIVERY_QUESTION": 1,
+      "UNKNOWN": 1,
+      "SMALL_TALK": 1,
+      "CONFIRM_ORDER": 1
+    }
+  },
+  "audit_sample": [
+    "syn-t1-0001",
+    "syn-t1-0002",
+    "syn-t1-0003",
+    "syn-t1-0004",
+    "syn-t1-0005",
+    "syn-t1-0006",
+    "syn-t1-0009",
+    "syn-t1-0013",
+    "syn-t1-0015",
+    "syn-t1-0017",
+    "syn-t1-0018",
+    "syn-t1-0020",
+    "syn-t1-0027",
+    "syn-t1-0028"
+  ]
+}

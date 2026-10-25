@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0374",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey morning crumb\"},{\"role\":\"business\",\"text\":\"morning! what can we get started for you?\"},{\"role\":\"customer\",\"text\":\"3 medium drip coffees pls - 2 of em with caramel syrup and 1 plain\"},{\"role\":\"business\",\"text\":\"got it: 3 medium drip coffees, 2 with caramel and 1 plain. anything else?\"},{\"role\":\"customer\",\"text\":\"yea one medium cappuccino w caramel too\"},{\"role\":\"customer\",\"text\":\"and 2 small americanos\"},{\"role\":\"business\",\"text\":\"ok so that's 3 med drip (2 caramel, 1 plain), 1 med cappuccino with caramel, and 2 small americanos. name for the order?\"},{\"role\":\"customer\",\"text\":\"luis. we'll pick it up and payin by card\"},{\"role\":\"business\",\"text\":\"perfect, see you soon luis ☕\"},{\"role\":\"customer\",\"text\":\"thx!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1484,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 217,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2084.5313249737956,
+  "cost_micros": 184,
+  "at": "2026-10-25T21:43:25.587573+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1484,
+   "completion_tokens": 217,
+   "total_tokens": 1701,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 332
+  }
+ }
+}

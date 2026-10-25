@@ -1,0 +1,41 @@
+{
+ "key": "syn-t1-0015",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"HEY!! I NEED FOOD FOR MY 2 KIDS AND ME!!! THE ONE I ALWAYS GET!!\"}, {\"role\": \"business\", \"text\": \"Hi there! Which one is your usual? We have a few burgers on the menu.\"}, {\"role\": \"customer\", \"text\": \"THE BACON ONE!!! 1 BACON BURGER!!! AND THEN 2 SPRITE, 1 ORDER OF ONION RINGS, 1 COKE, AND 2 VANILLA MILKSHAKES!!!\"}, {\"role\": \"customer\", \"text\": \"DELIVER TO 3643 SPRUCE DR, # 2A PLEASE!!!\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 1776,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 255,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1753.5738489823416,
+  "cost_micros": 306,
+  "at": "2026-10-25T21:06:32.629608+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 1776,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 255,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

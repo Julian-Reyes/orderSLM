@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0174",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"DELIVERY_QUESTION\",\"secondary\":null},{\"message_index\":1,\"primary\":\"SMALL_TALK\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":3,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"CONFIRM_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"MODIFY_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"milkshake\",\"unmatched_text\":null,\"halves\":null,\"quantity\":8,\"variant_id\":\"strawberry\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three strawberry milkshakes\"},{\"message_index\":7,\"quote\":\"make it 8\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":4,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"clock_time\",\"raw_text\":\"7pm\",\"normalized_local\":\"19:00\",\"evidence\":[{\"message_index\":3,\"quote\":\"7pm\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"Sycamore Ln\",\"number\":\"72\",\"unit\":null,\"reference\":null,\"raw_text\":\"72 sycamore ln\",\"evidence\":[{\"message_index\":4,\"quote\":\"72 sycamore ln\"}]},\"payment\":{\"method\":\"card\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":4,\"quote\":\"payin by card\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 9705,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 590,
+   "reasoning_tokens": 164
+  },
+  "latency_ms": 5621.954836999066,
+  "cost_micros": 561,
+  "at": "2026-10-25T22:09:33.016552+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 9705,
+   "completion_tokens": 590,
+   "total_tokens": 10295,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 1867,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 164,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

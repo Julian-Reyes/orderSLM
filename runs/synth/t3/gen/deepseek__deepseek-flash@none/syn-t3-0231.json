@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0231",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey there, do you have any muffins that are on the lighter side? Trying to keep things healthy.\"},{\"role\":\"business\",\"text\":\"Hi! We've got blueberry, chocolate chip, and banana nut muffins today. The blueberry is probably your best bet if you're keeping it light.\"},{\"role\":\"customer\",\"text\":\"Perfect, I'll take one muffin then. It's for pickup.\"},{\"role\":\"business\",\"text\":\"Sounds good! What name should I put on that?\"},{\"role\":\"customer\",\"text\":\"Nico please. And I'll pay by card when I come in. Thanks a lot!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1351,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 137,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1822.6909119985066,
+  "cost_micros": 135,
+  "at": "2026-10-25T21:38:35.985529+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1351,
+   "completion_tokens": 137,
+   "total_tokens": 1488,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 327
+  }
+ }
+}

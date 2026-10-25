@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0126",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey there! 👋\"}, {\"role\": \"business\", \"text\": \"Hi! Welcome to Halfmoon Pizza 🍕 What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"we'd like 2 small hawaiian pizzas with thin crust please 😊\"}, {\"role\": \"customer\", \"text\": \"and a coke + a 2 liter dr pepper\"}, {\"role\": \"customer\", \"text\": \"oh and it's for pickup!\"}, {\"role\": \"business\", \"text\": \"Got it! So that's 2 Small 10-inch Hawaiian pizzas with thin crust, 1 Coke, and 1 2-liter Dr Pepper, for pickup. Sound right?\"}, {\"role\": \"customer\", \"text\": \"yep that's it! 🙌\"}, {\"role\": \"customer\", \"text\": \"actually can you add red onions to the hawaiians too? 😊\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2271,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 213,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1913.4284160099924,
+  "cost_micros": 168,
+  "at": "2026-10-25T21:35:05.420963+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2271,
+   "completion_tokens": 213,
+   "total_tokens": 2484,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 223
+  }
+ }
+}

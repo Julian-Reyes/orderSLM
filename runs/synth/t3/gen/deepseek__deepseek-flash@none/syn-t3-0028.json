@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0028",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"YO I NEED COFFEE ASAP!\"},{\"role\":\"customer\",\"text\":\"SMALL LATTE AND A BREAKFAST SANDWICH W CHEDDAR! PICKIN IT UP, PAYIN BY CARD. NAME'S LEAH\"},{\"role\":\"business\",\"text\":\"Got it! Small latte and a breakfast sandwich with cheddar, for pickup, paid by card, under Leah — asap. Did I get that right?\"},{\"role\":\"customer\",\"text\":\"YEAH THATS IT!!\"},{\"role\":\"customer\",\"text\":\"WAIT ACTUALLY CAN U DO THE BREAKFAST SANDWICH WITHOUT THE CHEDDAR?? THANKS!!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1436,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 153,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1906.6120109637268,
+  "cost_micros": 157,
+  "at": "2026-10-25T21:31:43.148615+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1436,
+   "completion_tokens": 153,
+   "total_tokens": 1589,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 412
+  }
+ }
+}

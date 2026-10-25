@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0434",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hello there!\"},{\"role\":\"customer\",\"text\":\"quick q - r the croissants baked fresh in the morning?\"},{\"role\":\"business\",\"text\":\"Hi! Yes, we bake them fresh every morning 😊\"},{\"role\":\"customer\",\"text\":\"lovely thx. lemme get 2 croissants pls\"},{\"role\":\"customer\",\"text\":\"gonna pick up, name's Omar\"},{\"role\":\"business\",\"text\":\"Got it — 2 croissants for pickup under Omar. Anything else?\"},{\"role\":\"customer\",\"text\":\"oh and I'll pay by card rn\"},{\"role\":\"business\",\"text\":\"Sounds good! See you soon, Omar.\"},{\"role\":\"customer\",\"text\":\"actually could u switch that to cash pls? thx so much!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1394,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 173,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2116.441941005178,
+  "cost_micros": 144,
+  "at": "2026-10-25T21:45:25.601210+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1394,
+   "completion_tokens": 173,
+   "total_tokens": 1567,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 242
+  }
+ }
+}

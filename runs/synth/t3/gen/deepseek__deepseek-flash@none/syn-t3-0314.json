@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0314",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey there\"},{\"role\":\"business\",\"text\":\"hey! welcome to Corner Patty. what can we get started for ya?\"},{\"role\":\"customer\",\"text\":\"ordering for my friend whos sick rn so lemme get a lg fries pls\"},{\"role\":\"business\",\"text\":\"got it, one large fries. anything else?\"},{\"role\":\"customer\",\"text\":\"yea a sprite too\"},{\"role\":\"customer\",\"text\":\"and a bacon burger\"},{\"role\":\"business\",\"text\":\"ok so that's a large fries, a sprite, and a bacon burger. how did you wanna get it?\"},{\"role\":\"customer\",\"text\":\"delivery pls to 464 willow creek way #13c\"},{\"role\":\"customer\",\"text\":\"and can u bring it at 8:45\"},{\"role\":\"business\",\"text\":\"sounds good! large fries, sprite, bacon burger, delivered to 464 Willow Creek Way #13C at 8:45. thx!\"},{\"role\":\"customer\",\"text\":\"thx so much appreciate it\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1225,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 226,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2737.4853850342333,
+  "cost_micros": 169,
+  "at": "2026-10-25T21:41:22.840367+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1225,
+   "completion_tokens": 226,
+   "total_tokens": 1451,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 201
+  }
+ }
+}

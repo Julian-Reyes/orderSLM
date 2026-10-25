@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0177",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'd like to order a Sprite please, the 12 oz can. I'm getting it delivered to 775 Elm Ln, apt 26A. I'll be paying with card.\"},{\"role\":\"business\",\"text\":\"Hi! Just to confirm: one 12 oz can of Sprite, delivered to 775 Elm Ln, apt 26A, paying by card. Is that correct?\"},{\"role\":\"customer\",\"text\":\"Actually, please change the Sprite to a 20 oz bottle instead.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2222,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 119,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1434.506734018214,
+  "cost_micros": 104,
+  "at": "2026-10-25T21:36:50.207915+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2222,
+   "completion_tokens": 119,
+   "total_tokens": 2341,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 174
+  }
+ }
+}

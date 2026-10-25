@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0073",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey never been here before quick question, what year did the berlin wall fall\"},{\"role\":\"business\",\"text\":\"hey! 1989 🙂\"},{\"role\":\"customer\",\"text\":\"thx, was settling a bet with my roommate. one more, how many players on a soccer team on the field at once\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1143,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 77,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1756.3876890344545,
+  "cost_micros": 86,
+  "at": "2026-10-25T21:33:17.945073+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1143,
+   "completion_tokens": 77,
+   "total_tokens": 1220,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 247
+  }
+ }
+}

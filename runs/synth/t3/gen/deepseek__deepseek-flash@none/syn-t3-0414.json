@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0414",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"GOOD AFTERNOON! I'D LIKE TO ORDER SOME DRINKS PLEASE! 3 SPRITES AND 1 LEMONADE!\"}, {\"role\": \"business\", \"text\": \"Good afternoon! Got it — 3 Sprites and 1 Lemonade. Anything else?\"}, {\"role\": \"customer\", \"text\": \"YES THANK YOU! 1 CHEESEBURGER AND 3 ORDERS OF ONION RINGS PLEASE!\"}, {\"role\": \"business\", \"text\": \"Perfect! So that's 3 Sprites, 1 Lemonade, 1 Cheeseburger, and 3 Onion Rings. Is that for pickup or delivery?\"}, {\"role\": \"customer\", \"text\": \"DELIVERY PLEASE! TO 51 UNION DR, # 30! AND I'LL PAY BY CARD! COULD YOU HAVE IT HERE AT 6:30? THANK YOU SO MUCH!\"}, {\"role\": \"business\", \"text\": \"All set — delivery to 51 Union Dr, # 30, paid by card, at 6:30. Thanks for your order!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1209,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 253,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2081.7837250069715,
+  "cost_micros": 183,
+  "at": "2026-10-25T21:44:41.940173+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1209,
+   "completion_tokens": 253,
+   "total_tokens": 1462,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 185
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0539",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"HEY! NEED SOME FOOD FOR THE SHOP!\"},{\"role\":\"business\",\"text\":\"Hey! What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"1 VEGGIE BURGER PLEASE! DELIVER TO 183 SYCAMORE LN, UNIT 26A! PAYING BY CARD!\"},{\"role\":\"business\",\"text\":\"Got it — 1 Veggie Burger, delivery to 183 Sycamore Ln, Unit 26A, paying by card. Anything else?\"},{\"role\":\"customer\",\"text\":\"ACTUALLY ADD BACON TO THE VEGGIE BURGER! THANKS!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1177,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 143,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1938.5644079884514,
+  "cost_micros": 112,
+  "at": "2026-10-25T21:48:53.217545+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1177,
+   "completion_tokens": 143,
+   "total_tokens": 1320,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 153
+  }
+ }
+}

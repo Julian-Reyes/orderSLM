@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0487",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey there\"},{\"role\":\"customer\",\"text\":\"got two hungry kids here lol\"},{\"role\":\"customer\",\"text\":\"can i get 3 medium hawaiians, no ham\"},{\"role\":\"customer\",\"text\":\"plus 1 sprite 20oz bottle\"},{\"role\":\"customer\",\"text\":\"oh and a large veggie, no mushrooms, thick crust\"},{\"role\":\"business\",\"text\":\"Got it — 3 medium Hawaiian no ham, 1 large Veggie no mushrooms with thick crust, and a 20oz Sprite. What time do you want to pick up?\"},{\"role\":\"customer\",\"text\":\"we'll pick it up at 6:30\"},{\"role\":\"customer\",\"text\":\"actually scratch the sprite, make it 3 of those medium hawaiians no ham instead\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2311,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 174,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1641.1615120014176,
+  "cost_micros": 150,
+  "at": "2026-10-25T21:47:14.605497+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2311,
+   "completion_tokens": 174,
+   "total_tokens": 2485,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 263
+  }
+ }
+}

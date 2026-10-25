@@ -42,7 +42,7 @@ from orderslm.schema.synthetic import LabeledConversation, SynthCard, SyntheticC
 from . import analysis as an
 from . import generate as gen
 from . import label as lab
-from .cards import CARDS_VERSION, GENERATORS, plan_cards
+from .cards import CARDS_VERSION, GENERATORS, TARGETS_VERSION, plan_cards, plan_targeted_cards
 from .dedup import THRESHOLD, near_duplicates
 
 EXPERIMENT = "synth"
@@ -117,9 +117,14 @@ def plan(args: argparse.Namespace) -> int:
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    cards = plan_cards(
-        args.n, seed=args.seed, batch=args.batch, generators=generators, business_ids=business_ids
-    )
+    if args.targeted:
+        if business_ids:
+            raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
+        cards = plan_targeted_cards(args.n, seed=args.seed, batch=args.batch, generators=generators)
+    else:
+        cards = plan_cards(
+            args.n, seed=args.seed, batch=args.batch, generators=generators, business_ids=business_ids
+        )
     out.mkdir(parents=True, exist_ok=True)
     _jsonl(out / "cards.jsonl", [c.model_dump(mode="json") for c in cards])
     meta = {
@@ -127,6 +132,7 @@ def plan(args: argparse.Namespace) -> int:
         "n": args.n,
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
+        "targets_version": TARGETS_VERSION if args.targeted else None,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
         "menu_versions": {b: menu_version(load_menu(b)) for b in sorted({c.business_id for c in cards})},
@@ -153,6 +159,7 @@ def _card_distribution(cards: list[SynthCard]) -> dict[str, dict[str, int]]:
         "payment": count(lambda c: c.payment),
         "items": count(lambda c: len(c.items)),
         "expected_labels": dict(Counter(x.value for c in cards for x in c.expected_labels).most_common()),
+        "target": count(lambda c: next((x[7:] for x in c.extras if x.startswith("target:")), None)),
     }
 
 
@@ -502,6 +509,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--generators", help="config_id:weight,... (default: the pilot's 2:2:1)")
     p.add_argument("--menus", help="business ids, e.g. food-court (default: the three training menus)")
+    p.add_argument("--targeted", action="store_true", help="the targeted batch (cards.TARGET_WEIGHTS)")
     for name in ("generate", "label"):
         p = sub.add_parser(name)
         p.add_argument("--batch", required=True)

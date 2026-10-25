@@ -1,0 +1,35 @@
+{
+ "key": "syn-t1-0001",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey morning!\"}, {\"role\": \"business\", \"text\": \"Morning! What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"lemme get the one I always get\"}, {\"role\": \"business\", \"text\": \"Which one is that? We've got a few regulars :)\"}, {\"role\": \"customer\", \"text\": \"the americano! medium w vanilla syrup\"}, {\"role\": \"customer\", \"text\": \"also 2 croissants w butter pls\"}, {\"role\": \"customer\", \"text\": \"4 hot chocolates, vanilla + oat milk instead of whole\"}, {\"role\": \"customer\", \"text\": \"and 2 lg cappuccinos\"}, {\"role\": \"business\", \"text\": \"Got it — 1 medium Americano with vanilla, 2 croissants with butter, 4 hot chocolates with vanilla and oat milk, 2 large cappuccinos. Name for the order?\"}, {\"role\": \"customer\", \"text\": \"grace. gonna pick it up, need it asap pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1508,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 247,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2754.7517769853584,
+  "cost_micros": 375,
+  "at": "2026-10-25T21:06:26.806880+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1508,
+   "completion_tokens": 247,
+   "total_tokens": 1755,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "prompt_cache_hit_tokens": 0,
+   "prompt_cache_miss_tokens": 1508
+  }
+ }
+}

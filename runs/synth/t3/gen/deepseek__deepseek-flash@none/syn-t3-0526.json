@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0526",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hey, do you deliver? I'm stuck mid-match and can't leave.\"}, {\"role\": \"business\", \"text\": \"Yes we do! What can we get you?\"}, {\"role\": \"customer\", \"text\": \"Quick question first — does the Veggie Burger come with mayo already, or is that extra?\"}, {\"role\": \"business\", \"text\": \"It comes with mayo already, no extra charge.\"}, {\"role\": \"customer\", \"text\": \"Great. I'll do one strawberry milkshake and a cheeseburger with no pickles please.\"}, {\"role\": \"business\", \"text\": \"Got it: one strawberry milkshake and a cheeseburger, no pickles. Anything else?\"}, {\"role\": \"customer\", \"text\": \"Can you add chili on the cheeseburger?\"}, {\"role\": \"business\", \"text\": \"Sorry, we don't have chili. Anything else on it?\"}, {\"role\": \"customer\", \"text\": \"No worries, just the no pickles then. Delivery to 492 Chestnut Ave, #19, and I'll pay by card.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1208,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 254,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2260.3102970169857,
+  "cost_micros": 184,
+  "at": "2026-10-25T21:48:27.969698+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1208,
+   "completion_tokens": 254,
+   "total_tokens": 1462,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 184
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0208",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey\"},{\"role\":\"customer\",\"text\":\"movie night got moved to my place last min lol\"},{\"role\":\"customer\",\"text\":\"need 3 single cheeseburgers\"},{\"role\":\"customer\",\"text\":\"2 of them no american cheese\"},{\"role\":\"customer\",\"text\":\"2 choc shakes and a sprite pls\"},{\"role\":\"business\",\"text\":\"Got it! 3 single cheeseburgers — 2 with no American cheese — 2 chocolate shakes and a Sprite. Anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it, paying card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1222,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 131,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1429.2543140472844,
+  "cost_micros": 112,
+  "at": "2026-10-25T21:37:49.849059+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1222,
+   "completion_tokens": 131,
+   "total_tokens": 1353,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 198
+  }
+ }
+}

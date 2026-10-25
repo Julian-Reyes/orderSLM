@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0296",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'd like to place an order for pickup, please.\"},{\"role\":\"business\",\"text\":\"Hi there! Happy to help. What can I get started for you?\"},{\"role\":\"customer\",\"text\":\"Two breakfast sandwiches on croissants, a banana nut muffin, and two medium americanos with skim milk.\"},{\"role\":\"business\",\"text\":\"Got it: two breakfast sandwiches on croissants, one banana nut muffin, and two medium americanos with skim milk. Anything else?\"},{\"role\":\"customer\",\"text\":\"That's everything. Name's Dev, and I'll pay by card when I pick it up.\"},{\"role\":\"business\",\"text\":\"Thanks, Dev! We'll have it ready for you.\"},{\"role\":\"customer\",\"text\":\"Actually, could you make the americanos with whole milk instead of skim? Thanks.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1425,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 182,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1628.6182519979775,
+  "cost_micros": 173,
+  "at": "2026-10-25T21:40:47.733096+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1425,
+   "completion_tokens": 182,
+   "total_tokens": 1607,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 401
+  }
+ }
+}

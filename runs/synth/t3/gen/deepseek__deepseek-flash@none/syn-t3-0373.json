@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0373",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey morning\"},{\"role\":\"business\",\"text\":\"morning! what can we get started for you?\"},{\"role\":\"customer\",\"text\":\"can i get a medium latte and a breakfast sandwich on a bagel with no egg and add avocado pls. name's eli, gonna pick it up in 20 min and payin cash if thats ok, also can u break a fifty\"},{\"role\":\"business\",\"text\":\"got it eli - medium latte and a bagel breakfast sandwich, no egg, add avocado. pickup in 20, cash, we can break a fifty. anything else?\"},{\"role\":\"customer\",\"text\":\"oh wait lemme change that latte to skim milk instead of whole thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1497,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 157,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2006.3864170224406,
+  "cost_micros": 169,
+  "at": "2026-10-25T21:43:23.567416+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1497,
+   "completion_tokens": 157,
+   "total_tokens": 1654,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 473
+  }
+ }
+}

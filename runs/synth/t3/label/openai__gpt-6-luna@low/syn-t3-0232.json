@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0232",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":5,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":7,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three large Meat Lovers pizzas\"},{\"message_index\":2,\"quote\":\"Two of them as they come\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"meat_lovers_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three large Meat Lovers pizzas\"},{\"message_index\":2,\"quote\":\"the third one with a thick crust\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"supreme_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_stuffed\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"stuffed crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"one medium Supreme pizza\"},{\"message_index\":4,\"quote\":\"with a stuffed crust\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"breadsticks\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"an order of breadsticks\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"water\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":null,\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":5,\"quote\":\"a bottle of water\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for delivery\"}],\"requested_time\":{\"state\":\"not_mentioned\",\"kind\":null,\"raw_text\":null,\"normalized_local\":null,\"evidence\":[]}},\"address\":{\"state\":\"provided\",\"street\":\"Hawthorne Ln\",\"number\":\"30\",\"unit\":null,\"reference\":null,\"raw_text\":\"30 Hawthorne Ln\",\"evidence\":[{\"message_index\":7,\"quote\":\"30 Hawthorne Ln\"}]},\"payment\":{\"method\":\"unknown\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12902,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 888,
+   "reasoning_tokens": 118
+  },
+  "latency_ms": 7024.532665032893,
+  "cost_micros": 1030,
+  "at": "2026-10-25T22:15:21.585393+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12902,
+   "completion_tokens": 888,
+   "total_tokens": 13790,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 5064,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 118,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

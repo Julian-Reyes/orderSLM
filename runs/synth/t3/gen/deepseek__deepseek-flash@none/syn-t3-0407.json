@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0407",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! quick lunch break order for pickup pls 😄 name's Maya\"},{\"role\":\"customer\",\"text\":\"can i get a small cappuccino w hazelnut syrup, a drip coffee with skim milk, and a hot chocolate no whip but oat milk instead of whole? also 1 breakfast sandwich on a croissant, no cheddar. gonna pick up around 12:30, paying by card thx 🙏\"},{\"role\":\"business\",\"text\":\"Got it Maya! One quick question — the hot choc swaps whole milk for oat, and no whipped cream, right? 😊\"},{\"role\":\"customer\",\"text\":\"yep thats right! oh and does the drip coffee come in sizes or is it just one?\"},{\"role\":\"business\",\"text\":\"Drip comes in small 8 oz, medium 12 oz, or large 16 oz 👍\"},{\"role\":\"customer\",\"text\":\"ok cool. also pls scratch the breakfast sandwich, gotta run rn. everything else stands, see u at 12:30 🙌\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1528,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 228,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2595.579543034546,
+  "cost_micros": 216,
+  "at": "2026-10-25T21:44:27.270037+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1528,
+   "completion_tokens": 228,
+   "total_tokens": 1756,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 504
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0364",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey good morning\"},{\"role\":\"business\",\"text\":\"morning! what can i get ya\"},{\"role\":\"customer\",\"text\":\"could u do 2 small hot chocolates pls\"},{\"role\":\"business\",\"text\":\"2 small hot chocolates got it. anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it thx. name's luis and im gonna pay cash at 2\"},{\"role\":\"business\",\"text\":\"perfect, see u at 2 luis\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1370,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 113,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1541.6005339939147,
+  "cost_micros": 123,
+  "at": "2026-10-25T21:43:04.696428+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1370,
+   "completion_tokens": 113,
+   "total_tokens": 1483,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 346
+  }
+ }
+}

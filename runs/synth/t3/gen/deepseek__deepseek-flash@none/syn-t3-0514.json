@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0514",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hey, do you have any pastries left this morning?\"},{\"role\":\"business\",\"text\":\"Morning! We do, croissants, muffins and bagels are all available.\"},{\"role\":\"customer\",\"text\":\"Ok cool. I'll take one medium latte please.\"},{\"role\":\"business\",\"text\":\"Got it, one medium latte. Anything else?\"},{\"role\":\"customer\",\"text\":\"Thats it for now. Name's Leah and I'll be picking it up.\"},{\"role\":\"business\",\"text\":\"Thanks Leah! So that's one medium latte, regular whole milk, for pickup. Sound right?\"},{\"role\":\"customer\",\"text\":\"Yep thats correct.\"},{\"role\":\"customer\",\"text\":\"Actually can you do the latte with oat milk instead of whole?\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1424,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 166,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1910.2016660035588,
+  "cost_micros": 163,
+  "at": "2026-10-25T21:48:04.604112+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1424,
+   "completion_tokens": 166,
+   "total_tokens": 1590,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 400
+  }
+ }
+}

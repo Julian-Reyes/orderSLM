@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0018",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need 1 milkshake + 1 veggie burger pls\"},{\"role\":\"customer\",\"text\":\"gonna be at 56 sycamore ave apt 25A\"},{\"role\":\"customer\",\"text\":\"in 20 min thx\"},{\"role\":\"business\",\"text\":\"Got it — 1 milkshake and 1 veggie burger, headed to 56 Sycamore Ave, apt 25A in about 20 min. See you then!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1214,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 119,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2376.862440025434,
+  "cost_micros": 122,
+  "at": "2026-10-25T21:31:21.879529+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1214,
+   "completion_tokens": 119,
+   "total_tokens": 1333,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 318
+  }
+ }
+}

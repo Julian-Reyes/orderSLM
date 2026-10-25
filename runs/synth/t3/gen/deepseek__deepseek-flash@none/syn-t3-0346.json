@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0346",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Quick question, not abotu food. My buddy and I are arguing over who has more championships, the Yankees or the Canadiens? I say Yankees, he says Canadiens.\"}, {\"role\": \"business\", \"text\": \"Ha, no problem! The Canadiens actually have more with 24, the Yankees have 27 though. So you win this one.\"}, {\"role\": \"customer\", \"text\": \"Wait I said Yankees though, so that means I won right? 27 is more than 24. Now I'm confused lol\"}, {\"role\": \"business\", \"text\": \"Haha true, I mixed myself up. You said Yankees, so yep, you're right. 27 beats 24.\"}, {\"role\": \"customer\", \"text\": \"Knew it. Thanks, that settles the bet. See you guys later this week.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1108,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 198,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2242.879751021974,
+  "cost_micros": 154,
+  "at": "2026-10-25T21:42:27.717848+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1108,
+   "completion_tokens": 198,
+   "total_tokens": 1306,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 212
+  }
+ }
+}

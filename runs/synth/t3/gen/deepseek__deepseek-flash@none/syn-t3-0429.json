@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0429",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! quick q before i order — does the veggie pizza come w tomatoes on it? 🍅\"},{\"role\":\"business\",\"text\":\"Hey! Yes, the Veggie comes with tomato sauce, green peppers, onions, mushrooms, black olives and tomatoes 🙂\"},{\"role\":\"customer\",\"text\":\"ok cool. can i get 2 large veggie pizzas, and make 2 of them no tomato sauce please 🙏\"},{\"role\":\"business\",\"text\":\"Just to make sure — that's 4 large Veggie pizzas total, 2 of them with no tomato sauce?\"},{\"role\":\"customer\",\"text\":\"yep exactly! and 2 bottled waters too 💧\"},{\"role\":\"business\",\"text\":\"Got it! Anything else — pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"delivery please, 315 Hawthorne Way. asap if u can! and paying by card 💳\"},{\"role\":\"business\",\"text\":\"Perfect, we'll get that started: 2 large Veggie pizzas, 2 large Veggie pizzas no tomato sauce, 2 bottled waters, delivery to 315 Hawthorne Way, asap, paying by card. See you soon! 🍕\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2268,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 260,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2700.9481620043516,
+  "cost_micros": 196,
+  "at": "2026-10-25T21:45:15.062954+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2268,
+   "completion_tokens": 260,
+   "total_tokens": 2528,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 220
+  }
+ }
+}

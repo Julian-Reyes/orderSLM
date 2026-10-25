@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0516",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"bbq chicken large\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"diet_coke\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"can\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 diet coke can\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"medium\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"crust_thin\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thin crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"4 hawaiian mediums thin crust\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"veggie_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"onions\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no onions\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"jalapenos\",\"replacement_modifier_id\":null,\"amount\":\"extra\",\"raw_text\":\"extra jalapeños\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"2 veggie larges no onions extra jalapeños\"}]},{\"line_id\":\"L5\",\"menu_item_id\":\"margherita_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"olives\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"black olives\",\"not_on_menu\":false,\"kitchen_note\":false},{\"kind\":\"add\",\"modifier_id\":\"crust_thick\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"thick crust\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"1 margherita large with black olives and thick crust\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"for pickup\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in 20 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"in 20 min\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":5000,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":2,\"quote\":\"cash\"},{\"message_index\":2,\"quote\":\"change for a 50\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Nico\",\"evidence\":[{\"message_index\":2,\"quote\":\"Nico\"}]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12731,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1075,
+   "reasoning_tokens": 216
+  },
+  "latency_ms": 8605.886288976762,
+  "cost_micros": 1106,
+  "at": "2026-10-25T22:44:03.650994+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12731,
+   "completion_tokens": 1075,
+   "total_tokens": 13806,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4893,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 216,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

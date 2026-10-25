@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0143",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"SMALL_TALK\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"latte\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 3,\n        \"variant_id\": null,\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"substitute\",\n            \"modifier_id\": \"whole_milk\",\n            \"replacement_modifier_id\": \"almond_milk\",\n            \"amount\": \"normal\",\n            \"raw_text\": \"almond milk instead of whole\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"3 lattes\"\n          },\n          {\n            \"message_index\": 2,\n            \"quote\": \"almond milk instead of whole\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"muffin\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 1,\n        \"variant_id\": \"chocolate_chip\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"a chocolate chip muffin\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"pickup\",\n      \"method_evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"I'll be picking up\"\n        }\n      ],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_applicable\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"cash\",\n      \"change_for_cents\": 2000,\n      \"customer_claims_paid\": false,\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"paying cash\"\n        },\n        {\n          \"message_index\": 4,\n          \"quote\": \"break a 20\"\n        }\n      ]\n    },\n    \"customer_name\": {\n      \"state\": \"provided\",\n      \"value\": \"Jordan\",\n      \"evidence\": [\n        {\n          \"message_index\": 4,\n          \"quote\": \"Jordan\"\n        }\n      ]\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10439,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 1087,
+   "reasoning_tokens": 312
+  },
+  "latency_ms": 9419.265631993767,
+  "cost_micros": 883,
+  "at": "2026-10-25T22:06:06.116926+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10439,
+   "completion_tokens": 1087,
+   "total_tokens": 11526,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2601,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 312,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

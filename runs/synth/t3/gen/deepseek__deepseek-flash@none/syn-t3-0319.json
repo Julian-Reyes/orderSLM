@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0319",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey hey 😄 we're starving over here\"},{\"role\":\"business\",\"text\":\"Hey! Happy to help 😊 What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"ok so 4 extra large cheese pizzas w stuffed crust please, plus 1 sprite can, and a personal meat lovers but no tomato sauce — swap it for bbq sauce 🔥\"},{\"role\":\"business\",\"text\":\"Got it: 4 XL cheese pizzas with stuffed crust, 1 Sprite can, and a personal Meat Lovers with no tomato sauce, BBQ sauce instead. Delivery or pickup?\"},{\"role\":\"customer\",\"text\":\"delivery to 9 Kensington Terrace, # 11A 🙏 and we'll do cash\"},{\"role\":\"business\",\"text\":\"Perfect, thanks! 4 XL stuffed-crust cheese pizzas, 1 Sprite can, 1 personal Meat Lovers with no tomato sauce and BBQ added, delivered to 9 Kensington Terrace, # 11A, cash.\"},{\"role\":\"customer\",\"text\":\"actually can we switch that to card instead of cash? 😅\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2273,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 240,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2119.5788939949125,
+  "cost_micros": 184,
+  "at": "2026-10-25T21:41:35.526306+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2273,
+   "completion_tokens": 240,
+   "total_tokens": 2513,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 225
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0215",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey! can i get 3 cokes for 7pm pls 😊\"},{\"role\":\"business\",\"text\":\"Got it — 3 Cokes for a 7:00 pickup time. That all?\"},{\"role\":\"customer\",\"text\":\"yep that's it, paying cash thx\"},{\"role\":\"business\",\"text\":\"Perfect, 3 Cokes for 7:00, cash on arrival. See you then!\"},{\"role\":\"customer\",\"text\":\"actually can u make it 7:30 instead? gonna b stuck on a call 🙏\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2243,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 128,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2260.9749700059183,
+  "cost_micros": 113,
+  "at": "2026-10-25T21:38:03.501515+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2243,
+   "completion_tokens": 128,
+   "total_tokens": 2371,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 195
+  }
+ }
+}

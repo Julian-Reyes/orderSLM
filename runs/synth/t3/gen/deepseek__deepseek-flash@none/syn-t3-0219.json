@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0219",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello there!\"},{\"role\":\"business\",\"text\":\"Hi! What can we get started for you?\"},{\"role\":\"customer\",\"text\":\"We'd like one order of fries, please.\"},{\"role\":\"business\",\"text\":\"Sounds good — one order of fries. Is that for pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"We'll pick it up, and we'll pay by card.\"},{\"role\":\"business\",\"text\":\"Got it. What time would you like to pick it up?\"},{\"role\":\"customer\",\"text\":\"We'll be there at 9:15.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1152,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 128,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1869.4644500501454,
+  "cost_micros": 118,
+  "at": "2026-10-25T21:38:12.101382+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1152,
+   "completion_tokens": 128,
+   "total_tokens": 1280,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 256
+  }
+ }
+}

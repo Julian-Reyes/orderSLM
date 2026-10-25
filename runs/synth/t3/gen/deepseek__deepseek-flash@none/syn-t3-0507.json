@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0507",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I would like to order one almond croissant, one large cappuccino, and one hot chocolate with no whipped cream. My name is Ana and I will pick it up, paying by card.\"},{\"role\":\"business\",\"text\":\"Hi Ana! Let me read that back: one almond croissant, one large 16 oz cappuccino, and one hot chocolate with no whipped cream. Pickup, paying by card. Sound right?\"},{\"role\":\"customer\",\"text\":\"Yes, that is correct.\"},{\"role\":\"customer\",\"text\":\"Actually, please add butter to the croissant.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1447,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 135,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1888.3988200104795,
+  "cost_micros": 148,
+  "at": "2026-10-25T21:47:53.174551+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1447,
+   "completion_tokens": 135,
+   "total_tokens": 1582,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 423
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "key": "syn-t3-0305",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":2,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":4,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":6,\"primary\":\"PLACE_ORDER\",\"secondary\":null},{\"message_index\":8,\"primary\":\"CONFIRM_ORDER\",\"secondary\":\"PLACE_ORDER\"}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"hot_chocolate\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"hazelnut_syrup\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"hazelnut syrup\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"large hot chocolate with hazelnut syrup\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"bagel\",\"unmatched_text\":null,\"halves\":null,\"quantity\":3,\"variant_id\":\"everything\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"cream_cheese\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with cream cheese\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":2,\"quote\":\"three everything bagels with cream cheese\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"breakfast_sandwich\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"english_muffin\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":4,\"quote\":\"A breakfast sandwich on an English muffin\"}]},{\"line_id\":\"L4\",\"menu_item_id\":\"croissant\",\"unmatched_text\":null,\"halves\":null,\"quantity\":1,\"variant_id\":\"almond\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":\"butter\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"with butter on the side\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":6,\"quote\":\"One almond croissant with butter on the side\"}]}],\"fulfillment\":{\"method\":\"pickup\",\"method_evidence\":[{\"message_index\":8,\"quote\":\"I'll pick it up\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in about 20 minutes\",\"normalized_local\":null,\"evidence\":[{\"message_index\":8,\"quote\":\"in about 20 minutes\"}]}},\"address\":{\"state\":\"not_applicable\",\"street\":null,\"number\":null,\"unit\":null,\"reference\":null,\"raw_text\":null,\"evidence\":[]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"I'll pay cash\"}]},\"customer_name\":{\"state\":\"provided\",\"value\":\"Ivy\",\"evidence\":[{\"message_index\":8,\"quote\":\"Ivy\"}]},\"customer_decision\":{\"state\":\"confirmed\",\"agreed_while_incomplete\":false,\"evidence\":[{\"message_index\":8,\"quote\":\"That's right\"}]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10579,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 961,
+   "reasoning_tokens": 211
+  },
+  "latency_ms": 7214.645030035172,
+  "cost_micros": 834,
+  "at": "2026-10-25T22:22:33.453289+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10579,
+   "completion_tokens": 961,
+   "total_tokens": 11540,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2741,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 211,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

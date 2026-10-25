@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0185",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can we get that thing from before\"},{\"role\":\"business\",\"text\":\"Hey! Which one was that?\"},{\"role\":\"customer\",\"text\":\"the cappuccino\"},{\"role\":\"customer\",\"text\":\"large\"},{\"role\":\"customer\",\"text\":\"also a small latte w hazelnut\"},{\"role\":\"business\",\"text\":\"Got it — large cappuccino and a small hazelnut latte. Anything else?\"},{\"role\":\"customer\",\"text\":\"skim milk on the latte not whole\"},{\"role\":\"customer\",\"text\":\"2 drip coffees w caramel\"},{\"role\":\"business\",\"text\":\"Two drip coffees with caramel. Anything else?\"},{\"role\":\"customer\",\"text\":\"a croissant too\"},{\"role\":\"customer\",\"text\":\"and a hot choc, no whip\"},{\"role\":\"customer\",\"text\":\"skim milk in that one\"},{\"role\":\"business\",\"text\":\"So: 1 large cappuccino, 1 small latte with hazelnut and skim milk, 2 drip coffees with caramel, 1 croissant, and 1 hot chocolate with skim milk and no whipped cream. Correct?\"},{\"role\":\"customer\",\"text\":\"yep\"},{\"role\":\"customer\",\"text\":\"pickup\"},{\"role\":\"customer\",\"text\":\"name's Tom\"},{\"role\":\"business\",\"text\":\"Great, thanks Tom! See you soon.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1524,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 290,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1921.2447039899416,
+  "cost_micros": 253,
+  "at": "2026-10-25T21:37:05.333492+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1524,
+   "completion_tokens": 290,
+   "total_tokens": 1814,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 500
+  }
+ }
+}

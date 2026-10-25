@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0558",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey guys\"},{\"role\":\"business\",\"text\":\"hey! what can we get started for ya?\"},{\"role\":\"customer\",\"text\":\"lemme get a choc milkshake and a sprite pls\"},{\"role\":\"business\",\"text\":\"got it - chocolate shake and a sprite. anything else?\"},{\"role\":\"customer\",\"text\":\"yeah a regular fries n a lemonade too\"},{\"role\":\"customer\",\"text\":\"oh and two veggie burgers w jalapenos on both\"},{\"role\":\"business\",\"text\":\"ok so that's a chocolate milkshake, a sprite, regular fries, a lemonade, and two veggie burgers with jalapeños. picking up?\"},{\"role\":\"customer\",\"text\":\"yep gonna pick it up thx\"},{\"role\":\"business\",\"text\":\"sounds good, see u soon!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1234,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 184,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1855.6446519796737,
+  "cost_micros": 145,
+  "at": "2026-10-25T21:49:29.770563+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1234,
+   "completion_tokens": 184,
+   "total_tokens": 1418,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 210
+  }
+ }
+}

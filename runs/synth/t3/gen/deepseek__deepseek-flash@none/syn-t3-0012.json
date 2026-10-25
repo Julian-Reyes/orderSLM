@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0012",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need a choc chip muffin\"},{\"role\":\"customer\",\"text\":\"small latte too\"},{\"role\":\"customer\",\"text\":\"and an almond croissant\"},{\"role\":\"business\",\"text\":\"Got it — chocolate chip muffin, small latte, almond croissant. What name should I put on it?\"},{\"role\":\"customer\",\"text\":\"Grace, picking up at 11:45\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1392,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 98,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1497.5195240112953,
+  "cost_micros": 118,
+  "at": "2026-10-25T21:31:08.835004+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1392,
+   "completion_tokens": 98,
+   "total_tokens": 1490,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 368
+  }
+ }
+}

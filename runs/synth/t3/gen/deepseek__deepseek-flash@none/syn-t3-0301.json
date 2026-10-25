@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0301",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"yo random q but who won the world cup in 2018 rn i'm tryna settle a bet with my friend lol\"}, {\"role\": \"business\", \"text\": \"haha france beat croatia 4-2 that year\"}, {\"role\": \"customer\", \"text\": \"ok thx knew i was right\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1335,
+   "cached_input_tokens": 1152,
+   "cache_write_tokens": 0,
+   "output_tokens": 85,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1529.766727995593,
+  "cost_micros": 82,
+  "at": "2026-10-25T21:40:57.213157+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1335,
+   "completion_tokens": 85,
+   "total_tokens": 1420,
+   "prompt_tokens_details": {
+    "cached_tokens": 1152
+   },
+   "prompt_cache_hit_tokens": 1152,
+   "prompt_cache_miss_tokens": 183
+  }
+ }
+}

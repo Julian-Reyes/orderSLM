@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0454",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey morning crumb\"},{\"role\":\"customer\",\"text\":\"2 hot chocolates, one of them no whip\"},{\"role\":\"customer\",\"text\":\"and 2 sesame bagels w tomato on em\"},{\"role\":\"business\",\"text\":\"Got it — 2 hot chocolates (one no whip) and 2 sesame bagels with tomato. Name for the order?\"},{\"role\":\"customer\",\"text\":\"Grace, and I'll pay cash when I come grab it\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1424,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 107,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1901.3551420066506,
+  "cost_micros": 128,
+  "at": "2026-10-25T21:46:07.056342+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1424,
+   "completion_tokens": 107,
+   "total_tokens": 1531,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 400
+  }
+ }
+}

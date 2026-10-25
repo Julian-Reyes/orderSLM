@@ -1,0 +1,41 @@
+{
+ "key": "syn-t1-0003",
+ "config_id": "anthropic/claude-haiku-5-5@off-low",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "anthropic/claude-haiku-5-5@off-low",
+  "model": "claude-haiku-5-5",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"HEY I JUST FINISHED MY EXAM AND I AM STARVING!!!\"}, {\"role\": \"business\", \"text\": \"Congrats on finishing! What can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"I WANT ONE ORDER OF BREADSTICKS AND A PEPPERONI PIZZA, PERSONAL SIZE!!!\"}, {\"role\": \"business\", \"text\": \"Got it. Sure you want the personal 8-inch pepperoni? Anything else?\"}, {\"role\": \"customer\", \"text\": \"YES THATS IT!!! OH WAIT NO I MEAN THAT'S GOOD!!!\"}, {\"role\": \"business\", \"text\": \"Ok so that's one order of breadsticks (4 pieces each) and one personal 8-inch Pepperoni Pizza. Does that look right?\"}, {\"role\": \"customer\", \"text\": \"YES PERFECT!!! CONFIRMED!!!\"}, {\"role\": \"customer\", \"text\": \"OH AND ADD ONE MORE PIZZA, A SUPREME, PERSONAL SIZE TOO!!!\"}]}",
+  "finish_reason": "end_turn",
+  "usage": {
+   "input_tokens": 3778,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 396,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 3000.7956200279295,
+  "cost_micros": 576,
+  "at": "2026-10-25T21:06:26.804885+00:00",
+  "cached": false,
+  "raw_usage": {
+   "input_tokens": 3778,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "cache_creation": {
+    "ephemeral_5m_input_tokens": 0,
+    "ephemeral_1h_input_tokens": 0
+   },
+   "output_tokens": 396,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "service_tier": "standard",
+   "inference_geo": "global",
+   "speed": "standard"
+  }
+ }
+}

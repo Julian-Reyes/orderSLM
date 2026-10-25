@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0325",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello! I'd like to place an order for pickup. Could I get four large BBQ chicken pizzas, with mushrooms on two of them?\"},{\"role\":\"business\",\"text\":\"Got it — 4 large BBQ Chicken Pizzas, 2 of them with mushrooms. What else can I get you?\"},{\"role\":\"customer\",\"text\":\"I'll also take two Dr Peppers. Then a personal Margherita with no fresh mozzarella, and a small Hawaiian pizza.\"},{\"role\":\"business\",\"text\":\"Sure thing. So that's 4 large BBQ Chicken Pizzas (2 with mushrooms), 2 Dr Peppers, a personal Margherita with no fresh mozzarella, and a small Hawaiian. Anything else?\"},{\"role\":\"customer\",\"text\":\"That's everything. I'll pay cash when I come to pick it up.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2308,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 184,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1730.7314930367284,
+  "cost_micros": 156,
+  "at": "2026-10-25T21:41:48.622738+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2308,
+   "completion_tokens": 184,
+   "total_tokens": 2492,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 260
+  }
+ }
+}

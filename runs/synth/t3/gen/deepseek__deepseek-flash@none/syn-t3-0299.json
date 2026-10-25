@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0299",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"Hello, I'd like to order a personal 8-inch pepperoni pizza with a gluten-free crust.\"},{\"role\":\"business\",\"text\":\"Got it — one personal 8-inch pepperoni on gluten-free crust. Is that for pickup or delivery?\"},{\"role\":\"customer\",\"text\":\"Delivery please, to 71 Delancey Terrace, # 1. I'll pay by card, and we'd like it at 9:30.\"},{\"role\":\"business\",\"text\":\"Perfect. To confirm: 1 personal 8-inch pepperoni pizza with gluten-free crust, delivery to 71 Delancey Terrace, # 1, card payment, requested at 9:30. Anything else?\"},{\"role\":\"customer\",\"text\":\"No, that's everything. Thank you.\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2199,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 169,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1993.2132600224577,
+  "cost_micros": 131,
+  "at": "2026-10-25T21:40:52.394764+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2199,
+   "completion_tokens": 169,
+   "total_tokens": 2368,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 151
+  }
+ }
+}

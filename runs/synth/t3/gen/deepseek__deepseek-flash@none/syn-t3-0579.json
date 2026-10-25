@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0579",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"Hey, I need to get a decent order together for pickup. Starting with a large supreme pizza, but no onions on that one.\"}, {\"role\": \"business\", \"text\": \"Got it, one large Supreme with no onions for pickup. What else can I add for you?\"}, {\"role\": \"customer\", \"text\": \"Add an order of garlic knots too. And I need two large meat lovers, both without sausage.\"}, {\"role\": \"business\", \"text\": \"So far: large Supreme no onions, one Garlic Knots, and two large Meat Lovers no sausage. Anything to drink with that?\"}, {\"role\": \"customer\", \"text\": \"Yes, three iced teas in the 20 oz bottles please. That should do it.\"}, {\"role\": \"business\", \"text\": \"Perfect, here's the full order: 1 large Supreme pizza with no onions, 1 Garlic Knots, 2 large Meat Lovers pizzas with no sausage, and 3 Iced Teas (20 oz bottles). For pickup, right?\"}, {\"role\": \"customer\", \"text\": \"Yep, pickup is right. Thanks so much!\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2250,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 258,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2280.8082919800654,
+  "cost_micros": 192,
+  "at": "2026-10-25T21:50:13.483808+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2250,
+   "completion_tokens": 258,
+   "total_tokens": 2508,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 202
+  }
+ }
+}

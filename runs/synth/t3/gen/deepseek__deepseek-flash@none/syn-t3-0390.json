@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0390",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get a medium veggie pizza w capers on it pls\"},{\"role\":\"business\",\"text\":\"hi! medium veggie pizza, got it. just a heads up, we don't have capers but we can do extra of any of the veggie toppings if you want\"},{\"role\":\"customer\",\"text\":\"ah no worries then just the veggie pizza is fine thx\"},{\"role\":\"business\",\"text\":\"sounds good! just to confirm, 1 medium 12-inch veggie pizza. that's it?\"},{\"role\":\"customer\",\"text\":\"yep thats it. im gonna pick it up and pay by card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2195,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 145,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1639.5366169745103,
+  "cost_micros": 116,
+  "at": "2026-10-25T21:43:56.977841+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2195,
+   "completion_tokens": 145,
+   "total_tokens": 2340,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 147
+  }
+ }
+}

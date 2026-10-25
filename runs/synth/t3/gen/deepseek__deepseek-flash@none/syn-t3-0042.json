@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0042",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\": [{\"role\": \"customer\", \"text\": \"hey me n my partner r figuring out breakfast rn\"}, \"role\": \"business\", \"text\": \"morning! take your time, what can we get started for you?\"}, {\"role\": \"customer\", \"text\": \"ok so 1 hot chocolate but with almond milk instead of whole pls\"}, {\"role\": \"customer\", \"text\": \"also 3 breakfast sandwiches and 2 chocolate croissants w butter\"}, {\"role\": \"business\", \"text\": \"got it: 1 hot chocolate with almond milk, 3 breakfast sandwiches, and 2 chocolate croissants with butter. want to confirm that's everything?\"}, {\"role\": \"customer\", \"text\": \"yep that's it. oh and can u do honey on the hot chocolate\"}, {\"role\": \"business\", \"text\": \"honey isn't on our menu, sorry! anything else?\"}, {\"role\": \"customer\", \"text\": \"no worries that's all thx, we'll pay by card\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1427,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 224,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2387.1975950314663,
+  "cost_micros": 198,
+  "at": "2026-10-25T21:32:12.633513+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1427,
+   "completion_tokens": 224,
+   "total_tokens": 1651,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 403
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0017",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey can i get two breakfast sandwiches on bagels, no cheddar tho\"},{\"role\":\"customer\",\"text\":\"and a hot chocolate pls\"},{\"role\":\"business\",\"text\":\"sure thing! so thats 2 breakfast sandwiches on bagels with no cheddar, and 1 hot chocolate. can i get a name for the order?\"},{\"role\":\"customer\",\"text\":\"rosa. and ill pick it up, paying by card\"},{\"role\":\"business\",\"text\":\"got it rosa, 2 bagel sandwiches no cheddar and a hot chocolate for pickup, pay by card. see u soon!\"},{\"role\":\"customer\",\"text\":\"actually lemme change that hot choc to oat milk instead of whole pls thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1473,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 162,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2597.2026429953985,
+  "cost_micros": 168,
+  "at": "2026-10-25T21:31:19.268272+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1473,
+   "completion_tokens": 162,
+   "total_tokens": 1635,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 449
+  }
+ }
+}

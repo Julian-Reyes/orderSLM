@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0265",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hey there! 👋\"},{\"role\":\"business\",\"text\":\"Hey! What can we get for you?\"},{\"role\":\"customer\",\"text\":\"movie night got thrown together last min so i need a sprite and a vanilla shake please 🥤\"},{\"role\":\"business\",\"text\":\"Got it — one Sprite and one vanilla Milkshake. Anything else?\"},{\"role\":\"customer\",\"text\":\"nope thats it! make it a strawberry shake tho 🍓\"} ]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1197,
+   "cached_input_tokens": 1024,
+   "cache_write_tokens": 0,
+   "output_tokens": 108,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1340.1893979753368,
+  "cost_micros": 94,
+  "at": "2026-10-25T21:39:46.238945+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1197,
+   "completion_tokens": 108,
+   "total_tokens": 1305,
+   "prompt_tokens_details": {
+    "cached_tokens": 1024
+   },
+   "prompt_cache_hit_tokens": 1024,
+   "prompt_cache_miss_tokens": 173
+  }
+ }
+}

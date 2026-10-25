@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0020",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"hello there hope u r having a good day\"},{\"role\":\"business\",\"text\":\"hi! thanks, you too. what can we get you?\"},{\"role\":\"customer\",\"text\":\"could i pls get 2 orders of fries, 3 lemonades and an order of onion rings\"},{\"role\":\"business\",\"text\":\"sure thing. so that's 2 fries, 3 lemonades and 1 onion rings, for delivery to...?\"},{\"role\":\"customer\",\"text\":\"49 birch ct pls\"},{\"role\":\"business\",\"text\":\"got it: 2 fries, 3 lemonades, 1 onion rings, delivery to 49 birch ct. sound right?\"},{\"role\":\"customer\",\"text\":\"yes thats right thx so much\"},{\"role\":\"customer\",\"text\":\"oh actually lemme change the fries to just 1 order pls\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1241,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 188,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1954.7227950533852,
+  "cost_micros": 168,
+  "at": "2026-10-25T21:31:26.204047+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1241,
+   "completion_tokens": 188,
+   "total_tokens": 1429,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 345
+  }
+ }
+}

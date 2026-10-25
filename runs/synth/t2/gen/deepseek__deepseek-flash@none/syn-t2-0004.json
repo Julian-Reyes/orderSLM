@@ -1,0 +1,35 @@
+{
+ "key": "syn-t2-0004",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo its for a meeting can i get 4 sprites and 3 regular fries pls\"},{\"role\":\"business\",\"text\":\"got it! 4 sprites and 3 regular fries. anything else?\"},{\"role\":\"customer\",\"text\":\"thats it. pickup pls, name's marcus\"},{\"role\":\"business\",\"text\":\"cool, 4 sprites and 3 regular fries for pickup under marcus. i'll read that back to make sure it's right\"},{\"role\":\"customer\",\"text\":\"yep thats right but lemme change smth\"},{\"role\":\"customer\",\"text\":\"actually take off the 3 fries, just the 4 sprites thx\"}]}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1187,
+   "cached_input_tokens": 896,
+   "cache_write_tokens": 0,
+   "output_tokens": 153,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2082.878482993692,
+  "cost_micros": 139,
+  "at": "2026-10-25T21:10:12.109657+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1187,
+   "completion_tokens": 153,
+   "total_tokens": 1340,
+   "prompt_tokens_details": {
+    "cached_tokens": 896
+   },
+   "prompt_cache_hit_tokens": 896,
+   "prompt_cache_miss_tokens": 291
+  }
+ }
+}

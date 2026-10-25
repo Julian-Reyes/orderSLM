@@ -1,0 +1,35 @@
+{
+ "key": "syn-t2-0001",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\"messages\":[{\"role\":\"customer\",\"text\":\"yo\"},{\"role\":\"customer\",\"text\":\"need food, mid raid lol\"},{\"role\":\"customer\",\"text\":\"1 meat lovers, add garlic\"},{\"role\":\"customer\",\"text\":\"iced tea + garlic knots\"},{\"role\":\"business\",\"text\":\"Hey! Got it — 1 Meat Lovers with garlic, an iced tea, and garlic knots. That's for pickup, right?\"},{\"role\":\"customer\",\"text\":\"yea pickup. name's Eli\"},{\"role\":\"business\",\"text\":\"Perfect, Eli! 1 Meat Lovers Pizza with garlic, 1 Iced Tea, and 1 Garlic Knots (6 pieces) — for pickup, paying by card. We'll have it ready for you!\"},{\"role\":\"customer\",\"text\":\"bet, thanks\"}],\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2238,
+   "cached_input_tokens": 512,
+   "cache_write_tokens": 0,
+   "output_tokens": 169,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2664.616857015062,
+  "cost_micros": 362,
+  "at": "2026-10-25T21:10:07.073553+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2238,
+   "completion_tokens": 169,
+   "total_tokens": 2407,
+   "prompt_tokens_details": {
+    "cached_tokens": 512
+   },
+   "prompt_cache_hit_tokens": 512,
+   "prompt_cache_miss_tokens": 1726
+  }
+ }
+}

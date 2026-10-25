@@ -1,0 +1,35 @@
+{
+ "key": "syn-t3-0516",
+ "config_id": "deepseek/deepseek-flash@none",
+ "versions": {
+  "generator_prompt": "synth-write@0.2",
+  "cards": "synth-cards@0.5"
+ },
+ "response": {
+  "config_id": "deepseek/deepseek-flash@none",
+  "model": "deepseek-flash",
+  "text": "{\n  \"messages\": [\n    {\n      \"role\": \"customer\",\n      \"text\": \"hey! the usual for pickup pls 😊\"\n    },\n    {\n      \"role\": \"business\",\n      \"text\": \"Hey! Which pizza is 'the usual'? 😊\"\n    },\n    {\n      \"role\": \"customer\",\n      \"text\": \"bbq chicken large! plus 1 diet coke can, 4 hawaiian mediums thin crust, 2 veggie larges no onions extra jalapeños, and 1 margherita large with black olives and thick crust. name's Nico, cash, need change for a 50. can I get it in 20 min?\"\n    }\n  ]\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 2345,
+   "cached_input_tokens": 2048,
+   "cache_write_tokens": 0,
+   "output_tokens": 151,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 2029.510002990719,
+  "cost_micros": 142,
+  "at": "2026-10-25T21:48:08.602966+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 2345,
+   "completion_tokens": 151,
+   "total_tokens": 2496,
+   "prompt_tokens_details": {
+    "cached_tokens": 2048
+   },
+   "prompt_cache_hit_tokens": 2048,
+   "prompt_cache_miss_tokens": 297
+  }
+ }
+}
