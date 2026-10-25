@@ -1,0 +1,173 @@
+{
+  "compare_version": "student-compare@0.1",
+  "chats": 91,
+  "messages": 268,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single": {
+      "intent_accuracy": 0.9104477611940298,
+      "invalid_rate": 0.007462686567164179,
+      "item_f1": 0.8113879003558719,
+      "exact_rate": 0.7032967032967034
+    },
+    "qwen3.5-2b-single": {
+      "intent_accuracy": 0.8805970149253731,
+      "invalid_rate": 0.048507462686567165,
+      "item_f1": 0.762962962962963,
+      "exact_rate": 0.6483516483516484
+    },
+    "qwen3.5-2b-mixed": {
+      "intent_accuracy": 0.8992537313432836,
+      "invalid_rate": 0.033582089552238806,
+      "item_f1": 0.8185053380782918,
+      "exact_rate": 0.7142857142857143
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single",
+      "b": "qwen3.5-2b-single",
+      "intent_messages": {
+        "only_a_right": 18,
+        "only_b_right": 10
+      },
+      "exact_chats": {
+        "only_a_right": 10,
+        "only_b_right": 5,
+        "mcnemar_p": 0.3017578125,
+        "mcnemar_p_holm": 0.603515625
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.02985074626865669,
+          "ci95": [
+            -0.0185873605947956,
+            0.08361204013377921
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": -0.041044776119402986,
+          "ci95": [
+            -0.08275862068965517,
+            -0.007518796992481203
+          ],
+          "ci_excludes_0": true
+        },
+        "item_f1": {
+          "a_minus_b": 0.048424937392908984,
+          "ci95": [
+            -0.022214534582025824,
+            0.12713823393435042
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": 0.05494505494505497,
+          "ci95": [
+            -0.02197802197802201,
+            0.1428571428571428
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    },
+    {
+      "a": "qwen3.5-0.8b-single",
+      "b": "qwen3.5-2b-mixed",
+      "intent_messages": {
+        "only_a_right": 15,
+        "only_b_right": 12
+      },
+      "exact_chats": {
+        "only_a_right": 5,
+        "only_b_right": 6,
+        "mcnemar_p": 1.0,
+        "mcnemar_p_holm": 1.0
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.011194029850746245,
+          "ci95": [
+            -0.03137254901960784,
+            0.05673758865248224
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": -0.026119402985074626,
+          "ci95": [
+            -0.057692307692307696,
+            0.0
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.007117437722419906,
+          "ci95": [
+            -0.07001833097935506,
+            0.05365724225360413
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": -0.01098901098901095,
+          "ci95": [
+            -0.07692307692307698,
+            0.06593406593406592
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    },
+    {
+      "a": "qwen3.5-2b-single",
+      "b": "qwen3.5-2b-mixed",
+      "intent_messages": {
+        "only_a_right": 5,
+        "only_b_right": 10
+      },
+      "exact_chats": {
+        "only_a_right": 3,
+        "only_b_right": 9,
+        "mcnemar_p": 0.14599609375,
+        "mcnemar_p_holm": 0.43798828125
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": -0.018656716417910446,
+          "ci95": [
+            -0.05303030303030298,
+            0.010948905109488982
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.01492537313432836,
+          "ci95": [
+            -0.007692307692307693,
+            0.041984732824427475
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.05554237511532889,
+          "ci95": [
+            -0.12489927477840446,
+            0.004930129293456931
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": -0.06593406593406592,
+          "ci95": [
+            -0.1428571428571429,
+            0.0
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    }
+  ]
+}

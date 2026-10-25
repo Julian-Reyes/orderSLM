@@ -18,6 +18,7 @@ by docs/KAGGLE.md); gold stays here.
 """
 
 import argparse
+import dataclasses
 import json
 import sys
 from collections import Counter, defaultdict
@@ -174,6 +175,10 @@ def report(run_dir: Path) -> dict[str, Any]:
     }
     (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
     (run_dir / "intent_rows.jsonl").write_text("".join(json.dumps(r) + "\n" for r in intents))
+    # per chat, for paired comparisons between students (student_compare)
+    (run_dir / "order_rows.jsonl").write_text(
+        "".join(json.dumps(dataclasses.asdict(s)) + "\n" for s in scores)
+    )
     _write_report(run_dir, metrics)
     return metrics
 
@@ -230,7 +235,7 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     m = report(args.run_dir)
     print((args.run_dir / "report.md").read_text())
-    print(f"→ {args.run_dir.relative_to(ROOT)}  ({m['requests']} answers)")
+    print(f"→ {args.run_dir.resolve().relative_to(ROOT)}  ({m['requests']} answers)")
     return 0
 
 

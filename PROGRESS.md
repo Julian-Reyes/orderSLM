@@ -201,6 +201,22 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     beats the 0.8B. Much of the 2B single's gap is invalid answers (13 vs 2), each scoring as nothing. Mixed vs
     single for the 2B: +5 intents, +6 exact orders, fewer invalid answers. Not yet done: a paired comparison on the
     same messages, the error review, held-out (test/PIZZA) evaluation, and M6's order checker.
+  - **Paired comparison (2026-10-25): `runs/student-compare/20261025T191701Z/`** (`make student-compare ARGS="<dev
+    runs>"`, `eval/student_compare.py`, `student-compare@0.1`; free, local, from saved outputs). Same 268 messages /
+    91 chats for all three. Differences A − B in percentage points, 95% paired bootstrap over chats (10,000 resamples,
+    seed 20261025; chats resampled, since messages in a chat aren't independent); exact orders also get an exact
+    McNemar test on discordant chats, Holm-adjusted over the 3 pairs:
+    | A vs B | intents | invalid answers | item F1 | fully correct orders | chats only A / only B right, McNemar p (Holm) |
+    |---|---|---|---|---|---|
+    | 0.8B vs 2B single | +3.0 [−1.9, +8.4] | **−4.1 [−8.3, −0.8]** | +4.8 [−2.2, +12.7] | +5.5 [−2.2, +14.3] | 10 / 5, 0.30 (0.60) |
+    | 0.8B vs 2B mixed | +1.1 [−3.1, +5.7] | −2.6 [−5.8, 0.0] | −0.7 [−7.0, +5.4] | −1.1 [−7.7, +6.6] | 5 / 6, 1.00 (1.00) |
+    | 2B single vs 2B mixed | −1.9 [−5.3, +1.1] | +1.5 [−0.8, +4.2] | −5.6 [−12.5, +0.5] | −6.6 [−14.3, 0.0] | 3 / 9, 0.15 (0.44) |
+    **Reading:** the only difference that clears the bar: the 0.8B gives fewer invalid answers than the 2B single.
+    0.8B vs 2B mixed: a tie on every measure (orders 5 vs 6 chats). 2B mixed vs single: leans to mixed on orders and
+    item F1, but the intervals touch 0 and McNemar is not significant. With 91 chats the intervals are ~±7–8 pp
+    wide, so smaller real differences can't be seen on dev. Dev only (tuning). `student_dev report` now also writes
+    `order_rows.jsonl` (per-chat order scores; metrics/report unchanged, checked byte-identical on all three runs) and
+    no longer crashes on a relative run path when printing.
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
@@ -254,7 +270,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; next: paired comparison, error review, order checker |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; next: error review, order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
