@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-23._
+_Last updated 2026-10-25._
 
 ## Start here next session
 
@@ -179,14 +179,29 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     1.0`): **2B mixed done**, resumed at 534 → 560/560 (RNG fix works on CUDA), 509 tokens/s, host RAM peak 7.5 GB
     (only ~200 new rows). Validation 1.335 (base) → 0.0154 / 0.0114 / 0.0098 / **0.0095** at 0.5 / 1 / 1.5 / 2
     epochs: best = last (step 560, adapter sha256 `a72fc3a8…`). 6 skipped updates in total (GradScaler warm-up).
-  - **Session 4 = `runs/train/20261023T140955Z/`, pushed 2026-10-23 21:36 Brasília (kernel version 5, RUNNING;
-    expected to end ~03:30 Brasília):**
-    `export --train qwen3.5-0.8b-single --score qwen3.5-0.8b-single,qwen3.5-2b-mixed` → T4 #0: 0.8B resumed at step
-    140 (~4.5–5 h), then scored; T4 #1: 2B mixed scored (adapter `a72fc3a8…`, ~1.1 h). Expected ~6 h. Only one
-    training, so host RAM should hold. Input check passes; secrets scan 0 hits. When it ends: `make kaggle-pull
-    JOB=m6`, `make train ARGS="import runs/train/20261023T140955Z"`. Then all three M6 students are trained and scored.
-    **Push it from the MacBook (Julian, 2026-10-23):** the weights (`models/m6/`, 850 MB) and the staged upload
-    (`kaggle/m6/upload/`) are gitignored and only on the MacBook. Check the Kaggle quota reset first.
+  - **Session 4 = `runs/train/20261023T140955Z/`** (2026-10-23 21:37 → 2026-10-24 02:58 Brasília, ~5.4 h; $0;
+    imported 2026-10-25): everything done.
+    - **0.8B single: done**, resumed at 140 → 468/468 (2 epochs), 646 tokens/s, 6 skipped updates in total.
+      Validation 1.479 (base) → 0.0162 / 0.0117 / 0.0098 / **0.0097** at 0.5 / 1 / 1.5 / 2 epochs: best = last
+      (adapter sha256 `aeceedf5…`). Host RAM: the 0.8B's process peaked at 22.1 GB (same new-rows growth),
+      scoring 3.9 GB, lowest free 10.4 GB: one training + scoring fits.
+    - **Scoring done** for the 0.8B (268/268, ~58 min) and the 2B mixed (268/268, ~64 min).
+  - **M6 training done: all three students trained and scored on dev** (268 customer messages, 91 chats, Source A,
+    same requests; greedy; dev = tuning numbers, not held-out):
+    | | 0.8B single | 2B single | 2B mixed | teacher (ref.) |
+    |---|---|---|---|---|
+    | intents, all messages | **244/268 (91.0%, CI 87.0–93.9%)** | 236/268 (88.1%, 83.6–91.4%) | 241/268 (89.9%, 85.7–93.0%) | 259/268 |
+    | intents, last / earlier | 83/91 / 161/177 | 80/91 / 156/177 | 84/91 / 157/177 | |
+    | fully correct orders | 64/91 (70.3%, CI 60.3–78.7%) | 59/91 (64.8%, 54.6–73.9%) | **65/91 (71.4%, 61.4–79.7%)** | 90/91 |
+    | items found / extra / missed (F1) | 114 / 21 / 32 (0.811) | 103 / 21 / 43 (0.763) | 115 / 20 / 31 (0.819) | F1 0.993 |
+    | invalid answers (of 268) | **2** | 13 | 9 | |
+    | latency p50 / p95 (T4, fp16) | 13.1 / 19.0 s | 15.2 / 23.9 s | 14.3 / 21.5 s | |
+    | output tokens p50 | 316 | 310 | 319 | |
+    Reading (dev, small samples): the three are within each other's confidence intervals; nothing here shows the 2B
+    beats the 0.8B. Much of the 2B single's gap is invalid answers (13 vs 2), each scoring as nothing. Mixed vs
+    single for the 2B: +5 intents, +6 exact orders, fewer invalid answers. Not yet done: a paired comparison on the
+    same messages, the error review, held-out (test/PIZZA) evaluation, and M6's order checker.
+  - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -239,7 +254,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; session 4 (0.8B + scoring) staged |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; next: paired comparison, error review, order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
