@@ -1,0 +1,220 @@
+{
+ "card_id": "syn-t3-0552",
+ "reason": "teacher read 'one plain' veggie burger as removing every topping; it is the one without the added cheese",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.552615+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "veggie_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 5,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "cheese",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "with american cheese",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "six veggie burgers"
+      },
+      {
+       "message_index": 2,
+       "quote": "five of em with american cheese"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "veggie_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "six veggie burgers"
+      },
+      {
+       "message_index": 2,
+       "quote": "one plain"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "single",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "pickle",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no pickles",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "add",
+       "modifier_id": "avocado",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "add avocado",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a single cheeseburger no pickles add avocado"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "bacon",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no bacon",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a bacon burger but no bacon"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "two fries"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "deliver"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Kensington Ln",
+    "number": "30",
+    "unit": null,
+    "reference": null,
+    "raw_text": "30 kensington ln",
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "30 kensington ln"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "confirmed",
+    "agreed_while_incomplete": false,
+    "evidence": [
+     {
+      "message_index": 4,
+      "quote": "yep thats it"
+     }
+    ]
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

@@ -29,7 +29,6 @@ from pathlib import Path
 from typing import Any
 
 from orderslm.extractors.teacher import conversation_prompt
-from orderslm.llm.types import ChatResponse
 from orderslm.menus import load_menu
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
@@ -85,10 +84,8 @@ def build_rows(batch: str) -> tuple[list[dict[str, Any]], Counter]:
         if conv.id in excluded:
             skipped["excluded"] += 1
             continue
-        rec = json.loads(
-            (synth.batch_dir(batch) / "label" / synth._slug(lab.TEACHER) / f"{s.card_id}.json").read_text()
-        )
-        label = TeacherLabel.model_validate_json(ChatResponse.model_validate(rec["response"]).text)
+        text, label_version, fix = synth.label_record(batch, s.card_id, lab.TEACHER)  # a hand fix, if any
+        label = TeacherLabel.model_validate_json(text)
         if label.intents[-1].message_index != conv.customer_indices()[-1]:
             raise SystemExit(f"{conv.id}: last intent is not the last customer message")
         menu = load_menu(conv.business_id)
@@ -100,7 +97,8 @@ def build_rows(batch: str) -> tuple[list[dict[str, Any]], Counter]:
                 "batch": batch,
                 "generator": s.generator,
                 "business_id": conv.business_id,
-                "label_prompt_version": rec.get("versions", {}).get("label_prompt"),
+                "label_prompt_version": label_version,
+                "label_hand_fixed": fix is not None,
                 "intent": label.intents[-1].primary.value,
                 "items": len(label.order.items),
                 "chars": {"system": len(system), "user": len(user), "assistant": len(answer)},

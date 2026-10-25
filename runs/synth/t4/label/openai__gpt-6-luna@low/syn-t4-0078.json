@@ -1,0 +1,42 @@
+{
+ "key": "syn-t4-0078",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\n  \"schema_version\": \"label@0.1\",\n  \"intents\": [\n    {\n      \"message_index\": 0,\n      \"primary\": \"SMALL_TALK\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 2,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 3,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    },\n    {\n      \"message_index\": 4,\n      \"primary\": \"PLACE_ORDER\",\n      \"secondary\": null\n    }\n  ],\n  \"order\": {\n    \"items\": [\n      {\n        \"line_id\": \"L1\",\n        \"menu_item_id\": \"americano\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"small\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"add\",\n            \"modifier_id\": null,\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"lavender syrup\",\n            \"not_on_menu\": true,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 2,\n            \"quote\": \"Two small Americanos\"\n          },\n          {\n            \"message_index\": 4,\n            \"quote\": \"lavender syrup\"\n          }\n        ]\n      },\n      {\n        \"line_id\": \"L2\",\n        \"menu_item_id\": \"breakfast_sandwich\",\n        \"unmatched_text\": null,\n        \"halves\": null,\n        \"quantity\": 2,\n        \"variant_id\": \"bagel\",\n        \"unmatched_variant_text\": null,\n        \"modifications\": [\n          {\n            \"kind\": \"remove\",\n            \"modifier_id\": \"egg\",\n            \"replacement_modifier_id\": null,\n            \"amount\": \"normal\",\n            \"raw_text\": \"without the egg\",\n            \"not_on_menu\": false,\n            \"kitchen_note\": false\n          }\n        ],\n        \"combo_selections\": [],\n        \"notes\": null,\n        \"evidence\": [\n          {\n            \"message_index\": 3,\n            \"quote\": \"two breakfast sandwiches on a bagel, but without the egg\"\n          }\n        ]\n      }\n    ],\n    \"fulfillment\": {\n      \"method\": \"unknown\",\n      \"method_evidence\": [],\n      \"requested_time\": {\n        \"state\": \"not_mentioned\",\n        \"kind\": null,\n        \"raw_text\": null,\n        \"normalized_local\": null,\n        \"evidence\": []\n      }\n    },\n    \"address\": {\n      \"state\": \"not_mentioned\",\n      \"street\": null,\n      \"number\": null,\n      \"unit\": null,\n      \"reference\": null,\n      \"raw_text\": null,\n      \"evidence\": []\n    },\n    \"payment\": {\n      \"method\": \"unknown\",\n      \"change_for_cents\": null,\n      \"customer_claims_paid\": false,\n      \"evidence\": []\n    },\n    \"customer_name\": {\n      \"state\": \"not_mentioned\",\n      \"value\": null,\n      \"evidence\": []\n    },\n    \"customer_decision\": {\n      \"state\": \"pending\",\n      \"agreed_while_incomplete\": false,\n      \"evidence\": []\n    },\n    \"notes\": [],\n    \"ambiguity_flags\": []\n  }\n}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 10402,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 850,
+   "reasoning_tokens": 88
+  },
+  "latency_ms": 7211.591209983453,
+  "cost_micros": 761,
+  "at": "2026-10-25T23:38:21.708124+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 10402,
+   "completion_tokens": 850,
+   "total_tokens": 11252,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 2564,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 88,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

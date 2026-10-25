@@ -1,0 +1,192 @@
+{
+ "card_id": "syn-t3-0426",
+ "reason": "label dropped (check): quote '1 OF THEM GETS THE THIN CRUST', the chat says '1 OF THOSE'",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.511089+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": "MENU_QUESTION"
+   },
+   {
+    "message_index": 6,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 8,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "supreme_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 4,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "5 SMALL SUPREME PIZZAS"
+      },
+      {
+       "message_index": 2,
+       "quote": "THE OTHERS REGULAR"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "supreme_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "crust_thin",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "THIN CRUST",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "5 SMALL SUPREME PIZZAS"
+      },
+      {
+       "message_index": 2,
+       "quote": "JUST 1 OF THOSE GETS THE THIN CRUST"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "garlic_knots",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "AN ORDER OF THEM"
+      },
+      {
+       "message_index": 6,
+       "quote": "ONE ORDER OF THE KNOTS"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "diet_coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "two_liter",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 6,
+       "quote": "A 2 LITER DIET COKE"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 8,
+      "quote": "DELIVERY"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "asap",
+     "raw_text": "ASAP",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 8,
+       "quote": "ASAP"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Hollis Ave",
+    "number": "725",
+    "unit": "3B",
+    "reference": null,
+    "raw_text": "725 HOLLIS AVE, UNIT 3B",
+    "evidence": [
+     {
+      "message_index": 8,
+      "quote": "725 HOLLIS AVE, UNIT 3B"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 8,
+      "quote": "PAY BY CARD"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

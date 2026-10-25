@@ -1,0 +1,42 @@
+{
+ "key": "syn-t4-0030",
+ "config_id": "openai/gpt-6-luna@low",
+ "versions": {
+  "label_prompt": "teacher-label@0.7",
+  "label_schema": "label@0.1",
+  "finalize": "finalize@0.1"
+ },
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"schema_version\":\"label@0.1\",\"intents\":[{\"message_index\":0,\"primary\":\"PLACE_ORDER\",\"secondary\":null}],\"order\":{\"items\":[{\"line_id\":\"L1\",\"menu_item_id\":\"bbq_chicken_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"add\",\"modifier_id\":null,\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"put shrimp on the bbq chickn ones\",\"not_on_menu\":true,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two xl bbq chicken pizzas\"},{\"message_index\":0,\"quote\":\"put shrimp on the bbq chickn ones\"}]},{\"line_id\":\"L2\",\"menu_item_id\":\"hawaiian_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":4,\"variant_id\":\"extra_large\",\"unmatched_variant_text\":null,\"modifications\":[],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"four xl hawaiians\"}]},{\"line_id\":\"L3\",\"menu_item_id\":\"cheese_pizza\",\"unmatched_text\":null,\"halves\":null,\"quantity\":2,\"variant_id\":\"large\",\"unmatched_variant_text\":null,\"modifications\":[{\"kind\":\"remove\",\"modifier_id\":\"tomato_sauce\",\"replacement_modifier_id\":null,\"amount\":\"normal\",\"raw_text\":\"no sauce\",\"not_on_menu\":false,\"kitchen_note\":false}],\"combo_selections\":[],\"notes\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"two large cheese\"},{\"message_index\":0,\"quote\":\"no sauce\"}]}],\"fulfillment\":{\"method\":\"delivery\",\"method_evidence\":[{\"message_index\":0,\"quote\":\"delivery\"}],\"requested_time\":{\"state\":\"provided\",\"kind\":\"relative\",\"raw_text\":\"in like 40 min\",\"normalized_local\":null,\"evidence\":[{\"message_index\":0,\"quote\":\"in like 40 min\"}]}},\"address\":{\"state\":\"provided\",\"street\":\"hawthorne st\",\"number\":\"107\",\"unit\":null,\"reference\":null,\"raw_text\":\"107 hawthorne st\",\"evidence\":[{\"message_index\":0,\"quote\":\"107 hawthorne st\"}]},\"payment\":{\"method\":\"cash\",\"change_for_cents\":null,\"customer_claims_paid\":false,\"evidence\":[{\"message_index\":0,\"quote\":\"paying cash\"}]},\"customer_name\":{\"state\":\"not_mentioned\",\"value\":null,\"evidence\":[]},\"customer_decision\":{\"state\":\"pending\",\"agreed_while_incomplete\":false,\"evidence\":[]},\"notes\":[],\"ambiguity_flags\":[]}}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 12650,
+   "cached_input_tokens": 7835,
+   "cache_write_tokens": 0,
+   "output_tokens": 768,
+   "reasoning_tokens": 176
+  },
+  "latency_ms": 7036.4106459892355,
+  "cost_micros": 944,
+  "at": "2026-10-25T23:37:20.265669+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 12650,
+   "completion_tokens": 768,
+   "total_tokens": 13418,
+   "prompt_tokens_details": {
+    "cached_tokens": 7835,
+    "cache_write_tokens": 4812,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 176,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

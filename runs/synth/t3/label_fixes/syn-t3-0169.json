@@ -1,0 +1,150 @@
+{
+ "card_id": "syn-t3-0169",
+ "reason": "teacher dropped the stated quantities: 3 garlic knots, 2 breadsticks",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.483593+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L2",
+     "menu_item_id": "supreme_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "the supreme 🍕 small 10 inch"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "garlic_knots",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "three garlic knots"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "breadsticks",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "two breadsticks"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "water",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "a bottled water"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 4,
+      "quote": "payin cash"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Mike",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "mike"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

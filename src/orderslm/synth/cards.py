@@ -181,6 +181,12 @@ TARGET_WEIGHTS = {  # Julian, 2026-10-25: 600 chats, same writers and teacher as
     "bare_time": 4,  # "at 8:30" with no am/pm, meaning the later one
     "offmenu_addon": 4,  # a topping the menu doesn't have, on a menu item
 }
+# Top-up for the two targets t3's writer missed (Julian, 2026-10-25; chats written by Claude in the session): DeepSeek
+# wrote understandable orders for 32 of 59 unclear cards, and had the business decline most off-menu add-ons.
+TOPUP_WEIGHTS = {
+    "unclear": 50,
+    "offmenu_open": 50,  # as offmenu_addon, but the chat ends on the request, before the business answers it
+}
 # Kinds of change in the 160 modify_last chats, weighted toward what all three students got wrong on dev (Julian,
 # 2026-10-25: "the whole point is to help the students on what they got wrong"): size changes ("make the fries
 # large"), option swaps ("make the latte oat milk"), time/payment changes, removals, additions after confirming.
@@ -690,7 +696,7 @@ def _card(
             brief.append(time_sentence)
         elif modify_kind not in ("time", "payment") and rng.random() < 0.3:
             brief.append(f"Says when they want it: {rng.choice(TIMES)}.")
-        if target == "offmenu_addon":
+        if target in ("offmenu_addon", "offmenu_open"):
             host = next(
                 (p for p in items if p.menu_item_id and menu.item(p.menu_item_id).addon_ids),  # type: ignore[union-attr]
                 None,
@@ -706,6 +712,8 @@ def _card(
             brief.append(
                 f"Asks for {addon} on the {host_name}, as if the place has it (it isn't on the menu)."
             )
+            if target == "offmenu_open":
+                brief.append("The chat ends with that request: the business hasn't answered it yet.")
         if "greets_first" in extras:
             brief.insert(0, "Opens with a greeting before ordering.")
         if "asks_menu_mid_order" in extras:
@@ -811,6 +819,7 @@ TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
     "trivia": (S.out_of_scope,),
     "bare_time": (S.simple_order, S.multi_message_order),
     "offmenu_addon": (S.simple_order, S.multi_message_order),
+    "offmenu_open": (S.simple_order, S.multi_message_order),
 }
 
 
@@ -820,12 +829,13 @@ def plan_targeted_cards(
     seed: int,
     batch: str,
     generators: tuple[tuple[str, int], ...] = GENERATORS,
+    weights: dict[str, int] = TARGET_WEIGHTS,
 ) -> list[SynthCard]:
-    """n cards for the targeted batch (TARGET_WEIGHTS over the three training menus), generators assigned in target
-    order as in plan_cards."""
+    """n cards for the targeted batch (`weights` over the three training menus, TARGET_WEIGHTS or TOPUP_WEIGHTS),
+    generators assigned in target order as in plan_cards."""
     rng = random.Random(f"{TARGETS_VERSION}-{seed}-{batch}")
     menus = {b: m for b, m in load_menus().items() if not m.held_out}
-    targets = _exact(TARGET_WEIGHTS, n, rng)
+    targets = _exact(weights, n, rng)
     styles = _exact(STYLE_WEIGHTS, n, rng)
     kinds = iter(_exact(MODIFY_KIND_WEIGHTS, targets.count("modify_last"), rng))
     cards = []
@@ -839,7 +849,7 @@ def plan_targeted_cards(
             allowed = [b for b in allowed if menus[b].exclusive_groups]
         menu = menus[rng.choice(allowed)]
         cards.append(_card(i, scenario, style, menu, rng, batch, target=target, modify_kind=kind))
-    order = list(TARGET_WEIGHTS)
+    order = list(weights)
     pattern = _pattern(generators)
     ranked = sorted(range(n), key=lambda i: (order.index(cards[i].extras[-1].removeprefix("target:")), i))
     for j, i in enumerate(ranked):

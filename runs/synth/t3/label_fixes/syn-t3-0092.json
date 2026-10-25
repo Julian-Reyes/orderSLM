@@ -1,0 +1,170 @@
+{
+ "card_id": "syn-t3-0092",
+ "reason": "label dropped (contract): an ambiguous time can't carry a kind; 'at 6:30' at a café open 7-15 stays ambiguous",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.445567+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "latte",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "FOUR large lattes pls - three of em plain"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "latte",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "hazelnut_syrup",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "with hazelnut",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "FOUR large lattes pls - three of em plain and one with hazelnut"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "muffin",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "chocolate_chip",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "a chocolate chip muffin"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "bagel",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "everything",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "TWO everything bagels"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 5,
+      "quote": "grab it"
+     }
+    ],
+    "requested_time": {
+     "state": "ambiguous",
+     "kind": null,
+     "raw_text": "at 6:30",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 5,
+       "quote": "at 6:30"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Maya",
+    "evidence": [
+     {
+      "message_index": 5,
+      "quote": "MAYA"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

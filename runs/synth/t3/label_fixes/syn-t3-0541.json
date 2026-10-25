@@ -1,0 +1,164 @@
+{
+ "card_id": "syn-t3-0541",
+ "reason": "label dropped (contract): two lines both L1; renumbered L1-L4",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.547628+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "4 cheeseburgers"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "lettuce",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no lettuce",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "4 cheeseburgers"
+      },
+      {
+       "message_index": 0,
+       "quote": "3 of them with no lettuce"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "2 bacon burgers"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a Coke"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "Pickup please"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "relative",
+     "raw_text": "in about 20 min",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "in about 20 min"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "pay cash"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

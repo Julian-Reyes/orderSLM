@@ -151,3 +151,110 @@ def test_change_kinds_follow_the_weights_and_each_is_really_in_the_card(planned)
             )
             for p in c.items
         )
+
+
+def test_topup_plans_only_the_two_targets_and_open_requests_say_so():
+    cards = sc.plan_targeted_cards(
+        100,
+        seed=20261016,
+        batch="t-top",
+        generators=(("claude-session/claude-opus-5-5", 1),),
+        weights=sc.TOPUP_WEIGHTS,
+    )
+    assert Counter(_target(c) for c in cards) == sc.TOPUP_WEIGHTS
+    for c in (c for c in cards if _target(c) == "offmenu_open"):
+        assert "isn't on the menu" in c.brief and "hasn't answered it yet" in c.brief
+
+
+def _hand_batch(tmp_path, monkeypatch):
+    from orderslm.synth import run
+
+    monkeypatch.setattr(run, "batch_dir", lambda b: tmp_path / b)
+    cards = sc.plan_targeted_cards(
+        6, seed=1, batch="h", generators=((run.HAND_WRITER, 1),), weights={"trivia": 1, "offmenu_open": 1}
+    )
+    (tmp_path / "h").mkdir()
+    run._jsonl(tmp_path / "h" / "cards.jsonl", [c.model_dump(mode="json") for c in cards])
+    return run, cards
+
+
+def test_hand_written_chats_go_through_the_writer_checks(tmp_path, monkeypatch):
+    run, cards = _hand_batch(tmp_path, monkeypatch)
+    rows = [
+        {"card_id": cards[0].id, "messages": [{"role": "customer", "text": "who won the 1998 world cup?"}]},
+        {
+            "card_id": cards[1].id,
+            "messages": [
+                {"role": "customer", "text": "is that $4.50?"},
+                {"role": "business", "text": "It's $4.50"},
+                {"role": "customer", "text": "ok"},
+            ],
+        },
+        {
+            "card_id": cards[2].id,
+            "messages": [{"role": "customer", "text": "hi"}, {"role": "business", "text": "hey!"}],
+        },
+    ]
+    run._jsonl(tmp_path / "chats.jsonl", rows)
+    run.main(["import", "--batch", "h", "--file", str(tmp_path / "chats.jsonl")])
+    kept = run.load_conversations("h")
+    assert [k.card_id for k in kept] == [cards[0].id, cards[2].id]
+    assert kept[1].repairs == ["trimmed_trailing_business_message"]
+    assert all(
+        k.generator == run.HAND_WRITER and k.generator_prompt_version == run.HAND_PROMPT_VERSION for k in kept
+    )
+    drops = run._read_jsonl(tmp_path / "h" / "gen_drops.jsonl")
+    assert drops == [
+        {"card_id": cards[1].id, "generator": run.HAND_WRITER, "reason": "business_states_price"}
+    ]
+
+
+def test_import_refuses_cards_planned_for_a_model(tmp_path, monkeypatch):
+    run, cards = _hand_batch(tmp_path, monkeypatch)
+    model_card = cards[0].model_copy(update={"generator": "deepseek/deepseek-flash@none"})
+    run._jsonl(tmp_path / "h" / "cards.jsonl", [model_card.model_dump(mode="json")])
+    run._jsonl(
+        tmp_path / "chats.jsonl",
+        [{"card_id": model_card.id, "messages": [{"role": "customer", "text": "hi"}]}],
+    )
+    with pytest.raises(SystemExit):
+        run.main(["import", "--batch", "h", "--file", str(tmp_path / "chats.jsonl")])
+
+
+def test_rewrite_copies_only_dropped_cards_with_new_ids(tmp_path, monkeypatch):
+    run, cards = _hand_batch(tmp_path, monkeypatch)
+    run._jsonl(
+        tmp_path / "h" / "gen_drops.jsonl",
+        [{"card_id": cards[3].id, "generator": "x", "reason": "invalid_output"}],
+    )
+    out = run.rewrite_cards("h", "h2", start=101, generator=run.HAND_WRITER)
+    assert [c.id for c in out] == ["syn-h2-0101"]
+    assert out[0].extras[0] == f"rewrite_of:{cards[3].id}" and out[0].extras[1:] == cards[3].extras
+    assert out[0].brief == cards[3].brief and out[0].generator == run.HAND_WRITER
+
+
+def test_label_fix_replaces_the_teacher_output_but_keeps_it(tmp_path, monkeypatch):
+    from orderslm.llm.types import ChatResponse, LLMUsage
+
+    run, _ = _hand_batch(tmp_path, monkeypatch)
+    raw = {"intents": [], "order": None}
+    resp = ChatResponse(
+        config_id="t",
+        model="t",
+        text=json.dumps(raw),
+        finish_reason="stop",
+        usage=LLMUsage(),
+        latency_ms=0,
+        cost_micros=0,
+        at="x",
+    )
+    path = tmp_path / "h" / "label" / run._slug(run.lab.TEACHER) / "syn-h-0001.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps({"versions": {"label_prompt": "v"}, "response": resp.model_dump(mode="json")}))
+    assert run.label_record("h", "syn-h-0001") == (json.dumps(raw), "v", None)
+    fix = {"label": {"intents": [1]}, "reason": "r", "fixed_by": "me"}
+    (tmp_path / "h" / "label_fixes").mkdir()
+    (tmp_path / "h" / "label_fixes" / "syn-h-0001.json").write_text(json.dumps(fix))
+    text, version, got = run.label_record("h", "syn-h-0001")
+    assert json.loads(text) == {"intents": [1]} and version == "v" and got == fix
+    assert json.loads(ChatResponse.model_validate(json.loads(path.read_text())["response"]).text) == raw

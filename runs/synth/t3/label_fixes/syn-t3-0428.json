@@ -1,0 +1,180 @@
+{
+ "card_id": "syn-t3-0428",
+ "reason": "label dropped (check): removed cheese the veggie burger doesn't come with ('no cheese then' = don't add it)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.534234+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 6,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 8,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 10,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 12,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "veggie_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "the veggie burger. 3 of those"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "milkshake",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "strawberry",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 8,
+       "quote": "a strawberry milkshake"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 8,
+       "quote": "a coke"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "lemonade",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 8,
+       "quote": "a lemonade"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 10,
+      "quote": "delivery"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Dover Terrace",
+    "number": "36",
+    "unit": "15",
+    "reference": null,
+    "raw_text": "36 dover terrace # 15",
+    "evidence": [
+     {
+      "message_index": 10,
+      "quote": "36 dover terrace # 15"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 10,
+      "quote": "pay by card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "confirmed",
+    "agreed_while_incomplete": false,
+    "evidence": [
+     {
+      "message_index": 12,
+      "quote": "yes thats right"
+     }
+    ]
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

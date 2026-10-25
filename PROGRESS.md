@@ -249,7 +249,24 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     chats found 6 more where the teacher keeps an add-on the business declined and the customer accepted (22 others
     correctly drop it). **11 t3 chats excluded** (`runs/synth/excluded.json`) → 557 usable. Note: only ~14
     offmenu_addon chats end with the add-on still open (`not_on_menu`), since the writer usually has the business
-    decline it. Next (Julian's OK): training data v0.2 (old + t3), retrain on Kaggle, measure on fresh data.
+    decline it.
+  - **Hand-written top-up t4 + t3 label fixes (2026-10-25, Julian: "you write, the teacher labels").** New code:
+    `plan --topup` (`TOPUP_WEIGHTS`: 50 `unclear`, 50 `offmenu_open` = the add-on request ends the chat),
+    `plan --rewrite-missing t3` (copies of t3's 22 unwritten cards, `rewrite_of:<id>`), `import` stage (hand chats
+    through the same writer checks; writer `claude-session/claude-opus-5-5`, prompt `synth-write@0.2+hand`), and
+    `label_fixes/<card>.json` (a hand-fixed label + reason; the teacher's raw output stays; labels.jsonl and training
+    rows use the fix via `run.label_record`; student-data@0.1 rebuilds byte-identical). **t4: 122 chats written by
+    Claude** from the card views (`runs/synth/t4/hand_chats.txt`), all 122 pass the writer checks. **t3: 19 labels
+    hand-fixed** (`runs/synth/t3/label_fixes.py`, every fix passes parse_label): 9 of the 10 label drops (contract:
+    ambiguous time with a kind, duplicate line ids; checks: misquoted evidence, removing cheese a veggie burger
+    doesn't have) and 10 of the 11 exclusions (invented coffee, dropped quantities, kept removed lattes, "plain",
+    6 declined off-menu add-ons) plus the declined matcha in syn-t3-0098. Still excluded: syn-t3-0174 (ambiguous
+    chat), syn-t3-0467 (cancelled order with a vague item: not fixable by a label edit). **t3 now 577 labeled, 576
+    usable.** t4 teacher labels: 93 kept of 94 calls (unclear 42 of 45 end `UNKNOWN`; offmenu_open 43 of 44 keep the
+    add-on as `not_on_menu`); 1 drop (syn-t4-0084, ambiguous time with a kind, the same teacher slip). **Blocked:
+    OpenAI prepaid credit ($5) used up** → 28 t4 calls failed (`credit_balance_exhausted`, not billed); the
+    OpenAI Decisions half of the audit needs it too. Next: Julian adds OpenAI credit → label the 28
+    (`make label ARGS="--batch t4 --only <ids> --yes"`), audit t4, then training data v0.2 + retrain (Julian's OK).
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
@@ -303,7 +320,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 568 labeled, audited, 11 excluded → 557 usable ($0.73 incl. pilots)**; next: training data v0.2 + retrain (Julian's OK); order checker |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, 93 labeled, 28 waiting on OpenAI credit**; next: finish t4 labels + audit, then training data v0.2 + retrain (Julian's OK); order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

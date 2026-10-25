@@ -1,0 +1,167 @@
+{
+ "card_id": "syn-t3-0098",
+ "reason": "label dropped (contract): ambiguous 'at 6:30' without a kind; off-menu matcha powder declined by the business: removed",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.452571+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "DELIVERY_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 7,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 9,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "cappuccino",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "hazelnut_syrup",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "hazelnut syrup",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "substitute",
+       "modifier_id": "whole_milk",
+       "replacement_modifier_id": "oat_milk",
+       "amount": "normal",
+       "raw_text": "oat milk instead of whole",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a large cappuccino"
+      },
+      {
+       "message_index": 3,
+       "quote": "hazelnut syrup n oat milk instead of whole"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "breakfast_sandwich",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "croissant",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "a breakfast sandwich on a croissant"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 7,
+      "quote": "gonna pick it up"
+     }
+    ],
+    "requested_time": {
+     "state": "ambiguous",
+     "kind": null,
+     "raw_text": "at 6:30",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 9,
+       "quote": "at 6:30"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 9,
+      "quote": "pay by card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Jordan",
+    "evidence": [
+     {
+      "message_index": 7,
+      "quote": "Jordan"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "card_id": "syn-t3-0343",
+ "reason": "teacher kept the 2 lattes the customer removed in the last message: removed",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.501038+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "CONFIRM_ORDER",
+    "secondary": "PLACE_ORDER"
+   },
+   {
+    "message_index": 4,
+    "primary": "MODIFY_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "drip_coffee",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "skim_milk",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "skim milk",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a medium drip w skim milk"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cappuccino",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "caramel_syrup",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "caramel syrup",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "substitute",
+       "modifier_id": "whole_milk",
+       "replacement_modifier_id": "oat_milk",
+       "amount": "normal",
+       "raw_text": "oat milk instead of whole milk",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "two medium cappuccinos"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "gonna pick it up"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "pay by card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Priya",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "priya here"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

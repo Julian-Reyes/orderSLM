@@ -8,14 +8,15 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$6.5278** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642; M6 targeted pilots $0.0415; M6 targeted batch t3 write + label + audit $0.6857) |
-| Remaining (of $10 ceiling) | $3.4722 |
+| Spent to date | **$6.5885** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642; M6 targeted pilots $0.0415; M6 targeted batch t3 write + label + audit $0.6857; M6 hand-written batch t4 labels so far $0.0607) |
+| Remaining (of $10 ceiling) | $3.4115 |
 | Prepaid credit bought (not spend) | $12.00 (OpenAI $5, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
 
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | M6 | openai/gpt-6-luna@low | Label hand-written batch t4, `teacher-label@0.7`: 94 of 122 calls done, then OpenAI's $5 prepaid credit ran out (28 `credit_balance_exhausted`, not billed) | see calls log | 0.060700 | recorded usage × verified price | `runs/synth/t4/calls/20261025T233636Z-label.json` |
 | 2026-10-25 | M6 | Jev + OpenAI Decisions | Label audit on t3 teacher labels, `label-audit@0.3` (568 chats × 2) | Jev 1,343,207 in; Decisions 1,152,824 in | 0.172000 | input × price (Jev unverified) | `runs/label-audit/20261025T225312Z-train` |
 | 2026-10-25 | M6 | openai/gpt-6-luna@low | Label targeted batch t3 (578 chats), `teacher-label@0.7` | see calls log | 0.426073 | recorded usage × verified price | `runs/synth/t3/calls/20261025T215143Z-label.json` |
 | 2026-10-25 | M6 | deepseek/deepseek-flash@none | Write targeted batch t3 (600 cards, `synth-targets@0.1`) | see calls log | 0.087583 | recorded usage × verified price | `runs/synth/t3/calls/20261025T213106Z-generate.json` |
@@ -74,7 +75,7 @@ Buying credit is not spending it: spend is counted only in the ledger above, fro
 
 | Date | Provider | Amount (USD) | Why | Notes |
 |---|---|---|---|---|
-| 2026-10-15 | OpenAI (OrderSLM project) | 5.00 | Leave the free tier (50 requests/day, small batch queue) | Account moved to a paid usage tier; `gpt-6-luna` now 5,000 RPM, 2M TPM, 20M batch-queue TPD |
+| 2026-10-15 | OpenAI (OrderSLM project) | 5.00 | Leave the free tier (50 requests/day, small batch queue) | Account moved to a paid usage tier; `gpt-6-luna` now 5,000 RPM, 2M TPM, 20M batch-queue TPD. **Used up 2026-10-25** (t4 labels: `credit_balance_exhausted`) |
 | 2026-10-15 | Anthropic | 5.00 | API credit for the Haiku 5.5 teacher candidate | |
 | 2026-10-15 | DeepSeek | 2.00 | Prepaid balance for `deepseek-flash` | The balance is DeepSeek's only spend cap |
 

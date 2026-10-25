@@ -1,0 +1,181 @@
+{
+ "card_id": "syn-t3-0495",
+ "reason": "off-menu grilled mushrooms declined by the business and accepted by the customer: removed",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.538765+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 6,
+    "primary": "PLACE_ORDER",
+    "secondary": "MENU_QUESTION"
+   },
+   {
+    "message_index": 8,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 10,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 4,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "mustard",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "w mustard",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "4 bacon burgers"
+      },
+      {
+       "message_index": 4,
+       "quote": "w mustard"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "onion",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no onions",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "add",
+       "modifier_id": "bacon",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "add bacon",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 5,
+       "quote": "a cheeseburger, no onions, add bacon"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "provided",
+     "kind": "asap",
+     "raw_text": "asap",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "asap"
+      },
+      {
+       "message_index": 8,
+       "quote": "asap pls"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 8,
+      "quote": "card yeah"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "confirmed",
+    "agreed_while_incomplete": false,
+    "evidence": [
+     {
+      "message_index": 10,
+      "quote": "yep that's it"
+     }
+    ]
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

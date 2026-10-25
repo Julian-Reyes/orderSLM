@@ -5,6 +5,11 @@
     make synth ARGS="generate --batch p1 --limit 5 --yes"        # write them
     make label ARGS="--batch p1 --limit 5 [--yes]"               # teacher labels for the kept chats
     make synth ARGS="report --batch p1"                          # rebuild summary + report from saved outputs
+    make synth ARGS="import --batch t4 --file chats.jsonl"       # chats written by hand (HAND_WRITER), no calls
+
+Hand-written chats (`import`) go through the same checks as a model's (to_conversation, near-duplicates). Hand
+fixes of teacher labels live in label_fixes/<card>.json (the fixed label, reason, who fixed it); the teacher's raw
+output stays in label/ untouched, and labels.jsonl / training rows use the fix (`label_record`).
 
 Everything lands in runs/synth/<batch>/: cards.jsonl, gen/<generator>/<card>.json (raw responses),
 label/<teacher>/<card>.json, conversations.jsonl, labels.jsonl, drops, summary.json, report.md, and one
@@ -42,7 +47,15 @@ from orderslm.schema.synthetic import LabeledConversation, SynthCard, SyntheticC
 from . import analysis as an
 from . import generate as gen
 from . import label as lab
-from .cards import CARDS_VERSION, GENERATORS, TARGETS_VERSION, plan_cards, plan_targeted_cards
+from .cards import (
+    CARDS_VERSION,
+    GENERATORS,
+    TARGET_WEIGHTS,
+    TARGETS_VERSION,
+    TOPUP_WEIGHTS,
+    plan_cards,
+    plan_targeted_cards,
+)
 from .dedup import THRESHOLD, near_duplicates
 
 EXPERIMENT = "synth"
@@ -52,6 +65,12 @@ CHARS_PER_TOKEN = 3
 ASSUMED_OVERHEAD = {"anthropic": 300}
 ASSUMED_GEN_OUTPUT = 900  # chat JSON; generators run with reasoning off
 ASSUMED_LABEL_OUTPUT = 1200 + 1500  # label JSON + luna `low` reasoning (bake-off: ~1.2K reasoning)
+HAND_WRITER = (
+    "claude-session/claude-opus-5-5"  # chats written by Claude in a Claude Code session (no API call)
+)
+HAND_PROMPT_VERSION = (
+    "synth-write@0.2+hand"  # the same prompt, menu view and card view, read and followed by hand
+)
 PEAK = datetime(2026, 10, 13, 2, 0, tzinfo=UTC)  # estimates never assume DeepSeek's off-peak price
 
 
@@ -113,17 +132,24 @@ def plan(args: argparse.Namespace) -> int:
     generators = GENERATORS
     if args.generators:
         generators = tuple((g, int(w)) for g, w in (x.rsplit(":", 1) for x in args.generators.split(",")))
-        unknown = [g for g, _ in generators if g not in load_models()]
+        unknown = [g for g, _ in generators if g not in load_models() and g != HAND_WRITER]
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    if args.targeted:
+    if args.targeted or args.topup:
         if business_ids:
             raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
-        cards = plan_targeted_cards(args.n, seed=args.seed, batch=args.batch, generators=generators)
+        weights = TOPUP_WEIGHTS if args.topup else TARGET_WEIGHTS
+        cards = plan_targeted_cards(
+            args.n, seed=args.seed, batch=args.batch, generators=generators, weights=weights
+        )
     else:
         cards = plan_cards(
             args.n, seed=args.seed, batch=args.batch, generators=generators, business_ids=business_ids
+        )
+    if args.rewrite_missing:
+        cards += rewrite_cards(
+            args.rewrite_missing, args.batch, start=len(cards) + 1, generator=generators[0][0]
         )
     out.mkdir(parents=True, exist_ok=True)
     _jsonl(out / "cards.jsonl", [c.model_dump(mode="json") for c in cards])
@@ -132,7 +158,9 @@ def plan(args: argparse.Namespace) -> int:
         "n": args.n,
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
-        "targets_version": TARGETS_VERSION if args.targeted else None,
+        "targets_version": TARGETS_VERSION if args.targeted or args.topup else None,
+        "topup": args.topup,
+        "rewrite_missing": args.rewrite_missing,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
         "menu_versions": {b: menu_version(load_menu(b)) for b in sorted({c.business_id for c in cards})},
@@ -144,6 +172,25 @@ def plan(args: argparse.Namespace) -> int:
     print(f"Wrote {len(cards)} cards to {_rel(out)}/cards.jsonl")
     print(json.dumps(meta["distribution"]["generator"], indent=1))
     return 0
+
+
+def rewrite_cards(source: str, batch: str, *, start: int, generator: str) -> list[SynthCard]:
+    """Copies of the source batch's cards whose chat didn't survive writing (gen_drops), renumbered into `batch`
+    for a new writer; `rewrite_of:<id>` goes first in extras (the target, if any, stays last)."""
+    dropped = {d["card_id"] for d in _read_jsonl(batch_dir(source) / "gen_drops.jsonl")}
+    out = []
+    for c in load_cards(source):
+        if c.id in dropped:
+            out.append(
+                c.model_copy(
+                    update={
+                        "id": f"syn-{batch}-{start + len(out):04d}",
+                        "generator": generator,
+                        "extras": [f"rewrite_of:{c.id}", *c.extras],
+                    }
+                )
+            )
+    return out
 
 
 def _card_distribution(cards: list[SynthCard]) -> dict[str, dict[str, int]]:
@@ -275,6 +322,42 @@ def generate(args: argparse.Namespace) -> int:
     return rc
 
 
+def import_chats(args: argparse.Namespace) -> int:
+    """Hand-written chats ({"card_id", "messages": [{"role", "text"}]} per line) saved as the writer's responses,
+    then collected like any generator's. Only cards planned for HAND_WRITER; $0, no calls."""
+    cards = {c.id: c for c in load_cards(args.batch)}
+    rows = _read_jsonl(Path(args.file))
+    now = datetime.now(UTC).isoformat()
+    for r in rows:
+        card = cards.get(r["card_id"])
+        if card is None or card.generator != HAND_WRITER:
+            raise SystemExit(f"{r['card_id']}: not a {HAND_WRITER} card of batch {args.batch}")
+        resp = ChatResponse(
+            config_id=HAND_WRITER,
+            model="claude-opus-5-5",
+            text=json.dumps({"messages": r["messages"]}, ensure_ascii=False),
+            finish_reason="stop",
+            usage=LLMUsage(),
+            latency_ms=0,
+            cost_micros=0,
+            at=now,
+        )
+        path = batch_dir(args.batch) / "gen" / _slug(HAND_WRITER) / f"{card.id}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        rec = {
+            "key": card.id,
+            "config_id": HAND_WRITER,
+            "versions": {"generator_prompt": HAND_PROMPT_VERSION, "cards": CARDS_VERSION},
+            "response": resp.model_dump(mode="json"),
+        }
+        path.write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
+    print(
+        f"Imported {len(rows)} hand-written chats into {_rel(batch_dir(args.batch))}/gen/{_slug(HAND_WRITER)}/"
+    )
+    collect(args.batch)
+    return 0
+
+
 def _dev_conversations() -> list:
     return [ac.conversation for ac in load_dir(DEV, Split.dev)]
 
@@ -369,6 +452,20 @@ def label(args: argparse.Namespace) -> int:
     return rc
 
 
+def label_record(
+    batch: str, card_id: str, teacher: str = lab.TEACHER
+) -> tuple[str, str, dict[str, Any] | None]:
+    """(label JSON text, label prompt version, hand fix or None): the hand fix when label_fixes/<card>.json
+    exists, otherwise the teacher's raw response."""
+    fix_path = batch_dir(batch) / "label_fixes" / f"{card_id}.json"
+    rec = json.loads((batch_dir(batch) / "label" / _slug(teacher) / f"{card_id}.json").read_text())
+    version = rec.get("versions", {}).get("label_prompt")
+    if fix_path.exists():
+        fix = json.loads(fix_path.read_text())
+        return json.dumps(fix["label"], ensure_ascii=False), version, fix
+    return ChatResponse.model_validate(rec["response"]).text, version, None
+
+
 def collect_labels(batch: str, teacher: str) -> None:
     out = batch_dir(batch)
     cards = {c.id: c for c in load_cards(batch)}
@@ -382,12 +479,14 @@ def collect_labels(batch: str, teacher: str) -> None:
         if "error" in rec:
             drops.append({"card_id": s.card_id, "generator": s.generator, "reason": "call_error"})
             continue
-        resp = ChatResponse.model_validate(rec["response"])
         menu = load_menu(s.conversation.business_id)
-        version = rec.get("versions", {}).get("label_prompt")
+        text, version, fix = label_record(batch, s.card_id, teacher)
         if version is None:
             raise SystemExit(f"{path}: no label_prompt version recorded (backfill it first)")
-        lc, reason = lab.parse_label(resp.text, s.conversation, menu, teacher, prompt_version=version)
+        who = f"{teacher}+fix:{fix['fixed_by']}" if fix else teacher
+        lc, reason = lab.parse_label(text, s.conversation, menu, who, prompt_version=version)
+        if fix and lc is None:
+            raise SystemExit(f"{s.card_id}: the hand fix fails the label checks: {reason}")
         if lc is None:
             drops.append({"card_id": s.card_id, "generator": s.generator, "reason": reason})
             continue
@@ -510,6 +609,13 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--generators", help="config_id:weight,... (default: the pilot's 2:2:1)")
     p.add_argument("--menus", help="business ids, e.g. food-court (default: the three training menus)")
     p.add_argument("--targeted", action="store_true", help="the targeted batch (cards.TARGET_WEIGHTS)")
+    p.add_argument("--topup", action="store_true", help="the targeted top-up (cards.TOPUP_WEIGHTS)")
+    p.add_argument(
+        "--rewrite-missing", metavar="BATCH", help="also copy BATCH's cards whose chat was dropped"
+    )
+    p = sub.add_parser("import")
+    p.add_argument("--batch", required=True)
+    p.add_argument("--file", required=True, help="JSONL of hand-written chats")
     for name in ("generate", "label"):
         p = sub.add_parser(name)
         p.add_argument("--batch", required=True)
@@ -530,7 +636,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--batch", required=True)
     p.add_argument("--audit-per-generator", type=int, default=10)
     args = ap.parse_args(argv)
-    return {"plan": plan, "generate": generate, "label": label, "report": report}[args.stage](args)
+    stages = {"plan": plan, "generate": generate, "label": label, "report": report, "import": import_chats}
+    return stages[args.stage](args)
 
 
 if __name__ == "__main__":

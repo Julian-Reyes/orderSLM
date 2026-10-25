@@ -1,0 +1,188 @@
+{
+ "card_id": "syn-t3-0166",
+ "reason": "label dropped (check): 'TWO' quoted from message 2, it is in message 0 ('MAKE IT TWO')",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.478798+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": "MENU_QUESTION"
+   },
+   {
+    "message_index": 6,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 8,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "margherita_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "crust_stuffed",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "STUFFED CRUST",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "THE MARGHERITA! PERSONAL SIZE"
+      },
+      {
+       "message_index": 0,
+       "quote": "MAKE IT TWO"
+      },
+      {
+       "message_index": 2,
+       "quote": "STUFFED CRUST ON BOTH"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "pepperoni_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "A SMALL PEPPERONI"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "cheese_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "A MEDIUM CHEESE"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "diet_coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "A DIET COKE"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 6,
+      "quote": "DELIVERY"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Vine Ln",
+    "number": "4824",
+    "unit": null,
+    "reference": null,
+    "raw_text": "4824 VINE LN",
+    "evidence": [
+     {
+      "message_index": 6,
+      "quote": "4824 VINE LN"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 6,
+      "quote": "PAYING BY CARD"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "confirmed",
+    "agreed_while_incomplete": false,
+    "evidence": [
+     {
+      "message_index": 8,
+      "quote": "YEP THATS PERFECT!!"
+     }
+    ]
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "card_id": "syn-t3-0368",
+ "reason": "label dropped (check): removed cheese the veggie burger doesn't come with ('leave it off' = don't add it)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-25T23:38:56.505985+00:00",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 7,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 9,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 10,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 11,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 12,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 14,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 15,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 16,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "veggie_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "mustard",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "w mustard pls",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "veggie burger"
+      },
+      {
+       "message_index": 5,
+       "quote": "w mustard pls"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "onion",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no onions",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 10,
+       "quote": "1 cheeseburger no onions"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "onion_rings",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 11,
+       "quote": "onion rings"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 11,
+       "quote": "fries"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 12,
+       "quote": "coke"
+      }
+     ]
+    },
+    {
+     "line_id": "L6",
+     "menu_item_id": "milkshake",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "vanilla",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 12,
+       "quote": "vanilla shake"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 15,
+      "quote": "deliver to 634 orchard blvd"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "orchard blvd",
+    "number": "634",
+    "unit": null,
+    "reference": null,
+    "raw_text": "634 orchard blvd",
+    "evidence": [
+     {
+      "message_index": 15,
+      "quote": "634 orchard blvd"
+     }
+    ]
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 16,
+      "quote": "paying cash"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "confirmed",
+    "agreed_while_incomplete": false,
+    "evidence": [
+     {
+      "message_index": 14,
+      "quote": "yep thats it"
+     }
+    ]
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}
