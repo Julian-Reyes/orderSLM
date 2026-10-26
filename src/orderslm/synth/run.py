@@ -65,12 +65,11 @@ CHARS_PER_TOKEN = 3
 ASSUMED_OVERHEAD = {"anthropic": 300}
 ASSUMED_GEN_OUTPUT = 900  # chat JSON; generators run with reasoning off
 ASSUMED_LABEL_OUTPUT = 1200 + 1500  # label JSON + luna `low` reasoning (bake-off: ~1.2K reasoning)
-HAND_WRITER = (
-    "claude-session/claude-opus-5-5"  # chats written by Claude in a Claude Code session (no API call)
-)
-HAND_PROMPT_VERSION = (
-    "synth-write@0.2+hand"  # the same prompt, menu view and card view, read and followed by hand
-)
+# Chats written by Claude in a Claude Code session (no API call), from the same prompt, menu view and card view;
+# whole labels written the same way under the teacher's rules where the teacher call failed.
+HAND_WRITER = "claude-session/claude-opus-5-5"
+HAND_PROMPT_VERSION = "synth-write@0.2+hand"
+HAND_LABEL_VERSION = f"{lab.LABEL_PROMPT_VERSION}+hand"
 PEAK = datetime(2026, 10, 13, 2, 0, tzinfo=UTC)  # estimates never assume DeepSeek's off-peak price
 
 
@@ -456,13 +455,14 @@ def label_record(
     batch: str, card_id: str, teacher: str = lab.TEACHER
 ) -> tuple[str, str, dict[str, Any] | None]:
     """(label JSON text, label prompt version, hand fix or None): the hand fix when label_fixes/<card>.json
-    exists, otherwise the teacher's raw response."""
+    exists, otherwise the teacher's raw response. A fix of kind `hand_label` is a whole label written by hand
+    where the teacher call failed, with its own version (HAND_LABEL_VERSION)."""
     fix_path = batch_dir(batch) / "label_fixes" / f"{card_id}.json"
     rec = json.loads((batch_dir(batch) / "label" / _slug(teacher) / f"{card_id}.json").read_text())
     version = rec.get("versions", {}).get("label_prompt")
     if fix_path.exists():
         fix = json.loads(fix_path.read_text())
-        return json.dumps(fix["label"], ensure_ascii=False), version, fix
+        return json.dumps(fix["label"], ensure_ascii=False), fix.get("label_prompt_version", version), fix
     return ChatResponse.model_validate(rec["response"]).text, version, None
 
 
@@ -476,14 +476,16 @@ def collect_labels(batch: str, teacher: str) -> None:
             continue
         rec = json.loads(path.read_text())
         card = cards[s.card_id]
-        if "error" in rec:
+        if "error" in rec and not (out / "label_fixes" / f"{s.card_id}.json").exists():
             drops.append({"card_id": s.card_id, "generator": s.generator, "reason": "call_error"})
             continue
         menu = load_menu(s.conversation.business_id)
         text, version, fix = label_record(batch, s.card_id, teacher)
         if version is None:
             raise SystemExit(f"{path}: no label_prompt version recorded (backfill it first)")
-        who = f"{teacher}+fix:{fix['fixed_by']}" if fix else teacher
+        who = teacher
+        if fix:
+            who = fix["fixed_by"] if fix.get("kind") == "hand_label" else f"{teacher}+fix:{fix['fixed_by']}"
         lc, reason = lab.parse_label(text, s.conversation, menu, who, prompt_version=version)
         if fix and lc is None:
             raise SystemExit(f"{s.card_id}: the hand fix fails the label checks: {reason}")

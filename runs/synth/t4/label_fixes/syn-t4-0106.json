@@ -1,0 +1,184 @@
+{
+ "card_id": "syn-t4-0106",
+ "kind": "hand_label",
+ "reason": "teacher call failed (OpenAI credit used up); whole label written by hand under teacher-label@0.7",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-10-26T00:08:11.200831+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bbq_chicken_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "4 large bbq chicken pizzas"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "bbq_chicken_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "olives",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "w black olives",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "4 large bbq chicken pizzas"
+      },
+      {
+       "message_index": 0,
+       "quote": "2 of them w black olives"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "breadsticks",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "2 orders of breadstiks"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "veggie_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "a small veggie"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "hawaiian_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "a medium hawaiian"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 3,
+      "quote": "delivery"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "brookside terrace",
+    "number": "975",
+    "unit": null,
+    "reference": "across from the park",
+    "raw_text": "975 brookside terrace, across from the park",
+    "evidence": [
+     {
+      "message_index": 3,
+      "quote": "975 brookside terrace, across from the park"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

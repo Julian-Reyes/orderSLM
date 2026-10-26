@@ -1,0 +1,69 @@
+{
+  "jev": {
+    "intent_messages": 416,
+    "intent_agree_primary": 332,
+    "intent_agree_rate": 0.7981,
+    "intent_agree_ci95": [
+      0.7568529684664661,
+      0.833845999906368
+    ],
+    "intent_agree_primary_or_secondary": 333,
+    "intent_confusions": [
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "MODIFY_ORDER",
+        "count": 54
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "SMALL_TALK",
+        "count": 8
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "PLACE_ORDER",
+        "count": 6
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "UNKNOWN",
+        "count": 6
+      },
+      {
+        "expected": "SMALL_TALK",
+        "provider": "PLACE_ORDER",
+        "count": 5
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "MODIFY_ORDER",
+        "count": 2
+      },
+      {
+        "expected": "PLACE_ORDER",
+        "provider": "PAYMENT_QUESTION",
+        "count": 1
+      },
+      {
+        "expected": "DELIVERY_QUESTION",
+        "provider": "SMALL_TALK",
+        "count": 1
+      },
+      {
+        "expected": "UNKNOWN",
+        "provider": "MENU_QUESTION",
+        "count": 1
+      }
+    ],
+    "orders_expected_ok": 122,
+    "order_flagged": 6,
+    "order_flag_rate": 0.0492,
+    "planted": {},
+    "planted_catch_rate": null,
+    "errors": 0,
+    "input_tokens": 234330,
+    "cost_micros": 9905,
+    "latency_p50_ms": 351,
+    "latency_p95_ms": 2511
+  }
+}

@@ -258,3 +258,43 @@ def test_label_fix_replaces_the_teacher_output_but_keeps_it(tmp_path, monkeypatc
     text, version, got = run.label_record("h", "syn-h-0001")
     assert json.loads(text) == {"intents": [1]} and version == "v" and got == fix
     assert json.loads(ChatResponse.model_validate(json.loads(path.read_text())["response"]).text) == raw
+
+
+def test_hand_label_stands_in_for_a_failed_teacher_call(tmp_path, monkeypatch):
+    run, cards = _hand_batch(tmp_path, monkeypatch)
+    trivia = next(c for c in cards if _target(c) == "trivia")
+    run._jsonl(
+        tmp_path / "chats.jsonl",
+        [{"card_id": trivia.id, "messages": [{"role": "customer", "text": "who won the 1998 world cup?"}]}],
+    )
+    run.main(["import", "--batch", "h", "--file", str(tmp_path / "chats.jsonl")])
+    path = tmp_path / "h" / "label" / run._slug(run.lab.TEACHER) / f"{trivia.id}.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps({"versions": {"label_prompt": "v"}, "error": "credit_balance_exhausted"}))
+    run.collect_labels("h", run.lab.TEACHER)
+    assert run._read_jsonl(tmp_path / "h" / "label_drops.jsonl")[0]["reason"] == "call_error"
+    empty = {
+        "items": [],
+        "fulfillment": {
+            "method": "unknown",
+            "method_evidence": [],
+            "requested_time": {"state": "not_mentioned"},
+        },
+        "address": {"state": "not_mentioned"},
+        "payment": {"method": "unknown"},
+        "customer_name": {"state": "not_mentioned"},
+    }
+    label = {"intents": [{"message_index": 0, "primary": "OUT_OF_SCOPE", "secondary": None}], "order": empty}
+    (tmp_path / "h" / "label_fixes").mkdir()
+    fix = {
+        "kind": "hand_label",
+        "fixed_by": "me",
+        "reason": "r",
+        "label_prompt_version": run.HAND_LABEL_VERSION,
+        "label": label,
+    }
+    (tmp_path / "h" / "label_fixes" / f"{trivia.id}.json").write_text(json.dumps(fix))
+    run.collect_labels("h", run.lab.TEACHER)
+    (got,) = run._read_jsonl(tmp_path / "h" / "labels.jsonl")
+    assert got["teacher"] == "me" and got["label_prompt_version"] == run.HAND_LABEL_VERSION
+    assert run._read_jsonl(tmp_path / "h" / "label_drops.jsonl") == []
