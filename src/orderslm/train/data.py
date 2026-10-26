@@ -6,11 +6,15 @@ instructions, menu, chat) and the target `StudentOutput`: the intent of the last
 `ModelOrder`, taken from the teacher's raw answer (the label code checked it; code still computes the missing list
 and question at run time, `core/finalize`).
 
-Two training sets (spec §10–11e): `single` = the per-restaurant batches (p3, b1); `mixed` = the same + the
-food-court batch m1. The validation chats (seeded, 5%) are the same chats in both, plus 5% of m1 in `mixed`. Chats
-listed in runs/synth/excluded.json (label audit) are left out. Only synthetic chats: never dev, test or PIZZA.
+Two training sets (spec §10–11e): `single` = the per-restaurant batches; `mixed` = the same + the food-court batch
+m1. v0.1: p3 + b1 (+ m1). v0.2 (M6 error review, Julian 2026-10-25): + the targeted batch t3 and the hand-written
+top-up t4. Validation chats are drawn 5% per group (VERSIONS[...]["valid_groups"]), so v0.2 keeps exactly v0.1's
+validation chats and adds 5% of t3 + t4; the same chats are in both sets, plus 5% of m1 in `mixed`. Chats listed in
+runs/synth/excluded.json (label audit) are left out; hand-fixed labels (synth label_fixes) are used, and counted
+per set. Only synthetic chats: never dev, test or PIZZA.
 
-    make student-data            # → runs/student-data/<version>/{single,mixed}/{train,valid}.jsonl + manifest
+    make student-data                                   # → runs/student-data/<DATA_VERSION>/... + manifest
+    make student-data ARGS="--version student-data@0.1" # rebuild an earlier version (byte-identical)
 
 `train.jsonl` / `valid.jsonl` hold `{"messages": [system, user, assistant]}` only (the format Unsloth/TRL and
 MLX-LM read); `rows.jsonl` has the same rows' ids, batch, generator, menu and sizes. The jsonl files are gitignored
@@ -37,10 +41,22 @@ from orderslm.schema.routing import RouterLabel
 from orderslm.synth import label as lab
 from orderslm.synth import run as synth
 
-DATA_VERSION = "student-data@0.1"
+VERSIONS = {
+    "student-data@0.1": {
+        "single": ("p3", "b1"),
+        "mixed": ("p3", "b1", "m1"),
+        "valid_groups": (("p3", "b1"), ("m1",)),
+    },
+    "student-data@0.2": {
+        "single": ("p3", "b1", "t3", "t4"),
+        "mixed": ("p3", "b1", "m1", "t3", "t4"),
+        "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4")),
+    },
+}
+DATA_VERSION = "student-data@0.2"
 STUDENT_PROMPT_VERSION = "student-extract@0.1"
-SINGLE_BATCHES = ("p3", "b1")
-MIXED_BATCHES = ("p3", "b1", "m1")
+SINGLE_BATCHES = VERSIONS[DATA_VERSION]["single"]
+MIXED_BATCHES = VERSIONS[DATA_VERSION]["mixed"]
 VALID_SHARE = 0.05
 SEED = 20261020
 OUT = RUNS / "student-data"
@@ -137,17 +153,20 @@ def _stats(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "per_business": dict(Counter(r["business_id"] for r in rows)),
         "latest_intent": dict(Counter(r["intent"] for r in rows).most_common()),
         "rows_with_items": sum(r["items"] > 0 for r in rows),
+        "label_hand_fixed": sum(r["label_hand_fixed"] for r in rows),
         "chars_total": {"p50": q(total, 0.5), "p95": q(total, 0.95), "max": max(total)},
         "chars_answer": {"p50": q(answer, 0.5), "p95": q(answer, 0.95), "max": max(answer)},
     }
 
 
-def build(out_dir: Path) -> dict[str, Any]:
-    by_batch = {b: build_rows(b) for b in MIXED_BATCHES}
-    single_ids = [r["id"] for b in SINGLE_BATCHES for r in by_batch[b][0]]
-    valid = split_valid(single_ids) | split_valid([r["id"] for r in by_batch["m1"][0]])
+def build(out_dir: Path, version: str = DATA_VERSION) -> dict[str, Any]:
+    spec = VERSIONS[version]
+    by_batch = {b: build_rows(b) for b in spec["mixed"]}
+    valid = set().union(
+        *(split_valid([r["id"] for b in group for r in by_batch[b][0]]) for group in spec["valid_groups"])
+    )
     manifest: dict[str, Any] = {
-        "data_version": DATA_VERSION,
+        "data_version": version,
         "student_prompt_version": STUDENT_PROMPT_VERSION,
         "student_schema": StudentOutput.model_fields["schema_version"].default,
         "teacher": lab.TEACHER,
@@ -155,10 +174,11 @@ def build(out_dir: Path) -> dict[str, Any]:
         "valid_share": VALID_SHARE,
         "built_at": datetime.now(UTC).isoformat(),
         "git_commit": git_commit(),
-        "skipped": {b: dict(by_batch[b][1]) for b in MIXED_BATCHES},
+        "skipped": {b: dict(by_batch[b][1]) for b in spec["mixed"]},
         "sets": {},
     }
-    for name, batches in (("single", SINGLE_BATCHES), ("mixed", MIXED_BATCHES)):
+    for name in ("single", "mixed"):
+        batches = spec[name]
         rows = [r for b in batches for r in by_batch[b][0]]
         d = out_dir / name
         d.mkdir(parents=True, exist_ok=True)
@@ -179,9 +199,11 @@ def build(out_dir: Path) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--out", type=Path, default=OUT / DATA_VERSION)
+    ap.add_argument("--version", choices=sorted(VERSIONS), default=DATA_VERSION)
+    ap.add_argument("--out", type=Path, help="default: runs/student-data/<version>")
     args = ap.parse_args(argv)
-    m = build(args.out)
+    args.out = args.out or OUT / args.version
+    m = build(args.out, args.version)
     for name, s in m["sets"].items():
         t, v = s["train"], s["valid"]
         print(

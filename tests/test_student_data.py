@@ -65,7 +65,9 @@ def test_sets_are_synthetic_labels_minus_exclusions(built):
 def test_valid_split_is_disjoint_and_shared(built):
     out, m = built
     single, mixed = set(m["sets"]["single"]["valid_ids"]), set(m["sets"]["mixed"]["valid_ids"])
-    assert single <= mixed and len(single) == round(1963 * data.VALID_SHARE)
+    assert single <= mixed and len(single) == round(1963 * data.VALID_SHARE) + round(698 * data.VALID_SHARE)
+    v01 = json.loads((data.OUT / "student-data@0.1" / "manifest.json").read_text())
+    assert set(v01["sets"]["mixed"]["valid_ids"]) <= mixed  # v0.2 keeps every v0.1 validation chat
     train_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "train.jsonl")}
     valid_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "valid.jsonl")}
     assert not train_users & valid_users
@@ -79,10 +81,12 @@ def test_rows_are_chat_messages_with_valid_targets(built):
         StudentOutput.model_validate_json(r["messages"][2]["content"])
 
 
-def test_committed_manifest_matches_a_fresh_build(built):
-    """Deterministic, and the committed manifest is current (rerun `make student-data` after changing the inputs)."""
-    _, m = built
-    committed = json.loads((data.OUT / data.DATA_VERSION / "manifest.json").read_text())
+@pytest.mark.parametrize("version", sorted(data.VERSIONS))
+def test_committed_manifest_matches_a_fresh_build(version, built, tmp_path):
+    """Deterministic, and every committed manifest is current (rerun `make student-data` after changing inputs);
+    v0.1, which the M6 students were trained on, still rebuilds byte-identical."""
+    m = built[1] if version == data.DATA_VERSION else data.build(tmp_path, version)
+    committed = json.loads((data.OUT / version / "manifest.json").read_text())
     for name in ("single", "mixed"):
         for part in ("train", "valid"):
             assert committed["sets"][name][part]["sha256"] == m["sets"][name][part]["sha256"]

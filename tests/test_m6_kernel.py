@@ -168,3 +168,16 @@ def test_file_listing_skips_cli_warnings():
         "run.json,2060,2026-10-23 11:57:55.675000\n"
     )
     assert kaggle_jobs.parse_file_listing(out) == {"adapters/b/README.md", "run.json"}
+
+
+def test_bucket_pads_to_the_multiple_and_keeps_the_answer_logits(tmp_path, monkeypatch):
+    k = _kernel(tmp_path, monkeypatch)
+    assert k.bucket([5, 6, 7], None, 0) == [5, 6, 7]
+    assert k.bucket([5, 6, 7], 4, 0) == [5, 6, 7, 0]
+    assert k.bucket(list(range(8)), 4, 0) == list(range(8))
+    for n, offset, multiple in ((300, 250, 128), (256, 10, 128), (1000, 999, 64)):
+        big = len(k.bucket([1] * n, multiple, 0))
+        assert big % multiple == 0 and 0 <= big - n < multiple
+        keep = big - offset + 1  # logits_to_keep: the last `keep` positions
+        kept = list(range(big - keep, big))[: n - offset]
+        assert kept == list(range(offset - 1, n - 1))  # each predicts the next answer token, never padding

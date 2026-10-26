@@ -66,8 +66,16 @@ def test_settings_are_the_agreed_ones():
     t = kaggle_train.TRAIN
     assert t["lora"] == {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"}
     assert (t["epochs"], t["effective_batch"], t["warmup_share"], t["eval_every_epochs"]) == (2, 8, 0.05, 0.5)
-    assert {k: v["lr"] for k, v in kaggle_train.STUDENTS.items()} == {
+    students = kaggle_train.STUDENTS
+    assert {k: v["lr"] for k, v in students.items() if not k.endswith("-v2")} == {
         "qwen3.5-0.8b-single": 2e-4,
         "qwen3.5-2b-single": 1e-4,
         "qwen3.5-2b-mixed": 1e-4,
     }
+    # the v0.2 retrains differ from the v0.1 students only in their data
+    for name in ("qwen3.5-0.8b-single", "qwen3.5-2b-single", "qwen3.5-2b-mixed"):
+        v1, v2 = students[name], students[f"{name}-v2"]
+        assert (v1["data_version"], v2["data_version"]) == ("student-data@0.1", "student-data@0.2")
+        assert {k: x for k, x in v1.items() if k != "data_version"} == {
+            k: x for k, x in v2.items() if k != "data_version"
+        }

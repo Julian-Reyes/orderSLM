@@ -32,7 +32,7 @@ from typing import Any
 from orderslm.eval import student_dev
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
-from orderslm.train.data import DATA_VERSION, OUT, STUDENT_PROMPT_VERSION
+from orderslm.train.data import OUT, STUDENT_PROMPT_VERSION
 
 EXPERIMENT = "train"
 JOB_DIR = ROOT / "kaggle" / "m6"
@@ -52,9 +52,23 @@ PACKAGES = {  # as in the smoke test (runs/train-smoke/20261021T145441Z)
     "fla": ["fla-core==0.5.2"],
 }
 STUDENTS = {
-    "qwen3.5-0.8b-single": {"model": "0.8b", "data": "single", "lr": 2e-4},
-    "qwen3.5-2b-single": {"model": "2b", "data": "single", "lr": 1e-4},
-    "qwen3.5-2b-mixed": {"model": "2b", "data": "mixed", "lr": 1e-4},
+    "qwen3.5-0.8b-single": {
+        "model": "0.8b",
+        "data": "single",
+        "lr": 2e-4,
+        "data_version": "student-data@0.1",
+    },
+    "qwen3.5-2b-single": {"model": "2b", "data": "single", "lr": 1e-4, "data_version": "student-data@0.1"},
+    "qwen3.5-2b-mixed": {"model": "2b", "data": "mixed", "lr": 1e-4, "data_version": "student-data@0.1"},
+    # the same three retrained on v0.2 (+ targeted t3 and hand-written t4; Julian, 2026-10-25), same settings
+    "qwen3.5-0.8b-single-v2": {
+        "model": "0.8b",
+        "data": "single",
+        "lr": 2e-4,
+        "data_version": "student-data@0.2",
+    },
+    "qwen3.5-2b-single-v2": {"model": "2b", "data": "single", "lr": 1e-4, "data_version": "student-data@0.2"},
+    "qwen3.5-2b-mixed-v2": {"model": "2b", "data": "mixed", "lr": 1e-4, "data_version": "student-data@0.2"},
 }
 TRAIN = {
     "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"},
@@ -68,6 +82,9 @@ TRAIN = {
     "max_grad_norm": 1.0,
     "checkpoint_every": 20,  # optimizer steps (~160 rows, ~10–15 min)
     "dtype": "float16",
+    # v0.2 runs: rows padded to a multiple of 128 tokens, so host memory stops growing per new row length (it reached
+    # 26 of 32 GB on v0.1's 2,236 mixed rows; v0.2 mixed has 2,899). Same loss: causal model, padding not scored.
+    "pad_to_multiple": 128,
 }
 GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training answer 2,562 chars (~800 tokens)
 
@@ -101,34 +118,40 @@ def export(args: argparse.Namespace) -> Path:
     started = datetime.now(UTC)
     session = f"{started:%Y%m%dT%H%M%SZ}"
     out_dir = RUNS / EXPERIMENT / session
-    data_dir = OUT / DATA_VERSION
-    data_manifest = json.loads((data_dir / "manifest.json").read_text())
+    versions = sorted({STUDENTS[n]["data_version"] for n in train + score})
+    data_manifests = {v: json.loads((OUT / v / "manifest.json").read_text()) for v in versions}
     if STAGE.exists():
         shutil.rmtree(STAGE)
     STAGE.mkdir(parents=True)
     jobs, files = [], {}
     for kind, name, gpu in assign_gpus(train, score):
         s = STUDENTS[name]
+        tag = s["data_version"].split("@")[1]
         if kind == "train":
             for part in ("train", "valid"):
-                f = f"{s['data']}-{part}.jsonl"
+                f = f"{tag}-{s['data']}-{part}.jsonl"
                 if f not in files:
-                    shutil.copy(data_dir / s["data"] / f"{part}.jsonl", STAGE / f)
+                    shutil.copy(OUT / s["data_version"] / s["data"] / f"{part}.jsonl", STAGE / f)
                     files[f] = _sha256(STAGE / f)
             job = {
                 "kind": "train",
                 "name": name,
                 "model": s["model"],
                 "data": s["data"],
+                "data_version": s["data_version"],
                 "gpu": gpu,
                 "lr": s["lr"],
                 "epochs": TRAIN["epochs"],
                 "seed": SEED,
                 "dtype": TRAIN["dtype"],
-                "train_file": f"{s['data']}-train.jsonl",
-                "valid_file": f"{s['data']}-valid.jsonl",
+                "train_file": f"{tag}-{s['data']}-train.jsonl",
+                "valid_file": f"{tag}-{s['data']}-valid.jsonl",
                 "resume": None,
             }
+            if args.stop_after_steps:  # a probe: stop (paused, resumable) after this many steps this session
+                job["stop_after_steps"] = args.stop_after_steps
+            if args.pad_check and not (WEIGHTS / name / "last" / "status.json").exists():
+                job["pad_check_rows"] = args.pad_check
             last = WEIGHTS / name / "last"
             if (last / "status.json").exists():
                 st = json.loads((last / "status.json").read_text())
@@ -168,7 +191,7 @@ def export(args: argparse.Namespace) -> Path:
         jobs.append(job)
     run = {
         "session": session,
-        "data_version": DATA_VERSION,
+        "data_version": versions[0] if len(versions) == 1 else versions,
         "prompt_version": STUDENT_PROMPT_VERSION,
         "models": MODELS,
         "packages": PACKAGES,
@@ -187,9 +210,10 @@ def export(args: argparse.Namespace) -> Path:
         "seed": SEED,
         "staged_files_sha256": files,
         "data_manifest_sha256": {
-            k: data_manifest["sets"][k][p]["sha256"] for k in ("single", "mixed") for p in ("train",)
+            v: {k: m["sets"][k]["train"]["sha256"] for k in ("single", "mixed")}
+            for v, m in data_manifests.items()
         },
-        "data_built_at_commit": data_manifest["git_commit"],
+        "data_built_at_commit": {v: m["git_commit"] for v, m in data_manifests.items()},
         "exported_at": started.isoformat(),
         "git_commit": git_commit(),
         "kaggle_dataset": DATASET,
@@ -251,7 +275,7 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
         )
         if job["kind"] == "train":
             dst = run_dir / name
-            _copy(src, dst, ("config.json", "steps.jsonl", "val.jsonl", "status.json"))
+            _copy(src, dst, ("config.json", "steps.jsonl", "val.jsonl", "status.json", "pad_check.json"))
             weights = WEIGHTS / name
             for part in ("best", "last"):
                 if (src / part).exists():
@@ -310,7 +334,7 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                         "student": job["student"],
                         "adapter_sha256": scored or expected,
                         "session": manifest["session"],
-                        "data_version": manifest["data_version"],
+                        "data_version": STUDENTS[job["student"]]["data_version"],
                         "prompt_version": manifest["prompt_version"],
                         "generation": manifest["generation"],
                         "model": manifest["models"][job["model"]],
@@ -355,6 +379,10 @@ def main(argv: list[str] | None = None) -> int:
         type=float,
         default=DEADLINE_HOURS,
         help="jobs stop themselves this long after the session start (lower it to fit the remaining GPU quota)",
+    )
+    e.add_argument("--stop-after-steps", type=int, help="probe: each training pauses after N steps")
+    e.add_argument(
+        "--pad-check", type=int, metavar="ROWS", help="score ROWS valid rows padded and unpadded first"
     )
     i = sub.add_parser("import")
     i.add_argument("run_dir", type=Path)

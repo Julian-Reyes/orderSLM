@@ -217,6 +217,16 @@ def encode(tok, messages: list[dict]) -> tuple[list[int], int]:
     return ids, len(prompt)
 
 
+def bucket(ids: list[int], multiple: int | None, pad_id: int) -> list[int]:
+    """`ids` padded at the end to a multiple of `multiple` tokens (None: unchanged). Host memory grew ~10 MB per new
+    row through epoch 1 and stayed flat in epoch 2 (sessions 1-4): a per-shape cache (most likely fla's Triton
+    kernels, specialized per sequence length; every row had its own length). Buckets bound the number of shapes.
+    The model is causal, so end padding changes no earlier position; row_loss leaves the padding out of the loss."""
+    if not multiple:
+        return ids
+    return ids + [pad_id] * (-len(ids) % multiple)
+
+
 def eval_steps(steps_per_epoch: int, epochs: int, every: float) -> list[int]:
     """Optimizer steps after which validation runs: 0 (before training), then every `every` epoch."""
     n = round(epochs / every)
@@ -330,13 +340,16 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
         f"kernels {info['kernels']}; start at step {state['opt_step']}"
     )
 
+    pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
+    multiple = cfg.get("pad_to_multiple")  # absent in v0.1 runs: exact lengths, as they were trained
+
     def row_loss(ids: list[int], offset: int):
-        x = torch.tensor([ids], device=dev)
+        n = len(ids)
+        x = torch.tensor([bucket(ids, multiple, pad_id)], device=dev)
+        # keep the logits from the one before the answer to the end; the first n - offset predict the answer
         with torch.autocast("cuda", dtype=torch.float16, enabled=fp16):
-            logits = model(input_ids=x, logits_to_keep=len(ids) - offset + 1).logits[0, :-1]
-        return torch.nn.functional.cross_entropy(logits.float(), x[0, offset:], reduction="sum"), len(
-            ids
-        ) - offset
+            logits = model(input_ids=x, logits_to_keep=x.shape[1] - offset + 1).logits[0, : n - offset]
+        return torch.nn.functional.cross_entropy(logits.float(), x[0, offset:n], reduction="sum"), n - offset
 
     def validate() -> dict:
         model.eval()
@@ -401,6 +414,28 @@ def train_job(job: dict, run: dict, src: Path, start: float) -> None:
             f"{name}: val step {v['opt_step']} loss {v['val_loss']:.4f} ({v['seconds']} s){' best' if v['best'] else ''}"
         )
 
+    if job.get("pad_check_rows") and not resume:
+        # the same rows scored with exact lengths and with buckets: the losses must agree to fp16 rounding
+        model.eval()
+        with torch.no_grad():
+            rows_ = valid[: job["pad_check_rows"]]
+            saved, multiple = multiple, None
+            exact = [float(row_loss(i, o)[0]) for i, o in rows_]
+            multiple = saved
+            padded = [float(row_loss(i, o)[0]) for i, o in rows_]
+        model.train()
+        diff = max(abs(a - b) / max(abs(a), 1e-9) for a, b in zip(exact, padded, strict=True))
+        write_json(
+            out / "pad_check.json",
+            {
+                "rows": len(rows_),
+                "multiple": multiple,
+                "exact": exact,
+                "padded": padded,
+                "max_rel_diff": diff,
+            },
+        )
+        log(f"{name}: pad check on {len(rows_)} rows, max relative loss difference {diff:.2e}")
     model.train()
     maybe_eval()
     status, reason = "done", None
