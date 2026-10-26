@@ -1,0 +1,22 @@
+00:53:38 session 20261026T005023Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+00:55:07 qwen3.5-0.8b-single-v2: Qwen3_5ForCausalLM 10,822,656 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2528 rows, 632 steps (316/epoch), evals at [0, 158, 316, 474, 632]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 0
+00:55:21 qwen3.5-2b-mixed-v2: Qwen3_5ForCausalLM 16,819,200 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2899 rows, 726 steps (363/epoch), evals at [0, 182, 363, 544, 726]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 0
+00:58:05 qwen3.5-0.8b-single-v2: pad check on 20 rows, max relative loss difference 5.69e-04
+00:58:18 qwen3.5-2b-mixed-v2: pad check on 20 rows, max relative loss difference 5.01e-05
+01:01:29 qwen3.5-0.8b-single-v2: val step 0 loss 1.4020 (204.6 s)
+01:04:21 qwen3.5-2b-mixed-v2: val step 0 loss 1.2731 (362.3 s)
+01:12:23 qwen3.5-0.8b-single-v2: step 10/632 loss 1.5028 lr 3.13e-05 49.98 s/step, 34465 tok
+01:15:10 qwen3.5-2b-mixed-v2: step 10/726 loss 1.4228 lr 1.62e-05 69.76 s/step, 39320 tok
+01:19:24 qwen3.5-0.8b-single-v2: step 20/632 loss 0.3525 lr 9.38e-05 41.4 s/step, 28664 tok
+01:25:26 qwen3.5-2b-mixed-v2: step 20/726 loss 0.7656 lr 4.05e-05 52.79 s/step, 30119 tok
+01:27:10 qwen3.5-0.8b-single-v2: step 30/632 loss 0.0861 lr 1.56e-04 52.53 s/step, 36179 tok
+01:34:18 qwen3.5-0.8b-single-v2: step 40/632 loss 0.0307 lr 2.00e-04 45.47 s/step, 31580 tok
+01:36:34 qwen3.5-2b-mixed-v2: step 30/726 loss 0.1097 lr 6.76e-05 65.17 s/step, 36873 tok
+01:41:31 qwen3.5-0.8b-single-v2: step 50/632 loss 0.0269 lr 2.00e-04 45.82 s/step, 31628 tok
+01:46:10 qwen3.5-2b-mixed-v2: step 40/726 loss 0.0434 lr 9.46e-05 42.45 s/step, 23930 tok
+01:48:54 qwen3.5-0.8b-single-v2: step 60/632 loss 0.0421 lr 1.99e-04 58.03 s/step, 40063 tok
+01:48:54 qwen3.5-0.8b-single-v2: paused at step 60/632, best val None @ None
+01:56:58 qwen3.5-2b-mixed-v2: step 50/726 loss 0.0272 lr 1.00e-04 62.25 s/step, 34817 tok
+02:06:55 qwen3.5-2b-mixed-v2: step 60/726 loss 0.0257 lr 9.98e-05 69.63 s/step, 39167 tok
+02:06:55 qwen3.5-2b-mixed-v2: paused at step 60/726, best val None @ None
+02:07:08 done
