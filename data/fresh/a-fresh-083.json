@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh-083",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD AFTERNOON!",
+        "sent_at": "2026-10-31T15:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "MY GRANDSON AND I ARE DOING A CROSSWORD. WHICH RIVER RUNS THROUGH PARIS?",
+        "sent_at": "2026-10-31T15:40:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-083"
+}

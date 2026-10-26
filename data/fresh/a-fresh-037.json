@@ -1,0 +1,215 @@
+{
+  "conversation": {
+    "id": "a-fresh-037",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey! 🚗 grabbing stuff for the office on my way in",
+        "sent_at": "2026-11-06T07:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 medium lattes w vanilla ☕",
+        "sent_at": "2026-11-06T07:40:25-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "a large americano",
+        "sent_at": "2026-11-06T07:40:50-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Sure! Any milk in the Americano?",
+        "sent_at": "2026-11-06T07:41:35-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "no just black 👍",
+        "sent_at": "2026-11-06T07:42:00-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "and 2 chocolate croissants + 1 blueberry muffin 🥐",
+        "sent_at": "2026-11-06T07:42:25-08:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "oh and a hot chocolate for my coworker",
+        "sent_at": "2026-11-06T07:42:50-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 2,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "vanilla_syrup",
+            "raw_text": "w vanilla"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 medium lattes w vanilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "croissant",
+        "quantity": 2,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "2 chocolate croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "1 blueberry muffin"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 6,
+            "quote": "a hot chocolate"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-037",
+  "annotation_notes": "'no just black' answers the business's question about the Americano: nothing to add, PLACE_ORDER. Pickup isn't chosen (name with it), no payment."
+}

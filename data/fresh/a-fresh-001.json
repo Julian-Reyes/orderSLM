@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-fresh-001",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 👋 first time ordering from u guys",
+        "sent_at": "2026-10-27T13:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Welcome! What can I get you?",
+        "sent_at": "2026-10-27T13:10:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok so im kinda unsure 😅 whats good",
+        "sent_at": "2026-10-27T13:11:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Our Pepperoni and Supreme are the most popular!",
+        "sent_at": "2026-10-27T13:11:55-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "omg wait can i ask if u gu",
+        "sent_at": "2026-10-27T13:12:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-001",
+  "annotation_notes": "The last message is cut off mid-word ('u gu'): UNKNOWN, nothing to order. 'whats good' asks what's popular: MENU_QUESTION."
+}

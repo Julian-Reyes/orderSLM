@@ -1,0 +1,52 @@
+{
+  "conversation": {
+    "id": "a-fresh-058",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "I placed a pickup order for our office over half an hour ago and it still isn't ready.",
+        "sent_at": "2026-11-01T11:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "How much longer is it going to be? We have a meeting in ten minutes.",
+        "sent_at": "2026-11-01T11:40:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-058",
+  "annotation_notes": "An overdue order and a deadline: ORDER_STATUS, time_sensitive. No new order."
+}

@@ -1,0 +1,106 @@
+{
+  "conversation": {
+    "id": "a-fresh-076",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, could i get an extra large supreme n an extra large bbq chicken pls",
+        "sent_at": "2026-11-06T16:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure thing! Pickup or delivery?",
+        "sent_at": "2026-11-06T16:20:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh dear, i just looked at the prices online, thats more than i wanted to spend. please cancel it, thank you",
+        "sent_at": "2026-11-06T16:21:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an extra large supreme"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an extra large bbq chicken"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "please cancel it"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-076"
+}

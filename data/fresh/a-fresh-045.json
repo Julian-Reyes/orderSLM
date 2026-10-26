@@ -1,0 +1,138 @@
+{
+  "conversation": {
+    "id": "a-fresh-045",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi visiting for the game, need food for 6 ppl",
+        "sent_at": "2026-11-01T13:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 large pepperoni, 1 large bbq chicken, 1 medium margherita, 2 orders garlic knots n 4 cans of coke, pickup, card",
+        "sent_at": "2026-11-01T13:00:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 large pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 large bbq chicken"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 medium margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 orders garlic knots"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "coke",
+        "quantity": 4,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 cans of coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-045"
+}

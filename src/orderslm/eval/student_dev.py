@@ -15,6 +15,9 @@ Dev is for tuning: these are not held-out results. Requests go to Kaggle (dev ch
 by docs/KAGGLE.md); gold stays here.
 
     make student-dev ARGS="report runs/student-dev/<id>"     # rebuild metrics + report from saved outputs
+
+The same scoring runs on the fresh split (M6; Source A written after the dev-based fixes, to measure them), chosen
+by the run's manifest (`split`, default dev). The teacher reference is dev-only (its dev run).
 """
 
 import argparse
@@ -47,11 +50,12 @@ def request_id(conversation_id: str, message_index: int) -> str:
     return f"{conversation_id}#{message_index}"
 
 
-def build_requests() -> list[dict[str, Any]]:
-    """One request per dev customer message: the chat cut after it, as the training rows show a chat."""
+def build_requests(split: Split = Split.dev) -> list[dict[str, Any]]:
+    """One request per customer message of an evaluation split: the chat cut after it, as the training rows show a
+    chat."""
     system = data.system_prompt()
     out = []
-    for ac in load_eval_split(Split.dev):
+    for ac in load_eval_split(split):
         conv = ac.conversation
         menu = load_menu(conv.business_id)
         for k in conv.customer_indices():
@@ -80,7 +84,8 @@ def report(run_dir: Path) -> dict[str, Any]:
     outputs = {
         r["id"]: r for r in (json.loads(x) for x in (run_dir / "outputs.jsonl").read_text().splitlines())
     }
-    dev = load_eval_split(Split.dev)
+    split = Split(manifest.get("split", Split.dev.value))
+    dev = load_eval_split(split)
     scores, intents, errors = [], [], Counter()
     validity = {"last": [0, 0], "earlier": [0, 0]}
     for ac in dev:
@@ -148,6 +153,7 @@ def report(run_dir: Path) -> dict[str, Any]:
     teacher = TEACHER_RUN / "metrics.json"
     metrics = {
         "student": manifest["student"],
+        "split": split.value,
         "prompt_version": data.STUDENT_PROMPT_VERSION,
         "data_version": manifest.get("data_version"),
         "scorer_version": SCORER_VERSION,
@@ -171,7 +177,9 @@ def report(run_dir: Path) -> dict[str, Any]:
                 ).most_common()
             ],
         },
-        "teacher_reference": json.loads(teacher.read_text()) if teacher.exists() else None,
+        "teacher_reference": json.loads(teacher.read_text())
+        if teacher.exists() and split is Split.dev
+        else None,
     }
     (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
     (run_dir / "intent_rows.jsonl").write_text("".join(json.dumps(r) + "\n" for r in intents))
@@ -192,10 +200,15 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
         return f"{x['primary_correct']}/{x['messages']} ({100 * x['primary_accuracy']:.1f}%, 95% CI {lo:.3f}–{hi:.3f})"
 
     lines = [
-        f"# `{m['student']}` on dev at every customer message",
+        f"# `{m['student']}` on {m.get('split', 'dev')} at every customer message",
         "",
         f"Prompt `{m['prompt_version']}`, data `{m['data_version']}`, scorer `{m['scorer_version']}`, "
-        f"finalize `{m['finalize_version']}`. Dev numbers (tuning), not held-out results.",
+        f"finalize `{m['finalize_version']}`. "
+        + (
+            "Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes)."
+            if m.get("split") == "fresh"
+            else "Dev numbers (tuning), not held-out results."
+        ),
         "",
         "| | Student | Teacher (`teacher-label@0.7`, reference) |",
         "|---|---|---|",

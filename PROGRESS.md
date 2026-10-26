@@ -276,6 +276,26 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     disputed vs teacher 24%; 6 orders flagged, all 6 hand-checked as correct (false alarms). Decisions audit of t4
     still open (needs OpenAI credit). Next (Julian's OK): training data v0.2 (p3 + b1 [+ m1] + t3 576 + t4 122),
     retrain on Kaggle, measure on fresh data.
+  - **Training data v0.2 (2026-10-25, Julian: "build training data, retrain, measure on fresh data"):**
+    `make student-data` → `runs/student-data/student-data@0.2/` (`data.VERSIONS`; v0.1 still rebuilds
+    byte-identical): single 2,528 train / 133 valid (p3 + b1 + t3 + t4), mixed 2,899 / 153 (+ m1); validation keeps
+    every v0.1 chat + 5% of t3+t4; 47 training rows use hand-fixed/hand labels. Latest-intent rows: MODIFY_ORDER
+    204 (v0.1: 54), UNKNOWN 77 (v0.1: 14). Students `-v2` (same settings, data v0.2), so v0.1 adapters stay.
+  - **Kernel: 128-token buckets.** v0.1 host RAM grew ~10 MB per new row length in epoch 1 (2B mixed alone 4 → 26
+    of 32 GB on 2,236 rows; v0.2's 2,899 would pass the limit). Hypothesis: a per-shape cache (fla Triton kernels
+    specialized per length). Rows are padded at the end to a multiple of 128 (`pad_to_multiple`; causal model, the
+    padding is not scored, so the loss is the same; ~2% more compute). Unverified until the probe.
+  - **Probe session (kernel v6, pushed 2026-10-25 ~21:52 Brasília, Julian's OK):** 2B mixed v2 (GPU 0) + 0.8B v2
+    (GPU 1) side by side, 60 steps each (`--stop-after-steps 60`, resumable), pad check on 20 valid rows
+    (`--pad-check 20`), 2.5 h cap. Checks: padded = unpadded loss; host RAM levels off; two first epochs fit.
+  - **Fresh split (2026-10-25, Julian: option b, written by Claude like dev):** `data/fresh/` (`Split.fresh`,
+    `conversation@0.5`, docs/SPLITS.md): 90 cards (45 dev mix + 45 `FRESH_SITUATIONS` aimed at the dev mistakes),
+    90 chats + gold by claude-opus-5.5, 278 customer messages; 0 findings, no near-duplicates (within fresh, vs dev,
+    vs 3,073 training chats). Card quirks handled in notes: Corner Patty has no milk/crust (013: shake flavor; 025:
+    patty size); 041's "adds a topping" is placed after a yes so it is a change (MODIFY) under the guide; 047's
+    delivery-without-address at the pickup-only café is a delivery question. Scoring: `student_dev` takes the split
+    from the run manifest; export `--score-splits dev,fresh`. **Next: Julian reviews all 90 in the annotation tool
+    (`make annotate`, the fresh tab), then the sessions score v0.1 and v0.2 students on fresh.**
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every

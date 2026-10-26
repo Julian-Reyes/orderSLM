@@ -1,0 +1,116 @@
+{
+  "conversation": {
+    "id": "a-fresh-087",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey its me",
+        "sent_at": "2026-11-04T13:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "the usual pls",
+        "sent_at": "2026-11-04T13:15:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Hi! We can't see past orders here, sorry. What's your usual?",
+        "sent_at": "2026-11-04T13:16:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "oh right its the bac",
+        "sent_at": "2026-11-04T13:16:35-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "unmatched_text": "the usual",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "the usual"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which one do you mean by “the usual”, is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-087",
+  "annotation_notes": "'the bac' is cut off mid-word: UNKNOWN, and it resolves nothing, so 'the usual' stays unmatched + item_menu_match/ambiguous. An order exists, so refers_to draft."
+}

@@ -1,0 +1,103 @@
+{
+  "conversation": {
+    "id": "a-fresh-056",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 😊 are the onion rings homemade? either way can i get some onion rings and a veggie burger delivered to 92 kent ave 🙏",
+        "sent_at": "2026-10-30T17:50:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "onion_rings",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "some onion rings"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a veggie burger"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 92 kent ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "kent ave",
+      "number": "92",
+      "raw_text": "92 kent ave",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "92 kent ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many orders of onion rings would you like, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-056",
+  "annotation_notes": "'some onion rings' is an unclear quantity: item_quantity/ambiguous. 'either way' means the order doesn't wait on the answer: PLACE_ORDER + secondary MENU_QUESTION. No payment."
+}

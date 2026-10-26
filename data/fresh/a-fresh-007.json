@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-fresh-007",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "heyyy",
+        "sent_at": "2026-11-02T07:50:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 large hot chocs, 2 of em w caramel pls",
+        "sent_at": "2026-11-02T07:50:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 large hot chocs"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 2,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "caramel_syrup",
+            "raw_text": "w caramel"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 large hot chocs"
+          },
+          {
+            "message_index": 1,
+            "quote": "2 of em w caramel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-007",
+  "annotation_notes": "One request split into two lines: 1 large hot chocolate as is, 2 with caramel syrup. Pickup is never chosen (pickup-only café: still missing, and the name with it); no payment."
+}

@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh-086",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiii 😩 i ordered 2 hot chocolates for pickup at 8:15 n they werent ready till 8:45",
+        "sent_at": "2026-11-03T08:50:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "almost missed my bus 🚌",
+        "sent_at": "2026-11-03T08:50:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-086",
+  "annotation_notes": "A complaint about a late, already-received order: ORDER_PROBLEM; the follow-up adds context. Past, so normal."
+}

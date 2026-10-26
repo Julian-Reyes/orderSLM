@@ -1,0 +1,143 @@
+{
+  "conversation": {
+    "id": "a-fresh-090",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey its me again",
+        "sent_at": "2026-11-07T19:50:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "lg bbq chicken n a 2 liter coke",
+        "sent_at": "2026-11-07T19:50:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 1801 vine st, card",
+        "sent_at": "2026-11-07T19:50:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "actualy swap the coke for a 2 liter sprite",
+        "sent_at": "2026-11-07T19:51:15-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "lg bbq chicken"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "swap the coke for a 2 liter sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 1801 vine st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "vine st",
+      "number": "1801",
+      "raw_text": "1801 vine st",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "1801 vine st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-090",
+  "annotation_notes": "The swap removes the coke (L2) and adds a sprite line (L3)."
+}

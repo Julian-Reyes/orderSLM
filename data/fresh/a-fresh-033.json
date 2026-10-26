@@ -1,0 +1,108 @@
+{
+  "conversation": {
+    "id": "a-fresh-033",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get a large americano and an everthing bagel with butter for 11:45? Thanks!",
+        "sent_at": "2026-11-02T08:10:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "butter",
+            "raw_text": "with butter"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an everthing bagel with butter"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "for 11:45",
+        "normalized_local": "11:45",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "for 11:45"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-033",
+  "annotation_notes": "'for 11:45' with no am/pm at 08:10, open 7-15: 11:45 today. Pickup isn't chosen (and so the name), payment missing."
+}

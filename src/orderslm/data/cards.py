@@ -10,9 +10,13 @@ persona, variants, fulfillment, business within what the situation allows) comes
 Cards added after the first review (SUPPLEMENT) are appended with their own RNG stream, so earlier
 cards never change.
 Dev cards: data/dev/cards.jsonl. Test cards: data/test/cards.jsonl (sealed like the test split).
+Fresh cards (M6, Julian 2026-10-25): data/fresh/cards.jsonl, their own seed, made after the dev-based fixes to
+measure them: half targeted at what the students got wrong on dev (FRESH_SITUATIONS, written from the patterns in
+docs/STUDENT_ERRORS.md, never from dev chats), half the dev mix (dev's quotas, halved). Same rules as dev.
 
     uv run python -m orderslm.data.cards summary            # dev only
     ORDERSLM_UNSEAL_TEST="author Source A" uv run python -m orderslm.data.cards generate
+    uv run python -m orderslm.data.cards generate --split fresh
 """
 
 import argparse
@@ -326,6 +330,117 @@ SUPPLEMENT: dict[str, tuple[int, int]] = {
 SUPPLEMENT_SEED = f"{SEED}-supplement-2026-10-08"
 
 
+# Fresh (M6): situations aimed at the patterns the students got wrong on dev (docs/STUDENT_ERRORS.md). The
+# counts are the fresh split's; these never appear in dev or test.
+FRESH_SITUATIONS: dict[str, Situation] = {
+    "same_item_split": Situation(
+        (L.PLACE_ORDER,),
+        (S.simple_order,),
+        (0, 0),
+        "Orders several of one item in one request and changes only some of them ({variant}). Gold: two lines of "
+        "the same item, one with the change.",
+        (1, 4),
+        variants=(
+            "a count, then how many of them get a topping removed",
+            "a count, then how many of them get an add-on",
+            "a count, then how many of them get a different milk or crust",
+        ),
+    ),
+    "big_order": Situation(
+        (L.PLACE_ORDER,),
+        (S.multi_message_order,),
+        (0, 0),
+        "Orders four to six different items for a group, {variant}.",
+        (2, 6),
+        variants=(
+            "all in one long message",
+            "a few at a time, with a clarifying question from the business midway",
+        ),
+    ),
+    "late_change": Situation(
+        (L.PLACE_ORDER, L.MODIFY_ORDER),
+        (S.correction,),
+        (0, 0),
+        "Orders, then in the last customer message changes something already stated: {variant}.",
+        (2, 5),
+        variants=(
+            "the size of an item (including one whose size they never said)",
+            "the milk or crust of an item",
+            "removes one item",
+            "adds a topping to an item already ordered",
+            "swaps one item for another",
+        ),
+    ),
+    "change_after_confirming": Situation(
+        (L.PLACE_ORDER, L.CONFIRM_ORDER, L.MODIFY_ORDER),
+        (S.correction_after_confirmation, S.contextual_yes),
+        (0, 0),
+        "Says yes to the business's read-back, then changes something: {variant}.",
+        (3, 5),
+        variants=("the size of an item", "removes an item", "the payment method", "adds one more item"),
+    ),
+    "unclear_amount": Situation(
+        (L.PLACE_ORDER,),
+        (S.missing_info,),
+        (0, 0),
+        "Refers to an amount or size unclearly ({variant}) and the chat ends before it's settled. Gold flags it.",
+        (1, 3),
+        variants=("a size like 'the big one' where two sizes could fit", "a quantity like 'a few' or 'some'"),
+    ),
+    "unreadable": Situation(
+        (L.UNKNOWN,),
+        (S.unclear_message,),
+        (0, 0),
+        "The last message can't be understood ({variant}).",
+        (1, 3),
+        order=False,
+        variants=(
+            "a message cut off mid-word",
+            "garbled letters from a pocket or a slip",
+            "a lone symbol or emoji",
+        ),
+    ),
+    "trivia": Situation(
+        (L.OUT_OF_SCOPE,),
+        (S.out_of_scope,),
+        (0, 0),
+        "Asks a general-knowledge question unrelated to the restaurant ({variant}).",
+        (1, 2),
+        order=False,
+        variants=("history or geography", "sports or a fun fact", "settling a bet"),
+    ),
+    "clock_time_no_ampm": Situation(
+        (L.PLACE_ORDER,),
+        (S.simple_order,),
+        (0, 0),
+        "Orders for a clock time said without am/pm ({variant}); only the opening hours and the time now settle it.",
+        (1, 4),
+        variants=("later today", "a time that can only mean the evening"),
+    ),
+    "offmenu_addon": Situation(
+        (L.PLACE_ORDER,),
+        (S.off_menu,),
+        (0, 0),
+        "Asks for an add-on the menu doesn't offer on a real item ({variant}).",
+        (1, 4),
+        variants=("as the last thing they say", "and the chat goes on with other details"),
+    ),
+}
+FRESH_TARGETED = {
+    "same_item_split": 6,
+    "big_order": 6,
+    "late_change": 7,
+    "change_after_confirming": 4,
+    "unclear_amount": 5,
+    "unreadable": 5,
+    "trivia": 3,
+    "clock_time_no_ampm": 4,
+    "offmenu_addon": 5,
+}
+FRESH_SEED = f"{SEED}-fresh-2026-10-25"
+FRESH_MIX = 45  # dev's situation mix, largest-remainder share of this many cards
+
+
 # Cards corrected after review so they match the conversation written from them. Applied after
 # generation, so nothing else about any card (or the RNG) changes.
 CARD_FIXES: dict[str, dict] = {
@@ -446,6 +561,26 @@ def generate(seed: int = SEED) -> dict[Split, list[ScenarioCard]]:
     }
 
 
+def fresh_quotas() -> dict[str, int]:
+    """The fresh split: FRESH_TARGETED + FRESH_MIX cards in dev's proportions (largest remainder)."""
+    dev = {name: quota(name, Split.dev) for name in SITUATIONS}
+    total = sum(dev.values())
+    raw = {n: c * FRESH_MIX / total for n, c in dev.items()}
+    mix = {n: int(v) for n, v in raw.items()}
+    for n in sorted(raw, key=lambda n: (raw[n] - mix[n], n), reverse=True)[: FRESH_MIX - sum(mix.values())]:
+        mix[n] += 1
+    return {**{n: c for n, c in mix.items() if c}, **FRESH_TARGETED}
+
+
+def generate_fresh() -> list[ScenarioCard]:
+    menus = load_menus(include_held_out=True)
+    rng = random.Random(FRESH_SEED)
+    jobs = [name for name, n in fresh_quotas().items() for _ in range(n)]
+    rng.shuffle(jobs)
+    cards = _cards(Split.fresh, jobs, rng, menus, Counter(), Counter(), 0, True)
+    return [_stated_fulfillment(c, menus, FRESH_SEED) for c in cards]
+
+
 def _cards(
     split: Split,
     jobs: list[str],
@@ -460,7 +595,7 @@ def _cards(
     styles = _styles(len(jobs), rng)
     cards: list[ScenarioCard] = []
     for n, (name, style) in enumerate(zip(jobs, styles, strict=True), start=numbered_from + 1):
-        sit = SITUATIONS[name]
+        sit = SITUATIONS.get(name) or FRESH_SITUATIONS[name]
         options = [b for b in (sit.businesses or allowed) if b in allowed]
         load = {b: ((used[(name, b)],) if spread else ()) + (used[b],) for b in options}
         least = min(load.values())
@@ -566,13 +701,16 @@ def main(argv: list[str] | None = None) -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("generate", help="write dev + test cards (test needs ORDERSLM_UNSEAL_TEST)")
     g.add_argument("--force", action="store_true")
-    g.add_argument("--split", choices=["dev", "test"], action="append", help="default: both")
+    g.add_argument("--split", choices=["dev", "test", "fresh"], action="append", help="default: dev + test")
     s = sub.add_parser("summary")
-    s.add_argument("--split", choices=["dev", "test"], action="append")
+    s.add_argument("--split", choices=["dev", "test", "fresh"], action="append")
     args = ap.parse_args(argv)
     if args.cmd == "generate":
         chosen = {Split(x) for x in (args.split or ["dev", "test"])}
-        write({s: cs for s, cs in generate().items() if s in chosen}, force=args.force)
+        cards = {s: cs for s, cs in generate().items() if s in chosen} if chosen - {Split.fresh} else {}
+        if Split.fresh in chosen:
+            cards[Split.fresh] = generate_fresh()
+        write(cards, force=args.force)
     for split in (
         [Split(x) for x in (args.split or ["dev", "test"])]
         if args.cmd == "summary" or args.split

@@ -1,0 +1,197 @@
+{
+  "conversation": {
+    "id": "a-fresh-061",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi ordering for my study group",
+        "sent_at": "2026-11-04T12:20:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 large hot chocolates",
+        "sent_at": "2026-11-04T12:20:25-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 bagels w cream cheese",
+        "sent_at": "2026-11-04T12:20:50-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Which bagel? Plain, everything, sesame or cinnamon raisin?",
+        "sent_at": "2026-11-04T12:21:35-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "everything",
+        "sent_at": "2026-11-04T12:22:00-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "n 2 almond croissants n a blueberry muffin. pickup, name jay, card",
+        "sent_at": "2026-11-04T12:22:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 large hot chocolates"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 2,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 bagels w cream cheese"
+          },
+          {
+            "message_index": 4,
+            "quote": "everything"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "croissant",
+        "quantity": 2,
+        "variant_id": "almond",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "2 almond croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "a blueberry muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Jay",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "jay"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-061",
+  "annotation_notes": "The flavor answers the business's question: PLACE_ORDER, cited with the original line."
+}

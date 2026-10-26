@@ -32,6 +32,7 @@ from typing import Any
 from orderslm.eval import student_dev
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
+from orderslm.schema.conversation import Split
 from orderslm.train.data import OUT, STUDENT_PROMPT_VERSION
 
 EXPERIMENT = "train"
@@ -112,6 +113,9 @@ def _sha256(path: Path) -> str:
 def export(args: argparse.Namespace) -> Path:
     train = [n for n in (args.train or "").split(",") if n]
     score = [n for n in (args.score or "").split(",") if n]
+    score_splits = [x for x in (args.score_splits or "dev").split(",") if x]
+    if not set(score_splits) <= {"dev", "fresh"}:
+        raise SystemExit(f"--score-splits takes dev and/or fresh, got {score_splits}")
     for n in train + score:
         if n not in STUDENTS:
             raise SystemExit(f"unknown student {n}; known: {sorted(STUDENTS)}")
@@ -171,23 +175,29 @@ def export(args: argparse.Namespace) -> Path:
             else:
                 shutil.copytree(best, STAGE / "adapters" / name)
                 adapter, adapter_sha256 = f"adapters/{name}", _sha256(best / "adapter_model.safetensors")
-            if "dev-requests.jsonl" not in files:
-                reqs = student_dev.build_requests()
-                (STAGE / "dev-requests.jsonl").write_text(
-                    "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in reqs)
+            for split in score_splits:  # one job per split, same GPU, one after another
+                req_file = f"{split}-requests.jsonl"
+                if req_file not in files:
+                    reqs = student_dev.build_requests(Split(split))
+                    (STAGE / req_file).write_text(
+                        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in reqs)
+                    )
+                    files[req_file] = _sha256(STAGE / req_file)
+                jobs.append(
+                    {
+                        "kind": "score",
+                        "name": f"score-{name}" + ("" if split == "dev" else f"-{split}"),
+                        "student": name,
+                        "split": split,
+                        "model": s["model"],
+                        "gpu": gpu,
+                        "adapter": adapter,
+                        "adapter_sha256": adapter_sha256,
+                        "after_train": name if name in train else None,
+                        "requests": req_file,
+                    }
                 )
-                files["dev-requests.jsonl"] = _sha256(STAGE / "dev-requests.jsonl")
-            job = {
-                "kind": "score",
-                "name": f"score-{name}",
-                "student": name,
-                "model": s["model"],
-                "gpu": gpu,
-                "adapter": adapter,
-                "adapter_sha256": adapter_sha256,
-                "after_train": name if name in train else None,
-                "requests": "dev-requests.jsonl",
-            }
+            continue
         jobs.append(job)
     run = {
         "session": session,
@@ -314,7 +324,12 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
             (dst / "summary.json").write_text(json.dumps(info, indent=2) + "\n")
             summary["jobs"][name] = info
         else:
-            dev_dir = RUNS / student_dev.EXPERIMENT / f"{manifest['session']}-{job['student']}"
+            split = job.get("split", "dev")
+            dev_dir = (
+                RUNS
+                / student_dev.EXPERIMENT
+                / (f"{manifest['session']}-{job['student']}" + ("" if split == "dev" else f"-{split}"))
+            )
             _copy(src, dev_dir, ("outputs.jsonl", "config.json", "status.json"))
             scored = (
                 json.loads((src / "config.json").read_text()).get("adapter_sha256")
@@ -332,6 +347,7 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                     {
                         "experiment": student_dev.EXPERIMENT,
                         "student": job["student"],
+                        "split": split,
                         "adapter_sha256": scored or expected,
                         "session": manifest["session"],
                         "data_version": STUDENTS[job["student"]]["data_version"],
@@ -380,6 +396,7 @@ def main(argv: list[str] | None = None) -> int:
         default=DEADLINE_HOURS,
         help="jobs stop themselves this long after the session start (lower it to fit the remaining GPU quota)",
     )
+    e.add_argument("--score-splits", help="evaluation splits to score on: dev (default), fresh, or dev,fresh")
     e.add_argument("--stop-after-steps", type=int, help="probe: each training pauses after N steps")
     e.add_argument(
         "--pad-check", type=int, metavar="ROWS", help="score ROWS valid rows padded and unpadded first"

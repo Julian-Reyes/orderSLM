@@ -1,0 +1,111 @@
+{
+  "conversation": {
+    "id": "a-fresh-089",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey whats ur muffin flavors",
+        "sent_at": "2026-11-06T14:05:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Blueberry, chocolate chip and banana nut!",
+        "sent_at": "2026-11-06T14:05:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok can i get a few of the chocolate chip ones, pickup name zoe",
+        "sent_at": "2026-11-06T14:06:10-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "muffin",
+        "quantity": null,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a few of the chocolate chip ones"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Zoe",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "zoe"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many muffins would you like, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-089",
+  "annotation_notes": "'a few' is an unclear quantity: item_quantity/ambiguous. No payment."
+}

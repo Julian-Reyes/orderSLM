@@ -1,0 +1,81 @@
+{
+  "conversation": {
+    "id": "a-fresh-009",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "good afternoon, id like to order one of the big margheritas pls, and could u tell me if the margherita has fresh mozzarella on it? thank u kindly",
+        "sent_at": "2026-11-04T15:30:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "one of the big margheritas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which margherita pizza would you like (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch), is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-009",
+  "annotation_notes": "'the big margheritas' fits large (14\") and extra large (16\"): item_variant/ambiguous. The order comes first in the message and doesn't wait on the answer: PLACE_ORDER + secondary MENU_QUESTION."
+}

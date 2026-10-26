@@ -1,0 +1,222 @@
+{
+  "conversation": {
+    "id": "a-fresh-006",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 🌙 just got off my shift, ordering for the crew",
+        "sent_at": "2026-11-01T21:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 large pepperonis 🍕",
+        "sent_at": "2026-11-01T21:40:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "and a medium hawaiian",
+        "sent_at": "2026-11-01T21:40:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it! Anything on the Hawaiian, or as is?",
+        "sent_at": "2026-11-01T21:41:35-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "as is 👍 plus 2 orders of garlic knots and a 2 liter coke",
+        "sent_at": "2026-11-01T21:42:00-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh and a small veggie, no olives",
+        "sent_at": "2026-11-01T21:42:25-06:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "deliver to 503 fulton st #2, cash 💵",
+        "sent_at": "2026-11-01T21:42:50-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 large pepperonis"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium hawaiian"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 orders of garlic knots"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "a 2 liter coke"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "olives",
+            "raw_text": "no olives"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "a small veggie, no olives"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 6,
+          "quote": "deliver to 503 fulton st #2"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "fulton st",
+      "number": "503",
+      "unit": "2",
+      "raw_text": "503 fulton st #2",
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "503 fulton st #2"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-006",
+  "annotation_notes": "Five lines built over several messages; the business's question about the Hawaiian is answered 'as is' in the same message that adds more."
+}

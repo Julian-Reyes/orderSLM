@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh-075",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I just placed the pickup order for the party under Mia and already paid for it on the phone, so please don't charge me when I come in.",
+        "sent_at": "2026-11-05T09:30:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-075",
+  "annotation_notes": "A payment claim about a placed order: PAYMENT_CLAIM; no new items, gold null."
+}

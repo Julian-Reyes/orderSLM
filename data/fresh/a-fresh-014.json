@@ -1,0 +1,108 @@
+{
+  "conversation": {
+    "id": "a-fresh-014",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "does the veggie pizza have any meat on it? im vegetarian. if not ill take a large veggie for pickup, paying cash",
+        "sent_at": "2026-10-27T18:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "No meat on the Veggie Pizza: green peppers, onions, mushrooms, black olives and tomatoes. So that's 1 large Veggie Pizza for pickup, paying cash. Sound right?",
+        "sent_at": "2026-10-27T18:20:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-10-27T18:21:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large veggie"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "👍"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "secondary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-014",
+  "annotation_notes": "The order depends on the answer ('if not'), so the question comes first: MENU_QUESTION + secondary PLACE_ORDER. The 👍 answers the read-back: CONFIRM_ORDER."
+}

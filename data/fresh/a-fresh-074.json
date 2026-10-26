@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-fresh-074",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI ORDERING LUNCH FOR 3!!",
+        "sent_at": "2026-11-04T12:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 BACON BURGERS WITH BBQ SAUCE AND 3 LEMONADES",
+        "sent_at": "2026-11-04T12:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "PICKUP AT 12:45, PAYING BY CARD!!",
+        "sent_at": "2026-11-04T12:10:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 3,
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "BBQ SAUCE",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 BACON BURGERS WITH BBQ SAUCE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 LEMONADES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 12:45",
+        "normalized_local": "12:45",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "AT 12:45"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "PAYING BY CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have bbq sauce for the bacon burger. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-074",
+  "annotation_notes": "BBQ sauce isn't on Corner Patty's menu: not_on_menu, item_modification/off_menu. 12:45 is 35 min away: normal."
+}

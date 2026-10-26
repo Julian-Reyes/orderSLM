@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh-008",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-03T17:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "47",
+        "sent_at": "2026-11-03T17:05:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-008",
+  "annotation_notes": "A bare number with no context: UNKNOWN."
+}

@@ -1,0 +1,162 @@
+{
+  "conversation": {
+    "id": "a-fresh-071",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'm staying nearby for the weekend.",
+        "sent_at": "2026-11-01T18:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could I get a large margherita and a can of iced tea?",
+        "sent_at": "2026-11-01T18:30:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Please deliver to 220 Lakeview Dr, I'll pay by card.",
+        "sent_at": "2026-11-01T18:30:50-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Could you add pesto to the margherita?",
+        "sent_at": "2026-11-01T18:31:15-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "pesto",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large margherita"
+          },
+          {
+            "message_index": 3,
+            "quote": "add pesto to the margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "iced_tea",
+        "quantity": 1,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a can of iced tea"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 220 Lakeview Dr"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Lakeview Dr",
+      "number": "220",
+      "raw_text": "220 Lakeview Dr",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "220 Lakeview Dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have pesto for the margherita pizza. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-071",
+  "annotation_notes": "Pesto isn't on the menu: not_on_menu add-on, item_modification/off_menu; the chat ends before the business answers."
+}

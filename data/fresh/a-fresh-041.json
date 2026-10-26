@@ -1,0 +1,167 @@
+{
+  "conversation": {
+    "id": "a-fresh-041",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY!! DO YOU HAVE PINEAPPLE AS A TOPPING??",
+        "sent_at": "2026-10-28T18:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we have pineapple!",
+        "sent_at": "2026-10-28T18:05:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "OK ONE LARGE CHEESE PIZZA AND A MEDIUM HAWAIIAN, DELIVER TO 77 MARKET ST, CASH",
+        "sent_at": "2026-10-28T18:06:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 large Cheese Pizza and 1 medium Hawaiian, delivered to 77 Market St, paying cash. Sound right?",
+        "sent_at": "2026-10-28T18:06:55-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "YES",
+        "sent_at": "2026-10-28T18:07:20-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "ACTUALY ADD PINEAPPLE ON THE CHEESE ONE TOO",
+        "sent_at": "2026-10-28T18:07:45-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "pineapple",
+            "raw_text": "ADD PINEAPPLE"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "ONE LARGE CHEESE PIZZA"
+          },
+          {
+            "message_index": 5,
+            "quote": "ADD PINEAPPLE ON THE CHEESE ONE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "A MEDIUM HAWAIIAN"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "DELIVER TO 77 MARKET ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "market st",
+      "number": "77",
+      "raw_text": "77 MARKET ST",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "77 MARKET ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-041",
+  "annotation_notes": "Card: 'adds a topping to an item already ordered'. Before a yes that would be PLACE_ORDER (a detail, nothing replaced), so it comes after the read-back and the yes: any change after confirming is MODIFY_ORDER on the placed order (time_sensitive)."
+}

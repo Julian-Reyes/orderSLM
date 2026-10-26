@@ -1,0 +1,160 @@
+{
+  "conversation": {
+    "id": "a-fresh-021",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 😊 do the fries have anything with gluten on them?",
+        "sent_at": "2026-11-03T19:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We can't confirm allergens here, sorry!",
+        "sent_at": "2026-11-03T19:00:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok i'll risk it 😅 regular fries and a veggie burger, deliver to 9 elm ct, card 💳",
+        "sent_at": "2026-11-03T19:01:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 regular Fries and 1 Veggie Burger, delivered to 9 Elm Ct, paying by card. Sound right?",
+        "sent_at": "2026-11-03T19:01:55-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yes! 👍",
+        "sent_at": "2026-11-03T19:02:20-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh wait can u make the fries large 🍟",
+        "sent_at": "2026-11-03T19:02:45-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "regular fries"
+          },
+          {
+            "message_index": 5,
+            "quote": "make the fries large"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a veggie burger"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 9 elm ct"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elm ct",
+      "number": "9",
+      "raw_text": "9 elm ct",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "9 elm ct"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-021",
+  "annotation_notes": "A size change after the yes: MODIFY_ORDER on the placed order, time_sensitive; the decision resets to pending."
+}

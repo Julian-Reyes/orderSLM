@@ -1,0 +1,65 @@
+{
+  "conversation": {
+    "id": "a-fresh-023",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-11-05T14:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "random q",
+        "sent_at": "2026-11-05T14:10:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "wht year did the titanic sink lol",
+        "sent_at": "2026-11-05T14:10:50-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-023",
+  "annotation_notes": "'random q' only announces the question. Trivia: OUT_OF_SCOPE."
+}

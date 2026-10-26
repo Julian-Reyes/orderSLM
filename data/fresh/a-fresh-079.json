@@ -1,0 +1,257 @@
+{
+  "conversation": {
+    "id": "a-fresh-079",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-10-27T18:10:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "does the veggie burger come w cheese",
+        "sent_at": "2026-10-27T18:10:25-04:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "No cheese on it, but you can add American cheese!",
+        "sent_at": "2026-10-27T18:11:10-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok cool",
+        "sent_at": "2026-10-27T18:11:35-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "2 veggie burgers w cheese, a bacon burger no tomato, 2 large fries, onion rings, a choclate shake n 2 sprites",
+        "sent_at": "2026-10-27T18:12:00-04:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "deliver to 707 ashland ave",
+        "sent_at": "2026-10-27T18:12:25-04:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-27T18:12:50-04:00"
+      },
+      {
+        "index": 7,
+        "role": "customer",
+        "text": "need change for a 50",
+        "sent_at": "2026-10-27T18:13:15-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cheese",
+            "raw_text": "w cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 veggie burgers w cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "tomato",
+            "raw_text": "no tomato"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "a bacon burger no tomato"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "onion rings"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "a choclate shake"
+          }
+        ]
+      },
+      {
+        "line_id": "L6",
+        "menu_item_id": "sprite",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 sprites"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "deliver to 707 ashland ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ashland ave",
+      "number": "707",
+      "raw_text": "707 ashland ave",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "707 ashland ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "change_for_cents": 5000,
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "cash"
+        },
+        {
+          "message_index": 7,
+          "quote": "change for a 50"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 7,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-079",
+  "annotation_notes": "Six lines in one message after a menu question; 'ok cool' acknowledges the answer: SMALL_TALK."
+}

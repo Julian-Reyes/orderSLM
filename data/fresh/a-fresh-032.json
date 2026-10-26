@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh-032",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I'm putting together a lunch order for my team.",
+        "sent_at": "2026-11-01T12:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "?",
+        "sent_at": "2026-11-01T12:00:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-032",
+  "annotation_notes": "An announcement, then a lone '?': UNKNOWN. No order exists yet, so refers_to none."
+}

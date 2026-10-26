@@ -44,6 +44,19 @@ also checked across splits at lock time.
 A Source A conversation must follow its card: same business, and every expected label present in the gold
 routing (blocking). Missing scenario tags or a different style are warnings.
 
+## Fresh split (M6)
+
+`data/fresh/` (`Split.fresh`, `conversation@0.5`): 90 Source A conversations written **after** the dev-based M6 fixes
+(targeted data t3/t4, training data v0.2), to measure those fixes on chats nobody tuned on (CLAUDE.md: "measure the
+fix on fresh unseen data"). Cards: `cards generate --split fresh` (own seed `20261007-fresh-2026-10-25`): 45 in
+dev's situation mix (dev quotas, largest remainder) + 45 from `FRESH_SITUATIONS`, aimed at the patterns the students
+got wrong on dev (docs/STUDENT_ERRORS.md: same item on two lines, big orders, late changes and changes after a
+yes, unclear amounts, unreadable messages, trivia, clock times without am/pm, off-menu add-ons), written from the
+pattern descriptions, never from dev chats. Training menus only (no held-out menu), like dev. Written and labeled by
+claude-opus-5.5 like dev (Julian, 2026-10-25: option b), saved through the annotation tool's checks: 0 findings,
+no near-duplicates within fresh, against dev, or against any of the 3,073 synthetic training chats. Julian reviews
+all of it like dev. Evaluation-only: training and generation code never reads it (tests/test_fresh.py).
+
 ## Review (Source A)
 
 Julian reviews **all of dev and at least 25% of test** in the tool. "Save as reviewed" saves his version and

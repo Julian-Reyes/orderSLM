@@ -1,0 +1,166 @@
+{
+  "conversation": {
+    "id": "a-fresh-053",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-10-27T19:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "first time ordering",
+        "sent_at": "2026-10-27T19:40:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "1 large pepperoni, delivery to 41 orchard ln, paying card",
+        "sent_at": "2026-10-27T19:40:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 large Pepperoni Pizza, delivered to 41 Orchard Ln, paying by card. Sound right?",
+        "sent_at": "2026-10-27T19:41:35-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-10-27T19:42:00-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh can i add garlic knots too",
+        "sent_at": "2026-10-27T19:42:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 large pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "garlic knots"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "delivery to 41 orchard ln"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "orchard ln",
+      "number": "41",
+      "raw_text": "41 orchard ln",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "41 orchard ln"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-053",
+  "annotation_notes": "Adding after the yes: MODIFY_ORDER on the placed order; pending again."
+}

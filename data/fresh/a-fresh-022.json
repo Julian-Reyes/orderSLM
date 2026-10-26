@@ -1,0 +1,135 @@
+{
+  "conversation": {
+    "id": "a-fresh-022",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a single cheeseburger with no pickles.",
+        "sent_at": "2026-11-04T21:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Also an order of onion rings and a lemonade.",
+        "sent_at": "2026-11-04T21:30:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I'll pick it up and pay with cash.",
+        "sent_at": "2026-11-04T21:30:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "pickle",
+            "raw_text": "no pickles"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a single cheeseburger with no pickles"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an order of onion rings"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay with cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-022"
+}

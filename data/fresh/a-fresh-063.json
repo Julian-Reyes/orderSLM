@@ -1,0 +1,108 @@
+{
+  "conversation": {
+    "id": "a-fresh-063",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi team lunch time! 🙌",
+        "sent_at": "2026-11-06T12:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can we get 2 of the big pepperoni pizzas delivered to 400 congress ave, 5th floor 🍕",
+        "sent_at": "2026-11-06T12:30:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 of the big pepperoni pizzas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivered to 400 congress ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "congress ave",
+      "number": "400",
+      "unit": "5th floor",
+      "raw_text": "400 congress ave, 5th floor",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "400 congress ave, 5th floor"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which pepperoni pizza would you like (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-063",
+  "annotation_notes": "'the big' pepperoni pizzas fits large and extra large: item_variant/ambiguous. No payment."
+}

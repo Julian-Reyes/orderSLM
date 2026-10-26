@@ -1,0 +1,113 @@
+{
+  "conversation": {
+    "id": "a-fresh-011",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, could I get a medium pepperoni pizza and a can of Sprite?",
+        "sent_at": "2026-11-06T13:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure! Anything else?",
+        "sent_at": "2026-11-06T13:00:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Actually, make the pizza a large instead.",
+        "sent_at": "2026-11-06T13:01:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium pepperoni pizza"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the pizza a large"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a can of Sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-011",
+  "annotation_notes": "Size change before any confirmation: MODIFY_ORDER; L1 keeps its line id and cites both messages."
+}

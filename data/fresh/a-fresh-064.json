@@ -1,0 +1,91 @@
+{
+  "conversation": {
+    "id": "a-fresh-064",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiii can i get a strawberry shake n fries 🍓🍟 i already paid on the app 💸",
+        "sent_at": "2026-11-07T15:10:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "strawberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a strawberry shake"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "i already paid on the app"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-064",
+  "annotation_notes": "A claim during an order: PLACE_ORDER + secondary PAYMENT_CLAIM; customer_claims_paid, method unknown ('the app' is a channel). Not verified."
+}

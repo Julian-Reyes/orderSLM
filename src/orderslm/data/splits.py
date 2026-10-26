@@ -25,12 +25,12 @@ from orderslm.checks import check_all
 from orderslm.core.missing import required_missing
 from orderslm.domain.clock import Clock, system_clock
 from orderslm.menus import load_menus
-from orderslm.paths import DEV, test_split_dir
+from orderslm.paths import DEV, FRESH, test_split_dir
 from orderslm.schema.annotation import AnnotatedConversation
 from orderslm.schema.conversation import Role, Source, Split
 from orderslm.schema.routing import ORDER_LABELS
 
-EDITABLE = (Split.dev, Split.test)
+EDITABLE = (Split.dev, Split.test, Split.fresh)
 EVAL_SOURCES = (Source.claude_written, Source.human)
 LOCK_FILE = "LOCK.json"
 REVIEWS_FILE = "REVIEWS.jsonl"
@@ -50,6 +50,8 @@ class SplitError(ValueError):
 def split_dir(split: Split) -> Path:
     if split is Split.dev:
         return DEV
+    if split is Split.fresh:
+        return FRESH
     if split is Split.test:
         return test_split_dir()  # raises SealedSplitError unless unsealed
     raise SplitError(f"{split.value} is not a human-written split")
@@ -413,7 +415,7 @@ def main(argv: list[str] | None = None) -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("stats", help="counts per label, scenario, business, style")
     s.add_argument("split", choices=[x.value for x in EDITABLE])
-    sub.add_parser("dupes", help="near-duplicates within dev (and dev vs test if unsealed)")
+    sub.add_parser("dupes", help="near-duplicates within dev, within fresh, and fresh vs dev")
     lk = sub.add_parser("lock", help="seal the test split (needs ORDERSLM_UNSEAL_TEST)")
     lk.add_argument("--relabel-human", action="store_true", help="schedule a blind relabel of Source C")
     sub.add_parser("verify", help="check test files against LOCK.json")
@@ -421,7 +423,8 @@ def main(argv: list[str] | None = None) -> None:
     if args.cmd == "stats":
         print(json.dumps(stats(load_split(Split(args.split))), indent=2))
     elif args.cmd == "dupes":
-        for x, y, score in near_duplicates(load_split(Split.dev)):
+        dev, fresh = load_split(Split.dev), load_split(Split.fresh)
+        for x, y, score in near_duplicates(dev) + near_duplicates(fresh) + near_duplicates(fresh, dev):
             print(f"{score:.3f}  {x}  {y}")
     elif args.cmd == "lock":
         r = lock(relabel_human=args.relabel_human)

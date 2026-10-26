@@ -1,0 +1,163 @@
+{
+  "conversation": {
+    "id": "a-fresh-035",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "MORNING!! JUST GOT OFF A NIGHT SHIFT",
+        "sent_at": "2026-11-04T07:20:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "TWO LARGE DRIP COFFEES AND A BREAKFAST SANDWICH ON A BAGEL",
+        "sent_at": "2026-11-04T07:20:25-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "PICKUP, NAME IS OMAR, CASH",
+        "sent_at": "2026-11-04T07:20:50-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it, Omar: 2 large Drip Coffees and 1 Breakfast Sandwich on a bagel, for pickup, paying cash. Sound right?",
+        "sent_at": "2026-11-04T07:21:35-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "YES",
+        "sent_at": "2026-11-04T07:22:00-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "ACTUALLY ILL PAY WITH CARD INSTEAD",
+        "sent_at": "2026-11-04T07:22:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "TWO LARGE DRIP COFFEES"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 1,
+        "variant_id": "bagel",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A BREAKFAST SANDWICH ON A BAGEL"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "PAY WITH CARD INSTEAD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Omar",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "OMAR"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-035",
+  "annotation_notes": "A payment switch after the yes: MODIFY_ORDER on the placed order, urgency normal (rubric); decision pending."
+}

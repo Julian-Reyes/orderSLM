@@ -82,7 +82,7 @@ def create_app(clock: Clock | None = None) -> FastAPI:
         test_open = _test_open()
         lock = _lock_record() if test_open else None
         return {
-            "splits": ["dev", "test"] if test_open else ["dev"],
+            "splits": ["dev", "fresh", "test"] if test_open else ["dev", "fresh"],
             "test_locked": lock is not None,
             "labels": {k.value: v for k, v in LABEL_DESCRIPTIONS.items()},
             "urgency": {k.value: v for k, v in URGENCY_DESCRIPTIONS.items()},

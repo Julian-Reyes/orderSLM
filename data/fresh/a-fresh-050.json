@@ -1,0 +1,51 @@
+{
+  "conversation": {
+    "id": "a-fresh-050",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'm ordering for a birthday party and two of the kids have severe nut allergies.",
+        "sent_at": "2026-11-06T15:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could I speak with someone on your staff about how the pizzas are prepared before I order?",
+        "sent_at": "2026-11-06T15:00:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-050",
+  "annotation_notes": "The allergy context comes before the request; nothing to order yet. Asking for staff: HUMAN_REQUEST, asks_for_human. No reaction, so urgency normal."
+}

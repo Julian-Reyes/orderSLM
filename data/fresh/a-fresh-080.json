@@ -1,0 +1,151 @@
+{
+  "conversation": {
+    "id": "a-fresh-080",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI! I'M VEGAN",
+        "sent_at": "2026-10-28T19:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "CAN I GET A LARGE VEGGIE PIZZA WITH NO CHEESE AND VEGAN CHEESE INSTEAD?",
+        "sent_at": "2026-10-28T19:20:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "AND A BOTTLED WATER",
+        "sent_at": "2026-10-28T19:20:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "PAYING CASH!",
+        "sent_at": "2026-10-28T19:21:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "cheese",
+            "raw_text": "NO CHEESE"
+          },
+          {
+            "kind": "add",
+            "raw_text": "VEGAN CHEESE",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A LARGE VEGGIE PIZZA WITH NO CHEESE AND VEGAN CHEESE INSTEAD"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "water",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "A BOTTLED WATER"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "PAYING CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have vegan cheese for the veggie pizza. Would you like it as it comes, or with something else instead? Also, is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-080",
+  "annotation_notes": "Vegan cheese isn't on the menu: the house cheese is removed and vegan cheese is a not_on_menu add (item_modification/off_menu). Pickup/delivery missing."
+}

@@ -1,0 +1,151 @@
+{
+  "conversation": {
+    "id": "a-fresh-059",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, could I get the same as last time?",
+        "sent_at": "2026-11-02T17:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, we can't see past orders here. What would you like?",
+        "sent_at": "2026-11-02T17:15:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Right, it was a large Hawaiian and some breadsticks.",
+        "sent_at": "2026-11-02T17:16:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Make that two large Hawaiians, actually.",
+        "sent_at": "2026-11-02T17:16:35-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "I'll pick it up and pay with card.",
+        "sent_at": "2026-11-02T17:17:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large Hawaiian"
+          },
+          {
+            "message_index": 3,
+            "quote": "two large Hawaiians"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "breadsticks",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "some breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L3"
+      }
+    ],
+    "clarification_question": "How many orders of breadsticks would you like (4 per order)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-059",
+  "annotation_notes": "'the same as last time' (L1) is resolved by the next message and dropped. 'some breadsticks' stays an unclear quantity."
+}

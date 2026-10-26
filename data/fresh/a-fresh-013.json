@@ -1,0 +1,125 @@
+{
+  "conversation": {
+    "id": "a-fresh-013",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey!",
+        "sent_at": "2026-11-08T12:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "double cheeseburger + a vanilla shake, pickup",
+        "sent_at": "2026-11-08T12:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "wait make the shake chocolate",
+        "sent_at": "2026-11-08T12:10:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "double cheeseburger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a vanilla shake"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the shake chocolate"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-013",
+  "annotation_notes": "Card: change 'the milk or crust'; Corner Patty has neither, so the change is the shake's flavor (a variant). No payment: missing."
+}

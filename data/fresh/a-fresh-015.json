@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh-015",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "ok random but me n my bro r arguing",
+        "sent_at": "2026-10-28T16:00:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "who has more rings, jordan or lebron? settle it pls",
+        "sent_at": "2026-10-28T16:00:25-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-015",
+  "annotation_notes": "Settling a bet: OUT_OF_SCOPE."
+}

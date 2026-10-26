@@ -1,0 +1,105 @@
+{
+  "conversation": {
+    "id": "a-fresh-019",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a bacon burger n onion rings delivered to 77 crescent ave at 7:15, ill pay cash",
+        "sent_at": "2026-11-01T16:40:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 77 crescent ave"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7:15",
+        "normalized_local": "19:15",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 7:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "crescent ave",
+      "number": "77",
+      "raw_text": "77 crescent ave",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 crescent ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "ill pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-019",
+  "annotation_notes": "'at 7:15' with no am/pm at 16:40, open 11-22: only 19:15 works."
+}

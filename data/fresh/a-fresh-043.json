@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-fresh-043",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi do u guys have spicy stuff",
+        "sent_at": "2026-10-30T13:20:00-04:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "You can add jalapeños to any burger!",
+        "sent_at": "2026-10-30T13:20:45-04:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok 4 veggie burgers, 2 w jalapeños",
+        "sent_at": "2026-10-30T13:21:10-04:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 5 bay st, hotel lobby",
+        "sent_at": "2026-10-30T13:21:35-04:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-10-30T13:22:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "4 veggie burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "jalapeno",
+            "raw_text": "w jalapeños"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "4 veggie burgers"
+          },
+          {
+            "message_index": 2,
+            "quote": "2 w jalapeños"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 5 bay st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "bay st",
+      "number": "5",
+      "reference": "hotel lobby",
+      "raw_text": "5 bay st, hotel lobby",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "5 bay st, hotel lobby"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-043"
+}

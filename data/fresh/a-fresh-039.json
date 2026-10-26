@@ -1,0 +1,111 @@
+{
+  "conversation": {
+    "id": "a-fresh-039",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 👋 can i get a cheeseburger, fries and a coke delivered to 310 grove st, card 💳",
+        "sent_at": "2026-11-08T18:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "actually no coke, im good 🙅",
+        "sent_at": "2026-11-08T18:40:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 310 grove st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "grove st",
+      "number": "310",
+      "raw_text": "310 grove st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "310 grove st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-039",
+  "annotation_notes": "The coke (L3) is removed in the last message: MODIFY_ORDER, the line disappears."
+}

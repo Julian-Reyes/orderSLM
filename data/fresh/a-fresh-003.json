@@ -1,0 +1,71 @@
+{
+  "conversation": {
+    "id": "a-fresh-003",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey quick q",
+        "sent_at": "2026-10-29T08:40:00-07:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i pay online thru a link or is it card at the counter only",
+        "sent_at": "2026-10-29T08:40:25-07:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Card or cash here at the counter! We don't take online payments.",
+        "sent_at": "2026-10-29T08:41:10-07:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok cool thx",
+        "sent_at": "2026-10-29T08:41:35-07:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-003",
+  "annotation_notes": "No order: gold_extraction null."
+}

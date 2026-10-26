@@ -1,0 +1,118 @@
+{
+  "conversation": {
+    "id": "a-fresh-049",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get a red bull and a plain croisant for pickup?",
+        "sent_at": "2026-11-05T08:55:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "name is ana, ill pay cash",
+        "sent_at": "2026-11-05T08:55:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "unmatched_text": "a red bull",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a red bull"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a plain croisant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "ill pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ana",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "ana"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have a red bull. Would you like something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-049",
+  "annotation_notes": "Red Bull isn't on the menu: unmatched, item_menu_match/off_menu."
+}

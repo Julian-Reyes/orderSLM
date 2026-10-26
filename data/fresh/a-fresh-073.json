@@ -1,0 +1,169 @@
+{
+  "conversation": {
+    "id": "a-fresh-073",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo",
+        "sent_at": "2026-11-03T20:45:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "cheeseburger combo w fries n a coke",
+        "sent_at": "2026-11-03T20:45:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "+ a vanilla shake",
+        "sent_at": "2026-11-03T20:45:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup, cash",
+        "sent_at": "2026-11-03T20:46:15-05:00"
+      },
+      {
+        "index": 4,
+        "role": "business",
+        "text": "Got it: 1 Cheeseburger Combo with fries and a Coke, and 1 Vanilla Milkshake, for pickup, paying cash. Sound right?",
+        "sent_at": "2026-11-03T20:47:00-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "ya",
+        "sent_at": "2026-11-03T20:47:25-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "actually no shake",
+        "sent_at": "2026-11-03T20:47:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "coke"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "cheeseburger combo w fries n a coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-073",
+  "annotation_notes": "Removing the shake (L2) after the yes: MODIFY_ORDER on the placed order; pending."
+}

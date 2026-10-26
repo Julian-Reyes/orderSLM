@@ -1,0 +1,178 @@
+{
+  "conversation": {
+    "id": "a-fresh-051",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-11-07T11:15:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 large lattes",
+        "sent_at": "2026-11-07T11:15:25-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 everything bagels w cream cheese",
+        "sent_at": "2026-11-07T11:15:50-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n a chocolate muffin",
+        "sent_at": "2026-11-07T11:16:15-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "pickup, name kim, card",
+        "sent_at": "2026-11-07T11:16:40-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "actually drop the muffin",
+        "sent_at": "2026-11-07T11:17:05-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 large lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 2,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 everything bagels w cream cheese"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Kim",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "kim"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-051",
+  "annotation_notes": "The muffin (L3) is removed in the last message."
+}

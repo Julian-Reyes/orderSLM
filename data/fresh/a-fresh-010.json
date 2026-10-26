@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh-010",
+    "business_id": "morning-crumb",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Random question while I wait for my bus: how many players are on a rugby union team?",
+        "sent_at": "2026-11-05T10:20:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-010",
+  "annotation_notes": "General trivia: OUT_OF_SCOPE."
+}

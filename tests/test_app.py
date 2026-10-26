@@ -31,9 +31,9 @@ def client(at: str = "2026-10-20T15:00:00+00:00") -> TestClient:
     return TestClient(create_app(clock=fixed_clock(at)))
 
 
-def test_meta_lists_only_dev_while_sealed(dirs):
+def test_meta_hides_test_while_sealed(dirs):
     meta = client().get("/api/meta").json()
-    assert meta["splits"] == ["dev"]
+    assert meta["splits"] == ["dev", "fresh"]  # fresh (M6) is reviewed like dev; test stays hidden
     assert "PLACE_ORDER" in meta["labels"] and "half_and_half" in meta["scenarios"]
 
 

@@ -1,0 +1,36 @@
+{
+  "conversation": {
+    "id": "a-fresh-069",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, my delivery came but the onion rings I paid for never arrived. Could I get a refund for them?",
+        "sent_at": "2026-10-30T21:00:00-04:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "secondary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-069",
+  "annotation_notes": "A missing item and a refund in one message: ORDER_PROBLEM + secondary REFUND_REQUEST."
+}

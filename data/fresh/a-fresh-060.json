@@ -1,0 +1,124 @@
+{
+  "conversation": {
+    "id": "a-fresh-060",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "TWO VEGGIE BURGERS NO MAYO AND A LARGE FRIES DELIVERED TO 330 HARPER AVE AT 6 PLEASE, PAYING CASH! I DONT EAT EGGS SO NO MAYO!",
+        "sent_at": "2026-11-03T14:05:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "mayo",
+            "raw_text": "NO MAYO"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "TWO VEGGIE BURGERS NO MAYO"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A LARGE FRIES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERED TO 330 HARPER AVE"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 6",
+        "normalized_local": "18:00",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "AT 6"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "harper ave",
+      "number": "330",
+      "raw_text": "330 HARPER AVE",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "330 HARPER AVE"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "PAYING CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "notes": [
+      {
+        "text": "customer doesn't eat eggs",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "I DONT EAT EGGS"
+          }
+        ]
+      }
+    ]
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-060",
+  "annotation_notes": "'AT 6' at 14:05, open 11-22: 18:00. The egg remark is kept as a note; the mayo removal is the actionable part."
+}

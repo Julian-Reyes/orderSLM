@@ -1,0 +1,131 @@
+{
+  "conversation": {
+    "id": "a-fresh-062",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi whats on the bacon burger",
+        "sent_at": "2026-11-05T19:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "American cheese, lettuce, tomato, onions, pickles, ketchup and bacon!",
+        "sent_at": "2026-11-05T19:30:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok 1 bacon burger n a lemonde, deliver to 15 shore rd",
+        "sent_at": "2026-11-05T19:31:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "payin w card",
+        "sent_at": "2026-11-05T19:31:35-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a lemonde"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 15 shore rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "shore rd",
+      "number": "15",
+      "raw_text": "15 shore rd",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "15 shore rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "payin w card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-062"
+}

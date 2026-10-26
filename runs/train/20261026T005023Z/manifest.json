@@ -1,0 +1,106 @@
+{
+  "experiment": "train",
+  "session": "20261026T005023Z",
+  "data_version": "student-data@0.2",
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "deadline_hours": 2.5,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-2b-mixed-v2",
+      "model": "2b",
+      "data": "mixed",
+      "data_version": "student-data@0.2",
+      "gpu": 0,
+      "lr": 0.0001,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.2-mixed-train.jsonl",
+      "valid_file": "0.2-mixed-valid.jsonl",
+      "resume": null,
+      "stop_after_steps": 60,
+      "pad_check_rows": 20
+    },
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single-v2",
+      "model": "0.8b",
+      "data": "single",
+      "data_version": "student-data@0.2",
+      "gpu": 1,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.2-single-train.jsonl",
+      "valid_file": "0.2-single-valid.jsonl",
+      "resume": null,
+      "stop_after_steps": 60,
+      "pad_check_rows": 20
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "0.2-mixed-train.jsonl": "094567a4ef458473df74bc30fcf526f1cbf63276d75842acc9839dc3dff443f2",
+    "0.2-mixed-valid.jsonl": "009d98f37479907301e288a04148d0d2c238aed841c0114a0883b77d47eb706f",
+    "0.2-single-train.jsonl": "4779795ca642b1c387fd0d5b7831019fdbbb7e047a01e7ff154b6f846bf8c6a5",
+    "0.2-single-valid.jsonl": "58d1de3c32efe42c98b693bbb70e8aef07f57b2300a72501a1ddcfb9e97a90a1"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.2": {
+      "single": "4779795ca642b1c387fd0d5b7831019fdbbb7e047a01e7ff154b6f846bf8c6a5",
+      "mixed": "094567a4ef458473df74bc30fcf526f1cbf63276d75842acc9839dc3dff443f2"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.2": "4c8c1d4fe5febe288b7dff945973428898391c82-dirty"
+  },
+  "exported_at": "2026-10-26T00:50:23.702325+00:00",
+  "git_commit": "50ba5fd66cee2b13ae3e87cee76d8b9e46743de9",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}

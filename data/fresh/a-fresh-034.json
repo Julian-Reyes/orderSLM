@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-fresh-034",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! Can I get a cheeseburger combo with large fries and a lemonade?",
+        "sent_at": "2026-11-03T18:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "No onions on the burger, please.",
+        "sent_at": "2026-11-03T18:15:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Delivery to 415 Carver St.",
+        "sent_at": "2026-11-03T18:15:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "I'll pay by card.",
+        "sent_at": "2026-11-03T18:16:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "No onions"
+          }
+        ],
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries",
+            "variant_id": "large"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "lemonade"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger combo with large fries and a lemonade"
+          },
+          {
+            "message_index": 1,
+            "quote": "No onions on the burger"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Delivery to 415 Carver St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Carver St",
+      "number": "415",
+      "raw_text": "415 Carver St",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "415 Carver St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-034",
+  "annotation_notes": "The combo's side is upsized: fries, variant large."
+}

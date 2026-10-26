@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-fresh-020",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is the bbq chicken pizza gluten free?",
+        "sent_at": "2026-11-02T12:45:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We can't confirm allergens here, sorry, but we do have a gluten-free crust.",
+        "sent_at": "2026-11-02T12:45:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a small bbq chicken on gluten free crust, pickup, card",
+        "sent_at": "2026-11-02T12:46:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "actually swap it for a small margherita gf crust",
+        "sent_at": "2026-11-02T12:46:35-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L2",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "gf crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "swap it for a small margherita gf crust"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-020",
+  "annotation_notes": "The swap replaces the BBQ chicken line (L1 gone) with a new margherita line (L2)."
+}

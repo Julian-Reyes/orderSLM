@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "a-fresh-025",
+    "business_id": "corner-patty",
+    "split": "fresh",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD AFTERNOON! I WOULD LIKE TO ORDER FOR MY GRANDCHILDREN",
+        "sent_at": "2026-11-07T13:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "FOUR CHEESEBURGERS PLEASE, TWO OF THEM DOUBLE PATTY",
+        "sent_at": "2026-11-07T13:20:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "AND FOUR LEMONADES. THANK YOU KINDLY!",
+        "sent_at": "2026-11-07T13:20:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "FOUR CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "FOUR CHEESEBURGERS"
+          },
+          {
+            "message_index": 1,
+            "quote": "TWO OF THEM DOUBLE PATTY"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "FOUR LEMONADES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh)",
+  "card_id": "a-fresh-025",
+  "annotation_notes": "Card: 'a different milk or crust'; Corner Patty has neither, so the different option is the patty size: two lines, 2 as stated (default single) and 2 double. No pickup/delivery or payment yet."
+}
