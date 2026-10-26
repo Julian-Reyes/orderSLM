@@ -112,10 +112,15 @@ def _sha256(path: Path) -> str:
 
 def export(args: argparse.Namespace) -> Path:
     train = [n for n in (args.train or "").split(",") if n]
-    score = [n for n in (args.score or "").split(",") if n]
-    score_splits = [x for x in (args.score_splits or "dev").split(",") if x]
-    if not set(score_splits) <= {"dev", "fresh"}:
-        raise SystemExit(f"--score-splits takes dev and/or fresh, got {score_splits}")
+    default_splits = [x for x in (args.score_splits or "dev").split(",") if x]
+    splits_of: dict[str, list[str]] = {}  # "name" or "name:dev+fresh" (per-student splits)
+    for entry in (x for x in (args.score or "").split(",") if x):
+        name, _, sp = entry.partition(":")
+        splits_of[name] = sp.split("+") if sp else default_splits
+    score = list(splits_of)
+    for name, sp in splits_of.items():
+        if not sp or not set(sp) <= {"dev", "fresh"}:
+            raise SystemExit(f"{name}: score splits are dev and/or fresh, got {sp}")
     for n in train + score:
         if n not in STUDENTS:
             raise SystemExit(f"unknown student {n}; known: {sorted(STUDENTS)}")
@@ -175,7 +180,7 @@ def export(args: argparse.Namespace) -> Path:
             else:
                 shutil.copytree(best, STAGE / "adapters" / name)
                 adapter, adapter_sha256 = f"adapters/{name}", _sha256(best / "adapter_model.safetensors")
-            for split in score_splits:  # one job per split, same GPU, one after another
+            for split in splits_of[name]:  # one job per split, same GPU, one after another
                 req_file = f"{split}-requests.jsonl"
                 if req_file not in files:
                     reqs = student_dev.build_requests(Split(split))
@@ -389,7 +394,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("export")
     e.add_argument("--train", help="students to train (comma-separated, ≤ 2)")
-    e.add_argument("--score", help="students to score on dev (their best adapter)")
+    e.add_argument("--score", help="students to score (best adapter), each optionally name:dev+fresh")
     e.add_argument(
         "--deadline-hours",
         type=float,

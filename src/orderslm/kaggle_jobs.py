@@ -93,8 +93,23 @@ def push(job: str) -> None:
         time.sleep(10)
     else:
         raise SystemExit(f"{dataset} not ready after 10 min: {status}")
-    listed = _dataset_files(dataset)
-    if missing := missing_uploads(stage, listed):
+    start(job)
+
+
+def start(job: str, tries: int = 30) -> None:
+    """Start the kernel once the dataset lists every staged file. The listing can lag the "ready" status by a
+    minute or more (session 1 of the v0.2 retrain, 2026-10-26: it still showed the previous version), so it is
+    retried before giving up. Alone (`start`), it launches the kernel on the dataset already uploaded."""
+    job_dir = KAGGLE_DIR / job
+    stage = job_dir / "upload"
+    dataset = json.loads((stage / "dataset-metadata.json").read_text())["id"]
+    for i in range(tries):
+        listed = _dataset_files(dataset)
+        if not (missing := missing_uploads(stage, listed)):
+            break
+        if i < tries - 1:
+            time.sleep(10)
+    else:
         raise SystemExit(
             f"{dataset} lacks staged files {missing} (listed: {sorted(listed)}); kernel not started"
         )
@@ -124,10 +139,10 @@ def pull(job: str) -> Path:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["push", "status", "pull"])
+    ap.add_argument("cmd", choices=["push", "start", "status", "pull"])
     ap.add_argument("job")
     args = ap.parse_args(argv)
-    {"push": push, "status": status, "pull": pull}[args.cmd](args.job)
+    {"push": push, "start": start, "status": status, "pull": pull}[args.cmd](args.job)
     return 0
 
 

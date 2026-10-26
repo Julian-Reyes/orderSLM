@@ -1,0 +1,150 @@
+{
+  "experiment": "train",
+  "session": "20261026T131201Z",
+  "data_version": [
+    "student-data@0.1",
+    "student-data@0.2"
+  ],
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "deadline_hours": 11.25,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-2b-mixed-v2",
+      "model": "2b",
+      "data": "mixed",
+      "data_version": "student-data@0.2",
+      "gpu": 0,
+      "lr": 0.0001,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.2-mixed-train.jsonl",
+      "valid_file": "0.2-mixed-valid.jsonl",
+      "resume": "resume/qwen3.5-2b-mixed-v2",
+      "resumed_at_step": 60
+    },
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single-v2",
+      "model": "0.8b",
+      "data": "single",
+      "data_version": "student-data@0.2",
+      "gpu": 1,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.2-single-train.jsonl",
+      "valid_file": "0.2-single-valid.jsonl",
+      "resume": "resume/qwen3.5-0.8b-single-v2",
+      "resumed_at_step": 60
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v2",
+      "student": "qwen3.5-0.8b-single-v2",
+      "split": "dev",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "qwen3.5-0.8b-single-v2/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v2",
+      "requests": "dev-requests.jsonl"
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v2-fresh",
+      "student": "qwen3.5-0.8b-single-v2",
+      "split": "fresh",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "qwen3.5-0.8b-single-v2/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v2",
+      "requests": "fresh-requests.jsonl"
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-fresh",
+      "student": "qwen3.5-0.8b-single",
+      "split": "fresh",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single",
+      "adapter_sha256": "aeceedf59bc1c651f97db4bea9f0b64f235c7302dff47dbf5e0553e6653a39c8",
+      "after_train": null,
+      "requests": "fresh-requests.jsonl"
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "0.2-mixed-train.jsonl": "094567a4ef458473df74bc30fcf526f1cbf63276d75842acc9839dc3dff443f2",
+    "0.2-mixed-valid.jsonl": "009d98f37479907301e288a04148d0d2c238aed841c0114a0883b77d47eb706f",
+    "0.2-single-train.jsonl": "4779795ca642b1c387fd0d5b7831019fdbbb7e047a01e7ff154b6f846bf8c6a5",
+    "0.2-single-valid.jsonl": "58d1de3c32efe42c98b693bbb70e8aef07f57b2300a72501a1ddcfb9e97a90a1",
+    "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b",
+    "fresh-requests.jsonl": "ddc349daf25f7c61883af5da7382bab737aba5e35f2354420e9cc9dd391a455f"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.1": {
+      "single": "2196f96f874dd42f3608419df97942c720f95ac8bc73e17f2e6392ffde80f7ac",
+      "mixed": "9c4c416385be9f39c6b70942ad7e1e5f9e54d1030c5b00d8b1462e27327c7c40"
+    },
+    "student-data@0.2": {
+      "single": "4779795ca642b1c387fd0d5b7831019fdbbb7e047a01e7ff154b6f846bf8c6a5",
+      "mixed": "094567a4ef458473df74bc30fcf526f1cbf63276d75842acc9839dc3dff443f2"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.1": "2b4064f505be6fa6dd0697d4320ede37c82fa131",
+    "student-data@0.2": "4c8c1d4fe5febe288b7dff945973428898391c82-dirty"
+  },
+  "exported_at": "2026-10-26T13:12:01.502334+00:00",
+  "git_commit": "40b98f5fd8ddca5a231be9a9579f65a6ff90f548-dirty",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}
