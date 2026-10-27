@@ -1,0 +1,22 @@
+{
+  "job": {
+    "kind": "score",
+    "name": "score-qwen3.5-2b-mixed-v2-fresh",
+    "student": "qwen3.5-2b-mixed-v2",
+    "split": "fresh",
+    "model": "2b",
+    "gpu": 0,
+    "adapter": "qwen3.5-2b-mixed-v2/best",
+    "adapter_sha256": null,
+    "after_train": "qwen3.5-2b-mixed-v2",
+    "requests": "fresh-requests.jsonl"
+  },
+  "sdpa_gqa_flag_off": true,
+  "kernels": {
+    "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+    "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+  },
+  "dtype": "torch.float16",
+  "adapter_path": "/kaggle/working/qwen3.5-2b-mixed-v2/best",
+  "adapter_sha256": "bfcc9b6ef220851b7ace7f1927c5ce265dfab226524cda566abd3fb5746e7628"
+}

@@ -1,0 +1,142 @@
+12:42:28 session 20261027T123832Z: torch 2.11.0+cu128, transformers 5.20.2, GPUs ['Tesla T4', 'Tesla T4']
+12:43:58 qwen3.5-2b-single-v2: Qwen3_5ForCausalLM 16,819,200 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2528 rows, 632 steps (316/epoch), evals at [0, 158, 316, 474, 632]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 0
+12:44:30 qwen3.5-2b-mixed-v2: Qwen3_5ForCausalLM 16,819,200 trainable on ['down_proj', 'gate_proj', 'in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'k_proj', 'o_proj', 'out_proj', 'q_proj', 'up_proj', 'v_proj']; 2899 rows, 726 steps (363/epoch), evals at [0, 182, 363, 544, 726]; kernels {'chunk_gated_delta_rule': 'fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule', 'causal_conv1d_fn': 'transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn'}; start at step 610
+12:50:12 qwen3.5-2b-single-v2: val step 0 loss 1.2607 (374.6 s)
+13:00:15 qwen3.5-2b-single-v2: step 10/632 loss 1.4116 lr 1.88e-05 63.93 s/step, 34465 tok
+13:00:43 qwen3.5-2b-mixed-v2: step 620/726 loss 0.0070 lr 6.27e-06 74.02 s/step, 38585 tok
+13:09:13 qwen3.5-2b-single-v2: step 20/632 loss 0.6582 lr 4.69e-05 52.59 s/step, 28664 tok
+13:11:22 qwen3.5-2b-mixed-v2: step 630/726 loss 0.0057 lr 5.21e-06 50.55 s/step, 27134 tok
+13:19:06 qwen3.5-2b-single-v2: step 30/632 loss 0.1384 lr 7.81e-05 67.15 s/step, 36179 tok
+13:23:07 qwen3.5-2b-mixed-v2: step 640/726 loss 0.0057 lr 4.24e-06 75.17 s/step, 40188 tok
+13:28:11 qwen3.5-2b-single-v2: step 40/632 loss 0.0162 lr 1.00e-04 57.72 s/step, 31580 tok
+13:33:44 qwen3.5-2b-mixed-v2: step 650/726 loss 0.0091 lr 3.37e-06 59.62 s/step, 31506 tok
+13:37:23 qwen3.5-2b-single-v2: step 50/632 loss 0.0194 lr 9.99e-05 58.22 s/step, 31628 tok
+13:45:11 qwen3.5-2b-mixed-v2: step 660/726 loss 0.0075 lr 2.60e-06 52.42 s/step, 28288 tok
+13:46:46 qwen3.5-2b-single-v2: step 60/632 loss 0.0371 lr 9.96e-05 74.13 s/step, 40063 tok
+13:56:22 qwen3.5-2b-mixed-v2: step 670/726 loss 0.0138 lr 1.92e-06 70.67 s/step, 37241 tok
+13:56:51 qwen3.5-2b-single-v2: step 70/632 loss 0.0250 lr 9.93e-05 52.43 s/step, 28549 tok
+14:06:52 qwen3.5-2b-single-v2: step 80/632 loss 0.0234 lr 9.87e-05 64.41 s/step, 34910 tok
+14:08:08 qwen3.5-2b-mixed-v2: step 680/726 loss 0.0114 lr 1.35e-06 64.97 s/step, 34669 tok
+14:16:03 qwen3.5-2b-single-v2: step 90/632 loss 0.0139 lr 9.81e-05 46.36 s/step, 25442 tok
+14:20:07 qwen3.5-2b-mixed-v2: step 690/726 loss 0.0052 lr 8.71e-07 65.33 s/step, 34806 tok
+14:25:44 qwen3.5-2b-single-v2: step 100/632 loss 0.0216 lr 9.73e-05 65.87 s/step, 35702 tok
+14:32:04 qwen3.5-2b-mixed-v2: step 700/726 loss 0.0066 lr 4.99e-07 65.21 s/step, 34618 tok
+14:34:44 qwen3.5-2b-single-v2: step 110/632 loss 0.0165 lr 9.64e-05 49.75 s/step, 27348 tok
+14:42:10 qwen3.5-2b-mixed-v2: step 710/726 loss 0.0094 lr 2.29e-07 63.87 s/step, 33915 tok
+14:44:02 qwen3.5-2b-single-v2: step 120/632 loss 0.0145 lr 9.54e-05 61.46 s/step, 33426 tok
+14:53:31 qwen3.5-2b-single-v2: step 130/632 loss 0.0148 lr 9.42e-05 58.33 s/step, 31880 tok
+14:54:25 qwen3.5-2b-mixed-v2: step 720/726 loss 0.0088 lr 6.29e-08 79.72 s/step, 42106 tok
+15:02:26 qwen3.5-2b-single-v2: step 140/632 loss 0.0214 lr 9.29e-05 54.82 s/step, 29921 tok
+15:06:09 qwen3.5-2b-mixed-v2: val step 726 loss 0.0102 (375.8 s) best
+15:06:09 qwen3.5-2b-mixed-v2: done at step 726/726, best val 0.010151706584109577 @ 726
+15:11:46 score-qwen3.5-2b-mixed-v2: 20/268 (178 tok, 8.5 s)
+15:12:03 qwen3.5-2b-single-v2: step 150/632 loss 0.0244 lr 9.16e-05 70.05 s/step, 37932 tok
+15:16:37 score-qwen3.5-2b-mixed-v2: 40/268 (339 tok, 15.3 s)
+15:21:44 score-qwen3.5-2b-mixed-v2: 60/268 (369 tok, 16.7 s)
+15:23:20 qwen3.5-2b-single-v2: val step 158 loss 0.0171 (264.3 s) best
+15:25:01 qwen3.5-2b-single-v2: step 160/632 loss 0.0095 lr 9.01e-05 42.19 s/step, 23543 tok
+15:27:27 score-qwen3.5-2b-mixed-v2: 80/268 (365 tok, 17.1 s)
+15:31:49 score-qwen3.5-2b-mixed-v2: 100/268 (342 tok, 15.0 s)
+15:34:28 qwen3.5-2b-single-v2: step 170/632 loss 0.0171 lr 8.85e-05 54.0 s/step, 29700 tok
+15:36:21 score-qwen3.5-2b-mixed-v2: 120/268 (395 tok, 17.2 s)
+15:40:28 score-qwen3.5-2b-mixed-v2: 140/268 (178 tok, 8.7 s)
+15:43:33 qwen3.5-2b-single-v2: step 180/632 loss 0.0352 lr 8.68e-05 69.76 s/step, 38439 tok
+15:44:32 score-qwen3.5-2b-mixed-v2: 160/268 (217 tok, 10.2 s)
+15:49:39 score-qwen3.5-2b-mixed-v2: 180/268 (474 tok, 20.6 s)
+15:52:44 qwen3.5-2b-single-v2: step 190/632 loss 0.0183 lr 8.50e-05 60.97 s/step, 33643 tok
+15:54:45 score-qwen3.5-2b-mixed-v2: 200/268 (179 tok, 8.3 s)
+15:59:33 score-qwen3.5-2b-mixed-v2: 220/268 (178 tok, 8.4 s)
+16:02:39 qwen3.5-2b-single-v2: step 200/632 loss 0.0090 lr 8.31e-05 36.92 s/step, 20570 tok
+16:04:54 score-qwen3.5-2b-mixed-v2: 240/268 (348 tok, 15.1 s)
+16:09:03 score-qwen3.5-2b-mixed-v2: 260/268 (178 tok, 9.6 s)
+16:11:05 score-qwen3.5-2b-mixed-v2: done
+16:12:34 qwen3.5-2b-single-v2: step 210/632 loss 0.0148 lr 8.11e-05 59.75 s/step, 32038 tok
+16:16:24 score-qwen3.5-2b-mixed-v2-fresh: 20/278 (399 tok, 17.5 s)
+16:21:00 score-qwen3.5-2b-mixed-v2-fresh: 40/278 (282 tok, 13.9 s)
+16:21:27 qwen3.5-2b-single-v2: step 220/632 loss 0.0070 lr 7.90e-05 45.21 s/step, 24822 tok
+16:25:38 score-qwen3.5-2b-mixed-v2-fresh: 60/278 (333 tok, 16.0 s)
+16:30:24 score-qwen3.5-2b-mixed-v2-fresh: 80/278 (399 tok, 18.3 s)
+16:31:12 qwen3.5-2b-single-v2: step 230/632 loss 0.0223 lr 7.68e-05 52.72 s/step, 28866 tok
+16:35:23 score-qwen3.5-2b-mixed-v2-fresh: 100/278 (375 tok, 16.6 s)
+16:40:41 score-qwen3.5-2b-mixed-v2-fresh: 120/278 (178 tok, 8.5 s)
+16:41:11 qwen3.5-2b-single-v2: step 240/632 loss 0.0031 lr 7.45e-05 61.35 s/step, 33770 tok
+16:45:03 score-qwen3.5-2b-mixed-v2-fresh: 140/278 (246 tok, 11.4 s)
+16:49:33 score-qwen3.5-2b-mixed-v2-fresh: 160/278 (299 tok, 14.7 s)
+16:50:31 qwen3.5-2b-single-v2: step 250/632 loss 0.0115 lr 7.22e-05 50.91 s/step, 28017 tok
+16:54:15 score-qwen3.5-2b-mixed-v2-fresh: 180/278 (317 tok, 15.4 s)
+16:59:07 score-qwen3.5-2b-mixed-v2-fresh: 200/278 (180 tok, 8.9 s)
+17:00:08 qwen3.5-2b-single-v2: step 260/632 loss 0.0116 lr 6.99e-05 58.18 s/step, 31805 tok
+17:03:51 score-qwen3.5-2b-mixed-v2-fresh: 220/278 (377 tok, 16.4 s)
+17:09:08 qwen3.5-2b-single-v2: step 270/632 loss 0.0240 lr 6.74e-05 57.25 s/step, 31516 tok
+17:09:16 score-qwen3.5-2b-mixed-v2-fresh: 240/278 (719 tok, 30.9 s)
+17:14:30 score-qwen3.5-2b-mixed-v2-fresh: 260/278 (330 tok, 14.3 s)
+17:18:16 qwen3.5-2b-single-v2: step 280/632 loss 0.0091 lr 6.50e-05 53.17 s/step, 29442 tok
+17:18:27 score-qwen3.5-2b-mixed-v2-fresh: done
+17:23:50 score-qwen3.5-2b-single-fresh: 20/278 (402 tok, 17.9 s)
+17:27:44 qwen3.5-2b-single-v2: step 290/632 loss 0.0066 lr 6.24e-05 62.42 s/step, 34324 tok
+17:28:28 score-qwen3.5-2b-single-fresh: 40/278 (282 tok, 14.2 s)
+17:33:03 score-qwen3.5-2b-single-fresh: 60/278 (333 tok, 16.4 s)
+17:37:15 qwen3.5-2b-single-v2: step 300/632 loss 0.0061 lr 5.99e-05 70.26 s/step, 38430 tok
+17:37:39 score-qwen3.5-2b-single-fresh: 80/278 (397 tok, 17.5 s)
+17:42:30 score-qwen3.5-2b-single-fresh: 100/278 (376 tok, 16.7 s)
+17:46:40 qwen3.5-2b-single-v2: step 310/632 loss 0.0124 lr 5.73e-05 51.56 s/step, 28643 tok
+17:47:52 score-qwen3.5-2b-single-fresh: 120/278 (178 tok, 8.5 s)
+17:52:16 score-qwen3.5-2b-single-fresh: 140/278 (178 tok, 8.9 s)
+17:56:36 qwen3.5-2b-single-v2: val step 316 loss 0.0120 (264.8 s) best
+17:57:03 score-qwen3.5-2b-single-fresh: 160/278 (299 tok, 15.5 s)
+18:00:29 qwen3.5-2b-single-v2: step 320/632 loss 0.0091 lr 5.47e-05 66.36 s/step, 36360 tok
+18:01:48 score-qwen3.5-2b-single-fresh: 180/278 (317 tok, 16.2 s)
+18:06:38 score-qwen3.5-2b-single-fresh: 200/278 (180 tok, 8.5 s)
+18:09:56 qwen3.5-2b-single-v2: step 330/632 loss 0.0096 lr 5.21e-05 55.83 s/step, 30562 tok
+18:11:13 score-qwen3.5-2b-single-fresh: 220/278 (377 tok, 16.9 s)
+18:16:28 score-qwen3.5-2b-single-fresh: 240/278 (719 tok, 30.5 s)
+18:19:34 qwen3.5-2b-single-v2: step 340/632 loss 0.0112 lr 4.95e-05 55.61 s/step, 30671 tok
+18:21:32 score-qwen3.5-2b-single-fresh: 260/278 (330 tok, 14.6 s)
+18:25:29 score-qwen3.5-2b-single-fresh: done
+18:28:42 qwen3.5-2b-single-v2: step 350/632 loss 0.0098 lr 4.69e-05 56.99 s/step, 31006 tok
+18:31:06 score-qwen3.5-2b-mixed-fresh: 20/278 (400 tok, 18.1 s)
+18:35:51 score-qwen3.5-2b-mixed-fresh: 40/278 (282 tok, 14.1 s)
+18:38:17 qwen3.5-2b-single-v2: step 360/632 loss 0.0083 lr 4.43e-05 61.84 s/step, 33443 tok
+18:40:28 score-qwen3.5-2b-mixed-fresh: 60/278 (333 tok, 16.8 s)
+18:45:12 score-qwen3.5-2b-mixed-fresh: 80/278 (390 tok, 18.0 s)
+18:48:10 qwen3.5-2b-single-v2: step 370/632 loss 0.0085 lr 4.17e-05 54.46 s/step, 30120 tok
+18:50:09 score-qwen3.5-2b-mixed-fresh: 100/278 (376 tok, 17.2 s)
+18:55:36 score-qwen3.5-2b-mixed-fresh: 120/278 (178 tok, 8.8 s)
+18:57:06 qwen3.5-2b-single-v2: step 380/632 loss 0.0070 lr 3.91e-05 63.38 s/step, 34693 tok
+19:00:09 score-qwen3.5-2b-mixed-fresh: 140/278 (246 tok, 11.5 s)
+19:04:48 score-qwen3.5-2b-mixed-fresh: 160/278 (299 tok, 15.2 s)
+19:06:34 qwen3.5-2b-single-v2: step 390/632 loss 0.0048 lr 3.66e-05 64.3 s/step, 35399 tok
+19:09:27 score-qwen3.5-2b-mixed-fresh: 180/278 (318 tok, 16.0 s)
+19:14:25 score-qwen3.5-2b-mixed-fresh: 200/278 (180 tok, 8.7 s)
+19:16:20 qwen3.5-2b-single-v2: step 400/632 loss 0.0077 lr 3.41e-05 62.23 s/step, 34111 tok
+19:19:01 score-qwen3.5-2b-mixed-fresh: 220/278 (377 tok, 16.7 s)
+19:24:31 score-qwen3.5-2b-mixed-fresh: 240/278 (719 tok, 31.8 s)
+19:25:21 qwen3.5-2b-single-v2: step 410/632 loss 0.0020 lr 3.16e-05 46.03 s/step, 25625 tok
+19:29:55 score-qwen3.5-2b-mixed-fresh: 260/278 (330 tok, 15.0 s)
+19:33:50 score-qwen3.5-2b-mixed-fresh: done
+19:34:56 qwen3.5-2b-single-v2: step 420/632 loss 0.0124 lr 2.92e-05 54.7 s/step, 29057 tok
+19:44:23 qwen3.5-2b-single-v2: step 430/632 loss 0.0063 lr 2.68e-05 72.33 s/step, 38564 tok
+19:54:02 qwen3.5-2b-single-v2: step 440/632 loss 0.0058 lr 2.45e-05 47.82 s/step, 25841 tok
+20:03:38 qwen3.5-2b-single-v2: step 450/632 loss 0.0149 lr 2.23e-05 49.24 s/step, 26890 tok
+20:13:28 qwen3.5-2b-single-v2: step 460/632 loss 0.0063 lr 2.02e-05 72.13 s/step, 38504 tok
+20:23:18 qwen3.5-2b-single-v2: step 470/632 loss 0.0072 lr 1.81e-05 54.06 s/step, 29293 tok
+20:31:48 qwen3.5-2b-single-v2: val step 474 loss 0.0109 (272.4 s) best
+20:37:50 qwen3.5-2b-single-v2: step 480/632 loss 0.0080 lr 1.62e-05 82.47 s/step, 43941 tok
+20:47:36 qwen3.5-2b-single-v2: step 490/632 loss 0.0083 lr 1.43e-05 51.84 s/step, 27706 tok
+20:56:34 qwen3.5-2b-single-v2: step 500/632 loss 0.0041 lr 1.25e-05 45.88 s/step, 24727 tok
+21:06:05 qwen3.5-2b-single-v2: step 510/632 loss 0.0088 lr 1.08e-05 56.26 s/step, 30347 tok
+21:15:23 qwen3.5-2b-single-v2: step 520/632 loss 0.0069 lr 9.24e-06 68.45 s/step, 37026 tok
+21:24:29 qwen3.5-2b-single-v2: step 530/632 loss 0.0042 lr 7.78e-06 42.43 s/step, 23094 tok
+21:34:28 qwen3.5-2b-single-v2: step 540/632 loss 0.0074 lr 6.44e-06 54.65 s/step, 29425 tok
+21:43:22 qwen3.5-2b-single-v2: step 550/632 loss 0.0051 lr 5.21e-06 50.15 s/step, 27478 tok
+21:52:57 qwen3.5-2b-single-v2: step 560/632 loss 0.0047 lr 4.11e-06 60.69 s/step, 32667 tok
+22:01:53 qwen3.5-2b-single-v2: step 570/632 loss 0.0063 lr 3.14e-06 53.16 s/step, 28694 tok
+22:11:46 qwen3.5-2b-single-v2: step 580/632 loss 0.0068 lr 2.29e-06 68.63 s/step, 36996 tok
+22:21:02 qwen3.5-2b-single-v2: step 590/632 loss 0.0109 lr 1.57e-06 62.06 s/step, 33417 tok
+22:30:37 qwen3.5-2b-single-v2: step 600/632 loss 0.0080 lr 9.86e-07 67.64 s/step, 36289 tok
+22:40:16 qwen3.5-2b-single-v2: step 610/632 loss 0.0074 lr 5.36e-07 58.53 s/step, 31525 tok
+22:49:25 qwen3.5-2b-single-v2: step 620/632 loss 0.0049 lr 2.22e-07 61.12 s/step, 32696 tok
+22:58:55 qwen3.5-2b-single-v2: step 630/632 loss 0.0090 lr 4.39e-08 59.71 s/step, 32097 tok
+23:05:30 qwen3.5-2b-single-v2: val step 632 loss 0.0105 (272.2 s) best
+23:05:30 qwen3.5-2b-single-v2: done at step 632/632, best val 0.010473504317859898 @ 632
+23:06:01 done

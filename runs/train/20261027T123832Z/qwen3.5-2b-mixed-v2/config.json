@@ -1,0 +1,83 @@
+{
+  "job": {
+    "kind": "train",
+    "name": "qwen3.5-2b-mixed-v2",
+    "model": "2b",
+    "data": "mixed",
+    "data_version": "student-data@0.2",
+    "gpu": 0,
+    "lr": 0.0001,
+    "epochs": 2,
+    "seed": 20261021,
+    "dtype": "float16",
+    "train_file": "0.2-mixed-train.jsonl",
+    "valid_file": "0.2-mixed-valid.jsonl",
+    "resume": "resume/qwen3.5-2b-mixed-v2",
+    "resumed_at_step": 610
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "sdpa_gqa_flag_off": true,
+  "kernels": {
+    "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+    "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+  },
+  "device": "Tesla T4",
+  "dtype": "torch.float16",
+  "model_class": "Qwen3_5ForCausalLM",
+  "parameters": 1898644288,
+  "trainable_parameters": 16819200,
+  "lora_target_modules": [
+    "down_proj",
+    "gate_proj",
+    "in_proj_a",
+    "in_proj_b",
+    "in_proj_qkv",
+    "in_proj_z",
+    "k_proj",
+    "o_proj",
+    "out_proj",
+    "q_proj",
+    "up_proj",
+    "v_proj"
+  ],
+  "train_rows": 2899,
+  "valid_rows": 153,
+  "train_tokens": 13153111,
+  "steps_per_epoch": 363,
+  "total_steps": 726,
+  "warmup_steps": 37,
+  "eval_steps": [
+    0,
+    182,
+    363,
+    544,
+    726
+  ],
+  "resumed_from": {
+    "path": "resume/qwen3.5-2b-mixed-v2",
+    "opt_step": 610,
+    "epoch": 1,
+    "pos": 1976,
+    "best_val": 0.010391856822418362,
+    "best_step": 544,
+    "skipped_updates": 5
+  }
+}

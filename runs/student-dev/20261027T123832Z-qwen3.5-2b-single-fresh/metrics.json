@@ -1,0 +1,253 @@
+{
+  "student": "qwen3.5-2b-single",
+  "split": "fresh",
+  "prompt_version": "student-extract@0.1",
+  "data_version": "student-data@0.1",
+  "scorer_version": "scorer@0.2",
+  "finalize_version": "finalize@0.1",
+  "requests": 278,
+  "contract_valid": {
+    "last": {
+      "valid": 85,
+      "of": 90
+    },
+    "earlier": {
+      "valid": 183,
+      "of": 188
+    }
+  },
+  "invalid_reasons": {
+    "1 validation error for StudentOutput": 9,
+    "2 validation errors for StudentOutput": 1
+  },
+  "hit_token_limit": 0,
+  "latency_ms": {
+    "p50": 14919,
+    "p95": 24444
+  },
+  "output_tokens_p50": 319.0,
+  "order": {
+    "conversations": 90,
+    "conversations_with_order": 68,
+    "json_valid": 85,
+    "json_validity_rate": 0.9444444444444444,
+    "item": {
+      "gold_items": 156,
+      "tp": 109,
+      "fp": 25,
+      "fn": 47,
+      "precision": 0.8134328358208955,
+      "recall": 0.6987179487179487,
+      "f1": 0.7517241379310344
+    },
+    "exact_match": 51,
+    "exact_match_rate": 0.5666666666666667,
+    "exact_match_ci95": [
+      0.4636391101764269,
+      0.664235947367349
+    ],
+    "field_accuracy": {
+      "method": 0.9841269841269841,
+      "time": 0.9523809523809523,
+      "address": 0.9841269841269841,
+      "payment": 1.0,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.746031746031746
+    },
+    "correction": {
+      "conversations": 18,
+      "exact_match_rate": 0.3333333333333333,
+      "precision": 0.78125,
+      "recall": 0.7352941176470589,
+      "f1": 0.7575757575757576
+    },
+    "grounding": {
+      "conversations_with_issues": 6,
+      "rate": 0.07058823529411765,
+      "issues": {
+        "EVIDENCE_NOT_FOUND": 1,
+        "UNKNOWN_MODIFIER": 5,
+        "UNKNOWN_VARIANT": 1
+      }
+    },
+    "unclassified_requests": 3
+  },
+  "intent": {
+    "all": {
+      "messages": 278,
+      "primary_correct": 237,
+      "primary_accuracy": 0.8525,
+      "primary_ci95": [
+        0.8060375557040556,
+        0.8893885275994737
+      ],
+      "label_set_correct": 231
+    },
+    "last_message": {
+      "messages": 90,
+      "primary_correct": 69,
+      "primary_accuracy": 0.7667,
+      "primary_ci95": [
+        0.6694810141144782,
+        0.8420192160606255
+      ],
+      "label_set_correct": 66
+    },
+    "earlier_messages": {
+      "messages": 188,
+      "primary_correct": 168,
+      "primary_accuracy": 0.8936,
+      "primary_ci95": [
+        0.8413975161532907,
+        0.9300722797616723
+      ],
+      "label_set_correct": 165
+    },
+    "per_gold_label": {
+      "CANCEL_ORDER": {
+        "gold": 2,
+        "correct": 2,
+        "predicted": 2
+      },
+      "CONFIRM_ORDER": {
+        "gold": 9,
+        "correct": 9,
+        "predicted": 9
+      },
+      "DELIVERY_QUESTION": {
+        "gold": 4,
+        "correct": 3,
+        "predicted": 3
+      },
+      "HUMAN_REQUEST": {
+        "gold": 1,
+        "correct": 1,
+        "predicted": 1
+      },
+      "MENU_QUESTION": {
+        "gold": 14,
+        "correct": 13,
+        "predicted": 15
+      },
+      "MODIFY_ORDER": {
+        "gold": 18,
+        "correct": 14,
+        "predicted": 16
+      },
+      "ORDER_PROBLEM": {
+        "gold": 5,
+        "correct": 5,
+        "predicted": 6
+      },
+      "ORDER_STATUS": {
+        "gold": 4,
+        "correct": 3,
+        "predicted": 3
+      },
+      "OUT_OF_SCOPE": {
+        "gold": 5,
+        "correct": 1,
+        "predicted": 1
+      },
+      "PAYMENT_CLAIM": {
+        "gold": 1,
+        "correct": 1,
+        "predicted": 1
+      },
+      "PAYMENT_QUESTION": {
+        "gold": 1,
+        "correct": 1,
+        "predicted": 1
+      },
+      "PLACE_ORDER": {
+        "gold": 150,
+        "correct": 138,
+        "predicted": 153
+      },
+      "REFUND_REQUEST": {
+        "gold": 1,
+        "correct": 1,
+        "predicted": 1
+      },
+      "SMALL_TALK": {
+        "gold": 56,
+        "correct": 44,
+        "predicted": 54
+      },
+      "UNKNOWN": {
+        "gold": 7,
+        "correct": 1,
+        "predicted": 2
+      }
+    },
+    "confusions": [
+      {
+        "gold": "SMALL_TALK",
+        "pred": "PLACE_ORDER",
+        "count": 12
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": null,
+        "count": 8
+      },
+      {
+        "gold": "UNKNOWN",
+        "pred": "SMALL_TALK",
+        "count": 5
+      },
+      {
+        "gold": "OUT_OF_SCOPE",
+        "pred": "SMALL_TALK",
+        "count": 4
+      },
+      {
+        "gold": "MODIFY_ORDER",
+        "pred": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "gold": "MODIFY_ORDER",
+        "pred": null,
+        "count": 2
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "MODIFY_ORDER",
+        "count": 2
+      },
+      {
+        "gold": "MENU_QUESTION",
+        "pred": "SMALL_TALK",
+        "count": 1
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "MENU_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "UNKNOWN",
+        "pred": "MENU_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "DELIVERY_QUESTION",
+        "pred": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "gold": "ORDER_STATUS",
+        "pred": "ORDER_PROBLEM",
+        "count": 1
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "UNKNOWN",
+        "count": 1
+      }
+    ]
+  },
+  "teacher_reference": null
+}

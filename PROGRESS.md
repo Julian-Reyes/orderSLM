@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-26._
+_Last updated 2026-10-27._
 
 ## Start here next session
 
@@ -319,10 +319,26 @@ _Updated 2026-10-22 (M6 session 1 imported)._
   - **v0.2 session 2 (`runs/train/20261027T123832Z/`, kernel v8, pushed 2026-10-27 09:40 Brasília, Julian's OK):**
     GPU 0: finish 2B mixed v2, score it on dev+fresh, then 2B single and 2B mixed v0.1 on fresh; GPU 1: train 2B
     single v2 (all session). `assign_gpus` now queues other scoring behind the trainings scored this session (a
-    training not scored here may run the whole session). Then session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B
-    single v2 on dev+fresh.
+    training not scored here may run the whole session). **Ran 09:41–20:06 Brasília (≈ 10.4 h), imported 2026-10-27:
+    everything done.** 2B mixed v2 done (726 steps, best val 0.0102 at the last step); **2B single v2 done** (632 steps,
+    best val 0.0105 at the last step; not scored yet); host RSS ≤ 3.9 GB, ≥ 25.7 GB free. Scoring ≈ 1.1 h per split.
+    - **2B mixed v0.1 → v0.2, paired, same requests** (`runs/student-compare/20261027T231808Z` dev,
+      `20261027T231813Z` fresh; * excludes 0):
+
+      | split | intents right | item F1 | fully correct orders | McNemar p (orders) |
+      |---|---|---|---|---|
+      | dev (91 chats, used for fixes) | 89.9% → 93.7% (+3.7*) | 0.819 → 0.890 (+7.2*) | 65 → 73 of 91 (+8.8*) | 0.021 |
+      | **fresh (90 chats, unseen)** | 89.2% → 90.6% (+1.4 [−1.5, +4.3]) | **0.764 → 0.883 (+11.9*)** | **52 → 70 of 90 (+20.0*)** | **< 0.001** |
+
+      Invalid answers: dev 3.4% → 1.9%, fresh 1.8% → 2.9% (both n.s.). 2B single v0.1 on fresh: intents 237/278
+      (85.3%), item F1 0.752, exact 51/90.
+    - **0.8B v2 vs 2B mixed v2 on fresh** (`runs/student-compare/20261027T231823Z`):
+      intents 91.0% vs 90.6%, item F1 0.841 vs 0.883, exact 67 vs 70 of 90 (McNemar p 0.549): **no significant
+      difference** so far. Fresh still provisional until Julian's review.
+    - **Next: session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B single v2 on dev+fresh** (≈ 2.2 h;
+      training no longer needed).
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
-    probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h.
+    probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h, v0.2 session 2 ≈ 10.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).
@@ -330,7 +346,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 - **Git:** M0–M3 on `main` (GitHub's `main` matches local). M4, M5 and M6 so far are on branch **`milestone-4`**,
   **pushed 2026-10-20** after a secrets check (not merged; merge after M6). Ask Julian before every push, secrets
   check first. Large pushes need `git config http.postBuffer 524288000` (set in this clone).
-- **Spend:** $5.80 of $10 (docs/COSTS.md). M4 so far: data generation, labeling, relabels, audits.
+- **Spend:** $6.60 of $10 (docs/COSTS.md). M4 so far: data generation, labeling, relabels, audits.
 - **M4 state:** training data done: **1,963 single-menu + 391 mega-menu** labeled chats (`runs/synth/{p3,b1,m1}`,
   exclusions in `runs/synth/excluded.json`); label prompt `teacher-label@0.7`; label audit by Jev + OpenAI Decisions
   done (`runs/label-audit/`); every drop / repair / flag / catch rate: `make m4-report` → `runs/m4-report/`.
@@ -375,7 +391,7 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; next: training data v0.2 + retrain (Julian's OK); order checker |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; next: score 2B single v2 (session 3, after 31 Oct), Julian's fresh review; order checker |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

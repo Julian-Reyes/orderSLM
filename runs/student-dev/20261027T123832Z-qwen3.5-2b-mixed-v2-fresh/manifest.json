@@ -1,0 +1,54 @@
+{
+  "experiment": "student-dev",
+  "student": "qwen3.5-2b-mixed-v2",
+  "split": "fresh",
+  "adapter_sha256": "bfcc9b6ef220851b7ace7f1927c5ce265dfab226524cda566abd3fb5746e7628",
+  "session": "20261027T123832Z",
+  "data_version": "student-data@0.2",
+  "prompt_version": "student-extract@0.1",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "model": {
+    "repo": "Qwen/Qwen3.5-2B",
+    "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+  },
+  "kernel_env": {
+    "session": "20261027T123832Z",
+    "started_at": "2026-10-27T12:41:38.231924+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.87,
+        "Cached": 4.87,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.9,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-10-27T23:06:01.831185+00:00"
+  },
+  "cost_usd": 0.0
+}
