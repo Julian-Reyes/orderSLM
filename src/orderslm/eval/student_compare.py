@@ -1,6 +1,8 @@
-"""M6 students compared on the same dev requests, paired (docs/AGENTDESK_REUSE.md row 9: paired tests on the same items).
+"""M6 students compared on the same requests, paired (docs/AGENTDESK_REUSE.md row 9: paired tests on the same items).
 
-Every student answered the same 268 dev requests (91 chats), so each difference is measured on identical items:
+Every student answered the same requests of one split (dev: 268 requests, 91 chats; fresh: 278, 90), so each
+difference is measured on identical items. Students may differ in training data (v0.1 vs v0.2 is what M6 measures);
+prompt, scorer and finalize versions must match.
 
 - **fully correct orders** (one per chat, chats independent): discordant chats + exact McNemar p-value, Holm-adjusted
   over the pairs compared;
@@ -9,7 +11,7 @@ Every student answered the same 268 dev requests (91 chats), so each difference 
   not independent, so intents get no per-message test; the chat-level bootstrap carries that.
 
 Reads `intent_rows.jsonl` + `order_rows.jsonl` of each `runs/student-dev/<id>/` (rebuild older runs with
-`make student-dev ARGS="report …"`). Dev numbers (tuning), not held-out results.
+`make student-dev ARGS="report …"`). Dev numbers are tuning numbers; fresh numbers measure the dev-based fixes.
 
     make student-compare ARGS="runs/student-dev/<a> runs/student-dev/<b> [...]"   # → runs/student-compare/<time>/
 """
@@ -48,6 +50,7 @@ def load_run(run_dir: Path) -> dict[str, Any]:
             f'{run_dir}: no order_rows.jsonl; run `make student-dev ARGS="report {run_dir}"` first'
         )
     metrics = json.loads((run_dir / "metrics.json").read_text())
+    manifest = json.loads((run_dir / "manifest.json").read_text())
     chats: dict[str, dict[str, int]] = defaultdict(lambda: dict.fromkeys(("msgs", "ok", "invalid"), 0))
     messages = {}
     for r in _read_jsonl(run_dir / "intent_rows.jsonl"):
@@ -64,6 +67,7 @@ def load_run(run_dir: Path) -> dict[str, Any]:
     return {
         "student": metrics["student"],
         "run_dir": str(run_dir.resolve().relative_to(ROOT)),
+        "split": manifest.get("split", "dev"),
         "versions": {
             k: metrics[k] for k in ("prompt_version", "data_version", "scorer_version", "finalize_version")
         },
@@ -88,12 +92,17 @@ def summarize(chats: dict[str, dict[str, int]], ids: list[str]) -> dict[str, flo
     }
 
 
+def _same_setup(versions: dict[str, str]) -> dict[str, str]:
+    """The versions two compared runs must share: training data may differ (that is a compared variable)."""
+    return {k: v for k, v in versions.items() if k != "data_version"}
+
+
 def compare(runs: list[dict[str, Any]], resamples: int = RESAMPLES, seed: int = SEED) -> dict[str, Any]:
     ids = sorted(runs[0]["chats"])
     for r in runs[1:]:
         if set(r["messages"]) != set(runs[0]["messages"]):
             raise SystemExit(f"{r['student']} answered different messages than {runs[0]['student']}")
-        if r["versions"] != runs[0]["versions"]:
+        if _same_setup(r["versions"]) != _same_setup(runs[0]["versions"]):
             raise SystemExit(f"{r['student']} versions {r['versions']} differ from {runs[0]['versions']}")
     point = {r["student"]: summarize(r["chats"], ids) for r in runs}
     rng = random.Random(seed)
@@ -137,6 +146,7 @@ def compare(runs: list[dict[str, Any]], resamples: int = RESAMPLES, seed: int = 
         p["exact_chats"]["mcnemar_p_holm"] = adj
     return {
         "compare_version": COMPARE_VERSION,
+        "split": runs[0].get("split", "dev"),
         "chats": len(ids),
         "messages": len(runs[0]["messages"]),
         "resamples": resamples,
@@ -152,9 +162,15 @@ def _pp(x: float) -> str:
 
 def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> None:
     lines = [
-        f"# M6 students compared on dev, paired ({c['chats']} chats, {c['messages']} customer messages)",
+        f"# M6 students compared on {c['split']}, paired ({c['chats']} chats, {c['messages']} customer messages)",
         "",
-        "Same requests for every student. Dev numbers (tuning), not held-out results. Differences are A − B in "
+        "Same requests for every student. "
+        + (
+            "Dev numbers (tuning), not held-out results. "
+            if c["split"] == "dev"
+            else "Fresh chats, written after the dev-based fixes (evaluation-only). "
+        )
+        + "Differences are A − B in "
         f"percentage points with a 95% paired bootstrap interval over chats ({c['resamples']:,} resamples, seed "
         f"{c['seed']}); * = interval excludes 0. Fully correct orders also get an exact McNemar test on the chats where "
         "the two disagree, Holm-adjusted over the pairs.",
@@ -186,7 +202,9 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
             f"{cell('exact_rate')} | {p['intent_messages']['only_a_right']} / {p['intent_messages']['only_b_right']} | "
             f"{e['only_a_right']} / {e['only_b_right']} | {e['mcnemar_p']:.3f} ({e['mcnemar_p_holm']:.3f}) |"
         )
-    lines += ["", "Inputs:", ""] + [f"- `{r['student']}`: `{r['run_dir']}`" for r in runs]
+    lines += ["", "Inputs:", ""] + [
+        f"- `{r['student']}` ({r['versions']['data_version']}): `{r['run_dir']}`" for r in runs
+    ]
     (out / "report.md").write_text("\n".join(lines) + "\n")
 
 

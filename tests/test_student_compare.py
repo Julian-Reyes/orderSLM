@@ -83,3 +83,12 @@ def test_refuses_runs_on_different_messages_or_versions():
     b = _run("b", CHATS) | {"versions": {"prompt_version": "q"}}
     with pytest.raises(SystemExit, match="versions"):
         sc.compare([_run("a", CHATS), b], resamples=10)
+
+
+def test_training_data_may_differ_but_nothing_else():
+    v1 = _run("a", CHATS) | {"versions": {"prompt_version": "p", "data_version": "student-data@0.1"}}
+    v2 = _run("b", CHATS) | {"versions": {"prompt_version": "p", "data_version": "student-data@0.2"}}
+    assert sc.compare([v1, v2], resamples=10)["pairs"]
+    v2["versions"] |= {"prompt_version": "q"}
+    with pytest.raises(SystemExit, match="versions"):
+        sc.compare([v1, v2], resamples=10)

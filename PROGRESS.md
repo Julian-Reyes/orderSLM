@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-25._
+_Last updated 2026-10-26._
 
 ## Start here next session
 
@@ -296,7 +296,31 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     delivery-without-address at the pickup-only café is a delivery question. Scoring: `student_dev` takes the split
     from the run manifest; export `--score-splits dev,fresh`. **Next: Julian reviews all 90 in the annotation tool
     (`make annotate`, the fresh tab), then the sessions score v0.1 and v0.2 students on fresh.**
-  - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h.
+  - **Probe result (`runs/train/20261026T005023Z/`, 2026-10-26):** padded = unpadded loss (max relative difference
+    5e-5 2B / 5.7e-4 0.8B); host RAM flat (process RSS 3.6–3.7 GB, ≥ 25.75 GB free) with both first epochs side by
+    side, so the 128-token buckets fixed the growth. Both v2 trainings paused at step 60. Speeds: 2B mixed ≈ 70 s/step,
+    0.8B ≈ 45 s/step; scoring ≈ 1 h per student per split.
+  - **v0.2 session 1 (`runs/train/20261026T131201Z/`, kernel v7, 2026-10-26 10:47–22:03 Brasília, Julian's OK):**
+    the push's file-listing check ran before Kaggle had indexed the upload; `kaggle_jobs start` (retries the listing
+    for 5 min, launches without re-uploading) started it. Results: **0.8B v2 done** (632 steps, best val 0.0100 at
+    the last step); **2B mixed v2 paused at 610 of ≈ 726** (epoch 1.68, best val 0.0104 at 544); host RSS ≤ 3.9 GB,
+    ≥ 25.3 GB free all session. `student_compare` now lets compared runs differ in training data only (prompt,
+    scorer, finalize must match) and names the split.
+    - **0.8B v0.1 → v0.2, paired, same requests** (`runs/student-compare/20261027T010729Z` dev,
+      `20261027T010731Z` fresh; 95% chat-bootstrap intervals, * excludes 0):
+
+      | split | intents right | item F1 | fully correct orders | McNemar p (orders) |
+      |---|---|---|---|---|
+      | dev (91 chats, used for fixes) | 91.0% → 93.7% (+2.6 [−1.1, +6.2]) | 0.811 → 0.872 (+6.1*) | 64 → 70 of 91 (+6.6 [−1.1, +14.3]) | 0.146 |
+      | **fresh (90 chats, unseen)** | **85.6% → 91.0% (+5.4*)** | 0.777 → 0.841 (+6.4 [−0.8, +14.2]) | **54 → 67 of 90 (+14.4*)** | **0.004** |
+
+      Fresh is not yet reviewed by Julian: final numbers after the review (gold fixes rescore for free; a changed
+      customer message needs re-scoring). Invalid answers: dev 0.7% → 1.1%, fresh 3.2% → 2.5% (both n.s.).
+  - **Next: session 2** (GPU 0: finish 2B mixed v2, score it on dev+fresh, then 2B single and 2B mixed v0.1 on
+    fresh; GPU 1: train 2B single v2), then session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B
+    single v2 on dev+fresh.
+  - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
+    probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
   first); record every model/setting's counts, tokens, run and per-1k cost, before/after, for the website; end every
   task with a plain-English summary (changes + why, files, direct answers).

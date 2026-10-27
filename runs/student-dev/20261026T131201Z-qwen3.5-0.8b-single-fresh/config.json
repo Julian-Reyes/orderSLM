@@ -1,0 +1,22 @@
+{
+  "job": {
+    "kind": "score",
+    "name": "score-qwen3.5-0.8b-single-fresh",
+    "student": "qwen3.5-0.8b-single",
+    "split": "fresh",
+    "model": "0.8b",
+    "gpu": 1,
+    "adapter": "adapters/qwen3.5-0.8b-single",
+    "adapter_sha256": "aeceedf59bc1c651f97db4bea9f0b64f235c7302dff47dbf5e0553e6653a39c8",
+    "after_train": null,
+    "requests": "fresh-requests.jsonl"
+  },
+  "sdpa_gqa_flag_off": true,
+  "kernels": {
+    "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+    "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+  },
+  "dtype": "torch.float16",
+  "adapter_path": "/kaggle/input/datasets/jreyes33/orderslm-m6/adapters/qwen3.5-0.8b-single",
+  "adapter_sha256": "aeceedf59bc1c651f97db4bea9f0b64f235c7302dff47dbf5e0553e6653a39c8"
+}
