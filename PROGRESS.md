@@ -316,8 +316,10 @@ _Updated 2026-10-22 (M6 session 1 imported)._
 
       Fresh is not yet reviewed by Julian: final numbers after the review (gold fixes rescore for free; a changed
       customer message needs re-scoring). Invalid answers: dev 0.7% → 1.1%, fresh 3.2% → 2.5% (both n.s.).
-  - **Next: session 2** (GPU 0: finish 2B mixed v2, score it on dev+fresh, then 2B single and 2B mixed v0.1 on
-    fresh; GPU 1: train 2B single v2), then session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B
+  - **v0.2 session 2 (`runs/train/20261027T123832Z/`, kernel v8, pushed 2026-10-27 09:40 Brasília, Julian's OK):**
+    GPU 0: finish 2B mixed v2, score it on dev+fresh, then 2B single and 2B mixed v0.1 on fresh; GPU 1: train 2B
+    single v2 (all session). `assign_gpus` now queues other scoring behind the trainings scored this session (a
+    training not scored here may run the whole session). Then session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B
     single v2 on dev+fresh.
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
     probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h.

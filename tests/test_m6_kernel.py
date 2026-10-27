@@ -181,3 +181,16 @@ def test_bucket_pads_to_the_multiple_and_keeps_the_answer_logits(tmp_path, monke
         keep = big - offset + 1  # logits_to_keep: the last `keep` positions
         kept = list(range(big - keep, big))[: n - offset]
         assert kept == list(range(offset - 1, n - 1))  # each predicts the next answer token, never padding
+
+
+def test_other_scoring_waits_behind_the_training_that_finishes():
+    """v0.2 session 2: GPU 1 trains 2B single v2 all session, so every other scoring queues behind GPU 0."""
+    jobs = kaggle_train.assign_gpus(
+        ["qwen3.5-2b-mixed-v2", "qwen3.5-2b-single-v2"],
+        ["qwen3.5-2b-mixed-v2", "qwen3.5-2b-single", "qwen3.5-2b-mixed"],
+    )
+    assert [j for j in jobs if j[0] == "score"] == [
+        ("score", "qwen3.5-2b-mixed-v2", 0),
+        ("score", "qwen3.5-2b-single", 0),
+        ("score", "qwen3.5-2b-mixed", 0),
+    ]

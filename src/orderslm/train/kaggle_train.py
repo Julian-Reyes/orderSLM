@@ -92,14 +92,18 @@ GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training an
 
 def assign_gpus(train: list[str], score: list[str]) -> list[tuple[str, str, int]]:
     """(kind, name, gpu): training jobs one per GPU; a student trained this session is scored after its training on
-    the same GPU; other scoring on a GPU no training uses, else after the trainings."""
+    the same GPU; other scoring on a GPU no training uses, else after the trainings expected to finish (those scored
+    this session; a training not scored here may run the whole session), else after the trainings."""
     if len(train) > 2:
         raise SystemExit("at most two training jobs per session (one per T4)")
     jobs = [("train", n, g) for g, n in enumerate(train)]
     other = [n for n in score if n not in train]
-    free = [g for g in (0, 1) if g >= len(train)] or [
-        len(train) - 1 - i % len(train) for i in range(len(other))
-    ]
+    finishing = [g for g, n in enumerate(train) if n in score]
+    free = (
+        [g for g in (0, 1) if g >= len(train)]
+        or (finishing if 0 < len(finishing) < len(train) else [])
+        or [len(train) - 1 - i % len(train) for i in range(len(other))]
+    )
     for n in score:
         gpu = train.index(n) if n in train else free[other.index(n) % len(free)]
         jobs.append(("score", n, gpu))
