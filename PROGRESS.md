@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-10-27._
+_Last updated 2026-11-03._
 
 ## Start here next session
 
@@ -335,8 +335,10 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     - **0.8B v2 vs 2B mixed v2 on fresh** (`runs/student-compare/20261027T231823Z`):
       intents 91.0% vs 90.6%, item F1 0.841 vs 0.883, exact 67 vs 70 of 90 (McNemar p 0.549): **no significant
       difference** so far. Fresh still provisional until Julian's review.
-    - **Next: session 3 after the quota reset (Sat 31 Oct 21:00 Brasília): score 2B single v2 on dev+fresh** (≈ 2.2 h;
-      training no longer needed).
+  - **v0.2 session 3 (`runs/train/20261103T115227Z/`, kernel v9, pushed 2026-11-03 08:53 Brasília, Julian: "let's
+    finish" after the quota reset):** `export --score qwen3.5-2b-single-v2:dev+fresh --deadline-hours 2.5`; both
+    scorings on GPU 0 (≈ 2.2 h). Secrets check on the upload + kernel: 0 hits. When it ends: `make kaggle-pull
+    JOB=m6`, `make train ARGS="import runs/train/20261103T115227Z"`.
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
     probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h, v0.2 session 2 ≈ 10.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
