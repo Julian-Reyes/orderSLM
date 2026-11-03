@@ -1,0 +1,174 @@
+{
+  "compare_version": "student-compare@0.1",
+  "split": "fresh",
+  "chats": 90,
+  "messages": 278,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single-v2": {
+      "intent_accuracy": 0.9100719424460432,
+      "invalid_rate": 0.025179856115107913,
+      "item_f1": 0.8414239482200647,
+      "exact_rate": 0.7444444444444445
+    },
+    "qwen3.5-2b-mixed-v2": {
+      "intent_accuracy": 0.9064748201438849,
+      "invalid_rate": 0.02877697841726619,
+      "item_f1": 0.8831168831168831,
+      "exact_rate": 0.7777777777777778
+    },
+    "qwen3.5-2b-single-v2": {
+      "intent_accuracy": 0.9136690647482014,
+      "invalid_rate": 0.01079136690647482,
+      "item_f1": 0.8562091503267973,
+      "exact_rate": 0.7666666666666667
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single-v2",
+      "b": "qwen3.5-2b-mixed-v2",
+      "intent_messages": {
+        "only_a_right": 14,
+        "only_b_right": 13
+      },
+      "exact_chats": {
+        "only_a_right": 4,
+        "only_b_right": 7,
+        "mcnemar_p": 0.548828125,
+        "mcnemar_p_holm": 1.0
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.003597122302158251,
+          "ci95": [
+            -0.043010752688172005,
+            0.048689138576779034
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": -0.0035971223021582753,
+          "ci95": [
+            -0.036290322580645164,
+            0.0313588850174216
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.04169293489681836,
+          "ci95": [
+            -0.09373083057293574,
+            0.004108934543717191
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": -0.033333333333333326,
+          "ci95": [
+            -0.11111111111111105,
+            0.03333333333333344
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    },
+    {
+      "a": "qwen3.5-0.8b-single-v2",
+      "b": "qwen3.5-2b-single-v2",
+      "intent_messages": {
+        "only_a_right": 12,
+        "only_b_right": 13
+      },
+      "exact_chats": {
+        "only_a_right": 6,
+        "only_b_right": 8,
+        "mcnemar_p": 0.79052734375,
+        "mcnemar_p_holm": 1.0
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": -0.003597122302158251,
+          "ci95": [
+            -0.046762589928057596,
+            0.03717472118959109
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.014388489208633093,
+          "ci95": [
+            -0.007352941176470586,
+            0.04444444444444444
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.01478520210673262,
+          "ci95": [
+            -0.07201174743024963,
+            0.04122149507191741
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": -0.022222222222222254,
+          "ci95": [
+            -0.10000000000000009,
+            0.05555555555555558
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    },
+    {
+      "a": "qwen3.5-2b-mixed-v2",
+      "b": "qwen3.5-2b-single-v2",
+      "intent_messages": {
+        "only_a_right": 4,
+        "only_b_right": 6
+      },
+      "exact_chats": {
+        "only_a_right": 5,
+        "only_b_right": 4,
+        "mcnemar_p": 1.0,
+        "mcnemar_p_holm": 1.0
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": -0.007194244604316502,
+          "ci95": [
+            -0.03597122302158273,
+            0.018115942028985477
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.017985611510791366,
+          "ci95": [
+            -0.008403361344537816,
+            0.04609929078014184
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": 0.026907732790085737,
+          "ci95": [
+            -0.019736842105263164,
+            0.07654098743207649
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": 0.011111111111111072,
+          "ci95": [
+            -0.05555555555555558,
+            0.07777777777777783
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    }
+  ]
+}

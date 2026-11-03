@@ -16,6 +16,7 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
+| 2026-11-03 | M6 | Qwen3.5-2B + LoRA (2B single v2) on Kaggle (1 T4, free) | v0.2 session 3: score 2B single v2 on dev (268 requests) + fresh (278), greedy, `student-extract@0.1` | output p50 320 / 327 tokens per request | 0 | free (Kaggle GPU, ≈ 2.1 h of the 30 h/week quota) | `runs/train/20261103T115227Z` |
 | 2026-10-26 | M6 | Jev | Label audit of t4 labels (122 chats; teacher 90, hand 32), `label-audit@0.3`, Jev only (OpenAI Decisions blocked: credit used up) | 234,330 in | 0.009900 | input × price (Jev unverified) | `runs/label-audit/20261026T000631Z-train` |
 | 2026-10-25 | M6 | openai/gpt-6-luna@low | Label hand-written batch t4, `teacher-label@0.7`: 94 of 122 calls done, then OpenAI's $5 prepaid credit ran out (28 `credit_balance_exhausted`, not billed) | see calls log | 0.060700 | recorded usage × verified price | `runs/synth/t4/calls/20261025T233636Z-label.json` |
 | 2026-10-25 | M6 | Jev + OpenAI Decisions | Label audit on t3 teacher labels, `label-audit@0.3` (568 chats × 2) | Jev 1,343,207 in; Decisions 1,152,824 in | 0.172000 | input × price (Jev unverified) | `runs/label-audit/20261025T225312Z-train` |

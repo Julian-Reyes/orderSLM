@@ -1,0 +1,72 @@
+{
+  "compare_version": "student-compare@0.1",
+  "split": "fresh",
+  "chats": 90,
+  "messages": 278,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-2b-single": {
+      "intent_accuracy": 0.8525179856115108,
+      "invalid_rate": 0.03597122302158273,
+      "item_f1": 0.7517241379310344,
+      "exact_rate": 0.5666666666666667
+    },
+    "qwen3.5-2b-single-v2": {
+      "intent_accuracy": 0.9136690647482014,
+      "invalid_rate": 0.01079136690647482,
+      "item_f1": 0.8562091503267973,
+      "exact_rate": 0.7666666666666667
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-2b-single",
+      "b": "qwen3.5-2b-single-v2",
+      "intent_messages": {
+        "only_a_right": 1,
+        "only_b_right": 18
+      },
+      "exact_chats": {
+        "only_a_right": 2,
+        "only_b_right": 20,
+        "mcnemar_p": 0.00012111663818359375,
+        "mcnemar_p_holm": 0.00012111663818359375
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": -0.0611510791366906,
+          "ci95": [
+            -0.09689922480620161,
+            -0.03007518796992481
+          ],
+          "ci_excludes_0": true
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.02517985611510791,
+          "ci95": [
+            0.006578947368421052,
+            0.05058365758754864
+          ],
+          "ci_excludes_0": true
+        },
+        "item_f1": {
+          "a_minus_b": -0.10448501239576291,
+          "ci95": [
+            -0.1814066920300459,
+            -0.033458848843464284
+          ],
+          "ci_excludes_0": true
+        },
+        "exact_rate": {
+          "a_minus_b": -0.20000000000000007,
+          "ci95": [
+            -0.3,
+            -0.11111111111111105
+          ],
+          "ci_excludes_0": true
+        }
+      }
+    }
+  ]
+}
