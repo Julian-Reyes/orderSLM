@@ -93,7 +93,7 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
     if line.halves:
         halves = " / ".join(
             "half "
-            + menu.item(h.menu_item_id).name  # type: ignore[union-attr]
+            + getattr(menu.item(h.menu_item_id), "name", h.menu_item_id)  # an unknown id is shown as-is
             + "".join(f", {m.kind.value} {mod_name(m.modifier_id)}" for m in h.modifications)
             for h in line.halves
         )

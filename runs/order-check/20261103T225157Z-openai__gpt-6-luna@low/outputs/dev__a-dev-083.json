@@ -1,0 +1,61 @@
+{
+ "id": "dev__a-dev-083",
+ "split": "dev",
+ "conversation_id": "a-dev-083",
+ "kinds": [
+  "missing_item",
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× bagel, everything, add cream_cheese"
+   },
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× croissant, chocolate",
+    "pred": "1× croissant, chocolate, add butter"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cappuccino (Large 16 oz)\n- 1 × Muffin (Blueberry)\n- 1 × Croissant (Chocolate): add Butter\nFulfillment: pickup\nTime: at 9:15\nPayment: card\nName: Kai",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The record omits the everything bagel with schmear and adds butter to the chocolate croissant, which the customer did not request.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 379,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 121,
+   "reasoning_tokens": 73
+  },
+  "latency_ms": 2132.2264610789716,
+  "cost_micros": 99,
+  "at": "2026-11-03T22:52:13.451809+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 379,
+   "completion_tokens": 121,
+   "total_tokens": 500,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 73,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

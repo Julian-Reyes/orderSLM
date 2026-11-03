@@ -1,0 +1,46 @@
+{
+ "id": "fresh__a-fresh-074",
+ "split": "fresh",
+ "conversation_id": "a-fresh-074",
+ "kinds": [
+  "broken_answer"
+ ],
+ "errors": {
+  "invalid": "order.items.0.modifications.0: Value error, not_on_menu/kitchen_note only for a request with no catalog id"
+ },
+ "order_text": "No new order was placed in this chat. An order the customer placed before this chat (one they describe, ask about or complain about) is not part of this record.",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer placed a new order for three bacon burgers with BBQ sauce and three lemonades, for pickup at 12:45 and payment by card, but the record says no new order was placed.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 323,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 80,
+   "reasoning_tokens": 19
+  },
+  "latency_ms": 1548.6854809569195,
+  "cost_micros": 73,
+  "at": "2026-11-03T22:52:34.449740+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 323,
+   "completion_tokens": 80,
+   "total_tokens": 403,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 19,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "id": "fresh__a-fresh-028",
+ "split": "fresh",
+ "conversation_id": "a-fresh-028",
+ "kinds": [
+  "wrong_variant"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× water",
+    "pred": "1× water, bottle_20oz"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Veggie Pizza (Large 14-inch): add Gluten-free crust\n- 1 × Bottled Water\nFulfillment: delivery to 18 OAK HOLLOW LN\nPayment: card",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":true,\"problem\":\"\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 386,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 360,
+   "reasoning_tokens": 338
+  },
+  "latency_ms": 3964.1612409614027,
+  "cost_micros": 219,
+  "at": "2026-11-03T22:52:20.450459+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 386,
+   "completion_tokens": 360,
+   "total_tokens": 746,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 338,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "id": "dev__a-dev-079",
+ "split": "dev",
+ "conversation_id": "a-dev-079",
+ "kinds": [
+  "wrong_variant",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "2× pepperoni_pizza",
+    "pred": "2× pepperoni_pizza, personal"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_variant",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Pepperoni Pizza (Personal 8-inch)\n- 2 × Cheese Pizza (Extra large 16-inch)\nFulfillment: delivery to 5 ASPEN DR\nPayment: card",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The 2 pepperoni pizzas should be extra large, since the customer accepted that extra large was the biggest size.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 368,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 94,
+   "reasoning_tokens": 50
+  },
+  "latency_ms": 2016.113866935484,
+  "cost_micros": 84,
+  "at": "2026-11-03T22:52:12.452216+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 368,
+   "completion_tokens": 94,
+   "total_tokens": 462,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 50,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

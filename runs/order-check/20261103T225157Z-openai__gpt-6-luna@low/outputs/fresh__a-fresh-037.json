@@ -1,0 +1,56 @@
+{
+ "id": "fresh__a-fresh-037",
+ "split": "fresh",
+ "conversation_id": "a-fresh-037",
+ "kinds": [
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, large",
+    "pred": "1× americano, large, add black"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Latte (Medium 12 oz): add Vanilla syrup\n- 1 × Americano (Large 16 oz): add black\n- 2 × Croissant (Chocolate)\n- 1 × Muffin (Blueberry)\n- 1 × Hot Chocolate (Medium 12 oz)\nFulfillment: not stated\nPayment: not stated",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The hot chocolate was recorded as medium even though the customer did not specify a size.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 418,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 128,
+   "reasoning_tokens": 90
+  },
+  "latency_ms": 2273.5584740294144,
+  "cost_micros": 106,
+  "at": "2026-11-03T22:52:22.450436+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 418,
+   "completion_tokens": 128,
+   "total_tokens": 546,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 90,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

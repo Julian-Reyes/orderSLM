@@ -1,0 +1,164 @@
+{
+  "check_version": "order-check@0.1",
+  "checker": "openai/gpt-6-luna@low",
+  "student": "qwen3.5-0.8b-single-v2",
+  "all": {
+    "orders": 42,
+    "caught": 32,
+    "rate": 0.7619,
+    "ci95": [
+      0.6147216491768113,
+      0.8651917918898182
+    ]
+  },
+  "per_split": {
+    "dev": {
+      "orders": 19,
+      "caught": 15,
+      "rate": 0.7895,
+      "ci95": [
+        0.5666528575973392,
+        0.9149246150840843
+      ]
+    },
+    "fresh": {
+      "orders": 23,
+      "caught": 17,
+      "rate": 0.7391,
+      "ci95": [
+        0.5352960945624944,
+        0.8745155411075104
+      ]
+    }
+  },
+  "broken_answers": {
+    "orders": 4,
+    "caught": 4,
+    "rate": 1.0,
+    "ci95": [
+      0.5100999795960008,
+      1.0
+    ]
+  },
+  "readable_orders": {
+    "orders": 38,
+    "caught": 28,
+    "rate": 0.7368,
+    "ci95": [
+      0.5799084979362465,
+      0.8502853761029869
+    ]
+  },
+  "per_kind": {
+    "broken_answer": {
+      "orders": 4,
+      "caught": 4,
+      "rate": 1.0,
+      "ci95": [
+        0.5100999795960008,
+        1.0
+      ]
+    },
+    "extra_item": {
+      "orders": 13,
+      "caught": 11,
+      "rate": 0.8462,
+      "ci95": [
+        0.5776482949136899,
+        0.9567427368172621
+      ]
+    },
+    "field:decision": {
+      "orders": 1,
+      "caught": 1,
+      "rate": 1.0,
+      "ci95": [
+        0.20654329147389294,
+        1.0
+      ]
+    },
+    "field:missing": {
+      "orders": 15,
+      "caught": 9,
+      "rate": 0.6,
+      "ci95": [
+        0.357464427565077,
+        0.8017577191740534
+      ]
+    },
+    "field:payment": {
+      "orders": 2,
+      "caught": 1,
+      "rate": 0.5,
+      "ci95": [
+        0.09452865480086614,
+        0.9054713451991339
+      ]
+    },
+    "field:time": {
+      "orders": 2,
+      "caught": 1,
+      "rate": 0.5,
+      "ci95": [
+        0.09452865480086614,
+        0.9054713451991339
+      ]
+    },
+    "missing_item": {
+      "orders": 13,
+      "caught": 11,
+      "rate": 0.8462,
+      "ci95": [
+        0.5776482949136899,
+        0.9567427368172621
+      ]
+    },
+    "wrong_combo_picks": {
+      "orders": 1,
+      "caught": 1,
+      "rate": 1.0,
+      "ci95": [
+        0.20654329147389294,
+        1.0
+      ]
+    },
+    "wrong_modifications": {
+      "orders": 7,
+      "caught": 6,
+      "rate": 0.8571,
+      "ci95": [
+        0.48686549668097007,
+        0.9743210440510253
+      ]
+    },
+    "wrong_quantity": {
+      "orders": 8,
+      "caught": 6,
+      "rate": 0.75,
+      "ci95": [
+        0.40926987910258916,
+        0.9285223111419724
+      ]
+    },
+    "wrong_quantity+modifications": {
+      "orders": 2,
+      "caught": 2,
+      "rate": 1.0,
+      "ci95": [
+        0.34237195288961925,
+        1.0
+      ]
+    },
+    "wrong_variant": {
+      "orders": 8,
+      "caught": 5,
+      "rate": 0.625,
+      "ci95": [
+        0.30573785458380187,
+        0.863158240538479
+      ]
+    }
+  },
+  "no_verdict": 0,
+  "cost_micros": 3241
+}

@@ -1,0 +1,56 @@
+{
+ "id": "dev__a-dev-039",
+ "split": "dev",
+ "conversation_id": "a-dev-039",
+ "kinds": [
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, medium, add almond_milk",
+    "pred": "1× americano, medium, substitute whole_milk"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: confirmed by the customer\n- 1 × Americano (Medium 12 oz): Almond milk instead of Whole milk\n- 1 × Bagel (Plain): add Avocado\nFulfillment: pickup\nPayment: card\nName: Dev",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":true,\"problem\":\"\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 394,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 16,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1226.7382281133905,
+  "cost_micros": 48,
+  "at": "2026-11-03T22:52:03.451762+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 394,
+   "completion_tokens": 16,
+   "total_tokens": 410,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

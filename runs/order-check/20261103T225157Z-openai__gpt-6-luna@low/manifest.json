@@ -1,0 +1,72 @@
+{
+  "experiment": "order-check",
+  "check_version": "order-check@0.1",
+  "started_at": "2026-11-03T22:51:57.190667+00:00",
+  "git_commit": "d5f10e533a6c933da3bdd00653aef1a8d7d519fd-dirty",
+  "checker": "openai/gpt-6-luna@low",
+  "extra_body": {
+    "reasoning_effort": "low"
+  },
+  "price_verified": "2026-10-16",
+  "student": "qwen3.5-0.8b-single-v2",
+  "student_runs": {
+    "dev": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2",
+    "fresh": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh"
+  },
+  "data": {
+    "splits": [
+      "dev",
+      "fresh"
+    ],
+    "source": "A (claude_written)",
+    "selection": "student orders not the same action as gold (scorer@0.3); wrong orders only"
+  },
+  "ids": [
+    "dev__a-dev-011",
+    "dev__a-dev-012",
+    "dev__a-dev-017",
+    "dev__a-dev-019",
+    "dev__a-dev-020",
+    "dev__a-dev-039",
+    "dev__a-dev-045",
+    "dev__a-dev-048",
+    "dev__a-dev-049",
+    "dev__a-dev-061",
+    "dev__a-dev-063",
+    "dev__a-dev-067",
+    "dev__a-dev-073",
+    "dev__a-dev-074",
+    "dev__a-dev-075",
+    "dev__a-dev-079",
+    "dev__a-dev-083",
+    "dev__a-dev-085",
+    "dev__a-dev-089",
+    "fresh__a-fresh-007",
+    "fresh__a-fresh-009",
+    "fresh__a-fresh-016",
+    "fresh__a-fresh-024",
+    "fresh__a-fresh-028",
+    "fresh__a-fresh-034",
+    "fresh__a-fresh-037",
+    "fresh__a-fresh-039",
+    "fresh__a-fresh-043",
+    "fresh__a-fresh-044",
+    "fresh__a-fresh-049",
+    "fresh__a-fresh-051",
+    "fresh__a-fresh-056",
+    "fresh__a-fresh-057",
+    "fresh__a-fresh-063",
+    "fresh__a-fresh-065",
+    "fresh__a-fresh-066",
+    "fresh__a-fresh-073",
+    "fresh__a-fresh-074",
+    "fresh__a-fresh-080",
+    "fresh__a-fresh-084",
+    "fresh__a-fresh-087",
+    "fresh__a-fresh-089"
+  ],
+  "cache_mode": "record",
+  "estimate_micros": 14392,
+  "finished_at": "2026-11-03T22:52:40.888469+00:00",
+  "actual_cost_micros": 3241
+}

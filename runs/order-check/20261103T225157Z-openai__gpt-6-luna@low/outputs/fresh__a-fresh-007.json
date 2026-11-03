@@ -1,0 +1,56 @@
+{
+ "id": "fresh__a-fresh-007",
+ "split": "fresh",
+ "conversation_id": "a-fresh-007",
+ "kinds": [
+  "wrong_quantity"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "1× hot_chocolate, large",
+    "pred": "3× hot_chocolate, large"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Hot Chocolate (Large 16 oz)\n- 2 × Hot Chocolate (Large 16 oz): add Caramel syrup\nFulfillment: not stated\nPayment: not stated",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer ordered 3 hot chocolates total, with caramel on 2 of them, but the record lists 5 drinks.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 312,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 118,
+   "reasoning_tokens": 72
+  },
+  "latency_ms": 1972.88297500927,
+  "cost_micros": 91,
+  "at": "2026-11-03T22:52:16.450758+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 312,
+   "completion_tokens": 118,
+   "total_tokens": 430,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 72,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

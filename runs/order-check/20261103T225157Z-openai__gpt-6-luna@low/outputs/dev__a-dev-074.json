@@ -1,0 +1,90 @@
+{
+ "id": "dev__a-dev-074",
+ "split": "dev",
+ "conversation_id": "a-dev-074",
+ "kinds": [
+  "missing_item",
+  "wrong_modifications",
+  "missing_item",
+  "extra_item",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "3× breakfast_sandwich, bagel"
+   },
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "2× croissant, plain, add warm",
+    "pred": "2× croissant, plain"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "2× latte, medium, substitute whole_milk"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "3× bagel"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "2× oat_latte, medium"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [],
+    "pred": [
+     [
+      [
+       "item_variant",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Bagel\n- 2 × Croissant (Plain)\n- 2 × oat_latte\nFulfillment: pickup\nTime: 12:15\nPayment: card\nName: Sam",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The record omits the request to warm the croissants and the medium size for the oat lattes.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 398,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 83,
+   "reasoning_tokens": 41
+  },
+  "latency_ms": 1746.9263370148838,
+  "cost_micros": 82,
+  "at": "2026-11-03T22:52:10.451153+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 398,
+   "completion_tokens": 83,
+   "total_tokens": 481,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 41,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

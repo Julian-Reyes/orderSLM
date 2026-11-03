@@ -1,0 +1,90 @@
+{
+ "id": "dev__a-dev-049",
+ "split": "dev",
+ "conversation_id": "a-dev-049",
+ "kinds": [
+  "wrong_variant",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× milkshake",
+    "pred": "1× milkshake, chocolate"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× milkshake, strawberry"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "item_variant",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Milkshake (Chocolate)\n- 1 × Milkshake (Strawberry)\n- 1 × Lemonade\n- 2 × Cheeseburger (Single patty)\nFulfillment: not stated\nPayment: cash",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer replaced the chocolate milkshake with a lemonade, so the order should have one strawberry milkshake and one lemonade, not an additional lemonade alongside the chocolate milkshake.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 368,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 49,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1997.863466036506,
+  "cost_micros": 62,
+  "at": "2026-11-03T22:52:05.451587+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 368,
+   "completion_tokens": 49,
+   "total_tokens": 417,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

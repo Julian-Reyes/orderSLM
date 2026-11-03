@@ -1,0 +1,62 @@
+{
+ "id": "dev__a-dev-063",
+ "split": "dev",
+ "conversation_id": "a-dev-063",
+ "kinds": [
+  "wrong_quantity+modifications",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity+modifications",
+    "parts": [
+     "quantity",
+     "modifications"
+    ],
+    "gold": "2× cheeseburger, single",
+    "pred": "4× cheeseburger, single, remove onion"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "2× cheeseburger, single, remove onion"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 4 × Cheeseburger (Single patty): no Onions\n- 4 × Fries (Regular)\n- 4 × Lemonade\nFulfillment: delivery to 77 elm st\nPayment: cash",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer specified no onion for only 2 of the 4 cheeseburgers, but the record lists all 4 without onions.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 322,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 111,
+   "reasoning_tokens": 62
+  },
+  "latency_ms": 1494.5487979566678,
+  "cost_micros": 88,
+  "at": "2026-11-03T22:52:07.451129+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 322,
+   "completion_tokens": 111,
+   "total_tokens": 433,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 62,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

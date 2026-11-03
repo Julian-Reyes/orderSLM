@@ -1,0 +1,70 @@
+{
+ "id": "dev__a-dev-045",
+ "split": "dev",
+ "conversation_id": "a-dev-045",
+ "kinds": [
+  "wrong_quantity",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "None× garlic_knots",
+    "pred": "1× garlic_knots"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_quantity",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Garlic Knots\n- 1 × Cheese Pizza (Large 14-inch)\nFulfillment: pickup\nPayment: cash",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":true,\"problem\":\"\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 309,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 16,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1583.5731941042468,
+  "cost_micros": 39,
+  "at": "2026-11-03T22:51:59.451932+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 309,
+   "completion_tokens": 16,
+   "total_tokens": 325,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

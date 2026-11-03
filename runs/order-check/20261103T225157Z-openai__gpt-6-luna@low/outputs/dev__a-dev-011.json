@@ -1,0 +1,85 @@
+{
+ "id": "dev__a-dev-011",
+ "split": "dev",
+ "conversation_id": "a-dev-011",
+ "kinds": [
+  "wrong_combo_picks",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_combo_picks",
+    "parts": [
+     "combo_picks"
+    ],
+    "gold": "1× cheeseburger_combo, side=fries",
+    "pred": "1× cheeseburger_combo, side=fries, drink=coke"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "combo_choice",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cheeseburger Combo: side: Fries, drink: Coke\nFulfillment: not stated\nPayment: cash",
+ "config_id": "openai/gpt-6-luna@low",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer did not specify a drink, so recording Coke adds an unrequested option.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 290,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 138,
+   "reasoning_tokens": 100
+  },
+  "latency_ms": 2241.7318139923736,
+  "cost_micros": 98,
+  "at": "2026-11-03T22:52:02.451573+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 290,
+   "completion_tokens": 138,
+   "total_tokens": 428,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 100,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

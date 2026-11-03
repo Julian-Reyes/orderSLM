@@ -107,6 +107,9 @@ student-compare:
 # M6 error review: every dev mistake per student (+ teacher) in categories
 student-errors:
 	$(RUN) python -m orderslm.eval.student_errors $(ARGS)
+# Order checker pilot (spec §11b): the teacher on the picked student's wrong orders.
+order-check:
+	$(RUN) python -m orderslm.eval.order_check $(ARGS)
 eval:             ; $(call not_yet,6)
 router-bench:     ; $(call not_yet,7)
 demo:             ; $(call not_yet,8)
