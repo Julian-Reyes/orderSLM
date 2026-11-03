@@ -1,0 +1,82 @@
+{
+  "compare_version": "student-compare@0.2",
+  "split": "fresh",
+  "chats": 90,
+  "messages": 278,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single": {
+      "intent_accuracy": 0.8920863309352518,
+      "invalid_rate": 0.03237410071942446,
+      "item_f1": 0.7774086378737541,
+      "exact_rate": 0.6,
+      "action_rate": 0.6111111111111112
+    },
+    "qwen3.5-0.8b-single-v2": {
+      "intent_accuracy": 0.920863309352518,
+      "invalid_rate": 0.025179856115107913,
+      "item_f1": 0.8414239482200647,
+      "exact_rate": 0.7444444444444445,
+      "action_rate": 0.7444444444444445
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single",
+      "b": "qwen3.5-0.8b-single-v2",
+      "intent_messages": {
+        "only_a_right": 12,
+        "only_b_right": 20
+      },
+      "exact_chats": {
+        "only_a_right": 3,
+        "only_b_right": 16,
+        "mcnemar_p": 0.004425048828125,
+        "mcnemar_p_holm": 0.004425048828125
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": -0.02877697841726623,
+          "ci95": [
+            -0.0725190839694656,
+            0.01492537313432829
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.007194244604316547,
+          "ci95": [
+            -0.01779359430604982,
+            0.033582089552238806
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.06401531034631058,
+          "ci95": [
+            -0.14172931239659825,
+            0.008106491838135943
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": -0.1444444444444445,
+          "ci95": [
+            -0.2333333333333334,
+            -0.05555555555555558
+          ],
+          "ci_excludes_0": true
+        },
+        "action_rate": {
+          "a_minus_b": -0.1333333333333333,
+          "ci95": [
+            -0.23333333333333328,
+            -0.0444444444444444
+          ],
+          "ci_excludes_0": true
+        }
+      }
+    }
+  ]
+}

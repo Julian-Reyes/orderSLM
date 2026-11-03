@@ -28,7 +28,7 @@
   "output_tokens_p50": 327.0,
   "order": {
     "conversations": 90,
-    "conversations_with_order": 68,
+    "conversations_with_order": 70,
     "json_valid": 87,
     "json_validity_rate": 0.9666666666666667,
     "item": {
@@ -54,12 +54,12 @@
     ],
     "field_accuracy": {
       "method": 1.0,
-      "time": 0.9846153846153847,
+      "time": 0.9850746268656716,
       "address": 1.0,
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.8615384615384616
+      "missing": 0.8656716417910447
     },
     "correction": {
       "conversations": 18,
@@ -168,8 +168,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 161,
-        "correct": 150,
+        "gold": 163,
+        "correct": 151,
         "predicted": 154
       },
       "REFUND_REQUEST": {
@@ -178,8 +178,8 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 45,
-        "correct": 43,
+        "gold": 43,
+        "correct": 42,
         "predicted": 48
       },
       "UNKNOWN": {
@@ -197,7 +197,7 @@
       {
         "gold": "PLACE_ORDER",
         "pred": "SMALL_TALK",
-        "count": 4
+        "count": 5
       },
       {
         "gold": "DELIVERY_QUESTION",
@@ -221,11 +221,6 @@
       },
       {
         "gold": "DELIVERY_QUESTION",
-        "pred": "PLACE_ORDER",
-        "count": 1
-      },
-      {
-        "gold": "SMALL_TALK",
         "pred": "PLACE_ORDER",
         "count": 1
       },

@@ -23,14 +23,45 @@
     "unclear_message"
   ],
   "style": "clean",
-  "gold_extraction": null,
+  "gold_extraction": {
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "items",
+        "reason": "missing"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What would you like to order, is this for pickup or delivery, and will you pay by card or cash?"
+  },
   "gold_routing": [
     {
       "message_index": 0,
       "decision": {
-        "primary": "SMALL_TALK",
+        "primary": "PLACE_ORDER",
         "flags": {
-          "refers_to": "none"
+          "refers_to": "draft"
         }
       }
     },
@@ -46,5 +77,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A, fresh)",
   "card_id": "a-fresh-032",
-  "annotation_notes": "An announcement, then a lone '?': UNKNOWN. No order exists yet, so refers_to none."
+  "annotation_notes": "An announcement, then a lone '?': UNKNOWN. No order exists yet, so refers_to none. Opener is PLACE_ORDER under the 2026-11-03 rule; the gold order is empty: no items yet, the bot asks."
 }

@@ -6,22 +6,22 @@ Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.3`, fina
 |---|---|---|
 | Valid answers, last customer message | 89/90 | ?/? |
 | Valid answers, earlier messages | 184/188 | n/a (one call per chat) |
-| Intent, all customer messages | 250/278 (89.9%, 95% CI 0.858–0.929) | ? |
+| Intent, all customer messages | 252/278 (90.6%, 95% CI 0.866–0.935) | ? |
 | Intent, last message | 77/90 (85.6%, 95% CI 0.768–0.914) | |
-| Intent, earlier messages (mid-chat) | 173/188 (92.0%, 95% CI 0.873–0.951) | |
+| Intent, earlier messages (mid-chat) | 175/188 (93.1%, 95% CI 0.885–0.959) | |
 | Items (F1) | 115 found / 30 extra / 41 missed (F1 0.7641196013289037) | ? |
 | Fully correct orders | 52/90 (95% CI (0.4746099802268749, 0.6745775869075303)) | ? |
 | Same action (bot sends/asks the same; wording aside) | 54/90 (95% CI (0.4967011780834921, 0.6951114082321718)) | |
 
-Field accuracy: {'method': 0.9701492537313433, 'time': 0.9701492537313433, 'address': 0.9701492537313433, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.7014925373134329}
+Field accuracy: {'method': 0.9710144927536232, 'time': 0.9710144927536232, 'address': 0.9710144927536232, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.7101449275362319}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 15018, 'p95': 26062} ms (T4, fp16, greedy); output tokens p50 323.0.
 Invalid answers by reason: {'1 validation error for StudentOutput': 5}
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 161 | 148 | 154 |
-| SMALL_TALK | 45 | 43 | 51 |
+| PLACE_ORDER | 163 | 150 | 154 |
+| SMALL_TALK | 43 | 43 | 51 |
 | MODIFY_ORDER | 18 | 14 | 15 |
 | MENU_QUESTION | 14 | 12 | 15 |
 | CONFIRM_ORDER | 9 | 9 | 9 |
@@ -43,7 +43,6 @@ Mistakes (gold → predicted):
 - PLACE_ORDER → MENU_QUESTION: 3
 - MODIFY_ORDER → PLACE_ORDER: 3
 - UNKNOWN → SMALL_TALK: 2
-- SMALL_TALK → PLACE_ORDER: 2
 - MENU_QUESTION → SMALL_TALK: 1
 - OUT_OF_SCOPE → SMALL_TALK: 1
 - MODIFY_ORDER → None: 1

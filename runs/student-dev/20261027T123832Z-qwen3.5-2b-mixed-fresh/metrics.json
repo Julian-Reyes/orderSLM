@@ -27,7 +27,7 @@
   "output_tokens_p50": 323.0,
   "order": {
     "conversations": 90,
-    "conversations_with_order": 68,
+    "conversations_with_order": 70,
     "json_valid": 89,
     "json_validity_rate": 0.9888888888888889,
     "item": {
@@ -52,13 +52,13 @@
       0.6951114082321718
     ],
     "field_accuracy": {
-      "method": 0.9701492537313433,
-      "time": 0.9701492537313433,
-      "address": 0.9701492537313433,
+      "method": 0.9710144927536232,
+      "time": 0.9710144927536232,
+      "address": 0.9710144927536232,
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.7014925373134329
+      "missing": 0.7101449275362319
     },
     "correction": {
       "conversations": 18,
@@ -81,13 +81,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 250,
-      "primary_accuracy": 0.8993,
+      "primary_correct": 252,
+      "primary_accuracy": 0.9065,
       "primary_ci95": [
-        0.8582828143607655,
-        0.9293936677483341
+        0.8664924033456052,
+        0.9353764478105053
       ],
-      "label_set_correct": 247
+      "label_set_correct": 249
     },
     "last_message": {
       "messages": 90,
@@ -101,13 +101,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 173,
-      "primary_accuracy": 0.9202,
+      "primary_correct": 175,
+      "primary_accuracy": 0.9309,
       "primary_ci95": [
-        0.8725417731175508,
-        0.9510543603592344
+        0.885299294526408,
+        0.9591473739751057
       ],
-      "label_set_correct": 171
+      "label_set_correct": 173
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -166,8 +166,8 @@
         "predicted": 2
       },
       "PLACE_ORDER": {
-        "gold": 161,
-        "correct": 148,
+        "gold": 163,
+        "correct": 150,
         "predicted": 154
       },
       "REFUND_REQUEST": {
@@ -176,7 +176,7 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 45,
+        "gold": 43,
         "correct": 43,
         "predicted": 51
       },
@@ -210,11 +210,6 @@
       {
         "gold": "UNKNOWN",
         "pred": "SMALL_TALK",
-        "count": 2
-      },
-      {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
         "count": 2
       },
       {

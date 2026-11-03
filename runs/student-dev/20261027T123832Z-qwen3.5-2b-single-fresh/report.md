@@ -6,22 +6,22 @@ Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.3`, fina
 |---|---|---|
 | Valid answers, last customer message | 85/90 | ?/? |
 | Valid answers, earlier messages | 183/188 | n/a (one call per chat) |
-| Intent, all customer messages | 246/278 (88.5%, 95% CI 0.842–0.917) | ? |
+| Intent, all customer messages | 248/278 (89.2%, 95% CI 0.850–0.923) | ? |
 | Intent, last message | 69/90 (76.7%, 95% CI 0.669–0.842) | |
-| Intent, earlier messages (mid-chat) | 177/188 (94.2%, 95% CI 0.898–0.967) | |
+| Intent, earlier messages (mid-chat) | 179/188 (95.2%, 95% CI 0.912–0.975) | |
 | Items (F1) | 109 found / 25 extra / 47 missed (F1 0.7517241379310344) | ? |
 | Fully correct orders | 51/90 (95% CI (0.4636391101764269, 0.664235947367349)) | ? |
 | Same action (bot sends/asks the same; wording aside) | 53/90 (95% CI (0.48563048727714275, 0.6848695894478919)) | |
 
-Field accuracy: {'method': 0.9841269841269841, 'time': 0.9523809523809523, 'address': 0.9841269841269841, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.746031746031746}
+Field accuracy: {'method': 0.9846153846153847, 'time': 0.9538461538461539, 'address': 0.9846153846153847, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.7538461538461538}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 14919, 'p95': 24444} ms (T4, fp16, greedy); output tokens p50 319.0.
 Invalid answers by reason: {'1 validation error for StudentOutput': 9, '2 validation errors for StudentOutput': 1}
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 161 | 148 | 153 |
-| SMALL_TALK | 45 | 43 | 54 |
+| PLACE_ORDER | 163 | 150 | 153 |
+| SMALL_TALK | 43 | 43 | 54 |
 | MODIFY_ORDER | 18 | 14 | 16 |
 | MENU_QUESTION | 14 | 13 | 15 |
 | CONFIRM_ORDER | 9 | 9 | 9 |
@@ -42,7 +42,6 @@ Mistakes (gold → predicted):
 - UNKNOWN → SMALL_TALK: 5
 - OUT_OF_SCOPE → SMALL_TALK: 4
 - MODIFY_ORDER → PLACE_ORDER: 2
-- SMALL_TALK → PLACE_ORDER: 2
 - MODIFY_ORDER → None: 2
 - PLACE_ORDER → MODIFY_ORDER: 2
 - MENU_QUESTION → SMALL_TALK: 1

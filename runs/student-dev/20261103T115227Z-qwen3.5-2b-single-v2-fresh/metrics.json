@@ -27,7 +27,7 @@
   "output_tokens_p50": 327.0,
   "order": {
     "conversations": 90,
-    "conversations_with_order": 68,
+    "conversations_with_order": 70,
     "json_valid": 88,
     "json_validity_rate": 0.9777777777777777,
     "item": {
@@ -58,7 +58,7 @@
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.8333333333333334
+      "missing": 0.8382352941176471
     },
     "correction": {
       "conversations": 18,
@@ -79,13 +79,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 261,
-      "primary_accuracy": 0.9388,
+      "primary_correct": 263,
+      "primary_accuracy": 0.946,
       "primary_ci95": [
-        0.9042609467652611,
-        0.961473565102398
+        0.9128944346457954,
+        0.9670324462688744
       ],
-      "label_set_correct": 255
+      "label_set_correct": 257
     },
     "last_message": {
       "messages": 90,
@@ -99,13 +99,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 179,
-      "primary_accuracy": 0.9521,
+      "primary_correct": 181,
+      "primary_accuracy": 0.9628,
       "primary_ci95": [
-        0.9115347576827608,
-        0.9746129808682105
+        0.9251492110413535,
+        0.9818490625343463
       ],
-      "label_set_correct": 176
+      "label_set_correct": 178
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -164,8 +164,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 161,
-        "correct": 154,
+        "gold": 163,
+        "correct": 156,
         "predicted": 159
       },
       "REFUND_REQUEST": {
@@ -174,7 +174,7 @@
         "predicted": 1
       },
       "SMALL_TALK": {
-        "gold": 45,
+        "gold": 43,
         "correct": 43,
         "predicted": 47
       },
@@ -187,11 +187,6 @@
     "confusions": [
       {
         "gold": "MODIFY_ORDER",
-        "pred": "PLACE_ORDER",
-        "count": 2
-      },
-      {
-        "gold": "SMALL_TALK",
         "pred": "PLACE_ORDER",
         "count": 2
       },

@@ -28,7 +28,7 @@
   "output_tokens_p50": 320.0,
   "order": {
     "conversations": 90,
-    "conversations_with_order": 68,
+    "conversations_with_order": 70,
     "json_valid": 88,
     "json_validity_rate": 0.9777777777777777,
     "item": {
@@ -54,12 +54,12 @@
     ],
     "field_accuracy": {
       "method": 1.0,
-      "time": 0.9696969696969697,
+      "time": 0.9705882352941176,
       "address": 1.0,
       "payment": 1.0,
-      "name": 0.9848484848484849,
-      "decision": 0.9848484848484849,
-      "missing": 0.7878787878787878
+      "name": 0.9852941176470589,
+      "decision": 0.9852941176470589,
+      "missing": 0.7941176470588235
     },
     "correction": {
       "conversations": 18,
@@ -82,13 +82,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 247,
-      "primary_accuracy": 0.8885,
+      "primary_correct": 248,
+      "primary_accuracy": 0.8921,
       "primary_ci95": [
-        0.8460660485097524,
-        0.9203218800288309
+        0.8501260472668182,
+        0.9233580657952705
       ],
-      "label_set_correct": 244
+      "label_set_correct": 245
     },
     "last_message": {
       "messages": 90,
@@ -102,13 +102,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 175,
-      "primary_accuracy": 0.9309,
+      "primary_correct": 176,
+      "primary_accuracy": 0.9362,
       "primary_ci95": [
-        0.885299294526408,
-        0.9591473739751057
+        0.8917584807627845,
+        0.9631134552510936
       ],
-      "label_set_correct": 173
+      "label_set_correct": 174
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -167,8 +167,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 161,
-        "correct": 146,
+        "gold": 163,
+        "correct": 147,
         "predicted": 149
       },
       "REFUND_REQUEST": {
@@ -177,7 +177,7 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 45,
+        "gold": 43,
         "correct": 43,
         "predicted": 51
       },
@@ -191,7 +191,7 @@
       {
         "gold": "PLACE_ORDER",
         "pred": null,
-        "count": 7
+        "count": 8
       },
       {
         "gold": "UNKNOWN",
@@ -226,16 +226,6 @@
       {
         "gold": "OUT_OF_SCOPE",
         "pred": "SMALL_TALK",
-        "count": 1
-      },
-      {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
-        "count": 1
-      },
-      {
-        "gold": "SMALL_TALK",
-        "pred": null,
         "count": 1
       },
       {

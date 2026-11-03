@@ -377,10 +377,11 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     `SMALL_TALK`; reverses the 2026-10-16 a-dev-075 call). Guide §3 + TAXONOMY example. Applied by rule to 13
     messages (dev 074, 075; fresh 004 msg 2, 006, 018, 025, 037, 045, 047, 054, 061, 074, 082), each logged in
     `data/{dev,fresh}/CHANGES.jsonl` (old → new, reason, hashes; not in REVIEWS.jsonl, so not a review or a
-    correction). Context with no ordering ("first time ordering", "team lunch time!") stays SMALL_TALK. **Open
-    (Julian):** fresh 032 ("putting together a lunch order for my team." → "?") and 050 (nut-allergy party → asks
-    for staff before ordering) have no gold order, and a PLACE_ORDER message needs one (the save check blocks it);
-    no dev/fresh gold has an empty order yet. Left SMALL_TALK for now. **Also open:** `teacher-label@0.7` (lines
+    correction). Context with no ordering ("first time ordering", "team lunch time!") stays SMALL_TALK. Fresh 032 ("putting together a lunch order for my team." → "?") and 050 (nut-allergy party → asks
+    for staff before ordering) never name items, so a PLACE_ORDER opener needs a gold order: **Julian (2026-11-03):
+    an empty gold order** (no items; items, fulfillment, payment missing; the bot asks), built by `finalize_order`
+    from an all-not-mentioned order, logged in `data/fresh/CHANGES.jsonl`. The first empty gold order in dev/fresh;
+    all three v2 students still match it (they invent no items). **Also open:** `teacher-label@0.7` (lines
     127–128) still says SMALL_TALK for these (fix in the v0.3 label prompt); the students learned PLACE_ORDER on
     their own (training targets are only the last message's intent). The sealed test gold was written under the old
     rule: apply the rule there at final eval (needs `make annotate-test`, Julian's call).
@@ -397,13 +398,14 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     | v2 student | fresh intents | fresh exact / same action (of 90) | dev intents | dev exact / same action (of 91) |
     |---|---|---|---|---|
     | 0.8B single | 92.1% (was 91.0%) | 67 / 67 | 92.9% (was 93.7%) | 70 / 72 |
-    | 2B mixed | 91.7% (was 90.6%) | 70 / 72 | 93.7% | 73 / 74 |
-    | 2B single | **93.9%** (was 91.4%) | 69 / 71 | 91.4% | 69 / 69 |
+    | 2B mixed | 92.4% (was 90.6%) | 70 / 72 | 93.7% | 73 / 74 |
+    | 2B single | **94.6%** (was 91.4%) | 69 / 71 | 91.4% | 69 / 69 |
 
     The rule fixes opener misses but the students aren't consistent on openers either (some said SMALL_TALK), so
-    the net gain is +1 to +2.5 pp. Same action adds 0–2 chats. Paired: v0.1 → v0.2 on fresh still significant for
-    all three (exact and same action; `runs/student-compare/20261103T16372{4,9}Z`, `…163735Z`); the three v2
-    students still don't differ (`…163628Z` fresh, `…163719Z` dev; all Holm p ≥ 0.66). Tables above this entry use
+    the net gain is +1 to +3 pp (0.8B: 032 opener now a miss, 050 now right, net 0 from those two). Same action adds
+    0–2 chats. Paired: v0.1 → v0.2 on fresh still significant for all three (exact and same action;
+    `runs/student-compare/20261103T19404{0,3,7}Z`); the three v2 students still don't differ (`…194029Z` fresh,
+    `…163719Z` dev; all Holm p ≥ 0.66). Tables above this entry use
     the old gold and scorer@0.2.
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
     probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h, v0.2 session 2 ≈ 10.4 h.
