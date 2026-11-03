@@ -1,8 +1,9 @@
 {
   "student": "qwen3.5-0.8b-single",
+  "split": "dev",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 268,
   "contract_valid": {
@@ -41,6 +42,12 @@
     "exact_match": 64,
     "exact_match_rate": 0.7032967032967034,
     "exact_match_ci95": [
+      0.6027577176380822,
+      0.7873664472853271
+    ],
+    "action_match": 64,
+    "action_match_rate": 0.7032967032967034,
+    "action_match_ci95": [
       0.6027577176380822,
       0.7873664472853271
     ],
@@ -160,8 +167,8 @@
         "predicted": 3
       },
       "PLACE_ORDER": {
-        "gold": 160,
-        "correct": 157,
+        "gold": 162,
+        "correct": 158,
         "predicted": 164
       },
       "REFUND_REQUEST": {
@@ -170,8 +177,8 @@
         "predicted": 4
       },
       "SMALL_TALK": {
-        "gold": 28,
-        "correct": 25,
+        "gold": 26,
+        "correct": 24,
         "predicted": 31
       },
       "UNKNOWN": {
@@ -197,6 +204,11 @@
         "count": 3
       },
       {
+        "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
+        "count": 2
+      },
+      {
         "gold": "PAYMENT_CLAIM",
         "pred": "PLACE_ORDER",
         "count": 2
@@ -204,11 +216,6 @@
       {
         "gold": "SMALL_TALK",
         "pred": "MODIFY_ORDER",
-        "count": 1
-      },
-      {
-        "gold": "PLACE_ORDER",
-        "pred": "SMALL_TALK",
         "count": 1
       },
       {
@@ -239,11 +246,6 @@
       {
         "gold": "SMALL_TALK",
         "pred": "MENU_QUESTION",
-        "count": 1
-      },
-      {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
         "count": 1
       },
       {

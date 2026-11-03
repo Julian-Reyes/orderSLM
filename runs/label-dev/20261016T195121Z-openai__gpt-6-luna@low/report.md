@@ -13,13 +13,13 @@ Dev numbers (prompt tuning), not held-out results. Built from the saved outputs 
 
 ## Intents (per customer message, against reviewed gold)
 
-- Primary label correct: 259/268 (96.6%, 95% CI (0.9374194158516206, 0.9822337939587983))
-- Primary + secondary exactly right: 258/268 (96.3%)
+- Primary label correct: 257/268 (95.9%, 95% CI (0.9280093369841262, 0.9769294214693263))
+- Primary + secondary exactly right: 256/268 (95.5%)
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 160 | 154 | 154 |
-| SMALL_TALK | 28 | 28 | 31 |
+| PLACE_ORDER | 162 | 154 | 154 |
+| SMALL_TALK | 26 | 26 | 31 |
 | MENU_QUESTION | 16 | 16 | 16 |
 | MODIFY_ORDER | 14 | 13 | 13 |
 | CONFIRM_ORDER | 8 | 7 | 7 |
@@ -36,8 +36,8 @@ Dev numbers (prompt tuning), not held-out results. Built from the saved outputs 
 
 Mistakes (gold → predicted):
 
+- PLACE_ORDER → SMALL_TALK: 4
 - PLACE_ORDER → None: 4
-- PLACE_ORDER → SMALL_TALK: 2
 - CONFIRM_ORDER → None: 1
 - MODIFY_ORDER → None: 1
 - UNKNOWN → SMALL_TALK: 1

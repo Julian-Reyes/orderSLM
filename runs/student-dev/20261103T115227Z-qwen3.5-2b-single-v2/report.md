@@ -1,6 +1,6 @@
 # `qwen3.5-2b-single-v2` on dev at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.2`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
+Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.3`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -11,6 +11,7 @@ Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.2`, fina
 | Intent, earlier messages (mid-chat) | 160/177 (90.4%, 95% CI 0.852–0.939) | |
 | Items (F1) | 121 found / 14 extra / 25 missed (F1 0.8612099644128114) | F1 0.993103448275862 |
 | Fully correct orders | 69/91 (95% CI (0.6609799811910234, 0.8345831472251989)) | 90/91 |
+| Same action (bot sends/asks the same; wording aside) | 69/91 (95% CI (0.6609799811910234, 0.8345831472251989)) | |
 
 Field accuracy: {'method': 1.0, 'time': 0.967741935483871, 'address': 1.0, 'payment': 0.9838709677419355, 'name': 1.0, 'decision': 1.0, 'missing': 0.9032258064516129}
 
@@ -19,8 +20,8 @@ Invalid answers by reason: {'1 validation error for StudentOutput': 8, '2 valida
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 160 | 151 | 158 |
-| SMALL_TALK | 28 | 27 | 30 |
+| PLACE_ORDER | 162 | 152 | 158 |
+| SMALL_TALK | 26 | 26 | 30 |
 | MENU_QUESTION | 16 | 15 | 15 |
 | MODIFY_ORDER | 14 | 9 | 9 |
 | CONFIRM_ORDER | 8 | 8 | 8 |
@@ -45,7 +46,7 @@ Mistakes (gold → predicted):
 - HUMAN_REQUEST → None: 1
 - HUMAN_REQUEST → SMALL_TALK: 1
 - PAYMENT_CLAIM → ORDER_PROBLEM: 1
-- SMALL_TALK → PLACE_ORDER: 1
+- PLACE_ORDER → SMALL_TALK: 1
 - MENU_QUESTION → PLACE_ORDER: 1
 - ORDER_PROBLEM → ORDER_STATUS: 1
 - PAYMENT_CLAIM → PLACE_ORDER: 1

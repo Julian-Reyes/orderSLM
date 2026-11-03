@@ -6,7 +6,7 @@ prompt, scorer and finalize versions must match.
 
 - **fully correct orders** (one per chat, chats independent): discordant chats + exact McNemar p-value, Holm-adjusted
   over the pairs compared;
-- **intents, invalid answers, item F1, fully correct orders:** difference A − B with a 95% paired bootstrap interval
+- **intents, invalid answers, item F1, fully correct orders, same action (scorer@0.3):** difference A − B with a 95% paired bootstrap interval
   over chats (resample the 91 chats with replacement, both students on the same resample). Messages in one chat are
   not independent, so intents get no per-message test; the chat-level bootstrap carries that.
 
@@ -33,10 +33,10 @@ from orderslm.runinfo import git_commit
 from .stats import holm, mcnemar_exact, percentile_interval
 
 EXPERIMENT = "student-compare"
-COMPARE_VERSION = "student-compare@0.1"
+COMPARE_VERSION = "student-compare@0.2"  # 0.2: same-action orders (scorer@0.3)
 SEED = 20261025
 RESAMPLES = 10_000
-METRICS = ("intent_accuracy", "invalid_rate", "item_f1", "exact_rate")
+METRICS = ("intent_accuracy", "invalid_rate", "item_f1", "exact_rate", "action_rate")
 
 
 def _read_jsonl(path: Path) -> list[dict]:
@@ -63,7 +63,17 @@ def load_run(run_dir: Path) -> dict[str, Any]:
     if set(orders) != set(chats):
         raise SystemExit(f"{run_dir}: intent and order rows cover different chats")
     for cid, o in orders.items():
-        chats[cid] |= {"exact": int(o["exact"]), "tp": o["tp"], "fp": o["fp"], "fn": o["fn"]}
+        if "action_exact" not in o:
+            raise SystemExit(
+                f'{run_dir}: order rows predate scorer@0.3; run `make student-dev ARGS="report {run_dir}"`'
+            )
+        chats[cid] |= {
+            "exact": int(o["exact"]),
+            "action": int(o["action_exact"]),
+            "tp": o["tp"],
+            "fp": o["fp"],
+            "fn": o["fn"],
+        }
     return {
         "student": metrics["student"],
         "run_dir": str(run_dir.resolve().relative_to(ROOT)),
@@ -78,8 +88,8 @@ def load_run(run_dir: Path) -> dict[str, Any]:
 
 
 def summarize(chats: dict[str, dict[str, int]], ids: list[str]) -> dict[str, float]:
-    """The four metrics over a list of chat ids (repeats count again, as in a bootstrap resample)."""
-    t = dict.fromkeys(("msgs", "ok", "invalid", "exact", "tp", "fp", "fn"), 0)
+    """The metrics over a list of chat ids (repeats count again, as in a bootstrap resample)."""
+    t = dict.fromkeys(("msgs", "ok", "invalid", "exact", "action", "tp", "fp", "fn"), 0)
     for cid in ids:
         for k in t:
             t[k] += chats[cid][k]
@@ -89,6 +99,7 @@ def summarize(chats: dict[str, dict[str, int]], ids: list[str]) -> dict[str, flo
         "invalid_rate": t["invalid"] / t["msgs"],
         "item_f1": 2 * t["tp"] / f1_den if f1_den else 1.0,
         "exact_rate": t["exact"] / len(ids),
+        "action_rate": t["action"] / len(ids),
     }
 
 
@@ -175,19 +186,19 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
         f"{c['seed']}); * = interval excludes 0. Fully correct orders also get an exact McNemar test on the chats where "
         "the two disagree, Holm-adjusted over the pairs.",
         "",
-        "| student | intents right | invalid answers | item F1 | fully correct orders |",
-        "|---|---|---|---|---|",
+        "| student | intents right | invalid answers | item F1 | fully correct orders | same action |",
+        "|---|---|---|---|---|---|",
     ]
     for s, m in c["students"].items():
         lines.append(
             f"| {s} | {100 * m['intent_accuracy']:.1f}% | {100 * m['invalid_rate']:.1f}% | {m['item_f1']:.3f} | "
-            f"{100 * m['exact_rate']:.1f}% |"
+            f"{100 * m['exact_rate']:.1f}% | {100 * m['action_rate']:.1f}% |"
         )
     lines += [
         "",
         "| A vs B | intents (pp) | invalid answers (pp) | item F1 (pp) | fully correct orders (pp) | "
-        "messages only A / only B right | chats only A / only B fully correct | McNemar p (Holm) |",
-        "|---|---|---|---|---|---|---|---|",
+        "same action (pp) | messages only A / only B right | chats only A / only B fully correct | McNemar p (Holm) |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for p in c["pairs"]:
         d = p["differences"]
@@ -199,7 +210,7 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
         e = p["exact_chats"]
         lines.append(
             f"| {p['a']} vs {p['b']} | {cell('intent_accuracy')} | {cell('invalid_rate')} | {cell('item_f1')} | "
-            f"{cell('exact_rate')} | {p['intent_messages']['only_a_right']} / {p['intent_messages']['only_b_right']} | "
+            f"{cell('exact_rate')} | {cell('action_rate')} | {p['intent_messages']['only_a_right']} / {p['intent_messages']['only_b_right']} | "
             f"{e['only_a_right']} / {e['only_b_right']} | {e['mcnemar_p']:.3f} ({e['mcnemar_p_holm']:.3f}) |"
         )
     lines += ["", "Inputs:", ""] + [

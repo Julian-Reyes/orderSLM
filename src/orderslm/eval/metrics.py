@@ -9,6 +9,13 @@
 - Order exact match: the item multiset and every order-level field equal (method, time, address state,
   payment, name, decision, the missing set by field + reason). A conversation with no gold order
   (gold_extraction null) is an exact match when the prediction has no items.
+- Same action (scorer@0.3, Julian 2026-11-03): the bot does the same thing with both orders, so wording-level
+  differences stop counting as mistakes. Equal when the lines it can send to the kitchen match exactly, it must ask
+  about the same things before the order goes through (missing fields, reason ignored: "we don't have X" and "which
+  X?" both stop and ask), and the other order-level fields match. Requests the bot asks about compare as "ask":
+  off-menu items (`unmatched_text`, quantity ignored) and modifications with no catalog id that aren't kitchen notes
+  (off-menu or unverified). An order with nothing for the kitchen asks what they want, whether it says "items
+  missing" or holds only an unclear line ("the usual"). The strict exact match is unchanged.
 - Field accuracy on conversations with a gold order and a valid prediction.
 - Correction handling: exact match and item F1 on conversations tagged correction / cancellation.
 - Grounding issues (hallucinations): evidence quotes not in the cited message, evidence citing a business
@@ -16,6 +23,7 @@
 """
 
 from collections import Counter
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -27,7 +35,7 @@ from orderslm.schema.conversation import Role
 from orderslm.schema.extraction import ExtractionOutput, ItemProposal, Modification
 from orderslm.schema.menu import MenuCatalog
 
-SCORER_VERSION = "scorer@0.2"  # 0.2: unstated default variant = the default
+SCORER_VERSION = "scorer@0.3"  # 0.2: unstated default variant = the default; 0.3: adds the same-action match
 CORRECTION_SCENARIOS = {Scenario.correction, Scenario.correction_after_confirmation, Scenario.cancellation}
 
 
@@ -42,7 +50,12 @@ def _mod_key(m: Modification) -> tuple:
     )
 
 
-def item_key(item: ItemProposal) -> tuple:
+def _action_mod_key(m: Modification) -> tuple:
+    """Off-menu or unverified requests (no catalog id, not a kitchen note): the bot asks about them."""
+    return ("ask",) if m.modifier_id is None and not m.kitchen_note else _mod_key(m)
+
+
+def item_key(item: ItemProposal, mod_key: Callable[[Modification], tuple] = _mod_key) -> tuple:
     # Sorted by repr: modifier ids can be None (off-menu requests, kitchen notes), which plain sorting can't compare.
     if item.unmatched_text is not None:
         return ("off_menu", item.quantity)
@@ -51,7 +64,7 @@ def item_key(item: ItemProposal) -> tuple:
             "halves",
             tuple(
                 sorted(
-                    (h.menu_item_id, tuple(sorted((_mod_key(m) for m in h.modifications), key=repr)))
+                    (h.menu_item_id, tuple(sorted((mod_key(m) for m in h.modifications), key=repr)))
                     for h in item.halves
                 )
             ),
@@ -62,12 +75,21 @@ def item_key(item: ItemProposal) -> tuple:
         identity,
         item.quantity,
         item.variant_id,
-        tuple(sorted((_mod_key(m) for m in item.modifications), key=repr)),
+        tuple(sorted((mod_key(m) for m in item.modifications), key=repr)),
         tuple(sorted(((c.slot_id, c.menu_item_id, c.variant_id) for c in item.combo_selections), key=repr)),
     )
 
 
 FIELDS = ("method", "time", "address", "payment", "name", "decision", "missing")
+
+
+def action_view(o: ExtractionOutput) -> tuple[Counter, frozenset[str]]:
+    """What the bot does with an order: the lines it can send to the kitchen, and what it asks about first."""
+    kitchen = Counter(item_key(i, _action_mod_key) for i in o.items if i.unmatched_text is None)
+    asks = {m.field.value for m in o.missing_or_ambiguous}
+    if not kitchen and "item_menu_match" in asks:  # only unclear lines: it asks what they want
+        asks = (asks - {"item_menu_match"}) | {"items"}
+    return kitchen, frozenset(asks)
 
 
 def field_values(o: ExtractionOutput) -> dict[str, Any]:
@@ -98,6 +120,7 @@ class ConversationScore:
     fp: int
     fn: int
     exact: bool
+    action_exact: bool = False
     fields: dict[str, bool] = field(default_factory=dict)
     grounding_issues: list[str] = field(default_factory=list)
     unclassified_requests: int = 0
@@ -145,11 +168,14 @@ def score_conversation(
     score.grounding_issues = issues
     score.unclassified_requests = len(check_requests(predicted))
     if gold.gold_extraction is None:
-        score.exact = not predicted.items
+        score.exact = score.action_exact = not predicted.items
         return score
     gold_fields, pred_fields = field_values(gold.gold_extraction), field_values(predicted)
     score.fields = {f: gold_fields[f] == pred_fields[f] for f in FIELDS}
     score.exact = gold_items == pred_items and all(score.fields.values())
+    score.action_exact = action_view(gold.gold_extraction) == action_view(predicted) and all(
+        score.fields[f] for f in FIELDS if f != "missing"
+    )
     return score
 
 
@@ -172,6 +198,7 @@ def aggregate(scores: list[ConversationScore]) -> dict[str, Any]:
     tp, fp, fn = (sum(getattr(s, k) for s in scores) for k in ("tp", "fp", "fn"))
     issue_counts = Counter(code for s in valid for code in s.grounding_issues)
     exact = sum(s.exact for s in scores)
+    action = sum(s.action_exact for s in scores)
     return {
         "conversations": n,
         "conversations_with_order": sum(s.has_gold_order for s in scores),
@@ -181,6 +208,9 @@ def aggregate(scores: list[ConversationScore]) -> dict[str, Any]:
         "exact_match": exact,
         "exact_match_rate": _rate(exact, n),
         "exact_match_ci95": wilson(exact, n),
+        "action_match": action,
+        "action_match_rate": _rate(action, n),
+        "action_match_ci95": wilson(action, n),
         "field_accuracy": {f: _rate(sum(s.fields[f] for s in with_order), len(with_order)) for f in FIELDS},
         "correction": {
             "conversations": len(corrections),

@@ -3,7 +3,7 @@
   "split": "fresh",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.2",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 278,
   "contract_valid": {
@@ -45,6 +45,12 @@
       0.6694810141144782,
       0.8420192160606255
     ],
+    "action_match": 71,
+    "action_match_rate": 0.7888888888888889,
+    "action_match_ci95": [
+      0.6936500878323096,
+      0.8604751615240526
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 1.0,
@@ -73,13 +79,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 254,
-      "primary_accuracy": 0.9137,
+      "primary_correct": 261,
+      "primary_accuracy": 0.9388,
       "primary_ci95": [
-        0.8747601168877766,
-        0.9413011033153447
+        0.9042609467652611,
+        0.961473565102398
       ],
-      "label_set_correct": 248
+      "label_set_correct": 255
     },
     "last_message": {
       "messages": 90,
@@ -93,13 +99,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 172,
-      "primary_accuracy": 0.9149,
+      "primary_correct": 179,
+      "primary_accuracy": 0.9521,
       "primary_ci95": [
-        0.8662341398849908,
-        0.9469367260794298
+        0.9115347576827608,
+        0.9746129808682105
       ],
-      "label_set_correct": 169
+      "label_set_correct": 176
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -158,8 +164,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 150,
-        "correct": 145,
+        "gold": 161,
+        "correct": 154,
         "predicted": 159
       },
       "REFUND_REQUEST": {
@@ -168,8 +174,8 @@
         "predicted": 1
       },
       "SMALL_TALK": {
-        "gold": 56,
-        "correct": 45,
+        "gold": 45,
+        "correct": 43,
         "predicted": 47
       },
       "UNKNOWN": {
@@ -180,13 +186,18 @@
     },
     "confusions": [
       {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
-        "count": 11
-      },
-      {
         "gold": "MODIFY_ORDER",
         "pred": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "gold": "SMALL_TALK",
+        "pred": "PLACE_ORDER",
+        "count": 2
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
         "count": 2
       },
       {

@@ -1,16 +1,17 @@
 # `qwen3.5-2b-mixed` on fresh at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.2`, finalize `finalize@0.1`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.3`, finalize `finalize@0.1`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
 | Valid answers, last customer message | 89/90 | ?/? |
 | Valid answers, earlier messages | 184/188 | n/a (one call per chat) |
-| Intent, all customer messages | 248/278 (89.2%, 95% CI 0.850–0.923) | ? |
+| Intent, all customer messages | 250/278 (89.9%, 95% CI 0.858–0.929) | ? |
 | Intent, last message | 77/90 (85.6%, 95% CI 0.768–0.914) | |
-| Intent, earlier messages (mid-chat) | 171/188 (91.0%, 95% CI 0.860–0.943) | |
+| Intent, earlier messages (mid-chat) | 173/188 (92.0%, 95% CI 0.873–0.951) | |
 | Items (F1) | 115 found / 30 extra / 41 missed (F1 0.7641196013289037) | ? |
 | Fully correct orders | 52/90 (95% CI (0.4746099802268749, 0.6745775869075303)) | ? |
+| Same action (bot sends/asks the same; wording aside) | 54/90 (95% CI (0.4967011780834921, 0.6951114082321718)) | |
 
 Field accuracy: {'method': 0.9701492537313433, 'time': 0.9701492537313433, 'address': 0.9701492537313433, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.7014925373134329}
 
@@ -19,8 +20,8 @@ Invalid answers by reason: {'1 validation error for StudentOutput': 5}
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 150 | 143 | 154 |
-| SMALL_TALK | 56 | 46 | 51 |
+| PLACE_ORDER | 161 | 148 | 154 |
+| SMALL_TALK | 45 | 43 | 51 |
 | MODIFY_ORDER | 18 | 14 | 15 |
 | MENU_QUESTION | 14 | 12 | 15 |
 | CONFIRM_ORDER | 9 | 9 | 9 |
@@ -37,11 +38,12 @@ Invalid answers by reason: {'1 validation error for StudentOutput': 5}
 
 Mistakes (gold → predicted):
 
-- SMALL_TALK → PLACE_ORDER: 7
+- PLACE_ORDER → None: 4
+- PLACE_ORDER → SMALL_TALK: 3
 - PLACE_ORDER → MENU_QUESTION: 3
 - MODIFY_ORDER → PLACE_ORDER: 3
-- SMALL_TALK → None: 3
 - UNKNOWN → SMALL_TALK: 2
+- SMALL_TALK → PLACE_ORDER: 2
 - MENU_QUESTION → SMALL_TALK: 1
 - OUT_OF_SCOPE → SMALL_TALK: 1
 - MODIFY_ORDER → None: 1
@@ -53,4 +55,3 @@ Mistakes (gold → predicted):
 - MENU_QUESTION → UNKNOWN: 1
 - PLACE_ORDER → PAYMENT_QUESTION: 1
 - ORDER_PROBLEM → SMALL_TALK: 1
-- PLACE_ORDER → None: 1

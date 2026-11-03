@@ -3,7 +3,7 @@
   "split": "fresh",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.2",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 278,
   "contract_valid": {
@@ -46,6 +46,12 @@
       0.645621572349918,
       0.823253638643927
     ],
+    "action_match": 67,
+    "action_match_rate": 0.7444444444444445,
+    "action_match_ci95": [
+      0.645621572349918,
+      0.823253638643927
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 0.9846153846153847,
@@ -77,13 +83,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 253,
-      "primary_accuracy": 0.9101,
+      "primary_correct": 256,
+      "primary_accuracy": 0.9209,
       "primary_ci95": [
-        0.8706186245287684,
-        0.9383464111508475
+        0.8830923313540721,
+        0.9471612578960601
       ],
-      "label_set_correct": 249
+      "label_set_correct": 252
     },
     "last_message": {
       "messages": 90,
@@ -97,13 +103,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 172,
-      "primary_accuracy": 0.9149,
+      "primary_correct": 175,
+      "primary_accuracy": 0.9309,
       "primary_ci95": [
-        0.8662341398849908,
-        0.9469367260794298
+        0.885299294526408,
+        0.9591473739751057
       ],
-      "label_set_correct": 170
+      "label_set_correct": 173
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -162,8 +168,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 150,
-        "correct": 143,
+        "gold": 161,
+        "correct": 150,
         "predicted": 154
       },
       "REFUND_REQUEST": {
@@ -172,8 +178,8 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 56,
-        "correct": 47,
+        "gold": 45,
+        "correct": 43,
         "predicted": 48
       },
       "UNKNOWN": {
@@ -184,14 +190,14 @@
     },
     "confusions": [
       {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
-        "count": 8
-      },
-      {
         "gold": "PLACE_ORDER",
         "pred": null,
         "count": 6
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
+        "count": 4
       },
       {
         "gold": "DELIVERY_QUESTION",
@@ -215,6 +221,11 @@
       },
       {
         "gold": "DELIVERY_QUESTION",
+        "pred": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "gold": "SMALL_TALK",
         "pred": "PLACE_ORDER",
         "count": 1
       },

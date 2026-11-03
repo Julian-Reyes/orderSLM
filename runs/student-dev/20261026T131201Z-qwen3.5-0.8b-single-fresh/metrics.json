@@ -3,7 +3,7 @@
   "split": "fresh",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 278,
   "contract_valid": {
@@ -46,6 +46,12 @@
       0.4967011780834921,
       0.6951114082321718
     ],
+    "action_match": 55,
+    "action_match_rate": 0.6111111111111112,
+    "action_match_ci95": [
+      0.5078226845453937,
+      0.7053024113608994
+    ],
     "field_accuracy": {
       "method": 1.0,
       "time": 0.9696969696969697,
@@ -76,13 +82,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 238,
-      "primary_accuracy": 0.8561,
+      "primary_correct": 247,
+      "primary_accuracy": 0.8885,
       "primary_ci95": [
-        0.8099988582018303,
-        0.8925234096252044
+        0.8460660485097524,
+        0.9203218800288309
       ],
-      "label_set_correct": 235
+      "label_set_correct": 244
     },
     "last_message": {
       "messages": 90,
@@ -96,13 +102,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 166,
-      "primary_accuracy": 0.883,
+      "primary_correct": 175,
+      "primary_accuracy": 0.9309,
       "primary_ci95": [
-        0.8291801494693465,
-        0.921439111420888
+        0.885299294526408,
+        0.9591473739751057
       ],
-      "label_set_correct": 164
+      "label_set_correct": 173
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -161,8 +167,8 @@
         "predicted": 1
       },
       "PLACE_ORDER": {
-        "gold": 150,
-        "correct": 136,
+        "gold": 161,
+        "correct": 146,
         "predicted": 149
       },
       "REFUND_REQUEST": {
@@ -171,8 +177,8 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 56,
-        "correct": 44,
+        "gold": 45,
+        "correct": 43,
         "predicted": 51
       },
       "UNKNOWN": {
@@ -182,11 +188,6 @@
       }
     },
     "confusions": [
-      {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
-        "count": 11
-      },
       {
         "gold": "PLACE_ORDER",
         "pred": null,
@@ -214,12 +215,22 @@
       },
       {
         "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
+        "count": 2
+      },
+      {
+        "gold": "PLACE_ORDER",
         "pred": "MODIFY_ORDER",
         "count": 2
       },
       {
         "gold": "OUT_OF_SCOPE",
         "pred": "SMALL_TALK",
+        "count": 1
+      },
+      {
+        "gold": "SMALL_TALK",
+        "pred": "PLACE_ORDER",
         "count": 1
       },
       {
@@ -254,11 +265,6 @@
       },
       {
         "gold": "ORDER_PROBLEM",
-        "pred": "SMALL_TALK",
-        "count": 1
-      },
-      {
-        "gold": "PLACE_ORDER",
         "pred": "SMALL_TALK",
         "count": 1
       }

@@ -31,6 +31,7 @@ def _run(student, per_chat):
             "ok": sum(bool(o) for o in oks),
             "invalid": sum(o is None for o in oks),
             "exact": exact,
+            "action": exact,
             "tp": tp,
             "fp": fp,
             "fn": fn,

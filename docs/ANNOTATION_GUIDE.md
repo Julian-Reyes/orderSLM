@@ -129,6 +129,9 @@ Never cite a business message: gold must come from what the customer said.
 Label each customer message in order, using the context before it (not after). Use docs/TAXONOMY.md:
 primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key rules:
 - Small talk never wins over a real request.
+- Announcing an order with no items yet ("hey ordering for the office", "need food for 6 ppl", "I'd like to order
+  a few things") is `PLACE_ORDER`, `refers_to: draft` (Julian, 2026-11-03; was `SMALL_TALK`). Context with no
+  ordering in it ("first time here", "team lunch time!", "visiting from out of town") stays `SMALL_TALK`.
 - "yes" is `CONFIRM_ORDER` only right after the business asks to confirm the order. A "👍"/"sounds good" that
   answers a different question without answering it ("pickup or delivery?" → "👍 sounds good") is `UNKNOWN`.
 - Adding a detail to an item just stated ("4 cheeseburgers" → "2 no pickles", "w hazelnut syrup") is
@@ -159,4 +162,4 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 4. Disagreements found later: fix the gold, log the change (conversation id, field, old → new, reason).
    Don't change test gold after any model has been scored on it without recording why.
 
-_Last updated 2026-10-13 (test writing: one-choice combo slots, payment channels vs. methods; earlier: 2026-10-08 M2 dev review)._
+_Last updated 2026-11-03 (an order announced with no items is `PLACE_ORDER`; earlier: 2026-10-13 test writing: one-choice combo slots, payment channels vs. methods; 2026-10-08 M2 dev review)._

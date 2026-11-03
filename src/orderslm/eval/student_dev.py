@@ -223,6 +223,8 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
         f"(F1 {o['item']['f1']}) | " + (f"F1 {t['order']['item']['f1']} |" if t else "? |"),
         f"| Fully correct orders | {o['exact_match']}/{o['conversations']} (95% CI {o['exact_match_ci95']}) | "
         + (f"{t['order']['exact_match']}/{t['order']['conversations']} |" if t else "? |"),
+        f"| Same action (bot sends/asks the same; wording aside) | {o['action_match']}/{o['conversations']} "
+        f"(95% CI {o['action_match_ci95']}) | |",
         "",
         f"Field accuracy: {o['field_accuracy']}",
         "",

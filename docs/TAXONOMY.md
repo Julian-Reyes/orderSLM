@@ -46,6 +46,7 @@ message to the extractor.
 | "the bacon was missing, I want a refund" | `ORDER_PROBLEM` + secondary `REFUND_REQUEST` | Two requests. |
 | "how much is a large pizza?" | `MENU_QUESTION` | Item prices are menu questions; delivery fees are `DELIVERY_QUESTION`. |
 | "thanks! also add a coke" | `PLACE_ORDER` (not `SMALL_TALK`) | Small talk never wins over a request. |
+| "hey ordering for the office", "I'd like to order a few things" | `PLACE_ORDER` (not `SMALL_TALK`) | Announcing an order is a request even with no items yet (Julian, 2026-11-03). |
 | Insults with no request | `UNKNOWN` | Don't guess intent from tone. |
 
 ## Secondary label (optional)

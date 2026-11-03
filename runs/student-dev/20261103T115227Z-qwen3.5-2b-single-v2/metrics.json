@@ -3,7 +3,7 @@
   "split": "dev",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.2",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 268,
   "contract_valid": {
@@ -43,6 +43,12 @@
     "exact_match": 69,
     "exact_match_rate": 0.7582417582417582,
     "exact_match_ci95": [
+      0.6609799811910234,
+      0.8345831472251989
+    ],
+    "action_match": 69,
+    "action_match_rate": 0.7582417582417582,
+    "action_match_ci95": [
       0.6609799811910234,
       0.8345831472251989
     ],
@@ -159,8 +165,8 @@
         "predicted": 3
       },
       "PLACE_ORDER": {
-        "gold": 160,
-        "correct": 151,
+        "gold": 162,
+        "correct": 152,
         "predicted": 158
       },
       "REFUND_REQUEST": {
@@ -169,8 +175,8 @@
         "predicted": 4
       },
       "SMALL_TALK": {
-        "gold": 28,
-        "correct": 27,
+        "gold": 26,
+        "correct": 26,
         "predicted": 30
       },
       "UNKNOWN": {
@@ -221,8 +227,8 @@
         "count": 1
       },
       {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
+        "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
         "count": 1
       },
       {

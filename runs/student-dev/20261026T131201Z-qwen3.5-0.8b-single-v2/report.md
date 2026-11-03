@@ -1,16 +1,17 @@
 # `qwen3.5-0.8b-single-v2` on dev at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.2`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
+Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.3`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
 | Valid answers, last customer message | 90/91 | 90/91 |
 | Valid answers, earlier messages | 175/177 | n/a (one call per chat) |
-| Intent, all customer messages | 251/268 (93.7%, 95% CI 0.901–0.960) | 259/268 |
+| Intent, all customer messages | 249/268 (92.9%, 95% CI 0.892–0.954) | 259/268 |
 | Intent, last message | 85/91 (93.4%, 95% CI 0.864–0.969) | |
-| Intent, earlier messages (mid-chat) | 166/177 (93.8%, 95% CI 0.892–0.965) | |
+| Intent, earlier messages (mid-chat) | 164/177 (92.7%, 95% CI 0.878–0.957) | |
 | Items (F1) | 126 found / 17 extra / 20 missed (F1 0.8719723183391004) | F1 0.993103448275862 |
 | Fully correct orders | 70/91 (95% CI (0.672831372058367, 0.8438195490564182)) | 90/91 |
+| Same action (bot sends/asks the same; wording aside) | 72/91 (95% CI (0.6967662422964306, 0.8620602642154799)) | |
 
 Field accuracy: {'method': 1.0, 'time': 0.9841269841269841, 'address': 1.0, 'payment': 0.9682539682539683, 'name': 1.0, 'decision': 0.9841269841269841, 'missing': 0.873015873015873}
 
@@ -19,8 +20,8 @@ Invalid answers by reason: {'1 validation error for StudentOutput': 3}
 
 | gold label | messages | primary correct | predicted as this |
 |---|---|---|---|
-| PLACE_ORDER | 160 | 158 | 163 |
-| SMALL_TALK | 28 | 27 | 29 |
+| PLACE_ORDER | 162 | 158 | 163 |
+| SMALL_TALK | 26 | 25 | 29 |
 | MENU_QUESTION | 16 | 13 | 13 |
 | MODIFY_ORDER | 14 | 11 | 12 |
 | CONFIRM_ORDER | 8 | 8 | 9 |
@@ -39,6 +40,7 @@ Mistakes (gold → predicted):
 
 - MODIFY_ORDER → PLACE_ORDER: 3
 - PLACE_ORDER → None: 2
+- PLACE_ORDER → SMALL_TALK: 2
 - UNKNOWN → SMALL_TALK: 1
 - MENU_QUESTION → UNKNOWN: 1
 - SMALL_TALK → MODIFY_ORDER: 1

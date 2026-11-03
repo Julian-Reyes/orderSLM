@@ -3,7 +3,7 @@
   "split": "fresh",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
-  "scorer_version": "scorer@0.2",
+  "scorer_version": "scorer@0.3",
   "finalize_version": "finalize@0.1",
   "requests": 278,
   "contract_valid": {
@@ -45,6 +45,12 @@
       0.4746099802268749,
       0.6745775869075303
     ],
+    "action_match": 54,
+    "action_match_rate": 0.6,
+    "action_match_ci95": [
+      0.4967011780834921,
+      0.6951114082321718
+    ],
     "field_accuracy": {
       "method": 0.9701492537313433,
       "time": 0.9701492537313433,
@@ -75,13 +81,13 @@
   "intent": {
     "all": {
       "messages": 278,
-      "primary_correct": 248,
-      "primary_accuracy": 0.8921,
+      "primary_correct": 250,
+      "primary_accuracy": 0.8993,
       "primary_ci95": [
-        0.8501260472668182,
-        0.9233580657952705
+        0.8582828143607655,
+        0.9293936677483341
       ],
-      "label_set_correct": 245
+      "label_set_correct": 247
     },
     "last_message": {
       "messages": 90,
@@ -95,13 +101,13 @@
     },
     "earlier_messages": {
       "messages": 188,
-      "primary_correct": 171,
-      "primary_accuracy": 0.9096,
+      "primary_correct": 173,
+      "primary_accuracy": 0.9202,
       "primary_ci95": [
-        0.8599688541103245,
-        0.9427767443417316
+        0.8725417731175508,
+        0.9510543603592344
       ],
-      "label_set_correct": 169
+      "label_set_correct": 171
     },
     "per_gold_label": {
       "CANCEL_ORDER": {
@@ -160,8 +166,8 @@
         "predicted": 2
       },
       "PLACE_ORDER": {
-        "gold": 150,
-        "correct": 143,
+        "gold": 161,
+        "correct": 148,
         "predicted": 154
       },
       "REFUND_REQUEST": {
@@ -170,8 +176,8 @@
         "predicted": 2
       },
       "SMALL_TALK": {
-        "gold": 56,
-        "correct": 46,
+        "gold": 45,
+        "correct": 43,
         "predicted": 51
       },
       "UNKNOWN": {
@@ -182,9 +188,14 @@
     },
     "confusions": [
       {
-        "gold": "SMALL_TALK",
-        "pred": "PLACE_ORDER",
-        "count": 7
+        "gold": "PLACE_ORDER",
+        "pred": null,
+        "count": 4
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "SMALL_TALK",
+        "count": 3
       },
       {
         "gold": "PLACE_ORDER",
@@ -197,13 +208,13 @@
         "count": 3
       },
       {
-        "gold": "SMALL_TALK",
-        "pred": null,
-        "count": 3
-      },
-      {
         "gold": "UNKNOWN",
         "pred": "SMALL_TALK",
+        "count": 2
+      },
+      {
+        "gold": "SMALL_TALK",
+        "pred": "PLACE_ORDER",
         "count": 2
       },
       {
@@ -259,11 +270,6 @@
       {
         "gold": "ORDER_PROBLEM",
         "pred": "SMALL_TALK",
-        "count": 1
-      },
-      {
-        "gold": "PLACE_ORDER",
-        "pred": null,
         "count": 1
       }
     ]
