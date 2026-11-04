@@ -6,7 +6,37 @@ _Last updated 2026-11-03._
 
 ## Start here next session
 
-_Updated 2026-10-22 (M6 session 1 imported)._
+### Where we left off (2026-11-03, 22:40 Brasília)
+
+**First thing:** commit `273edd7e` (scorer@0.4, address fix) is committed but **not pushed**. Julian has not OK'd the
+push yet: ask, run the secrets check, then push. Everything before it is on `origin/milestone-4`.
+
+**Done today (M6):**
+
+- Student picked: **Qwen3.5-0.8B single v2**. Fresh, reviewed by Julian (90/90, 0 corrected): intents 92.1%, exact
+  orders 67/90, same action 67/90. Dev (scorer@0.4): 92.9%, 69/91, 71/91.
+- **Order checker** (`docs/ORDER_CHECK.md`, `make order-check`):
+  - pilot `order-check@0.1`: Luna caught 32/42 wrong orders;
+  - **v0.2** (menu + detailed order text + vague-amount rule), on 42 wrong + 42 right orders, caught / false alarms:
+    **Luna 33/42 / 6/42, Jev 28/42 / 2/42, OpenAI Decisions 25/42 / 4/42**, $0.0268. Fresh helped shape the rules,
+    so its numbers are "seen while fixing", not held out.
+- **scorer@0.4**: the address now compares the numbers in its text (dev 023, 140 vs 104 River Rd). Only that chat
+  changed; fresh unchanged; all runs re-scored.
+- Spend: **$6.63 of the $10 ceiling, $3.37 left** (`docs/COSTS.md`).
+
+**Open, for Julian to pick next:**
+
+1. **Checker v0.3** (noted, not started): label kitchen requests in the order text ("request not on the menu:
+   honey"), look at the 4 split-line orders v0.2 newly missed (dev 020, 063, fresh 007, 057), tune on dev only, measure
+   on unseen chats. A new run picks dev 023 as wrong (scorer@0.4) and draws a different right sample.
+2. **Which checker goes in the bot?** Luna catches the most; Jev is cheapest with the fewest false alarms. The
+   difference isn't significant at 42 orders. Jev's price is still unverified on TypeSafe's own page.
+3. **`core/finalize` off-menu id gap**: an id not on the menu (fresh 049 `red_bull`, dev 017 half `olives`) passes as
+   a normal line. Not fixed.
+4. Later/optional: the full §11b checker (planted mistakes, line-by-line, Julia-1, test-set score at final eval);
+   a fake-customer live-chat test; v0.3 student retrain + a fresh2 batch.
+
+_Older notes below (2026-10-22, M6 session 1 imported)._
 
 - **M5 student bake-off done (2026-10-20, free on Kaggle 2 × T4):** `docs/STUDENT_BAKEOFF.md`, run
   `runs/student-bakeoff/20261019T182539Z/`. **Decision: keep Qwen3.5-0.8B + 2B** (no candidate clearly better, tooling
