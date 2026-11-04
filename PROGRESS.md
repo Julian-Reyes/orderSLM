@@ -436,6 +436,8 @@ _Updated 2026-10-22 (M6 session 1 imported)._
     dev 023 (customer corrected 140 → 104 River Rd, student kept 140) scores as right; all three checkers flagged
     it. Not fixed (needs a decision + re-score). Kitchen requests show as bare words in the order text ("honey"),
     which caused 2 of Luna's false alarms.
+    **For checker v0.3 (Julian, 2026-11-03):** label kitchen requests in the order text ("request not on the menu:
+    honey"); look at the 4 split-line orders v0.2 newly missed; measure on unseen chats (list in `docs/ORDER_CHECK.md`).
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
     probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h, v0.2 session 2 ≈ 10.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check

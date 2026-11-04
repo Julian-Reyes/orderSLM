@@ -166,3 +166,11 @@ customer did ask for a Red Bull, so the checkers call it a match), fresh 087 ("t
 2. **Kitchen requests in the order text** show as bare words ("honey"), which reads like a menu option the item can't
    take. A v0.3 text should say "request not on the menu: honey".
 3. The off-menu id gap in `core/finalize` (above) is still open.
+
+### To do in checker v0.3 (Julian, 2026-11-03: "take note for when we do v0.3")
+
+- **Label kitchen requests in the order text**, e.g. "request not on the menu: honey" instead of a bare "honey", so a
+  request isn't read as a menu option the item can't take (Luna's false alarms on dev 034 and fresh 005).
+- Look again at the 4 split-line orders v0.2 newly missed ("2 with pickles, 2 without": dev 020, 063, fresh 007,
+  057), tuning on dev only.
+- Measure on chats nobody has seen while fixing (fresh2, or the test set at final eval).
