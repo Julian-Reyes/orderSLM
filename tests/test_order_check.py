@@ -1,7 +1,10 @@
 """Order checker: which orders are checked and what the checkers see (no network)."""
 
 from orderslm.eval import order_check
-from orderslm.eval.label_audit import ORDER_PROMPT
+from orderslm.eval.dataset import load_eval_split
+from orderslm.eval.label_audit import ORDER_PROMPT, order_text
+from orderslm.menus import load_menu
+from orderslm.schema.conversation import Split
 
 
 def _jobs() -> dict:
@@ -37,8 +40,23 @@ def test_every_checker_sees_the_same_chat_menu_and_order():
 
 def test_the_order_text_shows_what_the_pilot_could_not_see():
     jobs = _jobs()
-    assert "'red_bull' (NOT on the menu)" in jobs["fresh__a-fresh-049"]["order_text"]
-    assert "NOT a size of this item" in jobs["fresh__a-fresh-028"]["order_text"]
+    # finalize@0.2 turns the student's unknown id 'red_bull' into the off-menu line gold has, so fresh 049 is
+    # no longer a mistake; the order text still marks a raw unknown id for an order that skips finalize
+    assert not jobs.get("fresh__a-fresh-049", {}).get("wrong")
+    ac = next(a for a in load_eval_split(Split.fresh) if a.conversation.id == "a-fresh-049")
+    gold = ac.gold_extraction
+    raw = gold.model_copy(
+        update={
+            "items": [gold.items[0].model_copy(update={"menu_item_id": "red_bull", "unmatched_text": None})]
+        }
+    )
+    menu = load_menu(ac.conversation.business_id)
+    assert "'red_bull' (NOT on the menu)" in order_text(raw, menu, detail=True)
+    # fresh 028: finalize@0.2 drops the invented size 'bottle_20oz' on a water with no sizes; raw, it is marked
+    croissant = gold.items[1].model_copy(update={"variant_id": "bottle_20oz"})
+    raw = gold.model_copy(update={"items": [croissant]})
+    assert "NOT a size of this item" in order_text(raw, menu, detail=True)
+    assert "bottle_20oz" not in jobs.get("fresh__a-fresh-028", {}).get("order_text", "")
     assert "paying with $20.00 (needs change)" in jobs["dev__a-dev-075"]["order_text"]
 
 

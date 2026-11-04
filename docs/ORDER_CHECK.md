@@ -64,7 +64,8 @@ a changed pickup time, "a few muffins" turned into 2 (2/2), and all 4 broken ans
 
 `core/finalize` let an item id that isn't on the menu through as a normal line (fresh 049 `red_bull`; dev 017 has a
 pizza half `olives`). The order text used to crash on that unknown half id; it now shows the id as-is
-(`label_audit._line_text`, no change to any earlier audit text). The finalize gap itself is not fixed yet.
+(`label_audit._line_text`, no change to any earlier audit text). The finalize gap itself was fixed on 2026-11-04
+(`finalize@0.2`, see the end of this page).
 
 ### Next
 
@@ -166,7 +167,7 @@ customer did ask for a Red Bull, so the checkers call it a match), fresh 087 ("t
    run would count it as wrong and draw a different right sample.
 2. **Kitchen requests in the order text** show as bare words ("honey"), which reads like a menu option the item can't
    take. A v0.3 text should say "request not on the menu: honey".
-3. The off-menu id gap in `core/finalize` (above) is still open.
+3. The off-menu id gap in `core/finalize` (above): fixed 2026-11-04 (`finalize@0.2`).
 
 ### To do in checker v0.3 (Julian, 2026-11-03: "take note for when we do v0.3")
 
@@ -175,3 +176,13 @@ customer did ask for a Red Bull, so the checkers call it a match), fresh 087 ("t
 - Look again at the 4 split-line orders v0.2 newly missed ("2 with pickles, 2 without": dev 020, 063, fresh 007,
   057), tuning on dev only.
 - Measure on chats nobody has seen while fixing (fresh2, or the test set at final eval).
+
+## After v0.2: finalize@0.2 (2026-11-04)
+
+`core/finalize` now resolves every id the menu doesn't have before the order is shown or scored: an unknown item or
+half becomes an off-menu line (the bot asks), an unknown size is asked about (or dropped on an item with no sizes),
+a bad combo pick is dropped (asked), an unknown add-on id becomes an unverified request (asked). For the picked
+student this turns two of the 42 wrong orders into right ones: fresh 049 (`red_bull` → the off-menu line "a red
+bull", as in gold) and fresh 028 (the invented size `bottle_20oz` on a water with no sizes). The saved v0.2 checker
+run is unchanged (its report reads only its saved outputs); a new run would check 41 wrong orders (dev 20, fresh 21: dev
+023 added by scorer@0.4, fresh 049 and 028 gone), and draw a new right sample. Checker work is parked (Julian, 2026-11-04).

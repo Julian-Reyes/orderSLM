@@ -137,3 +137,99 @@ def test_raw_json_path_rebuilds_every_dev_gold():
         assert err is None, (ac.conversation.id, err)
         assert _key(out) == _key(gold), ac.conversation.id
         assert out.customer_decision == gold.customer_decision, ac.conversation.id
+
+
+# ---------------------------------------------------------------- rule 5: ids the menu doesn't have (finalize@0.2)
+
+from orderslm.checks import check_catalog  # noqa: E402
+from orderslm.core.finalize import known_ids  # noqa: E402
+
+
+def _with_line(cid: str, line_id: str, **update):
+    ac = _by_id(cid)
+    gold = ac.gold_extraction
+    items = [it.model_copy(update=update) if it.line_id == line_id else it for it in gold.items]
+    stripped = gold.model_copy(
+        update={"items": items, "missing_or_ambiguous": [], "clarification_question": None}
+    )
+    menu = load_menu(ac.conversation.business_id)
+    return finalize(stripped, menu, _judgments(gold)), menu
+
+
+def _line(out: ExtractionOutput, line_id: str):
+    return next(it for it in out.items if it.line_id == line_id)
+
+
+def _missing_for(out: ExtractionOutput, line_id: str) -> set[tuple[str, str]]:
+    return {(m.field.value, m.reason.value) for m in out.missing_or_ambiguous if m.line_id == line_id}
+
+
+def test_every_dev_gold_has_only_known_ids():
+    for ac in DEV:
+        menu = load_menu(ac.conversation.business_id)
+        assert known_ids(ac.gold_extraction, menu) == ac.gold_extraction, ac.conversation.id
+
+
+def test_unknown_item_id_becomes_an_off_menu_line_with_its_quote():
+    """Fresh 049 shape: the student wrote menu_item_id 'red_bull'; gold has the off-menu line 'a red bull'."""
+    out, menu = _with_line("a-dev-006", "L1", menu_item_id="red_bull", variant_id=None)
+    line = _line(out, "L1")
+    assert line.menu_item_id is None and line.unmatched_text == line.evidence[0].quote
+    assert ("item_menu_match", "off_menu") in _missing_for(out, "L1")
+    assert out.clarification_question and not check_catalog(out, menu)
+
+
+def test_unknown_half_makes_the_whole_line_off_menu():
+    """Dev 017 shape: a pizza half 'olives' (a topping, not a pizza)."""
+    ac = _by_id("a-dev-017")
+    halves = [h.model_copy() for h in _line(ac.gold_extraction, "L1").halves]
+    halves[1] = halves[1].model_copy(update={"menu_item_id": "olives", "modifications": []})
+    out, menu = _with_line("a-dev-017", "L1", halves=halves)
+    line = _line(out, "L1")
+    assert line.halves is None and line.unmatched_text == line.evidence[0].quote
+    assert ("item_menu_match", "off_menu") in _missing_for(out, "L1")
+    assert not check_catalog(out, menu)
+
+
+def test_unknown_size_is_asked_not_defaulted():
+    out, menu = _with_line("a-dev-006", "L1", variant_id="party_size")
+    line = _line(out, "L1")
+    assert line.variant_id is None and line.unmatched_variant_text == "party_size"
+    assert ("item_variant", "missing") in _missing_for(out, "L1")
+    assert not check_catalog(out, menu)
+
+
+def test_unknown_add_on_id_becomes_an_unverified_request():
+    ac = _by_id("a-dev-002")
+    mods = list(_line(ac.gold_extraction, "L1").modifications)
+    i = next(k for k, m in enumerate(mods) if m.modifier_id)
+    mods[i] = mods[i].model_copy(update={"modifier_id": "unicorn_sauce", "replacement_modifier_id": None})
+    out, menu = _with_line("a-dev-002", "L1", modifications=mods)
+    mod = _line(out, "L1").modifications[i]
+    assert mod.modifier_id is None and mod.raw_text == mods[i].raw_text and not mod.not_on_menu
+    assert ("item_modification", "ambiguous") in _missing_for(out, "L1")
+    assert not check_catalog(out, menu)
+
+
+def test_combo_pick_with_unknown_choice_is_dropped_and_asked():
+    ac = _by_id("a-dev-002")
+    picks = list(_line(ac.gold_extraction, "L1").combo_selections)
+    picks[0] = picks[0].model_copy(update={"menu_item_id": "lobster_roll", "variant_id": None})
+    out, menu = _with_line("a-dev-002", "L1", combo_selections=picks)
+    assert len(_line(out, "L1").combo_selections) == len(picks) - 1
+    assert ("combo_choice", "missing") in _missing_for(out, "L1")
+    assert not check_catalog(out, menu)
+
+
+def test_unknown_size_on_an_item_without_sizes_is_dropped():
+    """Fresh 028 shape: 'bottle_20oz' on a bottled water that has no sizes; nothing to ask."""
+    ac = _by_id("a-dev-006")
+    menu = load_menu(ac.conversation.business_id)
+    sizeless = next(i for i in menu.items if not i.variants and not i.combo_slots)
+    out, _ = _with_line(
+        "a-dev-006", "L1", menu_item_id=sizeless.id, variant_id="bottle_20oz", modifications=[]
+    )
+    line = _line(out, "L1")
+    assert line.variant_id is None and line.unmatched_variant_text is None
+    assert ("item_variant", "missing") not in _missing_for(out, "L1")
+    assert not check_catalog(out, menu)

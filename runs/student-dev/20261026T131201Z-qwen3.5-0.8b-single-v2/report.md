@@ -1,6 +1,6 @@
 # `qwen3.5-0.8b-single-v2` on dev at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.4`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
+Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.4`, finalize `finalize@0.2`. Dev numbers (tuning), not held-out results.
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -13,7 +13,7 @@ Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.4`, fina
 | Fully correct orders | 69/91 (95% CI (0.6609799811910234, 0.8345831472251989)) | 90/91 |
 | Same action (bot sends/asks the same; wording aside) | 71/91 (95% CI (0.6847588519917921, 0.8529798618215557)) | |
 
-Field accuracy: {'method': 1.0, 'time': 0.9841269841269841, 'address': 0.9841269841269841, 'payment': 0.9682539682539683, 'name': 1.0, 'decision': 0.9841269841269841, 'missing': 0.873015873015873}
+Field accuracy: {'method': 1.0, 'time': 0.9841269841269841, 'address': 0.9841269841269841, 'payment': 0.9682539682539683, 'name': 1.0, 'decision': 0.9841269841269841, 'missing': 0.8571428571428571}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 13542, 'p95': 19839} ms (T4, fp16, greedy); output tokens p50 321.5.
 Invalid answers by reason: {'1 validation error for StudentOutput': 3}

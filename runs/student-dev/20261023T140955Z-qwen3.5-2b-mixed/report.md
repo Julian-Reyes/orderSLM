@@ -1,6 +1,6 @@
 # `qwen3.5-2b-mixed` on dev at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
+Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.2`. Dev numbers (tuning), not held-out results.
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -13,7 +13,7 @@ Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, fina
 | Fully correct orders | 65/91 (95% CI (0.6142727836093079, 0.796939174012664)) | 90/91 |
 | Same action (bot sends/asks the same; wording aside) | 66/91 (95% CI (0.6258502470283998, 0.8064495032921346)) | |
 
-Field accuracy: {'method': 0.9838709677419355, 'time': 0.9838709677419355, 'address': 1.0, 'payment': 0.9838709677419355, 'name': 1.0, 'decision': 1.0, 'missing': 0.8709677419354839}
+Field accuracy: {'method': 0.9838709677419355, 'time': 0.9838709677419355, 'address': 1.0, 'payment': 0.9838709677419355, 'name': 1.0, 'decision': 1.0, 'missing': 0.8225806451612904}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 14304, 'p95': 21523} ms (T4, fp16, greedy); output tokens p50 319.0.
 Invalid answers by reason: {'1 validation error for StudentOutput': 8, '2 validation errors for StudentOutput': 1}

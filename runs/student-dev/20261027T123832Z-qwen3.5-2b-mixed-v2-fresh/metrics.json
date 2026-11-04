@@ -4,7 +4,7 @@
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.2",
   "scorer_version": "scorer@0.4",
-  "finalize_version": "finalize@0.1",
+  "finalize_version": "finalize@0.2",
   "requests": 278,
   "contract_valid": {
     "last": {
@@ -58,7 +58,7 @@
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.8405797101449275
+      "missing": 0.8260869565217391
     },
     "correction": {
       "conversations": 18,
@@ -68,11 +68,10 @@
       "f1": 0.9428571428571428
     },
     "grounding": {
-      "conversations_with_issues": 2,
-      "rate": 0.022727272727272728,
+      "conversations_with_issues": 1,
+      "rate": 0.011363636363636364,
       "issues": {
-        "EVIDENCE_NOT_FOUND": 1,
-        "UNKNOWN_VARIANT": 1
+        "EVIDENCE_NOT_FOUND": 1
       }
     },
     "unclassified_requests": 2

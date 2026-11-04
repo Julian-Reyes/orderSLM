@@ -1,6 +1,6 @@
 # `qwen3.5-2b-mixed` on fresh at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.1`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.2`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -11,9 +11,9 @@ Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, fina
 | Intent, earlier messages (mid-chat) | 175/188 (93.1%, 95% CI 0.885–0.959) | |
 | Items (F1) | 115 found / 30 extra / 41 missed (F1 0.7641196013289037) | ? |
 | Fully correct orders | 52/90 (95% CI (0.4746099802268749, 0.6745775869075303)) | ? |
-| Same action (bot sends/asks the same; wording aside) | 54/90 (95% CI (0.4967011780834921, 0.6951114082321718)) | |
+| Same action (bot sends/asks the same; wording aside) | 56/90 (95% CI (0.5189957287533067, 0.7154418767436157)) | |
 
-Field accuracy: {'method': 0.9710144927536232, 'time': 0.9710144927536232, 'address': 0.9710144927536232, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.7101449275362319}
+Field accuracy: {'method': 0.9710144927536232, 'time': 0.9710144927536232, 'address': 0.9710144927536232, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.6956521739130435}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 15018, 'p95': 26062} ms (T4, fp16, greedy); output tokens p50 323.0.
 Invalid answers by reason: {'1 validation error for StudentOutput': 5}

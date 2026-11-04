@@ -2,16 +2,28 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-03._
+_Last updated 2026-11-04._
 
 ## Start here next session
 
-### Where we left off (2026-11-03, 22:40 Brasília)
+### Where we left off (2026-11-04, Brasília)
 
-**First thing:** commit `273edd7e` (scorer@0.4, address fix) is committed but **not pushed**. Julian has not OK'd the
-push yet: ask, run the secrets check, then push. Everything before it is on `origin/milestone-4`.
+**Direction (Julian, 2026-11-04):** "skip the checker for now, it's better to get this across the finish line then do
+checker/more tuning". Checker v0.3 and the choice of checker for the bot are parked.
 
-**Done today (M6):**
+**Done 2026-11-04:** pushed `c87e9eca` (with OK, secrets check clean). **`finalize@0.2`: ids the menu doesn't have
+are caught in code** (was open item 3): an unknown item or half → off-menu line (bot asks), unknown size → asked (or
+dropped on an item with no sizes), bad combo pick → dropped (asked), unknown/not-allowed add-on id → unverified
+request (asked). All runs re-scored ($0). **Picked student fresh exact orders 67 → 69/90** (049 `red_bull`, 028
+invented water size), dev unchanged 69/91; both chats were found on fresh, so the fresh gain is "used for fixes".
+Comparisons re-run: conclusions unchanged. Details in the M6 log.
+
+**New open item (found while fixing, not fixed):** a size the customer names on an item with **no sizes** ("a large
+water") gives the question "We don't have a large for the bottled water; we have . Which would you like?" (empty list,
+`core/replies.py` q_variant_not_on_menu). The guide doesn't say what to do (ask, or ignore the size). Needs Julian's
+rule.
+
+**Done 2026-11-03 (M6):**
 
 - Student picked: **Qwen3.5-0.8B single v2**. Fresh, reviewed by Julian (90/90, 0 corrected): intents 92.1%, exact
   orders 67/90, same action 67/90. Dev (scorer@0.4): 92.9%, 69/91, 71/91.
@@ -24,15 +36,14 @@ push yet: ask, run the secrets check, then push. Everything before it is on `ori
   changed; fresh unchanged; all runs re-scored.
 - Spend: **$6.63 of the $10 ceiling, $3.37 left** (`docs/COSTS.md`).
 
-**Open, for Julian to pick next:**
+**Open, for Julian to pick next** (1 and 2 parked, 3 done 2026-11-04):
 
 1. **Checker v0.3** (noted, not started): label kitchen requests in the order text ("request not on the menu:
    honey"), look at the 4 split-line orders v0.2 newly missed (dev 020, 063, fresh 007, 057), tune on dev only, measure
    on unseen chats. A new run picks dev 023 as wrong (scorer@0.4) and draws a different right sample.
 2. **Which checker goes in the bot?** Luna catches the most; Jev is cheapest with the fewest false alarms. The
    difference isn't significant at 42 orders. Jev's price is still unverified on TypeSafe's own page.
-3. **`core/finalize` off-menu id gap**: an id not on the menu (fresh 049 `red_bull`, dev 017 half `olives`) passes as
-   a normal line. Not fixed.
+3. ~~**`core/finalize` off-menu id gap**~~: fixed 2026-11-04 (`finalize@0.2`).
 4. Later/optional: the full §11b checker (planted mistakes, line-by-line, Julia-1, test-set score at final eval);
    a fake-customer live-chat test; v0.3 student retrain + a fresh2 batch.
 
@@ -480,6 +491,29 @@ _Older notes below (2026-10-22, M6 session 1 imported)._
     (`runs/student-compare/20261104T005924Z`): still no significant differences (all Holm p ≥ 0.65). The order checker
     v0.2 run picked its orders under scorer@0.3 (dev 023 was in the "right" set); a new run would pick dev 023 as
     wrong and draw a different right sample.
+  - **`finalize@0.2`: ids the menu doesn't have** (Julian, 2026-11-04: "do 3"; was found by the order checker
+    pilot). Before, `core/finalize` passed a made-up id on as a normal line (only pricing's `check_catalog` refused
+    it, after the bot had read the order back). Now rule 5 in `core/finalize.py` resolves every id `check_catalog`
+    would reject: an unknown item, or a half-and-half with an unknown or non-splittable half → off-menu line, its first
+    evidence quote as `unmatched_text` (`item_menu_match / off_menu`, the bot asks); an unknown size →
+    `unmatched_variant_text` (`item_variant / missing`), or dropped on an item with no sizes (nothing to choose); a
+    combo pick with an unknown slot, choice or size → dropped (`combo_choice / missing`); an add-on id not in the
+    catalog or not allowed on the item → id removed, raw text kept, an unverified request (`item_modification /
+    ambiguous`, "we may not be able to do X"). Every dev gold is unchanged by it (test). Tests in
+    `tests/test_finalize.py`; `tests/test_order_check.py` now tests the raw-id order text directly (049 and 028 are
+    no longer mistakes). All student-dev runs, the teacher's label-dev run and the bake-off chart rebuilt from saved
+    outputs ($0; teacher numbers unchanged). Exact / same action, before → after:
+    0.8B v2 fresh **67 / 67 → 69 / 69** of 90 (049: `red_bull` → "a red bull" off-menu, = gold; 028: invented size
+    `bottle_20oz` on a sizeless water dropped, = gold), items 130/23/26 → 133/20/23 (found/extra/missed); 0.8B v2
+    dev unchanged (69 / 71). v1 students gain same-action only (invented add-on ids 'honey', 'pesto',
+    'pumpkin_syrup', 'artichoke_hearts', 'sauce' now asked, as gold asks; not exact because gold says "not on the
+    menu", code says "may not be able to"): 0.8B dev 63/63 → 63/64, 2B single dev 59/59 → 59/60, 0.8B fresh 54/55 →
+    54/58, 2B mixed fresh 52/54 → 52/56, 2B single fresh 51/53 → 51/56. 2B v2 runs: no exact/same-action change.
+    **Both fresh fixes came from looking at fresh, so the fresh gain is "used for fixes", not held out.** Comparisons
+    re-run (`runs/student-compare/20261104T113612Z`, `…113636Z`, `…113639Z`, `…113643Z`, `…113647Z`): each v2 still
+    beats its v1 on fresh (p ≤ 0.001); the three v2 students still don't differ (fresh and dev, all Holm p ≥ 0.65).
+    Training labels are unaffected (the label checks already rejected unknown ids). A new order-checker run would draw
+    a different wrong/right set (049 and 028 are now right).
   - Training cost: $0 (Kaggle). GPU time: session 1 ≈ 8.1 h, 2 ≈ 11.3 h, 3a ≈ 1.2 h, 3b ≈ 0.8 h, 4 ≈ 5.4 h; v0.2
     probe ≈ 2.5 h, v0.2 session 1 ≈ 11.3 h, v0.2 session 2 ≈ 10.4 h.
 - **Julian's standing rules (also in the other machine's Claude memory):** ask before every push (secrets check
@@ -534,7 +568,7 @@ _Older notes below (2026-10-22, M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)** |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)**; **2026-11-04: finalize@0.2 catches ids not on the menu (0.8B v2 fresh exact 67 → 69/90, used for fixes); checker parked (Julian)** |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 

@@ -1,0 +1,31 @@
+{
+  "experiment": "student-compare",
+  "compare_version": "student-compare@0.2",
+  "inputs": [
+    {
+      "student": "qwen3.5-0.8b-single",
+      "run_dir": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-fresh",
+      "outputs_sha256": "7a9a1e2441963efbda4ffea3608ea1ffcc8d45d018a59a022883b0054a42f2d3",
+      "versions": {
+        "prompt_version": "student-extract@0.1",
+        "data_version": "student-data@0.1",
+        "scorer_version": "scorer@0.4",
+        "finalize_version": "finalize@0.2"
+      }
+    },
+    {
+      "student": "qwen3.5-0.8b-single-v2",
+      "run_dir": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
+      "outputs_sha256": "9bbf4c239f43019a9cd095a66af7867ea8bf73451c50bb5976b8da91ab3d3baa",
+      "versions": {
+        "prompt_version": "student-extract@0.1",
+        "data_version": "student-data@0.2",
+        "scorer_version": "scorer@0.4",
+        "finalize_version": "finalize@0.2"
+      }
+    }
+  ],
+  "created_at": "2026-11-04T11:36:12.533325+00:00",
+  "git_commit": "c87e9eca1285181c6a43b908627648354d38ca67-dirty",
+  "cost_usd": 0.0
+}

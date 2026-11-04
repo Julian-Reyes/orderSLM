@@ -4,7 +4,7 @@
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
   "scorer_version": "scorer@0.4",
-  "finalize_version": "finalize@0.1",
+  "finalize_version": "finalize@0.2",
   "requests": 278,
   "contract_valid": {
     "last": {
@@ -46,11 +46,11 @@
       0.4636391101764269,
       0.664235947367349
     ],
-    "action_match": 53,
-    "action_match_rate": 0.5888888888888889,
+    "action_match": 56,
+    "action_match_rate": 0.6222222222222222,
     "action_match_ci95": [
-      0.48563048727714275,
-      0.6848695894478919
+      0.5189957287533067,
+      0.7154418767436157
     ],
     "field_accuracy": {
       "method": 0.9846153846153847,
@@ -59,7 +59,7 @@
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.7538461538461538
+      "missing": 0.7230769230769231
     },
     "correction": {
       "conversations": 18,
@@ -69,15 +69,13 @@
       "f1": 0.7575757575757576
     },
     "grounding": {
-      "conversations_with_issues": 6,
-      "rate": 0.07058823529411765,
+      "conversations_with_issues": 1,
+      "rate": 0.011764705882352941,
       "issues": {
-        "EVIDENCE_NOT_FOUND": 1,
-        "UNKNOWN_MODIFIER": 5,
-        "UNKNOWN_VARIANT": 1
+        "EVIDENCE_NOT_FOUND": 1
       }
     },
-    "unclassified_requests": 3
+    "unclassified_requests": 7
   },
   "intent": {
     "all": {

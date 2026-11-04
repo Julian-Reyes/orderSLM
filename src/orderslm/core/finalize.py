@@ -11,6 +11,11 @@ The model extracts the facts; the rules are applied in code, the same way every 
    the missing list only, so it never offers what the business doesn't do and never states an amount.
 4. A `confirmed` decision while something is missing becomes `pending` + `agreed_while_incomplete` (the guide's
    rule), keeping the customer's quoted yes as evidence.
+5. An id the menu doesn't have is never passed on as a normal line (finalize@0.2, the gaps check_catalog reports):
+   an unknown item, or a half-and-half with an unknown or non-splittable half, becomes an off-menu line (its first
+   evidence quote as `unmatched_text`, so the bot asks); an unknown size becomes `unmatched_variant_text` (asked), or is dropped on an item with no sizes;
+   a combo pick with an unknown slot, choice or size is dropped (the choice is asked); an add-on id not in the
+   catalog or not allowed on the item loses its id and becomes an unverified request (asked, softly).
 
 The model's own missing list and question are ignored, so a mistake there can't make the output invalid.
 """
@@ -27,17 +32,80 @@ from orderslm.schema.extraction import (
     DecisionState,
     ExtractionOutput,
     FieldRef,
+    ItemProposal,
     MissingInfo,
     MissingReason,
+    Modification,
 )
 from orderslm.schema.label import ModelOrder
-from orderslm.schema.menu import MenuCatalog
+from orderslm.schema.menu import MenuCatalog, MenuItem
 
-FINALIZE_VERSION = "finalize@0.1"
+FINALIZE_VERSION = "finalize@0.2"
 _JUDGMENT = {
     (FieldRef.item_menu_match, MissingReason.off_menu): MissingReason.ambiguous,
     (FieldRef.item_variant, MissingReason.missing): MissingReason.ambiguous,
 }
+
+
+def _known_mod(menu: MenuCatalog, item: MenuItem, mod: Modification) -> Modification:
+    ids = [i for i in (mod.modifier_id, mod.replacement_modifier_id) if i is not None]
+    if all(menu.modifier(i) is not None and i in item.allowed_modifier_ids for i in ids):
+        return mod
+    return mod.model_copy(update={"modifier_id": None, "replacement_modifier_id": None})
+
+
+def _off_menu(line: ItemProposal) -> ItemProposal:
+    return ItemProposal(
+        line_id=line.line_id,
+        unmatched_text=line.evidence[0].quote,
+        quantity=line.quantity,
+        notes=line.notes,
+        evidence=line.evidence,
+    )
+
+
+def _known_line(menu: MenuCatalog, line: ItemProposal) -> ItemProposal:
+    """Rule 5: the line with every id the menu doesn't have resolved to something the code asks about."""
+    if line.unmatched_text is not None:
+        return line
+    if line.halves is not None:
+        items = [menu.item(h.menu_item_id) for h in line.halves]
+        if any(i is None or not i.splittable for i in items):
+            return _off_menu(line)
+        halves = [
+            h.model_copy(update={"modifications": [_known_mod(menu, i, m) for m in h.modifications]})
+            for h, i in zip(line.halves, items, strict=True)
+        ]
+        line = line.model_copy(update={"halves": halves})
+        base = items[0]
+    else:
+        base = menu.item(line.menu_item_id or "")
+        if base is None:
+            return _off_menu(line)
+        picks = []
+        slots = {s.id: s for s in base.combo_slots}
+        for sel in line.combo_selections:
+            slot, choice = slots.get(sel.slot_id), menu.item(sel.menu_item_id)
+            if slot is None or choice is None or sel.menu_item_id not in slot.choices:
+                continue
+            if sel.variant_id is not None and choice.variant(sel.variant_id) is None:
+                continue
+            picks.append(sel)
+        line = line.model_copy(
+            update={
+                "modifications": [_known_mod(menu, base, m) for m in line.modifications],
+                "combo_selections": picks,
+            }
+        )
+    if line.variant_id is not None and base.variant(line.variant_id) is None:
+        # An item with sizes asks which one; on an item with none there is nothing to choose, so the id goes.
+        asked = line.variant_id if base.variants else None
+        line = line.model_copy(update={"variant_id": None, "unmatched_variant_text": asked})
+    return line
+
+
+def known_ids(output: ExtractionOutput, menu: MenuCatalog) -> ExtractionOutput:
+    return output.model_copy(update={"items": [_known_line(menu, line) for line in output.items]})
 
 
 def _default_variant(menu: MenuCatalog, item_id: str | None, variant_id: str | None) -> str | None:
@@ -72,7 +140,7 @@ def finalize(
     judgments: set[tuple[str, str, str | None]] | None = None,
     lang: str = "en",
 ) -> ExtractionOutput:
-    out = fill_default_variants(output, menu)
+    out = fill_default_variants(known_ids(output, menu), menu)
     judgments = (
         judgments
         if judgments is not None

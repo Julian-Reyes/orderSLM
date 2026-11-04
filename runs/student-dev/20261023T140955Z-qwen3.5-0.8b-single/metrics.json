@@ -4,7 +4,7 @@
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
   "scorer_version": "scorer@0.4",
-  "finalize_version": "finalize@0.1",
+  "finalize_version": "finalize@0.2",
   "requests": 268,
   "contract_valid": {
     "last": {
@@ -32,12 +32,12 @@
     "json_validity_rate": 0.989010989010989,
     "item": {
       "gold_items": 146,
-      "tp": 114,
-      "fp": 21,
-      "fn": 32,
-      "precision": 0.8444444444444444,
-      "recall": 0.7808219178082192,
-      "f1": 0.8113879003558719
+      "tp": 115,
+      "fp": 20,
+      "fn": 31,
+      "precision": 0.8518518518518519,
+      "recall": 0.7876712328767124,
+      "f1": 0.8185053380782918
     },
     "exact_match": 63,
     "exact_match_rate": 0.6923076923076923,
@@ -45,11 +45,11 @@
       0.5913030988143508,
       0.7777332734104956
     ],
-    "action_match": 63,
-    "action_match_rate": 0.6923076923076923,
+    "action_match": 64,
+    "action_match_rate": 0.7032967032967034,
     "action_match_ci95": [
-      0.5913030988143508,
-      0.7777332734104956
+      0.6027577176380822,
+      0.7873664472853271
     ],
     "field_accuracy": {
       "method": 0.9841269841269841,
@@ -58,26 +58,23 @@
       "payment": 0.8888888888888888,
       "name": 1.0,
       "decision": 0.9841269841269841,
-      "missing": 0.8412698412698413
+      "missing": 0.8095238095238095
     },
     "correction": {
       "conversations": 15,
       "exact_match_rate": 0.4666666666666667,
-      "precision": 0.8709677419354839,
-      "recall": 0.75,
-      "f1": 0.8059701492537313
+      "precision": 0.9032258064516129,
+      "recall": 0.7777777777777778,
+      "f1": 0.835820895522388
     },
     "grounding": {
-      "conversations_with_issues": 9,
-      "rate": 0.1,
+      "conversations_with_issues": 4,
+      "rate": 0.044444444444444446,
       "issues": {
-        "EVIDENCE_NOT_FOUND": 4,
-        "UNKNOWN_ITEM": 3,
-        "UNKNOWN_MODIFIER": 2,
-        "UNKNOWN_VARIANT": 1
+        "EVIDENCE_NOT_FOUND": 4
       }
     },
-    "unclassified_requests": 0
+    "unclassified_requests": 2
   },
   "intent": {
     "all": {
