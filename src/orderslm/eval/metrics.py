@@ -6,9 +6,11 @@
   lines match on being off-menu with the same quantity (their wording is free text). An unstated variant of an
   item with a default equals that default, on both sides (scorer@0.2, Julian 2026-10-15: "2 cheeseburgers" and
   "2 single cheeseburgers" are the same order).
-- Order exact match: the item multiset and every order-level field equal (method, time, address state,
-  payment, name, decision, the missing set by field + reason). A conversation with no gold order
+- Order exact match: the item multiset and every order-level field equal (method, time, address, payment, name, decision, the missing set by field + reason). A conversation with no gold order
   (gold_extraction null) is an exact match when the prediction has no items.
+- Address (scorer@0.4, Julian 2026-11-03): its state and the numbers in the address text (`raw_text`, what the
+  ticket and the replies print), so "140 river rd" after "it's 104 river rd" is wrong, while wording ("the blue
+  house", "Rd" or "Road") and how the street and number fields are split don't count. Before 0.4: state only.
 - Same action (scorer@0.3, Julian 2026-11-03): the bot does the same thing with both orders, so wording-level
   differences stop counting as mistakes. Equal when the lines it can send to the kitchen match exactly, it must ask
   about the same things before the order goes through (missing fields, reason ignored: "we don't have X" and "which
@@ -22,6 +24,7 @@
   message, ids not in the menu, items predicted when there is no order; plus unclassified requests.
 """
 
+import re
 from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -32,10 +35,11 @@ from orderslm.core.finalize import fill_default_variants
 from orderslm.eval.stats import wilson
 from orderslm.schema.annotation import AnnotatedConversation, Scenario
 from orderslm.schema.conversation import Role
-from orderslm.schema.extraction import ExtractionOutput, ItemProposal, Modification
+from orderslm.schema.extraction import Address, ExtractionOutput, ItemProposal, Modification, SlotState
 from orderslm.schema.menu import MenuCatalog
 
-SCORER_VERSION = "scorer@0.3"  # 0.2: unstated default variant = the default; 0.3: adds the same-action match
+SCORER_VERSION = "scorer@0.4"  # 0.2: unstated default variant = the default; 0.3: adds the same-action match;
+# 0.4: the address compares the numbers in its text, not only its state
 CORRECTION_SCENARIOS = {Scenario.correction, Scenario.correction_after_confirmation, Scenario.cancellation}
 
 
@@ -92,12 +96,18 @@ def action_view(o: ExtractionOutput) -> tuple[Counter, frozenset[str]]:
     return kitchen, frozenset(asks)
 
 
+def address_key(a: Address) -> tuple[str, tuple[str, ...]]:
+    """The address state and the numbers in its text (house, unit): a wrong number is a wrong address."""
+    numbers = sorted(re.findall(r"\d+", a.raw_text or "")) if a.state is SlotState.provided else []
+    return a.state.value, tuple(numbers)
+
+
 def field_values(o: ExtractionOutput) -> dict[str, Any]:
     t = o.fulfillment.requested_time
     return {
         "method": o.fulfillment.method.value,
         "time": (t.state.value, t.kind.value if t.kind else None, t.normalized_local),
-        "address": o.address.state.value,
+        "address": address_key(o.address),
         "payment": (o.payment.method.value, o.payment.change_for_cents, o.payment.customer_claims_paid),
         "name": (
             o.customer_name.state.value,

@@ -1,6 +1,6 @@
 # `qwen3.5-2b-mixed-v2` on fresh at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.3`, finalize `finalize@0.1`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.4`, finalize `finalize@0.1`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -13,7 +13,7 @@ Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.3`, fina
 | Fully correct orders | 70/90 (95% CI (0.6815249725824009, 0.8512877671833321)) | ? |
 | Same action (bot sends/asks the same; wording aside) | 72/90 (95% CI (0.7058607285729566, 0.8695770303740351)) | |
 
-Field accuracy: {'method': 0.9855072463768116, 'time': 1.0, 'address': 0.9855072463768116, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.8405797101449275}
+Field accuracy: {'method': 0.9855072463768116, 'time': 1.0, 'address': 0.9710144927536232, 'payment': 1.0, 'name': 1.0, 'decision': 1.0, 'missing': 0.8405797101449275}
 
 Hit the token limit: 0; latency p50/p95 {'p50': 14860, 'p95': 25412} ms (T4, fp16, greedy); output tokens p50 327.0.
 Invalid answers by reason: {'1 validation error for StudentOutput': 8}

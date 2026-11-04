@@ -160,9 +160,10 @@ customer did ask for a Red Bull, so the checkers call it a match), fresh 087 ("t
 
 ### Found along the way
 
-1. **Scorer gap: the address.** `eval/metrics.field_values` compares only whether an address was given, so a delivery
-   to the wrong address scores as correct (dev 023). Not fixed: fixing it changes every order score, so it needs a
-   decision and a re-score.
+1. **Scorer gap: the address.** `eval/metrics.field_values` compared only whether an address was given, so a delivery
+   to the wrong address scored as correct (dev 023). **Fixed in scorer@0.4** (Julian, 2026-11-03): the numbers in the
+   address text are compared too. This run chose its orders under scorer@0.3, so dev 023 is in its "right" set; a new
+   run would count it as wrong and draw a different right sample.
 2. **Kitchen requests in the order text** show as bare words ("honey"), which reads like a menu option the item can't
    take. A v0.3 text should say "request not on the menu: honey".
 3. The off-menu id gap in `core/finalize` (above) is still open.

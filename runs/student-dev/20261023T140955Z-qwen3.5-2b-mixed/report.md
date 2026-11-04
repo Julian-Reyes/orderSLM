@@ -1,12 +1,12 @@
 # `qwen3.5-2b-mixed` on dev at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.3`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
+Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.1`. Dev numbers (tuning), not held-out results.
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
 | Valid answers, last customer message | 89/91 | 90/91 |
 | Valid answers, earlier messages | 170/177 | n/a (one call per chat) |
-| Intent, all customer messages | 241/268 (89.9%, 95% CI 0.857–0.930) | 259/268 |
+| Intent, all customer messages | 241/268 (89.9%, 95% CI 0.857–0.930) | 257/268 |
 | Intent, last message | 84/91 (92.3%, 95% CI 0.850–0.962) | |
 | Intent, earlier messages (mid-chat) | 157/177 (88.7%, 95% CI 0.832–0.926) | |
 | Items (F1) | 115 found / 20 extra / 31 missed (F1 0.8185053380782918) | F1 0.993103448275862 |

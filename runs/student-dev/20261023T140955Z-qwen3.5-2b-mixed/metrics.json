@@ -3,7 +3,7 @@
   "split": "dev",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
-  "scorer_version": "scorer@0.3",
+  "scorer_version": "scorer@0.4",
   "finalize_version": "finalize@0.1",
   "requests": 268,
   "contract_valid": {
@@ -249,7 +249,7 @@
   "teacher_reference": {
     "teacher": "openai/gpt-6-luna@low",
     "label_prompt_version": "teacher-label@0.7",
-    "scorer_version": "scorer@0.2",
+    "scorer_version": "scorer@0.4",
     "finalize_version": "finalize@0.1",
     "order": {
       "conversations": 91,
@@ -268,6 +268,12 @@
       "exact_match": 90,
       "exact_match_rate": 0.989010989010989,
       "exact_match_ci95": [
+        0.9403491964093862,
+        0.9980575786766521
+      ],
+      "action_match": 90,
+      "action_match_rate": 0.989010989010989,
+      "action_match_ci95": [
         0.9403491964093862,
         0.9980575786766521
       ],
@@ -296,14 +302,14 @@
     },
     "intent": {
       "customer_messages": 268,
-      "primary_correct": 259,
-      "primary_accuracy": 0.9664,
+      "primary_correct": 257,
+      "primary_accuracy": 0.959,
       "primary_ci95": [
-        0.9374194158516206,
-        0.9822337939587983
+        0.9280093369841262,
+        0.9769294214693263
       ],
-      "label_set_correct": 258,
-      "label_set_accuracy": 0.9627,
+      "label_set_correct": 256,
+      "label_set_accuracy": 0.9552,
       "per_gold_label": {
         "CANCEL_ORDER": {
           "gold": 4,
@@ -361,7 +367,7 @@
           "predicted": 3
         },
         "PLACE_ORDER": {
-          "gold": 160,
+          "gold": 162,
           "correct": 154,
           "predicted": 154
         },
@@ -371,8 +377,8 @@
           "predicted": 4
         },
         "SMALL_TALK": {
-          "gold": 28,
-          "correct": 28,
+          "gold": 26,
+          "correct": 26,
           "predicted": 31
         },
         "UNKNOWN": {
@@ -384,13 +390,13 @@
       "confusions": [
         {
           "gold": "PLACE_ORDER",
-          "pred": null,
+          "pred": "SMALL_TALK",
           "count": 4
         },
         {
           "gold": "PLACE_ORDER",
-          "pred": "SMALL_TALK",
-          "count": 2
+          "pred": null,
+          "count": 4
         },
         {
           "gold": "CONFIRM_ORDER",
