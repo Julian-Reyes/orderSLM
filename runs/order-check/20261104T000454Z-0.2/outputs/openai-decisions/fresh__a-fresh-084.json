@@ -1,0 +1,40 @@
+{
+ "id": "fresh__a-fresh-084",
+ "split": "fresh",
+ "conversation_id": "a-fresh-084",
+ "wrong": true,
+ "kinds": [
+  "broken_answer"
+ ],
+ "errors": {
+  "invalid": "order: Value error, address must be not_applicable for pickup"
+ },
+ "order_text": "No new order was placed in this chat. An order the customer placed before this chat (one they describe, ask about or complain about) is not part of this record.",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.02,
+     "false": 0.98
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 743,
+   "output_tokens": 0
+  },
+  "latency_ms": 348.0165130458772,
+  "cost_micros": 75,
+  "cached": false
+ }
+}

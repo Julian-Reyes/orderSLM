@@ -1,0 +1,86 @@
+{
+ "id": "fresh__a-fresh-056",
+ "split": "fresh",
+ "conversation_id": "a-fresh-056",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "None× onion_rings",
+    "pred": "1× onion_rings"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_quantity",
+       "ambiguous"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Onion Rings\n- 1 × Veggie Burger\nFulfillment: delivery to 92 kent ave\nPayment: not stated",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":true,\"problem\":\"\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 650,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 16,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1120.5011869315058,
+  "cost_micros": 73,
+  "at": "2026-11-04T00:05:45.052436+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 650,
+   "completion_tokens": 16,
+   "total_tokens": 666,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

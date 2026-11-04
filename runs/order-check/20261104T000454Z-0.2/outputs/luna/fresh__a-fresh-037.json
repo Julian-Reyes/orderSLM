@@ -1,0 +1,57 @@
+{
+ "id": "fresh__a-fresh-037",
+ "split": "fresh",
+ "conversation_id": "a-fresh-037",
+ "wrong": true,
+ "kinds": [
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, large",
+    "pred": "1× americano, large, add black"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Latte (Medium 12 oz): add Vanilla syrup\n- 1 × Americano (Large 16 oz): add black\n- 2 × Croissant (Chocolate)\n- 1 × Muffin (Blueberry)\n- 1 × Hot Chocolate (Medium 12 oz)\nFulfillment: not stated\nPayment: not stated",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The Americano is requested black, but black is not a menu option to add; the record should not list it as an add-on.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 975,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 43,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1665.1309169828892,
+  "cost_micros": 119,
+  "at": "2026-11-04T00:05:39.051528+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 975,
+   "completion_tokens": 43,
+   "total_tokens": 1018,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

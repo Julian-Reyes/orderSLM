@@ -1,0 +1,40 @@
+{
+ "id": "fresh__a-fresh-074",
+ "split": "fresh",
+ "conversation_id": "a-fresh-074",
+ "wrong": true,
+ "kinds": [
+  "broken_answer"
+ ],
+ "errors": {
+  "invalid": "order.items.0.modifications.0: Value error, not_on_menu/kitchen_note only for a request with no catalog id"
+ },
+ "order_text": "No new order was placed in this chat. An order the customer placed before this chat (one they describe, ask about or complain about) is not part of this record.",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.26,
+     "false": 0.74
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 838,
+   "output_tokens": 21
+  },
+  "latency_ms": 218.94776599947363,
+  "cost_micros": 36,
+  "cached": false
+ }
+}

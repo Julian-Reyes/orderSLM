@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-024",
+ "split": "dev",
+ "conversation_id": "a-dev-024",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × half-and-half pizza (half Hawaiian Pizza / half BBQ Chicken Pizza) (Large 14-inch)\n- 2 × Dr Pepper (Can 12 oz)\nFulfillment: not stated\nPayment: cash",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1732,
+   "output_tokens": 0
+  },
+  "latency_ms": 535.6784811010584,
+  "cost_micros": 174,
+  "cached": false
+ }
+}

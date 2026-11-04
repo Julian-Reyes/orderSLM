@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-005",
+ "split": "fresh",
+ "conversation_id": "a-fresh-005",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Latte (Medium 12 oz): honey\n- 1 × Muffin (Blueberry)\nFulfillment: pickup\nTime: in 20 min\nPayment: card\nName: tasha",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.03,
+     "false": 0.97
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 907,
+   "output_tokens": 0
+  },
+  "latency_ms": 434.58623299375176,
+  "cost_micros": 91,
+  "cached": false
+ }
+}

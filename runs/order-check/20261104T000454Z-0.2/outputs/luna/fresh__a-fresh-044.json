@@ -1,0 +1,95 @@
+{
+ "id": "fresh__a-fresh-044",
+ "split": "fresh",
+ "conversation_id": "a-fresh-044",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "wrong_modifications",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "None× muffin, blueberry",
+    "pred": "2× muffin, blueberry"
+   },
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× drip_coffee, medium, add almond_milk",
+    "pred": "1× drip_coffee, medium, substitute whole_milk"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_quantity",
+       "ambiguous"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Muffin (Blueberry)\n- 1 × Drip Coffee (Medium 12 oz): Almond milk instead of Whole milk\nFulfillment: pickup\nTime: in 10\nPayment: not stated\nName: Sam",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer said “a few” blueberry muffins, so the quantity is unclear, but the record lists 2.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 891,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 79,
+   "reasoning_tokens": 35
+  },
+  "latency_ms": 2287.5443439697847,
+  "cost_micros": 129,
+  "at": "2026-11-04T00:05:42.051770+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 891,
+   "completion_tokens": 79,
+   "total_tokens": 970,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 35,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

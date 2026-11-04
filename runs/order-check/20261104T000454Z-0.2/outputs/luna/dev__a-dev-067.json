@@ -1,0 +1,69 @@
+{
+ "id": "dev__a-dev-067",
+ "split": "dev",
+ "conversation_id": "a-dev-067",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "field:decision"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× cheeseburger, double",
+    "pred": "1× cheeseburger, single"
+   }
+  ],
+  "fields": {
+   "decision": {
+    "gold": [
+     "pending",
+     false
+    ],
+    "pred": [
+     "confirmed",
+     false
+    ]
+   }
+  }
+ },
+ "order_text": "Status: confirmed by the customer\n- 1 × Cheeseburger (Single patty)\n- 1 × Fries (Regular)\n- 1 × Lemonade\nFulfillment: delivery to 16 hill st\nPayment: card",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer changed the cheeseburger to a double, but the record still lists a single-patty cheeseburger.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 738,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 108,
+   "reasoning_tokens": 62
+  },
+  "latency_ms": 2365.9146989230067,
+  "cost_micros": 128,
+  "at": "2026-11-04T00:05:06.050619+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 738,
+   "completion_tokens": 108,
+   "total_tokens": 846,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 62,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

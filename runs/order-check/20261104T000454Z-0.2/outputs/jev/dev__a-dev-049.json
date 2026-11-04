@@ -1,0 +1,84 @@
+{
+ "id": "dev__a-dev-049",
+ "split": "dev",
+ "conversation_id": "a-dev-049",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× milkshake",
+    "pred": "1× milkshake, chocolate"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× milkshake, strawberry"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "item_variant",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Milkshake (Chocolate)\n- 1 × Milkshake (Strawberry)\n- 1 × Lemonade\n- 2 × Cheeseburger (Single patty)\nFulfillment: not stated\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.24,
+     "false": 0.76
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 884,
+   "output_tokens": 21
+  },
+  "latency_ms": 275.43276199139655,
+  "cost_micros": 38,
+  "cached": false
+ }
+}

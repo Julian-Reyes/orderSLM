@@ -1,0 +1,55 @@
+{
+ "id": "fresh__a-fresh-016",
+ "split": "fresh",
+ "conversation_id": "a-fresh-016",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× muffin, banana_nut",
+    "pred": "1× muffin, chocolate_chip"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "1× latte, large, substitute whole_milk"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Muffin (Chocolate chip)\n- 1 × Muffin (Chocolate chip)\nFulfillment: pickup\nPayment: card\nName: dana",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.01,
+     "false": 0.99
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1068,
+   "output_tokens": 21
+  },
+  "latency_ms": 368.3688419405371,
+  "cost_micros": 45,
+  "cached": false
+ }
+}

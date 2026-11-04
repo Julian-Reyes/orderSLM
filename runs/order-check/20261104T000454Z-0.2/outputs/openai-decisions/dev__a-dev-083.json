@@ -1,0 +1,55 @@
+{
+ "id": "dev__a-dev-083",
+ "split": "dev",
+ "conversation_id": "a-dev-083",
+ "wrong": true,
+ "kinds": [
+  "missing_item",
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× bagel, everything, add cream_cheese"
+   },
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× croissant, chocolate",
+    "pred": "1× croissant, chocolate, add butter"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cappuccino (Large 16 oz)\n- 1 × Muffin (Blueberry)\n- 1 × Croissant (Chocolate): add Butter\nFulfillment: pickup\nTime: at 9:15\nPayment: card\nName: Kai",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.11,
+     "false": 0.89
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 963,
+   "output_tokens": 0
+  },
+  "latency_ms": 661.2272699130699,
+  "cost_micros": 97,
+  "cached": false
+ }
+}

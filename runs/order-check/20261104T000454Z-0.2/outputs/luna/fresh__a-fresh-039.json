@@ -1,0 +1,53 @@
+{
+ "id": "fresh__a-fresh-039",
+ "split": "fresh",
+ "conversation_id": "a-fresh-039",
+ "wrong": true,
+ "kinds": [
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "extra_item",
+    "pred": "1× coke"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cheeseburger (Single patty)\n- 1 × Fries (Regular)\n- 1 × Coke\nFulfillment: delivery to 310 grove st\nPayment: card",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer cancelled the Coke, but the recorded order still includes one Coke.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 670,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 54,
+   "reasoning_tokens": 18
+  },
+  "latency_ms": 1833.4234319627285,
+  "cost_micros": 94,
+  "at": "2026-11-04T00:05:40.048942+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 670,
+   "completion_tokens": 54,
+   "total_tokens": 724,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 18,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

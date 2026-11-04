@@ -1,0 +1,51 @@
+{
+ "id": "dev__a-dev-048",
+ "split": "dev",
+ "conversation_id": "a-dev-048",
+ "wrong": true,
+ "kinds": [
+  "missing_item",
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× breakfast_sandwich, croissant"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× croissant, plain"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Croissant (Plain)\nFulfillment: pickup\nTime: 7:30\nPayment: card\nName: Theo",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.03,
+     "false": 0.97
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1070,
+   "output_tokens": 21
+  },
+  "latency_ms": 709.1178639093414,
+  "cost_micros": 45,
+  "cached": false
+ }
+}

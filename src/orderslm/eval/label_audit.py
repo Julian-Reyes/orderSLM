@@ -81,7 +81,10 @@ def chat_text(conversation: Conversation) -> str:
     return "\n".join(f"[{m.index}] {m.role.value}: {m.text}" for m in conversation.messages)
 
 
-def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> str:
+def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False, detail: bool = False) -> str:
+    """`detail` (the order checker, order-check@0.2) also shows ids that aren't on the menu or the item, and a
+    size that was never chosen; without it the text is the label audit's, unchanged."""
+
     def mod_name(mid: str | None) -> str:
         m = menu.modifier(mid or "")
         return m.name if m else (mid or "")
@@ -93,7 +96,12 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
     if line.halves:
         halves = " / ".join(
             "half "
-            + getattr(menu.item(h.menu_item_id), "name", h.menu_item_id)  # an unknown id is shown as-is
+            + (
+                getattr(
+                    menu.item(h.menu_item_id), "name", None if detail else h.menu_item_id
+                )  # unknown: as-is
+                or f"{h.menu_item_id!r} (NOT on the menu)"
+            )
             + "".join(f", {m.kind.value} {mod_name(m.modifier_id)}" for m in h.modifications)
             for h in line.halves
         )
@@ -102,6 +110,8 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
     else:
         base = menu.item(line.menu_item_id or "")
         name = base.name if base else str(line.menu_item_id)
+        if base is None and detail:
+            name = f"{line.menu_item_id!r} (NOT on the menu)"
     qty = line.quantity if line.quantity is not None else "?"
     text = f"{qty} × {name}"
     variant = base.variant(line.variant_id) if base and line.variant_id else None
@@ -109,6 +119,10 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
         text += f" ({variant.name})"
     elif line.unmatched_variant_text:
         text += f" (size asked: {line.unmatched_variant_text!r}, not on the menu)"
+    elif detail and line.variant_id:
+        text += f" (size {line.variant_id!r}: NOT a size of this item)"
+    elif detail and base and base.variants:
+        text += " (size not stated)"
     parts = []
     for m in line.modifications:
         if m.not_on_menu or m.kitchen_note:
@@ -126,7 +140,7 @@ def _line_text(line: ItemProposal, menu: MenuCatalog, unclear: bool = False) -> 
     return text + (": " + ", ".join(parts) if parts else "")
 
 
-def order_text(out: ExtractionOutput | None, menu: MenuCatalog) -> str:
+def order_text(out: ExtractionOutput | None, menu: MenuCatalog, *, detail: bool = False) -> str:
     if out is None or not out.items:
         return (
             "No new order was placed in this chat. An order the customer placed before this chat (one they describe, "
@@ -141,7 +155,7 @@ def order_text(out: ExtractionOutput | None, menu: MenuCatalog) -> str:
         DecisionState.confirmed: "Status: confirmed by the customer",
         DecisionState.cancelled: "Status: CANCELLED by the customer (the items below are what was cancelled)",
     }.get(out.customer_decision.state, "Status: still open (not confirmed yet)")
-    lines = [status] + [f"- {_line_text(x, menu, x.line_id in unclear)}" for x in out.items]
+    lines = [status] + [f"- {_line_text(x, menu, x.line_id in unclear, detail)}" for x in out.items]
     method = out.fulfillment.method
     if method is FulfillmentMethod.delivery:
         where = (
@@ -156,6 +170,8 @@ def order_text(out: ExtractionOutput | None, menu: MenuCatalog) -> str:
         lines.append(f"Time: {out.fulfillment.requested_time.raw_text}")
     pay = out.payment.method
     lines.append(f"Payment: {'not stated' if pay is PaymentMethod.unknown else pay.value}")
+    if detail and out.payment.change_for_cents is not None:
+        lines[-1] += f", paying with ${out.payment.change_for_cents / 100:.2f} (needs change)"
     if out.customer_name.state is SlotState.provided:
         lines.append(f"Name: {out.customer_name.value}")
     return "\n".join(lines)

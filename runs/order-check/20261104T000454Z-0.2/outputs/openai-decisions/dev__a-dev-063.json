@@ -1,0 +1,56 @@
+{
+ "id": "dev__a-dev-063",
+ "split": "dev",
+ "conversation_id": "a-dev-063",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity+modifications",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity+modifications",
+    "parts": [
+     "quantity",
+     "modifications"
+    ],
+    "gold": "2× cheeseburger, single",
+    "pred": "4× cheeseburger, single, remove onion"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "2× cheeseburger, single, remove onion"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 4 × Cheeseburger (Single patty): no Onions\n- 4 × Fries (Regular)\n- 4 × Lemonade\nFulfillment: delivery to 77 elm st\nPayment: cash",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 692,
+   "output_tokens": 0
+  },
+  "latency_ms": 291.0109870135784,
+  "cost_micros": 70,
+  "cached": false
+ }
+}

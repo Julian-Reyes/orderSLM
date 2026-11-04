@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-091",
+ "split": "dev",
+ "conversation_id": "a-dev-091",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Hot Chocolate (Large 16 oz)\n- 1 × Croissant (Chocolate)\nFulfillment: pickup\nTime: in 15\nPayment: cash\nName: Zoe",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 944,
+   "output_tokens": 0
+  },
+  "latency_ms": 439.17325499933213,
+  "cost_micros": 95,
+  "cached": false
+ }
+}

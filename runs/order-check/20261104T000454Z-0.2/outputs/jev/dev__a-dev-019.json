@@ -1,0 +1,46 @@
+{
+ "id": "dev__a-dev-019",
+ "split": "dev",
+ "conversation_id": "a-dev-019",
+ "wrong": true,
+ "kinds": [
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "extra_item",
+    "pred": "1× muffin, chocolate_chip"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Americano (Small 8 oz)\n- 1 × Bagel (Sesame): add Butter\n- 1 × Muffin (Chocolate chip)\nFulfillment: pickup\nTime: 10:30\nPayment: card\nName: Lena",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.01,
+     "false": 0.99
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1113,
+   "output_tokens": 21
+  },
+  "latency_ms": 339.71197297796607,
+  "cost_micros": 47,
+  "cached": false
+ }
+}

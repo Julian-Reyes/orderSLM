@@ -1,0 +1,88 @@
+{
+ "id": "fresh__a-fresh-080",
+ "split": "fresh",
+ "conversation_id": "a-fresh-080",
+ "wrong": true,
+ "kinds": [
+  "wrong_modifications",
+  "wrong_variant",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× veggie_pizza, large, remove cheese, add VEGAN CHEESE",
+    "pred": "1× veggie_pizza, large, remove cheese, substitute cheese"
+   },
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× water",
+    "pred": "1× water, bottle_20oz"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "item_modification",
+       "off_menu"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Veggie Pizza (Large 14-inch): no House cheese blend, Fresh mozzarella instead of House cheese blend\n- 1 × Bottled Water (size 'bottle_20oz': NOT a size of this item)\nFulfillment: not stated\nPayment: cash",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.2,
+     "false": 0.8
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1774,
+   "output_tokens": 0
+  },
+  "latency_ms": 328.2697150716558,
+  "cost_micros": 178,
+  "cached": false
+ }
+}

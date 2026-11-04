@@ -1,0 +1,46 @@
+{
+ "id": "fresh__a-fresh-051",
+ "split": "fresh",
+ "conversation_id": "a-fresh-051",
+ "wrong": true,
+ "kinds": [
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "extra_item",
+    "pred": "1× muffin, chocolate_chip"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Latte (Large 16 oz)\n- 2 × Bagel (Everything): add Cream cheese\n- 1 × Muffin (Chocolate chip)\nFulfillment: pickup\nPayment: card\nName: kim",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.8,
+     "false": 0.19999999999999996
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 939,
+   "output_tokens": 0
+  },
+  "latency_ms": 319.48888406623155,
+  "cost_micros": 94,
+  "cached": false
+ }
+}

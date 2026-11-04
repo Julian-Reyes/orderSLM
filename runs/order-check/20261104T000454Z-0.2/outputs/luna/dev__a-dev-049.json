@@ -1,0 +1,91 @@
+{
+ "id": "dev__a-dev-049",
+ "split": "dev",
+ "conversation_id": "a-dev-049",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× milkshake",
+    "pred": "1× milkshake, chocolate"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× milkshake, strawberry"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "item_variant",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Milkshake (Chocolate)\n- 1 × Milkshake (Strawberry)\n- 1 × Lemonade\n- 2 × Cheeseburger (Single patty)\nFulfillment: not stated\nPayment: cash",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer did not specify which other shake flavor they wanted, so recording a strawberry milkshake is unsupported.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 711,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 191,
+   "reasoning_tokens": 149
+  },
+  "latency_ms": 4263.951721950434,
+  "cost_micros": 167,
+  "at": "2026-11-04T00:05:03.050881+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 711,
+   "completion_tokens": 191,
+   "total_tokens": 902,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 149,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

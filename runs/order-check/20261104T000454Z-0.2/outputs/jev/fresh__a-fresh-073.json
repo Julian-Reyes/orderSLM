@@ -1,0 +1,46 @@
+{
+ "id": "fresh__a-fresh-073",
+ "split": "fresh",
+ "conversation_id": "a-fresh-073",
+ "wrong": true,
+ "kinds": [
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "extra_item",
+    "pred": "1× milkshake, vanilla"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cheeseburger Combo: side: Fries, drink: Coke\n- 1 × Milkshake (Vanilla)\nFulfillment: pickup\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.02,
+     "false": 0.98
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 890,
+   "output_tokens": 21
+  },
+  "latency_ms": 206.51997905224562,
+  "cost_micros": 38,
+  "cached": false
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "id": "dev__a-dev-067",
+ "split": "dev",
+ "conversation_id": "a-dev-067",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "field:decision"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× cheeseburger, double",
+    "pred": "1× cheeseburger, single"
+   }
+  ],
+  "fields": {
+   "decision": {
+    "gold": [
+     "pending",
+     false
+    ],
+    "pred": [
+     "confirmed",
+     false
+    ]
+   }
+  }
+ },
+ "order_text": "Status: confirmed by the customer\n- 1 × Cheeseburger (Single patty)\n- 1 × Fries (Regular)\n- 1 × Lemonade\nFulfillment: delivery to 16 hill st\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.02,
+     "false": 0.98
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 923,
+   "output_tokens": 21
+  },
+  "latency_ms": 289.5909659564495,
+  "cost_micros": 39,
+  "cached": false
+ }
+}

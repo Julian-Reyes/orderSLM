@@ -1,0 +1,74 @@
+{
+ "id": "fresh__a-fresh-057",
+ "split": "fresh",
+ "conversation_id": "a-fresh-057",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "missing_item",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "3× bacon_burger",
+    "pred": "2× bacon_burger"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "1× off-menu 'one of them'"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× bacon_burger"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_menu_match",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Bacon Burger\n- 1 × Bacon Burger\nFulfillment: pickup\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.28,
+     "false": 0.72
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 842,
+   "output_tokens": 21
+  },
+  "latency_ms": 259.56736505031586,
+  "cost_micros": 36,
+  "cached": false
+ }
+}

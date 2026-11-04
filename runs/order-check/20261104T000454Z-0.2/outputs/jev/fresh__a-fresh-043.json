@@ -1,0 +1,50 @@
+{
+ "id": "fresh__a-fresh-043",
+ "split": "fresh",
+ "conversation_id": "a-fresh-043",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "2× veggie_burger",
+    "pred": "4× veggie_burger"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 4 × Veggie Burger\n- 2 × Veggie Burger: add Jalapeños\nFulfillment: delivery to 5 bay st, hotel lobby\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.8,
+     "false": 0.19999999999999996
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 862,
+   "output_tokens": 21
+  },
+  "latency_ms": 293.70782198384404,
+  "cost_micros": 37,
+  "cached": false
+ }
+}

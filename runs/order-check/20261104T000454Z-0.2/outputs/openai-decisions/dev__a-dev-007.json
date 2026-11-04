@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-007",
+ "split": "dev",
+ "conversation_id": "a-dev-007",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: confirmed by the customer\n- 3 × Cheeseburger (Single patty)\n- 2 × Fries (Large)\n- 1 × Veggie Burger: no Mayo\nFulfillment: delivery to 25 Cedar Ln\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 811,
+   "output_tokens": 0
+  },
+  "latency_ms": 517.0857110060751,
+  "cost_micros": 82,
+  "cached": false
+ }
+}

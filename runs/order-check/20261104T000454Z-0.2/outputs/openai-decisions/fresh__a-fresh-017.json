@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-017",
+ "split": "fresh",
+ "conversation_id": "a-fresh-017",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Meat Lovers Pizza (Medium 12-inch)\n- 1 × Garlic Knots\nFulfillment: delivery to the harbor inn on 12 water st, room 214\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1781,
+   "output_tokens": 0
+  },
+  "latency_ms": 259.2706489376724,
+  "cost_micros": 179,
+  "cached": false
+ }
+}

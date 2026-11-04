@@ -1,0 +1,46 @@
+{
+ "id": "dev__a-dev-085",
+ "split": "dev",
+ "conversation_id": "a-dev-085",
+ "wrong": true,
+ "kinds": [
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× pepperoni_pizza, large"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Dr Pepper (2-liter bottle)\n- 1 × Garlic Knots\nFulfillment: delivery to 300 university dr\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.99,
+     "false": 0.010000000000000009
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1779,
+   "output_tokens": 0
+  },
+  "latency_ms": 383.1088759470731,
+  "cost_micros": 178,
+  "cached": false
+ }
+}

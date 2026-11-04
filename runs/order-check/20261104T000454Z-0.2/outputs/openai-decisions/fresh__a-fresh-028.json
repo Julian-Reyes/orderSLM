@@ -1,0 +1,50 @@
+{
+ "id": "fresh__a-fresh-028",
+ "split": "fresh",
+ "conversation_id": "a-fresh-028",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× water",
+    "pred": "1× water, bottle_20oz"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Veggie Pizza (Large 14-inch): add Gluten-free crust\n- 1 × Bottled Water (size 'bottle_20oz': NOT a size of this item)\nFulfillment: delivery to 18 OAK HOLLOW LN\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.3,
+     "false": 0.7
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1809,
+   "output_tokens": 0
+  },
+  "latency_ms": 630.8105160715058,
+  "cost_micros": 181,
+  "cached": false
+ }
+}

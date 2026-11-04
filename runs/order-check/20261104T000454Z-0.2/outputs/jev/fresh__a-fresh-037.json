@@ -1,0 +1,50 @@
+{
+ "id": "fresh__a-fresh-037",
+ "split": "fresh",
+ "conversation_id": "a-fresh-037",
+ "wrong": true,
+ "kinds": [
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, large",
+    "pred": "1× americano, large, add black"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Latte (Medium 12 oz): add Vanilla syrup\n- 1 × Americano (Large 16 oz): add black\n- 2 × Croissant (Chocolate)\n- 1 × Muffin (Blueberry)\n- 1 × Hot Chocolate (Medium 12 oz)\nFulfillment: not stated\nPayment: not stated",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.66,
+     "false": 0.33999999999999997
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1175,
+   "output_tokens": 21
+  },
+  "latency_ms": 257.5488309375942,
+  "cost_micros": 50,
+  "cached": false
+ }
+}

@@ -8,14 +8,17 @@ never from an estimate. Estimates go in the "Planned" table and in each run's pr
 
 | | Amount |
 |---|---|
-| Spent to date | **$6.6016** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642; M6 targeted pilots $0.0415; M6 targeted batch t3 write + label + audit $0.6857; M6 hand-written batch t4 labels $0.0607 + Jev audit $0.0099; M6 order checker pilot $0.0032) |
-| Remaining (of $10 ceiling) | $3.3984 |
+| Spent to date | **$6.6284** (smoke tests $0.0007; bake-off pilot $0.0968; second bake-off $0.5811; head-to-head $0.1225; prompt checks $0.1090; repeat run $0.0547; M4 mini-pilots $0.0317; M4 pilot p3 $0.5157; label prompt on dev $0.2298; M4 bulk b1 + mega m1 $1.9104; p3 relabel $0.3266; v0.6 dev check + targeted relabel + Jev smoke $0.3657; label audit dev $0.0925; label audit train $0.5993; audit fixes + v0.7 relabel + re-audit $0.7642; M6 targeted pilots $0.0415; M6 targeted batch t3 write + label + audit $0.6857; M6 hand-written batch t4 labels $0.0607 + Jev audit $0.0099; M6 order checker pilot $0.0032; order checker v0.2, 3 checkers $0.0268) |
+| Remaining (of $10 ceiling) | $3.3716 |
 | Prepaid credit bought (not spend) | $17.97 (OpenAI $5 + $5.97, Anthropic $5, DeepSeek $2) |
 
 ## Ledger (actual)
 
 | Date | Milestone | Provider / model | What | Tokens in / out | Cost (USD) | Source | Run id |
 |---|---|---|---|---|---|---|---|
+| 2026-11-03 | M6 | openai/gpt-6-luna@low | Order checker `order-check@0.2` (menu + detailed order text + vague-amount rule) on the 0.8B v2's 42 wrong + 42 right orders (dev + fresh): caught 33/42, false alarms 6/42 (docs/ORDER_CHECK.md) | 95,283 in / 5,195 out (2,674 reasoning) | 0.012165 | recorded usage × verified price | `runs/order-check/20261104T000454Z-0.2` |
+| 2026-11-03 | M6 | OpenAI Decisions (gpt-6-luna) | Same 84 orders, one boolean question: caught 25/42, false alarms 4/42 | 97,571 / 0 | 0.009796 | recorded input × verified price ($0.10/1M input) | `runs/order-check/20261104T000454Z-0.2` |
+| 2026-11-03 | M6 | TypeSafe jev-latest | Same 84 orders, one boolean question: caught 28/42, false alarms 2/42 | 114,070 / 1,764 | 0.004833 (estimate) | recorded input × $0.042/1M (price **not verified** on TypeSafe's pricing page) | `runs/order-check/20261104T000454Z-0.2` |
 | 2026-11-03 | M6 | openai/gpt-6-luna@low | Order checker pilot, `order-check@0.1` (whole-order yes/no) on the 0.8B v2's 42 wrong orders (dev 19 + fresh 23); caught 32/42 (docs/ORDER_CHECK.md) | 14,448 in / 3,552 out (2,005 reasoning) | 0.003241 | recorded usage × verified price (re-verified 2026-11-03) | `runs/order-check/20261103T225157Z-openai__gpt-6-luna@low` |
 | 2026-11-03 | M6 | Qwen3.5-2B + LoRA (2B single v2) on Kaggle (1 T4, free) | v0.2 session 3: score 2B single v2 on dev (268 requests) + fresh (278), greedy, `student-extract@0.1` | output p50 320 / 327 tokens per request | 0 | free (Kaggle GPU, ≈ 2.1 h of the 30 h/week quota) | `runs/train/20261103T115227Z` |
 | 2026-10-26 | M6 | Jev | Label audit of t4 labels (122 chats; teacher 90, hand 32), `label-audit@0.3`, Jev only (OpenAI Decisions blocked: credit used up) | 234,330 in | 0.009900 | input × price (Jev unverified) | `runs/label-audit/20261026T000631Z-train` |

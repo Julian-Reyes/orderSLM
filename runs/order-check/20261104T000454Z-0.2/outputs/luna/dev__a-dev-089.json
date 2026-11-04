@@ -1,0 +1,61 @@
+{
+ "id": "dev__a-dev-089",
+ "split": "dev",
+ "conversation_id": "a-dev-089",
+ "wrong": true,
+ "kinds": [
+  "field:payment"
+ ],
+ "errors": {
+  "items": [],
+  "fields": {
+   "payment": {
+    "gold": [
+     "unknown",
+     null,
+     true
+    ],
+    "pred": [
+     "cash",
+     null,
+     true
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Pepperoni Pizza (Extra large 16-inch)\n- 2 × Cheese Pizza (Extra large 16-inch)\n- 2 × Sprite (2-liter bottle)\nFulfillment: pickup\nTime: 5\nPayment: cash",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer said they had already sent payment, but the record lists payment as cash.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1744,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 139,
+   "reasoning_tokens": 101
+  },
+  "latency_ms": 3188.2045340025797,
+  "cost_micros": 244,
+  "at": "2026-11-04T00:05:13.053490+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1744,
+   "completion_tokens": 139,
+   "total_tokens": 1883,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 1741,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 101,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

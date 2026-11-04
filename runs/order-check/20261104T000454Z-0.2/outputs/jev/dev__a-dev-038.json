@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-038",
+ "split": "dev",
+ "conversation_id": "a-dev-038",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Pepperoni Pizza (Medium 12-inch)\n- 1 × 'whatever i had to drink' (not on the menu)\nFulfillment: pickup\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.28,
+     "false": 0.72
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2030,
+   "output_tokens": 21
+  },
+  "latency_ms": 385.8634768985212,
+  "cost_micros": 86,
+  "cached": false
+ }
+}

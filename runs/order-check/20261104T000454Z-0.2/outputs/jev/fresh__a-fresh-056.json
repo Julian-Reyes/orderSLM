@@ -1,0 +1,79 @@
+{
+ "id": "fresh__a-fresh-056",
+ "split": "fresh",
+ "conversation_id": "a-fresh-056",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "None× onion_rings",
+    "pred": "1× onion_rings"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_quantity",
+       "ambiguous"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Onion Rings\n- 1 × Veggie Burger\nFulfillment: delivery to 92 kent ave\nPayment: not stated",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.38,
+     "false": 0.62
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 823,
+   "output_tokens": 21
+  },
+  "latency_ms": 254.17057401500642,
+  "cost_micros": 35,
+  "cached": false
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "fresh__a-fresh-063",
+ "split": "fresh",
+ "conversation_id": "a-fresh-063",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "2× pepperoni_pizza",
+    "pred": "2× pepperoni_pizza, large"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_variant",
+       "ambiguous"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Pepperoni Pizza (Large 14-inch)\nFulfillment: delivery to 400 congress ave, 5th floor\nPayment: not stated",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.06,
+     "false": 0.94
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1726,
+   "output_tokens": 0
+  },
+  "latency_ms": 521.1997369769961,
+  "cost_micros": 173,
+  "cached": false
+ }
+}

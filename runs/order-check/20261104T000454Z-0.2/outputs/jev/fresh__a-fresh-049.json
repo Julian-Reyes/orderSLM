@@ -1,0 +1,65 @@
+{
+ "id": "fresh__a-fresh-049",
+ "split": "fresh",
+ "conversation_id": "a-fresh-049",
+ "wrong": true,
+ "kinds": [
+  "missing_item",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× off-menu 'a red bull'"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× red_bull"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_menu_match",
+       "off_menu"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × 'red_bull' (NOT on the menu)\n- 1 × Croissant (Plain)\nFulfillment: pickup\nPayment: cash\nName: Ana",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.6,
+     "false": 0.4
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1053,
+   "output_tokens": 21
+  },
+  "latency_ms": 194.72911697812378,
+  "cost_micros": 45,
+  "cached": false
+ }
+}

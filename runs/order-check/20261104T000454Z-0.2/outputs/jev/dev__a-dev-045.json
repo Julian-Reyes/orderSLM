@@ -1,0 +1,64 @@
+{
+ "id": "dev__a-dev-045",
+ "split": "dev",
+ "conversation_id": "a-dev-045",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "None× garlic_knots",
+    "pred": "1× garlic_knots"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_quantity",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Garlic Knots\n- 1 × Cheese Pizza (Large 14-inch)\nFulfillment: pickup\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.65,
+     "false": 0.35
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1982,
+   "output_tokens": 21
+  },
+  "latency_ms": 836.3716159947217,
+  "cost_micros": 84,
+  "cached": false
+ }
+}

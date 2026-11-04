@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-071",
+ "split": "dev",
+ "conversation_id": "a-dev-071",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Margherita Pizza (Medium 12-inch)\n- 1 × Pepperoni Pizza (Personal 8-inch): add extra House cheese blend\n- 1 × Breadsticks\nFulfillment: pickup\nTime: 7:30\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1794,
+   "output_tokens": 0
+  },
+  "latency_ms": 387.1938419761136,
+  "cost_micros": 180,
+  "cached": false
+ }
+}

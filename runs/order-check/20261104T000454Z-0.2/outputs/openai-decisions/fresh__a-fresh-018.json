@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-018",
+ "split": "fresh",
+ "conversation_id": "a-fresh-018",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 6 × Drip Coffee (Medium 12 oz)\n- 2 × Hot Chocolate (Large 16 oz)\nFulfillment: pickup\nTime: at 9\nPayment: card\nName: ravi",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 938,
+   "output_tokens": 0
+  },
+  "latency_ms": 330.0035489955917,
+  "cost_micros": 94,
+  "cached": false
+ }
+}

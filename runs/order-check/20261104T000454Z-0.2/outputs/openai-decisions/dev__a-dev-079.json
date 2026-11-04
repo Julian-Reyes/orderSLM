@@ -1,0 +1,64 @@
+{
+ "id": "dev__a-dev-079",
+ "split": "dev",
+ "conversation_id": "a-dev-079",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "2× pepperoni_pizza",
+    "pred": "2× pepperoni_pizza, personal"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_variant",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Pepperoni Pizza (Personal 8-inch)\n- 2 × Cheese Pizza (Extra large 16-inch)\nFulfillment: delivery to 5 ASPEN DR\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.01,
+     "false": 0.99
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1776,
+   "output_tokens": 0
+  },
+  "latency_ms": 374.8860750347376,
+  "cost_micros": 178,
+  "cached": false
+ }
+}

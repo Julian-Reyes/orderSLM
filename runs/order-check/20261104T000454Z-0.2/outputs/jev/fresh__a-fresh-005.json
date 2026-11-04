@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-005",
+ "split": "fresh",
+ "conversation_id": "a-fresh-005",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Latte (Medium 12 oz): honey\n- 1 × Muffin (Blueberry)\nFulfillment: pickup\nTime: in 20 min\nPayment: card\nName: tasha",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.78,
+     "false": 0.21999999999999997
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1072,
+   "output_tokens": 21
+  },
+  "latency_ms": 306.2898810021579,
+  "cost_micros": 46,
+  "cached": false
+ }
+}

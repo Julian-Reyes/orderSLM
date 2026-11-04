@@ -1,0 +1,50 @@
+{
+ "id": "fresh__a-fresh-007",
+ "split": "fresh",
+ "conversation_id": "a-fresh-007",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "1× hot_chocolate, large",
+    "pred": "3× hot_chocolate, large"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Hot Chocolate (Large 16 oz)\n- 2 × Hot Chocolate (Large 16 oz): add Caramel syrup\nFulfillment: not stated\nPayment: not stated",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 896,
+   "output_tokens": 0
+  },
+  "latency_ms": 385.31669101212174,
+  "cost_micros": 90,
+  "cached": false
+ }
+}

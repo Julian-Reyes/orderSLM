@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-015",
+ "split": "dev",
+ "conversation_id": "a-dev-015",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Drip Coffee (Large 16 oz): add Hazelnut syrup\n- 1 × Bagel (Everything): add Cream cheese\n- 1 × Croissant (Plain)\nFulfillment: not stated\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 945,
+   "output_tokens": 0
+  },
+  "latency_ms": 296.48048896342516,
+  "cost_micros": 95,
+  "cached": false
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "id": "fresh__a-fresh-024",
+ "split": "fresh",
+ "conversation_id": "a-fresh-024",
+ "wrong": true,
+ "kinds": [
+  "field:time"
+ ],
+ "errors": {
+  "items": [],
+  "fields": {
+   "time": {
+    "gold": [
+     "provided",
+     "clock_time",
+     "11:30"
+    ],
+    "pred": [
+     "provided",
+     "clock_time",
+     "11:00"
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Cappuccino (Large 16 oz)\n- 2 × Croissant (Almond)\nFulfillment: pickup\nTime: 11\nPayment: card\nName: jules",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.2,
+     "false": 0.8
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 932,
+   "output_tokens": 0
+  },
+  "latency_ms": 551.1212869314477,
+  "cost_micros": 94,
+  "cached": false
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-019",
+ "split": "fresh",
+ "conversation_id": "a-fresh-019",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Bacon Burger\n- 1 × Onion Rings\nFulfillment: delivery to 77 crescent ave\nTime: 7:15\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.92,
+     "false": 0.07999999999999996
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 824,
+   "output_tokens": 21
+  },
+  "latency_ms": 454.71893693320453,
+  "cost_micros": 35,
+  "cached": false
+ }
+}

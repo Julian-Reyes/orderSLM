@@ -1,0 +1,93 @@
+{
+ "id": "fresh__a-fresh-009",
+ "split": "fresh",
+ "conversation_id": "a-fresh-009",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× margherita_pizza",
+    "pred": "1× margherita_pizza, large"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "item_variant",
+       "ambiguous"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "payment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Margherita Pizza (Large 14-inch)\nFulfillment: not stated\nPayment: not stated",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.21,
+     "false": 0.79
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1987,
+   "output_tokens": 21
+  },
+  "latency_ms": 268.4523389907554,
+  "cost_micros": 84,
+  "cached": false
+ }
+}

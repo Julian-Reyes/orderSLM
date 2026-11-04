@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-030",
+ "split": "dev",
+ "conversation_id": "a-dev-030",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "No new order was placed in this chat. An order the customer placed before this chat (one they describe, ask about or complain about) is not part of this record.",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 899,
+   "output_tokens": 0
+  },
+  "latency_ms": 357.90337703656405,
+  "cost_micros": 90,
+  "cached": false
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "id": "fresh__a-fresh-016",
+ "split": "fresh",
+ "conversation_id": "a-fresh-016",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× muffin, banana_nut",
+    "pred": "1× muffin, chocolate_chip"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "1× latte, large, substitute whole_milk"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Muffin (Chocolate chip)\n- 1 × Muffin (Chocolate chip)\nFulfillment: pickup\nPayment: card\nName: dana",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The record lists three chocolate chip muffins instead of two chocolate chip muffins and one banana nut muffin, and it omits the large latte with oat milk.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 883,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 81,
+   "reasoning_tokens": 30
+  },
+  "latency_ms": 1682.3878400027752,
+  "cost_micros": 129,
+  "at": "2026-11-04T00:05:35.049024+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 883,
+   "completion_tokens": 81,
+   "total_tokens": 964,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 30,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

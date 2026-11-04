@@ -1,0 +1,54 @@
+{
+ "id": "dev__a-dev-075",
+ "split": "dev",
+ "conversation_id": "a-dev-075",
+ "wrong": true,
+ "kinds": [
+  "field:payment"
+ ],
+ "errors": {
+  "items": [],
+  "fields": {
+   "payment": {
+    "gold": [
+     "cash",
+     20000,
+     false
+    ],
+    "pred": [
+     "cash",
+     2000,
+     false
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 6 × Cheeseburger (Single patty)\n- 3 × Bacon Burger\n- 2 × Veggie Burger\n- 5 × Fries (Large)\n- 3 × Onion Rings\n- 6 × Coke\n- 4 × Sprite\nFulfillment: not stated\nPayment: cash, paying with $20.00 (needs change)",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.05,
+     "false": 0.95
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 918,
+   "output_tokens": 21
+  },
+  "latency_ms": 224.97528907842934,
+  "cost_micros": 39,
+  "cached": false
+ }
+}

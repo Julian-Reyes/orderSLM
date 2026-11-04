@@ -1,0 +1,50 @@
+{
+ "id": "dev__a-dev-039",
+ "split": "dev",
+ "conversation_id": "a-dev-039",
+ "wrong": true,
+ "kinds": [
+  "wrong_modifications"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, medium, add almond_milk",
+    "pred": "1× americano, medium, substitute whole_milk"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: confirmed by the customer\n- 1 × Americano (Medium 12 oz): Almond milk instead of Whole milk\n- 1 × Bagel (Plain): add Avocado\nFulfillment: pickup\nPayment: card\nName: Dev",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 978,
+   "output_tokens": 0
+  },
+  "latency_ms": 574.1098939906806,
+  "cost_micros": 98,
+  "cached": false
+ }
+}

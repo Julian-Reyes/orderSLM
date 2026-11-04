@@ -1,0 +1,54 @@
+{
+ "id": "dev__a-dev-073",
+ "split": "dev",
+ "conversation_id": "a-dev-073",
+ "wrong": true,
+ "kinds": [
+  "field:time"
+ ],
+ "errors": {
+  "items": [],
+  "fields": {
+   "time": {
+    "gold": [
+     "provided",
+     "clock_time",
+     "22:30"
+    ],
+    "pred": [
+     "provided",
+     "clock_time",
+     "10:30"
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Supreme Pizza (Large 14-inch)\n- 1 × Breadsticks\nFulfillment: delivery to 450 Grant Street, apartment 12\nTime: 10:30\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.93,
+     "false": 0.06999999999999995
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2056,
+   "output_tokens": 21
+  },
+  "latency_ms": 306.65636097546667,
+  "cost_micros": 87,
+  "cached": false
+ }
+}

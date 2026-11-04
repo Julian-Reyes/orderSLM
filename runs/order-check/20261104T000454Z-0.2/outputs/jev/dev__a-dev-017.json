@@ -1,0 +1,51 @@
+{
+ "id": "dev__a-dev-017",
+ "split": "dev",
+ "conversation_id": "a-dev-017",
+ "wrong": true,
+ "kinds": [
+  "missing_item",
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× half cheese_pizza / cheese_pizza, extra_large"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× half mushroom_pizza / olives, extra_large"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × half-and-half pizza (half 'mushroom_pizza' (NOT on the menu) / half 'olives' (NOT on the menu)) (size 'extra_large': NOT a size of this item)\n- 2 × Garlic Knots\nFulfillment: not stated\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.05,
+     "false": 0.95
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2019,
+   "output_tokens": 21
+  },
+  "latency_ms": 271.3867579586804,
+  "cost_micros": 85,
+  "cached": false
+ }
+}

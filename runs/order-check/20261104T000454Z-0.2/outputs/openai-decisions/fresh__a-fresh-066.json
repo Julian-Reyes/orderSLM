@@ -1,0 +1,60 @@
+{
+ "id": "fresh__a-fresh-066",
+ "split": "fresh",
+ "conversation_id": "a-fresh-066",
+ "wrong": true,
+ "kinds": [
+  "missing_item",
+  "wrong_modifications",
+  "extra_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "missing_item",
+    "gold": "1× breakfast_sandwich, croissant"
+   },
+   {
+    "kind": "wrong_modifications",
+    "parts": [
+     "modifications"
+    ],
+    "gold": "1× americano, large, add oat_milk",
+    "pred": "1× americano, large, substitute whole_milk"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× croissant, croissant"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Croissant (size 'croissant': NOT a size of this item)\n- 1 × Americano (Large 16 oz): Oat milk instead of Whole milk\nFulfillment: pickup\nPayment: card\nName: Nora",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.22,
+     "false": 0.78
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 944,
+   "output_tokens": 0
+  },
+  "latency_ms": 371.31696508731693,
+  "cost_micros": 95,
+  "cached": false
+ }
+}

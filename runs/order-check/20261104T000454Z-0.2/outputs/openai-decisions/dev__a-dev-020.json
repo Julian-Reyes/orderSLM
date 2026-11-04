@@ -1,0 +1,56 @@
+{
+ "id": "dev__a-dev-020",
+ "split": "dev",
+ "conversation_id": "a-dev-020",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity+modifications",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity+modifications",
+    "parts": [
+     "quantity",
+     "modifications"
+    ],
+    "gold": "2× cheeseburger, single",
+    "pred": "4× cheeseburger, single, remove pickle"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "2× cheeseburger, single, remove pickle"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 4 × Cheeseburger (Single patty): no Pickles\n- 3 × Fries (Large)\n- 4 × Coke\nFulfillment: delivery to 200 park ave 5th fl\nTime: 12:30\nPayment: card",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 752,
+   "output_tokens": 0
+  },
+  "latency_ms": 366.83676997199655,
+  "cost_micros": 76,
+  "cached": false
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-066",
+ "split": "dev",
+ "conversation_id": "a-dev-066",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Bacon Burger: add Jalapeños\n- 1 × Fries (Large)\n- 1 × Milkshake (Vanilla)\nFulfillment: pickup\nTime: at 9:45\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.95,
+     "false": 0.050000000000000044
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 854,
+   "output_tokens": 21
+  },
+  "latency_ms": 354.9635619856417,
+  "cost_micros": 36,
+  "cached": false
+ }
+}

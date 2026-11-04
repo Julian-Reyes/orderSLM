@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-058",
+ "split": "dev",
+ "conversation_id": "a-dev-058",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × BBQ Chicken Pizza (Large 14-inch)\n- 1 × Garlic Knots\nFulfillment: not stated\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.65,
+     "false": 0.35
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2018,
+   "output_tokens": 21
+  },
+  "latency_ms": 209.62465496268123,
+  "cost_micros": 85,
+  "cached": false
+ }
+}

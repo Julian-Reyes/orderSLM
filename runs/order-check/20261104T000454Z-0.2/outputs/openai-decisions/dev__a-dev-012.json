@@ -1,0 +1,40 @@
+{
+ "id": "dev__a-dev-012",
+ "split": "dev",
+ "conversation_id": "a-dev-012",
+ "wrong": true,
+ "kinds": [
+  "broken_answer"
+ ],
+ "errors": {
+  "invalid": "order: Value error, address is only not_applicable for pickup"
+ },
+ "order_text": "No new order was placed in this chat. An order the customer placed before this chat (one they describe, ask about or complain about) is not part of this record.",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.0,
+     "false": 1.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1700,
+   "output_tokens": 0
+  },
+  "latency_ms": 1392.8039210150018,
+  "cost_micros": 170,
+  "cached": false
+ }
+}

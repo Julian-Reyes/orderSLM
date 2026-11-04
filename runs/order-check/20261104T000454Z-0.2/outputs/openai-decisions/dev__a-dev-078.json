@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-078",
+ "split": "dev",
+ "conversation_id": "a-dev-078",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Pepperoni Pizza (Large 14-inch): add extra House cheese blend\n- 2 × Coke (Can 12 oz)\nFulfillment: pickup\nTime: in 20 min\nPayment: cash",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1746,
+   "output_tokens": 0
+  },
+  "latency_ms": 304.055133019574,
+  "cost_micros": 175,
+  "cached": false
+ }
+}

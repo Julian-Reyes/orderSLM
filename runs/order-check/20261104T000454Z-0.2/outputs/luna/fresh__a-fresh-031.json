@@ -1,0 +1,46 @@
+{
+ "id": "fresh__a-fresh-031",
+ "split": "fresh",
+ "conversation_id": "a-fresh-031",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Supreme Pizza (Large 14-inch)\n- 2 × Supreme Pizza (Large 14-inch): no Black olives\n- 3 × Breadsticks\nFulfillment: delivery to 2201 hillcrest ave\nPayment: card",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"The customer ordered 5 Supreme pizzas, but the record lists 3 with olives and 2 without.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1732,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 36,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1455.5344990221784,
+  "cost_micros": 192,
+  "at": "2026-11-04T00:06:08.050529+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1732,
+   "completion_tokens": 36,
+   "total_tokens": 1768,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 1729,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

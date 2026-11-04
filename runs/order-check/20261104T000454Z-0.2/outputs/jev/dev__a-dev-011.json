@@ -1,0 +1,79 @@
+{
+ "id": "dev__a-dev-011",
+ "split": "dev",
+ "conversation_id": "a-dev-011",
+ "wrong": true,
+ "kinds": [
+  "wrong_combo_picks",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_combo_picks",
+    "parts": [
+     "combo_picks"
+    ],
+    "gold": "1× cheeseburger_combo, side=fries",
+    "pred": "1× cheeseburger_combo, side=fries, drink=coke"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "combo_choice",
+       "missing"
+      ],
+      1
+     ],
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ],
+    "pred": [
+     [
+      [
+       "fulfillment_method",
+       "missing"
+      ],
+      1
+     ]
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Cheeseburger Combo: side: Fries, drink: Coke\nFulfillment: not stated\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.68,
+     "false": 0.31999999999999995
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 803,
+   "output_tokens": 21
+  },
+  "latency_ms": 781.3622850226238,
+  "cost_micros": 34,
+  "cached": false
+ }
+}

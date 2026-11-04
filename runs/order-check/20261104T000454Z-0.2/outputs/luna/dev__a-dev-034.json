@@ -1,0 +1,46 @@
+{
+ "id": "dev__a-dev-034",
+ "split": "dev",
+ "conversation_id": "a-dev-034",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Supreme Pizza (Large 14-inch): artichoke hearts\n- 1 × Garlic Knots\nFulfillment: pickup\nPayment: card",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":false,\"problem\":\"Artichoke hearts are not an available Supreme Pizza topping on the menu, but the record lists them as an option.\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 1689,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 145,
+   "reasoning_tokens": 100
+  },
+  "latency_ms": 3646.024293033406,
+  "cost_micros": 242,
+  "at": "2026-11-04T00:05:22.050812+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 1689,
+   "completion_tokens": 145,
+   "total_tokens": 1834,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 1686,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 100,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

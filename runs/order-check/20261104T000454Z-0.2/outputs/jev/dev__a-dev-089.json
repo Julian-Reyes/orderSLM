@@ -1,0 +1,54 @@
+{
+ "id": "dev__a-dev-089",
+ "split": "dev",
+ "conversation_id": "a-dev-089",
+ "wrong": true,
+ "kinds": [
+  "field:payment"
+ ],
+ "errors": {
+  "items": [],
+  "fields": {
+   "payment": {
+    "gold": [
+     "unknown",
+     null,
+     true
+    ],
+    "pred": [
+     "cash",
+     null,
+     true
+    ]
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 3 × Pepperoni Pizza (Extra large 16-inch)\n- 2 × Cheese Pizza (Extra large 16-inch)\n- 2 × Sprite (2-liter bottle)\nFulfillment: pickup\nTime: 5\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.25,
+     "false": 0.75
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2039,
+   "output_tokens": 21
+  },
+  "latency_ms": 214.54990899655968,
+  "cost_micros": 86,
+  "cached": false
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-082",
+ "split": "fresh",
+ "conversation_id": "a-fresh-082",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Latte (Medium 12 oz): Oat milk instead of Whole milk\n- 1 × Hot Chocolate (Large 16 oz): Almond milk instead of Whole milk, no Whipped cream\n- 1 × Bagel (Sesame): add Avocado\nFulfillment: pickup\nPayment: card\nName: Grace",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.95,
+     "false": 0.050000000000000044
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1144,
+   "output_tokens": 21
+  },
+  "latency_ms": 461.6601209854707,
+  "cost_micros": 49,
+  "cached": false
+ }
+}

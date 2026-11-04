@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-002",
+ "split": "fresh",
+ "conversation_id": "a-fresh-002",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Cheeseburger (Single patty)\n- 1 × Fries (Large)\nFulfillment: delivery to 88 lincoln st apt 3\nPayment: not stated",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.92,
+     "false": 0.07999999999999996
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 868,
+   "output_tokens": 21
+  },
+  "latency_ms": 234.41015800926834,
+  "cost_micros": 37,
+  "cached": false
+ }
+}

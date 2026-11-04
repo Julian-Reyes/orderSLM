@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-038",
+ "split": "fresh",
+ "conversation_id": "a-fresh-038",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Pepperoni Pizza (Personal 8-inch)\n- 1 × Pepperoni Pizza (Personal 8-inch): no House cheese blend\nFulfillment: pickup\nPayment: cash",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 1.0,
+     "false": 0.0
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1724,
+   "output_tokens": 0
+  },
+  "latency_ms": 781.2102129682899,
+  "cost_micros": 173,
+  "cached": false
+ }
+}

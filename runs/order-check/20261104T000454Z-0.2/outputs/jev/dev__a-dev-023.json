@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-023",
+ "split": "dev",
+ "conversation_id": "a-dev-023",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Cheese Pizza (Large 14-inch)\n- 1 × Coke (2-liter bottle)\nFulfillment: delivery to 140 river rd\nPayment: card",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.02,
+     "false": 0.98
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2085,
+   "output_tokens": 21
+  },
+  "latency_ms": 227.25990402977914,
+  "cost_micros": 88,
+  "cached": false
+ }
+}

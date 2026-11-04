@@ -1,0 +1,55 @@
+{
+ "id": "fresh__a-fresh-016",
+ "split": "fresh",
+ "conversation_id": "a-fresh-016",
+ "wrong": true,
+ "kinds": [
+  "wrong_variant",
+  "missing_item"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_variant",
+    "parts": [
+     "variant"
+    ],
+    "gold": "1× muffin, banana_nut",
+    "pred": "1× muffin, chocolate_chip"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "1× latte, large, substitute whole_milk"
+   }
+  ],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Muffin (Chocolate chip)\n- 1 × Muffin (Chocolate chip)\nFulfillment: pickup\nPayment: card\nName: dana",
+ "checker": "openai-decisions",
+ "response": {
+  "provider": "openai-decisions",
+  "model": "gpt-6-luna",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": false,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.03,
+     "false": 0.97
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 910,
+   "output_tokens": 0
+  },
+  "latency_ms": 250.06336998194456,
+  "cost_micros": 91,
+  "cached": false
+ }
+}

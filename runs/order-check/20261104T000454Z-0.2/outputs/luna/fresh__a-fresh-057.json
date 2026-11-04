@@ -1,0 +1,81 @@
+{
+ "id": "fresh__a-fresh-057",
+ "split": "fresh",
+ "conversation_id": "a-fresh-057",
+ "wrong": true,
+ "kinds": [
+  "wrong_quantity",
+  "missing_item",
+  "extra_item",
+  "field:missing"
+ ],
+ "errors": {
+  "items": [
+   {
+    "kind": "wrong_quantity",
+    "parts": [
+     "quantity"
+    ],
+    "gold": "3× bacon_burger",
+    "pred": "2× bacon_burger"
+   },
+   {
+    "kind": "missing_item",
+    "gold": "1× off-menu 'one of them'"
+   },
+   {
+    "kind": "extra_item",
+    "pred": "1× bacon_burger"
+   }
+  ],
+  "fields": {
+   "missing": {
+    "gold": [
+     [
+      [
+       "item_menu_match",
+       "ambiguous"
+      ],
+      1
+     ]
+    ],
+    "pred": []
+   }
+  }
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Bacon Burger\n- 1 × Bacon Burger\nFulfillment: pickup\nPayment: card",
+ "checker": "luna",
+ "response": {
+  "config_id": "openai/gpt-6-luna@low",
+  "model": "gpt-6-luna",
+  "text": "{\"matches\":true,\"problem\":\"\"}",
+  "finish_reason": "stop",
+  "usage": {
+   "input_tokens": 672,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 16,
+   "reasoning_tokens": 0
+  },
+  "latency_ms": 1028.9003669749945,
+  "cost_micros": 76,
+  "at": "2026-11-04T00:05:46.050303+00:00",
+  "cached": false,
+  "raw_usage": {
+   "prompt_tokens": 672,
+   "completion_tokens": 16,
+   "total_tokens": 688,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "audio_tokens": 0,
+    "accepted_prediction_tokens": 0,
+    "rejected_prediction_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-006",
+ "split": "fresh",
+ "conversation_id": "a-fresh-006",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 2 × Pepperoni Pizza (Large 14-inch)\n- 1 × Hawaiian Pizza (Medium 12-inch)\n- 2 × Garlic Knots\n- 1 × Coke (2-liter bottle)\n- 1 × Veggie Pizza (Small 10-inch): no Black olives\nFulfillment: delivery to 503 fulton st #2\nPayment: cash",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.94,
+     "false": 0.06000000000000005
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 2127,
+   "output_tokens": 21
+  },
+  "latency_ms": 272.2717169672251,
+  "cost_micros": 90,
+  "cached": false
+ }
+}

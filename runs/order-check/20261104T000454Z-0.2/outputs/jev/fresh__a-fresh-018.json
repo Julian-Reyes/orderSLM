@@ -1,0 +1,39 @@
+{
+ "id": "fresh__a-fresh-018",
+ "split": "fresh",
+ "conversation_id": "a-fresh-018",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 6 × Drip Coffee (Medium 12 oz)\n- 2 × Hot Chocolate (Large 16 oz)\nFulfillment: pickup\nTime: at 9\nPayment: card\nName: ravi",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.96,
+     "false": 0.040000000000000036
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1098,
+   "output_tokens": 21
+  },
+  "latency_ms": 213.16729194950312,
+  "cost_micros": 47,
+  "cached": false
+ }
+}

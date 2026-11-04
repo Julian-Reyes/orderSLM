@@ -1,0 +1,39 @@
+{
+ "id": "dev__a-dev-051",
+ "split": "dev",
+ "conversation_id": "a-dev-051",
+ "wrong": false,
+ "kinds": [],
+ "errors": {
+  "items": [],
+  "fields": {}
+ },
+ "order_text": "Status: still open (not confirmed yet)\n- 1 × Meat Lovers Pizza (Large 14-inch)\nFulfillment: pickup\nTime: at 6\nPayment: not stated",
+ "checker": "jev",
+ "response": {
+  "provider": "jev",
+  "model": "jev-1.14.0",
+  "answers": {
+   "order_ok": {
+    "name": "order_ok",
+    "type": "boolean",
+    "choice": null,
+    "score": null,
+    "boolean": true,
+    "confidence": null,
+    "probabilities": {
+     "true": 0.94,
+     "false": 0.06000000000000005
+    },
+    "refused": false
+   }
+  },
+  "usage": {
+   "input_tokens": 1969,
+   "output_tokens": 21
+  },
+  "latency_ms": 498.38614801410586,
+  "cost_micros": 83,
+  "cached": false
+ }
+}
