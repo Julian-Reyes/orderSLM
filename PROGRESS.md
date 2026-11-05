@@ -6,28 +6,38 @@ _Last updated 2026-11-05._
 
 ## Start here next session
 
-### M6 packaging on Kaggle (2026-11-04/05, Brasília; Julian: "can we use kaggle for now")
+### M6 packaging done on Kaggle (2026-11-05, Brasília; write-up `docs/PACKAGING.md`)
 
-The picked student is merged, converted to GGUF (F16 1.52 GB, Q8_0 0.81 GB, Q4_K_M 0.53 GB) and served with llama.cpp
-b11700 (`make deploy`, `kaggle/m6-deploy/run.py`, docs/KAGGLE.md job D). GGUF files stay on Kaggle. $0.
+The picked student was merged, converted to GGUF and served with llama.cpp b11700 on Kaggle (`make deploy`,
+`kaggle/m6-deploy/run.py`). The GGUF files stay on Kaggle. $0.
 
-- **Run 1 = `runs/student-deploy/20261104T115735Z`** (2026-11-04 08:58 → 20:15): merge + convert worked, but the
-  prebuilt CUDA llama-server **never loaded its CUDA backend** and silently ran on the CPU (0 MiB GPU memory, 6-9
-  output tok/s), so it hit its 11.25 h stop. Kept: **dev in full for F16 and Q8_0: both 69/91 exact, 71/91 same
-  action, the same as the fp16 transformers run**; same answer text as transformers 265/268 (F16), 252/268 (Q8_0).
-  Its speed numbers are void (marked "GPU not used" in its report). Fresh partial (F16 139, Q8_0 45 of 278).
-- **Run 2 = `runs/student-deploy/20261105T121614Z`** (Julian: "the smaller run", "make sure it stops if it doesn't
-  work"), pushed 2026-11-05 ~09:20: Q4_K_M dev + fresh, F16 + Q8_0 fresh, a 50-request GPU timing sample for F16 and
-  Q8_0, and the same 50 on the CPU for Q8_0 + Q4_K_M. Stop rules: llama-server must list a CUDA device first (else a
-  source build for sm_75, else nothing runs); after each GPU job's first answer the GPU must hold ≥ 256 MiB and give
-  ≥ 20 output tok/s, and 3 failed requests in a row stop everything; 4 h deadline. **Next: pull, `make deploy
-  ARGS="import runs/student-deploy/20261105T121614Z"`, compare each format with the fp16 runs, write up.**
-- **Run 2, kernel v2 (09:17 → 09:21) stopped itself, as designed:** `llama-server --list-devices` listed no device;
-  cause found, **`libcuda.so.1 => not found`**: the kernel replaced LD_LIBRARY_PATH with the llama.cpp folders, hiding
-  the NVIDIA driver (also why run 1 ran on the CPU). The source-build fallback failed in 8 s for the same reason
-  (CMake: no `CUDA::cuda_driver`). Kept in `runs/student-deploy/20261105T121614Z/attempt-1-kernel-v2/`. Fix: the
-  driver's folder and the machine's LD_LIBRARY_PATH are added, not replaced; the source build is given the driver
-  library. Same session and plan, **kernel v3 pushed 2026-11-05 ~09:35**.
+| format | size | dev exact / same action | fresh exact / same action | T4 p50 latency | CPU (4 cores) p50 |
+|---|---|---|---|---|---|
+| fp16 transformers | 1.5 GB | 69 / 71 of 91 | 69 / 69 of 90 | 13.5 s | |
+| F16 | 1.52 GB | 69 / 71 | 69 / 69 | 3.9 s | |
+| **Q8_0** | 0.81 GB | **69 / 71** | **69 / 69** | 2.6 s | 50 s |
+| Q4_K_M | 0.53 GB | 66 / 67 | 66 / 67 | 2.3 s | 39 s |
+
+- **Q8_0 is exactly as accurate as fp16.** 0 chats differ on dev or fresh.
+- **Q4_K_M is 3 exact orders lower per split.** Not significant (p = 0.51); more invalid answers.
+- **Recommendation: ship Q8_0 (Julian decides).**
+- The CPU is slow because of the long prompt (77–110 prompt tok/s). Prompt-prefix caching and the Mac mini are not
+  measured yet.
+- Runs:
+  - `runs/student-deploy/20261104T115735Z` (run 1): ran on the CPU by mistake, so its speed numbers are void; its dev
+    accuracy for F16 and Q8_0 is kept.
+  - `runs/student-deploy/20261105T121614Z` (run 2): the smaller run, with stop rules. Kernel v2 stopped itself after
+    4 min, which found the cause: LD_LIBRARY_PATH was replaced, hiding `libcuda.so.1`. Kernel v3 then ran all jobs on
+    the GPU in 2.2 h.
+- Compares: `runs/student-compare/20261105T143617Z` (dev), `…T143627Z` (fresh).
+
+**Next, for Julian to pick:**
+1. Confirm Q8_0.
+2. M7 router benchmark (estimate before any paid call).
+3. Mac mini numbers (Metal/MLX, prompt caching).
+4. The parked items: the sizeless-item reply, checker v0.3.
+
+Push to GitHub pending (ask first).
 
 ### Where we left off (2026-11-04, Brasília)
 
@@ -593,7 +603,7 @@ _Older notes below (2026-10-22, M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)**; **2026-11-04: finalize@0.2 catches ids not on the menu (0.8B v2 fresh exact 67 → 69/90, used for fixes); checker parked (Julian)** |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)**; **2026-11-04: finalize@0.2 catches ids not on the menu (0.8B v2 fresh exact 67 → 69/90, used for fixes); checker parked (Julian)**; **2026-11-05: packaged as GGUF on Kaggle (llama.cpp b11700): Q8_0 0.81 GB = fp16 accuracy (dev 69/91, fresh 69/90), T4 p50 2.6 s; Q4_K_M 0.53 GB 66/91, 66/90 (n.s.); `docs/PACKAGING.md`** |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
