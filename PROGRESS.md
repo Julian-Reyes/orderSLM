@@ -6,6 +6,15 @@ _Last updated 2026-11-05._
 
 ## Start here next session
 
+### Website case study (2026-11-05; Julian: interview this week, "get the information and data we have live")
+
+- Q8_0 confirmed by Julian (2026-11-05). Pushed `2b5711b0` to `milestone-4` with OK (secrets check clean).
+- `make site-data` → `docs/site/case-study.json`: every number for the page, from saved runs (tests:
+  `tests/test_site_data.py`).
+- Page `orderslm/index.html` + `data.json` + a project card (`projects/index.html`, `projects/assets/img/orderslm.svg`)
+  in the site repo `Julian-Reyes.github.io` (julianreyes.dev). README rewritten with the results. **Waiting for
+  Julian's OK to push the site and to merge `milestone-4` into `main`.**
+
 ### M6 packaging done on Kaggle (2026-11-05, Brasília; write-up `docs/PACKAGING.md`)
 
 The picked student was merged, converted to GGUF and served with llama.cpp b11700 on Kaggle (`make deploy`,

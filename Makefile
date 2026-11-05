@@ -3,7 +3,7 @@
 UV ?= uv
 RUN := $(UV) run
 
-.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train student-dev student-compare student-errors deploy eval router-bench demo
+.PHONY: test lint format check menus annotate annotate-test annotate-api web pizza split-stats lock-test verify-test smoke teacher-bakeoff bakeoff-chart mega-menu label-dev label-audit julia-audit julia-variants kaggle-push kaggle-status kaggle-pull m4-report synth label student-bakeoff student-data mlx-smoke train-smoke train student-dev student-compare student-errors deploy site-data eval router-bench demo
 
 test:
 	$(RUN) pytest
@@ -108,6 +108,9 @@ student-compare:
 student-errors:
 	$(RUN) python -m orderslm.eval.student_errors $(ARGS)
 # M6 deployment check on Kaggle: merge + GGUF + quantize, llama.cpp on dev + fresh (export / import).
+# Website case-study data (julianreyes.dev/orderslm): every number from saved runs → docs/site/case-study.json
+site-data:
+	$(RUN) python -m orderslm.eval.site_data
 deploy:
 	$(RUN) python -m orderslm.train.kaggle_deploy $(ARGS)
 # Order checker pilot (spec §11b): the teacher on the picked student's wrong orders.
