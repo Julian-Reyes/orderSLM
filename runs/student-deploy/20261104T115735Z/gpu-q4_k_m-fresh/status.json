@@ -1,0 +1,21 @@
+{
+  "status": "paused",
+  "answered": 0,
+  "of": 278,
+  "cmd": [
+    "/tmp/deploy/llama.cpp/cuda/llama-b11700/llama-server",
+    "-m",
+    "/kaggle/working/gguf/q4_k_m.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--no-webui",
+    "-ngl",
+    "all"
+  ]
+}

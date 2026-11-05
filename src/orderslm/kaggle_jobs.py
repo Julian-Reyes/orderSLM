@@ -20,6 +20,9 @@ from pathlib import Path
 from orderslm.paths import ROOT
 
 KAGGLE_DIR = ROOT / "kaggle"
+# Jobs whose kernel output holds files too big to pull (`kaggle kernels output --file-pattern`, re.search on each
+# file name): m6-deploy keeps its GGUF models on Kaggle.
+PULL_PATTERNS = {"m6-deploy": r"^(?!.*\.gguf$)"}
 
 
 def _kaggle(*args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -131,7 +134,8 @@ def pull(job: str) -> Path:
     if out.exists():
         shutil.rmtree(out)
     out.mkdir()
-    r = _kaggle("kernels", "output", _meta(job)["id"], "-p", str(out))
+    pattern = ["--file-pattern", PULL_PATTERNS[job]] if job in PULL_PATTERNS else []
+    r = _kaggle("kernels", "output", _meta(job)["id"], "-p", str(out), *pattern)
     print(r.stdout.strip())
     print(f"Saved {out.relative_to(ROOT)}/: {sorted(p.name for p in out.iterdir())}")
     return out

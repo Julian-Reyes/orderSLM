@@ -2,9 +2,26 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-04._
+_Last updated 2026-11-05._
 
 ## Start here next session
+
+### M6 packaging on Kaggle (2026-11-04/05, Brasília; Julian: "can we use kaggle for now")
+
+The picked student is merged, converted to GGUF (F16 1.52 GB, Q8_0 0.81 GB, Q4_K_M 0.53 GB) and served with llama.cpp
+b11700 (`make deploy`, `kaggle/m6-deploy/run.py`, docs/KAGGLE.md job D). GGUF files stay on Kaggle. $0.
+
+- **Run 1 = `runs/student-deploy/20261104T115735Z`** (2026-11-04 08:58 → 20:15): merge + convert worked, but the
+  prebuilt CUDA llama-server **never loaded its CUDA backend** and silently ran on the CPU (0 MiB GPU memory, 6-9
+  output tok/s), so it hit its 11.25 h stop. Kept: **dev in full for F16 and Q8_0: both 69/91 exact, 71/91 same
+  action, the same as the fp16 transformers run**; same answer text as transformers 265/268 (F16), 252/268 (Q8_0).
+  Its speed numbers are void (marked "GPU not used" in its report). Fresh partial (F16 139, Q8_0 45 of 278).
+- **Run 2 = `runs/student-deploy/20261105T121614Z`** (Julian: "the smaller run", "make sure it stops if it doesn't
+  work"), pushed 2026-11-05 ~09:20: Q4_K_M dev + fresh, F16 + Q8_0 fresh, a 50-request GPU timing sample for F16 and
+  Q8_0, and the same 50 on the CPU for Q8_0 + Q4_K_M. Stop rules: llama-server must list a CUDA device first (else a
+  source build for sm_75, else nothing runs); after each GPU job's first answer the GPU must hold ≥ 256 MiB and give
+  ≥ 20 output tok/s, and 3 failed requests in a row stop everything; 4 h deadline. **Next: pull, `make deploy
+  ARGS="import runs/student-deploy/20261105T121614Z"`, compare each format with the fp16 runs, write up.**
 
 ### Where we left off (2026-11-04, Brasília)
 
@@ -20,8 +37,10 @@ Comparisons re-run: conclusions unchanged. Details in the M6 log.
 
 **New open item (found while fixing, not fixed):** a size the customer names on an item with **no sizes** ("a large
 water") gives the question "We don't have a large for the bottled water; we have . Which would you like?" (empty list,
-`core/replies.py` q_variant_not_on_menu). The guide doesn't say what to do (ask, or ignore the size). Needs Julian's
-rule.
+`core/replies.py` q_variant_not_on_menu). **Julian's rule (2026-11-04), not built yet ("forget it for now"):** say
+"We don't have a large for the bottled water; we just have one size (500 mL)." (keep it asked, `item_variant /
+missing`). Needs an optional menu field for the one size (`size_text`, menu contract bump) with Julian's values for
+Coke, Sprite, Lemonade (Corner Patty) and Bottled Water (Halfmoon); without a value: "…we just have one size."
 
 **Done 2026-11-03 (M6):**
 
