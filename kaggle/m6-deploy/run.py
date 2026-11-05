@@ -258,10 +258,39 @@ def find_file(root: Path, name: str) -> Path:
     return hits[0]
 
 
+DRIVER_DIRS = [
+    "/usr/local/nvidia/lib64",
+    "/usr/local/nvidia/lib",
+    "/usr/lib64-nvidia",
+    "/usr/lib/x86_64-linux-gnu",
+]
+
+
+def driver_lib() -> Path | None:
+    """The NVIDIA driver library (libcuda.so.1) as the system loader finds it (ctypes: no CUDA context, so no GPU
+    memory used), else the first one in a usual place. Run 2 (2026-11-05): the CUDA backend could not find it once
+    LD_LIBRARY_PATH held only the llama.cpp folders."""
+    try:
+        import ctypes
+
+        ctypes.CDLL("libcuda.so.1")
+        for line in Path("/proc/self/maps").read_text().splitlines():
+            path = line.split()[-1]
+            if "/libcuda.so" in path and Path(path).exists():
+                return Path(path)
+    except Exception:
+        pass
+    return next((Path(d) / "libcuda.so.1" for d in DRIVER_DIRS if (Path(d) / "libcuda.so.1").exists()), None)
+
+
 def lib_dirs(*roots: Path) -> str:
-    """Every folder holding a shared library in the extracted builds (the binaries load their ggml backends)."""
+    """Every folder holding a shared library in the extracted builds (the binaries load their ggml backends), then
+    the driver's folder and the machine's own LD_LIBRARY_PATH (added to, never replaced)."""
     dirs = sorted({str(p.parent) for r in roots for p in r.rglob("*.so*")})
-    return os.pathsep.join(dirs)
+    if (drv := driver_lib()) is not None:
+        dirs.append(str(drv.parent))
+    dirs += [d for d in os.environ.get("LD_LIBRARY_PATH", "").split(os.pathsep) if d]
+    return os.pathsep.join(dict.fromkeys(dirs))
 
 
 def probe(build: dict) -> dict:
@@ -274,7 +303,7 @@ def probe(build: dict) -> dict:
         out = (r.stdout + r.stderr)[-3000:]
     except (OSError, subprocess.SubprocessError) as e:
         out = f"{type(e).__name__}: {e}"
-    info: dict = {"list_devices": out, "cuda": "CUDA0" in out}
+    info: dict = {"list_devices": out, "cuda": "CUDA0" in out, "driver_lib": str(driver_lib())}
     lib = next(iter(sorted(Path(build["server"]).parent.glob("libggml-cuda.so*"))), None)
     if lib:
         r = subprocess.run(["ldd", str(lib)], capture_output=True, text=True, env=env)
@@ -297,6 +326,8 @@ def build_cuda(source: Path) -> dict:
     configure = [cmake, "-S", str(source), "-B", str(build), "-DCMAKE_BUILD_TYPE=Release", "-DGGML_CUDA=ON"]
     configure += ["-DCMAKE_CUDA_ARCHITECTURES=75", f"-DCMAKE_CUDA_COMPILER={nvcc}", "-DGGML_NATIVE=OFF"]
     configure += ["-DLLAMA_CURL=OFF", "-DLLAMA_BUILD_TESTS=OFF"]
+    if (drv := driver_lib()) is not None:  # run 2: CMake found no CUDA::cuda_driver (no toolkit stub)
+        configure.append(f"-DCUDA_cuda_driver_LIBRARY={drv}")
     compile_ = [cmake, "--build", str(build), "--target", "llama-server", "-j", str(os.cpu_count())]
     for cmd, limit in ((configure, 600), (compile_, 3000)):
         log(f"build: {' '.join(cmd[:4])} ...")
@@ -304,7 +335,7 @@ def build_cuda(source: Path) -> dict:
         if r.returncode != 0:
             raise RuntimeError(f"{cmd[1]} {cmd[2]} failed: {(r.stdout + r.stderr)[-1500:]}")
     server = find_file(build, "llama-server")
-    return {"server": str(server), "ld_library_path": str(server.parent), "nvcc": nvcc}
+    return {"server": str(server), "ld_library_path": lib_dirs(build / "bin"), "nvcc": nvcc}
 
 
 def setup_llama(run: dict) -> dict:

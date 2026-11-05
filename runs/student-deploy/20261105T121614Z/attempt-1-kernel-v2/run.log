@@ -1,0 +1,13 @@
+12:17:47 session 20261105T121614Z: torch 2.11.0+cu130, transformers 5.20.2, {'cpu_count': 4, 'cpu_model': 'Intel(R) Xeon(R) CPU @ 2.00GHz', 'gpus': ['Tesla T4, 580.178.04, 15360 MiB', 'Tesla T4, 580.178.04, 15360 MiB'], 'host_memory_gb': 33.7}
+12:17:47 download https://github.com/ggml-org/llama.cpp/archive/refs/tags/b11700.tar.gz
+12:17:55 download https://github.com/ggml-org/llama.cpp/releases/download/b11700/llama-b11700-bin-ubuntu-cuda-12.8-x64.tar.gz
+12:18:12 download https://github.com/ggml-org/llama.cpp/releases/download/b11700/cudart-llama-b11700-bin-ubuntu-cuda-12.8-x64.tar.gz
+12:19:01 download https://github.com/ggml-org/llama.cpp/releases/download/b11700/llama-b11700-bin-ubuntu-x64.tar.gz
+12:19:15 the prebuilt CUDA build sees no GPU: {'list_devices': 'Available devices:\n  (none)\n', 'cuda': False, 'ldd_libggml_cuda_not_found': ['libcuda.so.1 => not found']}; building from source
+12:19:15 build: /usr/local/bin/cmake -S /tmp/deploy/llama.cpp/source/llama.cpp-b11700 -B ...
+12:19:23 llama_cpp: failed: RuntimeError: -S /tmp/deploy/llama.cpp/source/llama.cpp-b11700 failed: a/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Using CMAKE_CUDA_ARCHITECTURES=75 CMAKE_CUDA_ARCHITECTURES_NATIVE=75-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0
+12:19:23 done

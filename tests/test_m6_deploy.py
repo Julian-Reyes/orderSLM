@@ -161,3 +161,14 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
         assert cpu["answered"] == kd.CPU_SAMPLE and cpu["vs_same_format_on_gpu"]["same_text"] == kd.CPU_SAMPLE
         assert (run_dir / f"cpu-{fmt}" / "outputs.jsonl").exists()
     shutil.rmtree(tmp_path / "runs")
+
+
+def test_llama_cpp_library_path_keeps_the_machines_own(tmp_path, monkeypatch):
+    """Run 2 (2026-11-05): replacing LD_LIBRARY_PATH hid libcuda.so.1, so the CUDA backend never loaded."""
+    k = _kernel(tmp_path, monkeypatch)
+    (tmp_path / "build").mkdir()
+    (tmp_path / "build" / "libggml-cuda.so").write_text("")
+    monkeypatch.setenv("LD_LIBRARY_PATH", "/usr/local/nvidia/lib64:/usr/local/cuda/lib64")
+    monkeypatch.setattr(k, "driver_lib", lambda: None)
+    dirs = k.lib_dirs(tmp_path / "build").split(":")
+    assert dirs == [str(tmp_path / "build"), "/usr/local/nvidia/lib64", "/usr/local/cuda/lib64"]

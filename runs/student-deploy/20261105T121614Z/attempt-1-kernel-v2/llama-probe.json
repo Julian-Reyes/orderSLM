@@ -1,0 +1,20 @@
+{
+  "cuda": {
+    "server": "/tmp/deploy/llama.cpp/cuda/llama-b11700/llama-server",
+    "ld_library_path": "/tmp/deploy/llama.cpp/cuda/llama-b11700:/tmp/deploy/llama.cpp/cudart/cudart-llama-b11700-bin-ubuntu-cuda-12.8-x64",
+    "probe": {
+      "list_devices": "Available devices:\n  (none)\n",
+      "cuda": false,
+      "ldd_libggml_cuda_not_found": [
+        "libcuda.so.1 => not found"
+      ]
+    }
+  },
+  "cpu": {
+    "server": "/tmp/deploy/llama.cpp/cpu/llama-b11700/llama-server",
+    "ld_library_path": "/tmp/deploy/llama.cpp/cpu/llama-b11700"
+  },
+  "quantize": "/tmp/deploy/llama.cpp/cpu/llama-b11700/llama-quantize",
+  "convert": "/tmp/deploy/llama.cpp/source/llama.cpp-b11700/convert_hf_to_gguf.py",
+  "cuda_build": "prebuilt CUDA 12.8"
+}

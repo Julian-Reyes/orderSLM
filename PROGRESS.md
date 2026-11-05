@@ -22,6 +22,12 @@ b11700 (`make deploy`, `kaggle/m6-deploy/run.py`, docs/KAGGLE.md job D). GGUF fi
   source build for sm_75, else nothing runs); after each GPU job's first answer the GPU must hold ≥ 256 MiB and give
   ≥ 20 output tok/s, and 3 failed requests in a row stop everything; 4 h deadline. **Next: pull, `make deploy
   ARGS="import runs/student-deploy/20261105T121614Z"`, compare each format with the fp16 runs, write up.**
+- **Run 2, kernel v2 (09:17 → 09:21) stopped itself, as designed:** `llama-server --list-devices` listed no device;
+  cause found, **`libcuda.so.1 => not found`**: the kernel replaced LD_LIBRARY_PATH with the llama.cpp folders, hiding
+  the NVIDIA driver (also why run 1 ran on the CPU). The source-build fallback failed in 8 s for the same reason
+  (CMake: no `CUDA::cuda_driver`). Kept in `runs/student-deploy/20261105T121614Z/attempt-1-kernel-v2/`. Fix: the
+  driver's folder and the machine's LD_LIBRARY_PATH are added, not replaced; the source build is given the driver
+  library. Same session and plan, **kernel v3 pushed 2026-11-05 ~09:35**.
 
 ### Where we left off (2026-11-04, Brasília)
 
