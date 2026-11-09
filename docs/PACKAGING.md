@@ -63,7 +63,7 @@ Measured on the same 50 seeded dev requests, one request at a time, with no prom
 - Q4_K_M saves 0.28 GB but loses 3 exact orders per split, gets more answers invalid, and its answers vary more
   between GPU and CPU. The loss isn't significant at 90 chats, but nothing here pays for it.
 
-Julian decides.
+**Decision: Q8_0 ships (Julian confirmed 2026-11-05).**
 
 ## How it was run
 

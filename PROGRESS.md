@@ -2,18 +2,29 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-05._
+_Last updated 2026-11-09._
 
 ## Start here next session
 
-### Website case study (2026-11-05; Julian: interview this week, "get the information and data we have live")
+### Next, for Julian to pick (2026-11-09)
 
-- Q8_0 confirmed by Julian (2026-11-05). Pushed `2b5711b0` to `milestone-4` with OK (secrets check clean).
-- `make site-data` → `docs/site/case-study.json`: every number for the page, from saved runs (tests:
-  `tests/test_site_data.py`).
-- Page `orderslm/index.html` + `data.json` + a project card (`projects/index.html`, `projects/assets/img/orderslm.svg`)
-  in the site repo `Julian-Reyes.github.io` (julianreyes.dev). README rewritten with the results. **Waiting for
-  Julian's OK to push the site and to merge `milestone-4` into `main`.**
+1. **M7 router benchmark** (recommended next; plan estimate < $1; tune on dev and estimate before any paid call).
+2. Mac mini numbers for the shipped Q8_0 (Metal/MLX, prompt-prefix caching); needs the GGUF from the Kaggle output.
+3. M8 demo, report, Hugging Face release (weights private for now, Julian 2026-10-20).
+4. Final sealed test evaluation, once, at the end.
+5. Parked: the sizeless-item reply, checker v0.3 (and which checker the bot uses).
+
+### Website case study live (2026-11-05)
+
+- **Live at https://julianreyes.dev/orderslm/** with a project card on julianreyes.dev/projects. Site repo
+  `Julian-Reyes.github.io` (branch `master`, GitHub Pages): `orderslm/index.html` + `orderslm/data.json` (a copy of
+  `docs/site/case-study.json`) + `projects/assets/img/orderslm.svg`. Julian pushed the site himself: this machine's
+  stored GitHub credential gets HTTP 403 on that repo (works for orderSLM).
+- A sticky section bar (links to every section, highlights the one being read) added 2026-11-05 (site `be0aa09`).
+- `make site-data` regenerates `docs/site/case-study.json` from saved runs (`tests/test_site_data.py` checks it is
+  current). After a new result: rerun it, copy the file to the site's `orderslm/data.json`, and update the page text.
+- orderSLM: `6a9bad5a` pushed to `milestone-4`; `main` fast-forwarded to it and pushed (2026-11-05, Julian's OK).
+- Q8_0 confirmed as the shipped format (Julian, 2026-11-05).
 
 ### M6 packaging done on Kaggle (2026-11-05, Brasília; write-up `docs/PACKAGING.md`)
 
@@ -29,7 +40,7 @@ The picked student was merged, converted to GGUF and served with llama.cpp b1170
 
 - **Q8_0 is exactly as accurate as fp16.** 0 chats differ on dev or fresh.
 - **Q4_K_M is 3 exact orders lower per split.** Not significant (p = 0.51); more invalid answers.
-- **Recommendation: ship Q8_0 (Julian decides).**
+- **Shipped: Q8_0 (Julian confirmed 2026-11-05).**
 - The CPU is slow because of the long prompt (77–110 prompt tok/s). Prompt-prefix caching and the Mac mini are not
   measured yet.
 - Runs:
@@ -40,13 +51,6 @@ The picked student was merged, converted to GGUF and served with llama.cpp b1170
     the GPU in 2.2 h.
 - Compares: `runs/student-compare/20261105T143617Z` (dev), `…T143627Z` (fresh).
 
-**Next, for Julian to pick:**
-1. Confirm Q8_0.
-2. M7 router benchmark (estimate before any paid call).
-3. Mac mini numbers (Metal/MLX, prompt caching).
-4. The parked items: the sizeless-item reply, checker v0.3.
-
-Push to GitHub pending (ask first).
 
 ### Where we left off (2026-11-04, Brasília)
 
@@ -612,13 +616,12 @@ _Older notes below (2026-10-22, M6 session 1 imported)._
 | 3 | Teacher bake-off | ✅ Done 2026-10-15 (merged to main, not pushed): **teacher `openai/gpt-6-luna@low`**, prompt `teacher-extract@0.4`, code rules `core/finalize`; write-up `docs/TEACHER_BAKEOFF.md`; spend $0.96; details in "M3 so far" |
 | 4 | Synthetic generation + labeling (order + intents; mega-menu share; label audit) | Data generated and labeled 2026-10-16 (p3 pilot, b1 bulk 1,476, m1 mega 391; M4 spend $2.69); label audit (§11d) open |
 | 5 | Student bake-off | ✅ Done 2026-10-20 (on `milestone-4`, not pushed): **keep Qwen3.5-0.8B + 2B**; write-up `docs/STUDENT_BAKEOFF.md`; $0 (Kaggle) |
-| 6 | LoRA training (intent + order) + distillation eval; order checker | Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)**; **2026-11-04: finalize@0.2 catches ids not on the menu (0.8B v2 fresh exact 67 → 69/90, used for fixes); checker parked (Julian)**; **2026-11-05: packaged as GGUF on Kaggle (llama.cpp b11700): Q8_0 0.81 GB = fp16 accuracy (dev 69/91, fresh 69/90), T4 p50 2.6 s; Q4_K_M 0.53 GB 66/91, 66/90 (n.s.); `docs/PACKAGING.md`** |
+| 6 | LoRA training (intent + order) + distillation eval; order checker | ✅ Done 2026-11-05 (Q8_0 shipped; the test-set comparisons wait for the final eval). Started 2026-10-20: training data built (`make student-data`); MLX smoke test 2026-10-21: stock mlx-lm OOM, PR #1870 patch verified then parked; **Kaggle T4 smoke test done 2026-10-21** (fla works, fp16 stable, one pass ≈ 3.1 h 0.8B / 3.9 h 2B); **session 1 2026-10-22**: 2B single done (val 0.0089), 0.8B killed at step 147; **session 2 2026-10-23**: 2B mixed paused at 534/560 (val 0.0098), 0.8B resume + scoring failed (dataset upload skipped subfolders; fixed); session 3a: **2B single dev: intents 236/268, exact orders 59/91**; 2B mixed resume failed (RNG-state bug, fixed); **session 3b: 2B mixed done (val 0.0095)**; **session 4 (2026-10-24): 0.8B done (val 0.0097); all three scored on dev: intents 244 / 236 / 241 of 268, exact orders 64 / 59 / 65 of 91 (0.8B / 2B single / 2B mixed)**; **paired comparison 2026-10-25: no significant differences except fewer invalid answers for the 0.8B vs the 2B single**; **error review 2026-10-25: shared mistakes from thin training data (`docs/STUDENT_ERRORS.md`)**; **targeted batch t3 2026-10-25: 577 labeled (19 hand-fixed), 576 usable; hand-written top-up t4: 122 chats, all labeled (28 by hand), Jev-audited**; **v0.2 (2026-10-26/27): 0.8B v2 + 2B mixed v2 + 2B single v2 trained; on fresh, exact orders 54→67 (0.8B) and 52→70 (2B mixed) of 90, both significant; 0.8B v2 vs 2B mixed v2 n.s.**; **v0.2 session 3 (2026-11-03): 2B single v2 on fresh exact orders 51→69 of 90 (p<0.001); the three v2 students don't differ significantly**; **2026-11-03: order openers are PLACE_ORDER (13 gold messages), scorer@0.3 adds a same-action order match**; **fresh reviewed by Julian: 90/90, 0 corrected**; **student picked: Qwen3.5-0.8B single v2**; **order checker pilot: Luna caught 32/42 of its wrong orders ($0.0032)**; **checker v0.2: caught / false alarms Luna 33/42 / 6/42, Jev 28/42 / 2/42, Decisions 25/42 / 4/42 ($0.0268); scorer address gap found and fixed (scorer@0.4: 0.8B v2 dev 69 / 71 of 91)**; **2026-11-04: finalize@0.2 catches ids not on the menu (0.8B v2 fresh exact 67 → 69/90, used for fixes); checker parked (Julian)**; **2026-11-05: packaged as GGUF on Kaggle (llama.cpp b11700): Q8_0 0.81 GB = fp16 accuracy (dev 69/91, fresh 69/90), T4 p50 2.6 s; Q4_K_M 0.53 GB 66/91, 66/90 (n.s.); `docs/PACKAGING.md`** |
 | 7 | Decision providers (router + cross-check, checker, narrowing, item chooser) + architecture comparison | Not started |
 | 8 | Demo, report, Hugging Face release | Not started |
 
-**Spend to date: $0.8011** (docs/COSTS.md): M3 smoke tests, teacher bake-off pilot, second bake-off, head-to-head. No model downloads,
-training or deployment so far.
-No results exist yet: the rules baselines have **not** been scored on anything (no dev/test set exists).
+**Spend to date: $6.6284 of the $10 ceiling** (docs/COSTS.md, itemized there). All training, student scoring and
+packaging ran free on Kaggle.
 
 ## M4 so far (2026-10-16)
 
