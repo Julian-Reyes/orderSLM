@@ -6,13 +6,35 @@ _Last updated 2026-11-09._
 
 ## Start here next session
 
-### Next, for Julian to pick (2026-11-09)
+### Student improvement round v3 (2026-11-09; Julian: skip M7, "fix the student", then "you write and label all of them I dont want to spend more money anymore")
 
-1. **M7 router benchmark** (recommended next; plan estimate < $1; tune on dev and estimate before any paid call).
-2. Mac mini numbers for the shipped Q8_0 (Metal/MLX, prompt-prefix caching); needs the GGUF from the Kaggle output.
-3. M8 demo, report, Hugging Face release (weights private for now, Julian 2026-10-20).
-4. Final sealed test evaluation, once, at the end.
-5. Parked: the sizeless-item reply, checker v0.3 (and which checker the bot uses).
+- **M7 router benchmark: skipped** (Julian, 2026-11-09). The site and write-up show three comparisons, not four.
+- **Step 1, code fixes: none worth making.** Error reviews of the shipped 0.8B v2 (`runs/student-errors/20261109T133033Z`
+  dev 22/91 wrong, `…T133808Z` fresh 21/90; `student-errors@0.2` now reads fresh runs too): the remaining misses are
+  misreadings (address 104/140, "2 hundreds" = $20, a payment method from "already sent the payment"), each a one-off;
+  the `missing` list differences are judgment calls (ambiguous vs off-menu). A rule per chat would tune to dev.
+- **Step 2, training data v3 = batch t5 (done, $0):** 300 targeted chats **written and labeled by hand** (Claude in the
+  session; `runs/synth/t5/chats_*.py`, built and checked by `runs/synth/t5/build.py` with `parse_label`; 0 drops; no
+  near-duplicates vs dev, fresh or the 3,073 training chats). Targets (`cards.V3_WEIGHTS`, from the dev + fresh misses):
+  split lines 50, vague quantity 50 (`quantity: null`), unstated size 30, vague references 30 (`unmatched_text` +
+  `item_menu_match`), late changes 60 (mostly removals), milk choices 30 (add on drip/americano, substitute on
+  latte/cappuccino/hot chocolate), unit sizes 20 ("2 liter", "12 oz", sizes a menu lacks → `unmatched_variant_text`),
+  item-less openers 30 (`PLACE_ORDER` per Julian's 2026-11-03 rule; teacher-label@0.7 still says SMALL_TALK, but the
+  training target is only the last message's intent, and older batches rarely end on an opener). Labels follow
+  teacher-label@0.7 otherwise (`teacher-label@0.7+hand`).
+- **Training data `student-data@0.3`** = v0.2 + t5: single 2,813 train / 148 valid (v0.2 kept every earlier
+  validation chat; t5 adds 15).
+- **Next:** retrain the 0.8B single on v0.3 on Kaggle (free, ~7 h; ask Julian before the push), then measure on a new
+  fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
+  training chats and fresh-2 would share a writer (Claude), which can flatter fresh-2; dev and fresh were Claude-written
+  too.
+
+### Later, for Julian to pick
+
+1. Mac mini numbers for the shipped Q8_0 (Metal/MLX, prompt-prefix caching); needs the GGUF from the Kaggle output.
+2. M8 demo, report, Hugging Face release (weights private for now, Julian 2026-10-20).
+3. Final sealed test evaluation, once, at the end.
+4. Parked: the sizeless-item reply, checker v0.3 (and which checker the bot uses).
 
 ### Website case study live (2026-11-05)
 

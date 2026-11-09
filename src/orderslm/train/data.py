@@ -52,8 +52,14 @@ VERSIONS = {
         "mixed": ("p3", "b1", "m1", "t3", "t4"),
         "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4")),
     },
+    # Julian, 2026-11-09: + t5, 300 targeted chats written and labeled by hand (training data v3, $0)
+    "student-data@0.3": {
+        "single": ("p3", "b1", "t3", "t4", "t5"),
+        "mixed": ("p3", "b1", "m1", "t3", "t4", "t5"),
+        "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4"), ("t5",)),
+    },
 }
-DATA_VERSION = "student-data@0.2"
+DATA_VERSION = "student-data@0.3"
 STUDENT_PROMPT_VERSION = "student-extract@0.1"
 SINGLE_BATCHES = VERSIONS[DATA_VERSION]["single"]
 MIXED_BATCHES = VERSIONS[DATA_VERSION]["mixed"]

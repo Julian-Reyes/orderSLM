@@ -65,9 +65,15 @@ def test_sets_are_synthetic_labels_minus_exclusions(built):
 def test_valid_split_is_disjoint_and_shared(built):
     out, m = built
     single, mixed = set(m["sets"]["single"]["valid_ids"]), set(m["sets"]["mixed"]["valid_ids"])
-    assert single <= mixed and len(single) == round(1963 * data.VALID_SHARE) + round(698 * data.VALID_SHARE)
-    v01 = json.loads((data.OUT / "student-data@0.1" / "manifest.json").read_text())
-    assert set(v01["sets"]["mixed"]["valid_ids"]) <= mixed  # v0.2 keeps every v0.1 validation chat
+    # groups: p3+b1 (1,963 chats), t3+t4 (698), t5 (300, v0.3)
+    expected = sum(round(n * data.VALID_SHARE) for n in (1963, 698, 300))
+    assert single <= mixed and len(single) == expected
+    for earlier in (
+        "student-data@0.1",
+        "student-data@0.2",
+    ):  # each version keeps every earlier validation chat
+        prev = json.loads((data.OUT / earlier / "manifest.json").read_text())
+        assert set(prev["sets"]["mixed"]["valid_ids"]) <= mixed
     train_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "train.jsonl")}
     valid_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "valid.jsonl")}
     assert not train_users & valid_users
