@@ -1,3 +1,5 @@
+import json
+
 from orderslm.eval import student_errors as se
 from orderslm.eval.dataset import load_eval_split
 from orderslm.schema.conversation import Split
@@ -57,3 +59,21 @@ def test_items_in_a_chat_with_no_order():
     assert se.chat_errors(no_order, _with_items([]), None) is None
     e = se.chat_errors(no_order, _with_items(list(AC.gold_extraction.items)), None)
     assert len(e["items_without_order"]) == 2
+
+
+def _manifest(tmp_path, name, split):
+    d = tmp_path / name
+    d.mkdir()
+    (d / "manifest.json").write_text(json.dumps({"split": split}))
+    return d
+
+
+def test_split_comes_from_the_runs_and_never_test(tmp_path):
+    import pytest
+
+    assert se.run_split([_manifest(tmp_path, "a", "fresh"), _manifest(tmp_path, "b", "fresh")]) is Split.fresh
+    assert se.run_split([_manifest(tmp_path, "c", "dev")]) is Split.dev
+    with pytest.raises(SystemExit):
+        se.run_split([_manifest(tmp_path, "d", "dev"), _manifest(tmp_path, "e", "fresh")])
+    with pytest.raises(SystemExit):
+        se.run_split([_manifest(tmp_path, "f", "test")])

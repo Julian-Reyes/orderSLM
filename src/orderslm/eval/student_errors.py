@@ -14,7 +14,8 @@ marked by which models got them wrong, so shared mistakes (hard or unclear cases
 
     make student-errors ARGS="runs/student-dev/<a> [...]"   # → runs/student-errors/<time>/
 
-Dev only (tuning), not held-out.
+The split comes from the runs' manifests (all the same): dev or fresh, both tuning / "used for fixes", never test.
+The teacher reference exists for dev only.
 """
 
 import argparse
@@ -42,7 +43,7 @@ from .student_bakeoff import TEACHER_RUN, strip_fences
 from .student_dev import request_id
 
 EXPERIMENT = "student-errors"
-ERRORS_VERSION = "student-errors@0.1"
+ERRORS_VERSION = "student-errors@0.2"  # 0.2: fresh runs too (split from the manifest)
 TEACHER = "teacher"
 PARTS = ("quantity", "variant", "modifications", "combo_picks")
 
@@ -163,9 +164,22 @@ def teacher_predictions(dev: dict) -> tuple[str, dict, dict]:
     return TEACHER, orders, intents
 
 
+def run_split(run_dirs: list[Path]) -> Split:
+    splits = {json.loads((d / "manifest.json").read_text()).get("split", "dev") for d in run_dirs}
+    if len(splits) != 1:
+        raise SystemExit(f"runs from different splits: {sorted(splits)}")
+    split = Split(splits.pop())
+    if split not in (Split.dev, Split.fresh):
+        raise SystemExit(f"error review is for dev or fresh, not {split.value}")
+    return split
+
+
 def review(run_dirs: list[Path]) -> dict[str, Any]:
-    dev = {ac.conversation.id: ac for ac in load_eval_split(Split.dev)}
-    models = [student_predictions(d, dev) for d in run_dirs] + [teacher_predictions(dev)]
+    split = run_split(run_dirs)
+    dev = {ac.conversation.id: ac for ac in load_eval_split(split)}
+    models = [student_predictions(d, dev) for d in run_dirs]
+    if split is Split.dev:
+        models.append(teacher_predictions(dev))
     students = [m[0] for m in models if m[0] != TEACHER]
     chats, messages = [], []
     for cid, ac in sorted(dev.items()):
@@ -197,7 +211,15 @@ def review(run_dirs: list[Path]) -> dict[str, Any]:
                         "all_students_wrong": all(s in bad for s in students),
                     }
                 )
-    return {"models": [m[0] for m in models], "students": students, "chats": chats, "messages": messages}
+    return {
+        "split": split.value,
+        "n_chats": len(dev),
+        "n_messages": sum(len(ac.gold_routing) for ac in dev.values()),
+        "models": [m[0] for m in models],
+        "students": students,
+        "chats": chats,
+        "messages": messages,
+    }
 
 
 def summarize(r: dict[str, Any]) -> dict[str, Any]:
@@ -267,14 +289,21 @@ def _fmt_errors(e: dict[str, Any]) -> list[str]:
 def write_report(out: Path, r: dict[str, Any], s: dict[str, Any]) -> None:
     models = r["models"]
     lines = [
-        "# M6 error review on dev",
+        f"# M6 error review on {r['split']}",
         "",
-        "Every chat or customer message a model got wrong, from saved outputs. Dev (tuning), not held-out. The teacher "
-        "(`teacher-label@0.7`, the labels the students learned from) is shown as a reference.",
+        f"Every chat or customer message a model got wrong, from saved outputs. {r['split'].capitalize()} is tuning / "
+        '"used for fixes" data, not held-out.'
+        + (
+            " The teacher (`teacher-label@0.7`, the labels the students learned from) is shown as a reference."
+            if TEACHER in models
+            else ""
+        ),
         "",
         "| | " + " | ".join(models) + " |",
         "|---|" + "---|" * len(models),
-        "| chats not fully right (of 91) | " + " | ".join(str(s[m]["chats_wrong"]) for m in models) + " |",
+        f"| chats not fully right (of {r['n_chats']}) | "
+        + " | ".join(str(s[m]["chats_wrong"]) for m in models)
+        + " |",
     ]
     cats = sorted({c for m in models for c in s[m]["categories"]})
     lines += [
@@ -292,7 +321,11 @@ def write_report(out: Path, r: dict[str, Any], s: dict[str, Any]) -> None:
     lines += [
         f"| field: {f} | " + " | ".join(str(s[m]["fields"].get(f, 0)) for m in models) + " |" for f in fields
     ]
-    lines += ["| intents wrong (of 268) | " + " | ".join(str(s[m]["intents_wrong"]) for m in models) + " |"]
+    lines += [
+        f"| intents wrong (of {r['n_messages']}) | "
+        + " | ".join(str(s[m]["intents_wrong"]) for m in models)
+        + " |"
+    ]
     lines += ["", f"Overlap: {s['overlap']}", "", "Chats wrong by scenario (a chat can have several):", ""]
     lines += [f"- {k}: {v}" for k, v in s["chats_wrong_by_scenario"].items()]
     lines += ["", "## Intent mistakes", ""]
@@ -327,8 +360,9 @@ def main(argv: list[str] | None = None) -> int:
     manifest = {
         "experiment": EXPERIMENT,
         "errors_version": ERRORS_VERSION,
+        "split": r["split"],
         "inputs": [str(d.resolve().relative_to(ROOT)) for d in args.run_dirs]
-        + [str(TEACHER_RUN.relative_to(ROOT))],
+        + ([str(TEACHER_RUN.relative_to(ROOT))] if TEACHER in r["models"] else []),
         "created_at": started.isoformat(),
         "git_commit": git_commit(),
         "cost_usd": 0.0,
