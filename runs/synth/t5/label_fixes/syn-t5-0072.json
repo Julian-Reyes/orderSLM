@@ -1,0 +1,112 @@
+{
+ "card_id": "syn-t5-0072",
+ "kind": "hand_label",
+ "reason": "training data v3: chat and label written by hand (Julian, 2026-11-09: no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-09T14:03:02.312483+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "DELIVERY_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "MODIFY_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "single",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "TWO SINGLE CHEESEBURGERS"
+      },
+      {
+       "message_index": 4,
+       "quote": "JUST ONE CHEESEBURGER"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "TO 69 CLEMENT ST"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "relative",
+     "raw_text": "IN LIKE 30 MIN",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "IN LIKE 30 MIN"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "CLEMENT ST",
+    "number": "69",
+    "unit": null,
+    "reference": null,
+    "raw_text": "69 CLEMENT ST",
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "69 CLEMENT ST"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}
