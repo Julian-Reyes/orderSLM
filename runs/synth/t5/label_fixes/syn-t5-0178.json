@@ -1,0 +1,134 @@
+{
+ "card_id": "syn-t5-0178",
+ "kind": "hand_label",
+ "reason": "training data v3: chat and label written by hand (Julian, 2026-11-09: no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-09T14:11:33.880162+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "americano",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": null,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a few medium americanos"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "breakfast_sandwich",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a breakfast sandwich"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "hot_chocolate",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "substitute",
+       "modifier_id": "whole_milk",
+       "replacement_modifier_id": "almond_milk",
+       "amount": "normal",
+       "raw_text": "w almond milk",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a medium hot chocolate"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "provided",
+     "kind": "asap",
+     "raw_text": "asap",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "asap"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

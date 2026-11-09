@@ -1,0 +1,155 @@
+{
+ "card_id": "syn-t5-0205",
+ "kind": "hand_label",
+ "reason": "training data v3: chat and label written by hand (Julian, 2026-11-09: no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-09T14:11:33.880162+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.1",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "CONFIRM_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "MODIFY_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "croissant",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "plain",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "butter",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "w butter",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "2 plain croissants"
+      },
+      {
+       "message_index": 4,
+       "quote": "just 1 croissant"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "drip_coffee",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "caramel_syrup",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "w caramel",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "3 small coffees"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 1,
+      "quote": "pickup"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 8:15",
+     "normalized_local": "08:15",
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "at 8:15"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Jordan",
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "jordan"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}
