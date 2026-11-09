@@ -70,6 +70,13 @@ STUDENTS = {
     },
     "qwen3.5-2b-single-v2": {"model": "2b", "data": "single", "lr": 1e-4, "data_version": "student-data@0.2"},
     "qwen3.5-2b-mixed-v2": {"model": "2b", "data": "mixed", "lr": 1e-4, "data_version": "student-data@0.2"},
+    # the shipped 0.8B retrained on v0.3 (+ t5, written and labeled by hand; Julian, 2026-11-09), same settings
+    "qwen3.5-0.8b-single-v3": {
+        "model": "0.8b",
+        "data": "single",
+        "lr": 2e-4,
+        "data_version": "student-data@0.3",
+    },
 }
 TRAIN = {
     "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"},

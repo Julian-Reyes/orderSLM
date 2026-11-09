@@ -67,7 +67,7 @@ def test_settings_are_the_agreed_ones():
     assert t["lora"] == {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"}
     assert (t["epochs"], t["effective_batch"], t["warmup_share"], t["eval_every_epochs"]) == (2, 8, 0.05, 0.5)
     students = kaggle_train.STUDENTS
-    assert {k: v["lr"] for k, v in students.items() if not k.endswith("-v2")} == {
+    assert {k: v["lr"] for k, v in students.items() if not k.endswith(("-v2", "-v3"))} == {
         "qwen3.5-0.8b-single": 2e-4,
         "qwen3.5-2b-single": 1e-4,
         "qwen3.5-2b-mixed": 1e-4,
@@ -79,3 +79,9 @@ def test_settings_are_the_agreed_ones():
         assert {k: x for k, x in v1.items() if k != "data_version"} == {
             k: x for k, x in v2.items() if k != "data_version"
         }
+    # the v0.3 retrain of the shipped 0.8B differs from it only in its data
+    v2, v3 = students["qwen3.5-0.8b-single-v2"], students["qwen3.5-0.8b-single-v3"]
+    assert v3["data_version"] == "student-data@0.3"
+    assert {k: x for k, x in v2.items() if k != "data_version"} == {
+        k: x for k, x in v3.items() if k != "data_version"
+    }
