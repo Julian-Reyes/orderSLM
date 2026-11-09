@@ -1,28 +1,29 @@
 {
   "batch": "t5",
-  "built_at": "2026-11-09T13:56:02.324072+00:00",
+  "built_at": "2026-11-09T14:16:41.461321+00:00",
   "dedup_threshold": 0.8,
   "by_generator": {
     "claude-session/claude-opus-5-5": {
       "cards": 300,
-      "generated": 12,
-      "kept": 12,
+      "generated": 300,
+      "kept": 300,
       "repairs": {},
       "gen_drops": {},
       "label_attempted": 0,
-      "labeled": 12,
+      "labeled": 300,
       "label_drops": {},
       "card_agreement": {
-        "labeled": 12,
-        "all_agree": 10,
+        "labeled": 300,
+        "all_agree": 184,
         "flags": {
-          "items": 1,
-          "item_details": 1
+          "items": 101,
+          "item_details": 9,
+          "labels": 6
         }
       },
-      "customer_messages_mean": 3.25,
+      "customer_messages_mean": 3.16,
       "generation_usage": {
-        "calls": 12,
+        "calls": 300,
         "input_tokens": 0,
         "cached_input_tokens": 0,
         "output_tokens": 0,
@@ -42,40 +43,41 @@
         "latency_p50_ms": null
       },
       "style": {
-        "chats": 12,
-        "customer_messages_per_chat": 3.25,
-        "business_messages_per_chat": 0.33,
-        "words_per_customer_message": 7.0,
-        "share_lowercase_messages": 0.564,
-        "share_all_caps_messages": 0.205,
-        "share_messages_with_emoji": 0.026,
-        "share_uppercase_letters": 0.238,
-        "distinct_openers": 0.833,
+        "chats": 300,
+        "customer_messages_per_chat": 3.16,
+        "business_messages_per_chat": 0.21,
+        "words_per_customer_message": 5.6,
+        "share_lowercase_messages": 0.717,
+        "share_all_caps_messages": 0.094,
+        "share_messages_with_emoji": 0.102,
+        "share_uppercase_letters": 0.134,
+        "distinct_openers": 0.463,
         "top_openers": {
-          "can i": 2,
-          "hi can": 2,
-          "hey": 1,
-          "yo can": 1,
-          "heyy": 1
+          "hey": 39,
+          "hi": 11,
+          "hi i'd": 10,
+          "can i": 8,
+          "hi can": 8
         }
       },
       "diversity": {
-        "mean_nearest_similarity": 0.043,
-        "max_nearest_similarity": 0.081,
-        "distinct_3gram_share": 0.948
+        "mean_nearest_similarity": 0.103,
+        "max_nearest_similarity": 0.462,
+        "distinct_3gram_share": 0.738
       },
       "addresses": {
-        "cards_with_address": 3,
-        "card_address_used": 2
+        "cards_with_address": 66,
+        "card_address_used": 56
       }
     }
   },
   "labeled_intents": {
-    "PLACE_ORDER": 25,
-    "SMALL_TALK": 6,
-    "MODIFY_ORDER": 4,
-    "CONFIRM_ORDER": 3,
-    "MENU_QUESTION": 1
+    "PLACE_ORDER": 702,
+    "SMALL_TALK": 125,
+    "MODIFY_ORDER": 60,
+    "MENU_QUESTION": 34,
+    "CONFIRM_ORDER": 26,
+    "DELIVERY_QUESTION": 2
   },
   "planned": {
     "generator": {
@@ -138,54 +140,55 @@
   "agreement_by_scenario": {
     "correction_after_confirmation": {
       "claude-session/claude-opus-5-5": {
-        "labeled": 3,
-        "agree": 3
+        "labeled": 26,
+        "agree": 26
       }
     },
     "missing_info": {
       "claude-session/claude-opus-5-5": {
-        "labeled": 2,
-        "agree": 1
+        "labeled": 110,
+        "agree": 30
       }
     },
     "correction": {
       "claude-session/claude-opus-5-5": {
-        "labeled": 1,
-        "agree": 1
+        "labeled": 34,
+        "agree": 32
       }
     },
     "simple_order": {
       "claude-session/claude-opus-5-5": {
-        "labeled": 5,
-        "agree": 4
+        "labeled": 93,
+        "agree": 69
       }
     },
     "multi_message_order": {
       "claude-session/claude-opus-5-5": {
-        "labeled": 1,
-        "agree": 1
+        "labeled": 37,
+        "agree": 27
       }
     }
   },
   "intents_by_generator": {
     "claude-session/claude-opus-5-5": {
-      "PLACE_ORDER": 25,
-      "SMALL_TALK": 6,
-      "MODIFY_ORDER": 4,
-      "CONFIRM_ORDER": 3,
-      "MENU_QUESTION": 1
+      "PLACE_ORDER": 702,
+      "SMALL_TALK": 125,
+      "MODIFY_ORDER": 60,
+      "MENU_QUESTION": 34,
+      "CONFIRM_ORDER": 26,
+      "DELIVERY_QUESTION": 2
     }
   },
   "audit_sample": [
-    "syn-t5-0001",
-    "syn-t5-0002",
-    "syn-t5-0003",
-    "syn-t5-0004",
-    "syn-t5-0006",
-    "syn-t5-0007",
-    "syn-t5-0009",
-    "syn-t5-0010",
-    "syn-t5-0011",
-    "syn-t5-0012"
+    "syn-t5-0050",
+    "syn-t5-0116",
+    "syn-t5-0165",
+    "syn-t5-0179",
+    "syn-t5-0180",
+    "syn-t5-0193",
+    "syn-t5-0225",
+    "syn-t5-0229",
+    "syn-t5-0247",
+    "syn-t5-0287"
   ]
 }
