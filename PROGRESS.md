@@ -24,7 +24,10 @@ _Last updated 2026-11-09._
   teacher-label@0.7 otherwise (`teacher-label@0.7+hand`).
 - **Training data `student-data@0.3`** = v0.2 + t5: single 2,813 train / 148 valid (v0.2 kept every earlier
   validation chat; t5 adds 15).
-- **Next:** retrain the 0.8B single on v0.3 on Kaggle (free, ~7 h; ask Julian before the push), then measure on a new
+- **Kaggle run pushed 2026-11-09 11:33 Brasília (Julian: "yes push then start kaggle"):** `runs/train/20261109T142855Z`,
+  kernel v10, one T4: train `qwen3.5-0.8b-single-v3` (~7 h), then score it on dev and fresh (~1 h each).
+  Pull with `make kaggle-pull JOB=m6`, then `make train ARGS="import runs/train/20261109T142855Z"`.
+- **Then:** then measure on a new
   fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
   training chats and fresh-2 would share a writer (Claude), which can flatter fresh-2; dev and fresh were Claude-written
   too.
