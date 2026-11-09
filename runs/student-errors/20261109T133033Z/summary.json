@@ -1,0 +1,116 @@
+{
+  "qwen3.5-0.8b-single-v2": {
+    "chats_wrong": 22,
+    "categories": {
+      "item mistakes": 15,
+      "fields only": 6,
+      "invalid answer": 1
+    },
+    "item_kinds": {
+      "missing_item": 9,
+      "extra_item": 7,
+      "wrong_modifications": 3,
+      "wrong_variant": 3,
+      "wrong_quantity+modifications": 2,
+      "wrong_combo_picks": 1,
+      "wrong_quantity": 1
+    },
+    "fields": {
+      "missing": 9,
+      "payment": 2,
+      "address": 1,
+      "decision": 1,
+      "time": 1
+    },
+    "intents_wrong": 19,
+    "confusions": {
+      "MODIFY_ORDER → PLACE_ORDER": 3,
+      "PLACE_ORDER → None": 2,
+      "PLACE_ORDER → SMALL_TALK": 2,
+      "UNKNOWN → SMALL_TALK": 1,
+      "MENU_QUESTION → UNKNOWN": 1,
+      "SMALL_TALK → MODIFY_ORDER": 1,
+      "HUMAN_REQUEST → PLACE_ORDER": 1,
+      "HUMAN_REQUEST → SMALL_TALK": 1,
+      "UNKNOWN → CONFIRM_ORDER": 1,
+      "PAYMENT_CLAIM → ORDER_STATUS": 1,
+      "MENU_QUESTION → OUT_OF_SCOPE": 1,
+      "MENU_QUESTION → None": 1,
+      "ORDER_PROBLEM → ORDER_STATUS": 1,
+      "PAYMENT_CLAIM → PLACE_ORDER": 1,
+      "HUMAN_REQUEST → ORDER_PROBLEM": 1
+    }
+  },
+  "teacher": {
+    "chats_wrong": 1,
+    "categories": {
+      "invalid answer": 1
+    },
+    "item_kinds": {},
+    "fields": {},
+    "intents_wrong": 11,
+    "confusions": {
+      "PLACE_ORDER → SMALL_TALK": 4,
+      "PLACE_ORDER → None": 4,
+      "CONFIRM_ORDER → None": 1,
+      "MODIFY_ORDER → None": 1,
+      "UNKNOWN → SMALL_TALK": 1
+    }
+  },
+  "overlap": {
+    "chats_all_students_wrong": 22,
+    "chats_all_students_and_teacher_wrong": 1,
+    "chats_one_student_only": 22,
+    "messages_all_students_wrong": 19,
+    "messages_one_student_only": 19
+  },
+  "chats_wrong_by_scenario": {
+    "ambiguous_reference": {
+      "qwen3.5-0.8b-single-v2": 3
+    },
+    "combo": {
+      "qwen3.5-0.8b-single-v2": 1
+    },
+    "contextual_yes": {
+      "qwen3.5-0.8b-single-v2": 3,
+      "teacher": 1
+    },
+    "correction": {
+      "qwen3.5-0.8b-single-v2": 4
+    },
+    "correction_after_confirmation": {
+      "qwen3.5-0.8b-single-v2": 2,
+      "teacher": 1
+    },
+    "half_and_half": {
+      "qwen3.5-0.8b-single-v2": 1
+    },
+    "implicit_category": {
+      "qwen3.5-0.8b-single-v2": 2
+    },
+    "menu_question": {
+      "qwen3.5-0.8b-single-v2": 6
+    },
+    "missing_info": {
+      "qwen3.5-0.8b-single-v2": 3
+    },
+    "multi_message_order": {
+      "qwen3.5-0.8b-single-v2": 5
+    },
+    "off_menu": {
+      "qwen3.5-0.8b-single-v2": 2
+    },
+    "payment_claim": {
+      "qwen3.5-0.8b-single-v2": 1
+    },
+    "simple_order": {
+      "qwen3.5-0.8b-single-v2": 2
+    },
+    "small_talk": {
+      "qwen3.5-0.8b-single-v2": 3
+    },
+    "two_requests": {
+      "qwen3.5-0.8b-single-v2": 2
+    }
+  }
+}
