@@ -25,7 +25,9 @@ _Last updated 2026-11-09._
 - **Training data `student-data@0.3`** = v0.2 + t5: single 2,813 train / 148 valid (v0.2 kept every earlier
   validation chat; t5 adds 15).
 - **Kaggle run pushed 2026-11-09 11:33 Brasília (Julian: "yes push then start kaggle"):** `runs/train/20261109T142855Z`,
-  kernel v10, one T4: train `qwen3.5-0.8b-single-v3` (~7 h), then score it on dev and fresh (~1 h each).
+  one T4: train `qwen3.5-0.8b-single-v3` (~7 h), then score it on dev and fresh (~1 h each). Kernel v10 sat queued
+  ~6 h (I missed the >20 min re-push rule in docs/KAGGLE.md); **v11 started 2026-11-09 17:22 Brasília and ran at once**
+  (same upload, `kaggle_jobs start m6`). Cancel v10 on the website. Expected done ~02:30 Brasília 2026-11-10.
   Pull with `make kaggle-pull JOB=m6`, then `make train ARGS="import runs/train/20261109T142855Z"`.
 - **Then:** then measure on a new
   fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
