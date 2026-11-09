@@ -53,6 +53,8 @@ from .cards import (
     TARGET_WEIGHTS,
     TARGETS_VERSION,
     TOPUP_WEIGHTS,
+    V3_MODIFY_KIND_WEIGHTS,
+    V3_WEIGHTS,
     plan_cards,
     plan_targeted_cards,
 )
@@ -135,12 +137,17 @@ def plan(args: argparse.Namespace) -> int:
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    if args.targeted or args.topup:
+    if args.targeted or args.topup or args.v3:
         if business_ids:
             raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
-        weights = TOPUP_WEIGHTS if args.topup else TARGET_WEIGHTS
+        weights = V3_WEIGHTS if args.v3 else TOPUP_WEIGHTS if args.topup else TARGET_WEIGHTS
         cards = plan_targeted_cards(
-            args.n, seed=args.seed, batch=args.batch, generators=generators, weights=weights
+            args.n,
+            seed=args.seed,
+            batch=args.batch,
+            generators=generators,
+            weights=weights,
+            **({"modify_weights": V3_MODIFY_KIND_WEIGHTS} if args.v3 else {}),
         )
     else:
         cards = plan_cards(
@@ -157,8 +164,9 @@ def plan(args: argparse.Namespace) -> int:
         "n": args.n,
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
-        "targets_version": TARGETS_VERSION if args.targeted or args.topup else None,
+        "targets_version": TARGETS_VERSION if args.targeted or args.topup or args.v3 else None,
         "topup": args.topup,
+        "v3": args.v3,
         "rewrite_missing": args.rewrite_missing,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
@@ -458,7 +466,13 @@ def label_record(
     exists, otherwise the teacher's raw response. A fix of kind `hand_label` is a whole label written by hand
     where the teacher call failed, with its own version (HAND_LABEL_VERSION)."""
     fix_path = batch_dir(batch) / "label_fixes" / f"{card_id}.json"
-    rec = json.loads((batch_dir(batch) / "label" / _slug(teacher) / f"{card_id}.json").read_text())
+    rec_path = batch_dir(batch) / "label" / _slug(teacher) / f"{card_id}.json"
+    if not rec_path.exists():  # a batch labeled by hand only (v3): no teacher call was made
+        fix = json.loads(fix_path.read_text())
+        if fix.get("kind") != "hand_label":
+            raise SystemExit(f"{card_id}: no teacher label to fix")
+        return json.dumps(fix["label"], ensure_ascii=False), fix["label_prompt_version"], fix
+    rec = json.loads(rec_path.read_text())
     version = rec.get("versions", {}).get("label_prompt")
     if fix_path.exists():
         fix = json.loads(fix_path.read_text())
@@ -472,11 +486,12 @@ def collect_labels(batch: str, teacher: str) -> None:
     labels, drops, agreement = [], [], []
     for s in load_conversations(batch):
         path = out / "label" / _slug(teacher) / f"{s.card_id}.json"
-        if not path.exists():
+        hand = out / "label_fixes" / f"{s.card_id}.json"
+        if not path.exists() and not hand.exists():
             continue
-        rec = json.loads(path.read_text())
+        rec = json.loads(path.read_text()) if path.exists() else {}
         card = cards[s.card_id]
-        if "error" in rec and not (out / "label_fixes" / f"{s.card_id}.json").exists():
+        if "error" in rec and not hand.exists():
             drops.append({"card_id": s.card_id, "generator": s.generator, "reason": "call_error"})
             continue
         menu = load_menu(s.conversation.business_id)
@@ -530,8 +545,15 @@ def report(args: argparse.Namespace) -> int:
     out = batch_dir(args.batch)
     # Rebuild the derived files from the saved responses first, so the report reflects the current checks ($0).
     collect(args.batch)
-    for d in sorted((out / "label").glob("*")) if (out / "label").exists() else []:
-        collect_labels(args.batch, d.name.replace("__", "/"))
+    labelers = (
+        [d.name.replace("__", "/") for d in sorted((out / "label").glob("*"))]
+        if (out / "label").exists()
+        else []
+    )
+    if not labelers and (out / "label_fixes").exists():  # labeled by hand only (v3): no teacher calls
+        labelers = [lab.TEACHER]
+    for teacher in labelers:
+        collect_labels(args.batch, teacher)
     cards = load_cards(args.batch)
     convs = {s.card_id: s for s in load_conversations(args.batch)}
     gen_drops = _read_jsonl(out / "gen_drops.jsonl")
@@ -612,6 +634,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--menus", help="business ids, e.g. food-court (default: the three training menus)")
     p.add_argument("--targeted", action="store_true", help="the targeted batch (cards.TARGET_WEIGHTS)")
     p.add_argument("--topup", action="store_true", help="the targeted top-up (cards.TOPUP_WEIGHTS)")
+    p.add_argument(
+        "--v3", action="store_true", help="training data v3 targets (cards.V3_WEIGHTS), $0 by hand"
+    )
     p.add_argument(
         "--rewrite-missing", metavar="BATCH", help="also copy BATCH's cards whose chat was dropped"
     )

@@ -1,0 +1,79 @@
+{
+  "batch": "t5",
+  "n": 300,
+  "seed": 20261016,
+  "cards_version": "synth-cards@0.5",
+  "targets_version": "synth-targets@0.1",
+  "topup": false,
+  "v3": true,
+  "rewrite_missing": null,
+  "synth_schema_version": "synth@0.1",
+  "generators": {
+    "claude-session/claude-opus-5-5": 1
+  },
+  "menu_versions": {
+    "corner-patty": "corner-patty@882e409e5aa8",
+    "halfmoon-pizza": "halfmoon-pizza@44183959594b",
+    "morning-crumb": "morning-crumb@c8f57ec59225"
+  },
+  "planned_at": "2026-11-09T13:52:36.646883+00:00",
+  "git_commit": "15190f6ad7dea5f2e31cfe12f49ae4ae09004d2c-dirty",
+  "distribution": {
+    "generator": {
+      "claude-session/claude-opus-5-5": 300
+    },
+    "scenario": {
+      "missing_info": 110,
+      "simple_order": 93,
+      "multi_message_order": 37,
+      "correction": 34,
+      "correction_after_confirmation": 26
+    },
+    "business": {
+      "morning-crumb": 121,
+      "corner-patty": 90,
+      "halfmoon-pizza": 89
+    },
+    "style": {
+      "texting": 90,
+      "clean": 60,
+      "emoji": 60,
+      "rapid_fire": 60,
+      "shouty": 30
+    },
+    "fulfillment": {
+      "pickup": 132,
+      "unstated": 92,
+      "delivery": 76
+    },
+    "payment": {
+      "card": 115,
+      "cash": 94,
+      "unstated": 91
+    },
+    "items": {
+      "1": 110,
+      "3": 70,
+      "2": 66,
+      "0": 30,
+      "4": 17,
+      "5": 7
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 300,
+      "MODIFY_ORDER": 60,
+      "MENU_QUESTION": 40,
+      "CONFIRM_ORDER": 26
+    },
+    "target": {
+      "modify_last": 60,
+      "qty_unstated": 50,
+      "split_lines": 50,
+      "size_unstated": 30,
+      "milk_choice": 30,
+      "opener_only": 30,
+      "vague_ref": 30,
+      "unit_size": 20
+    }
+  }
+}

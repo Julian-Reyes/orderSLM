@@ -1,0 +1,191 @@
+{
+  "batch": "t5",
+  "built_at": "2026-11-09T13:56:02.324072+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "claude-session/claude-opus-5-5": {
+      "cards": 300,
+      "generated": 12,
+      "kept": 12,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 0,
+      "labeled": 12,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 12,
+        "all_agree": 10,
+        "flags": {
+          "items": 1,
+          "item_details": 1
+        }
+      },
+      "customer_messages_mean": 3.25,
+      "generation_usage": {
+        "calls": 12,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "cost_micros": 0,
+        "cost_per_1k_usd": 0.0,
+        "latency_p50_ms": 0
+      },
+      "label_usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "cost_micros": 0,
+        "cost_per_1k_usd": null,
+        "latency_p50_ms": null
+      },
+      "style": {
+        "chats": 12,
+        "customer_messages_per_chat": 3.25,
+        "business_messages_per_chat": 0.33,
+        "words_per_customer_message": 7.0,
+        "share_lowercase_messages": 0.564,
+        "share_all_caps_messages": 0.205,
+        "share_messages_with_emoji": 0.026,
+        "share_uppercase_letters": 0.238,
+        "distinct_openers": 0.833,
+        "top_openers": {
+          "can i": 2,
+          "hi can": 2,
+          "hey": 1,
+          "yo can": 1,
+          "heyy": 1
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.043,
+        "max_nearest_similarity": 0.081,
+        "distinct_3gram_share": 0.948
+      },
+      "addresses": {
+        "cards_with_address": 3,
+        "card_address_used": 2
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 25,
+    "SMALL_TALK": 6,
+    "MODIFY_ORDER": 4,
+    "CONFIRM_ORDER": 3,
+    "MENU_QUESTION": 1
+  },
+  "planned": {
+    "generator": {
+      "claude-session/claude-opus-5-5": 300
+    },
+    "scenario": {
+      "missing_info": 110,
+      "simple_order": 93,
+      "multi_message_order": 37,
+      "correction": 34,
+      "correction_after_confirmation": 26
+    },
+    "business": {
+      "morning-crumb": 121,
+      "corner-patty": 90,
+      "halfmoon-pizza": 89
+    },
+    "style": {
+      "texting": 90,
+      "clean": 60,
+      "emoji": 60,
+      "rapid_fire": 60,
+      "shouty": 30
+    },
+    "fulfillment": {
+      "pickup": 132,
+      "unstated": 92,
+      "delivery": 76
+    },
+    "payment": {
+      "card": 115,
+      "cash": 94,
+      "unstated": 91
+    },
+    "items": {
+      "1": 110,
+      "3": 70,
+      "2": 66,
+      "0": 30,
+      "4": 17,
+      "5": 7
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 300,
+      "MODIFY_ORDER": 60,
+      "MENU_QUESTION": 40,
+      "CONFIRM_ORDER": 26
+    },
+    "target": {
+      "modify_last": 60,
+      "qty_unstated": 50,
+      "split_lines": 50,
+      "size_unstated": 30,
+      "milk_choice": 30,
+      "opener_only": 30,
+      "vague_ref": 30,
+      "unit_size": 20
+    }
+  },
+  "agreement_by_scenario": {
+    "correction_after_confirmation": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 3,
+        "agree": 3
+      }
+    },
+    "missing_info": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 2,
+        "agree": 1
+      }
+    },
+    "correction": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 1,
+        "agree": 1
+      }
+    },
+    "simple_order": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 5,
+        "agree": 4
+      }
+    },
+    "multi_message_order": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 1,
+        "agree": 1
+      }
+    }
+  },
+  "intents_by_generator": {
+    "claude-session/claude-opus-5-5": {
+      "PLACE_ORDER": 25,
+      "SMALL_TALK": 6,
+      "MODIFY_ORDER": 4,
+      "CONFIRM_ORDER": 3,
+      "MENU_QUESTION": 1
+    }
+  },
+  "audit_sample": [
+    "syn-t5-0001",
+    "syn-t5-0002",
+    "syn-t5-0003",
+    "syn-t5-0004",
+    "syn-t5-0006",
+    "syn-t5-0007",
+    "syn-t5-0009",
+    "syn-t5-0010",
+    "syn-t5-0011",
+    "syn-t5-0012"
+  ]
+}

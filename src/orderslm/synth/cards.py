@@ -187,6 +187,19 @@ TOPUP_WEIGHTS = {
     "unclear": 50,
     "offmenu_open": 50,  # as offmenu_addon, but the chat ends on the request, before the business answers it
 }
+# Training data v3 (Julian, 2026-11-09: "you write and label all of them", no API spend; the goal is to improve the
+# student). Targets from the shipped 0.8B v2's dev + fresh misses (runs/student-errors/20261109T133033Z, …T133808Z).
+V3_WEIGHTS = {
+    "split_lines": 50,  # still missed: "3 large hot chocs, 2 of em w caramel" read as 3 caramel (fresh 007, 043)
+    "qty_unstated": 50,  # "some muffins" guessed as 2 instead of asked (fresh 044, 056, 089; dev 045)
+    "size_unstated": 30,  # a size never said, guessed as large (fresh 009, 063; dev 049, 079)
+    "vague_ref": 30,  # "the usual" / "one of them" with nothing to resolve it, mapped to a real item (fresh 057, 087)
+    "modify_last": 60,  # removals ignored ("actually no coke": fresh 039, 051, 073) and other late changes
+    "milk_choice": 30,  # "with oat milk" on a drink with no milk: an add, not a whole-milk swap (fresh 044, 066, 037)
+    "unit_size": 20,  # "2 liter dr pepper" read as 2 bottles (fresh 065)
+    "opener_only": 30,  # "hey, ordering for the crew" alone is PLACE_ORDER (5 fresh, 4 dev intent misses)
+}
+V3_MODIFY_KIND_WEIGHTS = {"remove_item": 30, "quantity": 12, "option_swap": 10, "size": 8}
 # Kinds of change in the 160 modify_last chats, weighted toward what all three students got wrong on dev (Julian,
 # 2026-10-25: "the whole point is to help the students on what they got wrong"): size changes ("make the fries
 # large"), option swaps ("make the latte oat milk"), time/payment changes, removals, additions after confirming.
@@ -820,6 +833,21 @@ TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
     "bare_time": (S.simple_order, S.multi_message_order),
     "offmenu_addon": (S.simple_order, S.multi_message_order),
     "offmenu_open": (S.simple_order, S.multi_message_order),
+    "qty_unstated": (S.missing_info,),
+    "vague_ref": (S.missing_info,),
+    "milk_choice": (S.simple_order, S.multi_message_order),
+    "unit_size": (S.simple_order,),
+    "opener_only": (S.simple_order,),
+}
+V3_SENTENCES = {
+    "qty_unstated": "Never says how many of the first item: asks for it vaguely ('some', 'a few', 'muffins for the "
+    "office'), and the chat ends before the business asks how many.",
+    "vague_ref": "Also asks for one thing only vaguely ('{vague}'), with nothing earlier in the chat saying what it "
+    "is; the chat ends before the business asks which.",
+    "milk_choice": "Orders a coffee drink with a milk choice said casually ('with oat milk', 'almond pls', 'black').",
+    "unit_size": "Says a size as a number with a unit (like '2 liter', '12 inch' or '16 oz'), ordering just one.",
+    "opener_only": "Only one or two short customer messages: a greeting that says they want to order (for the "
+    "office, the family, the crew…) without naming any item yet. The chat ends there, before the business replies.",
 }
 
 
@@ -830,6 +858,7 @@ def plan_targeted_cards(
     batch: str,
     generators: tuple[tuple[str, int], ...] = GENERATORS,
     weights: dict[str, int] = TARGET_WEIGHTS,
+    modify_weights: dict[str, int] = MODIFY_KIND_WEIGHTS,
 ) -> list[SynthCard]:
     """n cards for the targeted batch (`weights` over the three training menus, TARGET_WEIGHTS or TOPUP_WEIGHTS),
     generators assigned in target order as in plan_cards."""
@@ -837,7 +866,7 @@ def plan_targeted_cards(
     menus = {b: m for b, m in load_menus().items() if not m.held_out}
     targets = _exact(weights, n, rng)
     styles = _exact(STYLE_WEIGHTS, n, rng)
-    kinds = iter(_exact(MODIFY_KIND_WEIGHTS, targets.count("modify_last"), rng))
+    kinds = iter(_exact(modify_weights, targets.count("modify_last"), rng))
     cards = []
     for i, (target, style) in enumerate(zip(targets, styles, strict=True), start=1):
         kind = next(kinds) if target == "modify_last" else None
@@ -847,8 +876,19 @@ def plan_targeted_cards(
         allowed = sorted(menus)
         if kind == "option_swap":  # milk (bakery) or crust (pizza): the burger place has no such choice
             allowed = [b for b in allowed if menus[b].exclusive_groups]
+        if target == "milk_choice":
+            allowed = [b for b in allowed if "milk" in menus[b].exclusive_groups]
         menu = menus[rng.choice(allowed)]
-        cards.append(_card(i, scenario, style, menu, rng, batch, target=target, modify_kind=kind))
+        card = _card(i, scenario, style, menu, rng, batch, target=target, modify_kind=kind)
+        if target in V3_SENTENCES:
+            sentence = V3_SENTENCES[target].format(vague=rng.choice(VAGUE))
+            if target == "opener_only":
+                card = card.model_copy(
+                    update={"brief": sentence, "items": [], "customer_messages": rng.randint(1, 2)}
+                )
+            else:
+                card = card.model_copy(update={"brief": f"{card.brief} {sentence}"})
+        cards.append(card)
     order = list(weights)
     pattern = _pattern(generators)
     ranked = sorted(range(n), key=lambda i: (order.index(cards[i].extras[-1].removeprefix("target:")), i))
