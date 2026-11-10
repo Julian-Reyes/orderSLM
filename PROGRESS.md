@@ -41,6 +41,11 @@ _Last updated 2026-11-09._
   fully correct. **Re-score of all of fresh pushed 2026-11-10 ~08:39 Brasília (Julian: "yes"): `runs/train/20261110T113810Z`,
   kernel v12, ~1 h; watcher re-pushes every 20 min while queued.** Then `make kaggle-pull JOB=m6`,
   `make train ARGS="import runs/train/20261110T113810Z"`, and compare with v2 fresh.
+- **v3 result, fresh (complete, 278/278; used for fixes; `runs/student-compare/20261110T130020Z`, kernel v12 ran
+  08:59–09:59 Brasília):** v2 → v3: fully correct orders 76.7% → **84.4%** (+7.8 pp, 95% CI [+0.0, +16.7]; chats only
+  v2 / only v3 right 4 / 11, McNemar p = 0.118), same action 76.7% → **85.6%** (+8.9 pp, CI [+1.1, +17.8]), item F1
+  0.861 → **0.919** (+5.8 pp, CI [+0.7, +11.7]); intents 92.1% → 90.3% and invalid answers 2.5% → 2.2% (within
+  noise). Same direction as dev (+6.6 pp). Not yet 100%: 14/90 fresh orders still wrong.
 - **Then:** then measure on a new
   fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
   training chats and fresh-2 would share a writer (Claude), which can flatter fresh-2; dev and fresh were Claude-written
