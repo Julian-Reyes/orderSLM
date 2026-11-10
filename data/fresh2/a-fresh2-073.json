@@ -1,0 +1,104 @@
+{
+  "conversation": {
+    "id": "a-fresh2-073",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! I'm visiting from out of town. Could I get a medium latte with vanilla and a plain croissant for pickup? My name is Lars.",
+        "sent_at": "2026-12-03T09:50:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "vanilla_syrup",
+            "raw_text": "with vanilla"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium latte with vanilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a plain croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Lars",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Lars"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-073",
+  "annotation_notes": "Everything but the payment method."
+}

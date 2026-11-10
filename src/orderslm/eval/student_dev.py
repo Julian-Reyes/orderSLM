@@ -213,6 +213,8 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
         + (
             "Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes)."
             if m.get("split") == "fresh"
+            else "Fresh2 split: written after the v3 fixes that used fresh, never tuned on (the measure of those fixes)."
+            if m.get("split") == "fresh2"
             else "Dev numbers (tuning), not held-out results."
         ),
         "",

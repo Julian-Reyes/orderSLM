@@ -1,0 +1,73 @@
+{
+  "conversation": {
+    "id": "a-fresh2-026",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, is my order ready yet? It's under Sam.",
+        "sent_at": "2026-11-19T08:10:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Let me check on that for you!",
+        "sent_at": "2026-11-19T08:10:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "It's been 25 minutes and I have a train to catch.",
+        "sent_at": "2026-11-19T08:11:10-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Can you tell me when it will be ready?",
+        "sent_at": "2026-11-19T08:11:35-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-026",
+  "annotation_notes": "Asking about an earlier order: ORDER_STATUS on the placed order. Once the customer says it has been 25 minutes and a train is waiting, the delay matters now: time_sensitive. No items in this chat."
+}

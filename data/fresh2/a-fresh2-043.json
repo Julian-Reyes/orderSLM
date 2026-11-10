@@ -1,0 +1,51 @@
+{
+  "conversation": {
+    "id": "a-fresh2-043",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY THERE",
+        "sent_at": "2026-11-23T19:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "JUST CHECKING, I ALREADY PAID FOR MY DELIVERY ORDER ONLINE WHEN I PLACED IT, SO PLEASE DONT CHARGE ME AGIAN AT THE DOOR",
+        "sent_at": "2026-11-23T19:40:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-043",
+  "annotation_notes": "A claim about an order placed earlier, outside this chat: PAYMENT_CLAIM on the placed order, unverified. No items here, so no gold order."
+}

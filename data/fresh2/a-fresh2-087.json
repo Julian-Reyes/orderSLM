@@ -1,0 +1,118 @@
+{
+  "conversation": {
+    "id": "a-fresh2-087",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "NEED 3 LARGE CHEESE PIZZAS AND 2 LARGE PEPERONI DELIVERED TO 450 COLLEGE AVE",
+        "sent_at": "2026-12-07T18:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "PAYING CASH, HAVE A 100 DOLLAR BILL",
+        "sent_at": "2026-12-07T18:00:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 LARGE CHEESE PIZZAS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 LARGE PEPERONI"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERED TO 450 COLLEGE AVE"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "college ave",
+      "number": "450",
+      "raw_text": "450 COLLEGE AVE",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "450 COLLEGE AVE"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "change_for_cents": 10000,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "PAYING CASH"
+        },
+        {
+          "message_index": 1,
+          "quote": "HAVE A 100 DOLLAR BILL"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-087",
+  "annotation_notes": "Complete order. Paying cash with a $100 bill: change_for_cents 10000 (more than the total)."
+}

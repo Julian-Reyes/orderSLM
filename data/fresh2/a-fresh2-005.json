@@ -1,0 +1,204 @@
+{
+  "conversation": {
+    "id": "a-fresh2-005",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "morning! grabbing stuff for the team on my way in",
+        "sent_at": "2026-11-12T07:35:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get 2 lg lattes one w oat milk, a med drip coffee, a sm americano, 3 blubery muffins, a plain bagel w cream cheese and 2 almond croissants",
+        "sent_at": "2026-11-12T07:35:25-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh and its under marco",
+        "sent_at": "2026-11-12T07:35:50-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "oat_milk",
+            "raw_text": "w oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg lattes"
+          },
+          {
+            "message_index": 1,
+            "quote": "one w oat milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a med drip coffee"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a sm americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "muffin",
+        "quantity": 3,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 blubery muffins"
+          }
+        ]
+      },
+      {
+        "line_id": "L6",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a plain bagel w cream cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L7",
+        "menu_item_id": "croissant",
+        "quantity": 2,
+        "variant_id": "almond",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 almond croissants"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Marco",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "marco"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-005",
+  "annotation_notes": "Six different items in one message; 'one w oat milk' splits the lattes into two lines (oat milk on a latte is a substitute of the whole milk). Pickup is never chosen at the pickup-only café: still missing; no payment."
+}

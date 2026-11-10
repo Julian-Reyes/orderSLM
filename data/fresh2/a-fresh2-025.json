@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh2-025",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi! Hope you're having a good morning.",
+        "sent_at": "2026-11-18T09:00:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-025",
+  "annotation_notes": "A greeting only: SMALL_TALK, no order."
+}

@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-fresh2-015",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning. I would like a medium latte and a plain bagel, toasted, with a side of strawberry jam please.",
+        "sent_at": "2026-11-15T10:10:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium latte"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "toasted",
+            "kitchen_note": true
+          },
+          {
+            "kind": "add",
+            "raw_text": "strawberry jam",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a plain bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have strawberry jam for the bagel. Would you like it as it comes, or with something else instead? Also, is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-015",
+  "annotation_notes": "Jam isn't on the menu: an off-menu add-on, asked about. 'toasted' is an accepted kitchen request (warm). Pickup, payment and name are never given."
+}

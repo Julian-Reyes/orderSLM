@@ -1,0 +1,144 @@
+{
+  "conversation": {
+    "id": "a-fresh2-031",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi!",
+        "sent_at": "2026-11-20T16:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "4 vanilla shakes but 2 of them chocolate instead, and 4 cheeseburgers",
+        "sent_at": "2026-11-20T16:30:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "deliver to 81 elmwood terrace, cash pls",
+        "sent_at": "2026-11-20T16:30:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "milkshake",
+        "quantity": 2,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 vanilla shakes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 2,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 vanilla shakes"
+          },
+          {
+            "message_index": 1,
+            "quote": "2 of them chocolate instead"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "cheeseburger",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 cheeseburgers"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 81 elmwood terrace"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elmwood terrace",
+      "number": "81",
+      "raw_text": "81 elmwood terrace",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "81 elmwood terrace"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-031",
+  "annotation_notes": "Corner Patty has no milk or crust; the shake flavor plays that part: 4 shakes, 2 of them chocolate, are two lines of 2. Said in the same request, so PLACE_ORDER."
+}

@@ -1,0 +1,124 @@
+{
+  "conversation": {
+    "id": "a-fresh2-012",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY NEED 4 DOUBLE CHEESEBURGERS AND 4 FRIES DELIVERED TO 350 OAK RIDGE DR, CASH. HOW BIG IS AN ORDER OF FRIES?",
+        "sent_at": "2026-11-14T18:45:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Fries come regular or large; a large is the bigger portion.",
+        "sent_at": "2026-11-14T18:45:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "OK MAKE ALL THE FRIES LARGE THEN",
+        "sent_at": "2026-11-14T18:46:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 4,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 DOUBLE CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 4,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 FRIES"
+          },
+          {
+            "message_index": 2,
+            "quote": "MAKE ALL THE FRIES LARGE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "DELIVERED TO 350 OAK RIDGE DR"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "oak ridge dr",
+      "number": "350",
+      "raw_text": "350 OAK RIDGE DR",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "350 OAK RIDGE DR"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-012",
+  "annotation_notes": "The fries' size was never said (regular by default), then changed to large: MODIFY_ORDER on the draft. The first message orders and asks about the menu."
+}

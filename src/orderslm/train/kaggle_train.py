@@ -130,8 +130,8 @@ def export(args: argparse.Namespace) -> Path:
         splits_of[name] = sp.split("+") if sp else default_splits
     score = list(splits_of)
     for name, sp in splits_of.items():
-        if not sp or not set(sp) <= {"dev", "fresh"}:
-            raise SystemExit(f"{name}: score splits are dev and/or fresh, got {sp}")
+        if not sp or not set(sp) <= {"dev", "fresh", "fresh2"}:
+            raise SystemExit(f"{name}: score splits are dev, fresh and/or fresh2, got {sp}")
     for n in train + score:
         if n not in STUDENTS:
             raise SystemExit(f"unknown student {n}; known: {sorted(STUDENTS)}")
@@ -412,7 +412,9 @@ def main(argv: list[str] | None = None) -> int:
         default=DEADLINE_HOURS,
         help="jobs stop themselves this long after the session start (lower it to fit the remaining GPU quota)",
     )
-    e.add_argument("--score-splits", help="evaluation splits to score on: dev (default), fresh, or dev,fresh")
+    e.add_argument(
+        "--score-splits", help="evaluation splits to score on: dev (default), fresh, fresh2, or a comma list"
+    )
     e.add_argument("--stop-after-steps", type=int, help="probe: each training pauses after N steps")
     e.add_argument(
         "--pad-check", type=int, metavar="ROWS", help="score ROWS valid rows padded and unpadded first"

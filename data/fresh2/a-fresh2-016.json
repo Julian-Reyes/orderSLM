@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-fresh2-016",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I'm picking up dinner for the family tonight. We'd like 2 cheeseburgers, a bacon burger, a veggie burger and a milkshake pls",
+        "sent_at": "2026-11-16T17:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Happy to help! What flavor would you like for the milkshake: vanilla, chocolate or strawberry?",
+        "sent_at": "2026-11-16T17:30:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Strawberry pls, and 2 large fries and an order of onion rings too. We'll pick it up, thx",
+        "sent_at": "2026-11-16T17:31:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a veggie burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "strawberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a milkshake"
+          },
+          {
+            "message_index": 2,
+            "quote": "Strawberry"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L6",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "an order of onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "We'll pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-016",
+  "annotation_notes": "Six items over two messages; the business asks the shake flavor midway and the answer fills it. No payment."
+}

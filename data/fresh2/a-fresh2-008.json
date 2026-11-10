@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-fresh2-008",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI CAN I GET A LARGE CAPPUCCINO AND A PLAIN CROISSANT FOR PICKUP, NAME IS ROB",
+        "sent_at": "2026-11-13T09:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure, Rob! Will you pay by card or cash?",
+        "sent_at": "2026-11-13T09:40:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ACTUALLY CANCEL THAT, OUR TOUR BUS IS LEAVING EARLY",
+        "sent_at": "2026-11-13T09:41:10-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "cancellation"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A LARGE CAPPUCCINO"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A PLAIN CROISSANT"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Rob",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "NAME IS ROB"
+        }
+      ]
+    },
+    "customer_decision": {
+      "state": "cancelled",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CANCEL THAT"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CANCEL_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-008",
+  "annotation_notes": "Cancelling the whole order keeps the items, decision cancelled, nothing missing. ALL CAPS is style, not urgency."
+}

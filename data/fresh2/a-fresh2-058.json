@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-fresh2-058",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey whats popular there",
+        "sent_at": "2026-11-28T11:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Our lattes and breakfast sandwiches are the favorites!",
+        "sent_at": "2026-11-28T11:30:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "nice, do the sandwiches come on a bagel",
+        "sent_at": "2026-11-28T11:31:10-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "They come on an English muffin, or you can get them on a croissant or a bagel.",
+        "sent_at": "2026-11-28T11:31:55-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok cool ill swing by in a bit",
+        "sent_at": "2026-11-28T11:32:20-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-058",
+  "annotation_notes": "Two menu questions and no order. 'ill swing by in a bit' orders nothing: SMALL_TALK."
+}

@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh2-062",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Quick question while I wait for my coworkers: how many players are on a soccer team?",
+        "sent_at": "2026-11-29T12:40:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-062",
+  "annotation_notes": "A sports question unrelated to the restaurant: OUT_OF_SCOPE."
+}

@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh2-048",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI DO ANY OF YOUR PASTRIES HAVE NU",
+        "sent_at": "2026-11-25T10:30:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-048",
+  "annotation_notes": "Cut off mid-word ('NU'): it could be nuts or something else, so the question can't be read. UNKNOWN, no order."
+}

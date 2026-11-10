@@ -1,0 +1,136 @@
+{
+  "conversation": {
+    "id": "a-fresh2-069",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi need 4 cheeseburgers n 4 cokes for the office",
+        "sent_at": "2026-12-01T12:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "make 2 of em double",
+        "sent_at": "2026-12-01T12:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actualy swap the cokes for lemonades",
+        "sent_at": "2026-12-01T12:10:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers"
+          },
+          {
+            "message_index": 1,
+            "quote": "make 2 of em double"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "lemonade",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cokes"
+          },
+          {
+            "message_index": 2,
+            "quote": "swap the cokes for lemonades"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-069",
+  "annotation_notes": "'make 2 of em double' adds a detail (PLACE_ORDER): two lines of 2. The cokes are swapped for lemonades, 4 of them: the coke line goes, a lemonade line comes. Pickup or delivery and payment never said."
+}

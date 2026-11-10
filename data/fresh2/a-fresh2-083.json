@@ -1,0 +1,77 @@
+{
+  "conversation": {
+    "id": "a-fresh2-083",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey if i order delivery can i pay w card at the door",
+        "sent_at": "2026-12-06T16:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, you can pay by card or cash.",
+        "sent_at": "2026-12-06T16:30:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok cool, n if i pay cash do u bring change",
+        "sent_at": "2026-12-06T16:31:10-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Yes, just tell us the bill size when you order.",
+        "sent_at": "2026-12-06T16:31:55-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "sounds good thx",
+        "sent_at": "2026-12-06T16:32:20-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-083",
+  "annotation_notes": "Two questions about paying, no order yet: PAYMENT_QUESTION, then thanks."
+}

@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh2-050",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi!! 👋 are u guys hiring? 😊",
+        "sent_at": "2026-11-25T14:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i'd love to apply for a barista job ☕ where do i send my resume? 📄",
+        "sent_at": "2026-11-25T14:00:25-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-050",
+  "annotation_notes": "A job application isn't about ordering food: OUT_OF_SCOPE both times."
+}

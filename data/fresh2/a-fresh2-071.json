@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh2-071",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Is the one with the thing still the thing from before or the other",
+        "sent_at": "2026-12-02T16:00:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "unclear"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-071",
+  "annotation_notes": "No item, no order and nothing in the chat to resolve 'the thing': UNKNOWN. It may be about some earlier order, so refers_to unclear."
+}

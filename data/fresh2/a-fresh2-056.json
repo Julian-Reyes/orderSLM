@@ -1,0 +1,35 @@
+{
+  "conversation": {
+    "id": "a-fresh2-056",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "ok settle a bet for us 😂☕ is a tomato a fruit or a vegetable?? 🍅",
+        "sent_at": "2026-11-27T09:20:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-056",
+  "annotation_notes": "A general-knowledge bet, nothing about the café: OUT_OF_SCOPE."
+}

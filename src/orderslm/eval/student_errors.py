@@ -169,8 +169,8 @@ def run_split(run_dirs: list[Path]) -> Split:
     if len(splits) != 1:
         raise SystemExit(f"runs from different splits: {sorted(splits)}")
     split = Split(splits.pop())
-    if split not in (Split.dev, Split.fresh):
-        raise SystemExit(f"error review is for dev or fresh, not {split.value}")
+    if split not in (Split.dev, Split.fresh, Split.fresh2):
+        raise SystemExit(f"error review is for dev or fresh(2), not {split.value}")
     return split
 
 

@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-fresh2-075",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "lunch order",
+        "sent_at": "2026-12-03T11:45:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "6 cheeseburgers",
+        "sent_at": "2026-12-03T11:45:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n a few orders of fries",
+        "sent_at": "2026-12-03T11:45:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n some cokes",
+        "sent_at": "2026-12-03T11:46:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 6,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "6 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a few orders of fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "some cokes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L2"
+      },
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L3"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many orders of fries would you like, how many cokes would you like, is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-075",
+  "annotation_notes": "'a few orders' and 'some cokes' are unclear quantities: null, asked. The chat ends before they are settled."
+}

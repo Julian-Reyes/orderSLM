@@ -192,6 +192,8 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
         + (
             "Dev numbers (tuning), not held-out results. "
             if c["split"] == "dev"
+            else "Fresh2 chats, written after the v3 fixes that used fresh (evaluation-only). "
+            if c["split"] == "fresh2"
             else "Fresh chats, written after the dev-based fixes (evaluation-only). "
         )
         + "Differences are A − B in "

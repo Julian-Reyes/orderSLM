@@ -57,6 +57,21 @@ claude-opus-5.5 like dev (Julian, 2026-10-25: option b), saved through the annot
 no near-duplicates within fresh, against dev, or against any of the 3,073 synthetic training chats. Julian reviews
 all of it like dev. Evaluation-only: training and generation code never reads it (tests/test_fresh.py).
 
+## Fresh2 split (M6 v3)
+
+`data/fresh2/` (`Split.fresh2`, `conversation@0.6`): 90 Source A conversations written **after** the v3 retrain,
+whose targeted data (t5) came from the dev **and fresh** misses, so fresh is "used for fixes" for v3. Fresh2 compares
+v2 and v3 on chats nobody looked at while fixing. Cards: `cards generate --split fresh2`: the same quotas as fresh
+(45 dev mix + 45 `FRESH_SITUATIONS`) from its own seed (`20261007-fresh2-2026-11-10`), training menus only.
+Written and labeled by claude-opus-5.5 in the session ($0, 2026-11-10); `missing_or_ambiguous` and the question come
+from the rules (the tool's one-click fill), every chat passes `validate()`: 0 blocking findings, 275 customer
+messages, all inside opening hours; no near-duplicates within fresh2, against dev or fresh (token Jaccard ≥ 0.8), or
+against the 3,432 synthetic chats (word 3-gram ≥ 0.8). Julian reviews all of it like dev and fresh.
+Evaluation-only: training and generation code never reads it (tests/test_fresh2.py).
+
+**Caveat to report:** the t5 training chats and fresh2 share a writer (Claude in a session), which can flatter
+fresh2. Dev and fresh were Claude-written too.
+
 ## Review (Source A)
 
 Julian reviews **all of dev and at least 25% of test** in the tool. "Save as reviewed" saves his version and

@@ -1,0 +1,225 @@
+{
+  "conversation": {
+    "id": "a-fresh2-006",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey!",
+        "sent_at": "2026-11-12T19:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "1 veggie burger no mayo",
+        "sent_at": "2026-11-12T19:10:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "+ onion rings",
+        "sent_at": "2026-11-12T19:10:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n a choc shake",
+        "sent_at": "2026-11-12T19:11:15-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "deliver to 75 hollis st, cash",
+        "sent_at": "2026-11-12T19:11:40-05:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Got it: 1 Veggie Burger with no mayo, 1 Onion Rings and 1 chocolate Milkshake, delivered to 75 Hollis St, paying cash. Sound right?",
+        "sent_at": "2026-11-12T19:12:25-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-11-12T19:12:50-05:00"
+      },
+      {
+        "index": 7,
+        "role": "customer",
+        "text": "oh add a lemonade too",
+        "sent_at": "2026-11-12T19:13:15-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "mayo",
+            "raw_text": "no mayo"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 veggie burger no mayo"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "onion rings"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a choc shake"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 7,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "deliver to 75 hollis st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "hollis st",
+      "number": "75",
+      "raw_text": "75 hollis st",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "75 hollis st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 7,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-006",
+  "annotation_notes": "Adding an item after the yes is MODIFY_ORDER on the placed order (a food change: time_sensitive); the decision resets to pending."
+}

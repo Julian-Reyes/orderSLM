@@ -1,0 +1,121 @@
+{
+  "conversation": {
+    "id": "a-fresh2-059",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a party size pepperoni pizza and 2 large cheese pizzas delivered to 88 Grand Ave.",
+        "sent_at": "2026-11-28T17:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'll pay with card.",
+        "sent_at": "2026-11-28T17:00:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "unmatched_variant_text": "party size",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a party size pepperoni pizza"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 large cheese pizzas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 88 Grand Ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Grand Ave",
+      "number": "88",
+      "raw_text": "88 Grand Ave",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "88 Grand Ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "pay with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have a party size for the pepperoni pizza; we have personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch. Which would you like?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-059",
+  "annotation_notes": "There is no party size: the pepperoni pizza stays on the menu with the size as unmatched text, and the size is asked."
+}

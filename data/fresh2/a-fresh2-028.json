@@ -1,0 +1,114 @@
+{
+  "conversation": {
+    "id": "a-fresh2-028",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HELLO, WHATS IN THE BACON BURGER?",
+        "sent_at": "2026-11-19T12:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Cheese, lettuce, tomato, onion, pickles, ketchup and bacon.",
+        "sent_at": "2026-11-19T12:30:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "OK 4 CHEESBURGERS THEN, 2 OF THEM DOUBEL PATTY, FOR PICKUP",
+        "sent_at": "2026-11-19T12:31:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "4 CHEESBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "4 CHEESBURGERS"
+          },
+          {
+            "message_index": 2,
+            "quote": "2 OF THEM DOUBEL PATTY"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-028",
+  "annotation_notes": "Corner Patty has no milk or crust choices; the patty size plays that part here: 4 cheeseburgers, 2 of them double, are two lines of 2 (single is the default). No payment."
+}

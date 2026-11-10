@@ -22,6 +22,9 @@ class Split(StrEnum):
     synthetic = "synthetic"
     benchmark = "benchmark"  # third-party eval set (PIZZA), data/external only; evaluation-only
     fresh = "fresh"  # M6: Source A written after the dev-based fixes, to measure them; evaluation-only, never tuned on
+    fresh2 = (
+        "fresh2"  # M6 v3: Source A written after the fixes that used fresh, to measure them; evaluation-only
+    )
 
 
 class Source(StrEnum):

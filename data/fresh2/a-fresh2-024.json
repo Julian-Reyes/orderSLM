@@ -1,0 +1,155 @@
+{
+  "conversation": {
+    "id": "a-fresh2-024",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello, do u have a gluten free crust?",
+        "sent_at": "2026-11-18T18:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we have a gluten-free crust for any pizza.",
+        "sent_at": "2026-11-18T18:05:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "great. a medium veggie on gluten free crust, an order of breadsticks n 2 sprites pls",
+        "sent_at": "2026-11-18T18:06:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 44 chesnut st, i'll pay cash",
+        "sent_at": "2026-11-18T18:06:35-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "on second thougt, skip the breadsticks",
+        "sent_at": "2026-11-18T18:07:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "on gluten free crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium veggie on gluten free crust"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "sprite",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 sprites"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 44 chesnut st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "chesnut st",
+      "number": "44",
+      "raw_text": "44 chesnut st",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "44 chesnut st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "i'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-024",
+  "annotation_notes": "The breadsticks are removed in the last message: the line disappears (MODIFY_ORDER). Sprites default to cans."
+}

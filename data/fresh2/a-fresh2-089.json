@@ -1,0 +1,98 @@
+{
+  "conversation": {
+    "id": "a-fresh2-089",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi we're in town for a family reunion, need food for like 40 ppl tmrw",
+        "sent_at": "2026-12-08T14:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "is there someone i can talk to about a catering order",
+        "sent_at": "2026-12-08T14:20:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "a manager or whoever handles big orders",
+        "sent_at": "2026-12-08T14:20:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "items",
+        "reason": "missing"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What would you like to order, is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-089",
+  "annotation_notes": "Announcing an order with no items is PLACE_ORDER (2026-11-03 rule), so the gold order is empty: no items, the bot asks. Then two requests for a person: HUMAN_REQUEST, asks_for_human."
+}

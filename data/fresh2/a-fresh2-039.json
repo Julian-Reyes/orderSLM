@@ -1,0 +1,191 @@
+{
+  "conversation": {
+    "id": "a-fresh2-039",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi im in town for a conference, wanna order some food",
+        "sent_at": "2026-11-22T20:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "1 cheeseburger w bacon",
+        "sent_at": "2026-11-22T20:00:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n 1 fries",
+        "sent_at": "2026-11-22T20:00:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "n a sprite",
+        "sent_at": "2026-11-22T20:01:15-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "deliver to the harbor inn, 400 front st room 512",
+        "sent_at": "2026-11-22T20:01:40-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "cash, thx",
+        "sent_at": "2026-11-22T20:02:05-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "bacon",
+            "raw_text": "w bacon"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 cheeseburger w bacon"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a sprite"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "deliver to the harbor inn"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "front st",
+      "number": "400",
+      "unit": "room 512",
+      "reference": "the harbor inn",
+      "raw_text": "the harbor inn, 400 front st room 512",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "the harbor inn, 400 front st room 512"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-039",
+  "annotation_notes": "The opener announces an order: PLACE_ORDER. Built one item at a time. The hotel is the address's landmark."
+}

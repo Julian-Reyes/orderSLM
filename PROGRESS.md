@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-09._
+_Last updated 2026-11-10._
 
 ## Start here next session
 
@@ -46,10 +46,21 @@ _Last updated 2026-11-09._
   v2 / only v3 right 4 / 11, McNemar p = 0.118), same action 76.7% → **85.6%** (+8.9 pp, CI [+1.1, +17.8]), item F1
   0.861 → **0.919** (+5.8 pp, CI [+0.7, +11.7]); intents 92.1% → 90.3% and invalid answers 2.5% → 2.2% (within
   noise). Same direction as dev (+6.6 pp). Not yet 100%: 14/90 fresh orders still wrong.
-- **Then:** then measure on a new
-  fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
-  training chats and fresh-2 would share a writer (Claude), which can flatter fresh-2; dev and fresh were Claude-written
-  too.
+- **Fresh2 batch written (2026-11-10, $0; docs/SPLITS.md "Fresh2 split"):** `data/fresh2/` (`Split.fresh2`,
+  `conversation@0.6`), 90 cards with fresh's quotas from a new seed (`cards generate --split fresh2`), 90 chats + gold
+  written and labeled by Claude in the session, 275 customer messages. Missing info and the question from the rules;
+  0 blocking findings; all messages inside opening hours; no near-duplicates (within, vs dev, fresh, 3,432 training
+  chats). Wiring: split dir, annotation tool tab, `kaggle_train --score-splits fresh2`, report wording,
+  `tests/test_fresh2.py` (training/generation never read it). Judgment calls for the review: 049 (card asked for an
+  unclear size; at Corner Patty "the big burgers" became an unclear item), 053 (dairy allergy, not eaten:
+  needs_staff_now), 061 ("the other one" resolved to almond from the business's answer), 071 (refers_to unclear),
+  076 (mid-order thanks: SMALL_TALK on the draft), 081 ("Yes please" to "Is this for pickup?" chooses pickup).
+- **Next:** (1) Julian reviews fresh2 in `make annotate` (fresh2 tab, "Save as reviewed"); (2) score v2 and v3 on
+  fresh2 on Kaggle (free, ~1 h each; `make train ARGS="export --score qwen3.5-0.8b-single-v2,qwen3.5-0.8b-single-v3
+  --score-splits fresh2"`, `make kaggle-push JOB=m6`; needs Julian's OK to push); gold fixes from the review re-score for free, a changed customer
+  message needs re-scoring. Then `student_compare` v2 vs v3 on fresh2: the clean held-out number. Caveat to report:
+  the t5 training chats and fresh2 share a writer (Claude), which can flatter fresh2; dev and fresh were
+  Claude-written too.
 
 ### Later, for Julian to pick
 

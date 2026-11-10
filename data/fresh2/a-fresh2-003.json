@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "a-fresh2-003",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI CAN I GET 2 HOT CHOCOLATES AND A CHOCOLATE CHIP MUFFIN FOR PICKUP",
+        "sent_at": "2026-11-12T08:05:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure! What name should I put it under, and will you pay by card or cash?",
+        "sent_at": "2026-11-12T08:05:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "NAME IS DANA",
+        "sent_at": "2026-11-12T08:06:10-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "AND I ALREADY PAID, I HAVE THE SCREENSHOT",
+        "sent_at": "2026-11-12T08:06:35-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 HOT CHOCOLATES"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A CHOCOLATE CHIP MUFFIN"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "I ALREADY PAID"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Dana",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "DANA"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-003",
+  "annotation_notes": "The claim is in its own message: primary PAYMENT_CLAIM about the draft. customer_claims_paid, method unknown (a screenshot is not a method); staff verify it, so payment isn't asked again. Hot chocolate has a default size (medium)."
+}

@@ -1,0 +1,141 @@
+{
+  "conversation": {
+    "id": "a-fresh2-042",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do ur pizzas come in personal size? 🍕",
+        "sent_at": "2026-11-23T15:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes! Every pizza comes in a personal 8-inch.",
+        "sent_at": "2026-11-23T15:00:45-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "yay 😍 2 personal pepperonis w ricotta, n 1 personal cheese w pineapple 🍍 pickup at 7, card 💳",
+        "sent_at": "2026-11-23T15:01:10-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "personal",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w ricotta",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 personal pepperonis w ricotta"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "personal",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "pineapple",
+            "raw_text": "w pineapple"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 personal cheese w pineapple"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 7"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have ricotta for the pepperoni pizza. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-042",
+  "annotation_notes": "Ricotta isn't on the menu: an off-menu add-on, asked about; the message goes on with more items and details. 'at 7' at 15:00, open 12-23: 19:00."
+}

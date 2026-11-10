@@ -1,0 +1,105 @@
+{
+  "conversation": {
+    "id": "a-fresh2-088",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a med meat lovers n a 20 oz coke",
+        "sent_at": "2026-12-08T22:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "paying card",
+        "sent_at": "2026-12-08T22:05:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "meat_lovers_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a med meat lovers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "variant_id": "bottle_20oz",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a 20 oz coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-088",
+  "annotation_notes": "Pickup or delivery is never said: missing. '20 oz' is the bottle size."
+}

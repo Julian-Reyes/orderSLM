@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-fresh2-090",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey r u open at 7 tmrw",
+        "sent_at": "2026-12-08T14:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we open at 7 am!",
+        "sent_at": "2026-12-08T14:30:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok can u save me a bluebe",
+        "sent_at": "2026-12-08T14:31:10-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-090",
+  "annotation_notes": "Opening hours: DELIVERY_QUESTION. The last message is cut off mid-word ('bluebe'): it could be a muffin or anything else, so UNKNOWN; nothing to order."
+}

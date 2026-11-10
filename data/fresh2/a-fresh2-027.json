@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-fresh2-027",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, a large americano with vanilla and a sesame bagel with butter for pickup at 9:30, name's Jordan, I'll pay by card.",
+        "sent_at": "2026-11-19T07:20:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "vanilla_syrup",
+            "raw_text": "with vanilla"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large americano with vanilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "butter",
+            "raw_text": "with butter"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a sesame bagel with butter"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9:30",
+        "normalized_local": "09:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 9:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Jordan",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Jordan"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-027",
+  "annotation_notes": "'at 9:30' at 07:20 with the café open 7-15: only 9:30 am works."
+}

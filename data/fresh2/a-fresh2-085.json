@@ -1,0 +1,104 @@
+{
+  "conversation": {
+    "id": "a-fresh2-085",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-12-07T12:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i got charged twice for my delivery yesterday, can u refund one",
+        "sent_at": "2026-12-07T12:30:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "it was 2 cheeseburgers n fries",
+        "sent_at": "2026-12-07T12:30:50-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "both charges r on my card rn",
+        "sent_at": "2026-12-07T12:31:15-05:00"
+      },
+      {
+        "index": 4,
+        "role": "business",
+        "text": "So sorry about that! I've passed this to the manager to check the charges.",
+        "sent_at": "2026-12-07T12:32:00-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "ok thx",
+        "sent_at": "2026-12-07T12:32:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-085",
+  "annotation_notes": "A double charge is a disputed payment: REFUND_REQUEST, needs_staff_now. The next two messages give details for the same request. The items named are a past order: no gold order."
+}

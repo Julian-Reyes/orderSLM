@@ -1,0 +1,133 @@
+{
+  "conversation": {
+    "id": "a-fresh2-077",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 3 cheeseburgers",
+        "sent_at": "2026-12-04T12:05:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 orders of chiken tacos",
+        "sent_at": "2026-12-04T12:05:25-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n 3 lg fries",
+        "sent_at": "2026-12-04T12:05:50-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "unmatched_text": "chiken tacos",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 orders of chiken tacos"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 lg fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "off_menu",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have chiken tacos. Would you like something else instead? Also, is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-077",
+  "annotation_notes": "Tacos aren't on a burger menu: unmatched text, off-menu, with the stated quantity. Pickup or delivery and payment never said."
+}

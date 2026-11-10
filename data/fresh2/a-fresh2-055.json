@@ -1,0 +1,164 @@
+{
+  "conversation": {
+    "id": "a-fresh2-055",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "good afternoon, hope ur well",
+        "sent_at": "2026-11-27T15:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "id like a large hawaiian, a medium margherita, an order of breadsticks and 3 iced teas pls",
+        "sent_at": "2026-11-27T15:30:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Sure! Would you like the iced teas in cans or 20 oz bottles?",
+        "sent_at": "2026-11-27T15:31:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "bottles pls, and add a small pepperoni for my grandson",
+        "sent_at": "2026-11-27T15:31:35-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large hawaiian"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a medium margherita"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "breadsticks",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an order of breadsticks"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "iced_tea",
+        "quantity": 3,
+        "variant_id": "bottle_20oz",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 iced teas"
+          },
+          {
+            "message_index": 3,
+            "quote": "bottles"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a small pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-055",
+  "annotation_notes": "Five items over two messages, with the business asking the iced-tea size midway. Pickup or delivery and payment never said."
+}

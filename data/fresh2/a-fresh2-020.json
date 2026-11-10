@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh2-020",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hey, random question for a school thing.",
+        "sent_at": "2026-11-17T15:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "What's the capital of Australia?",
+        "sent_at": "2026-11-17T15:20:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-020",
+  "annotation_notes": "Geography question unrelated to the restaurant: OUT_OF_SCOPE. The lead-in has no request: SMALL_TALK."
+}

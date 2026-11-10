@@ -17,6 +17,7 @@ docs/STUDENT_ERRORS.md, never from dev chats), half the dev mix (dev's quotas, h
     uv run python -m orderslm.data.cards summary            # dev only
     ORDERSLM_UNSEAL_TEST="author Source A" uv run python -m orderslm.data.cards generate
     uv run python -m orderslm.data.cards generate --split fresh
+    uv run python -m orderslm.data.cards generate --split fresh2   # same quotas, own seed (M6 v3)
 """
 
 import argparse
@@ -439,6 +440,9 @@ FRESH_TARGETED = {
 }
 FRESH_SEED = f"{SEED}-fresh-2026-10-25"
 FRESH_MIX = 45  # dev's situation mix, largest-remainder share of this many cards
+# Fresh2 (M6 v3, 2026-11-10): the same quotas as fresh from its own seed, written after the v3 fixes (which used
+# fresh), so v2 and v3 are compared on chats nobody has seen.
+FRESH2_SEED = f"{SEED}-fresh2-2026-11-10"
 
 
 # Cards corrected after review so they match the conversation written from them. Applied after
@@ -572,13 +576,15 @@ def fresh_quotas() -> dict[str, int]:
     return {**{n: c for n, c in mix.items() if c}, **FRESH_TARGETED}
 
 
-def generate_fresh() -> list[ScenarioCard]:
+def generate_fresh(split: Split = Split.fresh) -> list[ScenarioCard]:
+    """Fresh or fresh2 cards: the same quotas, each split from its own seed."""
+    seed = {Split.fresh: FRESH_SEED, Split.fresh2: FRESH2_SEED}[split]
     menus = load_menus(include_held_out=True)
-    rng = random.Random(FRESH_SEED)
+    rng = random.Random(seed)
     jobs = [name for name, n in fresh_quotas().items() for _ in range(n)]
     rng.shuffle(jobs)
-    cards = _cards(Split.fresh, jobs, rng, menus, Counter(), Counter(), 0, True)
-    return [_stated_fulfillment(c, menus, FRESH_SEED) for c in cards]
+    cards = _cards(split, jobs, rng, menus, Counter(), Counter(), 0, True)
+    return [_stated_fulfillment(c, menus, seed) for c in cards]
 
 
 def _cards(
@@ -701,15 +707,21 @@ def main(argv: list[str] | None = None) -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("generate", help="write dev + test cards (test needs ORDERSLM_UNSEAL_TEST)")
     g.add_argument("--force", action="store_true")
-    g.add_argument("--split", choices=["dev", "test", "fresh"], action="append", help="default: dev + test")
+    g.add_argument(
+        "--split", choices=["dev", "test", "fresh", "fresh2"], action="append", help="default: dev + test"
+    )
     s = sub.add_parser("summary")
-    s.add_argument("--split", choices=["dev", "test", "fresh"], action="append")
+    s.add_argument("--split", choices=["dev", "test", "fresh", "fresh2"], action="append")
     args = ap.parse_args(argv)
     if args.cmd == "generate":
         chosen = {Split(x) for x in (args.split or ["dev", "test"])}
-        cards = {s: cs for s, cs in generate().items() if s in chosen} if chosen - {Split.fresh} else {}
-        if Split.fresh in chosen:
-            cards[Split.fresh] = generate_fresh()
+        cards = (
+            {s: cs for s, cs in generate().items() if s in chosen}
+            if chosen - {Split.fresh, Split.fresh2}
+            else {}
+        )
+        for split in {Split.fresh, Split.fresh2} & chosen:
+            cards[split] = generate_fresh(split)
         write(cards, force=args.force)
     for split in (
         [Split(x) for x in (args.split or ["dev", "test"])]

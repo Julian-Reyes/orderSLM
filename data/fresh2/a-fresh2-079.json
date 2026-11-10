@@ -1,0 +1,163 @@
+{
+  "conversation": {
+    "id": "a-fresh2-079",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey need pizzas for a party, 3 lg pepperoni",
+        "sent_at": "2026-12-05T13:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 2 lg hawaiian, one w extra pineapple",
+        "sent_at": "2026-12-05T13:00:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n 3 orders of knots. pickup at 5:30, card",
+        "sent_at": "2026-12-05T13:00:50-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 lg pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg hawaiian"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "hawaiian_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "pineapple",
+            "amount": "extra",
+            "raw_text": "extra pineapple"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg hawaiian"
+          },
+          {
+            "message_index": 1,
+            "quote": "one w extra pineapple"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "garlic_knots",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 orders of knots"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 5:30",
+        "normalized_local": "17:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 5:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-079",
+  "annotation_notes": "2 Hawaiians, one with extra pineapple: two lines (extra = add + extra, even though pineapple is included). 'at 5:30' at 13:00, open 12-23: 17:30."
+}

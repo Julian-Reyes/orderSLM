@@ -15,6 +15,9 @@ SAMPLES = DATA / "samples"
 MENUS = DATA / "menus"  # M1
 DEV = DATA / "dev"  # M2
 FRESH = DATA / "fresh"  # M6: fresh Source A to measure the dev-based fixes (evaluation-only, like dev)
+FRESH2 = (
+    DATA / "fresh2"
+)  # M6 v3: a second fresh batch, written after the v3 fixes that used fresh (evaluation-only)
 _TEST = DATA / "test"  # M2, sealed
 EXTERNAL = DATA / "external"  # third-party downloads + anything derived from them, gitignored
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)

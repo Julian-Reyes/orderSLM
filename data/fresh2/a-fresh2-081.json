@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-fresh2-081",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning ☀️ could I please get a medium cappuccino and a blueberry muffin? Card 💳, name is Walter",
+        "sent_at": "2026-12-05T08:45:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Thank you, Walter! Is this for pickup?",
+        "sent_at": "2026-12-05T08:45:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Yes please 😊",
+        "sent_at": "2026-12-05T08:46:10-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Great: 1 medium Cappuccino and 1 blueberry Muffin for pickup, paying by card. Is that right?",
+        "sent_at": "2026-12-05T08:46:55-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Perfect, thank you 👍",
+        "sent_at": "2026-12-05T08:47:20-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "Oh, could you make the cappuccino a large instead? 🙏",
+        "sent_at": "2026-12-05T08:47:45-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium cappuccino"
+          },
+          {
+            "message_index": 5,
+            "quote": "make the cappuccino a large"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a blueberry muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Yes please"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Walter",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "Walter"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-081",
+  "annotation_notes": "'Yes please' answers 'Is this for pickup?', so it chooses pickup (PLACE_ORDER), not a confirmation. 'Perfect, thank you' after the read-back confirms. The size change after it is MODIFY_ORDER on the placed order, time_sensitive; back to pending."
+}

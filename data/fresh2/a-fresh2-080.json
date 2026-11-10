@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh2-080",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! just checking on my delivery",
+        "sent_at": "2026-12-05T19:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordered abt 40 min ago, no rush tho",
+        "sent_at": "2026-12-05T19:20:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-080",
+  "annotation_notes": "A polite status check on a placed order. 40 minutes for a delivery isn't clearly late and the customer says no rush: urgency normal. No items in this chat."
+}

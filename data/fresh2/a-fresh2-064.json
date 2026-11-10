@@ -1,0 +1,56 @@
+{
+  "conversation": {
+    "id": "a-fresh2-064",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, do you have anything vegan besides the veggie burger?",
+        "sent_at": "2026-11-30T13:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "The veggie burger comes with mayo, and you can get it without. We can't confirm allergens or dietary details here, sorry.",
+        "sent_at": "2026-11-30T13:15:45-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "?",
+        "sent_at": "2026-11-30T13:16:10-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-064",
+  "annotation_notes": "A lone '?' after the answer: it could be confusion or a follow-up, there's no way to tell what is wanted. UNKNOWN, no order."
+}

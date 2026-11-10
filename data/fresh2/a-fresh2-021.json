@@ -1,0 +1,144 @@
+{
+  "conversation": {
+    "id": "a-fresh2-021",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "omg ur still open 🙏🍕",
+        "sent_at": "2026-11-17T22:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ok for the dorm: 2 xl pepperoni, 1 lg supreme no olives, 2 orders of garlic knots, an order of breadsticks n a 2 liter dr pepper 🥤🔥",
+        "sent_at": "2026-11-17T22:15:25-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 xl pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "olives",
+            "raw_text": "no olives"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "1 lg supreme no olives"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 orders of garlic knots"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "breadsticks",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an order of breadsticks"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "dr_pepper",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a 2 liter dr pepper"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-021",
+  "annotation_notes": "'ur still open' is a remark, not a question about hours: SMALL_TALK. A 2 liter Dr Pepper is one bottle of the 2-liter size. Pickup or delivery and payment never said."
+}

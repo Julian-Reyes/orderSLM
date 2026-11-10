@@ -1,0 +1,128 @@
+{
+  "conversation": {
+    "id": "a-fresh2-029",
+    "business_id": "corner-patty",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like 3 bacon burgers, 3 large fries and 3 Cokes delivered to 210 Westfield Ave.",
+        "sent_at": "2026-11-19T18:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'll pay cash, and I'll need change for a $100.",
+        "sent_at": "2026-11-19T18:40:25-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 Cokes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 210 Westfield Ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Westfield Ave",
+      "number": "210",
+      "raw_text": "210 Westfield Ave",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "210 Westfield Ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "change_for_cents": 10000,
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "pay cash"
+        },
+        {
+          "message_index": 1,
+          "quote": "change for a $100"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-029",
+  "annotation_notes": "Complete order. Change for a $100 bill: change_for_cents 10000 (more than the total)."
+}

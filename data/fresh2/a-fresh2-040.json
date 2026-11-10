@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "a-fresh2-040",
+    "business_id": "morning-crumb",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning, is the almond croissant sweet?",
+        "sent_at": "2026-11-23T08:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It's filled with almond cream, so yes, a little sweet!",
+        "sent_at": "2026-11-23T08:40:45-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Lovely, one almond croissant and a medium drip coffee pls",
+        "sent_at": "2026-11-23T08:41:10-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "pickup, name Ruth, cash",
+        "sent_at": "2026-11-23T08:41:35-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "almond",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "one almond croissant"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium drip coffee"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ruth",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Ruth"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-040",
+  "annotation_notes": "A menu question before any order (refers_to none), then a complete order."
+}

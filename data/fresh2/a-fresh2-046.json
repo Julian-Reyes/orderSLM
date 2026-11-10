@@ -1,0 +1,143 @@
+{
+  "conversation": {
+    "id": "a-fresh2-046",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi!! 🎈 2 xl cheese pizzas n 2 xl pepperoni for a party 🎉",
+        "sent_at": "2026-11-24T17:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "deliver to 1515 sunset dr, paying cash 💵",
+        "sent_at": "2026-11-24T17:15:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 2 extra large Cheese Pizzas and 2 extra large Pepperoni Pizzas, delivered to 1515 Sunset Dr, paying cash. Is that right?",
+        "sent_at": "2026-11-24T17:16:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok sounds good 👍",
+        "sent_at": "2026-11-24T17:16:35-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 xl cheese pizzas"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 xl pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 1515 sunset dr"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "sunset dr",
+      "number": "1515",
+      "raw_text": "1515 sunset dr",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "1515 sunset dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "ok sounds good"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-046",
+  "annotation_notes": "'ok sounds good' right after the read-back is a confirmation; nothing is missing, so confirmed."
+}

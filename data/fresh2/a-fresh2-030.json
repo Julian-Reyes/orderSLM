@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-fresh2-030",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh2",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey there",
+        "sent_at": "2026-11-20T21:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "a large cheese pizza w sausage n jalapenos, deliver to 600 river rd unit 12, cash",
+        "sent_at": "2026-11-20T21:30:25-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 1 large Cheese Pizza with sausage and jalapeños, delivered to 600 River Rd Unit 12, paying cash. Is that right?",
+        "sent_at": "2026-11-20T21:31:10-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "yep thats it",
+        "sent_at": "2026-11-20T21:31:35-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh actualy ill pay w card instead",
+        "sent_at": "2026-11-20T21:32:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "sausage",
+            "raw_text": "w sausage"
+          },
+          {
+            "kind": "add",
+            "modifier_id": "jalapenos",
+            "raw_text": "jalapenos"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large cheese pizza w sausage n jalapenos"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "deliver to 600 river rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "river rd",
+      "number": "600",
+      "unit": "unit 12",
+      "raw_text": "600 river rd unit 12",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "600 river rd unit 12"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "pay w card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Source A, fresh2)",
+  "card_id": "a-fresh2-030",
+  "annotation_notes": "A payment switch after the yes: MODIFY_ORDER on the placed order, urgency normal; the decision resets to pending."
+}
