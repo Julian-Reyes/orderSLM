@@ -1,0 +1,196 @@
+{
+  "env": {
+    "session": "20261109T142855Z",
+    "started_at": "2026-11-09T20:23:40.915796+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.9,
+        "Cached": 4.96,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.9,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-11-10T07:38:59.940877+00:00"
+  },
+  "jobs": {
+    "qwen3.5-0.8b-single-v3": {
+      "status": {
+        "status": "done",
+        "opt_step": 704,
+        "epoch": 2,
+        "pos": 0,
+        "best_val": 0.009394695804963918,
+        "best_step": 704,
+        "skipped_updates": 6,
+        "finished_at": "2026-11-10T05:48:10.128972+00:00"
+      },
+      "val": [
+        {
+          "val_loss": 1.4009980779466915,
+          "val_tokens": 53147,
+          "seconds": 339.0,
+          "opt_step": 0,
+          "epoch": 0.0,
+          "best": false
+        },
+        {
+          "val_loss": 0.01771083352374274,
+          "val_tokens": 53147,
+          "seconds": 235.2,
+          "opt_step": 176,
+          "epoch": 0.5,
+          "best": true
+        },
+        {
+          "val_loss": 0.011743646253149966,
+          "val_tokens": 53147,
+          "seconds": 235.0,
+          "opt_step": 352,
+          "epoch": 1.0,
+          "best": true
+        },
+        {
+          "val_loss": 0.009789104927351185,
+          "val_tokens": 53147,
+          "seconds": 235.3,
+          "opt_step": 528,
+          "epoch": 1.5,
+          "best": true
+        },
+        {
+          "val_loss": 0.009394695804963918,
+          "val_tokens": 53147,
+          "seconds": 235.2,
+          "opt_step": 704,
+          "epoch": 2.0,
+          "best": true
+        }
+      ],
+      "best_adapter_sha256": "d328521d4fa02ee56797b343e8598f64327253f507f2da91d59932a16c8517c8",
+      "best": {
+        "val_loss": 0.009394695804963918,
+        "val_tokens": 53147,
+        "seconds": 235.2,
+        "opt_step": 704,
+        "epoch": 2.0
+      },
+      "steps_logged": 704,
+      "skipped_updates": 6,
+      "train_hours_logged": 9.02,
+      "peak_memory_gb": 4.56,
+      "tokens_per_second": 665.8
+    },
+    "score-qwen3.5-0.8b-single-v3": {
+      "status": {
+        "status": "done",
+        "answered": 268
+      },
+      "dev_run": "runs/student-dev/20261109T142855Z-qwen3.5-0.8b-single-v3",
+      "intent_all": {
+        "messages": 268,
+        "primary_correct": 247,
+        "primary_accuracy": 0.9216,
+        "primary_ci95": [
+          0.8831859523943784,
+          0.9481805492742406
+        ],
+        "label_set_correct": 239
+      },
+      "intent_earlier": {
+        "messages": 177,
+        "primary_correct": 163,
+        "primary_accuracy": 0.9209,
+        "primary_ci95": [
+          0.8716232338084631,
+          0.9523022346678165
+        ],
+        "label_set_correct": 159
+      },
+      "items_f1": 0.9122807017543859,
+      "exact": "75/91",
+      "contract_valid": {
+        "last": {
+          "valid": 89,
+          "of": 91
+        },
+        "earlier": {
+          "valid": 174,
+          "of": 177
+        }
+      }
+    },
+    "score-qwen3.5-0.8b-single-v3-fresh": {
+      "status": {
+        "status": "paused",
+        "answered": 246
+      },
+      "dev_run": "runs/student-dev/20261109T142855Z-qwen3.5-0.8b-single-v3-fresh",
+      "intent_all": {
+        "messages": 278,
+        "primary_correct": 220,
+        "primary_accuracy": 0.7914,
+        "primary_ci95": [
+          0.7397906849612241,
+          0.8350002614427132
+        ],
+        "label_set_correct": 215
+      },
+      "intent_earlier": {
+        "messages": 188,
+        "primary_correct": 143,
+        "primary_accuracy": 0.7606,
+        "primary_ci95": [
+          0.6948127908434929,
+          0.816025317262361
+        ],
+        "label_set_correct": 140
+      },
+      "items_f1": 0.8707482993197279,
+      "exact": "68/90",
+      "contract_valid": {
+        "last": {
+          "valid": 79,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 161,
+          "of": 188
+        }
+      }
+    }
+  },
+  "host_memory": {
+    "samples": 1349,
+    "total_gb": 33.66,
+    "min_available_gb": 28.78,
+    "max_shmem_gb": 0.02,
+    "max_rss_gb": {
+      "gpu0": 3.65
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}

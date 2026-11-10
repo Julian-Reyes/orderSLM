@@ -88,6 +88,7 @@ def report(run_dir: Path) -> dict[str, Any]:
     dev = load_eval_split(split)
     scores, intents, errors = [], [], Counter()
     validity = {"last": [0, 0], "earlier": [0, 0]}
+    unanswered = 0  # no record at all: the session stopped first (paused), not an invalid answer
     for ac in dev:
         conv = ac.conversation
         menu = load_menu(conv.business_id)
@@ -95,6 +96,7 @@ def report(run_dir: Path) -> dict[str, Any]:
         parsed: dict[int, StudentOutput | None] = {}
         for k in conv.customer_indices():
             rec = outputs.get(request_id(conv.id, k))
+            unanswered += rec is None
             out, err = (
                 (None, (rec or {}).get("error", "no output"))
                 if not rec or "text" not in rec
@@ -159,6 +161,10 @@ def report(run_dir: Path) -> dict[str, Any]:
         "scorer_version": SCORER_VERSION,
         "finalize_version": FINALIZE_VERSION,
         "requests": len(recs),
+        # a paused scoring session leaves requests unanswered; they score as invalid, so such a run is
+        # incomplete and student_compare refuses it (v3 fresh, 2026-11-10: 32 of 278 unanswered)
+        "unanswered": unanswered,
+        "complete": unanswered == 0,
         "contract_valid": {k: {"valid": v[0], "of": v[1]} for k, v in validity.items()},
         "invalid_reasons": dict(errors.most_common(10)),
         "hit_token_limit": sum(r.get("finish_reason") == "length" for r in recs),
@@ -210,6 +216,15 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
             else "Dev numbers (tuning), not held-out results."
         ),
         "",
+        *(
+            [
+                f"**Incomplete run: {m['unanswered']} customer messages were never answered (the session "
+                "stopped first); they count as invalid below. Not a result.**",
+                "",
+            ]
+            if m.get("unanswered")
+            else []
+        ),
         "| | Student | Teacher (`teacher-label@0.7`, reference) |",
         "|---|---|---|",
         f"| Valid answers, last customer message | {cv['last']['valid']}/{cv['last']['of']} | "

@@ -93,3 +93,35 @@ def test_training_data_may_differ_but_nothing_else():
     v2["versions"] |= {"prompt_version": "q"}
     with pytest.raises(SystemExit, match="versions"):
         sc.compare([v1, v2], resamples=10)
+
+
+def test_paused_run_is_refused_not_scored_as_invalid(tmp_path):
+    """A paused scoring session leaves messages with no output record; comparing it would count them as
+    invalid answers (v3 fresh, 2026-11-10), so the comparison refuses such a run."""
+    import json
+
+    import pytest
+
+    from orderslm.eval.student_compare import load_run, unanswered
+
+    messages = {("c1", 0): True, ("c1", 2): False, ("c2", 0): True}
+    (tmp_path / "outputs.jsonl").write_text(
+        json.dumps({"id": "c1#0", "text": "{}"})
+        + "\n"
+        + json.dumps({"id": "c1#2", "error": "bad json"})
+        + "\n"
+    )
+    assert unanswered(tmp_path, messages) == ["c2#0"]  # an error record is answered (invalid), not missing
+    rows = [
+        {"conversation_id": c, "message_index": k, "primary_ok": ok, "pred": None}
+        for (c, k), ok in messages.items()
+    ]
+    (tmp_path / "intent_rows.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    (tmp_path / "order_rows.jsonl").write_text("")
+    (tmp_path / "metrics.json").write_text("{}")
+    (tmp_path / "manifest.json").write_text("{}")
+    with pytest.raises(SystemExit, match="incomplete run"):
+        load_run(tmp_path)
+    with (tmp_path / "outputs.jsonl").open("a") as f:
+        f.write(json.dumps({"id": "c2#0", "text": "{}"}) + "\n")
+    assert unanswered(tmp_path, messages) == []

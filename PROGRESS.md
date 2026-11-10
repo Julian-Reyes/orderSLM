@@ -29,6 +29,18 @@ _Last updated 2026-11-09._
   ~6 h (I missed the >20 min re-push rule in docs/KAGGLE.md); **v11 started 2026-11-09 17:22 Brasília and ran at once**
   (same upload, `kaggle_jobs start m6`). Cancel v10 on the website. Expected done ~02:30 Brasília 2026-11-10.
   Pull with `make kaggle-pull JOB=m6`, then `make train ARGS="import runs/train/20261109T142855Z"`.
+- **v3 result, dev (used for fixes; `runs/student-compare/20261110T113141Z`, imported 2026-11-10):** training 9.0 h
+  (not ~7 h). v2 → v3: fully correct orders 75.8% → **82.4%** (+6.6 pp, 95% CI [+1.1, +13.2]; chats only v2 / only v3
+  right 1 / 7, McNemar p = 0.070), item F1 0.872 → **0.912** (+4.0 pp, CI [+0.4, +8.0]), intents 92.9% → 92.2% and
+  invalid answers 1.1% → 1.9% (both within noise).
+- **v3 fresh: incomplete, not a result.** The session hit Kaggle's limit at 246/278 messages (chats 082–090 never
+  answered; `runs/student-dev/20261109T142855Z-qwen3.5-0.8b-single-v3-fresh`, its report says so). The report counted
+  unanswered messages as invalid (13.7%); fixed: `student_dev.report` records `unanswered`/`complete` and warns, and
+  `student_compare` refuses a run with unanswered messages (checked from outputs.jsonl, so older runs need no rebuild;
+  test `test_paused_run_is_refused_not_scored_as_invalid`). Unofficial look at the 81 complete chats: v3 68 vs v2 63
+  fully correct. **Re-score of all of fresh pushed 2026-11-10 ~08:39 Brasília (Julian: "yes"): `runs/train/20261110T113810Z`,
+  kernel v12, ~1 h; watcher re-pushes every 20 min while queued.** Then `make kaggle-pull JOB=m6`,
+  `make train ARGS="import runs/train/20261110T113810Z"`, and compare with v2 fresh.
 - **Then:** then measure on a new
   fresh-2 batch (written by Claude, reviewed by Julian) plus dev/fresh ("used for fixes"). Caveat to report: the t5
   training chats and fresh-2 would share a writer (Claude), which can flatter fresh-2; dev and fresh were Claude-written

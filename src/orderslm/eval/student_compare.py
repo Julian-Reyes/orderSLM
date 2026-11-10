@@ -31,6 +31,7 @@ from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
 
 from .stats import holm, mcnemar_exact, percentile_interval
+from .student_dev import request_id
 
 EXPERIMENT = "student-compare"
 COMPARE_VERSION = "student-compare@0.2"  # 0.2: same-action orders (scorer@0.3)
@@ -41,6 +42,13 @@ METRICS = ("intent_accuracy", "invalid_rate", "item_f1", "exact_rate", "action_r
 
 def _read_jsonl(path: Path) -> list[dict]:
     return [json.loads(x) for x in path.read_text().splitlines() if x.strip()]
+
+
+def unanswered(run_dir: Path, messages: dict[tuple[str, int], bool]) -> list[str]:
+    """Scored messages with no record in outputs.jsonl: a paused session's leftovers, which the report counts
+    as invalid answers (v3 fresh, 2026-11-10: 32 of 278). Checked from the files, so older runs need no rebuild."""
+    answered = {r["id"] for r in _read_jsonl(run_dir / "outputs.jsonl")}
+    return sorted(i for cid, k in messages if (i := request_id(cid, k)) not in answered)
 
 
 def load_run(run_dir: Path) -> dict[str, Any]:
@@ -59,6 +67,11 @@ def load_run(run_dir: Path) -> dict[str, Any]:
         c["ok"] += r["primary_ok"]
         c["invalid"] += r["pred"] is None
         messages[(r["conversation_id"], r["message_index"])] = r["primary_ok"]
+    if missing := unanswered(run_dir, messages):
+        raise SystemExit(
+            f"{run_dir}: incomplete run ({len(missing)} of {len(messages)} messages never answered, the "
+            f"session stopped first, e.g. {missing[0]}); score the split again before comparing"
+        )
     orders = {r["conversation_id"]: r for r in _read_jsonl(run_dir / "order_rows.jsonl")}
     if set(orders) != set(chats):
         raise SystemExit(f"{run_dir}: intent and order rows cover different chats")
