@@ -1,0 +1,130 @@
+{
+  "env": {
+    "session": "20261110T162058Z",
+    "started_at": "2026-11-10T16:52:04.158448+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.82,
+        "Cached": 4.96,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.9,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-11-10T17:57:51.761526+00:00"
+  },
+  "jobs": {
+    "score-qwen3.5-0.8b-single-v2-fresh2": {
+      "status": {
+        "status": "done",
+        "answered": 275
+      },
+      "dev_run": "runs/student-dev/20261110T162058Z-qwen3.5-0.8b-single-v2-fresh2",
+      "intent_all": {
+        "messages": 275,
+        "primary_correct": 249,
+        "primary_accuracy": 0.9055,
+        "primary_ci95": [
+          0.8650748517956687,
+          0.9346623466711311
+        ],
+        "label_set_correct": 246
+      },
+      "intent_earlier": {
+        "messages": 185,
+        "primary_correct": 170,
+        "primary_accuracy": 0.9189,
+        "primary_ci95": [
+          0.8705431506556757,
+          0.9502505727611986
+        ],
+        "label_set_correct": 167
+      },
+      "items_f1": 0.8242424242424242,
+      "exact": "62/90",
+      "contract_valid": {
+        "last": {
+          "valid": 87,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 184,
+          "of": 185
+        }
+      }
+    },
+    "score-qwen3.5-0.8b-single-v3-fresh2": {
+      "status": {
+        "status": "done",
+        "answered": 275
+      },
+      "dev_run": "runs/student-dev/20261110T162058Z-qwen3.5-0.8b-single-v3-fresh2",
+      "intent_all": {
+        "messages": 275,
+        "primary_correct": 255,
+        "primary_accuracy": 0.9273,
+        "primary_ci95": [
+          0.8903419546111568,
+          0.9524304294233632
+        ],
+        "label_set_correct": 252
+      },
+      "intent_earlier": {
+        "messages": 185,
+        "primary_correct": 170,
+        "primary_accuracy": 0.9189,
+        "primary_ci95": [
+          0.8705431506556757,
+          0.9502505727611986
+        ],
+        "label_set_correct": 167
+      },
+      "items_f1": 0.8613569321533924,
+      "exact": "68/90",
+      "contract_valid": {
+        "last": {
+          "valid": 90,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 185,
+          "of": 185
+        }
+      }
+    }
+  },
+  "host_memory": {
+    "samples": 130,
+    "total_gb": 33.66,
+    "min_available_gb": 25.39,
+    "max_shmem_gb": 0.03,
+    "max_rss_gb": {
+      "gpu0": 3.89,
+      "gpu1": 3.82
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}

@@ -55,12 +55,21 @@ _Last updated 2026-11-10._
   unclear size; at Corner Patty "the big burgers" became an unclear item), 053 (dairy allergy, not eaten:
   needs_staff_now), 061 ("the other one" resolved to almond from the business's answer), 071 (refers_to unclear),
   076 (mid-order thanks: SMALL_TALK on the draft), 081 ("Yes please" to "Is this for pickup?" chooses pickup).
-- **Next:** (1) Julian reviews fresh2 in `make annotate` (fresh2 tab, "Save as reviewed"); (2) score v2 and v3 on
-  fresh2 on Kaggle (free, ~1 h each; `make train ARGS="export --score qwen3.5-0.8b-single-v2,qwen3.5-0.8b-single-v3
-  --score-splits fresh2"`, `make kaggle-push JOB=m6`; needs Julian's OK to push); gold fixes from the review re-score for free, a changed customer
-  message needs re-scoring. Then `student_compare` v2 vs v3 on fresh2: the clean held-out number. Caveat to report:
-  the t5 training chats and fresh2 share a writer (Claude), which can flatter fresh2; dev and fresh were
-  Claude-written too.
+- **v3 result, fresh2 (2026-11-10, $0; provisional until Julian's review; `runs/student-compare/20261110T183245Z`):**
+  kernel v14 ran 13:52–15:32 Brasília (no queue), both students complete (275/275). v2 → v3: fully correct orders
+  68.9% → **75.6%** (62 → 68 of 90, +6.7 pp, 95% CI [+0.0, +14.4]; chats only v2 / only v3 right 3 / 9, McNemar
+  p = 0.146), same action 70.0% → 76.7%, item F1 0.824 → **0.861** (+3.7 pp, CI [−0.3, +8.0]), intents 90.5% →
+  92.7%, invalid answers 1.5% → 0.0%. **First result nobody used for fixes.** Same direction and size as dev
+  (+6.6 pp) and fresh (+7.8 pp); none of the three intervals alone clearly excludes 0, but all three point the same
+  way. Both students score lower on fresh2 than on fresh (v2 76.7% → 68.9%): fresh2 is a different, unreviewed batch;
+  look at what drives the gap after the review. Caveat: the t5 training chats and fresh2 share a writer (Claude).
+  - The local adapters had gone missing (`models/m6/` absent; a `models/qwen3.5-0.8b-single-v3/` copy appeared
+    2026-11-10 10:25). v2's adapter was re-downloaded from the `orderslm-m6-deploy` dataset (sha256 `a06b298f…` =
+    the runs' record) and both were copied back to `models/m6/<student>/best/` (Julian's folder left as is).
+- **Next:** (1) Julian reviews fresh2 in `make annotate` (fresh2 tab, "Save as reviewed"); gold fixes re-score for
+  free (`make student-dev ARGS="report …"` on both runs, then `student-compare` again), a changed customer message
+  needs re-scoring on Kaggle. (2) Decide whether v3 replaces v2 as the shipped student (needs a Q8_0 build of v3:
+  `make deploy` with v3's adapter). (3) `make site-data` + website text once the numbers are final.
 
 ### Later, for Julian to pick
 
