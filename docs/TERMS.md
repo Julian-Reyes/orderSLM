@@ -12,6 +12,7 @@ date. This is our reading of the text, not legal advice.
 | DeepSeek | flash (generator) | Writes synthetic chats | Yes: training inputs |
 | Google | `gemini-3.1-flash-lite` (generator, paid tier) | Writes synthetic chats | Yes: training inputs |
 | Anthropic | Haiku 5.5 (generator) | Writes synthetic chats | Yes: training inputs |
+| Anthropic | Claude Code session (claude-opus-5.5; batch t5, 2026-11-09) | Wrote **and labeled** 300 targeted training chats by hand (`runs/synth/t5/`, `teacher-label@0.7+hand`) | **Yes: training inputs and training targets** (training data v0.3, student v3) |
 | TypeSafe | Jev (auditor) | Flags label errors; flagged chats were relabeled by the teacher or excluded | No: only decides which chats to recheck/exclude |
 | OpenAI | Decisions API (auditor) | Same as Jev | No: same as Jev |
 | Supersonic Labs | Julia-1 (auditor, open weights) | Same, run on Kaggle | No |
@@ -50,7 +51,16 @@ date. This is our reading of the text, not legal advice.
    - (c) Relabel the training set with a teacher whose terms allow distillation (e.g., DeepSeek, or an open-weights
      model under Apache 2.0) before a public release; costs a relabel of the ~2,350 training chats (estimate first) and a new teacher check on dev.
    - (d) Ask OpenAI support.
-5. **Nothing found that forbids M5/M6 as research.** Training and evaluating the student privately is covered by
+5. **Claude Code labels (t5, added 2026-11-10).** Batch t5 (300 chats, training data `student-data@0.3`, student
+   `qwen3.5-0.8b-single-v3`) was written and labeled in a Claude Code session, so Anthropic output is now a training
+   target, not only a training input (the Haiku generator chats). Like the original check, this was recorded after
+   use. Which Anthropic terms govern a Claude Code session (the Commercial Terms above, or consumer terms, depending
+   on the account) was **not verified here**; the consumer terms were not read. If the Commercial Terms apply, D.4 is
+   the same "competing AI models" clause as point 3, and our reading is the same: a narrow order extractor and intent
+   classifier does not compete with Claude. Consequences: v3 weights stay private like v2 (point 4, option (b)); a
+   public weights release would need t5 relabeled by a teacher whose terms allow distillation (or dropped), along with
+   the luna labels. Read the governing Anthropic terms before any release.
+6. **Nothing found that forbids M5/M6 as research.** Training and evaluating the student privately is covered by
    point 3's reading and, for the intent part, by OpenAI's Permitted Exception.
 
 Not checked here (check when they are used): student model licenses (Qwen3.5, Qwen3, Gemma 4) for M5/M8, and Kaggle's
