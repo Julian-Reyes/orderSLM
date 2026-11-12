@@ -15,6 +15,11 @@ menu@0.5: `accepted_kitchen_requests` lists the preparation requests this busine
 menu@0.6: `sold_as: order` marks items sold by the order (garlic knots, fries), optionally with
 `pieces_per_order`. The quantity question asks "how many orders of …", and the extractor sees the piece
 count so "12 garlic knots" can be read as 2 orders (docs/ANNOTATION_GUIDE.md).
+
+menu@0.7: `weekly_hours` (a weekday's own hours, or null = closed that day; a weekday not listed keeps
+`opens_at`–`closes_at`) and `scheduled_orders` (orders for a later day: off unless the business turns it on).
+Reply layer only (core/schedule.py checks the date code worked out); `extractor_view()` drops both, so the
+extractor's menu is unchanged.
 """
 
 from datetime import time
@@ -24,7 +29,7 @@ from pydantic import Field, model_validator
 
 from orderslm.domain.money import Cents
 
-from .common import ID_PATTERN, Strict
+from .common import ID_PATTERN, Strict, Weekday
 
 
 class Variant(Strict):
@@ -124,6 +129,24 @@ class DeliveryPolicy(Strict):
     min_order_cents: Cents = 0
 
 
+class DayHours(Strict):
+    opens_at: time
+    closes_at: time
+
+    @model_validator(mode="after")
+    def _order(self) -> "DayHours":
+        if self.closes_at <= self.opens_at:
+            raise ValueError("closes_at must be after opens_at (hours past midnight aren't supported)")
+        return self
+
+
+class ScheduledOrders(Strict):
+    """Orders for a later day (menu@0.7). Without this setting a business takes orders for today only."""
+
+    accepted: bool = False
+    max_days_ahead: int = Field(default=7, ge=1, le=60, description="the latest day, counted from today")
+
+
 class MenuCatalog(Strict):
     business_id: str = Field(pattern=ID_PATTERN)
     name: str
@@ -145,6 +168,13 @@ class MenuCatalog(Strict):
     items: list[MenuItem] = Field(min_length=1)
     accepted_kitchen_requests: list[KitchenRequest] = Field(
         default_factory=list, description="requests with no catalog id that are free kitchen notes (menu@0.5)"
+    )
+    weekly_hours: dict[Weekday, DayHours | None] | None = Field(
+        default=None,
+        description="per-weekday hours; null for a day = closed; unlisted days use opens_at/closes_at (menu@0.7)",
+    )
+    scheduled_orders: ScheduledOrders | None = Field(
+        default=None, description="orders for a later day; null = today only (menu@0.7)"
     )
 
     @model_validator(mode="after")
@@ -172,25 +202,36 @@ class MenuCatalog(Strict):
             raise ValueError(f"exclusive_groups not used by any modifier: {sorted(unknown_groups)}")
         return self
 
+    def hours_on(self, weekday: Weekday) -> DayHours | None:
+        """That weekday's hours, or None if closed."""
+        if self.weekly_hours is not None and weekday in self.weekly_hours:
+            return self.weekly_hours[weekday]
+        return DayHours(opens_at=self.opens_at, closes_at=self.closes_at)
+
     def item(self, item_id: str) -> MenuItem | None:
         return next((i for i in self.items if i.id == item_id), None)
 
     def has_reply_only_fields(self) -> bool:
-        return any(
-            getattr(v, f) is not None
-            for i in self.items
-            for v in i.variants
-            for f in REPLY_ONLY_VARIANT_FIELDS
+        return (
+            self.weekly_hours is not None
+            or self.scheduled_orders is not None
+            or any(
+                getattr(v, f) is not None
+                for i in self.items
+                for v in i.variants
+                for f in REPLY_ONLY_VARIANT_FIELDS
+            )
         )
 
     def extractor_view(self) -> "MenuCatalog":
-        """The menu as an extractor sees it: identical except the reply-only size facts are removed."""
+        """The menu as an extractor sees it: identical except the reply-only facts (size facts, weekly hours,
+        scheduling policy) are removed."""
         clear = dict.fromkeys(REPLY_ONLY_VARIANT_FIELDS)
         items = [
             i.model_copy(update={"variants": [v.model_copy(update=clear) for v in i.variants]})
             for i in self.items
         ]
-        return self.model_copy(update={"items": items})
+        return self.model_copy(update={"items": items, "weekly_hours": None, "scheduled_orders": None})
 
     def modifier(self, modifier_id: str) -> Modifier | None:
         return next((m for m in self.modifiers if m.id == modifier_id), None)

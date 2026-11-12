@@ -48,7 +48,13 @@ def _order_fields(o: ExtractionOutput) -> dict[str, object]:
     t = o.fulfillment.requested_time
     return {
         "fulfillment.method": o.fulfillment.method.value,
-        "fulfillment.requested_time": (t.state.value, t.kind, t.normalized_local, t.raw_text),
+        "fulfillment.requested_time": (
+            t.state.value,
+            t.kind,
+            t.normalized_local,
+            t.raw_text,
+            t.day.model_dump(mode="json", exclude={"evidence"}) if t.day else None,
+        ),
         "address": o.address.model_dump(mode="json", exclude={"evidence"}),
         "payment": o.payment.model_dump(mode="json", exclude={"evidence"}),
         "customer_name": (o.customer_name.state.value, o.customer_name.value),

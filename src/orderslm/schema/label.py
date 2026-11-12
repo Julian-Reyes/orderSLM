@@ -89,7 +89,7 @@ class MessageIntent(Strict):
 
 
 class TeacherLabel(Strict):
-    schema_version: Literal["label@0.1"] = LABEL_SCHEMA_VERSION
+    schema_version: Literal["label@0.1", "label@0.2"] = LABEL_SCHEMA_VERSION
     intents: list[MessageIntent] = Field(min_length=1, description="one per customer message, in order")
     order: ModelOrder
 
@@ -102,6 +102,6 @@ class StudentIntent(Strict):
 class StudentOutput(Strict):
     """Spec §4: the order so far plus the intent of the latest customer message."""
 
-    schema_version: Literal["student@0.1"] = STUDENT_SCHEMA_VERSION
+    schema_version: Literal["student@0.1", "student@0.2"] = STUDENT_SCHEMA_VERSION
     intent: StudentIntent
     order: ModelOrder

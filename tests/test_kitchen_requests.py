@@ -18,7 +18,7 @@ from orderslm.core.ticket import ticket_lines
 from orderslm.menus import load_menu, load_menus
 from orderslm.schema.extraction import Modification
 
-from .builders import line, order
+from .builders import line, order, sched
 
 P = DeterministicPricing()
 CP = load_menu("corner-patty")
@@ -84,7 +84,7 @@ def test_accepted_kitchen_note_is_free_and_printed_on_the_ticket():
     o = order(line("L1", "cheeseburger", mods=[req("well done", kitchen_note=True)]))
     q = P.quote(CP, o)
     assert q.ok and q.data.total_cents == 899
-    assert ticket_lines(CP, q.data, o)[0] == "1 Cheeseburger (well done)"
+    assert ticket_lines(CP, q.data, o, sched(CP, o).data)[0] == "1 Cheeseburger (well done)"
 
 
 def test_every_menu_has_accepted_kitchen_requests():
@@ -103,7 +103,7 @@ def test_unknown_request_is_asked_softly_and_never_priced(flags):
     o = gold(CP, burger)
     r = P.quote(CP, o)
     assert not r.ok and r.error.code == "REQUEST_UNVERIFIED"
-    text, kind = next_reply(CP, o, r)
+    text, kind = next_reply(CP, o, r, sched(CP, o))
     assert kind == "question"
     assert text == (
         "Just checking, we may not be able to do truffle oil on the cheeseburger. "
@@ -116,7 +116,7 @@ def test_not_on_menu_request_is_told_firmly():
         HM,
         line("L1", "supreme_pizza", variant="large", mods=[req("with artichoke hearts", not_on_menu=True)]),
     )
-    text, kind = next_reply(HM, o, P.quote(HM, o))
+    text, kind = next_reply(HM, o, P.quote(HM, o), sched(HM, o))
     assert kind == "question" and text.startswith("We don't have artichoke hearts for the supreme pizza.")
 
 
@@ -124,7 +124,7 @@ def test_unresolved_request_never_reaches_the_ticket():
     o = gold(CP, line("L1", "cheeseburger", mods=[req("with truffle oil")]))
     quote = P.quote(CP, order(line("L1", "cheeseburger"))).data  # even with some valid quote in hand
     with pytest.raises(ValueError):
-        ticket_lines(CP, quote, o)
+        ticket_lines(CP, quote, o, sched(CP, o).data)
 
 
 # ---------------------------------------------------------------- no summary while anything is missing
@@ -135,14 +135,14 @@ def test_no_summary_while_something_is_missing():
     r = P.quote(CP, o)
     assert r.ok  # it can be priced...
     with pytest.raises(ValueError):
-        summary(CP, r.data, o)  # ...but a summary is never sent
-    text, kind = next_reply(CP, o, r)
+        summary(CP, r.data, o, sched(CP, o).data)  # ...but a summary is never sent
+    text, kind = next_reply(CP, o, r, sched(CP, o))
     assert kind == "question" and text == "Is this for pickup or delivery?"
 
 
 def test_complete_order_gets_the_summary():
     o = order(line("L1", "cheeseburger"))
-    text, kind = next_reply(CP, o, P.quote(CP, o))
+    text, kind = next_reply(CP, o, P.quote(CP, o), sched(CP, o))
     assert kind == "summary" and text.startswith("Got it: 1 Cheeseburger.")
 
 
@@ -151,7 +151,7 @@ def test_complete_order_gets_the_summary():
 
 def test_summary_never_says_a_claimed_payment_is_confirmed():
     o = order(line("L1", "cheeseburger"), payment="unknown", claims_paid=True)
-    text = summary(CP, P.quote(CP, o).data, o)
+    text = summary(CP, P.quote(CP, o).data, o, sched(CP, o).data)
     assert text == (
         "Got it: 1 Cheeseburger. Pickup as soon as possible. Total $8.99. "
         "You mentioned you've already paid, and the restaurant will confirm it. Is that right?"
@@ -161,13 +161,16 @@ def test_summary_never_says_a_claimed_payment_is_confirmed():
 def test_ticket_flags_a_claimed_payment_for_staff():
     o = order(line("L1", "cheeseburger"), payment="unknown", claims_paid=True)
     q = P.quote(CP, o).data
-    assert ticket_lines(CP, q, o)[-1] == "Payment: customer says paid, not verified"
-    assert ticket_lines(CP, q, o, payment_confirmed=True)[-1] == "Payment: paid (verified)"
+    assert ticket_lines(CP, q, o, sched(CP, o).data)[-1] == "Payment: customer says paid, not verified"
+    assert ticket_lines(CP, q, o, sched(CP, o).data, payment_confirmed=True)[-1] == "Payment: paid (verified)"
 
 
 def test_ticket_payment_lines():
     o = order(line("L1", "cheeseburger"), payment="cash")
-    assert ticket_lines(CP, P.quote(CP, o).data, o)[-2:] == ["Total: $8.99", "Payment: cash"]
+    assert ticket_lines(CP, P.quote(CP, o).data, o, sched(CP, o).data)[-2:] == [
+        "Total: $8.99",
+        "Payment: cash",
+    ]
 
 
 # ---------------------------------------------------------------- audit fixes (2026-10-08)
@@ -198,7 +201,7 @@ def test_cash_below_the_total_is_a_payment_problem():
     o.payment.change_for_cents = 10000
     r = P.quote(CP, o)
     assert not r.ok and r.error.code == "CASH_BELOW_TOTAL"
-    text, kind = next_reply(CP, o, r)
+    text, kind = next_reply(CP, o, r, sched(CP, o))
     assert kind == "pricing_problem"
     assert (
         text
@@ -211,7 +214,10 @@ def test_cash_below_the_total_is_a_payment_problem():
 def test_pickup_only_business_asks_pickup_and_name():
     o = gold(MC, line("L1", "drip_coffee"), method="unknown")
     assert [m.field.value for m in o.missing_or_ambiguous] == ["fulfillment_method", "customer_name"]
-    assert next_reply(MC, o, P.quote(MC, o))[0] == "Is this for pickup, and can I get a name for the order?"
+    assert (
+        next_reply(MC, o, P.quote(MC, o), sched(MC, o))[0]
+        == "Is this for pickup, and can I get a name for the order?"
+    )
 
 
 def test_half_and_half_without_a_size_asks_for_the_size():

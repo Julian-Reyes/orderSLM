@@ -11,13 +11,13 @@ code by comparing the snapshot with the current draft. See docs/SCHEMA.md.
 
 from collections.abc import Iterator
 from enum import StrEnum
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from orderslm.domain.money import Cents
 
-from .common import EXTRACTION_SCHEMA_VERSION, ID_PATTERN, Evidence, Strict
+from .common import EXTRACTION_SCHEMA_VERSION, ID_PATTERN, Evidence, Strict, Weekday
 
 LINE_ID_PATTERN = r"^L[0-9]+$"
 HHMM_PATTERN = r"^([01][0-9]|2[0-3]):[0-5][0-9]$"
@@ -181,6 +181,34 @@ class TimeKind(StrEnum):
     relative = "relative"  # "in 20 min"
 
 
+class DayKind(StrEnum):
+    """The day the customer named for the order, when it isn't today (extraction@0.5). The model only says which
+    day was named; code turns it into a date from the message time and checks it (core/schedule.py)."""
+
+    tomorrow = "tomorrow"  # "tmrw", "tomorrow at 6"
+    weekday = "weekday"  # "on saturday", "fri", "next friday": the first such day from the message's day
+    date = "date"  # "nov 20", "the 15th", "11/20"
+
+
+class RequestedDay(Strict):
+    kind: DayKind
+    weekday: Weekday | None = Field(default=None, description="kind 'weekday' only")
+    month: int | None = Field(default=None, ge=1, le=12, description="kind 'date'; null for 'the 15th'")
+    day_of_month: int | None = Field(default=None, ge=1, le=31, description="kind 'date' only")
+    raw_text: str = Field(min_length=1, description="as stated, e.g. 'tmrw', 'on saturday'")
+    evidence: list[Evidence] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def _fields(self) -> "RequestedDay":
+        if (self.weekday is not None) != (self.kind is DayKind.weekday):
+            raise ValueError("requested_time.day: weekday is set exactly for kind 'weekday'")
+        if (self.day_of_month is not None) != (self.kind is DayKind.date):
+            raise ValueError("requested_time.day: day_of_month is set exactly for kind 'date'")
+        if self.month is not None and self.kind is not DayKind.date:
+            raise ValueError("requested_time.day: month only for kind 'date'")
+        return self
+
+
 class RequestedTime(Strict):
     state: SlotState
     kind: TimeKind | None = None
@@ -191,6 +219,11 @@ class RequestedTime(Strict):
         description="HH:MM in the business's timezone, only if unambiguous",
     )
     evidence: list[Evidence] = Field(default_factory=list)
+    day: RequestedDay | None = Field(
+        default=None,
+        description="a day other than today ('tmrw at 6', 'saturday'); null = today. With a clock time "
+        "(state provided) or without one (state ambiguous: the time is asked)",
+    )
 
     @model_validator(mode="after")
     def _slot(self) -> "RequestedTime":
@@ -201,7 +234,23 @@ class RequestedTime(Strict):
             raise ValueError("requested_time: normalized_local only for kind 'clock_time'")
         if self.state in (SlotState.provided, SlotState.ambiguous) and not self.raw_text:
             raise ValueError("requested_time: raw_text required when the time was mentioned")
+        if self.day is not None and not (
+            self.state is SlotState.ambiguous
+            or (self.state is SlotState.provided and self.kind is TimeKind.clock_time)
+        ):
+            raise ValueError(
+                "requested_time: a day goes with a clock time, or with state 'ambiguous' (no time yet)"
+            )
         return self
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_day(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        """No day = today: left out, so extraction@0.4 data (gold, saved outputs, training targets) dumps
+        byte-identical."""
+        data = handler(self)
+        if self.day is None:
+            data.pop("day", None)
+        return data
 
 
 class Fulfillment(Strict):
@@ -363,7 +412,7 @@ class MissingInfo(Strict):
 
 
 class ExtractionOutput(Strict):
-    schema_version: Literal["extraction@0.4"] = EXTRACTION_SCHEMA_VERSION
+    schema_version: Literal["extraction@0.4", "extraction@0.5"] = EXTRACTION_SCHEMA_VERSION
     items: list[ItemProposal] = Field(default_factory=list)
     fulfillment: Fulfillment
     address: Address

@@ -95,9 +95,13 @@ def _branch(schema, value):
     raise AssertionError(f"no branch for {value!r} in {schema}")
 
 
+OMITTED_WHEN_NULL = {"day"}  # RequestedTime.day: left out of dumps when null (extraction@0.5), sent as null
+
+
 def _same_keys(schema, value, path="$"):
     schema = _branch(schema, value)
     if isinstance(value, dict):
+        value = {**{k: None for k in OMITTED_WHEN_NULL & set(schema["properties"]) - set(value)}, **value}
         assert set(value) == set(schema["properties"]), path
         for k, v in value.items():
             _same_keys(schema["properties"][k], v, f"{path}.{k}")

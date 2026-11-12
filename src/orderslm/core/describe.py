@@ -10,6 +10,7 @@ from orderslm.domain.money import format_cents
 from orderslm.schema.common import Evidence
 from orderslm.schema.extraction import (
     Amount,
+    DayKind,
     DecisionState,
     ExtractionOutput,
     FulfillmentMethod,
@@ -18,6 +19,7 @@ from orderslm.schema.extraction import (
     Modification,
     ModificationKind,
     PaymentMethod,
+    RequestedDay,
     SlotState,
 )
 from orderslm.schema.menu import MenuCatalog, MenuItem
@@ -118,6 +120,15 @@ def _item(menu: MenuCatalog, line: ItemProposal, out: ExtractionOutput) -> str:
     return text + (f" — {'; '.join(details)}" if details else "")
 
 
+def _day(day: RequestedDay) -> str:
+    if day.kind is DayKind.tomorrow:
+        return "tomorrow"
+    if day.kind is DayKind.weekday:
+        return f"the next {day.weekday.value} (today counts)"
+    month = f"month {day.month}, " if day.month else ""
+    return f"{month}day {day.day_of_month}"
+
+
 def describe_gold(out: ExtractionOutput, menu: MenuCatalog) -> list[str]:
     lines = ["ITEMS"] + (
         [_item(menu, i, out) + _ev(i.evidence) for i in out.items] if out.items else ["(nothing ordered yet)"]
@@ -139,6 +150,8 @@ def describe_gold(out: ExtractionOutput, menu: MenuCatalog) -> list[str]:
         lines.append(f"Time: {when}{norm}" + _ev(rt.evidence))
     elif rt.state is SlotState.ambiguous:
         lines.append(f"Time: UNCLEAR “{rt.raw_text}”" + _ev(rt.evidence))
+    if rt.day is not None:
+        lines.append(f"Day: {_day(rt.day)} (“{rt.day.raw_text}”; not today)" + _ev(rt.day.evidence))
     else:
         lines.append("Time: not mentioned (as soon as possible)")
     a = out.address

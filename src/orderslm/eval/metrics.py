@@ -35,11 +35,19 @@ from orderslm.core.finalize import fill_default_variants
 from orderslm.eval.stats import wilson
 from orderslm.schema.annotation import AnnotatedConversation, Scenario
 from orderslm.schema.conversation import Role
-from orderslm.schema.extraction import Address, ExtractionOutput, ItemProposal, Modification, SlotState
+from orderslm.schema.extraction import (
+    Address,
+    ExtractionOutput,
+    ItemProposal,
+    Modification,
+    RequestedDay,
+    SlotState,
+)
 from orderslm.schema.menu import MenuCatalog
 
-SCORER_VERSION = "scorer@0.4"  # 0.2: unstated default variant = the default; 0.3: adds the same-action match;
-# 0.4: the address compares the numbers in its text, not only its state
+SCORER_VERSION = "scorer@0.5"  # 0.2: unstated default variant = the default; 0.3: adds the same-action match;
+# 0.4: the address compares the numbers in its text, not only its state; 0.5: the time includes the named day
+# (an order for the wrong day is wrong; no output or gold before extraction@0.5 has a day, so their scores hold)
 CORRECTION_SCENARIOS = {Scenario.correction, Scenario.correction_after_confirmation, Scenario.cancellation}
 
 
@@ -102,11 +110,18 @@ def address_key(a: Address) -> tuple[str, tuple[str, ...]]:
     return a.state.value, tuple(numbers)
 
 
+def day_key(day: RequestedDay | None) -> tuple | None:
+    """Which day was named; its words and evidence don't count."""
+    if day is None:
+        return None
+    return day.kind.value, day.weekday.value if day.weekday else None, day.month, day.day_of_month
+
+
 def field_values(o: ExtractionOutput) -> dict[str, Any]:
     t = o.fulfillment.requested_time
     return {
         "method": o.fulfillment.method.value,
-        "time": (t.state.value, t.kind.value if t.kind else None, t.normalized_local),
+        "time": (t.state.value, t.kind.value if t.kind else None, t.normalized_local, day_key(t.day)),
         "address": address_key(o.address),
         "payment": (o.payment.method.value, o.payment.change_for_cents, o.payment.customer_claims_paid),
         "name": (

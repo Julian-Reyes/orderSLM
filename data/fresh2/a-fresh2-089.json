@@ -33,7 +33,24 @@
     "fulfillment": {
       "method": "unknown",
       "requested_time": {
-        "state": "not_mentioned"
+        "state": "ambiguous",
+        "raw_text": "tmrw",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "tmrw"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tmrw",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "tmrw"
+            }
+          ]
+        }
       }
     },
     "address": {
@@ -55,11 +72,15 @@
         "reason": "missing"
       },
       {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      },
+      {
         "field": "payment_method",
         "reason": "missing"
       }
     ],
-    "clarification_question": "What would you like to order, is this for pickup or delivery, and will you pay by card or cash?"
+    "clarification_question": "What would you like to order, is this for pickup or delivery, what time tomorrow would you like it, and will you pay by card or cash?"
   },
   "gold_routing": [
     {
@@ -94,5 +115,5 @@
   ],
   "annotator": "claude-opus-5.5 (Source A, fresh2)",
   "card_id": "a-fresh2-089",
-  "annotation_notes": "Announcing an order with no items is PLACE_ORDER (2026-11-03 rule), so the gold order is empty: no items, the bot asks. Then two requests for a person: HUMAN_REQUEST, asks_for_human."
+  "annotation_notes": "Announcing an order with no items is PLACE_ORDER (2026-11-03 rule), so the gold order is empty: no items, the bot asks. Then two requests for a person: HUMAN_REQUEST, asks_for_human. 'tmrw' with no clock time: requested_time ambiguous with day tomorrow (2026-11-12 rule), asked."
 }

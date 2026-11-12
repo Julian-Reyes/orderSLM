@@ -85,6 +85,19 @@ no order at all (only a status question, small talk), `gold_extraction` is `null
   `normalized_local` (HH:MM, business's timezone) only for clock times that are unambiguous given opening
   hours ("at 7" at a place open 11–22 → `19:00`). "around 7 or 8" → `ambiguous` + `requested_time / ambiguous`.
   Not mentioned → `not_mentioned`, and it is **not** missing (default is ASAP).
+- **Another day** (2026-11-12, extraction@0.5): when the customer orders for a day other than today, name it in
+  `requested_time.day`, never as a date: `tomorrow` ("tmrw", "2morrow"); `weekday` with its code ("saturday",
+  "on fri", "next friday" = `fri`: code takes the first such day, and the summary states the date); `date` with
+  `day_of_month` and `month` if said ("nov 20", "11/20"; "the 15th" has no month). `raw_text` = the day words,
+  evidence = the shortest quote with them. The date is worked out in code from the message time.
+  - With a clock time, the time is `provided` as usual (`normalized_local` from the opening hours: "tmrw at 9" at
+    Morning Crumb is 09:00).
+  - With no clock time ("tmrw", "saturday morning", "for friday's meeting"): `state: ambiguous`, `raw_text` the
+    words, the day in `day`, and `requested_time / ambiguous` (the bot asks "What time tomorrow would you like it?").
+  - "today", "tonight", "this afternoon", "later": today, no `day` (unchanged). A day that's only context ("rough
+    sunday lol", "happy monday", "we came by last weekend") is not a day for the order.
+  - "this weekend", "sometime next week", "in a few days": no single day: `ambiguous`, no `day`.
+  - A later message that changes the day replaces it; after confirming, that's a time change (`time_sensitive`).
 - Address: `not_applicable` for pickup. For delivery or unknown: `provided` with components you can read
   (`street`, `number`, `unit`, `reference` landmark) + `raw_text`; or `not_mentioned`. Delivery with no
   address → `address / missing`. An address stated in a question still counts as `provided`.
@@ -144,6 +157,8 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
   disputed payment: `needs_staff_now`.
 - `refers_to: draft` for messages building the current order (including the first one);
   `placed_order` after the order was confirmed/sent; `none` for greetings or questions with no order.
+- Asking whether they can order ahead ("can i order for saturday?") is `DELIVERY_QUESTION` (pickup and hours);
+  an order for another day is `PLACE_ORDER` as usual, urgency `normal` (it isn't soon).
 - A menu question in the middle of an order is `refers_to: draft`; before any order, `none`. An `UNKNOWN`
   message with no order in the chat is `none`; a message about an order that isn't in this chat (and isn't
   clearly placed) is `unclear`.
@@ -162,4 +177,4 @@ primary label, optional secondary, urgency, `refers_to`, `asks_for_human`. Key r
 4. Disagreements found later: fix the gold, log the change (conversation id, field, old → new, reason).
    Don't change test gold after any model has been scored on it without recording why.
 
-_Last updated 2026-11-03 (an order announced with no items is `PLACE_ORDER`; earlier: 2026-10-13 test writing: one-choice combo slots, payment channels vs. methods; 2026-10-08 M2 dev review)._
+_Last updated 2026-11-12 (orders for another day: `requested_time.day`; earlier: 2026-11-03 an order announced with no items is `PLACE_ORDER`; 2026-10-13 test writing: one-choice combo slots, payment channels vs. methods; 2026-10-08 M2 dev review)._

@@ -3,7 +3,7 @@
   "split": "fresh2",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.3",
-  "scorer_version": "scorer@0.4",
+  "scorer_version": "scorer@0.5",
   "finalize_version": "finalize@0.2",
   "requests": 275,
   "unanswered": 0,
@@ -39,26 +39,26 @@
       "recall": 0.8538011695906432,
       "f1": 0.8613569321533924
     },
-    "exact_match": 68,
-    "exact_match_rate": 0.7555555555555555,
+    "exact_match": 67,
+    "exact_match_rate": 0.7444444444444445,
     "exact_match_ci95": [
+      0.645621572349918,
+      0.823253638643927
+    ],
+    "action_match": 68,
+    "action_match_rate": 0.7555555555555555,
+    "action_match_ci95": [
       0.6575143545381369,
       0.8326733660463373
     ],
-    "action_match": 69,
-    "action_match_rate": 0.7666666666666667,
-    "action_match_ci95": [
-      0.6694810141144782,
-      0.8420192160606255
-    ],
     "field_accuracy": {
       "method": 1.0,
-      "time": 1.0,
+      "time": 0.9852941176470589,
       "address": 1.0,
       "payment": 1.0,
       "name": 1.0,
       "decision": 1.0,
-      "missing": 0.8676470588235294
+      "missing": 0.8529411764705882
     },
     "correction": {
       "conversations": 18,

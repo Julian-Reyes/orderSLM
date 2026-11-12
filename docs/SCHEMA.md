@@ -122,6 +122,12 @@ required for every non-`unknown` value.
   only when `variant_id` is null (and never on an off-menu item).
 - Pickup ⇒ address `not_applicable`; delivery/unknown ⇒ address is not `not_applicable`.
 - `normalized_local` is strict `HH:MM`, only for `provided` + `clock_time`.
+- `requested_time.day` (extraction@0.5): the day the customer named when it isn't today, as words, never a date:
+  `{kind: tomorrow | weekday | date, weekday?, month?, day_of_month?, raw_text, evidence}` (`weekday` only for
+  `weekday`, `day_of_month` only and always for `date`, `month` null for "the 15th"). Only with a clock time
+  (`provided` + `clock_time`) or with `ambiguous` (a day, no time yet: the time is asked). Absent = today, and left
+  out of the JSON when absent, so extraction@0.4 data is unchanged. The date is worked out in code
+  (`core/schedule.py` → `Schedule`).
 - `change_for_cents` only for cash. `customer_claims_paid` records a claim; there is no "paid" field in model output.
 - `replacement_modifier_id` only for `substitute` modifications; `amount` other than `normal` only for `add`.
 - Modification meaning: `remove` an ingredient ("no onions"); `add` an add-on ("add bacon") or, with `extra`/`light`,
@@ -158,15 +164,24 @@ Adapters (M7) map this to each provider's documented API after verifying it.
 
 ## Verified results (`schema/order.py`)
 
+`Schedule` (core/schedule.py, `schedule@0.1`): the order's `local_date`, `days_ahead` (0 = today), `asap`,
+`local_time` and a relative `time_text`, worked out from the customer's words, the business-local day of the
+message they said it in, and the menu's hours; problems are `ToolErr` codes `SCHEDULE_INVALID_DATE`,
+`SCHEDULE_NOT_ACCEPTED`, `SCHEDULE_TOO_FAR_AHEAD`, `SCHEDULE_CLOSED_DAY`, `SCHEDULE_OUTSIDE_HOURS`,
+`SCHEDULE_IN_PAST`. The summary and ticket state the day only from it ("today at 6:30 PM", "tomorrow, Thu, Nov 12,
+at 6:30 PM"); a ticket for a later day starts with a SCHEDULED line.
 `QuoteLine`, `Quote` (arithmetic-checked), `OrderRecord` (`status`, `payment_confirmed` set only by
 staff/payment systems), `HandoffTicket`, and `ToolOk[T] | ToolErr` (`error.code` is `UPPER_SNAKE`).
 Order statuses: `draft → awaiting_confirmation → new → preparing → ready → completed`, or `cancelled`.
 Allowed transitions: `core/state.py` (customer changes to a placed order go to staff).
 
-## Menu catalog (`menu@0.6`)
+## Menu catalog (`menu@0.7`)
 
 Business id, currency, timezone, hours, delivery policy (`available`, `fee_cents`, `min_order_cents`),
 `name_required_for_pickup` (0.2), `exclusive_groups` (0.3), modifiers, and items.
+- **Weekly hours and scheduled orders** (0.7, reply layer only, dropped by `extractor_view()`):
+  `weekly_hours: {mon..sun: {opens_at, closes_at} | null}` (null = closed; an unlisted day keeps
+  `opens_at`–`closes_at`) and `scheduled_orders: {accepted, max_days_ahead}` (absent = today only).
 - **Accepted kitchen requests** (0.5): `accepted_kitchen_requests: [{id, name, aliases, categories}]`, the
   preparation requests the business always does ("well done", "cut in squares", "warm"), optionally limited to item
   categories. Matched on whole words before anything else (core/requests.py). Visible to the extractor.

@@ -59,6 +59,7 @@ VERSIONS = {
         "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4"), ("t5",)),
     },
 }
+STUDENT_SCHEMA = {v: "student@0.1" for v in VERSIONS}  # the version string in each data version's targets
 DATA_VERSION = "student-data@0.3"
 STUDENT_PROMPT_VERSION = "student-extract@0.1"
 SINGLE_BATCHES = VERSIONS[DATA_VERSION]["single"]
@@ -78,10 +79,12 @@ def user_prompt(conversation, menu) -> str:
     return conversation_prompt(menu.extractor_view(), conversation) + USER_SUFFIX
 
 
-def target(label: TeacherLabel) -> StudentOutput:
+def target(label: TeacherLabel, version: str = DATA_VERSION) -> StudentOutput:
     last = label.intents[-1]
     return StudentOutput(
-        intent=StudentIntent(primary=last.primary, secondary=last.secondary), order=label.order
+        schema_version=STUDENT_SCHEMA[version],
+        intent=StudentIntent(primary=last.primary, secondary=last.secondary),
+        order=label.order,
     )
 
 
@@ -90,7 +93,7 @@ def _excluded() -> set[str]:
     return {e["id"] for e in json.loads(path.read_text())["excluded"]} if path.exists() else set()
 
 
-def build_rows(batch: str) -> tuple[list[dict[str, Any]], Counter]:
+def build_rows(batch: str, version: str = DATA_VERSION) -> tuple[list[dict[str, Any]], Counter]:
     """Rows for one batch's kept labels (labels.jsonl), skipping excluded chats."""
     kept = {
         json.loads(x)["conversation_id"]
@@ -112,7 +115,7 @@ def build_rows(batch: str) -> tuple[list[dict[str, Any]], Counter]:
             raise SystemExit(f"{conv.id}: last intent is not the last customer message")
         menu = load_menu(conv.business_id)
         user = user_prompt(conv, menu)
-        answer = target(label).model_dump_json()
+        answer = target(label, version).model_dump_json()
         rows.append(
             {
                 "id": conv.id,
@@ -167,14 +170,14 @@ def _stats(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def build(out_dir: Path, version: str = DATA_VERSION) -> dict[str, Any]:
     spec = VERSIONS[version]
-    by_batch = {b: build_rows(b) for b in spec["mixed"]}
+    by_batch = {b: build_rows(b, version) for b in spec["mixed"]}
     valid = set().union(
         *(split_valid([r["id"] for b in group for r in by_batch[b][0]]) for group in spec["valid_groups"])
     )
     manifest: dict[str, Any] = {
         "data_version": version,
         "student_prompt_version": STUDENT_PROMPT_VERSION,
-        "student_schema": StudentOutput.model_fields["schema_version"].default,
+        "student_schema": STUDENT_SCHEMA[version],
         "teacher": lab.TEACHER,
         "seed": SEED,
         "valid_share": VALID_SHARE,

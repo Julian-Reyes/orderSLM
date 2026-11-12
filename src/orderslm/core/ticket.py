@@ -1,7 +1,8 @@
 """The business's order ticket, built only from verified results (Quote) and the structured order.
 
-A ticket exists only for a complete, priced order: nothing missing, no unresolved request (a Quote
-can't be made with one). A customer's "I already paid" is printed as an unverified claim, so staff
+A ticket exists only for a complete, priced, scheduled order: nothing missing, no unresolved request (a Quote
+can't be made with one), a day and time that passed the schedule check. An order for a later day says
+SCHEDULED with its date first, so the kitchen doesn't start it now. A customer's "I already paid" is printed as an unverified claim, so staff
 check before handing over the food; only `payment_confirmed` (set by staff or a payment system,
 never by chat) prints as paid.
 """
@@ -11,12 +12,13 @@ from orderslm.core.replies import _line_text, _when
 from orderslm.domain.money import format_cents
 from orderslm.schema.extraction import ExtractionOutput, FulfillmentMethod, PaymentMethod
 from orderslm.schema.menu import MenuCatalog
-from orderslm.schema.order import Quote
+from orderslm.schema.order import Quote, Schedule
 
-TICKET_VERSION = "ticket@0.1"
+TICKET_VERSION = "ticket@0.2"  # 0.2: the day in every time; SCHEDULED line
 
 TICKET: dict[str, dict[str, str]] = {
     "en": {
+        "scheduled": "SCHEDULED for {when}, not today",
         "pickup": "Pickup {when}",
         "delivery": "Delivery to {address} {when}",
         "name": "Name: {name}",
@@ -37,6 +39,7 @@ def ticket_lines(
     menu: MenuCatalog,
     quote: Quote,
     proposal: ExtractionOutput,
+    schedule: Schedule,
     *,
     payment_confirmed: bool = False,
     lang: str = "en",
@@ -44,9 +47,10 @@ def ticket_lines(
     if required_missing(proposal, menu) or proposal.missing_or_ambiguous:
         raise ValueError("ticket: the order still has missing or unresolved parts")
     T = TICKET[lang]
-    lines = [_line_text(menu, proposal, ql.line_id, lang) for ql in quote.lines]
+    when = _when(schedule, lang)
+    lines = [T["scheduled"].format(when=when)] if schedule.days_ahead else []
+    lines += [_line_text(menu, proposal, ql.line_id, lang) for ql in quote.lines]
     method = proposal.fulfillment.method
-    when = _when(proposal, lang)
     if method is FulfillmentMethod.pickup:
         lines.append(T["pickup"].format(when=when))
     elif method is FulfillmentMethod.delivery:

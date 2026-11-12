@@ -1,19 +1,23 @@
-"""Customer replies, filled only from verified results (Quote, OrderRecord, tool results) and the menu.
+"""Customer replies, filled only from verified results (Quote, Schedule, OrderRecord, tool results) and the menu.
 
-Prices and totals come from the Quote; status from the OrderRecord. The only
+Prices and totals come from the Quote; the day and time from the Schedule (core/schedule.py), always with the
+day named ("today at 6:30 PM", "tomorrow, Thu, Nov 13, at 6:30 PM"), so a "yes" confirms a date and not just a
+clock time; status from the OrderRecord. The only
 model-written text that can reach a customer is the clarification question, and
 it is used only if it states no amounts (otherwise the template question is used).
 Strings are keyed by language so pt-BR can be added without touching the logic.
 """
 
 import re
-from datetime import time
+from datetime import date, time
 
 from orderslm.core.missing import required_missing
 from orderslm.core.requests import UNRESOLVED, RequestStatus, line_requests, request_status
+from orderslm.core.schedule import DAY_PROBLEMS, WEEKDAYS
 from orderslm.domain.money import format_cents
 from orderslm.schema.extraction import (
     Amount,
+    DayKind,
     ExtractionOutput,
     FieldRef,
     FulfillmentMethod,
@@ -22,15 +26,23 @@ from orderslm.schema.extraction import (
     Modification,
     ModificationKind,
     PaymentMethod,
+    RequestedDay,
     SlotState,
-    TimeKind,
 )
 from orderslm.schema.menu import MenuCatalog, SoldAs
-from orderslm.schema.order import HandoffTicket, OrderRecord, OrderStatus, Quote, ToolErr, ToolResult
+from orderslm.schema.order import (
+    HandoffTicket,
+    OrderRecord,
+    OrderStatus,
+    Quote,
+    Schedule,
+    ToolErr,
+    ToolResult,
+)
 
 SHOWN = {RequestStatus.catalog, RequestStatus.kitchen_note}
 
-REPLIES_VERSION = "replies@0.7"
+REPLIES_VERSION = "replies@0.8"  # 0.8: the day in every time; schedule problems
 
 TEMPLATES: dict[str, dict[str, str]] = {
     "en": {
@@ -39,7 +51,12 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "delivery": "Delivery to {address} {when}",
         "fulfillment_unknown": "Pickup or delivery not chosen yet",
         "asap": "as soon as possible",
-        "at": "at {time}",
+        "today_at": "today at {time}",
+        "tomorrow_at": "tomorrow, {date}, at {time}",
+        "day_at": "on {date} at {time}",
+        "today": "today",
+        "tomorrow": "tomorrow",
+        "on_day": "on {date}",
         "fee": " (incl. {fee} delivery)",
         "pay_cash": ", paying cash",
         "pay_cash_change": ", paying cash (change for {change})",
@@ -71,6 +88,9 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "q_method_pickup_only": "is this for pickup",
         "q_size": "what size would you like for the {name} ({options})",
         "q_time": "what time would you like it",
+        "q_time_day": "what time {day} would you like it",
+        "on_weekday": "on {weekday}",
+        "on_the": "on the {nth}",
         "q_address": "what's the delivery address",
         "q_payment": "will you pay by card or cash",
         "q_name": "can I get a name for the order",
@@ -93,6 +113,20 @@ TEMPLATES: dict[str, dict[str, str]] = {
         "no_delivery": "Sorry, {business} is pickup only. Would pickup work for you?",
         "unavailable": "Sorry, {detail}. Would you like something else?",
         "cannot_price": "Sorry, I couldn't put that order together yet. Could you tell me again what you'd like?",
+        "schedule_not_accepted": "Sorry, we can only take orders for today. Would you like it today instead?",
+        "schedule_too_far": "Sorry, we take orders up to {days} days ahead, and {date} is further out. Could you pick an earlier day?",
+        "schedule_closed": "Sorry, we're closed {day}. Would another day work?",
+        "schedule_hours": "We're open {opens} to {closes} {day}. What time in that window works for you?",
+        "schedule_past": "{time} has already passed today. What time would you like it instead?",
+        "schedule_no_date": "Sorry, I couldn't find that date ({text}). Which day would you like it for?",
+    }
+}
+
+DATE_WORDS: dict[str, dict[str, list[str]]] = {
+    "en": {
+        "weekdays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "weekdays_short": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        "months_short": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     }
 }
 
@@ -139,9 +173,44 @@ def _option_text(raw: str) -> str:
     return text.lower()
 
 
-def _format_time(hhmm: str) -> str:
-    t = time.fromisoformat(hhmm)
+def _format_time(hhmm: str | time) -> str:
+    t = time.fromisoformat(hhmm) if isinstance(hhmm, str) else hhmm
     return f"{(t.hour % 12) or 12}:{t.minute:02d} {'AM' if t.hour < 12 else 'PM'}"
+
+
+def _format_date(d: date, lang: str) -> str:
+    """'Thu, Nov 13': weekday and date, so the customer can check both."""
+    W = DATE_WORDS[lang]
+    return f"{W['weekdays_short'][d.weekday()]}, {W['months_short'][d.month - 1]} {d.day}"
+
+
+def _ordinal_en(n: int) -> str:
+    return f"{n}{'th' if 11 <= n % 100 <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+
+
+def _named_day(day: RequestedDay, lang: str) -> str:
+    """The day the customer named, in the reply language, without working out the date ('tomorrow', 'on
+    Saturday', 'on Nov 20', 'on the 15th'). Used by the question, which finalize builds without the chat."""
+    T = _t(lang)
+    if day.kind is DayKind.tomorrow:
+        return T["tomorrow"]
+    if day.kind is DayKind.weekday:
+        return T["on_weekday"].format(weekday=DATE_WORDS[lang]["weekdays"][WEEKDAYS.index(day.weekday)])
+    if day.month is not None:
+        return T["on_day"].format(
+            date=f"{DATE_WORDS[lang]['months_short'][day.month - 1]} {day.day_of_month}"
+        )
+    return T["on_the"].format(nth=_ordinal_en(day.day_of_month))
+
+
+def _day_words(d: date, days_ahead: int, lang: str) -> str:
+    """'today', 'tomorrow, Thu, Nov 13', 'on Sat, Nov 15'."""
+    T = _t(lang)
+    if days_ahead == 0:
+        return T["today"]
+    if days_ahead == 1:
+        return f"{T['tomorrow']}, {_format_date(d, lang)}"
+    return T["on_day"].format(date=_format_date(d, lang))
 
 
 def _mod_text(menu: MenuCatalog, ingredient_ids: list[str], mod: Modification, lang: str) -> str:
@@ -200,17 +269,23 @@ def _line_text(menu: MenuCatalog, proposal: ExtractionOutput, line_id: str, lang
     return f"{line.quantity} {title}" + (f" ({', '.join(details)})" if details else "")
 
 
-def _when(proposal: ExtractionOutput, lang: str) -> str:
+def _when(schedule: Schedule, lang: str) -> str:
+    """The day and time, from the verified Schedule only."""
     T = _t(lang)
-    rt = proposal.fulfillment.requested_time
-    if rt.state is SlotState.provided and rt.normalized_local:
-        return T["at"].format(time=_format_time(rt.normalized_local))
-    if rt.state is SlotState.provided and rt.kind is not TimeKind.asap and rt.raw_text:
-        return rt.raw_text
+    if schedule.local_time is not None:
+        at = _format_time(schedule.local_time)
+        if schedule.days_ahead == 0:
+            return T["today_at"].format(time=at)
+        key = "tomorrow_at" if schedule.days_ahead == 1 else "day_at"
+        return T[key].format(date=_format_date(schedule.local_date, lang), time=at)
+    if schedule.time_text:
+        return schedule.time_text
     return T["asap"]
 
 
-def summary(menu: MenuCatalog, quote: Quote, proposal: ExtractionOutput, lang: str = "en") -> str:
+def summary(
+    menu: MenuCatalog, quote: Quote, proposal: ExtractionOutput, schedule: Schedule, lang: str = "en"
+) -> str:
     """The confirmation question. Every amount comes from the Quote. Never sent while anything is missing:
     use next_reply(), which asks the missing question first."""
     if required_missing(proposal, menu) or proposal.missing_or_ambiguous:
@@ -219,9 +294,9 @@ def summary(menu: MenuCatalog, quote: Quote, proposal: ExtractionOutput, lang: s
     items = ", ".join(_line_text(menu, proposal, ql.line_id, lang) for ql in quote.lines)
     method = proposal.fulfillment.method
     if method is FulfillmentMethod.pickup:
-        fulfillment = T["pickup"].format(when=_when(proposal, lang))
+        fulfillment = T["pickup"].format(when=_when(schedule, lang))
     elif method is FulfillmentMethod.delivery:
-        fulfillment = T["delivery"].format(address=proposal.address.raw_text, when=_when(proposal, lang))
+        fulfillment = T["delivery"].format(address=proposal.address.raw_text, when=_when(schedule, lang))
     else:
         fulfillment = T["fulfillment_unknown"]
     pay = proposal.payment
@@ -324,7 +399,8 @@ def template_question(
             else:
                 questions.append(T["q_method"])
         elif m.field is FieldRef.requested_time:
-            questions.append(T["q_time"])
+            day = proposal.fulfillment.requested_time.day
+            questions.append(T["q_time_day"].format(day=_named_day(day, lang)) if day else T["q_time"])
         elif m.field is FieldRef.address:
             questions.append(T["q_address"])
         elif m.field is FieldRef.payment_method:
@@ -352,15 +428,53 @@ def clarification(
 
 
 def next_reply(
-    menu: MenuCatalog, proposal: ExtractionOutput, quote: ToolResult[Quote], lang: str = "en"
+    menu: MenuCatalog,
+    proposal: ExtractionOutput,
+    quote: ToolResult[Quote],
+    schedule: ToolResult[Schedule],
+    lang: str = "en",
 ) -> tuple[str, str]:
-    """(text, kind): the missing-info question first; a summary only for a complete, priced order."""
+    """(text, kind): a problem with the day first (no time on it can work), then the missing-info question; a
+    summary only for a complete, priced, scheduled order."""
+    if isinstance(schedule, ToolErr) and schedule.error.code in DAY_PROBLEMS:
+        return schedule_problem(schedule, lang), "schedule_problem"
     missing = required_missing(proposal, menu)
     if missing:
         return clarification(proposal, menu, missing, lang)[0], "question"
     if isinstance(quote, ToolErr):
         return pricing_problem(quote, menu, lang), "pricing_problem"
-    return summary(menu, quote.data, proposal, lang), "summary"
+    if isinstance(schedule, ToolErr):
+        return schedule_problem(schedule, lang), "schedule_problem"
+    return summary(menu, quote.data, proposal, schedule.data, lang), "summary"
+
+
+def schedule_problem(err: ToolErr, lang: str = "en") -> str:
+    """Why that day or time can't work, from the schedule check's details (core/schedule.py)."""
+    T = _t(lang)
+    code, details = err.error.code, err.error.details or {}
+    on_date = details.get("date")
+    day = (
+        _day_words(date.fromisoformat(str(on_date)), int(details.get("days_ahead", 1)), lang)
+        if on_date
+        else ""
+    )
+    if code == "SCHEDULE_NOT_ACCEPTED":
+        return T["schedule_not_accepted"]
+    if code == "SCHEDULE_TOO_FAR_AHEAD":
+        return T["schedule_too_far"].format(
+            days=details["max_days_ahead"], date=_format_date(date.fromisoformat(str(on_date)), lang)
+        )
+    if code == "SCHEDULE_CLOSED_DAY":
+        return T["schedule_closed"].format(day=day)
+    if code == "SCHEDULE_OUTSIDE_HOURS":
+        return T["schedule_hours"].format(
+            opens=_format_time(str(details["opens_at"])),
+            closes=_format_time(str(details["closes_at"])),
+            day=day,
+        )
+    if code == "SCHEDULE_IN_PAST":
+        return T["schedule_past"].format(time=_format_time(str(details["time"])))
+    return T["schedule_no_date"].format(text=details.get("raw_text", ""))
 
 
 def pricing_problem(err: ToolErr, menu: MenuCatalog, lang: str = "en") -> str:

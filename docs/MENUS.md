@@ -1,6 +1,6 @@
 # Menus
 
-Fictional businesses, `menu@0.6` JSON in `data/menus/`. Run `make menus` to validate them and print each
+Fictional businesses, `menu@0.7` JSON in `data/menus/`. Run `make menus` to validate them and print each
 menu's content hash (`menu_version`), which every quote and run records.
 
 | Business | File | Cuisine / tests | Hours (local) | Delivery | Name for pickup |
@@ -19,6 +19,11 @@ free, printed on the ticket (core/requests.py matches them before anything else)
 | Halfmoon Pizza | well done / extra crispy, cut in squares, uncut (pizzas); sauce on the side (pizzas, sides); warm (sides) |
 | Morning Crumb Café | warm / toasted (pastries, sandwiches, combos); cut in half (pastries, sandwiches); extra hot, room for milk, extra foam (coffee, combos) |
 | Lucky Lime Taqueria | well done, salsa on the side (tacos, burritos, mains, combos); cut in half (burritos); extra crispy (mains, sides); no ice (drinks) |
+
+**Orders for a later day** (menu@0.7, `scheduled_orders`): Corner Patty, Halfmoon Pizza and Morning Crumb take
+them up to 7 days ahead (default chosen 2026-11-12 for Julian to change; without the setting a business takes
+today only, as Lucky Lime does, whose held-out file is left unchanged). None sets `weekly_hours` yet: every day
+uses the hours above. Both are checked in code (core/schedule.py), never shown to the extractor.
 
 Items **sold by the order** (menu@0.6, `sold_as: order`; quantity counts orders): Halfmoon garlic knots (6 per
 order) and breadsticks (4 per order); Corner Patty fries and onion rings (no piece count).

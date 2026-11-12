@@ -2,8 +2,11 @@
 
 from datetime import UTC, datetime, timedelta
 
+from orderslm.core.schedule import resolve_schedule
 from orderslm.schema.conversation import Conversation, Message
 from orderslm.schema.extraction import ExtractionOutput
+from orderslm.schema.menu import MenuCatalog
+from orderslm.schema.order import Schedule, ToolResult
 
 EV = [{"message_index": 0, "quote": "x"}]
 T0 = datetime(2026, 10, 7, 18, 0, tzinfo=UTC)
@@ -84,3 +87,8 @@ def conversation(
             for i, (role, text) in enumerate(messages)
         ],
     )
+
+
+def sched(menu: MenuCatalog, o: ExtractionOutput) -> ToolResult[Schedule]:
+    """The order's schedule for a one-message chat sent at T0 (14:00 in New York, 13:00 Chicago, 11:00 LA)."""
+    return resolve_schedule(menu, o, conversation(("customer", "x"), business=menu.business_id))

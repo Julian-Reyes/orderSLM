@@ -20,7 +20,7 @@ from .decision import Usage
 class ExtractionRequest(Strict):
     """Never carries the router's label (docs/ARCHITECTURE.md, design rules)."""
 
-    menu: MenuCatalog = Field(description="menu.extractor_view(): no reply-only size facts")
+    menu: MenuCatalog = Field(description="menu.extractor_view(): no reply-only facts")
     conversation: Conversation
     draft: ExtractionOutput | None = Field(default=None, description="current draft order state, if any")
     prompt_version: str
@@ -28,7 +28,9 @@ class ExtractionRequest(Strict):
     @model_validator(mode="after")
     def _extractor_menu(self) -> "ExtractionRequest":
         if self.menu.has_reply_only_fields():
-            raise ValueError("pass menu.extractor_view(): diameter_cm/slices are for the reply layer only")
+            raise ValueError(
+                "pass menu.extractor_view(): size facts, weekly hours and scheduling are reply-layer only"
+            )
         return self
 
 

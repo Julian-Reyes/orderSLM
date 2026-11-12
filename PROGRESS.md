@@ -6,6 +6,33 @@ _Last updated 2026-11-12._
 
 ## Start here next session
 
+### Orders for another day (2026-11-12; Julian: "do the recommended fix, then the training batch and v4 retrain, then the new test chats. We have to get this to 95%+ accuracy")
+
+- **Why:** the order had no day: "tmrw" became ASAP, and "tmrw at 6:30" became 18:30 *today* with a read-back
+  ("Pickup at 6:30 PM") the customer would say yes to. Dev, fresh and fresh2 had no such order (only fresh2 089).
+- **Step 1, code (done, $0):** the model names the day, code finds the date (like prices).
+  - `extraction@0.5` / `label@0.2` / `student@0.2`: optional `requested_time.day` = `{kind: tomorrow | weekday |
+    date, weekday?, month?, day_of_month?, raw_text, evidence}`, with a clock time or with `ambiguous` (time asked).
+    Left out of the JSON when absent: every older gold file, output and training target is byte-identical (old
+    version strings still accepted; student-data v0.1–0.3 still rebuild identically, their targets keep
+    `student@0.1`).
+  - `menu@0.7`: `weekly_hours` (per weekday, null = closed) and `scheduled_orders {accepted, max_days_ahead}`,
+    reply layer only (`extractor_view()` drops them: the student prompt is unchanged). **Defaults I chose (Julian
+    didn't pick):** off unless a business turns it on; our 3 training menus on, 7 days ahead. No weekly hours set.
+    Held-out Lucky Lime left unchanged (today only). The "30 min notice" I first proposed is not built: a later day
+    is always hours away, and today's prep time is a separate question.
+  - `core/schedule.py` (`schedule@0.1` → verified `Schedule`): date from the business-local day of the message it
+    was said in; checks accepted / max days / closed day / inside that day's hours (closing excluded) / not in the
+    past today / real date. `replies@0.8`: every time names the day ("today at 6:30 PM", "tomorrow, Thu, Nov 12,
+    at 6:30 PM"); "What time tomorrow would you like it?"; a problem with the day is said before any question.
+    `ticket@0.2`: a later day starts with "SCHEDULED for …, not today". `scorer@0.5`: the time includes the day
+    (old scores can't change: nothing before had a day). Guide rule in docs/ANNOTATION_GUIDE.md ("Another day").
+  - Gold: fresh2 089 relabeled under the rule (`data/fresh2/CHANGES.jsonl`); re-scored
+    (`runs/student-compare/20261112T203054Z`): both students lose that chat, **v3 75.6% → 74.4%, v2 68.9% →
+    67.8%** fully correct on fresh2. This supersedes the fresh2 numbers below.
+  - **Known gap for the final eval:** the sealed test split was labeled before this rule; any test chat ordering
+    for another day has old-rule gold. Can't be checked without unsealing; fix with logged CHANGES at final eval.
+
 ### Student improvement round v3 (2026-11-09; Julian: skip M7, "fix the student", then "you write and label all of them I dont want to spend more money anymore")
 
 - **M7 router benchmark: skipped** (Julian, 2026-11-09). The site and write-up show three comparisons, not four.

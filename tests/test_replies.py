@@ -10,7 +10,7 @@ from orderslm.core.pricing import DeterministicPricing
 from orderslm.menus import load_menu
 from orderslm.schema.order import HandoffReason, HandoffTicket, OrderRecord, OrderStatus
 
-from .builders import line, order
+from .builders import line, order, sched
 
 CP = load_menu("corner-patty")
 HM = load_menu("halfmoon-pizza")
@@ -27,8 +27,8 @@ def test_spec_example_summary():
         line("L3", "sprite"),
         time_=SEVEN_PM,
     )
-    assert replies.summary(CP, P.quote(CP, o).data, o) == (
-        "Got it: 1 Cheeseburger, 1 Cheeseburger (no onions), 1 Sprite. Pickup at 7:00 PM. "
+    assert replies.summary(CP, P.quote(CP, o).data, o, sched(CP, o).data) == (
+        "Got it: 1 Cheeseburger, 1 Cheeseburger (no onions), 1 Sprite. Pickup today at 7:00 PM. "
         "Total $20.47, paying cash. Is that right?"
     )
 
@@ -37,7 +37,7 @@ def test_summary_amounts_come_from_the_quote_not_the_proposal():
     o = order(line("L1", "cheeseburger"))
     q = P.quote(CP, o).data
     tampered = q.model_copy(update={"total_cents": 12345})  # whatever the verified quote says is what we say
-    assert "$123.45" in replies.summary(CP, tampered, o)
+    assert "$123.45" in replies.summary(CP, tampered, o, sched(CP, o).data)
 
 
 def test_delivery_summary_shows_fee_and_details():
@@ -49,7 +49,7 @@ def test_delivery_summary_shows_fee_and_details():
         address="410 Birch Ave",
         payment="card",
     )
-    text = replies.summary(HM, P.quote(HM, o).data, o)
+    text = replies.summary(HM, P.quote(HM, o).data, o, sched(HM, o).data)
     # large pepperoni 1449 + 400, extra cheese 175 = 2024; fee 299 -> 2323
     assert text == (
         "Got it: 1 Pepperoni Pizza (Large 14-inch, add thin crust, extra house cheese blend). Delivery to 410 Birch Ave "

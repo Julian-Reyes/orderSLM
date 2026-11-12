@@ -5,7 +5,7 @@ deterministic core or a business tool, carries `verified_by`, and is the only
 thing the reply layer may state as fact (prices, totals, order status).
 """
 
-from datetime import datetime
+from datetime import date, datetime, time
 from enum import StrEnum
 from typing import Generic, Literal, TypeVar
 
@@ -68,6 +68,29 @@ class Quote(Strict):
             raise ValueError("delivery_fee_cents must be 0 unless delivering")
         if self.total_cents != self.subtotal_cents + self.delivery_fee_cents:
             raise ValueError("total_cents != subtotal_cents + delivery_fee_cents")
+        return self
+
+
+class Schedule(Strict):
+    """When the order is for, worked out in code (core/schedule.py) from the customer's words, the time of the
+    message they said it in, and the menu's hours. The reply layer states the day and time only from this."""
+
+    business_id: str = Field(pattern=ID_PATTERN)
+    local_date: date = Field(description="the order's day in the business's timezone")
+    days_ahead: int = Field(ge=0, description="0 = today")
+    asap: bool = Field(description="no time given: as soon as possible (today only)")
+    local_time: time | None = Field(default=None, description="the clock time, if one was given")
+    time_text: str | None = Field(
+        default=None, description="a relative time as said ('in 20 min'); today only"
+    )
+    verified_by: str = Field(description="schedule version, e.g. schedule@0.1")
+
+    @model_validator(mode="after")
+    def _consistent(self) -> "Schedule":
+        if (self.asap or self.time_text) and self.days_ahead:
+            raise ValueError("asap and relative times are for today only")
+        if self.asap and (self.local_time or self.time_text):
+            raise ValueError("asap has no clock or relative time")
         return self
 
 
