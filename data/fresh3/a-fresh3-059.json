@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-fresh3-059",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 🎉 6 cheeseburgers n 3 large fries for pickup",
+        "sent_at": "2026-11-21T12:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "paying card 💳",
+        "sent_at": "2026-11-21T12:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Got it: 6 Cheeseburgers and 3 large Fries for pickup, paying by card. Is that right?",
+        "sent_at": "2026-11-21T12:31:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "yep 👍",
+        "sent_at": "2026-11-21T12:31:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "oh n add bacon to all the burgers 🥓",
+        "sent_at": "2026-11-21T12:32:24-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 6,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "bacon",
+            "raw_text": "add bacon"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 cheeseburgers"
+          },
+          {
+            "message_index": 4,
+            "quote": "add bacon to all the burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-059",
+  "annotation_notes": "As fresh 041: the added topping comes after the yes, so it is a change to the placed order."
+}

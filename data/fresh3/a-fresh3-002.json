@@ -1,0 +1,168 @@
+{
+  "conversation": {
+    "id": "a-fresh3-002",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey do u guys take orders for tmrw",
+        "sent_at": "2026-11-18T21:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we take orders up to a week ahead. What would you like?",
+        "sent_at": "2026-11-18T21:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok bet. 2 bacon burgers n a large fries",
+        "sent_at": "2026-11-18T21:31:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "for tmrw at 7pm, deliver to 410 kensington ave apt 2",
+        "sent_at": "2026-11-18T21:31:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "paying card",
+        "sent_at": "2026-11-18T21:32:24-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 410 kensington ave"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7pm",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 7pm"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tmrw",
+          "evidence": [
+            {
+              "message_index": 3,
+              "quote": "tmrw"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "kensington ave",
+      "number": "410",
+      "unit": "apt 2",
+      "raw_text": "410 kensington ave apt 2",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "410 kensington ave apt 2"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-002",
+  "annotation_notes": "Asking whether they take orders for tomorrow is a DELIVERY_QUESTION (2026-11-12 rule); the order for tomorrow at 7 pm: requested_time.day tomorrow."
+}

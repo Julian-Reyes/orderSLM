@@ -1,0 +1,151 @@
+{
+  "conversation": {
+    "id": "a-fresh3-033",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 cheeseburgers",
+        "sent_at": "2026-11-20T21:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n that one u had on special last week",
+        "sent_at": "2026-11-20T21:10:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "actually make the cheeseburgers doubles",
+        "sent_at": "2026-11-20T21:11:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 55 ivanhoe st",
+        "sent_at": "2026-11-20T21:11:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the cheeseburgers doubles"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "unmatched_text": "that one u had on special last week",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "that one u had on special last week"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 55 ivanhoe st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ivanhoe st",
+      "number": "55",
+      "raw_text": "55 ivanhoe st",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "55 ivanhoe st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "ambiguous",
+        "line_id": "L2"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which one do you mean by “that one u had on special last week”, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-033"
+}

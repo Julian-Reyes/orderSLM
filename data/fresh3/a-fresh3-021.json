@@ -1,0 +1,104 @@
+{
+  "conversation": {
+    "id": "a-fresh3-021",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "does the cheeseburger come w pickles",
+        "sent_at": "2026-11-16T12:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes: cheese, lettuce, tomato, onion, pickles and ketchup.",
+        "sent_at": "2026-11-16T12:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok 3 cheeseburgers no pickles, pickup, card",
+        "sent_at": "2026-11-16T12:31:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "pickle",
+            "raw_text": "no pickles"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 cheeseburgers no pickles"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-021"
+}

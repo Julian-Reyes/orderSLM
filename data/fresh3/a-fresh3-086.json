@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-fresh3-086",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 CHEESEBURGERS AND 2 LARGE FRIES",
+        "sent_at": "2026-11-17T20:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "TO 990 ELM ST",
+        "sent_at": "2026-11-17T20:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "CARD",
+        "sent_at": "2026-11-17T20:01:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 LARGE FRIES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "TO 990 ELM ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "ELM ST",
+      "number": "990",
+      "raw_text": "990 ELM ST",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "990 ELM ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-086"
+}

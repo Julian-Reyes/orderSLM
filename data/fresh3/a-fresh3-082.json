@@ -1,0 +1,134 @@
+{
+  "conversation": {
+    "id": "a-fresh3-082",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI, DO YOU MAKE BREAKFAST SANDWICHES ON BAGELS?",
+        "sent_at": "2026-11-19T13:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, the breakfast sandwich comes on an English muffin, a croissant or a bagel.",
+        "sent_at": "2026-11-19T13:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "GREAT, 3 ON BAGELS AND 3 MEDIUM COFFEES FOR SATURDAY",
+        "sent_at": "2026-11-19T13:01:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 3,
+        "variant_id": "bagel",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 ON BAGELS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "drip_coffee",
+        "quantity": 3,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 MEDIUM COFFEES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "FOR SATURDAY",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "FOR SATURDAY"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "sat",
+          "raw_text": "SATURDAY",
+          "evidence": [
+            {
+              "message_index": 2,
+              "quote": "SATURDAY"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, what time on Saturday would you like it, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-082"
+}

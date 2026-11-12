@@ -1,0 +1,150 @@
+{
+  "conversation": {
+    "id": "a-fresh3-047",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i get a large americano n a breakfast sandwich for pickup wednesday",
+        "sent_at": "2026-11-16T14:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "name kim",
+        "sent_at": "2026-11-16T14:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-16T14:01:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 1,
+        "variant_id": "english_muffin",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a breakfast sandwich"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "wednesday",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "wednesday"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "wed",
+          "raw_text": "wednesday",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "wednesday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Kim",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "kim"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      }
+    ],
+    "clarification_question": "What time on Wednesday would you like it?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-047"
+}

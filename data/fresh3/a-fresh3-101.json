@@ -1,0 +1,152 @@
+{
+  "conversation": {
+    "id": "a-fresh3-101",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI, FIRST TIME ORDERING",
+        "sent_at": "2026-11-18T18:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "CAN I GET A CHEESEBURGER COMBO WITH FRIES AND A COKE",
+        "sent_at": "2026-11-18T18:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "AND A STRAWBERRY SHAKE",
+        "sent_at": "2026-11-18T18:31:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "DELIVER TO 45 HOLLIS ST, I'LL PAY CASH",
+        "sent_at": "2026-11-18T18:31:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries",
+            "variant_id": "regular"
+          },
+          {
+            "slot_id": "drink",
+            "menu_item_id": "coke"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A CHEESEBURGER COMBO WITH FRIES AND A COKE"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "strawberry",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "A STRAWBERRY SHAKE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "DELIVER TO 45 HOLLIS ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "HOLLIS ST",
+      "number": "45",
+      "raw_text": "45 HOLLIS ST",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "45 HOLLIS ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "PAY CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-101"
+}

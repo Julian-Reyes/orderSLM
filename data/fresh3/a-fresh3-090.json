@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-fresh3-090",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 👋 we're arriving thursday nov 19, could we get 2 bacon burgers n 2 cokes delivered to the harbor inn, 400 front st, room 210, at 8pm that day? 🏨",
+        "sent_at": "2026-11-16T15:00:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cokes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to the harbor inn"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 8pm",
+        "normalized_local": "20:00",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 8pm"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "month": 11,
+          "day_of_month": 19,
+          "raw_text": "nov 19",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "nov 19"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "front st",
+      "number": "400",
+      "unit": "room 210",
+      "reference": "the harbor inn",
+      "raw_text": "the harbor inn, 400 front st, room 210",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "the harbor inn, 400 front st, room 210"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-090",
+  "annotation_notes": "The weekday and the date name the same day; the date is labeled (kind date)."
+}

@@ -1,0 +1,64 @@
+{
+  "conversation": {
+    "id": "a-fresh3-099",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-20T21:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "just picked up my order n its a pepperoni, i ordered a veggie",
+        "sent_at": "2026-11-20T21:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "can i get my money back",
+        "sent_at": "2026-11-20T21:31:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-099"
+}

@@ -1,0 +1,174 @@
+{
+  "conversation": {
+    "id": "a-fresh3-044",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HI! PARTY TOMORROW",
+        "sent_at": "2026-11-20T11:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "NEED 6 BLUEBERRY MUFFINS",
+        "sent_at": "2026-11-20T11:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "AND 6 CHOCOLATE CROISSANTS",
+        "sent_at": "2026-11-20T11:01:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "PICKUP AT 9:30 TOMORROW MORNING",
+        "sent_at": "2026-11-20T11:01:57-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "NAME IS SUE, CARD",
+        "sent_at": "2026-11-20T11:02:24-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "6 BLUEBERRY MUFFINS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 6,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "6 CHOCOLATE CROISSANTS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 9:30",
+        "normalized_local": "09:30",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "AT 9:30"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "TOMORROW",
+          "evidence": [
+            {
+              "message_index": 3,
+              "quote": "TOMORROW"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sue",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "SUE"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-044"
+}

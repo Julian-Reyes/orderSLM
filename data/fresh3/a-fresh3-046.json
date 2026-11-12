@@ -1,0 +1,140 @@
+{
+  "conversation": {
+    "id": "a-fresh3-046",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello! Could we get 4 cheeseburgers, two of them without onions?",
+        "sent_at": "2026-11-18T19:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Delivered to the Grant Hotel, 200 Grant Ave, room 418.",
+        "sent_at": "2026-11-18T19:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "We'll pay cash.",
+        "sent_at": "2026-11-18T19:31:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "without onions"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 cheeseburgers"
+          },
+          {
+            "message_index": 0,
+            "quote": "two of them without onions"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Delivered to the Grant Hotel"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Grant Ave",
+      "number": "200",
+      "unit": "room 418",
+      "reference": "the Grant Hotel",
+      "raw_text": "the Grant Hotel, 200 Grant Ave, room 418",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "the Grant Hotel, 200 Grant Ave, room 418"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-046"
+}

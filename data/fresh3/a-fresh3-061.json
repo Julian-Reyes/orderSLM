@@ -1,0 +1,191 @@
+{
+  "conversation": {
+    "id": "a-fresh3-061",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-11-17T12:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 bacon burgers",
+        "sent_at": "2026-11-17T12:10:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "do they come w cheese",
+        "sent_at": "2026-11-17T12:11:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Yes, the bacon burger comes with cheese.",
+        "sent_at": "2026-11-17T12:11:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok cool n 3 cokes",
+        "sent_at": "2026-11-17T12:12:24-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "deliver to 1200 harbor dr, cash",
+        "sent_at": "2026-11-17T12:12:58-05:00"
+      },
+      {
+        "index": 6,
+        "role": "business",
+        "text": "Got it: 3 Bacon Burgers and 3 Cokes, delivered to 1200 Harbor Dr, paying cash. Is that right?",
+        "sent_at": "2026-11-17T12:13:39-05:00"
+      },
+      {
+        "index": 7,
+        "role": "customer",
+        "text": "yep thats it",
+        "sent_at": "2026-11-17T12:14:27-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "3 cokes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "deliver to 1200 harbor dr"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "harbor dr",
+      "number": "1200",
+      "raw_text": "1200 harbor dr",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "1200 harbor dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 7,
+          "quote": "yep thats it"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 7,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-061"
+}

@@ -443,6 +443,26 @@ FRESH_MIX = 45  # dev's situation mix, largest-remainder share of this many card
 # Fresh2 (M6 v3, 2026-11-10): the same quotas as fresh from its own seed, written after the v3 fixes (which used
 # fresh), so v2 and v3 are compared on chats nobody has seen.
 FRESH2_SEED = f"{SEED}-fresh2-2026-11-10"
+# Fresh3 (M6 v4, 2026-11-12): fresh's quotas from its own seed + a block of orders for another day (new in
+# extraction@0.5), written after t6 and the finalize@0.3 fix (which used dev, fresh and fresh2). The 90 standard
+# cards compare with fresh and fresh2; the future-day block is reported on its own.
+FRESH3_SEED = f"{SEED}-fresh3-2026-11-12"
+FRESH3_FUTURE_DAY = 20
+FUTURE_DAY = Situation(
+    (L.PLACE_ORDER,),
+    (S.future_day,),
+    (0, 0),
+    "Orders for a day other than today ({variant}).",
+    (1, 5),
+    variants=(
+        "tomorrow, at a clock time",
+        "a weekday named, at a clock time",
+        "a date like 'nov 20' or 'the 18th', at a clock time",
+        "a later day but no time, and the chat ends before the business asks",
+        "first for today, then moved to another day at a time",
+        "first asks whether they can order ahead, then orders for that day at a time",
+    ),
+)
 
 
 # Cards corrected after review so they match the conversation written from them. Applied after
@@ -577,11 +597,14 @@ def fresh_quotas() -> dict[str, int]:
 
 
 def generate_fresh(split: Split = Split.fresh) -> list[ScenarioCard]:
-    """Fresh or fresh2 cards: the same quotas, each split from its own seed."""
-    seed = {Split.fresh: FRESH_SEED, Split.fresh2: FRESH2_SEED}[split]
+    """Fresh, fresh2 or fresh3 cards: the same quotas, each split from its own seed (fresh3 adds the future-day
+    block)."""
+    seed = {Split.fresh: FRESH_SEED, Split.fresh2: FRESH2_SEED, Split.fresh3: FRESH3_SEED}[split]
     menus = load_menus(include_held_out=True)
     rng = random.Random(seed)
     jobs = [name for name, n in fresh_quotas().items() for _ in range(n)]
+    if split is Split.fresh3:
+        jobs += ["future_day"] * FRESH3_FUTURE_DAY
     rng.shuffle(jobs)
     cards = _cards(split, jobs, rng, menus, Counter(), Counter(), 0, True)
     return [_stated_fulfillment(c, menus, seed) for c in cards]
@@ -601,7 +624,7 @@ def _cards(
     styles = _styles(len(jobs), rng)
     cards: list[ScenarioCard] = []
     for n, (name, style) in enumerate(zip(jobs, styles, strict=True), start=numbered_from + 1):
-        sit = SITUATIONS.get(name) or FRESH_SITUATIONS[name]
+        sit = FUTURE_DAY if name == "future_day" else SITUATIONS.get(name) or FRESH_SITUATIONS[name]
         options = [b for b in (sit.businesses or allowed) if b in allowed]
         load = {b: ((used[(name, b)],) if spread else ()) + (used[b],) for b in options}
         least = min(load.values())
@@ -708,19 +731,22 @@ def main(argv: list[str] | None = None) -> None:
     g = sub.add_parser("generate", help="write dev + test cards (test needs ORDERSLM_UNSEAL_TEST)")
     g.add_argument("--force", action="store_true")
     g.add_argument(
-        "--split", choices=["dev", "test", "fresh", "fresh2"], action="append", help="default: dev + test"
+        "--split",
+        choices=["dev", "test", "fresh", "fresh2", "fresh3"],
+        action="append",
+        help="default: dev + test",
     )
     s = sub.add_parser("summary")
-    s.add_argument("--split", choices=["dev", "test", "fresh", "fresh2"], action="append")
+    s.add_argument("--split", choices=["dev", "test", "fresh", "fresh2", "fresh3"], action="append")
     args = ap.parse_args(argv)
     if args.cmd == "generate":
         chosen = {Split(x) for x in (args.split or ["dev", "test"])}
         cards = (
             {s: cs for s, cs in generate().items() if s in chosen}
-            if chosen - {Split.fresh, Split.fresh2}
+            if chosen - {Split.fresh, Split.fresh2, Split.fresh3}
             else {}
         )
-        for split in {Split.fresh, Split.fresh2} & chosen:
+        for split in {Split.fresh, Split.fresh2, Split.fresh3} & chosen:
             cards[split] = generate_fresh(split)
         write(cards, force=args.force)
     for split in (

@@ -1,0 +1,121 @@
+{
+  "conversation": {
+    "id": "a-fresh3-024",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a medium latte and the same as last time for my colleague.",
+        "sent_at": "2026-11-18T11:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "I'm sorry, I can't see past orders here. What did your colleague have?",
+        "sent_at": "2026-11-18T11:40:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I'm not sure, I'll ask her. Actually, make my latte a large.",
+        "sent_at": "2026-11-18T11:41:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "ambiguous_reference"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium latte"
+          },
+          {
+            "message_index": 2,
+            "quote": "make my latte a large"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "unmatched_text": "the same as last time",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "the same as last time"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "ambiguous",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which one do you mean by “the same as last time”, is this for pickup, will you pay by card or cash, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-024",
+  "annotation_notes": "The colleague's order is never settled: unmatched, ambiguous."
+}

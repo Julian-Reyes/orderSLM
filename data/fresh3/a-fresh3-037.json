@@ -1,0 +1,139 @@
+{
+  "conversation": {
+    "id": "a-fresh3-037",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey can i order lunch for the office for nov 19",
+        "sent_at": "2026-11-16T11:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "5 cheeseburgers n 5 sprites",
+        "sent_at": "2026-11-16T11:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "at 12:30, card",
+        "sent_at": "2026-11-16T11:31:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 5,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "5 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 5,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "5 sprites"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 12:30"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "month": 11,
+          "day_of_month": 19,
+          "raw_text": "nov 19",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "nov 19"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-037"
+}

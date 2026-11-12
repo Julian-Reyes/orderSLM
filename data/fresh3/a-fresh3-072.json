@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh3-072",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey where is my order",
+        "sent_at": "2026-11-17T08:50:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordered 20 min ago for pickup, name raj, train in 10 min",
+        "sent_at": "2026-11-17T08:50:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-072"
+}

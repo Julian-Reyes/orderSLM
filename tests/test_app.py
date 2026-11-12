@@ -34,7 +34,7 @@ def client(at: str = "2026-10-20T15:00:00+00:00") -> TestClient:
 def test_meta_hides_test_while_sealed(dirs):
     meta = client().get("/api/meta").json()
     # fresh/fresh2 (M6) are reviewed like dev; test stays hidden
-    assert meta["splits"] == ["dev", "fresh", "fresh2"]
+    assert meta["splits"] == ["dev", "fresh", "fresh2", "fresh3"]
     assert "PLACE_ORDER" in meta["labels"] and "half_and_half" in meta["scenarios"]
 
 

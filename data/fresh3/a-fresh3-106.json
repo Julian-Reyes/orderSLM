@@ -1,0 +1,110 @@
+{
+  "conversation": {
+    "id": "a-fresh3-106",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "what sizes do your lattes come in",
+        "sent_at": "2026-11-20T10:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Small 8 oz, medium 12 oz or large 16 oz.",
+        "sent_at": "2026-11-20T10:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "one of the bigger ones then please, for pickup, name is ed",
+        "sent_at": "2026-11-20T10:01:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "one of the bigger ones"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "ed"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which latte would you like (small 8 oz, medium 12 oz or large 16 oz), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-106",
+  "annotation_notes": "'one of the bigger ones' fits medium or large: the size is stated unclearly, asked."
+}

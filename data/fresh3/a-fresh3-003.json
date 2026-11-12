@@ -1,0 +1,166 @@
+{
+  "conversation": {
+    "id": "a-fresh3-003",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning! Do your croissants come warm?",
+        "sent_at": "2026-11-21T09:10:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We can warm them up for you if you'd like.",
+        "sent_at": "2026-11-21T09:10:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Yes please. For a little party: 2 large lattes, a medium hot chocolate, 3 chocolate croissants warmed, 2 blueberry muffins and an everything bagel with cream cheese. Pickup under Nadia, card.",
+        "sent_at": "2026-11-21T09:11:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 large lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium hot chocolate"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "croissant",
+        "quantity": 3,
+        "variant_id": "chocolate",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "warmed",
+            "kitchen_note": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 chocolate croissants warmed"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "muffin",
+        "quantity": 2,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 blueberry muffins"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "with cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "an everything bagel with cream cheese"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Nadia",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Nadia"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-003"
+}

@@ -1,0 +1,131 @@
+{
+  "conversation": {
+    "id": "a-fresh3-094",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Do you have hazelnut syrup?",
+        "sent_at": "2026-11-19T09:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We do!",
+        "sent_at": "2026-11-19T09:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Then a medium latte with hazelnut for pickup on Monday at 7:40, under Paul. Card.",
+        "sent_at": "2026-11-19T09:31:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "hazelnut_syrup",
+            "raw_text": "with hazelnut"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a medium latte with hazelnut"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7:40",
+        "normalized_local": "07:40",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 7:40"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "mon",
+          "raw_text": "Monday",
+          "evidence": [
+            {
+              "message_index": 2,
+              "quote": "Monday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Paul",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Paul"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-094"
+}

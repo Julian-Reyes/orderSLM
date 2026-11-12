@@ -1,0 +1,203 @@
+{
+  "conversation": {
+    "id": "a-fresh3-077",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello",
+        "sent_at": "2026-11-20T12:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 cheeseburgers and a bacon burger please",
+        "sent_at": "2026-11-20T12:40:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "do you have chicken sandwiches",
+        "sent_at": "2026-11-20T12:41:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Sorry, we don't have chicken sandwiches. Would you like anything else?",
+        "sent_at": "2026-11-20T12:41:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "then a veggie burger, 2 shakes and 2 orders of fries",
+        "sent_at": "2026-11-20T12:42:24-05:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Which flavors for the shakes, and regular or large fries?",
+        "sent_at": "2026-11-20T12:42:58-05:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "2 vanilla, regular fries. pickup please",
+        "sent_at": "2026-11-20T12:43:39-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "a veggie burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "milkshake",
+        "quantity": 2,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 shakes"
+          },
+          {
+            "message_index": 6,
+            "quote": "2 vanilla"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "regular",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "2 orders of fries"
+          },
+          {
+            "message_index": 6,
+            "quote": "regular fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 6,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-077"
+}

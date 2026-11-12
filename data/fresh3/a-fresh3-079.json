@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh3-079",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "SETTLE A BET",
+        "sent_at": "2026-11-22T11:15:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "IS A HOT DOG A SANDWICH???",
+        "sent_at": "2026-11-22T11:15:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-079"
+}

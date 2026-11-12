@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-fresh3-071",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 🙂 if i pay cash can the driver break a 50?",
+        "sent_at": "2026-11-16T18:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, just let us know the bill when you order.",
+        "sent_at": "2026-11-16T18:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "great thank u! 💵",
+        "sent_at": "2026-11-16T18:01:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-071"
+}

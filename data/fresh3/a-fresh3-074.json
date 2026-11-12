@@ -1,0 +1,140 @@
+{
+  "conversation": {
+    "id": "a-fresh3-074",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, could I get 2 bagels with cream cheese, one plain and one everything, at 2:30?",
+        "sent_at": "2026-11-16T09:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'll pay with card.",
+        "sent_at": "2026-11-16T09:00:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "with cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bagels with cream cheese"
+          },
+          {
+            "message_index": 0,
+            "quote": "one plain"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "with cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bagels with cream cheese"
+          },
+          {
+            "message_index": 0,
+            "quote": "one everything"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 2:30",
+        "normalized_local": "14:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 2:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "pay with card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-074",
+  "annotation_notes": "'at 2:30' at a café open 7-15: only 14:30 is open."
+}

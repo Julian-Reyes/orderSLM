@@ -18,6 +18,9 @@ FRESH = DATA / "fresh"  # M6: fresh Source A to measure the dev-based fixes (eva
 FRESH2 = (
     DATA / "fresh2"
 )  # M6 v3: a second fresh batch, written after the v3 fixes that used fresh (evaluation-only)
+FRESH3 = (
+    DATA / "fresh3"
+)  # M6 v4: written after the v4 fixes that used dev, fresh and fresh2 (evaluation-only)
 _TEST = DATA / "test"  # M2, sealed
 EXTERNAL = DATA / "external"  # third-party downloads + anything derived from them, gitignored
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)

@@ -1,0 +1,79 @@
+{
+  "conversation": {
+    "id": "a-fresh3-051",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-17T08:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "is the uhh",
+        "sent_at": "2026-11-17T08:40:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "thing w the",
+        "sent_at": "2026-11-17T08:41:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok nvm the other one",
+        "sent_at": "2026-11-17T08:41:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-051"
+}

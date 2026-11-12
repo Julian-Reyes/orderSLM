@@ -1,0 +1,214 @@
+{
+  "conversation": {
+    "id": "a-fresh3-016",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY",
+        "sent_at": "2026-11-20T22:05:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 LARGE PEPPERONI",
+        "sent_at": "2026-11-20T22:05:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "1 LARGE VEGGIE",
+        "sent_at": "2026-11-20T22:06:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "2 ORDERS OF BREADSTICKS",
+        "sent_at": "2026-11-20T22:06:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "AND SOME SODAS",
+        "sent_at": "2026-11-20T22:07:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "business",
+        "text": "Which sodas would you like, and how many? We have Coke, Diet Coke, Sprite, Dr Pepper and iced tea.",
+        "sent_at": "2026-11-20T22:07:58-06:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "2 COKES AND A SPRITE, CANS. PICKUP",
+        "sent_at": "2026-11-20T22:08:39-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 LARGE PEPPERONI"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "1 LARGE VEGGIE"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "breadsticks",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "2 ORDERS OF BREADSTICKS"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 6,
+            "quote": "2 COKES"
+          },
+          {
+            "message_index": 6,
+            "quote": "CANS"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 6,
+            "quote": "A SPRITE"
+          },
+          {
+            "message_index": 6,
+            "quote": "CANS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 6,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-016",
+  "annotation_notes": "'SOME SODAS' is settled by the next message: the vague line is dropped."
+}

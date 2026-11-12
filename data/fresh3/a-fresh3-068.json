@@ -1,0 +1,161 @@
+{
+  "conversation": {
+    "id": "a-fresh3-068",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, it's me again.",
+        "sent_at": "2026-11-17T12:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'd like my usual for Thursday: a double cheeseburger with no onions and a large fries.",
+        "sent_at": "2026-11-17T12:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Pickup at 12:15.",
+        "sent_at": "2026-11-17T12:01:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Card, as always.",
+        "sent_at": "2026-11-17T12:01:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "with no onions"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a double cheeseburger with no onions"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:15",
+        "normalized_local": "12:15",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 12:15"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "thu",
+          "raw_text": "Thursday",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "Thursday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-068",
+  "annotation_notes": "'my usual' is spelled out in the same message, so nothing is unclear."
+}

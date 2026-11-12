@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-fresh3-027",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi can i get 2 medium cappuccinos",
+        "sent_at": "2026-11-17T12:10:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a cinnamon raisin bagel",
+        "sent_at": "2026-11-17T12:10:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup for dana, card",
+        "sent_at": "2026-11-17T12:11:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "oh n can u put peanut butter on the bagel",
+        "sent_at": "2026-11-17T12:11:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 2,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 medium cappuccinos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "cinnamon_raisin",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "put peanut butter on the bagel",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a cinnamon raisin bagel"
+          },
+          {
+            "message_index": 3,
+            "quote": "put peanut butter on the bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Dana",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "dana"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "We don't have put peanut butter on the bagel for the bagel. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-027"
+}

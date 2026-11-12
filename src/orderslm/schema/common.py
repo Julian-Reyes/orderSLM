@@ -16,8 +16,8 @@ from pydantic import BaseModel, ConfigDict, Field
 EXTRACTION_SCHEMA_VERSION = "extraction@0.5"
 ROUTER_SCHEMA_VERSION = "router@0.1"
 CONVERSATION_SCHEMA_VERSION = (
-    "conversation@0.6"  # 0.2: Split.benchmark; 0.3: Source.claude_written, card_id, more Scenario tags;
-    # 0.4: Scenario.implicit_category; 0.5: Split.fresh; 0.6: Split.fresh2
+    "conversation@0.7"  # 0.2: Split.benchmark; 0.3: Source.claude_written, card_id, more Scenario tags;
+    # 0.4: Scenario.implicit_category; 0.5: Split.fresh; 0.6: Split.fresh2; 0.7: Split.fresh3, Scenario.future_day
 )
 MENU_SCHEMA_VERSION = (
     "menu@0.7"  # 0.2: name_required_for_pickup; 0.3: ingredients/add-ons, aliases, exclusive groups;

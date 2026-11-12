@@ -1,0 +1,64 @@
+{
+  "conversation": {
+    "id": "a-fresh3-105",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "random q",
+        "sent_at": "2026-11-17T16:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "who was the first president",
+        "sent_at": "2026-11-17T16:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "of the us lol",
+        "sent_at": "2026-11-17T16:31:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-105"
+}

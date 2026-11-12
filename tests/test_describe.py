@@ -52,3 +52,29 @@ def test_missing_requests_and_claims_are_spelled_out():
     assert (
         "L2: which kind (size, flavor, filling…) (not given)" in t and "pickup or delivery (not given)" in t
     )
+
+
+def test_time_lines_today_and_another_day():
+    from orderslm.core.describe import describe_gold
+    from orderslm.menus import load_menu
+
+    from .builders import line, order
+
+    ev = [{"message_index": 0, "quote": "x"}]
+    at = {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 6",
+        "normalized_local": "18:00",
+        "evidence": ev,
+    }
+    menu = load_menu("corner-patty")
+    today = describe_gold(order(line("L1", "cheeseburger"), time_=at), menu)
+    assert [x for x in today if x.startswith(("Time", "Day"))] == ["Time: “at 6” = 18:00   ← #0 “x”"]
+    tmrw = {**at, "day": {"kind": "tomorrow", "raw_text": "tmrw", "evidence": ev}}
+    lines = [
+        x
+        for x in describe_gold(order(line("L1", "cheeseburger"), time_=tmrw), menu)
+        if x.startswith(("Time", "Day"))
+    ]
+    assert lines == ["Time: “at 6” = 18:00   ← #0 “x”", "Day: tomorrow (“tmrw”; not today)   ← #0 “x”"]

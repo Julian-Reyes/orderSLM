@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh3-008",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey quick q",
+        "sent_at": "2026-11-22T17:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "is the bacon burger ok for someone who cant ea",
+        "sent_at": "2026-11-22T17:30:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-008",
+  "annotation_notes": "Cut off mid-word: what can't be eaten is unknown, so UNKNOWN (like fresh 001)."
+}

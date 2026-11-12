@@ -1,0 +1,82 @@
+{
+  "conversation": {
+    "id": "a-fresh3-083",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "WE JUST GOT OUR ORDER",
+        "sent_at": "2026-11-20T19:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "THERE'S MUSTARD ON MY SON'S CHEESEBURGER",
+        "sent_at": "2026-11-20T19:40:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "HE'S ALLERGIC TO MUSTARD, I SAID NO MUSTARD",
+        "sent_at": "2026-11-20T19:41:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "HE DIDN'T EAT IT. WHAT DO WE DO?",
+        "sent_at": "2026-11-20T19:41:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "urgency": "needs_staff_now",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-083",
+  "annotation_notes": "As fresh2 053: an allergen on a received order is a food-safety problem once the allergy is said, needs_staff_now even though it wasn't eaten."
+}

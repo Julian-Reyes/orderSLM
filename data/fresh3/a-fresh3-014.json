@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-fresh3-014",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hiya",
+        "sent_at": "2026-11-17T18:25:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a jumbo pepperoni n a small cheese delivered to 39 grant st",
+        "sent_at": "2026-11-17T18:25:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "unmatched_variant_text": "jumbo",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a jumbo pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a small cheese"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivered to 39 grant st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "grant st",
+      "number": "39",
+      "raw_text": "39 grant st",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "39 grant st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have a jumbo for the pepperoni pizza; we have personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch. Which would you like? Also, will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-014"
+}

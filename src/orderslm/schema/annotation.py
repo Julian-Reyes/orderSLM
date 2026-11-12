@@ -39,6 +39,7 @@ class Scenario(StrEnum):
     out_of_scope = "out_of_scope"
     unclear_message = "unclear_message"
     implicit_category = "implicit_category"  # items/categories named implicitly ("pop", "something sweet")
+    future_day = "future_day"  # an order for another day ("tmrw at 6", "for saturday"; conversation@0.7)
 
 
 class WritingStyle(StrEnum):

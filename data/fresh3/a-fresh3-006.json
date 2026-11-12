@@ -1,0 +1,88 @@
+{
+  "conversation": {
+    "id": "a-fresh3-006",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 🍕 2 large cheese pizzas to 77 hawthorne st for the office, i already paid online, got the screenshot 📸",
+        "sent_at": "2026-11-19T12:40:00-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 large cheese pizzas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "to 77 hawthorne st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "hawthorne st",
+      "number": "77",
+      "raw_text": "77 hawthorne st",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 hawthorne st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown",
+      "customer_claims_paid": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "i already paid"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-006",
+  "annotation_notes": "A claim in the order message: PLACE_ORDER + PAYMENT_CLAIM; 'online' and a screenshot are not a method (unknown), unverified, not asked again."
+}

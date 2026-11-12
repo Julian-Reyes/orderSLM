@@ -1,0 +1,147 @@
+{
+  "conversation": {
+    "id": "a-fresh3-085",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is the knots order 6 pieces? 🧄",
+        "sent_at": "2026-11-21T20:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, 6 garlic knots per order.",
+        "sent_at": "2026-11-21T20:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok 2 orders + a large pepperoni to 23 juniper ct, cash 💵",
+        "sent_at": "2026-11-21T20:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 2 orders of Garlic Knots and 1 large Pepperoni Pizza, delivered to 23 Juniper Ct, paying cash. Is that right?",
+        "sent_at": "2026-11-21T20:31:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-11-21T20:32:24-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 orders"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "to 23 juniper ct"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "juniper ct",
+      "number": "23",
+      "raw_text": "23 juniper ct",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "23 juniper ct"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "👍"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-085"
+}

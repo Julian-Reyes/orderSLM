@@ -1,0 +1,34 @@
+{
+  "conversation": {
+    "id": "a-fresh3-018",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey ☕ how much is delivery to the office park? 🚗",
+        "sent_at": "2026-11-19T09:00:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "delivery_question"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-018"
+}

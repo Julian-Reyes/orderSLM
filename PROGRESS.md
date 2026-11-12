@@ -48,6 +48,17 @@ _Last updated 2026-11-12._
     11.5 h). 2B not trained: ~16 h needs two sessions, more than this week's quota. Pull with
     `make kaggle-pull JOB=m6`, then `make train ARGS="import runs/train/20261112T215707Z"` (PATH needs
     `~/.local/bin` for the kaggle CLI).
+- **Step 3, test batch fresh3 (written 2026-11-12, $0; scoring waits for v4):** `data/fresh3/` (`Split.fresh3`,
+  `conversation@0.7`, + `Scenario.future_day`): 110 Source A chats + gold by Claude (`runs/source-a/fresh3/build.py`,
+  reproducible): fresh's 90-card quotas from a new seed (comparable with fresh/fresh2) + **20 future-day cards**
+  (reported on their own). 321 customer messages; 0 blocking findings; all inside opening hours; every future-day
+  gold resolves to a later day; no near-duplicates vs dev/fresh/fresh2/all training batches incl. t6. Written after
+  t6 and finalize@0.3: **the clean measure of v4**. Not reviewed by Julian; same writer as t6 (caveat). Also fixed:
+  the plain-English view printed "Time: not mentioned" next to a clock time (describe.py, since step 1).
+  - **Next:** when kernel v15 finishes: `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261112T215707Z"`;
+    then a scoring session: `export --score qwen3.5-0.8b-single-v3:fresh3,qwen3.5-0.8b-single-v4:fresh+fresh2+fresh3`
+    (one per T4, ~1–2 h), import, `student-compare` v3 vs v4 per split, report fresh3 overall, its 90 standard chats
+    and its 20 future-day chats separately.
   - **Left (was):** add `qwen3.5-0.8b-single-v4` (data v0.4) to `STUDENTS` in
     `train/kaggle_train.py`, check the Kaggle GPU quota (~15 h left this week, estimated), export + push (~10 h
     training); then step 3: a new fresh3 batch written after t6, scored for v3 and v4. 95% is not expected from

@@ -150,10 +150,10 @@ def describe_gold(out: ExtractionOutput, menu: MenuCatalog) -> list[str]:
         lines.append(f"Time: {when}{norm}" + _ev(rt.evidence))
     elif rt.state is SlotState.ambiguous:
         lines.append(f"Time: UNCLEAR “{rt.raw_text}”" + _ev(rt.evidence))
-    if rt.day is not None:
-        lines.append(f"Day: {_day(rt.day)} (“{rt.day.raw_text}”; not today)" + _ev(rt.day.evidence))
     else:
         lines.append("Time: not mentioned (as soon as possible)")
+    if rt.day is not None:
+        lines.append(f"Day: {_day(rt.day)} (“{rt.day.raw_text}”; not today)" + _ev(rt.day.evidence))
     a = out.address
     if a.state is SlotState.provided:
         parts = [f"{k} {v}" for k, v in (("number", a.number), ("street", a.street), ("unit", a.unit),

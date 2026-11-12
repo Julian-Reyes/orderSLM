@@ -1,0 +1,131 @@
+{
+  "conversation": {
+    "id": "a-fresh3-108",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, a single cheeseburger and a lemonade delivered to 61 Easton Rd.",
+        "sent_at": "2026-11-19T21:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Paying by card.",
+        "sent_at": "2026-11-19T21:15:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Actually, make the cheeseburger a double.",
+        "sent_at": "2026-11-19T21:16:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a single cheeseburger"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the cheeseburger a double"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 61 Easton Rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Easton Rd",
+      "number": "61",
+      "raw_text": "61 Easton Rd",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "61 Easton Rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-108",
+  "annotation_notes": "Corner Patty has no milk or crust; the patty size plays that part."
+}

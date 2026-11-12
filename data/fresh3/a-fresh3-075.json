@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh3-075",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 🙂",
+        "sent_at": "2026-11-18T07:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a medium lat",
+        "sent_at": "2026-11-18T07:30:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-075",
+  "annotation_notes": "Cut off mid-word: UNKNOWN, as fresh 001 and fresh2 090."
+}

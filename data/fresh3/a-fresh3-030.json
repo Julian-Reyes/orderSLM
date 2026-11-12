@@ -1,0 +1,55 @@
+{
+  "conversation": {
+    "id": "a-fresh3-030",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do u have gluten free crust",
+        "sent_at": "2026-11-16T16:45:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, gluten-free crust is available on any pizza.",
+        "sent_at": "2026-11-16T16:45:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "🤔",
+        "sent_at": "2026-11-16T16:46:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-030"
+}

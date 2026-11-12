@@ -75,6 +75,19 @@ Evaluation-only: training and generation code never reads it (tests/test_fresh2.
 **Caveat to report:** the t5 training chats and fresh2 share a writer (Claude in a session), which can flatter
 fresh2. Dev and fresh were Claude-written too.
 
+## Fresh3 split (M6 v4)
+
+`data/fresh3/` (`Split.fresh3`, `conversation@0.7`): 110 Source A conversations written **after** the v4 fixes (batch
+t6 and finalize@0.3, which used the dev, fresh **and fresh2** misses), to measure v3 vs v4 on chats nobody fixed on.
+Cards: `cards generate --split fresh3`: fresh's quotas (90, comparable with fresh and fresh2) from their own seed
+(`20261007-fresh3-2026-11-12`) **plus 20 `future_day` cards** (orders for another day, extraction@0.5; scenario
+`future_day`), reported on their own. Written and labeled by claude-opus-5.5 in the session ($0, 2026-11-12) with
+`runs/source-a/fresh3/build.py` (compact entries; the missing list and question from the rules; routing defaults
+from the guide), every chat passes `validate()`: 321 customer messages, all inside opening hours, every
+future-day gold resolves to a later day the menus take; no near-duplicates within fresh3, against dev, fresh or
+fresh2, or against the training chats (t6 included). Evaluation-only (tests/test_fresh3.py). Not reviewed by
+Julian; same writer as t6 (report it).
+
 ## Review (Source A)
 
 Julian reviews **all of dev and at least 25% of test** in the tool. "Save as reviewed" saves his version and

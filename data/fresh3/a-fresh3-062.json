@@ -1,0 +1,115 @@
+{
+  "conversation": {
+    "id": "a-fresh3-062",
+    "business_id": "morning-crumb",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi ☀️ for tmrw at 12:15 can i get 3 breakfast sandwiches on croissants n 3 medium lattes for pickup, name is omar 🙏",
+        "sent_at": "2026-11-18T13:00:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 3,
+        "variant_id": "croissant",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 breakfast sandwiches on croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "latte",
+        "quantity": 3,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium lattes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:15",
+        "normalized_local": "12:15",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 12:15"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tmrw",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "tmrw"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Omar",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "omar"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-062"
+}

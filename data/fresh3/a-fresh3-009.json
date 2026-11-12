@@ -1,0 +1,172 @@
+{
+  "conversation": {
+    "id": "a-fresh3-009",
+    "business_id": "corner-patty",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I'd like to order for my family: 2 cheeseburgers, a bacon burger, a veggie burger and 2 milkshakes.",
+        "sent_at": "2026-11-20T18:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sure! Which flavors for the milkshakes: vanilla, chocolate or strawberry?",
+        "sent_at": "2026-11-20T18:10:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "One chocolate and one strawberry, plus 2 large fries. Delivered to 1520 Willow Creek Rd, please. I'll pay by card.",
+        "sent_at": "2026-11-20T18:11:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a veggie burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 milkshakes"
+          },
+          {
+            "message_index": 2,
+            "quote": "One chocolate"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "strawberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 milkshakes"
+          },
+          {
+            "message_index": 2,
+            "quote": "one strawberry"
+          }
+        ]
+      },
+      {
+        "line_id": "L6",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "Delivered to 1520 Willow Creek Rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Willow Creek Rd",
+      "number": "1520",
+      "raw_text": "1520 Willow Creek Rd",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "1520 Willow Creek Rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-009"
+}

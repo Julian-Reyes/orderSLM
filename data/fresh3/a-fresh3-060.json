@@ -1,0 +1,122 @@
+{
+  "conversation": {
+    "id": "a-fresh3-060",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh3",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, could I get a medium pepperoni delivered to the Lakeview Inn, 900 Lakeview Blvd, room 12, tonight at 8?",
+        "sent_at": "2026-11-21T16:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Actually, we'll be out tonight. Could you make it tomorrow at 8 instead?",
+        "sent_at": "2026-11-21T16:00:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to the Lakeview Inn"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 8",
+        "normalized_local": "20:00",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "at 8"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tomorrow",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "tomorrow"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Lakeview Blvd",
+      "number": "900",
+      "unit": "room 12",
+      "reference": "the Lakeview Inn",
+      "raw_text": "the Lakeview Inn, 900 Lakeview Blvd, room 12",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "the Lakeview Inn, 900 Lakeview Blvd, room 12"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-12)",
+  "card_id": "a-fresh3-060"
+}
