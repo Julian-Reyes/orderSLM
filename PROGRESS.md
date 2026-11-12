@@ -43,7 +43,12 @@ _Last updated 2026-11-12._
     outputs). v3 fully correct, before → after rule 6 (used for fixes): dev 82.4% → **83.5%**, fresh 84.4% →
     **85.6%**, fresh2 74.4% → **76.7%** (v2: 76.9% / 76.7% / 68.9%). `docs/site/case-study.json` regenerated
     (each student ±1 chat); **the website copy is now stale** (copy it to the site repo with the v4 numbers).
-  - **Left:** add `qwen3.5-0.8b-single-v4` (data v0.4) to `STUDENTS` in
+  - **v4 training pushed 2026-11-12 ~19:00 Brasília: `runs/train/20261112T215707Z`, kernel v15, RUNNING at once**
+    (one T4: train `qwen3.5-0.8b-single-v4` on student-data@0.4, ~9.7 h est., then dev scoring ~1 h; stop at
+    11.5 h). 2B not trained: ~16 h needs two sessions, more than this week's quota. Pull with
+    `make kaggle-pull JOB=m6`, then `make train ARGS="import runs/train/20261112T215707Z"` (PATH needs
+    `~/.local/bin` for the kaggle CLI).
+  - **Left (was):** add `qwen3.5-0.8b-single-v4` (data v0.4) to `STUDENTS` in
     `train/kaggle_train.py`, check the Kaggle GPU quota (~15 h left this week, estimated), export + push (~10 h
     training); then step 3: a new fresh3 batch written after t6, scored for v3 and v4. 95% is not expected from
     one retrain; v3's misses are mostly reading errors of the 0.8B.

@@ -1,0 +1,98 @@
+{
+  "experiment": "train",
+  "session": "20261112T215707Z",
+  "data_version": "student-data@0.4",
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "deadline_hours": 11.5,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single-v4",
+      "model": "0.8b",
+      "data": "single",
+      "data_version": "student-data@0.4",
+      "gpu": 0,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.4-single-train.jsonl",
+      "valid_file": "0.4-single-valid.jsonl",
+      "resume": null
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "dev",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v4/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v4",
+      "requests": "dev-requests.jsonl"
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "0.4-single-train.jsonl": "6502c963092937a0e2d4284326fd4296ca182fb91d0acc170272665cdbac0cdc",
+    "0.4-single-valid.jsonl": "96a4405b8ee759d018e3d2022474bd032be1c99655150b556969a0db766bca8e",
+    "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.4": {
+      "single": "6502c963092937a0e2d4284326fd4296ca182fb91d0acc170272665cdbac0cdc",
+      "mixed": "160be0b86fc9db5ecd382ee7350fb3e16c0b4d36b0160d28bbc9044d231dc3f6"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.4": "e101d197db70622f39220b370fc0906616943dbc-dirty"
+  },
+  "exported_at": "2026-11-12T21:57:07.806135+00:00",
+  "git_commit": "c8fecec85c08a908076e45fbed02b05434b0ebba-dirty",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}

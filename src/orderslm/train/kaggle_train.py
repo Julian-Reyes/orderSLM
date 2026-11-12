@@ -77,6 +77,13 @@ STUDENTS = {
         "lr": 2e-4,
         "data_version": "student-data@0.3",
     },
+    # and on v0.4 (+ t6: orders for another day + v3 misses, by hand; Julian, 2026-11-12), same settings
+    "qwen3.5-0.8b-single-v4": {
+        "model": "0.8b",
+        "data": "single",
+        "lr": 2e-4,
+        "data_version": "student-data@0.4",
+    },
 }
 TRAIN = {
     "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"},
