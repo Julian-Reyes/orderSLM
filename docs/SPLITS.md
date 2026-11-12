@@ -66,7 +66,10 @@ v2 and v3 on chats nobody looked at while fixing. Cards: `cards generate --split
 Written and labeled by claude-opus-5.5 in the session ($0, 2026-11-10); `missing_or_ambiguous` and the question come
 from the rules (the tool's one-click fill), every chat passes `validate()`: 0 blocking findings, 275 customer
 messages, all inside opening hours; no near-duplicates within fresh2, against dev or fresh (token Jaccard ≥ 0.8), or
-against the 3,432 synthetic chats (word 3-gram ≥ 0.8). Julian reviews all of it like dev and fresh.
+against the 3,432 synthetic chats (word 3-gram ≥ 0.8). **Reviewed 2026-11-12 by claude-opus-5.5, not Julian**
+(Julian delegated it): a self-review of its own labels, against the guide and Julian-reviewed dev/fresh precedents,
+without the per-chat student outputs. 90/90 reviewed, 1 changed (071 `refers_to` unclear → none), correction rate
+1.1%. Report fresh2 numbers as "gold self-reviewed by the writer", unlike dev and fresh.
 Evaluation-only: training and generation code never reads it (tests/test_fresh2.py).
 
 **Caveat to report:** the t5 training chats and fresh2 share a writer (Claude in a session), which can flatter
