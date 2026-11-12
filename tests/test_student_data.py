@@ -65,15 +65,19 @@ def test_sets_are_synthetic_labels_minus_exclusions(built):
 def test_valid_split_is_disjoint_and_shared(built):
     out, m = built
     single, mixed = set(m["sets"]["single"]["valid_ids"]), set(m["sets"]["mixed"]["valid_ids"])
-    # groups: p3+b1 (1,963 chats), t3+t4 (698), t5 (300, v0.3)
-    expected = sum(round(n * data.VALID_SHARE) for n in (1963, 698, 300))
-    assert single <= mixed and len(single) == expected
+    # groups: p3+b1 (1,963 chats), t3+t4 (698), t5 (300, v0.3), t6 (240, v0.4); then the chats left out for the
+    # day rule are dropped (after the draw)
+    drop = set(data.VERSIONS[data.DATA_VERSION]["exclude"])
+    expected = sum(round(n * data.VALID_SHARE) for n in (1963, 698, 300, 240))
+    assert single <= mixed and len(single) == expected - len(drop & single)
     for earlier in (
         "student-data@0.1",
         "student-data@0.2",
-    ):  # each version keeps every earlier validation chat
+        "student-data@0.3",
+    ):  # each version keeps every earlier validation chat (but the ones left out for the day rule)
         prev = json.loads((data.OUT / earlier / "manifest.json").read_text())
-        assert set(prev["sets"]["mixed"]["valid_ids"]) <= mixed
+        assert set(prev["sets"]["mixed"]["valid_ids"]) - drop <= mixed
+    assert not drop & {r["id"] for r in _rows(out / "mixed" / "rows.jsonl")}
     train_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "train.jsonl")}
     valid_users = {r["messages"][1]["content"] for r in _rows(out / "mixed" / "valid.jsonl")}
     assert not train_users & valid_users

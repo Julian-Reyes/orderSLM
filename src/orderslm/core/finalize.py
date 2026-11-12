@@ -16,6 +16,10 @@ The model extracts the facts; the rules are applied in code, the same way every 
    evidence quote as `unmatched_text`, so the bot asks); an unknown size becomes `unmatched_variant_text` (asked), or is dropped on an item with no sizes;
    a combo pick with an unknown slot, choice or size is dropped (the choice is asked); an add-on id not in the
    catalog or not allowed on the item loses its id and becomes an unverified request (asked, softly).
+6. A choice from an exclusive group (milk, crust) read the wrong way round is turned around (finalize@0.3, the
+   guide's rule; the most common v3 slip on dev, fresh and fresh2): "oat milk instead of whole" on a drink with no
+   whole milk (drip coffee, americano) is an add of oat milk; "w oat milk" as an add on a drink that includes whole
+   milk (latte, cappuccino, hot chocolate) is a substitute of whole milk with oat milk. Gold never needs either.
 
 The model's own missing list and question are ignored, so a mistake there can't make the output invalid.
 """
@@ -28,6 +32,7 @@ from pydantic import ValidationError
 from orderslm.core.missing import required_missing
 from orderslm.core.replies import template_question
 from orderslm.schema.extraction import (
+    Amount,
     CustomerDecision,
     DecisionState,
     ExtractionOutput,
@@ -36,11 +41,12 @@ from orderslm.schema.extraction import (
     MissingInfo,
     MissingReason,
     Modification,
+    ModificationKind,
 )
 from orderslm.schema.label import ModelOrder
 from orderslm.schema.menu import MenuCatalog, MenuItem
 
-FINALIZE_VERSION = "finalize@0.2"
+FINALIZE_VERSION = "finalize@0.3"
 _JUDGMENT = {
     (FieldRef.item_menu_match, MissingReason.off_menu): MissingReason.ambiguous,
     (FieldRef.item_variant, MissingReason.missing): MissingReason.ambiguous,
@@ -52,6 +58,59 @@ def _known_mod(menu: MenuCatalog, item: MenuItem, mod: Modification) -> Modifica
     if all(menu.modifier(i) is not None and i in item.allowed_modifier_ids for i in ids):
         return mod
     return mod.model_copy(update={"modifier_id": None, "replacement_modifier_id": None})
+
+
+def _exclusive_choice(menu: MenuCatalog, item: MenuItem, mod: Modification) -> Modification:
+    """Rule 6: a choice from an exclusive group the right way round for this item (add vs substitute)."""
+    groups = set(menu.exclusive_groups)
+
+    def group(mid: str | None) -> str | None:
+        m = menu.modifier(mid) if mid else None
+        return m.group if m is not None and m.group in groups else None
+
+    if (
+        mod.kind is ModificationKind.substitute
+        and mod.modifier_id not in item.ingredient_ids
+        and mod.replacement_modifier_id in item.addon_ids
+        and group(mod.replacement_modifier_id) is not None
+    ):
+        return mod.model_copy(
+            update={
+                "kind": ModificationKind.add,
+                "modifier_id": mod.replacement_modifier_id,
+                "replacement_modifier_id": None,
+            }
+        )
+    g = group(mod.modifier_id)
+    if (
+        mod.kind is ModificationKind.add
+        and mod.amount is Amount.normal
+        and g
+        and mod.modifier_id in item.addon_ids
+    ):
+        included = [i for i in item.ingredient_ids if group(i) == g]
+        if len(included) == 1:
+            return mod.model_copy(
+                update={
+                    "kind": ModificationKind.substitute,
+                    "modifier_id": included[0],
+                    "replacement_modifier_id": mod.modifier_id,
+                }
+            )
+    return mod
+
+
+def exclusive_choices(items: list[ItemProposal], menu: MenuCatalog) -> list[ItemProposal]:
+    """Rule 6 alone, on lines whose items are on the menu (also used to fix training targets, train/data.py)."""
+    out = []
+    for line in items:
+        item = menu.item(line.menu_item_id or "")
+        if item is not None:
+            line = line.model_copy(
+                update={"modifications": [_exclusive_choice(menu, item, m) for m in line.modifications]}
+            )
+        out.append(line)
+    return out
 
 
 def _off_menu(line: ItemProposal) -> ItemProposal:
@@ -73,7 +132,13 @@ def _known_line(menu: MenuCatalog, line: ItemProposal) -> ItemProposal:
         if any(i is None or not i.splittable for i in items):
             return _off_menu(line)
         halves = [
-            h.model_copy(update={"modifications": [_known_mod(menu, i, m) for m in h.modifications]})
+            h.model_copy(
+                update={
+                    "modifications": [
+                        _exclusive_choice(menu, i, _known_mod(menu, i, m)) for m in h.modifications
+                    ]
+                }
+            )
             for h, i in zip(line.halves, items, strict=True)
         ]
         line = line.model_copy(update={"halves": halves})
@@ -93,7 +158,9 @@ def _known_line(menu: MenuCatalog, line: ItemProposal) -> ItemProposal:
             picks.append(sel)
         line = line.model_copy(
             update={
-                "modifications": [_known_mod(menu, base, m) for m in line.modifications],
+                "modifications": [
+                    _exclusive_choice(menu, base, _known_mod(menu, base, m)) for m in line.modifications
+                ],
                 "combo_selections": picks,
             }
         )

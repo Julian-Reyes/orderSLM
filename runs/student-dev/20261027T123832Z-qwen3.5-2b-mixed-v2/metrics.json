@@ -3,9 +3,11 @@
   "split": "dev",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.2",
-  "scorer_version": "scorer@0.4",
-  "finalize_version": "finalize@0.2",
+  "scorer_version": "scorer@0.5",
+  "finalize_version": "finalize@0.3",
   "requests": 268,
+  "unanswered": 0,
+  "complete": true,
   "contract_valid": {
     "last": {
       "valid": 89,
@@ -32,24 +34,24 @@
     "json_validity_rate": 0.978021978021978,
     "item": {
       "gold_items": 146,
-      "tp": 126,
-      "fp": 11,
-      "fn": 20,
-      "precision": 0.9197080291970803,
-      "recall": 0.863013698630137,
-      "f1": 0.8904593639575972
+      "tp": 127,
+      "fp": 10,
+      "fn": 19,
+      "precision": 0.927007299270073,
+      "recall": 0.8698630136986302,
+      "f1": 0.8975265017667845
     },
-    "exact_match": 73,
-    "exact_match_rate": 0.8021978021978022,
+    "exact_match": 74,
+    "exact_match_rate": 0.8131868131868132,
     "exact_match_ci95": [
-      0.7088578689746323,
-      0.8710564302358408
-    ],
-    "action_match": 74,
-    "action_match_rate": 0.8131868131868132,
-    "action_match_ci95": [
       0.7210386540209152,
       0.8799634378881206
+    ],
+    "action_match": 75,
+    "action_match_rate": 0.8241758241758241,
+    "action_match_ci95": [
+      0.7333142298436154,
+      0.888775654763983
     ],
     "field_accuracy": {
       "method": 0.9838709677419355,
@@ -246,7 +248,7 @@
     "teacher": "openai/gpt-6-luna@low",
     "label_prompt_version": "teacher-label@0.7",
     "scorer_version": "scorer@0.4",
-    "finalize_version": "finalize@0.1",
+    "finalize_version": "finalize@0.2",
     "order": {
       "conversations": 91,
       "conversations_with_order": 64,

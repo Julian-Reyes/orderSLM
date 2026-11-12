@@ -200,6 +200,45 @@ V3_WEIGHTS = {
     "opener_only": 30,  # "hey, ordering for the crew" alone is PLACE_ORDER (5 fresh, 4 dev intent misses)
 }
 V3_MODIFY_KIND_WEIGHTS = {"remove_item": 30, "quantity": 12, "option_swap": 10, "size": 8}
+# Training data v4 (Julian, 2026-11-12: "do the recommended fix, then the training batch and v4 retrain"): orders
+# for another day (extraction@0.5, new: no earlier chat has a day label) + the v3 misses that remain on dev, fresh and
+# fresh2 (runs/student-errors/20261112T203229Z, …T203235Z, …T203230Z). By hand, $0.
+V4_WEIGHTS = {
+    "future_day": 120,
+    "modify_last": 25,  # late swaps and removals still missed (fresh2 024, 063, 067, 069)
+    "vague_ref": 15,  # "the big burgers", "one of them" mapped to a real item (fresh2 049, fresh 057)
+    "split_lines": 15,  # "2 lg hawaiian, one w extra pineapple" (fresh2 079)
+    "big_order": 15,  # items dropped from long orders (dev 063, 074; fresh2 005, 086)
+    "qty_unstated": 10,  # "some knots" read as 1 (dev 045, fresh 056, 059)
+    "size_unstated": 10,  # "one of the bigger sizes" read as large (fresh2 033, fresh 009, 063)
+    "offmenu_addon": 10,  # off-menu add-ons flagged as unverified or mapped to a real id (fresh 074, fresh2 042)
+    "combo_extra": 10,  # an extra drink read as a third combo pick (fresh2 023); combo picks with invented fields
+    "implicit": 10,  # "a strawberry", "smth to snack on" settled by the menu or the business (fresh2 004, 068)
+}
+V4_MODIFY_KIND_WEIGHTS = {"remove_item": 10, "swap_item": 10, "quantity": 5}
+FUTURE_DAY_KIND_WEIGHTS = {
+    "tomorrow_time": 30,
+    "weekday_time": 25,
+    "date_time": 10,
+    "day_no_time": 25,
+    "day_change": 15,
+    "ask_ahead": 7,
+    "context_day": 8,
+}
+FUTURE_DAY_SENTENCES = {
+    "tomorrow_time": "The order is for tomorrow, not today, at a clock time (like 'tmrw at 6', 'for tomorrow 12:30').",
+    "weekday_time": "The order is for a later day named by its weekday (like 'saturday at 7', 'for fri 11:30'), "
+    "not today.",
+    "date_time": "The order is for a later date said as a date (like 'nov 20 at noon', 'the 18th at 6').",
+    "day_no_time": "The order is for a later day (tomorrow or a weekday) but the customer never says a time; the chat "
+    "ends before the business asks.",
+    "day_change": "First the order is for today; in a later message the customer moves it to tomorrow or another day "
+    "at a time (or the other way round).",
+    "ask_ahead": "First asks whether they can order ahead for a later day; after the business says yes, orders for "
+    "that day at a time.",
+    "context_day": "Mentions a day of the week only as small talk ('rough monday lol', 'happy friday'); the order "
+    "is for now.",
+}
 # Kinds of change in the 160 modify_last chats, weighted toward what all three students got wrong on dev (Julian,
 # 2026-10-25: "the whole point is to help the students on what they got wrong"): size changes ("make the fries
 # large"), option swaps ("make the latte oat milk"), time/payment changes, removals, additions after confirming.
@@ -707,6 +746,8 @@ def _card(
         if target == "bare_time":
             start_at, time_sentence = _bare_time(menu, rng)
             brief.append(time_sentence)
+        elif target == "future_day":
+            pass  # the day sentence says when (plan_targeted_cards)
         elif modify_kind not in ("time", "payment") and rng.random() < 0.3:
             brief.append(f"Says when they want it: {rng.choice(TIMES)}.")
         if target in ("offmenu_addon", "offmenu_open"):
@@ -838,6 +879,9 @@ TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
     "milk_choice": (S.simple_order, S.multi_message_order),
     "unit_size": (S.simple_order,),
     "opener_only": (S.simple_order,),
+    "future_day": (S.simple_order, S.multi_message_order, S.missing_info),
+    "combo_extra": (S.combo,),
+    "implicit": (S.implicit_category,),
 }
 V3_SENTENCES = {
     "qty_unstated": "Never says how many of the first item: asks for it vaguely ('some', 'a few', 'muffins for the "
@@ -848,6 +892,9 @@ V3_SENTENCES = {
     "unit_size": "Says a size as a number with a unit (like '2 liter', '12 inch' or '16 oz'), ordering just one.",
     "opener_only": "Only one or two short customer messages: a greeting that says they want to order (for the "
     "office, the family, the crew…) without naming any item yet. The chat ends there, before the business replies.",
+    "combo_extra": "Besides the combo's own picks, also orders one more drink or side as a separate item.",
+    "implicit": "Names items without category words or only vaguely ('a veggie', 'a strawberry', 'something to "
+    "snack on'); the menu or the business's reply settles each one.",
 }
 
 
@@ -859,6 +906,7 @@ def plan_targeted_cards(
     generators: tuple[tuple[str, int], ...] = GENERATORS,
     weights: dict[str, int] = TARGET_WEIGHTS,
     modify_weights: dict[str, int] = MODIFY_KIND_WEIGHTS,
+    future_day_weights: dict[str, int] = FUTURE_DAY_KIND_WEIGHTS,
 ) -> list[SynthCard]:
     """n cards for the targeted batch (`weights` over the three training menus, TARGET_WEIGHTS or TOPUP_WEIGHTS),
     generators assigned in target order as in plan_cards."""
@@ -867,6 +915,9 @@ def plan_targeted_cards(
     targets = _exact(weights, n, rng)
     styles = _exact(STYLE_WEIGHTS, n, rng)
     kinds = iter(_exact(modify_weights, targets.count("modify_last"), rng))
+    days = iter(
+        _exact(future_day_weights, targets.count("future_day"), rng) if "future_day" in weights else []
+    )
     cards = []
     for i, (target, style) in enumerate(zip(targets, styles, strict=True), start=1):
         kind = next(kinds) if target == "modify_last" else None
@@ -880,6 +931,14 @@ def plan_targeted_cards(
             allowed = [b for b in allowed if "milk" in menus[b].exclusive_groups]
         menu = menus[rng.choice(allowed)]
         card = _card(i, scenario, style, menu, rng, batch, target=target, modify_kind=kind)
+        if target == "future_day":
+            day_kind = next(days)
+            card = card.model_copy(
+                update={
+                    "brief": f"{card.brief} {FUTURE_DAY_SENTENCES[day_kind]}",
+                    "extras": [*card.extras[:-1], f"day:{day_kind}", card.extras[-1]],
+                }
+            )
         if target in V3_SENTENCES:
             sentence = V3_SENTENCES[target].format(vague=rng.choice(VAGUE))
             if target == "opener_only":

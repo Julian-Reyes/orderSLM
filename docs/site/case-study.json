@@ -63,9 +63,9 @@
         "cost_per_1000_usd": 1.53,
         "valid_json": 31,
         "item_f1_before": 0.909,
-        "item_f1_after": 0.966,
+        "item_f1_after": 0.983,
         "exact_before": 22,
-        "exact_after": 27
+        "exact_after": 28
       },
       {
         "setting": "anthropic/claude-haiku-5-5@off-low",
@@ -120,7 +120,7 @@
     },
     "views": {
       "before": "raw model JSON, scorer@0.1 (unstated default variant counts as different)",
-      "after": "model JSON through finalize@0.2, scorer@0.5 (blank = default variant)"
+      "after": "model JSON through finalize@0.3, scorer@0.5 (blank = default variant)"
     }
   },
   "student_bakeoff": {
@@ -237,30 +237,30 @@
           0.7777332734104956
         ],
         "same_action": 64,
-        "item_f1": 0.819,
+        "item_f1": 0.826,
         "messages": 268,
         "intents_right": 244,
         "invalid_answers": 2,
         "latency_ms_p50": 13141,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-fresh",
         "chats": 90,
-        "exact": 54,
+        "exact": 55,
         "exact_ci95": [
-          0.4967011780834921,
-          0.6951114082321718
+          0.5078226845453937,
+          0.7053024113608994
         ],
-        "same_action": 58,
-        "item_f1": 0.777,
+        "same_action": 59,
+        "item_f1": 0.797,
         "messages": 278,
         "intents_right": 248,
         "invalid_answers": 9,
         "latency_ms_p50": 13518,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     },
     {
@@ -269,19 +269,19 @@
       "dev": {
         "run": "runs/student-dev/20261023T115559Z-qwen3.5-2b-single",
         "chats": 91,
-        "exact": 59,
+        "exact": 61,
         "exact_ci95": [
-          0.5460564927584927,
-          0.7386287086721032
+          0.5685683540449548,
+          0.7582924327827664
         ],
-        "same_action": 60,
-        "item_f1": 0.763,
+        "same_action": 62,
+        "item_f1": 0.778,
         "messages": 268,
         "intents_right": 236,
         "invalid_answers": 13,
         "latency_ms_p50": 15164,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-single-fresh",
@@ -292,13 +292,13 @@
           0.664235947367349
         ],
         "same_action": 56,
-        "item_f1": 0.752,
+        "item_f1": 0.759,
         "messages": 278,
         "intents_right": 248,
         "invalid_answers": 10,
         "latency_ms_p50": 14919,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     },
     {
@@ -307,19 +307,19 @@
       "dev": {
         "run": "runs/student-dev/20261023T140955Z-qwen3.5-2b-mixed",
         "chats": 91,
-        "exact": 65,
+        "exact": 66,
         "exact_ci95": [
-          0.6142727836093079,
-          0.796939174012664
+          0.6258502470283998,
+          0.8064495032921346
         ],
-        "same_action": 66,
-        "item_f1": 0.819,
+        "same_action": 67,
+        "item_f1": 0.826,
         "messages": 268,
         "intents_right": 241,
         "invalid_answers": 9,
         "latency_ms_p50": 14304,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-mixed-fresh",
@@ -330,13 +330,13 @@
           0.6745775869075303
         ],
         "same_action": 56,
-        "item_f1": 0.764,
+        "item_f1": 0.771,
         "messages": 278,
         "intents_right": 252,
         "invalid_answers": 5,
         "latency_ms_p50": 15018,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     },
     {
@@ -345,19 +345,19 @@
       "dev": {
         "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2",
         "chats": 91,
-        "exact": 69,
+        "exact": 70,
         "exact_ci95": [
-          0.6609799811910234,
-          0.8345831472251989
+          0.672831372058367,
+          0.8438195490564182
         ],
-        "same_action": 71,
-        "item_f1": 0.872,
+        "same_action": 72,
+        "item_f1": 0.879,
         "messages": 268,
         "intents_right": 249,
         "invalid_answers": 3,
         "latency_ms_p50": 13542,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
@@ -368,13 +368,13 @@
           0.8420192160606255
         ],
         "same_action": 69,
-        "item_f1": 0.861,
+        "item_f1": 0.874,
         "messages": 278,
         "intents_right": 256,
         "invalid_answers": 7,
         "latency_ms_p50": 13849,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     },
     {
@@ -383,19 +383,19 @@
       "dev": {
         "run": "runs/student-dev/20261103T115227Z-qwen3.5-2b-single-v2",
         "chats": 91,
-        "exact": 69,
+        "exact": 70,
         "exact_ci95": [
-          0.6609799811910234,
-          0.8345831472251989
+          0.672831372058367,
+          0.8438195490564182
         ],
-        "same_action": 69,
-        "item_f1": 0.861,
+        "same_action": 70,
+        "item_f1": 0.868,
         "messages": 268,
         "intents_right": 245,
         "invalid_answers": 9,
         "latency_ms_p50": 13977,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261103T115227Z-qwen3.5-2b-single-v2-fresh",
@@ -406,13 +406,13 @@
           0.8420192160606255
         ],
         "same_action": 71,
-        "item_f1": 0.856,
+        "item_f1": 0.863,
         "messages": 278,
         "intents_right": 263,
         "invalid_answers": 3,
         "latency_ms_p50": 14142,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     },
     {
@@ -421,19 +421,19 @@
       "dev": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-mixed-v2",
         "chats": 91,
-        "exact": 73,
+        "exact": 74,
         "exact_ci95": [
-          0.7088578689746323,
-          0.8710564302358408
+          0.7210386540209152,
+          0.8799634378881206
         ],
-        "same_action": 74,
-        "item_f1": 0.89,
+        "same_action": 75,
+        "item_f1": 0.898,
         "messages": 268,
         "intents_right": 251,
         "invalid_answers": 5,
         "latency_ms_p50": 14729,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-mixed-v2-fresh",
@@ -444,13 +444,13 @@
           0.8512877671833321
         ],
         "same_action": 72,
-        "item_f1": 0.883,
+        "item_f1": 0.896,
         "messages": 278,
         "intents_right": 257,
         "invalid_answers": 8,
         "latency_ms_p50": 14860,
-        "scorer": "scorer@0.4",
-        "finalize": "finalize@0.2"
+        "scorer": "scorer@0.5",
+        "finalize": "finalize@0.3"
       }
     }
   ],
@@ -464,19 +464,19 @@
         "dev": {
           "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2",
           "chats": 91,
-          "exact": 69,
+          "exact": 70,
           "exact_ci95": [
-            0.6609799811910234,
-            0.8345831472251989
+            0.672831372058367,
+            0.8438195490564182
           ],
-          "same_action": 71,
-          "item_f1": 0.872,
+          "same_action": 72,
+          "item_f1": 0.879,
           "messages": 268,
           "intents_right": 249,
           "invalid_answers": 3,
           "latency_ms_p50": 13542,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "fresh": {
           "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
@@ -487,13 +487,13 @@
             0.8420192160606255
           ],
           "same_action": 69,
-          "item_f1": 0.861,
+          "item_f1": 0.874,
           "messages": 278,
           "intents_right": 256,
           "invalid_answers": 7,
           "latency_ms_p50": 13849,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "t4_latency_s_p50": 13.5
       },
@@ -503,19 +503,19 @@
         "dev": {
           "run": "runs/student-dev/20261104T115735Z-qwen3.5-0.8b-single-v2-f16",
           "chats": 91,
-          "exact": 69,
+          "exact": 70,
           "exact_ci95": [
-            0.6609799811910234,
-            0.8345831472251989
+            0.672831372058367,
+            0.8438195490564182
           ],
-          "same_action": 71,
-          "item_f1": 0.872,
+          "same_action": 72,
+          "item_f1": 0.879,
           "messages": 268,
           "intents_right": 249,
           "invalid_answers": 3,
           "latency_ms_p50": 90866,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-f16-fresh",
@@ -526,13 +526,13 @@
             0.8420192160606255
           ],
           "same_action": 69,
-          "item_f1": 0.861,
+          "item_f1": 0.874,
           "messages": 278,
           "intents_right": 256,
           "invalid_answers": 7,
           "latency_ms_p50": 4267,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "t4_latency_s_p50": 3.9,
         "t4_latency_s_p95": 5.5,
@@ -546,19 +546,19 @@
         "dev": {
           "run": "runs/student-dev/20261104T115735Z-qwen3.5-0.8b-single-v2-q8_0",
           "chats": 91,
-          "exact": 69,
+          "exact": 70,
           "exact_ci95": [
-            0.6609799811910234,
-            0.8345831472251989
+            0.672831372058367,
+            0.8438195490564182
           ],
-          "same_action": 71,
-          "item_f1": 0.871,
+          "same_action": 72,
+          "item_f1": 0.878,
           "messages": 268,
           "intents_right": 248,
           "invalid_answers": 4,
           "latency_ms_p50": 112088,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-q8_0-fresh",
@@ -569,13 +569,13 @@
             0.8420192160606255
           ],
           "same_action": 69,
-          "item_f1": 0.867,
+          "item_f1": 0.874,
           "messages": 278,
           "intents_right": 256,
           "invalid_answers": 7,
           "latency_ms_p50": 2770,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "t4_latency_s_p50": 2.6,
         "t4_latency_s_p95": 3.7,
@@ -589,19 +589,19 @@
         "dev": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-q4_k_m",
           "chats": 91,
-          "exact": 66,
+          "exact": 67,
           "exact_ci95": [
-            0.6258502470283998,
-            0.8064495032921346
+            0.6374922768443272,
+            0.81589526617477
           ],
-          "same_action": 67,
-          "item_f1": 0.847,
+          "same_action": 68,
+          "item_f1": 0.854,
           "messages": 268,
           "intents_right": 244,
           "invalid_answers": 6,
           "latency_ms_p50": 2378,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-q4_k_m-fresh",
@@ -612,13 +612,13 @@
             0.8137630795703863
           ],
           "same_action": 67,
-          "item_f1": 0.855,
+          "item_f1": 0.862,
           "messages": 278,
           "intents_right": 252,
           "invalid_answers": 10,
           "latency_ms_p50": 2422,
-          "scorer": "scorer@0.4",
-          "finalize": "finalize@0.2"
+          "scorer": "scorer@0.5",
+          "finalize": "finalize@0.3"
         },
         "t4_latency_s_p50": 2.3,
         "t4_latency_s_p95": 3.3,

@@ -1,0 +1,149 @@
+{
+ "card_id": "syn-t6-0144",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "MODIFY_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 5,
+       "quote": "a bacon burger"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "onion_rings",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "an order of onion rings"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "lemonade",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 4,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "4 lemonades"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 4,
+      "quote": "Delivery to 847 Mission Way"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Mission Way",
+    "number": "847",
+    "unit": null,
+    "reference": null,
+    "raw_text": "847 Mission Way",
+    "evidence": [
+     {
+      "message_index": 4,
+      "quote": "847 Mission Way"
+     }
+    ]
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 4,
+      "quote": "paying cash"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

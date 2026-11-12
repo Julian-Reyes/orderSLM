@@ -1,0 +1,116 @@
+{
+ "card_id": "syn-t6-0204",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "large",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "large fries"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 3,
+      "quote": "delivered"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 1",
+     "normalized_local": "13:00",
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "at 1"
+      }
+     ],
+     "day": {
+      "kind": "date",
+      "weekday": null,
+      "month": 10,
+      "day_of_month": 17,
+      "raw_text": "oct 17",
+      "evidence": [
+       {
+        "message_index": 4,
+        "quote": "oct 17"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

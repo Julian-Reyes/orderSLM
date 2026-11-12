@@ -2,12 +2,19 @@
 
 import json
 
-from orderslm.core.finalize import fill_default_variants, finalize, parse_and_finalize
+from orderslm.core.finalize import exclusive_choices, fill_default_variants, finalize, parse_and_finalize
 from orderslm.eval.dataset import load_eval_split
 from orderslm.eval.metrics import score_conversation
 from orderslm.menus import load_menu
 from orderslm.schema.conversation import Split
-from orderslm.schema.extraction import DecisionState, ExtractionOutput, FieldRef, MissingReason, PaymentMethod
+from orderslm.schema.extraction import (
+    DecisionState,
+    ExtractionOutput,
+    FieldRef,
+    ItemProposal,
+    MissingReason,
+    PaymentMethod,
+)
 
 DEV = [ac for ac in load_eval_split(Split.dev) if ac.gold_extraction is not None]
 
@@ -233,3 +240,58 @@ def test_unknown_size_on_an_item_without_sizes_is_dropped():
     assert line.variant_id is None and line.unmatched_variant_text is None
     assert ("item_variant", "missing") not in _missing_for(out, "L1")
     assert not check_catalog(out, menu)
+
+
+def test_exclusive_choice_read_the_wrong_way_round_is_turned_around():
+    """Rule 6 (finalize@0.3): milk on a drink without milk is an add; on a drink with whole milk, a substitute."""
+    menu = load_menu("morning-crumb")
+    ev = [{"message_index": 0, "quote": "x"}]
+
+    def line(item, kind, mid, repl=None):
+        return ItemProposal.model_validate(
+            {
+                "line_id": "L1",
+                "menu_item_id": item,
+                "quantity": 1,
+                "variant_id": "medium",
+                "modifications": [
+                    {
+                        "kind": kind,
+                        "modifier_id": mid,
+                        "replacement_modifier_id": repl,
+                        "raw_text": "w oat milk",
+                    }
+                ],
+                "evidence": ev,
+            }
+        )
+
+    def mod(ln):
+        m = exclusive_choices([ln], menu)[0].modifications[0]
+        return m.kind.value, m.modifier_id, m.replacement_modifier_id
+
+    assert mod(line("drip_coffee", "substitute", "whole_milk", "oat_milk")) == ("add", "oat_milk", None)
+    assert mod(line("americano", "substitute", "skim_milk", "whole_milk")) == ("add", "whole_milk", None)
+    assert mod(line("latte", "add", "oat_milk")) == ("substitute", "whole_milk", "oat_milk")
+    # already right: unchanged
+    assert mod(line("drip_coffee", "add", "oat_milk")) == ("add", "oat_milk", None)
+    assert mod(line("latte", "substitute", "whole_milk", "oat_milk")) == (
+        "substitute",
+        "whole_milk",
+        "oat_milk",
+    )
+    assert mod(line("latte", "add", "vanilla_syrup")) == (
+        "add",
+        "vanilla_syrup",
+        None,
+    )  # not an exclusive group
+
+
+def test_rule_6_never_changes_gold():
+    for split in (Split.dev, Split.fresh, Split.fresh2):
+        for ac in load_eval_split(split):
+            if ac.gold_extraction is not None:
+                items = ac.gold_extraction.items
+                assert exclusive_choices(items, load_menu(ac.conversation.business_id)) == items, (
+                    ac.conversation.id
+                )

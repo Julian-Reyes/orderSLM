@@ -30,6 +30,23 @@ _Last updated 2026-11-12._
   - Gold: fresh2 089 relabeled under the rule (`data/fresh2/CHANGES.jsonl`); re-scored
     (`runs/student-compare/20261112T203054Z`): both students lose that chat, **v3 75.6% → 74.4%, v2 68.9% →
     67.8%** fully correct on fresh2. This supersedes the fresh2 numbers below.
+- **Step 2, training batch (done, $0; not trained yet):** batch t6, 240 chats + labels by hand (`runs/synth/t6/`,
+  `synth plan --v4`, `cards.V4_WEIGHTS`): 120 future day (tomorrow / weekday / date with a time, a day with no time,
+  change of day both ways, asking ahead, a day as small talk) + 120 on v3's remaining misses (error reviews
+  `runs/student-errors/20261112T203229Z` dev, `…T203235Z` fresh, `…T203230Z` fresh2: **fresh2 is now "used for
+  fixes" too**). 0 drops, 0 near-duplicates vs dev/fresh/fresh2/training. `student-data@0.4`: single 3,037 train /
+  160 valid; 5 older chats ordering for another day under pre-rule labels dropped after the validation draw; targets
+  `student@0.2`. **finalize@0.3 rule 6**: a milk/crust choice read the wrong way round is turned around (swap from
+  an ingredient the drink lacks → add; add into a group the drink already has → swap); changes no gold; fixed 7
+  teacher labels in v0.4 targets (the habit behind v3's milk misses).
+  - **All 23 scored student runs re-scored with finalize@0.3** (the 2 empty 2026-10-22/23 session dirs have no
+    outputs). v3 fully correct, before → after rule 6 (used for fixes): dev 82.4% → **83.5%**, fresh 84.4% →
+    **85.6%**, fresh2 74.4% → **76.7%** (v2: 76.9% / 76.7% / 68.9%). `docs/site/case-study.json` regenerated
+    (each student ±1 chat); **the website copy is now stale** (copy it to the site repo with the v4 numbers).
+  - **Left:** add `qwen3.5-0.8b-single-v4` (data v0.4) to `STUDENTS` in
+    `train/kaggle_train.py`, check the Kaggle GPU quota (~15 h left this week, estimated), export + push (~10 h
+    training); then step 3: a new fresh3 batch written after t6, scored for v3 and v4. 95% is not expected from
+    one retrain; v3's misses are mostly reading errors of the 0.8B.
   - **Known gap for the final eval:** the sealed test split was labeled before this rule; any test chat ordering
     for another day has old-rule gold. Can't be checked without unsealing; fix with logged CHANGES at final eval.
 

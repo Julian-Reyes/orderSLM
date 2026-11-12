@@ -3,9 +3,11 @@
   "split": "fresh",
   "prompt_version": "student-extract@0.1",
   "data_version": "student-data@0.1",
-  "scorer_version": "scorer@0.4",
-  "finalize_version": "finalize@0.2",
+  "scorer_version": "scorer@0.5",
+  "finalize_version": "finalize@0.3",
   "requests": 278,
+  "unanswered": 0,
+  "complete": true,
   "contract_valid": {
     "last": {
       "valid": 88,
@@ -33,24 +35,24 @@
     "json_validity_rate": 0.9777777777777777,
     "item": {
       "gold_items": 156,
-      "tp": 117,
-      "fp": 28,
-      "fn": 39,
-      "precision": 0.8068965517241379,
-      "recall": 0.75,
-      "f1": 0.7774086378737541
+      "tp": 120,
+      "fp": 25,
+      "fn": 36,
+      "precision": 0.8275862068965517,
+      "recall": 0.7692307692307693,
+      "f1": 0.7973421926910299
     },
-    "exact_match": 54,
-    "exact_match_rate": 0.6,
+    "exact_match": 55,
+    "exact_match_rate": 0.6111111111111112,
     "exact_match_ci95": [
-      0.4967011780834921,
-      0.6951114082321718
+      0.5078226845453937,
+      0.7053024113608994
     ],
-    "action_match": 58,
-    "action_match_rate": 0.6444444444444445,
+    "action_match": 59,
+    "action_match_rate": 0.6555555555555556,
     "action_match_ci95": [
-      0.54149980634835,
-      0.7355628183298311
+      0.55283279348344,
+      0.7455423407853703
     ],
     "field_accuracy": {
       "method": 1.0,

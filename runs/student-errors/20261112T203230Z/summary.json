@@ -1,0 +1,82 @@
+{
+  "qwen3.5-0.8b-single-v3": {
+    "chats_wrong": 23,
+    "categories": {
+      "item mistakes": 22,
+      "fields only": 1
+    },
+    "item_kinds": {
+      "missing_item": 12,
+      "extra_item": 9,
+      "wrong_modifications": 7,
+      "wrong_variant": 4,
+      "wrong_combo_picks": 1,
+      "wrong_quantity+modifications": 1
+    },
+    "fields": {
+      "missing": 10,
+      "time": 1
+    },
+    "intents_wrong": 20,
+    "confusions": {
+      "SMALL_TALK → UNKNOWN": 5,
+      "UNKNOWN → SMALL_TALK": 3,
+      "PLACE_ORDER → MODIFY_ORDER": 2,
+      "PAYMENT_CLAIM → PLACE_ORDER": 1,
+      "MODIFY_ORDER → PLACE_ORDER": 1,
+      "SMALL_TALK → OUT_OF_SCOPE": 1,
+      "SMALL_TALK → DELIVERY_QUESTION": 1,
+      "MENU_QUESTION → OUT_OF_SCOPE": 1,
+      "PLACE_ORDER → UNKNOWN": 1,
+      "PLACE_ORDER → MENU_QUESTION": 1,
+      "DELIVERY_QUESTION → PLACE_ORDER": 1,
+      "PAYMENT_QUESTION → PLACE_ORDER": 1,
+      "REFUND_REQUEST → PAYMENT_CLAIM": 1
+    }
+  },
+  "overlap": {
+    "chats_all_students_wrong": 23,
+    "chats_all_students_and_teacher_wrong": 0,
+    "chats_one_student_only": 23,
+    "messages_all_students_wrong": 20,
+    "messages_one_student_only": 20
+  },
+  "chats_wrong_by_scenario": {
+    "ambiguous_reference": {
+      "qwen3.5-0.8b-single-v3": 2
+    },
+    "combo": {
+      "qwen3.5-0.8b-single-v3": 1
+    },
+    "contextual_yes": {
+      "qwen3.5-0.8b-single-v3": 2
+    },
+    "correction": {
+      "qwen3.5-0.8b-single-v3": 4
+    },
+    "correction_after_confirmation": {
+      "qwen3.5-0.8b-single-v3": 1
+    },
+    "human_request": {
+      "qwen3.5-0.8b-single-v3": 1
+    },
+    "implicit_category": {
+      "qwen3.5-0.8b-single-v3": 2
+    },
+    "missing_info": {
+      "qwen3.5-0.8b-single-v3": 2
+    },
+    "multi_message_order": {
+      "qwen3.5-0.8b-single-v3": 4
+    },
+    "off_menu": {
+      "qwen3.5-0.8b-single-v3": 3
+    },
+    "simple_order": {
+      "qwen3.5-0.8b-single-v3": 2
+    },
+    "small_talk": {
+      "qwen3.5-0.8b-single-v3": 2
+    }
+  }
+}

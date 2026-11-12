@@ -1,6 +1,6 @@
 # `qwen3.5-2b-single` on fresh at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, finalize `finalize@0.2`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.5`, finalize `finalize@0.3`. Fresh split: written after the dev-based fixes, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -9,7 +9,7 @@ Prompt `student-extract@0.1`, data `student-data@0.1`, scorer `scorer@0.4`, fina
 | Intent, all customer messages | 248/278 (89.2%, 95% CI 0.850–0.923) | ? |
 | Intent, last message | 69/90 (76.7%, 95% CI 0.669–0.842) | |
 | Intent, earlier messages (mid-chat) | 179/188 (95.2%, 95% CI 0.912–0.975) | |
-| Items (F1) | 109 found / 25 extra / 47 missed (F1 0.7517241379310344) | ? |
+| Items (F1) | 110 found / 24 extra / 46 missed (F1 0.7586206896551724) | ? |
 | Fully correct orders | 51/90 (95% CI (0.4636391101764269, 0.664235947367349)) | ? |
 | Same action (bot sends/asks the same; wording aside) | 56/90 (95% CI (0.5189957287533067, 0.7154418767436157)) | |
 

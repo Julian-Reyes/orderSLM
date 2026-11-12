@@ -1,0 +1,172 @@
+{
+ "card_id": "syn-t6-0048",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bbq_chicken_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "extra_large",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "anchovies",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "WITH ANCHOVIES",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "3 XL BBQ CHICKEN WITH ANCHOVIES"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "dr_pepper",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "2 DR PEPPERS"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "margherita_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "crust_gluten_free",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "ON GLUTEN FREE CRUST",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "2 PERSONAL MARGHERITAS ON GLUTEN FREE CRUST"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": null,
+     "unmatched_text": "THE ONE I ALWAYS GET",
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "THE ONE I ALWAYS GET"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 1,
+      "quote": "DELIVER TO 968 MISSION CT #13A"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "MISSION CT",
+    "number": "968",
+    "unit": "#13A",
+    "reference": null,
+    "raw_text": "968 MISSION CT #13A",
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "968 MISSION CT #13A"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": [
+    {
+     "field": "item_menu_match",
+     "line_id": "L4"
+    }
+   ]
+  }
+ }
+}

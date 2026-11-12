@@ -1,0 +1,121 @@
+{
+ "card_id": "syn-t6-0106",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "veggie_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "olive_oil",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "with olive oil",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "two medium veggie pizzas with olive oil"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 1,
+      "quote": "delivered to 54 Cedar Hill Dr"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 7:30",
+     "normalized_local": "19:30",
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "at 7:30"
+      }
+     ],
+     "day": {
+      "kind": "weekday",
+      "weekday": "mon",
+      "month": null,
+      "day_of_month": null,
+      "raw_text": "Monday",
+      "evidence": [
+       {
+        "message_index": 1,
+        "quote": "Monday"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "Cedar Hill Dr",
+    "number": "54",
+    "unit": null,
+    "reference": null,
+    "raw_text": "54 Cedar Hill Dr",
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "54 Cedar Hill Dr"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

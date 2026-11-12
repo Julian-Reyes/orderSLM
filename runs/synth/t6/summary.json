@@ -1,0 +1,216 @@
+{
+  "batch": "t6",
+  "built_at": "2026-11-12T20:53:10.275769+00:00",
+  "dedup_threshold": 0.8,
+  "by_generator": {
+    "claude-session/claude-opus-5-5": {
+      "cards": 240,
+      "generated": 240,
+      "kept": 240,
+      "repairs": {},
+      "gen_drops": {},
+      "label_attempted": 0,
+      "labeled": 240,
+      "label_drops": {},
+      "card_agreement": {
+        "labeled": 240,
+        "all_agree": 204,
+        "flags": {
+          "items": 29,
+          "labels": 7
+        }
+      },
+      "customer_messages_mean": 3.33,
+      "generation_usage": {
+        "calls": 240,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "cost_micros": 0,
+        "cost_per_1k_usd": 0.0,
+        "latency_p50_ms": 0
+      },
+      "label_usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "cost_micros": 0,
+        "cost_per_1k_usd": null,
+        "latency_p50_ms": null
+      },
+      "style": {
+        "chats": 240,
+        "customer_messages_per_chat": 3.33,
+        "business_messages_per_chat": 0.27,
+        "words_per_customer_message": 6.4,
+        "share_lowercase_messages": 0.745,
+        "share_all_caps_messages": 0.091,
+        "share_messages_with_emoji": 0.143,
+        "share_uppercase_letters": 0.131,
+        "distinct_openers": 0.429,
+        "top_openers": {
+          "hey": 25,
+          "hey can": 18,
+          "hi": 16,
+          "can i": 13,
+          "hi can": 12
+        }
+      },
+      "diversity": {
+        "mean_nearest_similarity": 0.079,
+        "max_nearest_similarity": 0.208,
+        "distinct_3gram_share": 0.763
+      },
+      "addresses": {
+        "cards_with_address": 53,
+        "card_address_used": 53
+      }
+    }
+  },
+  "labeled_intents": {
+    "PLACE_ORDER": 615,
+    "SMALL_TALK": 95,
+    "MODIFY_ORDER": 40,
+    "MENU_QUESTION": 36,
+    "DELIVERY_QUESTION": 9,
+    "CONFIRM_ORDER": 4
+  },
+  "planned": {
+    "generator": {
+      "claude-session/claude-opus-5-5": 240
+    },
+    "scenario": {
+      "missing_info": 71,
+      "simple_order": 59,
+      "multi_message_order": 57,
+      "correction": 16,
+      "implicit_category": 10,
+      "combo": 10,
+      "correction_after_confirmation": 9,
+      "ambiguous_reference": 8
+    },
+    "business": {
+      "morning-crumb": 100,
+      "halfmoon-pizza": 75,
+      "corner-patty": 65
+    },
+    "style": {
+      "texting": 72,
+      "rapid_fire": 48,
+      "clean": 48,
+      "emoji": 48,
+      "shouty": 24
+    },
+    "fulfillment": {
+      "pickup": 122,
+      "delivery": 60,
+      "unstated": 58
+    },
+    "payment": {
+      "card": 116,
+      "unstated": 69,
+      "cash": 55
+    },
+    "items": {
+      "1": 110,
+      "2": 65,
+      "3": 44,
+      "4": 13,
+      "5": 7,
+      "6": 1
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 240,
+      "MENU_QUESTION": 37,
+      "MODIFY_ORDER": 25,
+      "CONFIRM_ORDER": 9
+    },
+    "target": {
+      "future_day": 120,
+      "modify_last": 25,
+      "vague_ref": 15,
+      "split_lines": 15,
+      "big_order": 15,
+      "qty_unstated": 10,
+      "implicit": 10,
+      "combo_extra": 10,
+      "size_unstated": 10,
+      "offmenu_addon": 10
+    }
+  },
+  "agreement_by_scenario": {
+    "simple_order": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 59,
+        "agree": 59
+      }
+    },
+    "multi_message_order": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 57,
+        "agree": 57
+      }
+    },
+    "missing_info": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 71,
+        "agree": 45
+      }
+    },
+    "implicit_category": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 10,
+        "agree": 10
+      }
+    },
+    "correction_after_confirmation": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 9,
+        "agree": 4
+      }
+    },
+    "combo": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 10,
+        "agree": 6
+      }
+    },
+    "correction": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 16,
+        "agree": 15
+      }
+    },
+    "ambiguous_reference": {
+      "claude-session/claude-opus-5-5": {
+        "labeled": 8,
+        "agree": 8
+      }
+    }
+  },
+  "intents_by_generator": {
+    "claude-session/claude-opus-5-5": {
+      "PLACE_ORDER": 615,
+      "SMALL_TALK": 95,
+      "MODIFY_ORDER": 40,
+      "MENU_QUESTION": 36,
+      "DELIVERY_QUESTION": 9,
+      "CONFIRM_ORDER": 4
+    }
+  },
+  "audit_sample": [
+    "syn-t6-0031",
+    "syn-t6-0048",
+    "syn-t6-0054",
+    "syn-t6-0097",
+    "syn-t6-0136",
+    "syn-t6-0173",
+    "syn-t6-0181",
+    "syn-t6-0187",
+    "syn-t6-0216",
+    "syn-t6-0232"
+  ]
+}

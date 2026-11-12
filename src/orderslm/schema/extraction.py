@@ -476,6 +476,9 @@ class ExtractionOutput(Strict):
         groups = {
             "fulfillment.method": self.fulfillment.method_evidence,
             "fulfillment.requested_time": self.fulfillment.requested_time.evidence,
+            "fulfillment.requested_time.day": (
+                self.fulfillment.requested_time.day.evidence if self.fulfillment.requested_time.day else []
+            ),
             "address": self.address.evidence,
             "payment": self.payment.evidence,
             "customer_name": self.customer_name.evidence,

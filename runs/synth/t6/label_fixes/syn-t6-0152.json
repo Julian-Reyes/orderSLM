@@ -1,0 +1,189 @@
+{
+ "card_id": "syn-t6-0152",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "veggie_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "2 veggie burgers"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "regular",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "3 regular fries"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "onion_rings",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "2 orders of onion rings"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "milkshake",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "strawberry",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "2 strawberry shakes"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "single",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 4,
+       "quote": "a single cheeseburger"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 5,
+      "quote": "deliver to 2562 mission pl"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "mission pl",
+    "number": "2562",
+    "unit": null,
+    "reference": null,
+    "raw_text": "2562 mission pl",
+    "evidence": [
+     {
+      "message_index": 5,
+      "quote": "2562 mission pl"
+     }
+    ]
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": 10000,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 5,
+      "quote": "cash"
+     },
+     {
+      "message_index": 5,
+      "quote": "change for a 100"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

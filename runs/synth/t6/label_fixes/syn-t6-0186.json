@@ -1,0 +1,117 @@
+{
+ "card_id": "syn-t6-0186",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "coffee_pastry_combo",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [
+      {
+       "slot_id": "drink",
+       "menu_item_id": "americano",
+       "variant_id": "medium"
+      },
+      {
+       "slot_id": "pastry",
+       "menu_item_id": "croissant",
+       "variant_id": null
+      }
+     ],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "2 coffee n pastry deals w a medium americano n a croissant each"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "muffin",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "blueberry",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a blueberry muffin"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 0,
+      "quote": "pickup"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Dev",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "dev"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "card_id": "syn-t6-0165",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "latte",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "substitute",
+       "modifier_id": "whole_milk",
+       "replacement_modifier_id": "oat_milk",
+       "amount": "normal",
+       "raw_text": "w oat milk",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a small latte w oat milk"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "hot_chocolate",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a hot chocolate"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "muffin",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "banana_nut",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a banana nut muffin"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": null,
+     "unmatched_text": "the one i always get",
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "the one i always get"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 3,
+      "quote": "pickup"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 10",
+     "normalized_local": "10:00",
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "at 10"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Marcus",
+    "evidence": [
+     {
+      "message_index": 3,
+      "quote": "marcus"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": [
+    {
+     "field": "item_menu_match",
+     "line_id": "L4"
+    }
+   ]
+  }
+ }
+}

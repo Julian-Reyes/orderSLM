@@ -4,6 +4,7 @@ import json
 
 import pytest
 
+from orderslm.core.finalize import FINALIZE_VERSION
 from orderslm.eval import site_data
 from orderslm.paths import ROOT
 
@@ -21,7 +22,7 @@ def test_student_rows_are_the_runs_metrics(data):
             m = json.loads((ROOT / row[split]["run"] / "metrics.json").read_text())
             assert row[split]["exact"] == m["order"]["exact_match"]
             assert row[split]["intents_right"] == m["intent"]["all"]["primary_correct"]
-            assert row[split]["finalize"] == "finalize@0.2"  # all re-scored with the current rules
+            assert row[split]["finalize"] == FINALIZE_VERSION  # all re-scored with the current rules
 
 
 def test_packaging_and_example(data):

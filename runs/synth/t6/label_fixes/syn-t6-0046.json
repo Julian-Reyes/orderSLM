@@ -1,0 +1,152 @@
+{
+ "card_id": "syn-t6-0046",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "DELIVERY_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "2 bacon burgers"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "2 fries"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "coke",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a coke"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "deliver to 89 hollis blvd"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 7pm",
+     "normalized_local": "19:00",
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "at 7pm"
+      }
+     ],
+     "day": {
+      "kind": "tomorrow",
+      "weekday": null,
+      "month": null,
+      "day_of_month": null,
+      "raw_text": "tomorrow",
+      "evidence": [
+       {
+        "message_index": 2,
+        "quote": "tomorrow"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "hollis blvd",
+    "number": "89",
+    "unit": null,
+    "reference": null,
+    "raw_text": "89 hollis blvd",
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "89 hollis blvd"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

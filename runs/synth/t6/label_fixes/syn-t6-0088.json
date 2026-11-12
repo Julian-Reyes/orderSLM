@@ -1,0 +1,147 @@
+{
+ "card_id": "syn-t6-0088",
+ "kind": "hand_label",
+ "reason": "training data v4: chat and label written by hand (Julian, 2026-11-12; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-12T20:52:54.748810+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "milkshake",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "strawberry",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a strawberry shake"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "single",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a single cheeseburger"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "sprite",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a sprite"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 0,
+      "quote": "delivered"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 8",
+     "normalized_local": "20:00",
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "at 8"
+      }
+     ],
+     "day": {
+      "kind": "weekday",
+      "weekday": "sat",
+      "month": null,
+      "day_of_month": null,
+      "raw_text": "saturday",
+      "evidence": [
+       {
+        "message_index": 0,
+        "quote": "saturday"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "ivanhoe st",
+    "number": "7674",
+    "unit": null,
+    "reference": null,
+    "raw_text": "7674 ivanhoe st",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "7674 ivanhoe st"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

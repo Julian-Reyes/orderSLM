@@ -9,7 +9,9 @@ and question at run time, `core/finalize`).
 Two training sets (spec §10–11e): `single` = the per-restaurant batches; `mixed` = the same + the food-court batch
 m1. v0.1: p3 + b1 (+ m1). v0.2 (M6 error review, Julian 2026-10-25): + the targeted batch t3 and the hand-written
 top-up t4. Validation chats are drawn 5% per group (VERSIONS[...]["valid_groups"]), so v0.2 keeps exactly v0.1's
-validation chats and adds 5% of t3 + t4; the same chats are in both sets, plus 5% of m1 in `mixed`. Chats listed in
+validation chats and adds 5% of t3 + t4; the same chats are in both sets, plus 5% of m1 in `mixed`. v0.4 (Julian 2026-11-12) adds t6 (orders for another
+day) and leaves out five older chats labeled before the day rule (VERSIONS[...]["exclude"]); its targets are
+`student@0.2`, earlier versions' stay `student@0.1`. Chats listed in
 runs/synth/excluded.json (label audit) are left out; hand-fixed labels (synth label_fixes) are used, and counted
 per set. Only synthetic chats: never dev, test or PIZZA.
 
@@ -32,6 +34,7 @@ from importlib.resources import files
 from pathlib import Path
 from typing import Any
 
+from orderslm.core.finalize import exclusive_choices
 from orderslm.extractors.teacher import conversation_prompt
 from orderslm.menus import load_menu
 from orderslm.paths import ROOT, RUNS
@@ -58,9 +61,20 @@ VERSIONS = {
         "mixed": ("p3", "b1", "m1", "t3", "t4", "t5"),
         "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4"), ("t5",)),
     },
+    # Julian, 2026-11-12: + t6, 240 chats written and labeled by hand (orders for another day + v3 misses), $0.
+    # Five older chats order for another day under labels from before the day rule (no `day`): left out here only.
+    "student-data@0.4": {
+        "single": ("p3", "b1", "t3", "t4", "t5", "t6"),
+        "mixed": ("p3", "b1", "m1", "t3", "t4", "t5", "t6"),
+        "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4"), ("t5",), ("t6",)),
+        "exclude": ("syn-t3-0502", "syn-m1-0057", "syn-b1-0909", "syn-b1-0495", "syn-b1-0582"),
+        # finalize rule 6 on the targets: 7 teacher labels swapped whole milk on drinks that have none (b1 0203,
+        # m1 0304, t3 0171, 0263, 0296, 0375, 0441), the habit behind v3's milk misses
+        "fix_exclusive_choice": True,
+    },
 }
-STUDENT_SCHEMA = {v: "student@0.1" for v in VERSIONS}  # the version string in each data version's targets
-DATA_VERSION = "student-data@0.3"
+STUDENT_SCHEMA = {v: "student@0.1" for v in VERSIONS} | {"student-data@0.4": "student@0.2"}
+DATA_VERSION = "student-data@0.4"
 STUDENT_PROMPT_VERSION = "student-extract@0.1"
 SINGLE_BATCHES = VERSIONS[DATA_VERSION]["single"]
 MIXED_BATCHES = VERSIONS[DATA_VERSION]["mixed"]
@@ -111,9 +125,14 @@ def build_rows(batch: str, version: str = DATA_VERSION) -> tuple[list[dict[str, 
             continue
         text, label_version, fix = synth.label_record(batch, s.card_id, lab.TEACHER)  # a hand fix, if any
         label = TeacherLabel.model_validate_json(text)
+        menu = load_menu(conv.business_id)
+        if VERSIONS[version].get("fix_exclusive_choice"):
+            fixed = exclusive_choices(label.order.items, menu)
+            if fixed != label.order.items:
+                skipped["exclusive_choice_fixed"] += 1
+                label = label.model_copy(update={"order": label.order.model_copy(update={"items": fixed})})
         if label.intents[-1].message_index != conv.customer_indices()[-1]:
             raise SystemExit(f"{conv.id}: last intent is not the last customer message")
-        menu = load_menu(conv.business_id)
         user = user_prompt(conv, menu)
         answer = target(label, version).model_dump_json()
         rows.append(
@@ -174,6 +193,12 @@ def build(out_dir: Path, version: str = DATA_VERSION) -> dict[str, Any]:
     valid = set().union(
         *(split_valid([r["id"] for b in group for r in by_batch[b][0]]) for group in spec["valid_groups"])
     )
+    # dropped after the validation draw, so the draw (and every earlier version's validation chats) is unchanged
+    drop = set(spec.get("exclude", ()))
+    for b in spec["mixed"]:
+        if n := sum(r["id"] in drop for r in by_batch[b][0]):
+            by_batch[b][1]["before_day_rule"] += n
+        by_batch[b] = ([r for r in by_batch[b][0] if r["id"] not in drop], by_batch[b][1])
     manifest: dict[str, Any] = {
         "data_version": version,
         "student_prompt_version": STUDENT_PROMPT_VERSION,

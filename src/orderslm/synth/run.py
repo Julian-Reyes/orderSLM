@@ -55,6 +55,8 @@ from .cards import (
     TOPUP_WEIGHTS,
     V3_MODIFY_KIND_WEIGHTS,
     V3_WEIGHTS,
+    V4_MODIFY_KIND_WEIGHTS,
+    V4_WEIGHTS,
     plan_cards,
     plan_targeted_cards,
 )
@@ -137,10 +139,18 @@ def plan(args: argparse.Namespace) -> int:
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    if args.targeted or args.topup or args.v3:
+    if args.targeted or args.topup or args.v3 or args.v4:
         if business_ids:
             raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
-        weights = V3_WEIGHTS if args.v3 else TOPUP_WEIGHTS if args.topup else TARGET_WEIGHTS
+        weights = (
+            V4_WEIGHTS
+            if args.v4
+            else V3_WEIGHTS
+            if args.v3
+            else TOPUP_WEIGHTS
+            if args.topup
+            else TARGET_WEIGHTS
+        )
         cards = plan_targeted_cards(
             args.n,
             seed=args.seed,
@@ -148,6 +158,7 @@ def plan(args: argparse.Namespace) -> int:
             generators=generators,
             weights=weights,
             **({"modify_weights": V3_MODIFY_KIND_WEIGHTS} if args.v3 else {}),
+            **({"modify_weights": V4_MODIFY_KIND_WEIGHTS} if args.v4 else {}),
         )
     else:
         cards = plan_cards(
@@ -164,9 +175,10 @@ def plan(args: argparse.Namespace) -> int:
         "n": args.n,
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
-        "targets_version": TARGETS_VERSION if args.targeted or args.topup or args.v3 else None,
+        "targets_version": TARGETS_VERSION if args.targeted or args.topup or args.v3 or args.v4 else None,
         "topup": args.topup,
         "v3": args.v3,
+        "v4": args.v4,
         "rewrite_missing": args.rewrite_missing,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
@@ -636,6 +648,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--topup", action="store_true", help="the targeted top-up (cards.TOPUP_WEIGHTS)")
     p.add_argument(
         "--v3", action="store_true", help="training data v3 targets (cards.V3_WEIGHTS), $0 by hand"
+    )
+    p.add_argument(
+        "--v4", action="store_true", help="training data v4 targets (cards.V4_WEIGHTS), $0 by hand"
     )
     p.add_argument(
         "--rewrite-missing", metavar="BATCH", help="also copy BATCH's cards whose chat was dropped"

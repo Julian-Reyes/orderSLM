@@ -1,7 +1,7 @@
 {
   "views": {
     "before": "raw model JSON, scorer@0.1 (unstated default variant counts as different)",
-    "after": "model JSON through finalize@0.2, scorer@0.5 (blank = default variant)"
+    "after": "model JSON through finalize@0.3, scorer@0.5 (blank = default variant)"
   },
   "data": "dev split, Source A (Claude-written, reviewed by Julian); prompt-tuning data, not held-out results",
   "bakeoff": {
@@ -373,16 +373,16 @@
           "conversations": 35,
           "items": {
             "gold_items": 58,
-            "tp": 56,
-            "fp": 2,
-            "fn": 2
+            "tp": 57,
+            "fp": 1,
+            "fn": 1
           },
-          "item_f1": 0.9655172413793104,
-          "exact": 27,
-          "exact_rate": 0.7714285714285715,
+          "item_f1": 0.9827586206896551,
+          "exact": 28,
+          "exact_rate": 0.8,
           "exact_ci95": [
-            0.6098236221989801,
-            0.879342632538209
+            0.6410806339053748,
+            0.899576805540992
           ],
           "field_accuracy": {
             "method": 1.0,

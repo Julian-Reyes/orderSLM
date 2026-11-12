@@ -1,6 +1,6 @@
 # `qwen3.5-0.8b-single-v2` on fresh2 at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.5`, finalize `finalize@0.2`. Fresh2 split: written after the v3 fixes that used fresh, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.5`, finalize `finalize@0.3`. Fresh2 split: written after the v3 fixes that used fresh, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|
@@ -9,9 +9,9 @@ Prompt `student-extract@0.1`, data `student-data@0.2`, scorer `scorer@0.5`, fina
 | Intent, all customer messages | 249/275 (90.5%, 95% CI 0.865–0.935) | ? |
 | Intent, last message | 79/90 (87.8%, 95% CI 0.794–0.930) | |
 | Intent, earlier messages (mid-chat) | 170/185 (91.9%, 95% CI 0.871–0.950) | |
-| Items (F1) | 136 found / 23 extra / 35 missed (F1 0.8242424242424242) | ? |
-| Fully correct orders | 61/90 (95% CI (0.5756664407220551, 0.765333712728014)) | ? |
-| Same action (bot sends/asks the same; wording aside) | 62/90 (95% CI (0.5871698145125097, 0.7751428485281886)) | |
+| Items (F1) | 138 found / 21 extra / 33 missed (F1 0.8363636363636363) | ? |
+| Fully correct orders | 62/90 (95% CI (0.5871698145125097, 0.7751428485281886)) | ? |
+| Same action (bot sends/asks the same; wording aside) | 63/90 (95% CI (0.598732953143893, 0.7848922194874346)) | |
 
 Field accuracy: {'method': 1.0, 'time': 0.9846153846153847, 'address': 1.0, 'payment': 0.9846153846153847, 'name': 1.0, 'decision': 1.0, 'missing': 0.8615384615384616}
 
