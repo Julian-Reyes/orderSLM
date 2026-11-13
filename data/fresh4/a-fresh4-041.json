@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-fresh4-041",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "a med latte n a blueberry muffin, name ines",
+        "sent_at": "2026-11-24T14:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "actually swap the muffin for a choc croissant",
+        "sent_at": "2026-11-24T14:00:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a med latte"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a choc croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ines",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "ines"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-041"
+}

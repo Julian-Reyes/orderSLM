@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-fresh4-042",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, can I get 2 medium supremes for Thursday at 7 pm, deliverd to 45 Lake Dr?",
+        "sent_at": "2026-11-23T16:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'll pay cash.",
+        "sent_at": "2026-11-23T16:00:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 medium supremes"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "deliverd to 45 Lake Dr"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7 pm",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 7 pm"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "thu",
+          "raw_text": "Thursday",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "Thursday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Lake Dr",
+      "number": "45",
+      "raw_text": "45 Lake Dr",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "45 Lake Dr"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "I'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-042"
+}

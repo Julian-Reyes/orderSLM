@@ -1,0 +1,178 @@
+{
+  "conversation": {
+    "id": "a-fresh4-045",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "medium pepperoni",
+        "sent_at": "2026-11-25T18:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a veggie",
+        "sent_at": "2026-11-25T18:10:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup",
+        "sent_at": "2026-11-25T18:11:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-25T18:11:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "name is luca",
+        "sent_at": "2026-11-25T18:12:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "make both of them large",
+        "sent_at": "2026-11-25T18:12:58-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "medium pepperoni"
+          },
+          {
+            "message_index": 5,
+            "quote": "make both of them large"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a veggie"
+          },
+          {
+            "message_index": 5,
+            "quote": "make both of them large"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Luca",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "luca"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-045"
+}

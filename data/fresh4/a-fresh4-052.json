@@ -1,0 +1,100 @@
+{
+  "conversation": {
+    "id": "a-fresh4-052",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "5 cheeseburgers, 2 with no onions 🍔 paying card",
+        "sent_at": "2026-11-23T12:30:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "5 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onion",
+            "raw_text": "no onions"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "5 cheeseburgers"
+          },
+          {
+            "message_index": 0,
+            "quote": "2 with no onions"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-052"
+}

@@ -27,6 +27,22 @@ _Last updated 2026-11-13._
   length-limited string rejected): the grammar gets the schema without string length limits; validation keeps them.
 - **Training time:** v4 took 9 h 56 min for 3,037 rows on one T4; v5 ≈ 10.7 h, so dev scoring can't share the session
   (12 h cap): training session, then a scoring session.
+- **Label fix in t7 (before training):** 9 messages that only add a detail ("add mayo to all the cheeseburgers",
+  "make it thin crust" before any confirmation) were `MODIFY_ORDER`; the guide says `PLACE_ORDER` (nothing replaced).
+  Relabeled; student-data@0.5 rebuilt (same row counts).
+- **Test batch fresh4 (done, $0):** `data/fresh4/` (`Split.fresh4`, `conversation@0.8`): 110 Source A chats + gold,
+  fresh3's shape (90 standard + 20 future-day) from a new seed, written after t7 and finalize@0.4: **the clean
+  measure of v5**. 343 customer messages; checks as fresh3 (docs/SPLITS.md). Not reviewed by Julian; same writer.
+- **Stopped before Kaggle (Julian: "stop before kaggle run so I can confirm limits").** Proposed, $0:
+  1. Session A (~11 h): `make train ARGS="export --train qwen3.5-0.8b-single-v5 --score
+     qwen3.5-0.8b-single-v4:fresh4+dev+fresh+fresh2+fresh3 --constrained"`: GPU0 trains v5 (~10.7 h, stops itself at
+     11.5 h and resumes next session if short); GPU1, idle otherwise, scores v4 with constrained decoding on all five
+     splits (~6 h): the decoding effect alone, and v4's fresh4 number.
+  2. Session B (~6.5 h): `export --score qwen3.5-0.8b-single-v5:fresh4+dev+fresh+fresh2+fresh3 --constrained`.
+  Unconstrained numbers come from the same runs: a message the grammar never steered is the plain greedy answer;
+  a steered one would have been invalid unconstrained (the grammar accepts every valid answer, checked).
+  ~17.5 h of Kaggle session time in total; the remaining weekly quota is Julian's to confirm.
+
 
 ### Orders for another day (2026-11-12; Julian: "do the recommended fix, then the training batch and v4 retrain, then the new test chats. We have to get this to 95%+ accuracy")
 

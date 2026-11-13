@@ -1,0 +1,230 @@
+{
+  "conversation": {
+    "id": "a-fresh4-022",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-29T10:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "for tmrw",
+        "sent_at": "2026-11-29T10:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 lg drips",
+        "sent_at": "2026-11-29T10:01:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "1 w oat milk",
+        "sent_at": "2026-11-29T10:01:57-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "n 3 blueberry muffins",
+        "sent_at": "2026-11-29T10:02:24-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "pickup",
+        "sent_at": "2026-11-29T10:02:58-08:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "name sol",
+        "sent_at": "2026-11-29T10:03:39-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 lg drips"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "oat_milk",
+            "raw_text": "w oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 lg drips"
+          },
+          {
+            "message_index": 3,
+            "quote": "1 w oat milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "muffin",
+        "quantity": 3,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "3 blueberry muffins"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 5,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "for tmrw",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "for tmrw"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tmrw",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "tmrw"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sol",
+      "evidence": [
+        {
+          "message_index": 6,
+          "quote": "sol"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What time tomorrow would you like it, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-022"
+}

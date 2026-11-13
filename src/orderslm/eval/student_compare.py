@@ -125,7 +125,7 @@ def summarize(chats: dict[str, dict[str, int]], ids: list[str]) -> dict[str, flo
 
 def split_parts(split: str) -> dict[str, list[str]] | None:
     """Chat ids by part when the split has future_day cards (fresh3), else None."""
-    if split not in ("dev", "fresh", "fresh2", "fresh3"):  # never opens the sealed test split
+    if split not in ("dev", "fresh", "fresh2", "fresh3", "fresh4"):  # never opens the sealed test split
         return None
     cards = split_dir(Split(split)) / "cards.jsonl"
     if not cards.exists():
@@ -245,6 +245,8 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
             if c["split"] == "fresh2"
             else "Fresh3 chats, written after the v4 fixes that used dev, fresh and fresh2 (evaluation-only). "
             if c["split"] == "fresh3"
+            else "Fresh4 chats, written after the v5 fixes that used dev, fresh, fresh2 and fresh3 (evaluation-only). "
+            if c["split"] == "fresh4"
             else "Fresh chats, written after the dev-based fixes (evaluation-only). "
         )
         + "Differences are A − B in "

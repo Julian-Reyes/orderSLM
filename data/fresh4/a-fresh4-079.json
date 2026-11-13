@@ -1,0 +1,131 @@
+{
+  "conversation": {
+    "id": "a-fresh4-079",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "a latte, one of the bigger ones",
+        "sent_at": "2026-11-23T07:50:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a choc chip muffin",
+        "sent_at": "2026-11-23T07:50:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup for ivo",
+        "sent_at": "2026-11-23T07:51:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a latte, one of the bigger ones"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "chocolate_chip",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a choc chip muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ivo",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "ivo"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which latte would you like (small 8 oz, medium 12 oz or large 16 oz), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-079",
+  "annotation_notes": "'one of the bigger ones' fits medium or large: the size is unclear, asked."
+}

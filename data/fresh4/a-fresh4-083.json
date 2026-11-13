@@ -1,0 +1,123 @@
+{
+  "conversation": {
+    "id": "a-fresh4-083",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Four small cappuccinos, two of them with skim milk, please.",
+        "sent_at": "2026-11-26T07:15:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Pickup for Marco.",
+        "sent_at": "2026-11-26T07:15:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 2,
+        "variant_id": "small",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "Four small cappuccinos"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cappuccino",
+        "quantity": 2,
+        "variant_id": "small",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "skim_milk",
+            "raw_text": "with skim milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "Four small cappuccinos"
+          },
+          {
+            "message_index": 0,
+            "quote": "two of them with skim milk"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Marco",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Marco"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-083"
+}

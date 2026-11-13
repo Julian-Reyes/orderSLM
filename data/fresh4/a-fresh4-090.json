@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh4-090",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "random but whats the capital of australia",
+        "sent_at": "2026-11-23T14:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "my friend says sydney lol",
+        "sent_at": "2026-11-23T14:20:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-090"
+}

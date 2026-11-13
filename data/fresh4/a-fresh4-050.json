@@ -1,0 +1,163 @@
+{
+  "conversation": {
+    "id": "a-fresh4-050",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good morning.",
+        "sent_at": "2026-11-25T08:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'd like a large cappuccino and an almond croissant for pickup, please.",
+        "sent_at": "2026-11-25T08:40:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "My name is Harold, and I'll pay cash.",
+        "sent_at": "2026-11-25T08:41:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Thank you, Harold: 1 large Cappuccino and 1 almond Croissant, pickup, paying cash. Is that right?",
+        "sent_at": "2026-11-25T08:41:57-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Yes, that's correct.",
+        "sent_at": "2026-11-25T08:42:24-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "On second thought, I'll pay by card instead.",
+        "sent_at": "2026-11-25T08:42:58-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large cappuccino"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 1,
+        "variant_id": "almond",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an almond croissant"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "I'll pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Harold",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Harold"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-050"
+}

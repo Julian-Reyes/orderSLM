@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-fresh4-018",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "lg americano n a sesame bagel w cream cheese",
+        "sent_at": "2026-11-25T11:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup at 2:15",
+        "sent_at": "2026-11-25T11:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "name is aimee",
+        "sent_at": "2026-11-25T11:31:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-25T11:31:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "lg americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a sesame bagel w cream cheese"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 2:15",
+        "normalized_local": "14:15",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "at 2:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Aimee",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "aimee"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-018",
+  "annotation_notes": "'at 2:15' at 11:30, open 7-15: only 14:15 is open."
+}

@@ -1,0 +1,70 @@
+{
+  "conversation": {
+    "id": "a-fresh4-099",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-11-26T14:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "does the veggie burger have nuts in it",
+        "sent_at": "2026-11-26T14:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "No nuts in the Veggie Burger.",
+        "sent_at": "2026-11-26T14:31:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ok thx",
+        "sent_at": "2026-11-26T14:31:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-099"
+}

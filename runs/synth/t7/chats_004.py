@@ -276,7 +276,7 @@ c: + breadsticks
 c: 499 cedar hill ct delivery at 10:30, card
 c: add banana peppers to both hawaiians
 """,
-        "P Q S P P M",
+        "P Q S P P P",
         items=[
             I(
                 "hawaiian_pizza",

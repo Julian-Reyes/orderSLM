@@ -1,0 +1,123 @@
+{
+  "conversation": {
+    "id": "a-fresh4-106",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "I WOULD LIKE TO ORDER FOR TOMMOROW: 2 CHEESEBURGERS AND A VANILLA SHAKE, PICKUP AT NOON",
+        "sent_at": "2026-11-23T16:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "THANK YOU",
+        "sent_at": "2026-11-23T16:30:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "vanilla",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A VANILLA SHAKE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT NOON",
+        "normalized_local": "12:00",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "AT NOON"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "TOMMOROW",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "TOMMOROW"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-106"
+}

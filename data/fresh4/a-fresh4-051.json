@@ -1,0 +1,126 @@
+{
+  "conversation": {
+    "id": "a-fresh4-051",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 bacon burgers n a lemonade to 14 hill rd, cash 🍔 is the lemonade fresh?",
+        "sent_at": "2026-11-26T19:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It's our house lemonade! Got it: 2 Bacon Burgers and 1 Lemonade, delivered to 14 Hill Rd, paying cash. Is that right?",
+        "sent_at": "2026-11-26T19:15:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "👍",
+        "sent_at": "2026-11-26T19:16:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "to 14 hill rd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "hill rd",
+      "number": "14",
+      "raw_text": "14 hill rd",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "14 hill rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "customer_decision": {
+      "state": "confirmed",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "👍"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-051"
+}

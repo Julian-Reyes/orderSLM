@@ -1,0 +1,137 @@
+{
+  "conversation": {
+    "id": "a-fresh4-019",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, a bacon burger, a regular fries and a lemonade please.",
+        "sent_at": "2026-11-26T20:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Delivered to 72 Linden St.",
+        "sent_at": "2026-11-26T20:30:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Card.",
+        "sent_at": "2026-11-26T20:31:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "regular",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a regular fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Delivered to 72 Linden St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Linden St",
+      "number": "72",
+      "raw_text": "72 Linden St",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "72 Linden St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-019"
+}

@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh4-085",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, just wanted to say the pizza last night was fantastic.",
+        "sent_at": "2026-11-29T13:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Thanks to the whole team!",
+        "sent_at": "2026-11-29T13:00:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-085"
+}

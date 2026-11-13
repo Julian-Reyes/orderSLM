@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-fresh4-016",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Good evening.",
+        "sent_at": "2026-11-27T18:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I would like 4 large cheese pizzas, two of them with mushrooms please.",
+        "sent_at": "2026-11-27T18:15:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "For pickup.",
+        "sent_at": "2026-11-27T18:16:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Thank you kindly.",
+        "sent_at": "2026-11-27T18:16:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 large cheese pizzas"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "mushrooms",
+            "raw_text": "with mushrooms"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 large cheese pizzas"
+          },
+          {
+            "message_index": 1,
+            "quote": "two of them with mushrooms"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "For pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-016"
+}

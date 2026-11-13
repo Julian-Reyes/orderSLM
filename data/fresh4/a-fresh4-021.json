@@ -1,0 +1,176 @@
+{
+  "conversation": {
+    "id": "a-fresh4-021",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is the veggie pizza dairy free",
+        "sent_at": "2026-11-24T19:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It comes with cheese, but we can leave it off.",
+        "sent_at": "2026-11-24T19:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok large veggie no cheese",
+        "sent_at": "2026-11-24T19:01:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 9 oak ct",
+        "sent_at": "2026-11-24T19:01:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-24T19:02:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "n add vegan cheese pls",
+        "sent_at": "2026-11-24T19:02:58-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "cheese",
+            "raw_text": "no cheese"
+          },
+          {
+            "kind": "add",
+            "raw_text": "vegan cheese",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "large veggie no cheese"
+          },
+          {
+            "message_index": 5,
+            "quote": "add vegan cheese"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 9 oak ct"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "oak ct",
+      "number": "9",
+      "raw_text": "9 oak ct",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "9 oak ct"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have vegan cheese for the veggie pizza. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-021",
+  "annotation_notes": "Vegan cheese isn't on the menu: a not_on_menu add, asked (as fresh 080). Adding a detail replaces nothing: PLACE_ORDER."
+}

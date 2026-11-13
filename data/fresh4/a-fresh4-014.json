@@ -1,0 +1,115 @@
+{
+  "conversation": {
+    "id": "a-fresh4-014",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, may I have a medium supreme and a medium cheese for pickup? Is the supreme very spicy?",
+        "sent_at": "2026-11-24T12:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It isn't spicy: pepperoni, sausage, peppers, onions, olives and mushrooms.",
+        "sent_at": "2026-11-24T12:40:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Lovely, thank you. Please make the cheese pizza a large insted.",
+        "sent_at": "2026-11-24T12:41:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium supreme"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a medium cheese"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the cheese pizza a large"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-014"
+}

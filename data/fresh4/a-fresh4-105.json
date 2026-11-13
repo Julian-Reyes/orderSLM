@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-fresh4-105",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "do u have decaf?",
+        "sent_at": "2026-11-25T10:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Sorry, no decaf at the moment.",
+        "sent_at": "2026-11-25T10:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a med hot choc n a bec for pickup at 1:30, name is pam",
+        "sent_at": "2026-11-25T10:31:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "hot_chocolate",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a med hot choc"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 1,
+        "variant_id": "english_muffin",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a bec"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 1:30",
+        "normalized_local": "13:30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 1:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Pam",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "pam"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-105",
+  "annotation_notes": "'at 1:30' at 10:30, open 7-15: 13:30."
+}

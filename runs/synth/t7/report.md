@@ -12,8 +12,8 @@ Built from the saved files in this folder (`make synth ARGS="report --batch t7"`
 | repairs | 0 |
 | labels kept | – |
 | label drops | 0 |
-| card agrees with label | 182/240 (76%) |
-| disagreement types | items 53, item_details 4, labels 1 |
+| card agrees with label | 173/240 (72%) |
+| disagreement types | items 53, item_details 4, labels 10 |
 | card address used | 57/57 (100%) |
 
 ## Cost and tokens
@@ -52,7 +52,7 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 | scenario | claude-opus-5-5 |
 |---|---|
 | ambiguous_reference | 8/8 |
-| correction | 23/24 |
+| correction | 14/24 |
 | correction_after_confirmation | 19/21 |
 | implicit_category | 5/10 |
 | missing_info | 20/51 |
@@ -67,8 +67,8 @@ Nearest similarity: word 3-gram Jaccard of a chat's customer text with the most 
 |---|---|
 | CONFIRM_ORDER | 21 |
 | MENU_QUESTION | 30 |
-| MODIFY_ORDER | 45 |
-| PLACE_ORDER | 581 |
+| MODIFY_ORDER | 36 |
+| PLACE_ORDER | 590 |
 | SMALL_TALK | 72 |
 | UNKNOWN | 15 |
 

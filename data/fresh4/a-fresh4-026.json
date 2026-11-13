@@ -1,0 +1,182 @@
+{
+  "conversation": {
+    "id": "a-fresh4-026",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "need food for the team, 2 lg meat lovers",
+        "sent_at": "2026-11-26T12:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n 2 lg cheese, some sodas too",
+        "sent_at": "2026-11-26T12:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Which sodas, and how many? We have Coke, Diet Coke, Sprite, Dr Pepper and iced tea.",
+        "sent_at": "2026-11-26T12:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "3 cokes n a diet coke, 2 liters",
+        "sent_at": "2026-11-26T12:31:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "+ breadsticks",
+        "sent_at": "2026-11-26T12:32:24-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "meat_lovers_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 lg meat lovers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": 3,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "3 cokes"
+          },
+          {
+            "message_index": 3,
+            "quote": "2 liters"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "diet_coke",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "a diet coke"
+          },
+          {
+            "message_index": 3,
+            "quote": "2 liters"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "breadsticks",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-026",
+  "annotation_notes": "'some sodas' is settled by the next message: the vague line is dropped."
+}

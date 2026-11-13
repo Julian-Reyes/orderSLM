@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-fresh4-096",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like a half pepperoni, half veggie pizza.",
+        "sent_at": "2026-11-25T12:50:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "And two orders of breadsticks.",
+        "sent_at": "2026-11-25T12:50:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Please deliver to 900 Market St, 4th floor.",
+        "sent_at": "2026-11-25T12:51:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Paying by card.",
+        "sent_at": "2026-11-25T12:51:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "half_and_half"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "halves": [
+          {
+            "menu_item_id": "pepperoni_pizza"
+          },
+          {
+            "menu_item_id": "veggie_pizza"
+          }
+        ],
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a half pepperoni, half veggie pizza"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breadsticks",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "two orders of breadsticks"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "deliver to 900 Market St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Market St",
+      "number": "900",
+      "unit": "4th floor",
+      "raw_text": "900 Market St, 4th floor",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "900 Market St, 4th floor"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "What size would you like for the pizza (personal 8-inch, small 10-inch, medium 12-inch, large 14-inch or extra large 16-inch)?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-096",
+  "annotation_notes": "Half-and-half with no size: the size is missing, asked."
+}

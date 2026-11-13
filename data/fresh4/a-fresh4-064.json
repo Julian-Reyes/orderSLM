@@ -1,0 +1,159 @@
+{
+  "conversation": {
+    "id": "a-fresh4-064",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey!",
+        "sent_at": "2026-11-28T16:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "4 cheeseburgers for the party, 2 w grilled mushrooms on top, n 2 lg fries",
+        "sent_at": "2026-11-28T16:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup in 30, card",
+        "sent_at": "2026-11-28T16:01:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w grilled mushrooms on top",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 cheeseburgers"
+          },
+          {
+            "message_index": 1,
+            "quote": "2 w grilled mushrooms on top"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 lg fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "relative",
+        "raw_text": "in 30",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "in 30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "We don't have grilled mushrooms on top for the cheeseburger. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-064",
+  "annotation_notes": "Grilled mushrooms aren't on the menu: a not_on_menu add on two of the four, asked."
+}

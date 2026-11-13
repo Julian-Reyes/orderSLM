@@ -1,0 +1,117 @@
+{
+  "conversation": {
+    "id": "a-fresh4-101",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, a large americano with oat milk and a banana nut muffin for pickup, please.",
+        "sent_at": "2026-11-24T09:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Name is Owen, paying by card.",
+        "sent_at": "2026-11-24T09:00:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "oat_milk",
+            "raw_text": "with oat milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large americano with oat milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "banana_nut",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a banana nut muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Owen",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Owen"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-101"
+}

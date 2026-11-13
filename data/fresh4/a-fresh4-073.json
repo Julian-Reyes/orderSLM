@@ -1,0 +1,125 @@
+{
+  "conversation": {
+    "id": "a-fresh4-073",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 👋",
+        "sent_at": "2026-11-25T21:30:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i order for tomorrow? if so 2 bacon burgers n a choc shake, pickup at 12:30 🍔",
+        "sent_at": "2026-11-25T21:30:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a choc shake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "at 12:30"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tomorrow",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "tomorrow"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-073",
+  "annotation_notes": "Asks whether they can order ahead and orders in the same message: PLACE_ORDER + secondary DELIVERY_QUESTION."
+}

@@ -21,6 +21,9 @@ FRESH2 = (
 FRESH3 = (
     DATA / "fresh3"
 )  # M6 v4: written after the v4 fixes that used dev, fresh and fresh2 (evaluation-only)
+FRESH4 = (
+    DATA / "fresh4"
+)  # M6 v5: written after the v5 fixes that used dev, fresh, fresh2, fresh3 (evaluation-only)
 _TEST = DATA / "test"  # M2, sealed
 EXTERNAL = DATA / "external"  # third-party downloads + anything derived from them, gitignored
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)

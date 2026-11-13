@@ -1,0 +1,188 @@
+{
+  "conversation": {
+    "id": "a-fresh4-067",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi",
+        "sent_at": "2026-11-29T11:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "lg americano",
+        "sent_at": "2026-11-29T11:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n a sesame bagel",
+        "sent_at": "2026-11-29T11:01:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "name is rui",
+        "sent_at": "2026-11-29T11:01:57-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-29T11:02:24-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "can u put honey on the bagel",
+        "sent_at": "2026-11-29T11:02:58-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "americano",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "lg americano"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "honey",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a sesame bagel"
+          },
+          {
+            "message_index": 5,
+            "quote": "honey on the bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Rui",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "rui"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L2"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have honey for the bagel. Would you like it as it comes, or with something else instead? Also, is this for pickup?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-067"
+}

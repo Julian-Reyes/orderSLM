@@ -1,0 +1,124 @@
+{
+  "conversation": {
+    "id": "a-fresh4-100",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, I'd like a few large pepperoni pizzas.",
+        "sent_at": "2026-11-27T21:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "And a 2-liter Coke.",
+        "sent_at": "2026-11-27T21:40:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I'll pay cash.",
+        "sent_at": "2026-11-27T21:41:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": null,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a few large pepperoni pizzas"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "coke",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a 2-liter Coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "I'll pay cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many pepperoni pizzas would you like, and is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-100"
+}

@@ -1,0 +1,124 @@
+{
+  "conversation": {
+    "id": "a-fresh4-081",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "order for tmrw at 12:30: 4 lg cheese n 2 lg pepperoni, is there a discount for big orders?",
+        "sent_at": "2026-11-25T16:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-11-25T16:40:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 4,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 lg cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 lg pepperoni"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 12:30"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tmrw",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "tmrw"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-081"
+}

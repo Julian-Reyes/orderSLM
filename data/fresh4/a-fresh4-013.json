@@ -1,0 +1,179 @@
+{
+  "conversation": {
+    "id": "a-fresh4-013",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "yo",
+        "sent_at": "2026-11-25T21:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "order for satrday",
+        "sent_at": "2026-11-25T21:15:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "3 double cbs n 3 fries",
+        "sent_at": "2026-11-25T21:16:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "deliver to 15 campus dr dorm b at 9pm",
+        "sent_at": "2026-11-25T21:16:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-11-25T21:17:24-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 double cbs"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 3,
+        "variant_id": "regular",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "deliver to 15 campus dr"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 9pm",
+        "normalized_local": "21:00",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 9pm"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "sat",
+          "raw_text": "satrday",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "satrday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "campus dr",
+      "number": "15",
+      "unit": "dorm b",
+      "raw_text": "15 campus dr dorm b",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "15 campus dr dorm b"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-013"
+}

@@ -1,0 +1,139 @@
+{
+  "conversation": {
+    "id": "a-fresh4-084",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello, two large cheese pizzas with sausage for pickup.",
+        "sent_at": "2026-11-24T12:15:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Name is Graham.",
+        "sent_at": "2026-11-24T12:15:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Paying by card.",
+        "sent_at": "2026-11-24T12:16:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "Sorry, could you do pepperoni instead of sausage on both?",
+        "sent_at": "2026-11-24T12:16:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "pepperoni",
+            "raw_text": "pepperoni instead of sausage"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two large cheese pizzas with sausage"
+          },
+          {
+            "message_index": 3,
+            "quote": "pepperoni instead of sausage on both"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Graham",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Graham"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-084"
+}

@@ -1,0 +1,51 @@
+{
+  "conversation": {
+    "id": "a-fresh4-095",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! is there someone i can talk to about a big catering order? ☕",
+        "sent_at": "2026-11-24T10:10:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "like 80 ppl next week 🙏",
+        "sent_at": "2026-11-24T10:10:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-095"
+}

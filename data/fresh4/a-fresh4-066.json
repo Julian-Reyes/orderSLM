@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh4-066",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi i ordered a lg latte for pickup under bo n already paid, got a screenshot",
+        "sent_at": "2026-11-27T09:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "also do u have oat milk",
+        "sent_at": "2026-11-27T09:40:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-066",
+  "annotation_notes": "A claim about an order not in this chat: PAYMENT_CLAIM about the placed order; no gold order."
+}

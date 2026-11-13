@@ -1,0 +1,105 @@
+{
+  "conversation": {
+    "id": "a-fresh4-102",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey 👋",
+        "sent_at": "2026-11-29T17:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a #1 w fries for pickup 🍔",
+        "sent_at": "2026-11-29T17:20:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo",
+    "small_talk"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "side",
+            "menu_item_id": "fries",
+            "variant_id": "regular"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a #1 w fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "combo_choice",
+        "reason": "missing",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which drink would you like with the cheeseburger combo (Coke, Sprite or Lemonade), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-102",
+  "annotation_notes": "The combo's drink is never chosen: combo_choice missing, asked."
+}

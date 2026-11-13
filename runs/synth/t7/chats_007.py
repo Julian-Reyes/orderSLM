@@ -637,7 +637,7 @@ c: HELLO
 c: 4 SMALL CAPPUCCINOS, CASH
 c: ADD CARAMEL TO ALL OF THEM PLEASE
 """,
-        "S P M",
+        "S P P",
         items=[
             I(
                 "cappuccino",

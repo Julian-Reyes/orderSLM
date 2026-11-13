@@ -115,7 +115,7 @@ GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training an
 # exactly one of id / text / halves) stay with validation. Checked offline (runs/grammar-check/): the grammar accepts
 # every student-data@0.5 target and every valid v4 answer token by token, so a valid greedy answer can't change.
 CONSTRAINED = {"library": "xgrammar==0.2.8", "schema": "student-schema.json", "whitespace": "none"}
-SCORE_SPLITS = ("dev", "fresh", "fresh2", "fresh3")
+SCORE_SPLITS = ("dev", "fresh", "fresh2", "fresh3", "fresh4")
 
 
 def grammar_schema() -> dict[str, Any]:
@@ -459,7 +459,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     e.add_argument(
         "--score-splits",
-        help="evaluation splits to score on: dev (default), fresh, fresh2, fresh3, or a comma list",
+        help="evaluation splits to score on: dev (default), fresh, fresh2, fresh3, fresh4, or a comma list",
     )
     e.add_argument(
         "--constrained",

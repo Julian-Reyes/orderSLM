@@ -90,6 +90,19 @@ Julian; same writer as t6 (report it). **Clean result (2026-11-13, finalize@0.3)
 standard, 90% another day) vs v3 63.6% (`runs/student-compare/20261113T153207Z`). finalize@0.4 came from a fresh3
 miss (093), so fresh3 is "used for fixes" from then on.
 
+## Fresh4 split (M6 v5)
+
+`data/fresh4/` (`Split.fresh4`, `conversation@0.8`): 110 Source A conversations written **after** the v5 fixes (batch
+t7 and finalize@0.4, which used the dev, fresh, fresh2 **and fresh3** misses), to measure v4 vs v5 on chats nobody
+fixed on. Cards: `cards generate --split fresh4`: fresh3's shape (fresh's 90 quotas + 20 `future_day` cards) from
+its own seed (`20261007-fresh4-2026-11-13`), training menus only. Written and labeled by claude-opus-5.5 in the
+session ($0, 2026-11-13) with `runs/source-a/fresh4/build.py` (fresh3's builder; the week of 2026-11-23), every chat
+passes `validate()`: 343 customer messages, all inside opening hours, all 20 future-day golds resolve to a later
+day (1-6 days ahead); no near-duplicates within fresh4, against dev, fresh, fresh2 or fresh3, or against the
+training chats (t7 included). Evaluation-only (tests/test_fresh4.py). Not reviewed by Julian; same writer as t7
+(report it). Two cards asked for a late change that only adds a topping, which the guide labels `PLACE_ORDER`
+(nothing replaced); those chats (062, 084) swap one topping for another instead, so the card's `MODIFY_ORDER` holds.
+
 ## Review (Source A)
 
 Julian reviews **all of dev and at least 25% of test** in the tool. "Save as reviewed" saves his version and

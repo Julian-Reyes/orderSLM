@@ -1,0 +1,118 @@
+{
+  "conversation": {
+    "id": "a-fresh4-060",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi! 🎉 6 chocolate croissants n 6 blueberry muffins for sunday, pickup for gwen 🥐",
+        "sent_at": "2026-11-25T13:00:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "croissant",
+        "quantity": 6,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 chocolate croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 6,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "6 blueberry muffins"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "for sunday",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "for sunday"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "sun",
+          "raw_text": "sunday",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "sunday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Gwen",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "gwen"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What time on Sunday would you like it, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-060"
+}

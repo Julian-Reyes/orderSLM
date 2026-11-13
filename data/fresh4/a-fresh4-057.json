@@ -1,0 +1,135 @@
+{
+  "conversation": {
+    "id": "a-fresh4-057",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, could I get the big burger and two regular fries?",
+        "sent_at": "2026-11-27T21:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Delivered to 210 Ocean Ave.",
+        "sent_at": "2026-11-27T21:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Cash, please.",
+        "sent_at": "2026-11-27T21:01:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "unmatched_text": "the big burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "the big burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "regular",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two regular fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Delivered to 210 Ocean Ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Ocean Ave",
+      "number": "210",
+      "raw_text": "210 Ocean Ave",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "210 Ocean Ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "Which one do you mean by “the big burger”?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-057",
+  "annotation_notes": "'the big burger' fits the double cheeseburger or the bacon burger (as fresh2 049): unclear, asked."
+}

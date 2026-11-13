@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-fresh4-055",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "3 medium cheese pizzas, 1 w spinach, all on gluten free crust pls im celiac",
+        "sent_at": "2026-11-24T18:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "to 410 birch ave",
+        "sent_at": "2026-11-24T18:20:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "on gluten free crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium cheese pizzas"
+          },
+          {
+            "message_index": 0,
+            "quote": "all on gluten free crust"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "spinach",
+            "raw_text": "w spinach"
+          },
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "on gluten free crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium cheese pizzas"
+          },
+          {
+            "message_index": 0,
+            "quote": "1 w spinach"
+          },
+          {
+            "message_index": 0,
+            "quote": "all on gluten free crust"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "to 410 birch ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "birch ave",
+      "number": "410",
+      "raw_text": "410 birch ave",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "410 birch ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-055",
+  "annotation_notes": "The gluten-free crust is for all 3 (as fresh2 014): both lines get it."
+}

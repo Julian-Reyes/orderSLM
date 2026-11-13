@@ -26,6 +26,9 @@ class Split(StrEnum):
         "fresh2"  # M6 v3: Source A written after the fixes that used fresh, to measure them; evaluation-only
     )
     fresh3 = "fresh3"  # M6 v4: written after the v4 fixes that used dev, fresh and fresh2; evaluation-only
+    fresh4 = (
+        "fresh4"  # M6 v5: written after the v5 fixes that used dev, fresh, fresh2 and fresh3; evaluation-only
+    )
 
 
 class Source(StrEnum):

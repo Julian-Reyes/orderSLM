@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-fresh4-086",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is the veggie burger gluten free? 🌾",
+        "sent_at": "2026-11-25T18:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "The patty is, but the bun isn't. We don't have gluten-free buns, sorry.",
+        "sent_at": "2026-11-25T18:50:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a veggie burger n a large fries to 27 oak st 🍔",
+        "sent_at": "2026-11-25T18:51:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "w avocado n a fried egg on the burger pls 🍳",
+        "sent_at": "2026-11-25T18:51:57-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "avocado",
+            "raw_text": "w avocado"
+          },
+          {
+            "kind": "add",
+            "raw_text": "a fried egg",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a veggie burger"
+          },
+          {
+            "message_index": 3,
+            "quote": "w avocado n a fried egg on the burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "to 27 oak st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "oak st",
+      "number": "27",
+      "raw_text": "27 oak st",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "27 oak st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have fried egg for the veggie burger. Would you like it as it comes, or with something else instead? Also, will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-086"
+}

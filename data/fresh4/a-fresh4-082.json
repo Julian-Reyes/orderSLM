@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh4-082",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello,",
+        "sent_at": "2026-11-24T14:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I would like to order two cheeseb",
+        "sent_at": "2026-11-24T14:10:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-082",
+  "annotation_notes": "Cut off mid-word: UNKNOWN (as fresh 001, fresh3 075)."
+}

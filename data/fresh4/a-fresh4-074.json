@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh4-074",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi my bagel this morning had sesame on it",
+        "sent_at": "2026-11-24T12:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i told them no sesame, im allergic, luckily i noticed b4 eating",
+        "sent_at": "2026-11-24T12:30:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-074",
+  "annotation_notes": "Nobody is hurt (noticed before eating): urgency normal."
+}

@@ -415,7 +415,7 @@ c: Hi there.
 c: 3 single cheeseburgers, 2 onion rings and a vanilla shake for pickup, cash.
 c: Oh, and add mayo to all the cheeseburgers.
 """,
-        "S P M",
+        "S P P",
         items=[
             I(
                 "cheeseburger",
@@ -617,7 +617,7 @@ c: all w whipped cream
 c: n a drip
 c: oh n hazelnut in the cap
 """,
-        "S P P P P M",
+        "S P P P P P",
         items=[
             I(
                 "cappuccino",

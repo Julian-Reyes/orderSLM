@@ -1,0 +1,149 @@
+{
+  "conversation": {
+    "id": "a-fresh4-023",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HELLO",
+        "sent_at": "2026-11-24T17:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I NEED 3 LARGE PEPPERONI AND 2 GARLIC KNOTS FOR NOVEMBER 28 AT 6PM",
+        "sent_at": "2026-11-24T17:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "DELIVER TO 1400 RIVER RD",
+        "sent_at": "2026-11-24T17:01:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 3,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 LARGE PEPPERONI"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 GARLIC KNOTS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "DELIVER TO 1400 RIVER RD"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 6PM",
+        "normalized_local": "18:00",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "AT 6PM"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "month": 11,
+          "day_of_month": 28,
+          "raw_text": "NOVEMBER 28",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "NOVEMBER 28"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "RIVER RD",
+      "number": "1400",
+      "raw_text": "1400 RIVER RD",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "1400 RIVER RD"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-023"
+}

@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-fresh4-108",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hello 😊 does the bacon burger come with cheese?",
+        "sent_at": "2026-11-26T17:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, it comes with cheese!",
+        "sent_at": "2026-11-26T17:40:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "wonderful, one bacon burger and a lemonade please, delivered to 12 Rose Ln. cash 💵",
+        "sent_at": "2026-11-26T17:41:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 Bacon Burger and 1 Lemonade, delivered to 12 Rose Ln, paying cash. Is that right?",
+        "sent_at": "2026-11-26T17:41:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yes thank you 🙏",
+        "sent_at": "2026-11-26T17:42:24-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh dear, it's 21 Rose Ln, not 12! sorry 🙈",
+        "sent_at": "2026-11-26T17:42:58-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "one bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "delivered to 12 Rose Ln"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Rose Ln",
+      "number": "21",
+      "raw_text": "21 Rose Ln",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "21 Rose Ln"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-108"
+}

@@ -1,0 +1,192 @@
+{
+  "conversation": {
+    "id": "a-fresh4-088",
+    "business_id": "morning-crumb",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-23T12:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "order for the 27th",
+        "sent_at": "2026-11-23T12:40:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "3 med lattes",
+        "sent_at": "2026-11-23T12:41:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "2 bec on croissants",
+        "sent_at": "2026-11-23T12:41:57-08:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "pickup at 8",
+        "sent_at": "2026-11-23T12:42:24-08:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "name is dmitri",
+        "sent_at": "2026-11-23T12:42:58-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 3,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "3 med lattes"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "breakfast_sandwich",
+        "quantity": 2,
+        "variant_id": "croissant",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "2 bec on croissants"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 8",
+        "normalized_local": "08:00",
+        "evidence": [
+          {
+            "message_index": 4,
+            "quote": "at 8"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "day_of_month": 27,
+          "raw_text": "the 27th",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "the 27th"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Dmitri",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "dmitri"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-088"
+}

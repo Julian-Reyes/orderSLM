@@ -1,0 +1,138 @@
+{
+  "conversation": {
+    "id": "a-fresh4-059",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like to order for Friday: a large meat lovers and a large veggie.",
+        "sent_at": "2026-11-23T13:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Pickup at 7:30 pm.",
+        "sent_at": "2026-11-23T13:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Paying cash, thanks.",
+        "sent_at": "2026-11-23T13:31:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "meat_lovers_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large meat lovers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large veggie"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "Pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 7:30 pm",
+        "normalized_local": "19:30",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "at 7:30 pm"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "fri",
+          "raw_text": "Friday",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "Friday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-059"
+}

@@ -440,7 +440,7 @@ c: Hi!
 c: One medium margherita for pickup in 20 minutes, please. Cash, I have a 20.
 c: Could you make it thin crust?
 """,
-        "S P M",
+        "S P P",
         items=[
             I(
                 "margherita_pizza",

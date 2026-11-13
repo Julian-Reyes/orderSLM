@@ -125,7 +125,7 @@ c: ok large pepperoni no sauce, 2 iced teas n a 20 oz coke
 c: pickup in 30 for jordan, card 💳
 c: oh make the pepperoni thick crust
 """,
-        "Q P P M",
+        "Q P P P",
         items=[
             I(
                 "pepperoni_pizza",
@@ -450,7 +450,7 @@ b: No, it has tomato sauce, cheese, ham and pineapple.
 c: ok a small hawaiian, a water n a sprite to 43 vine ave, side entrance. cash
 c: actually add bbq sauce to the hawaiian
 """,
-        "Q P M",
+        "Q P P",
         items=[
             I(
                 "hawaiian_pizza",

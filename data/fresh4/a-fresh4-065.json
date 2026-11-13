@@ -1,0 +1,107 @@
+{
+  "conversation": {
+    "id": "a-fresh4-065",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 VEGGIE BURGERS AND ONION RINGS FOR PICKUP NOW, ACTUALY NO MAKE THAT TOMOROW AT 1PM",
+        "sent_at": "2026-11-24T20:30:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 VEGGIE BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "ONION RINGS"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 1PM",
+        "normalized_local": "13:00",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "AT 1PM"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "TOMOROW",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "TOMOROW"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-065",
+  "annotation_notes": "'now' is replaced in the same message by tomorrow at 1 pm."
+}

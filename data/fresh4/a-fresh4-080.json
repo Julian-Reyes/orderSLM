@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh4-080",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "where is my order?? been waiting 50 min",
+        "sent_at": "2026-11-27T20:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordered under kev, delivery to 9 bay st",
+        "sent_at": "2026-11-27T20:00:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-080"
+}

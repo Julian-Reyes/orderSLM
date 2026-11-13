@@ -187,7 +187,7 @@ c: pickup
 c: cash
 c: make it gluten free crust
 """,
-        "P P P P M",
+        "P P P P P",
         items=[
             I(
                 "hawaiian_pizza",
@@ -570,7 +570,7 @@ c: ok 2 drips w hazelnut
 c: pickup in 20, luis, card
 c: n make them w whole milk pls
 """,
-        "S Q P P M",
+        "S Q P P P",
         items=[
             I(
                 "drip_coffee",

@@ -294,7 +294,7 @@ def test_exclusive_choice_read_the_wrong_way_round_is_turned_around():
 
 
 def test_rule_6_never_changes_gold():
-    for split in (Split.dev, Split.fresh, Split.fresh2, Split.fresh3):
+    for split in (Split.dev, Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4):
         for ac in load_eval_split(split):
             if ac.gold_extraction is not None:
                 items = ac.gold_extraction.items

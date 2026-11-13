@@ -1,0 +1,157 @@
+{
+  "conversation": {
+    "id": "a-fresh4-061",
+    "business_id": "corner-patty",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "GOOD AFTERNOON",
+        "sent_at": "2026-11-29T15:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "DO YOU HAVE DIET COKE?",
+        "sent_at": "2026-11-29T15:10:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "business",
+        "text": "Sorry, no Diet Coke. We have Coke, Sprite and lemonade.",
+        "sent_at": "2026-11-29T15:11:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ALRIGHT. TWO CHEESEBURGERS, A LARGE FRIES AND A DR PEPPER THEN",
+        "sent_at": "2026-11-29T15:11:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "FOR PICKUP",
+        "sent_at": "2026-11-29T15:12:24-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "TWO CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "A LARGE FRIES"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "unmatched_text": "A DR PEPPER",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "A DR PEPPER"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "off_menu",
+        "line_id": "L3"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have A DR PEPPER. Would you like something else instead? Also, will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-061",
+  "annotation_notes": "Corner Patty has no Dr Pepper: an off-menu line, asked."
+}

@@ -1,0 +1,168 @@
+{
+  "conversation": {
+    "id": "a-fresh4-037",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh4",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "LARGE VEGGIE ON GLUTEN FREE CRUST AND A SPRITE",
+        "sent_at": "2026-11-26T18:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "DELIVER TO 77 PINE ST",
+        "sent_at": "2026-11-26T18:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "CASH",
+        "sent_at": "2026-11-26T18:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ACTUALY CAN WE DO IT TOMORROW AT 7 INSTEAD",
+        "sent_at": "2026-11-26T18:31:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_gluten_free",
+            "raw_text": "ON GLUTEN FREE CRUST"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "LARGE VEGGIE ON GLUTEN FREE CRUST"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A SPRITE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "DELIVER TO 77 PINE ST"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 7",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "AT 7"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "TOMORROW",
+          "evidence": [
+            {
+              "message_index": 3,
+              "quote": "TOMORROW"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "PINE ST",
+      "number": "77",
+      "raw_text": "77 PINE ST",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "77 PINE ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-13)",
+  "card_id": "a-fresh4-037"
+}
