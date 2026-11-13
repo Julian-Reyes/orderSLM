@@ -1,0 +1,145 @@
+{
+ "card_id": "syn-t7-0050",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 5,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "sprite",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "sprite"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "cheeseburger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "double",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "a double cheeseburger"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "deliver to 69 glenwood ave"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 9",
+     "normalized_local": "21:00",
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "at 9"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "glenwood ave",
+    "number": "69",
+    "unit": "apt 6a",
+    "reference": null,
+    "raw_text": "69 glenwood ave apt 6a",
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "69 glenwood ave apt 6a"
+     }
+    ]
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": 2000,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 4,
+      "quote": "cash"
+     },
+     {
+      "message_index": 4,
+      "quote": "i have a 20"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

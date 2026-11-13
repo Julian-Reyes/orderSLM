@@ -33,6 +33,7 @@ from orderslm.eval import student_dev
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
 from orderslm.schema.conversation import Split
+from orderslm.schema.label import StudentOutput
 from orderslm.train.data import OUT, STUDENT_PROMPT_VERSION
 
 EXPERIMENT = "train"
@@ -84,6 +85,13 @@ STUDENTS = {
         "lr": 2e-4,
         "data_version": "student-data@0.4",
     },
+    # and on v0.5 (+ t7: the patterns behind v4's remaining misses, by hand; Julian, 2026-11-13), same settings
+    "qwen3.5-0.8b-single-v5": {
+        "model": "0.8b",
+        "data": "single",
+        "lr": 2e-4,
+        "data_version": "student-data@0.5",
+    },
 }
 TRAIN = {
     "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"},
@@ -102,6 +110,24 @@ TRAIN = {
     "pad_to_multiple": 128,
 }
 GENERATION = {"do_sample": False, "max_new_tokens": 1536}  # longest training answer 2,562 chars (~800 tokens)
+# Schema-constrained decoding (Julian, 2026-11-13, v5: "go ahead"): greedy, but each token must keep the answer a
+# prefix of compact student JSON (xgrammar's JSON-schema grammar). Cross-field rules (an address on a pickup order,
+# exactly one of id / text / halves) stay with validation. Checked offline (runs/grammar-check/): the grammar accepts
+# every student-data@0.5 target and every valid v4 answer token by token, so a valid greedy answer can't change.
+CONSTRAINED = {"library": "xgrammar==0.2.8", "schema": "student-schema.json", "whitespace": "none"}
+SCORE_SPLITS = ("dev", "fresh", "fresh2", "fresh3")
+
+
+def grammar_schema() -> dict[str, Any]:
+    """The student output's JSON schema as the grammar gets it: without string length limits (xgrammar 0.2.8 rejects
+    an escaped quote in a length-limited string, e.g. a quote of `14\"`); validation still checks them."""
+
+    def loosen(x: Any) -> Any:
+        if isinstance(x, dict):
+            return {k: loosen(v) for k, v in x.items() if k not in ("maxLength", "minLength")}
+        return [loosen(v) for v in x] if isinstance(x, list) else x
+
+    return loosen(StudentOutput.model_json_schema())
 
 
 def assign_gpus(train: list[str], score: list[str]) -> list[tuple[str, str, int]]:
@@ -137,8 +163,8 @@ def export(args: argparse.Namespace) -> Path:
         splits_of[name] = sp.split("+") if sp else default_splits
     score = list(splits_of)
     for name, sp in splits_of.items():
-        if not sp or not set(sp) <= {"dev", "fresh", "fresh2", "fresh3"}:
-            raise SystemExit(f"{name}: score splits are dev, fresh, fresh2 and/or fresh3, got {sp}")
+        if not sp or not set(sp) <= set(SCORE_SPLITS):
+            raise SystemExit(f"{name}: score splits are {', '.join(SCORE_SPLITS)}, got {sp}")
     for n in train + score:
         if n not in STUDENTS:
             raise SystemExit(f"unknown student {n}; known: {sorted(STUDENTS)}")
@@ -209,7 +235,9 @@ def export(args: argparse.Namespace) -> Path:
                 jobs.append(
                     {
                         "kind": "score",
-                        "name": f"score-{name}" + ("" if split == "dev" else f"-{split}"),
+                        "name": f"score-{name}"
+                        + ("" if split == "dev" else f"-{split}")
+                        + ("-cd" if args.constrained else ""),
                         "student": name,
                         "split": split,
                         "model": s["model"],
@@ -218,18 +246,22 @@ def export(args: argparse.Namespace) -> Path:
                         "adapter_sha256": adapter_sha256,
                         "after_train": name if name in train else None,
                         "requests": req_file,
+                        "constrained": bool(args.constrained),
                     }
                 )
             continue
         jobs.append(job)
+    if args.constrained:
+        (STAGE / CONSTRAINED["schema"]).write_text(json.dumps(grammar_schema(), indent=1) + "\n")
+        files[CONSTRAINED["schema"]] = _sha256(STAGE / CONSTRAINED["schema"])
     run = {
         "session": session,
         "data_version": versions[0] if len(versions) == 1 else versions,
         "prompt_version": STUDENT_PROMPT_VERSION,
         "models": MODELS,
-        "packages": PACKAGES,
+        "packages": PACKAGES | ({"grammar": [CONSTRAINED["library"]]} if args.constrained else {}),
         "train": TRAIN,
-        "generation": GENERATION,
+        "generation": GENERATION | ({"constrained": CONSTRAINED} if args.constrained else {}),
         "deadline_hours": args.deadline_hours,
         "jobs": jobs,
     }
@@ -351,7 +383,11 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
             dev_dir = (
                 RUNS
                 / student_dev.EXPERIMENT
-                / (f"{manifest['session']}-{job['student']}" + ("" if split == "dev" else f"-{split}"))
+                / (
+                    f"{manifest['session']}-{job['student']}"
+                    + ("" if split == "dev" else f"-{split}")
+                    + ("-cd" if job.get("constrained") else "")
+                )
             )
             _copy(src, dev_dir, ("outputs.jsonl", "config.json", "status.json"))
             scored = (
@@ -375,7 +411,9 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                         "session": manifest["session"],
                         "data_version": STUDENTS[job["student"]]["data_version"],
                         "prompt_version": manifest["prompt_version"],
-                        "generation": manifest["generation"],
+                        "generation": manifest["generation"]
+                        if job.get("constrained")
+                        else {k: v for k, v in manifest["generation"].items() if k != "constrained"},
                         "model": manifest["models"][job["model"]],
                         "kernel_env": summary["env"],
                         "cost_usd": 0.0,
@@ -422,6 +460,11 @@ def main(argv: list[str] | None = None) -> int:
     e.add_argument(
         "--score-splits",
         help="evaluation splits to score on: dev (default), fresh, fresh2, fresh3, or a comma list",
+    )
+    e.add_argument(
+        "--constrained",
+        action="store_true",
+        help="score with schema-constrained decoding (CONSTRAINED; run dirs get a -cd suffix)",
     )
     e.add_argument("--stop-after-steps", type=int, help="probe: each training pauses after N steps")
     e.add_argument(

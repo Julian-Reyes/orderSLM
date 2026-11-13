@@ -1,0 +1,104 @@
+{
+  "qwen3.5-0.8b-single-v4": {
+    "chats_wrong": 12,
+    "categories": {
+      "item mistakes": 10,
+      "invalid answer": 1,
+      "fields only": 1
+    },
+    "item_kinds": {
+      "missing_item": 5,
+      "wrong_quantity": 3,
+      "extra_item": 2,
+      "wrong_variant": 2,
+      "wrong_modifications": 1
+    },
+    "fields": {
+      "missing": 4,
+      "time": 1,
+      "payment": 1
+    },
+    "intents_wrong": 17,
+    "confusions": {
+      "OUT_OF_SCOPE → MENU_QUESTION": 2,
+      "PAYMENT_CLAIM → PLACE_ORDER": 2,
+      "UNKNOWN → SMALL_TALK": 1,
+      "MENU_QUESTION → UNKNOWN": 1,
+      "PLACE_ORDER → None": 1,
+      "SMALL_TALK → MODIFY_ORDER": 1,
+      "MODIFY_ORDER → PLACE_ORDER": 1,
+      "HUMAN_REQUEST → PLACE_ORDER": 1,
+      "HUMAN_REQUEST → SMALL_TALK": 1,
+      "OUT_OF_SCOPE → HUMAN_REQUEST": 1,
+      "UNKNOWN → CONFIRM_ORDER": 1,
+      "PLACE_ORDER → MENU_QUESTION": 1,
+      "SMALL_TALK → MENU_QUESTION": 1,
+      "PLACE_ORDER → MODIFY_ORDER": 1,
+      "HUMAN_REQUEST → ORDER_PROBLEM": 1
+    }
+  },
+  "teacher": {
+    "chats_wrong": 1,
+    "categories": {
+      "invalid answer": 1
+    },
+    "item_kinds": {},
+    "fields": {},
+    "intents_wrong": 11,
+    "confusions": {
+      "PLACE_ORDER → SMALL_TALK": 4,
+      "PLACE_ORDER → None": 4,
+      "CONFIRM_ORDER → None": 1,
+      "MODIFY_ORDER → None": 1,
+      "UNKNOWN → SMALL_TALK": 1
+    }
+  },
+  "overlap": {
+    "chats_all_students_wrong": 12,
+    "chats_all_students_and_teacher_wrong": 0,
+    "chats_one_student_only": 12,
+    "messages_all_students_wrong": 17,
+    "messages_one_student_only": 17
+  },
+  "chats_wrong_by_scenario": {
+    "ambiguous_reference": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "combo": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "contextual_yes": {
+      "teacher": 1
+    },
+    "correction": {
+      "qwen3.5-0.8b-single-v4": 3
+    },
+    "correction_after_confirmation": {
+      "teacher": 1
+    },
+    "half_and_half": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "implicit_category": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "menu_question": {
+      "qwen3.5-0.8b-single-v4": 5
+    },
+    "missing_info": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "multi_message_order": {
+      "qwen3.5-0.8b-single-v4": 4
+    },
+    "simple_order": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "small_talk": {
+      "qwen3.5-0.8b-single-v4": 3
+    },
+    "two_requests": {
+      "qwen3.5-0.8b-single-v4": 2
+    }
+  }
+}

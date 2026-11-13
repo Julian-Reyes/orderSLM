@@ -1,0 +1,15 @@
+{
+  "experiment": "grammar-check",
+  "purpose": "Schema-constrained decoding for v5 scoring (Julian, 2026-11-13: go ahead with v5): does the student JSON-schema grammar accept every training answer and every valid v4 answer token by token, and which v4 invalid answers would it block?",
+  "environment": {"xgrammar": "0.2.8", "transformers": "5.20.2", "torch": "2.15.0", "python": "3.13", "where": "scratch venv on the Mac (xgrammar is not a project dependency; the Kaggle kernel pip-installs it)"},
+  "tokenizer": {"repo": "Qwen/Qwen3.5-0.8B", "revision": "2fc06364715b967f1860aea9cf38778875588b17", "vocab_size": 248320, "eos": "<|im_end|> (248046)"},
+  "grammar": {"schema": "StudentOutput (student@0.2) without maxLength/minLength (kaggle_train.grammar_schema)", "any_whitespace": false, "separators": [",", ":"], "strict_mode": true},
+  "xgrammar_bug_found": "0.2.8 rejects an escaped quote inside a length-limited string ({\"q\":\"14\\\" x\"} with maxLength 300 -> rejected; without the limit -> accepted). With the limits kept, 1 target (a quote of 14\\" half n half) was rejected; hence grammar_schema() drops string length limits (validation still checks them).",
+  "results": {
+    "student_data_0_5_single_targets_accepted": "3437/3437",
+    "v4_valid_outputs_accepted": "1134/1134 (dev, fresh, fresh2, fresh3 runs 20261112T215707Z, 20261113T100155Z)",
+    "v4_invalid_outputs_blocked": {"blocked": 6, "of": 8, "blocked_ids": ["a-dev-011#0", "a-fresh2-015#0", "a-fresh3-003#2", "a-fresh3-064#3", "a-fresh3-087#1", "a-fresh3-090#0"], "not_blockable_cross_field": ["a-fresh-057#4", "a-fresh-084#8"]},
+    "runner_processor_simulation": {"valid_answer_unchanged": true, "steered_steps_on_valid": 0, "invalid_enum_steered": true, "note": "the newline the model writes after a finished answer is not allowed (only the end token), which doesn't change the parsed answer"}
+  },
+  "cost_usd": 0.0
+}

@@ -6,6 +6,28 @@ _Last updated 2026-11-13._
 
 ## Start here next session
 
+### Student v5 (2026-11-13; Julian: "keep going with 0.8B", "go ahead with v5 and stop before kaggle run so I can confirm limits")
+
+- **What v4 still misses** (`runs/student-errors/20261113T155319Z` dev, `…T155325Z` fresh, `…T155320Z` fresh2,
+  `…T155327Z` fresh3; finalize@0.4): 58 chats. Guessing instead of asking 12, splitting/counting 10, items dropped or
+  misread 12, late changes 6, invalid answers 7, time/day 5, off-menu add-ons 4, other 2. All four splits are now
+  "used for fixes".
+- **Batch t7 (done, $0):** 240 chats + labels by hand (`runs/synth/t7/`, `synth plan --v5`, `cards.V5_WEIGHTS`:
+  split_lines 45, modify_last 45, vague_ref 20, big_order 20, size_unstated 15, question_mid 15, alias_variant 15,
+  future_day 15, qty_unstated 10, unclear 10, implicit 10, bare_time 10, offmenu_addon 10). 0 drops, 0 label drops;
+  no near-duplicates within t7, vs dev/fresh/fresh2/fresh3, or vs training; all 15 day labels resolve to a later day.
+- **student-data@0.5 (done):** + t7; single 3,265 train / 172 valid (v0.4: 3,037 / 160); same exclusions and rule 6.
+  `qwen3.5-0.8b-single-v5` in `STUDENTS` (same settings as v4).
+- **Schema-constrained decoding (built, not run):** `export --constrained` → score jobs get `-cd` run dirs; the kernel
+  pip-installs `xgrammar==0.2.8` (Apache-2.0, Sept 2026; **new dependency, Kaggle kernel only: Julian to approve**)
+  and masks tokens that can't continue compact student JSON; `grammar_steered` per answer counts the steps where it
+  changed the greedy token. Offline check (`runs/grammar-check/20261113T162755Z`): the grammar accepts all 3,437
+  targets and all 1,134 valid v4 answers token by token (so a valid answer can't change) and would block 6 of v4's
+  8 invalid answers (the other 2 break cross-field rules). Found an xgrammar 0.2.8 bug (escaped quote in a
+  length-limited string rejected): the grammar gets the schema without string length limits; validation keeps them.
+- **Training time:** v4 took 9 h 56 min for 3,037 rows on one T4; v5 ≈ 10.7 h, so dev scoring can't share the session
+  (12 h cap): training session, then a scoring session.
+
 ### Orders for another day (2026-11-12; Julian: "do the recommended fix, then the training batch and v4 retrain, then the new test chats. We have to get this to 95%+ accuracy")
 
 - **Why:** the order had no day: "tmrw" became ASAP, and "tmrw at 6:30" became 18:30 *today* with a read-back

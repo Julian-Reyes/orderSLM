@@ -1,0 +1,129 @@
+{
+ "card_id": "syn-t7-0099",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "milkshake",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a milkshake"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "lemonade",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "3 lemonades"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 0,
+      "quote": "for pickup"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 6pm",
+     "normalized_local": "18:00",
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "at 6pm"
+      }
+     ],
+     "day": {
+      "kind": "date",
+      "weekday": null,
+      "month": 10,
+      "day_of_month": 4,
+      "raw_text": "October 4th",
+      "evidence": [
+       {
+        "message_index": 0,
+        "quote": "October 4th"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "paying by card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Ana",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "Ana"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

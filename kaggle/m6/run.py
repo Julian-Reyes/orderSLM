@@ -14,6 +14,9 @@ different GPUs run in parallel (one process each, `CUDA_VISIBLE_DEVICES`), jobs 
   below MIN_FREE_GB (the host grows ~10 MB per new training row; two trainings at once ran it out in session 1).
 - `score`: greedy generation for each request (dev prefixes) with base + adapter; raw text out, scored on the Mac.
   With `after_train`, the adapter is that job's best from this session, scored only if its training finished.
+  With `constrained`, each token must keep the answer a prefix of compact JSON for the staged student schema
+  (xgrammar); `grammar_steered` counts the steps where that changed the greedy token (not counting the newline the
+  model writes after a finished answer).
 
 Before any job starts, every input file run.json names must exist (session 2 lost its resume and adapter folders in
 the upload), else the session ends at once.
@@ -63,6 +66,8 @@ def missing_inputs(run: dict, src: Path) -> list[str]:
             need.append(j["requests"])
             if j.get("adapter") and not j.get("after_train"):
                 need += [f"{j['adapter']}/{f}" for f in ("adapter_config.json", "adapter_model.safetensors")]
+            if j.get("constrained"):
+                need.append(run["generation"]["constrained"]["schema"])
     return [f for f in dict.fromkeys(need) if not (src / f).is_file()]
 
 
@@ -532,6 +537,32 @@ def unfinished_training(job: dict) -> str | None:
     return None if trained == "done" else f"{job['after_train']} is {trained}"
 
 
+def grammar_processor_factory(compiled, transformers):
+    """A fresh logits processor per request (batch of one): masks tokens the grammar can't take next and counts the
+    steps where the mask changed the greedy choice."""
+    import xgrammar as xgr
+
+    class Grammar(transformers.LogitsProcessor):
+        def __init__(self):
+            self.matcher = xgr.GrammarMatcher(compiled)
+            self.bitmask = xgr.allocate_token_bitmask(1, compiled.tokenizer_info.vocab_size)
+            self.started = False
+            self.steered = 0
+
+        def __call__(self, input_ids, scores):
+            if self.started:
+                self.matcher.accept_token(int(input_ids[0, -1]))
+            self.started = True
+            top = int(scores[0].argmax())
+            self.matcher.fill_next_token_bitmask(self.bitmask)
+            xgr.apply_token_bitmask_inplace(scores, self.bitmask.to(scores.device))
+            if int(scores[0].argmax()) != top and not self.matcher.is_completed():
+                self.steered += 1
+            return scores
+
+    return Grammar
+
+
 def score_job(job: dict, run: dict, src: Path, start: float) -> None:
     import torch
     import transformers
@@ -559,8 +590,22 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
         ).hexdigest()
         model = PeftModel.from_pretrained(model, adapter).merge_and_unload()
     model.eval()
-    write_json(out / "config.json", info)
     gen = run["generation"]
+    grammar = None
+    if job.get("constrained"):
+        import xgrammar as xgr
+
+        vocab = model.get_output_embeddings().weight.shape[0]
+        tinfo = xgr.TokenizerInfo.from_huggingface(tok, vocab_size=vocab, stop_token_ids=[tok.eos_token_id])
+        compiled = xgr.GrammarCompiler(tinfo).compile_json_schema(
+            (src / gen["constrained"]["schema"]).read_text(),
+            any_whitespace=False,
+            separators=(",", ":"),
+            strict_mode=True,
+        )
+        grammar = grammar_processor_factory(compiled, transformers)
+        info["constrained"] = {"vocab_size": vocab, "eos_token_id": tok.eos_token_id}
+    write_json(out / "config.json", info)
     requests = read_jsonl(src / job["requests"])
     done = set()
     outputs = out / "outputs.jsonl"
@@ -582,6 +627,7 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
             t = time.perf_counter()
             rec = {"id": req["id"], "input_tokens": int(ids.shape[1])}
             try:
+                proc = grammar() if grammar else None
                 with torch.inference_mode():
                     o = model.generate(
                         ids,
@@ -589,7 +635,10 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
                         do_sample=False,
                         max_new_tokens=gen["max_new_tokens"],
                         pad_token_id=tok.pad_token_id or tok.eos_token_id,
+                        **({"logits_processor": transformers.LogitsProcessorList([proc])} if proc else {}),
                     )
+                if proc:
+                    rec["grammar_steered"] = proc.steered
                 new = o[0, ids.shape[1] :]
                 rec |= {
                     "text": tok.decode(new, skip_special_tokens=True),
@@ -644,6 +693,8 @@ def main() -> None:
             text=True,
         )
         env["fla_install"] = {"returncode": r.returncode, "stderr": r.stderr[-1000:]}
+        if pins.get("grammar"):
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", *pins["grammar"]])
     import peft
     import torch
     import transformers

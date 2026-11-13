@@ -1,0 +1,170 @@
+{
+ "card_id": "syn-t7-0130",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "margherita_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "extra_large",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "remove",
+       "modifier_id": "mozzarella",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "no mozzarella",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "an xl margherita no mozzarella"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "breadsticks",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "3 breadsticks"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "garlic_knots",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a garlic knots"
+      }
+     ]
+    },
+    {
+     "line_id": "L4",
+     "menu_item_id": "dr_pepper",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "can",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "2 cans of dr pepper"
+      }
+     ]
+    },
+    {
+     "line_id": "L5",
+     "menu_item_id": "sprite",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "two_liter",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 3,
+       "quote": "3 2-liter sprites"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

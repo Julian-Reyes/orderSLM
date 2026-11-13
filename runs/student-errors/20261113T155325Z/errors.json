@@ -1,0 +1,487 @@
+{
+ "split": "fresh",
+ "n_chats": 90,
+ "n_messages": 278,
+ "models": [
+  "qwen3.5-0.8b-single-v4"
+ ],
+ "students": [
+  "qwen3.5-0.8b-single-v4"
+ ],
+ "chats": [
+  {
+   "conversation_id": "a-fresh-009",
+   "scenarios": [
+    "missing_info"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [],
+     "fields": {
+      "missing": {
+       "gold": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "item_variant",
+          "ambiguous"
+         ],
+         1
+        ],
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ],
+       "pred": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "item_variant",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-031",
+   "scenarios": [
+    "simple_order"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [
+      {
+       "kind": "wrong_quantity",
+       "parts": [
+        "quantity"
+       ],
+       "gold": "3× supreme_pizza, large",
+       "pred": "2× supreme_pizza, large"
+      }
+     ],
+     "fields": {}
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-057",
+   "scenarios": [
+    "ambiguous_reference"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "invalid": "order.items.1: Value error, L2: exactly one of menu_item_id, unmatched_text, halves must be set (spec §4)"
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-063",
+   "scenarios": [
+    "missing_info",
+    "small_talk"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [
+      {
+       "kind": "wrong_variant",
+       "parts": [
+        "variant"
+       ],
+       "gold": "2× pepperoni_pizza",
+       "pred": "2× pepperoni_pizza, large"
+      }
+     ],
+     "fields": {
+      "missing": {
+       "gold": [
+        [
+         [
+          "item_variant",
+          "ambiguous"
+         ],
+         1
+        ],
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ],
+       "pred": [
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-066",
+   "scenarios": [
+    "simple_order"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [
+      {
+       "kind": "missing_item",
+       "gold": "1× breakfast_sandwich, croissant"
+      },
+      {
+       "kind": "extra_item",
+       "pred": "1× croissant"
+      }
+     ],
+     "fields": {
+      "missing": {
+       "gold": [],
+       "pred": [
+        [
+         [
+          "item_variant",
+          "missing"
+         ],
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-080",
+   "scenarios": [
+    "off_menu"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [
+      {
+       "kind": "wrong_modifications",
+       "parts": [
+        "modifications"
+       ],
+       "gold": "1× veggie_pizza, large, remove cheese, add VEGAN CHEESE",
+       "pred": "1× veggie_pizza, large, remove cheese, add feta_cheese"
+      }
+     ],
+     "fields": {
+      "missing": {
+       "gold": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "item_modification",
+          "off_menu"
+         ],
+         1
+        ]
+       ],
+       "pred": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-084",
+   "scenarios": [
+    "correction"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "invalid": "order: Value error, address must be not_applicable for pickup"
+    }
+   }
+  },
+  {
+   "conversation_id": "a-fresh-087",
+   "scenarios": [
+    "unclear_message"
+   ],
+   "wrong": [
+    "qwen3.5-0.8b-single-v4"
+   ],
+   "all_students_wrong": true,
+   "errors": {
+    "qwen3.5-0.8b-single-v4": {
+     "items": [
+      {
+       "kind": "missing_item",
+       "gold": "1× off-menu 'the usual'"
+      },
+      {
+       "kind": "extra_item",
+       "pred": "1× bacon_burger"
+      }
+     ],
+     "fields": {
+      "missing": {
+       "gold": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "item_menu_match",
+          "ambiguous"
+         ],
+         1
+        ],
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ],
+       "pred": [
+        [
+         [
+          "fulfillment_method",
+          "missing"
+         ],
+         1
+        ],
+        [
+         [
+          "payment_method",
+          "missing"
+         ],
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  }
+ ],
+ "messages": [
+  {
+   "conversation_id": "a-fresh-004",
+   "message_index": 1,
+   "text": "party at my place tonight",
+   "gold": "SMALL_TALK",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "PLACE_ORDER"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-008",
+   "message_index": 1,
+   "text": "47",
+   "gold": "UNKNOWN",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "PLACE_ORDER"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-009",
+   "message_index": 0,
+   "text": "good afternoon, id like to order one of the big margheritas pls, and could u tell me if the margherita has fresh mozzarella on it? thank u kindly",
+   "gold": "PLACE_ORDER",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "MENU_QUESTION"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-012",
+   "message_index": 0,
+   "text": "]",
+   "gold": "UNKNOWN",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "SMALL_TALK"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-023",
+   "message_index": 1,
+   "text": "random q",
+   "gold": "SMALL_TALK",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "UNKNOWN"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-029",
+   "message_index": 0,
+   "text": "Hi!",
+   "gold": "SMALL_TALK",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "UNKNOWN"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-037",
+   "message_index": 0,
+   "text": "hey! 🚗 grabbing stuff for the office on my way in",
+   "gold": "PLACE_ORDER",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "SMALL_TALK"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-046",
+   "message_index": 1,
+   "text": "party tmrw",
+   "gold": "SMALL_TALK",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "PLACE_ORDER"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-047",
+   "message_index": 2,
+   "text": "CAN U DELIVER IT",
+   "gold": "DELIVERY_QUESTION",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "PLACE_ORDER"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-057",
+   "message_index": 4,
+   "text": "actualy make it 3 bacon burgers",
+   "gold": "MODIFY_ORDER",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": null
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-069",
+   "message_index": 0,
+   "text": "Hello, my delivery came but the onion rings I paid for never arrived. Could I get a refund for them?",
+   "gold": "ORDER_PROBLEM",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "REFUND_REQUEST"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-080",
+   "message_index": 0,
+   "text": "HI! I'M VEGAN",
+   "gold": "SMALL_TALK",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "MENU_QUESTION"
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-084",
+   "message_index": 8,
+   "text": "cash pls",
+   "gold": "PLACE_ORDER",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": null
+   },
+   "all_students_wrong": true
+  },
+  {
+   "conversation_id": "a-fresh-087",
+   "message_index": 3,
+   "text": "oh right its the bac",
+   "gold": "UNKNOWN",
+   "pred": {
+    "qwen3.5-0.8b-single-v4": "PLACE_ORDER"
+   },
+   "all_students_wrong": true
+  }
+ ]
+}

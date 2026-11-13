@@ -57,6 +57,9 @@ from .cards import (
     V3_WEIGHTS,
     V4_MODIFY_KIND_WEIGHTS,
     V4_WEIGHTS,
+    V5_FUTURE_DAY_KIND_WEIGHTS,
+    V5_MODIFY_KIND_WEIGHTS,
+    V5_WEIGHTS,
     plan_cards,
     plan_targeted_cards,
 )
@@ -139,11 +142,13 @@ def plan(args: argparse.Namespace) -> int:
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    if args.targeted or args.topup or args.v3 or args.v4:
+    if args.targeted or args.topup or args.v3 or args.v4 or args.v5:
         if business_ids:
             raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
         weights = (
-            V4_WEIGHTS
+            V5_WEIGHTS
+            if args.v5
+            else V4_WEIGHTS
             if args.v4
             else V3_WEIGHTS
             if args.v3
@@ -159,6 +164,11 @@ def plan(args: argparse.Namespace) -> int:
             weights=weights,
             **({"modify_weights": V3_MODIFY_KIND_WEIGHTS} if args.v3 else {}),
             **({"modify_weights": V4_MODIFY_KIND_WEIGHTS} if args.v4 else {}),
+            **(
+                {"modify_weights": V5_MODIFY_KIND_WEIGHTS, "future_day_weights": V5_FUTURE_DAY_KIND_WEIGHTS}
+                if args.v5
+                else {}
+            ),
         )
     else:
         cards = plan_cards(
@@ -175,10 +185,13 @@ def plan(args: argparse.Namespace) -> int:
         "n": args.n,
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
-        "targets_version": TARGETS_VERSION if args.targeted or args.topup or args.v3 or args.v4 else None,
+        "targets_version": TARGETS_VERSION
+        if args.targeted or args.topup or args.v3 or args.v4 or args.v5
+        else None,
         "topup": args.topup,
         "v3": args.v3,
         "v4": args.v4,
+        "v5": args.v5,
         "rewrite_missing": args.rewrite_missing,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
@@ -651,6 +664,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     p.add_argument(
         "--v4", action="store_true", help="training data v4 targets (cards.V4_WEIGHTS), $0 by hand"
+    )
+    p.add_argument(
+        "--v5", action="store_true", help="training data v5 targets (cards.V5_WEIGHTS), $0 by hand"
     )
     p.add_argument(
         "--rewrite-missing", metavar="BATCH", help="also copy BATCH's cards whose chat was dropped"

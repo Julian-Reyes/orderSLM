@@ -1,0 +1,158 @@
+{
+ "card_id": "syn-t7-0183",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "supreme_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "anchovies",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "WITH ANCHOVIES",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "add",
+       "modifier_id": "crust_gluten_free",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "ON GLUTEN FREE",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "A PERSONAL SUPREME WITH ANCHOVIES ON GLUTEN FREE"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "dr_pepper",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "can",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "A DR PEPPER"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": null,
+     "unmatched_text": "SAME AS LAST TIME",
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "SAME AS LAST TIME"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 1,
+      "quote": "TO 2 BIRCH RD"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "relative",
+     "raw_text": "IN 30 MIN",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "IN 30 MIN"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "BIRCH RD",
+    "number": "2",
+    "unit": "UNIT 15B",
+    "reference": null,
+    "raw_text": "2 BIRCH RD UNIT 15B",
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "2 BIRCH RD UNIT 15B"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": [
+    {
+     "field": "item_menu_match",
+     "line_id": "L3"
+    }
+   ]
+  }
+ }
+}

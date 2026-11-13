@@ -1,0 +1,90 @@
+{
+  "qwen3.5-0.8b-single-v4": {
+    "chats_wrong": 20,
+    "categories": {
+      "item mistakes": 17,
+      "fields only": 2,
+      "invalid answer": 1
+    },
+    "item_kinds": {
+      "missing_item": 7,
+      "wrong_modifications": 5,
+      "extra_item": 4,
+      "wrong_variant": 3,
+      "wrong_quantity": 3,
+      "wrong_modifications+combo_picks": 1,
+      "wrong_quantity+modifications": 1
+    },
+    "fields": {
+      "missing": 5,
+      "payment": 1,
+      "time": 1
+    },
+    "intents_wrong": 18,
+    "confusions": {
+      "OUT_OF_SCOPE → HUMAN_REQUEST": 2,
+      "PLACE_ORDER → MODIFY_ORDER": 2,
+      "UNKNOWN → SMALL_TALK": 2,
+      "PAYMENT_CLAIM → PLACE_ORDER": 1,
+      "PLACE_ORDER → None": 1,
+      "UNKNOWN → PLACE_ORDER": 1,
+      "SMALL_TALK → OUT_OF_SCOPE": 1,
+      "SMALL_TALK → DELIVERY_QUESTION": 1,
+      "CONFIRM_ORDER → SMALL_TALK": 1,
+      "UNKNOWN → MENU_QUESTION": 1,
+      "OUT_OF_SCOPE → UNKNOWN": 1,
+      "MENU_QUESTION → OUT_OF_SCOPE": 1,
+      "PLACE_ORDER → MENU_QUESTION": 1,
+      "ORDER_STATUS → DELIVERY_QUESTION": 1,
+      "DELIVERY_QUESTION → PLACE_ORDER": 1
+    }
+  },
+  "overlap": {
+    "chats_all_students_wrong": 20,
+    "chats_all_students_and_teacher_wrong": 0,
+    "chats_one_student_only": 20,
+    "messages_all_students_wrong": 18,
+    "messages_one_student_only": 18
+  },
+  "chats_wrong_by_scenario": {
+    "ambiguous_reference": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "combo": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "contextual_yes": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "correction": {
+      "qwen3.5-0.8b-single-v4": 3
+    },
+    "correction_after_confirmation": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "human_request": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "implicit_category": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "missing_info": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "multi_message_order": {
+      "qwen3.5-0.8b-single-v4": 5
+    },
+    "off_menu": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "payment_claim": {
+      "qwen3.5-0.8b-single-v4": 1
+    },
+    "simple_order": {
+      "qwen3.5-0.8b-single-v4": 2
+    },
+    "small_talk": {
+      "qwen3.5-0.8b-single-v4": 4
+    }
+  }
+}

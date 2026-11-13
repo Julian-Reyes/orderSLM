@@ -1,0 +1,94 @@
+{
+  "batch": "t7",
+  "n": 240,
+  "seed": 20261016,
+  "cards_version": "synth-cards@0.5",
+  "targets_version": "synth-targets@0.1",
+  "topup": false,
+  "v3": false,
+  "v4": false,
+  "v5": true,
+  "rewrite_missing": null,
+  "synth_schema_version": "synth@0.1",
+  "generators": {
+    "claude-session/claude-opus-5-5": 1
+  },
+  "menu_versions": {
+    "corner-patty": "corner-patty@ff1a995e0937",
+    "halfmoon-pizza": "halfmoon-pizza@76a71f5db02f",
+    "morning-crumb": "morning-crumb@176c82480e7c"
+  },
+  "planned_at": "2026-11-13T16:01:58.192873+00:00",
+  "git_commit": "6ea25889882dd3d2b3fbc11556c12f26f322c168-dirty",
+  "distribution": {
+    "generator": {
+      "claude-session/claude-opus-5-5": 240
+    },
+    "scenario": {
+      "multi_message_order": 62,
+      "missing_info": 51,
+      "simple_order": 45,
+      "correction": 24,
+      "correction_after_confirmation": 21,
+      "implicit_category": 10,
+      "unclear_message": 10,
+      "two_requests": 9,
+      "ambiguous_reference": 8
+    },
+    "business": {
+      "morning-crumb": 88,
+      "halfmoon-pizza": 80,
+      "corner-patty": 72
+    },
+    "style": {
+      "texting": 72,
+      "emoji": 48,
+      "clean": 48,
+      "rapid_fire": 48,
+      "shouty": 24
+    },
+    "fulfillment": {
+      "pickup": 115,
+      "delivery": 61,
+      "unstated": 54,
+      "not_applicable": 10
+    },
+    "payment": {
+      "card": 100,
+      "cash": 65,
+      "unstated": 65,
+      "not_applicable": 10
+    },
+    "items": {
+      "1": 72,
+      "2": 58,
+      "3": 57,
+      "4": 23,
+      "5": 18,
+      "0": 10,
+      "6": 2
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 230,
+      "MODIFY_ORDER": 45,
+      "MENU_QUESTION": 40,
+      "CONFIRM_ORDER": 21,
+      "UNKNOWN": 10
+    },
+    "target": {
+      "split_lines": 45,
+      "modify_last": 45,
+      "big_order": 20,
+      "vague_ref": 20,
+      "alias_variant": 15,
+      "question_mid": 15,
+      "size_unstated": 15,
+      "future_day": 15,
+      "implicit": 10,
+      "unclear": 10,
+      "offmenu_addon": 10,
+      "bare_time": 10,
+      "qty_unstated": 10
+    }
+  }
+}

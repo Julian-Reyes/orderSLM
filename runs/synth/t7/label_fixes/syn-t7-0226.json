@@ -1,0 +1,124 @@
+{
+ "card_id": "syn-t7-0226",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "bacon_burger",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "2 bacon burgers"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "sprite",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "a sprite"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 0,
+      "quote": "delivered to 449 clement ave"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 7pm",
+     "normalized_local": "19:00",
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "at 7pm"
+      }
+     ],
+     "day": {
+      "kind": "date",
+      "weekday": null,
+      "month": 10,
+      "day_of_month": 9,
+      "raw_text": "oct 9",
+      "evidence": [
+       {
+        "message_index": 0,
+        "quote": "oct 9"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "clement ave",
+    "number": "449",
+    "unit": null,
+    "reference": null,
+    "raw_text": "449 clement ave",
+    "evidence": [
+     {
+      "message_index": 0,
+      "quote": "449 clement ave"
+     }
+    ]
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

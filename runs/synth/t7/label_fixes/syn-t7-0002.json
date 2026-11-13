@@ -1,0 +1,181 @@
+{
+ "card_id": "syn-t7-0002",
+ "kind": "hand_label",
+ "reason": "training data v5: chat and label written by hand (Julian, 2026-11-13; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-13T16:29:10.094448+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 3,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "hawaiian_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "4 personal Hawaiian pizzas"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "hawaiian_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "crust_thick",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "on thick crust",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "4 personal Hawaiian pizzas"
+      },
+      {
+       "message_index": 1,
+       "quote": "3 of them on thick crust"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "veggie_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 3,
+     "variant_id": "personal",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "add",
+       "modifier_id": "basil",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "with basil",
+       "not_on_menu": false,
+       "kitchen_note": false
+      },
+      {
+       "kind": "add",
+       "modifier_id": "crust_gluten_free",
+       "replacement_modifier_id": null,
+       "amount": "normal",
+       "raw_text": "on gluten-free crust",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "3 personal veggie pizzas"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "pickup",
+    "method_evidence": [
+     {
+      "message_index": 3,
+      "quote": "Pickup"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "not_applicable",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": 5000,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 3,
+      "quote": "I'll pay cash"
+     },
+     {
+      "message_index": 3,
+      "quote": "with a 50"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "provided",
+    "value": "Tom",
+    "evidence": [
+     {
+      "message_index": 3,
+      "quote": "Tom"
+     }
+    ]
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

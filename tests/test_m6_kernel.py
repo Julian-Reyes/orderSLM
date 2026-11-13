@@ -194,3 +194,32 @@ def test_other_scoring_waits_behind_the_training_that_finishes():
         ("score", "qwen3.5-2b-single", 0),
         ("score", "qwen3.5-2b-mixed", 0),
     ]
+
+
+def test_grammar_schema_drops_only_string_length_limits():
+    from orderslm.schema.label import StudentOutput
+
+    full, loose = StudentOutput.model_json_schema(), kaggle_train.grammar_schema()
+    text = str(loose)
+    assert "maxLength" not in text and "minLength" not in text
+    assert "maxLength" in str(full)  # the contract still has them (validation checks them after decoding)
+
+    def strip(x):
+        if isinstance(x, dict):
+            return {k: strip(v) for k, v in x.items() if k not in ("maxLength", "minLength")}
+        return [strip(v) for v in x] if isinstance(x, list) else x
+
+    assert strip(full) == loose
+
+
+def test_constrained_scoring_needs_the_schema_file(tmp_path, monkeypatch):
+    k = _kernel(tmp_path / "out", monkeypatch)
+    src = tmp_path / "in"
+    run = {
+        "generation": {"constrained": {"schema": "student-schema.json"}},
+        "jobs": [{"kind": "score", "requests": "fresh3-requests.jsonl", "constrained": True}],
+    }
+    _write(src / "fresh3-requests.jsonl")
+    assert k.missing_inputs(run, src) == ["student-schema.json"]
+    _write(src / "student-schema.json")
+    assert k.missing_inputs(run, src) == []

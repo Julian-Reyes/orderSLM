@@ -216,6 +216,27 @@ V4_WEIGHTS = {
     "implicit": 10,  # "a strawberry", "smth to snack on" settled by the menu or the business (fresh2 004, 068)
 }
 V4_MODIFY_KIND_WEIGHTS = {"remove_item": 10, "swap_item": 10, "quantity": 5}
+# Training data v5 (Julian, 2026-11-13: "keep going with 0.8B", "go ahead with v5"): the 58 chats v4 still gets wrong
+# on dev, fresh, fresh2 and fresh3 (runs/student-errors/20261113T155319Z, …T155325Z, …T155320Z, …T155327Z), in
+# groups: guessing instead of asking, splitting/counting, items dropped or misread, late changes, time/day,
+# off-menu add-ons. Invalid answers are left to schema-constrained decoding. By hand, $0.
+V5_WEIGHTS = {
+    "split_lines": 45,  # "5 supremes, 2 no olives", "one chocolate and one strawberry", "make it 5" (10 misses)
+    "modify_last": 45,  # "almond instead of oat" ignored, "skip the breadsticks", "add bacon to all" (6)
+    "vague_ref": 20,  # "the big one" after two were named, "the usual… its the bac" (5)
+    "size_unstated": 15,  # "one of the bigger ones", "the big pepperonis" guessed as large (4)
+    "qty_unstated": 10,  # "some garlic knots" read as 1 (1)
+    "unclear": 10,  # "can i get a medium lat" (cut off) read as a latte (1)
+    "big_order": 20,  # an item dropped from a six-item message (dev 074, fresh2 005)
+    "question_mid": 15,  # an order and a question in one message: the order after the question lost (dev 085)
+    "alias_variant": 15,  # "bec on a croissant", "1 on a croissant", "bacon egg n cheese" misread (4)
+    "implicit": 10,  # "the breadsticks" after the business listed knots and breadsticks (fresh3 091)
+    "bare_time": 10,  # "10:30" at a place open till 11 pm, "pickup now" (2)
+    "future_day": 15,  # a date ("nov 19"), a day with a catering ask (3)
+    "offmenu_addon": 10,  # "vegan cheese" mapped to feta, "pesto drizzle" split (4)
+}
+V5_MODIFY_KIND_WEIGHTS = {"option_swap": 12, "remove_item": 12, "quantity": 8, "add_mod": 8, "swap_item": 5}
+V5_FUTURE_DAY_KIND_WEIGHTS = {"date_time": 6, "day_no_time": 6, "weekday_time": 3}
 FUTURE_DAY_KIND_WEIGHTS = {
     "tomorrow_time": 30,
     "weekday_time": 25,
@@ -882,6 +903,8 @@ TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
     "future_day": (S.simple_order, S.multi_message_order, S.missing_info),
     "combo_extra": (S.combo,),
     "implicit": (S.implicit_category,),
+    "question_mid": (S.two_requests, S.multi_message_order),
+    "alias_variant": (S.simple_order, S.multi_message_order),
 }
 V3_SENTENCES = {
     "qty_unstated": "Never says how many of the first item: asks for it vaguely ('some', 'a few', 'muffins for the "
@@ -895,6 +918,10 @@ V3_SENTENCES = {
     "combo_extra": "Besides the combo's own picks, also orders one more drink or side as a separate item.",
     "implicit": "Names items without category words or only vaguely ('a veggie', 'a strawberry', 'something to "
     "snack on'); the menu or the business's reply settles each one.",
+    "question_mid": "One customer message orders an item, asks a question in the middle, and goes on ordering after "
+    "the question; every item named before and after the question is ordered.",
+    "alias_variant": "Names an item only by a nickname or its parts ('bec', 'bacon egg n cheese', 'a number 2', "
+    "'1 on a croissant' after asking about it) with its variant said casually.",
 }
 
 
