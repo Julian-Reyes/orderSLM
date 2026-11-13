@@ -125,3 +125,25 @@ def test_paused_run_is_refused_not_scored_as_invalid(tmp_path):
     with (tmp_path / "outputs.jsonl").open("a") as f:
         f.write(json.dumps({"id": "c2#0", "text": "{}"}) + "\n")
     assert unanswered(tmp_path, messages) == []
+
+
+def test_parts_split_fresh3_into_standard_and_future_day():
+    parts = sc.split_parts("fresh3")
+    assert parts is not None and len(parts["standard"]) == 90 and len(parts["future_day"]) == 20
+    assert sc.split_parts("dev") is None and sc.split_parts("test") is None  # never opens the sealed split
+    worse = dict(CHATS) | {"c0": ([True, True], 0, 1, 0, 1)}
+    c = sc.compare(
+        [_run("a", CHATS), _run("b", worse)],
+        resamples=10,
+        parts={"standard": ["c1", "c2"], "future_day": ["c0", "c8"]},
+    )
+    assert c["parts"]["future_day"]["students"]["a"]["exact_rate"] == 0.5
+    assert c["parts"]["future_day"]["students"]["b"]["exact_rate"] == 0.0
+    assert c["parts"]["future_day"]["pairs"][0] | {} == {
+        "a": "a",
+        "b": "b",
+        "only_a_right": 1,
+        "only_b_right": 0,
+        "mcnemar_p": 1.0,
+    }
+    assert c["parts"]["standard"]["pairs"][0]["only_a_right"] == 0

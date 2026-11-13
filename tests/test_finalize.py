@@ -273,6 +273,12 @@ def test_exclusive_choice_read_the_wrong_way_round_is_turned_around():
     assert mod(line("drip_coffee", "substitute", "whole_milk", "oat_milk")) == ("add", "oat_milk", None)
     assert mod(line("americano", "substitute", "skim_milk", "whole_milk")) == ("add", "whole_milk", None)
     assert mod(line("latte", "add", "oat_milk")) == ("substitute", "whole_milk", "oat_milk")
+    # finalize@0.4: a swap from the customer's earlier milk, on a drink that comes with whole milk
+    assert mod(line("latte", "substitute", "oat_milk", "almond_milk")) == (
+        "substitute",
+        "whole_milk",
+        "almond_milk",
+    )
     # already right: unchanged
     assert mod(line("drip_coffee", "add", "oat_milk")) == ("add", "oat_milk", None)
     assert mod(line("latte", "substitute", "whole_milk", "oat_milk")) == (
@@ -288,7 +294,7 @@ def test_exclusive_choice_read_the_wrong_way_round_is_turned_around():
 
 
 def test_rule_6_never_changes_gold():
-    for split in (Split.dev, Split.fresh, Split.fresh2):
+    for split in (Split.dev, Split.fresh, Split.fresh2, Split.fresh3):
         for ac in load_eval_split(split):
             if ac.gold_extraction is not None:
                 items = ac.gold_extraction.items

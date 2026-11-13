@@ -120,7 +120,7 @@
     },
     "views": {
       "before": "raw model JSON, scorer@0.1 (unstated default variant counts as different)",
-      "after": "model JSON through finalize@0.3, scorer@0.5 (blank = default variant)"
+      "after": "model JSON through finalize@0.4, scorer@0.5 (blank = default variant)"
     }
   },
   "student_bakeoff": {
@@ -243,7 +243,7 @@
         "invalid_answers": 2,
         "latency_ms_p50": 13141,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-fresh",
@@ -260,7 +260,7 @@
         "invalid_answers": 9,
         "latency_ms_p50": 13518,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     },
     {
@@ -281,7 +281,7 @@
         "invalid_answers": 13,
         "latency_ms_p50": 15164,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-single-fresh",
@@ -298,7 +298,7 @@
         "invalid_answers": 10,
         "latency_ms_p50": 14919,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     },
     {
@@ -319,7 +319,7 @@
         "invalid_answers": 9,
         "latency_ms_p50": 14304,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-mixed-fresh",
@@ -336,7 +336,7 @@
         "invalid_answers": 5,
         "latency_ms_p50": 15018,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     },
     {
@@ -357,7 +357,7 @@
         "invalid_answers": 3,
         "latency_ms_p50": 13542,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
@@ -374,7 +374,7 @@
         "invalid_answers": 7,
         "latency_ms_p50": 13849,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     },
     {
@@ -395,7 +395,7 @@
         "invalid_answers": 9,
         "latency_ms_p50": 13977,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261103T115227Z-qwen3.5-2b-single-v2-fresh",
@@ -412,7 +412,7 @@
         "invalid_answers": 3,
         "latency_ms_p50": 14142,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     },
     {
@@ -433,7 +433,7 @@
         "invalid_answers": 5,
         "latency_ms_p50": 14729,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       },
       "fresh": {
         "run": "runs/student-dev/20261027T123832Z-qwen3.5-2b-mixed-v2-fresh",
@@ -450,7 +450,7 @@
         "invalid_answers": 8,
         "latency_ms_p50": 14860,
         "scorer": "scorer@0.5",
-        "finalize": "finalize@0.3"
+        "finalize": "finalize@0.4"
       }
     }
   ],
@@ -476,7 +476,7 @@
           "invalid_answers": 3,
           "latency_ms_p50": 13542,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "fresh": {
           "run": "runs/student-dev/20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
@@ -493,7 +493,7 @@
           "invalid_answers": 7,
           "latency_ms_p50": 13849,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "t4_latency_s_p50": 13.5
       },
@@ -515,7 +515,7 @@
           "invalid_answers": 3,
           "latency_ms_p50": 90866,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-f16-fresh",
@@ -532,7 +532,7 @@
           "invalid_answers": 7,
           "latency_ms_p50": 4267,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "t4_latency_s_p50": 3.9,
         "t4_latency_s_p95": 5.5,
@@ -558,7 +558,7 @@
           "invalid_answers": 4,
           "latency_ms_p50": 112088,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-q8_0-fresh",
@@ -575,7 +575,7 @@
           "invalid_answers": 7,
           "latency_ms_p50": 2770,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "t4_latency_s_p50": 2.6,
         "t4_latency_s_p95": 3.7,
@@ -601,7 +601,7 @@
           "invalid_answers": 6,
           "latency_ms_p50": 2378,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "fresh": {
           "run": "runs/student-dev/20261105T121614Z-qwen3.5-0.8b-single-v2-q4_k_m-fresh",
@@ -618,7 +618,7 @@
           "invalid_answers": 10,
           "latency_ms_p50": 2422,
           "scorer": "scorer@0.5",
-          "finalize": "finalize@0.3"
+          "finalize": "finalize@0.4"
         },
         "t4_latency_s_p50": 2.3,
         "t4_latency_s_p95": 3.3,

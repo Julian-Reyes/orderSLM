@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-12._
+_Last updated 2026-11-13._
 
 ## Start here next session
 
@@ -55,14 +55,39 @@ _Last updated 2026-11-12._
   gold resolves to a later day; no near-duplicates vs dev/fresh/fresh2/all training batches incl. t6. Written after
   t6 and finalize@0.3: **the clean measure of v4**. Not reviewed by Julian; same writer as t6 (caveat). Also fixed:
   the plain-English view printed "Time: not mentioned" next to a clock time (describe.py, since step 1).
-  - **Next:** when kernel v15 finishes: `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261112T215707Z"`;
-    then a scoring session: `export --score qwen3.5-0.8b-single-v3:fresh3,qwen3.5-0.8b-single-v4:fresh+fresh2+fresh3`
-    (one per T4, ~1–2 h), import, `student-compare` v3 vs v4 per split, report fresh3 overall, its 90 standard chats
-    and its 20 future-day chats separately.
-  - **Left (was):** add `qwen3.5-0.8b-single-v4` (data v0.4) to `STUDENTS` in
-    `train/kaggle_train.py`, check the Kaggle GPU quota (~15 h left this week, estimated), export + push (~10 h
-    training); then step 3: a new fresh3 batch written after t6, scored for v3 and v4. 95% is not expected from
-    one retrain; v3's misses are mostly reading errors of the 0.8B.
+- **Results (2026-11-13, $0 Kaggle).** v4 trained to the end (kernel v15, best val 0.0093 at the last step 760,
+  finished 07:56 UTC; dev scored in the same session); imported `runs/train/20261112T215707Z`. Scoring session
+  kernel v16 (`runs/train/20261113T100155Z`, fresh3 first on both T4s in case the quota ran out): v3 on fresh3,
+  v4 on fresh3 / fresh / fresh2, all complete. Fully correct orders, v3 → v4 (finalize@0.3, `student-compare`):
+  | split | v3 | v4 | chats only v3 / only v4 right | |
+  |---|---|---|---|---|
+  | **fresh3, clean** (110) | 63.6% | **82.7%** | 2 / 23, p < 0.001 | `runs/student-compare/20261113T153207Z` |
+  | · 90 standard chats | 77.8% | **81.1%** | 2 / 5, p 0.45 | |
+  | · 20 orders for another day | 0% | **90.0%** | 0 / 18 | v3 can't name a day |
+  | fresh (used for fixes) | 85.6% | 91.1% | 3 / 8, p 0.23 | `…T153009Z` |
+  | fresh2 (used for fixes) | 76.7% | 77.8% | 3 / 4, p 1.0 | `…T153011Z` |
+  | dev (tuning) | 83.5% | 86.8% | 1 / 4, p 0.38 | `runs/student-compare/20261113T100130Z` |
+
+  Intents right on fresh3: 89.1% → 93.5% (interval excludes 0). **Far from 95% fully correct on chats nobody fixed
+  on (82.7%)**: the day skill works (18/20), the standard chats moved +3.3 pp, not significant.
+  - Error review on fresh3 (`runs/student-errors/20261113T153046Z`, v4 19 chats wrong): 3 invalid answers (a made-up
+    modification kind, a day `kind` outside the 3, a month as text: 2 of them on the new day field), wrong
+    modifications 5 (off-menu add-ons split or merged, "w lox" vs "lox", a milk swap), missing/extra items 6 (a
+    vague "the big one" guessed, breadsticks vs knots, an item dropped in a two-request message), quantity 2,
+    time 3 (an ASAP "now" missed, a day on a question, a date missed), a guessed size, a missing-list kind. Dev
+    review: `runs/student-errors/20261113T120702Z` (v4 12 wrong, 11 shared with v3: counting across messages,
+    half-and-half, guessing vague amounts, items lost in long chats, "10:30" at night).
+  - **finalize@0.4 (fix from fresh3, so fresh3 is "used for fixes" from here):** rule 6's two steps run in turn:
+    "almond instead of oat" on a latte (oat said earlier) was turned into an add of almond; now a swap of whole milk
+    with almond (fresh3 093, the model had read it right). Changes no gold in any split. All 28 scored runs
+    re-scored: only fresh3 changes (+1 chat each): **v3 64.5%, v4 83.6% (82.2% standard, 90% another day)**
+    (`runs/student-compare/20261113T153303Z`). `student-compare@0.3` reports the standard / future_day parts.
+  - Website (`docs/site/case-study.json`) still shows v2 runs; regenerated, unchanged in substance. Moving it to v4
+    is a separate step.
+  - **Next (proposal, not started):** 95% needs more than another 0.8B data round: the remaining misses are reading
+    errors spread over many kinds. Options: (a) the 2B on student-data@0.4 (~16 h, two Kaggle sessions, next
+    week's quota); (b) constrained decoding to the schema (removes the 1–3% invalid answers); (c) a second
+    fresh batch (fresh4) for a clean number after any further fix.
   - **Known gap for the final eval:** the sealed test split was labeled before this rule; any test chat ordering
     for another day has old-rule gold. Can't be checked without unsealing; fix with logged CHANGES at final eval.
 

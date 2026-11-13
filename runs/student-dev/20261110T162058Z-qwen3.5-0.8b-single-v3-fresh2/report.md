@@ -1,6 +1,6 @@
 # `qwen3.5-0.8b-single-v3` on fresh2 at every customer message
 
-Prompt `student-extract@0.1`, data `student-data@0.3`, scorer `scorer@0.5`, finalize `finalize@0.3`. Fresh2 split: written after the v3 fixes that used fresh, never tuned on (the measure of those fixes).
+Prompt `student-extract@0.1`, data `student-data@0.3`, scorer `scorer@0.5`, finalize `finalize@0.4`. Fresh2 split: written after the v3 fixes that used fresh, never tuned on (the measure of those fixes).
 
 | | Student | Teacher (`teacher-label@0.7`, reference) |
 |---|---|---|

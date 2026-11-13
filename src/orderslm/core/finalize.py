@@ -20,6 +20,8 @@ The model extracts the facts; the rules are applied in code, the same way every 
    guide's rule; the most common v3 slip on dev, fresh and fresh2): "oat milk instead of whole" on a drink with no
    whole milk (drip coffee, americano) is an add of oat milk; "w oat milk" as an add on a drink that includes whole
    milk (latte, cappuccino, hot chocolate) is a substitute of whole milk with oat milk. Gold never needs either.
+   finalize@0.4: both steps in turn, so "almond instead of oat" on a latte (oat was the customer's earlier choice) is
+   a substitute of whole milk with almond, not an add of almond (fresh3 093, so fresh3 is "used for fixes" after it).
 
 The model's own missing list and question are ignored, so a mistake there can't make the output invalid.
 """
@@ -46,7 +48,7 @@ from orderslm.schema.extraction import (
 from orderslm.schema.label import ModelOrder
 from orderslm.schema.menu import MenuCatalog, MenuItem
 
-FINALIZE_VERSION = "finalize@0.3"
+FINALIZE_VERSION = "finalize@0.4"
 _JUDGMENT = {
     (FieldRef.item_menu_match, MissingReason.off_menu): MissingReason.ambiguous,
     (FieldRef.item_variant, MissingReason.missing): MissingReason.ambiguous,
@@ -73,8 +75,8 @@ def _exclusive_choice(menu: MenuCatalog, item: MenuItem, mod: Modification) -> M
         and mod.modifier_id not in item.ingredient_ids
         and mod.replacement_modifier_id in item.addon_ids
         and group(mod.replacement_modifier_id) is not None
-    ):
-        return mod.model_copy(
+    ):  # the swap's "from" isn't on this item: an add, then checked below (a latte's oat → almond swaps whole milk)
+        mod = mod.model_copy(
             update={
                 "kind": ModificationKind.add,
                 "modifier_id": mod.replacement_modifier_id,

@@ -86,7 +86,9 @@ Cards: `cards generate --split fresh3`: fresh's quotas (90, comparable with fres
 from the guide), every chat passes `validate()`: 321 customer messages, all inside opening hours, every
 future-day gold resolves to a later day the menus take; no near-duplicates within fresh3, against dev, fresh or
 fresh2, or against the training chats (t6 included). Evaluation-only (tests/test_fresh3.py). Not reviewed by
-Julian; same writer as t6 (report it).
+Julian; same writer as t6 (report it). **Clean result (2026-11-13, finalize@0.3):** v4 82.7% fully correct (81.1%
+standard, 90% another day) vs v3 63.6% (`runs/student-compare/20261113T153207Z`). finalize@0.4 came from a fresh3
+miss (093), so fresh3 is "used for fixes" from then on.
 
 ## Review (Source A)
 

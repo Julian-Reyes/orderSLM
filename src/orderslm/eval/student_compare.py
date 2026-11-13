@@ -10,6 +10,9 @@ prompt, scorer and finalize versions must match.
   over chats (resample the 91 chats with replacement, both students on the same resample). Messages in one chat are
   not independent, so intents get no per-message test; the chat-level bootstrap carries that.
 
+A split with orders for another day (fresh3: 90 standard chats + 20 `future_day` cards) is also reported in those
+two parts (point values + McNemar per part), since the 20 measure a new skill the older students never learned.
+
 Reads `intent_rows.jsonl` + `order_rows.jsonl` of each `runs/student-dev/<id>/` (rebuild older runs with
 `make student-dev ARGS="report …"`). Dev numbers are tuning numbers; fresh numbers measure the dev-based fixes.
 
@@ -27,14 +30,18 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any
 
+from orderslm.data.splits import split_dir
 from orderslm.paths import ROOT, RUNS
 from orderslm.runinfo import git_commit
+from orderslm.schema.conversation import Split
 
 from .stats import holm, mcnemar_exact, percentile_interval
 from .student_dev import request_id
 
 EXPERIMENT = "student-compare"
-COMPARE_VERSION = "student-compare@0.2"  # 0.2: same-action orders (scorer@0.3)
+COMPARE_VERSION = (
+    "student-compare@0.3"  # 0.2: same-action orders (scorer@0.3); 0.3: standard / future_day parts
+)
 SEED = 20261025
 RESAMPLES = 10_000
 METRICS = ("intent_accuracy", "invalid_rate", "item_f1", "exact_rate", "action_rate")
@@ -116,12 +123,31 @@ def summarize(chats: dict[str, dict[str, int]], ids: list[str]) -> dict[str, flo
     }
 
 
+def split_parts(split: str) -> dict[str, list[str]] | None:
+    """Chat ids by part when the split has future_day cards (fresh3), else None."""
+    if split not in ("dev", "fresh", "fresh2", "fresh3"):  # never opens the sealed test split
+        return None
+    cards = split_dir(Split(split)) / "cards.jsonl"
+    if not cards.exists():
+        return None
+    future = {c["id"] for c in _read_jsonl(cards) if c["situation"] == "future_day"}
+    if not future:
+        return None
+    ids = [c["id"] for c in _read_jsonl(cards)]
+    return {"standard": [i for i in ids if i not in future], "future_day": [i for i in ids if i in future]}
+
+
 def _same_setup(versions: dict[str, str]) -> dict[str, str]:
     """The versions two compared runs must share: training data may differ (that is a compared variable)."""
     return {k: v for k, v in versions.items() if k != "data_version"}
 
 
-def compare(runs: list[dict[str, Any]], resamples: int = RESAMPLES, seed: int = SEED) -> dict[str, Any]:
+def compare(
+    runs: list[dict[str, Any]],
+    resamples: int = RESAMPLES,
+    seed: int = SEED,
+    parts: dict[str, list[str]] | None = None,
+) -> dict[str, Any]:
     ids = sorted(runs[0]["chats"])
     for r in runs[1:]:
         if set(r["messages"]) != set(runs[0]["messages"]):
@@ -168,6 +194,28 @@ def compare(runs: list[dict[str, Any]], resamples: int = RESAMPLES, seed: int = 
         )
     for p, adj in zip(pairs, holm([p["exact_chats"]["mcnemar_p"] for p in pairs]), strict=True):
         p["exact_chats"]["mcnemar_p_holm"] = adj
+    by_part = {}
+    for part, pids in (parts or {}).items():
+        if not set(pids) <= set(ids):
+            raise SystemExit(f"part {part}: chats the runs did not answer")
+        by_part[part] = {
+            "chats": len(pids),
+            "students": {r["student"]: summarize(r["chats"], pids) for r in runs},
+            "pairs": [
+                {
+                    "a": a["student"],
+                    "b": b["student"],
+                    "only_a_right": (
+                        x := sum(a["chats"][c]["exact"] and not b["chats"][c]["exact"] for c in pids)
+                    ),
+                    "only_b_right": (
+                        y := sum(b["chats"][c]["exact"] and not a["chats"][c]["exact"] for c in pids)
+                    ),
+                    "mcnemar_p": mcnemar_exact(x, y),
+                }
+                for a, b in combinations(runs, 2)
+            ],
+        }
     return {
         "compare_version": COMPARE_VERSION,
         "split": runs[0].get("split", "dev"),
@@ -177,6 +225,7 @@ def compare(runs: list[dict[str, Any]], resamples: int = RESAMPLES, seed: int = 
         "seed": seed,
         "students": {r["student"]: point[r["student"]] for r in runs},
         "pairs": pairs,
+        "parts": by_part,
     }
 
 
@@ -230,6 +279,21 @@ def write_report(out: Path, c: dict[str, Any], runs: list[dict[str, Any]]) -> No
             f"{cell('exact_rate')} | {cell('action_rate')} | {p['intent_messages']['only_a_right']} / {p['intent_messages']['only_b_right']} | "
             f"{e['only_a_right']} / {e['only_b_right']} | {e['mcnemar_p']:.3f} ({e['mcnemar_p_holm']:.3f}) |"
         )
+    for part, pc in c.get("parts", {}).items():
+        lines += [
+            "",
+            f"**{part}** ({pc['chats']} chats): "
+            + "; ".join(
+                f"{s} {100 * m['exact_rate']:.1f}% fully correct, {100 * m['intent_accuracy']:.1f}% intents"
+                for s, m in pc["students"].items()
+            )
+            + ". "
+            + "; ".join(
+                f"{p['a']} / {p['b']} only right: {p['only_a_right']} / {p['only_b_right']}, McNemar p "
+                f"{p['mcnemar_p']:.3f}"
+                for p in pc["pairs"]
+            ),
+        ]
     lines += ["", "Inputs:", ""] + [
         f"- `{r['student']}` ({r['versions']['data_version']}): `{r['run_dir']}`" for r in runs
     ]
@@ -243,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
     if len(args.run_dirs) < 2:
         raise SystemExit("compare at least two runs")
     runs = [load_run(d) for d in args.run_dirs]
-    c = compare(runs)
+    c = compare(runs, parts=split_parts(runs[0]["split"]))
     started = datetime.now(UTC)
     out = RUNS / EXPERIMENT / f"{started:%Y%m%dT%H%M%SZ}"
     out.mkdir(parents=True)

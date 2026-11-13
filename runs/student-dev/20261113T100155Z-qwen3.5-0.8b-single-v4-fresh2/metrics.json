@@ -1,0 +1,268 @@
+{
+  "student": "qwen3.5-0.8b-single-v4",
+  "split": "fresh2",
+  "prompt_version": "student-extract@0.1",
+  "data_version": "student-data@0.4",
+  "scorer_version": "scorer@0.5",
+  "finalize_version": "finalize@0.4",
+  "requests": 275,
+  "unanswered": 0,
+  "complete": true,
+  "contract_valid": {
+    "last": {
+      "valid": 89,
+      "of": 90
+    },
+    "earlier": {
+      "valid": 185,
+      "of": 185
+    }
+  },
+  "invalid_reasons": {
+    "1 validation error for StudentOutput": 1
+  },
+  "hit_token_limit": 0,
+  "latency_ms": {
+    "p50": 14896,
+    "p95": 22258
+  },
+  "output_tokens_p50": 337,
+  "order": {
+    "conversations": 90,
+    "conversations_with_order": 68,
+    "json_valid": 89,
+    "json_validity_rate": 0.9888888888888889,
+    "item": {
+      "gold_items": 171,
+      "tp": 149,
+      "fp": 17,
+      "fn": 22,
+      "precision": 0.8975903614457831,
+      "recall": 0.8713450292397661,
+      "f1": 0.884272997032641
+    },
+    "exact_match": 70,
+    "exact_match_rate": 0.7777777777777778,
+    "exact_match_ci95": [
+      0.6815249725824009,
+      0.8512877671833321
+    ],
+    "action_match": 71,
+    "action_match_rate": 0.7888888888888889,
+    "action_match_ci95": [
+      0.6936500878323096,
+      0.8604751615240526
+    ],
+    "field_accuracy": {
+      "method": 1.0,
+      "time": 0.9850746268656716,
+      "address": 1.0,
+      "payment": 0.9850746268656716,
+      "name": 1.0,
+      "decision": 1.0,
+      "missing": 0.9253731343283582
+    },
+    "correction": {
+      "conversations": 18,
+      "exact_match_rate": 0.7777777777777778,
+      "precision": 0.9230769230769231,
+      "recall": 0.9230769230769231,
+      "f1": 0.9230769230769231
+    },
+    "grounding": {
+      "conversations_with_issues": 1,
+      "rate": 0.011235955056179775,
+      "issues": {
+        "EVIDENCE_NOT_FOUND": 1
+      }
+    },
+    "unclassified_requests": 1
+  },
+  "intent": {
+    "all": {
+      "messages": 275,
+      "primary_correct": 257,
+      "primary_accuracy": 0.9345,
+      "primary_ci95": [
+        0.8989178170483269,
+        0.9581996288420999
+      ],
+      "label_set_correct": 254
+    },
+    "last_message": {
+      "messages": 90,
+      "primary_correct": 82,
+      "primary_accuracy": 0.9111,
+      "primary_ci95": [
+        0.8342928001780631,
+        0.9542700546752215
+      ],
+      "label_set_correct": 82
+    },
+    "earlier_messages": {
+      "messages": 185,
+      "primary_correct": 175,
+      "primary_accuracy": 0.9459,
+      "primary_ci95": [
+        0.903370644020272,
+        0.9703775131654329
+      ],
+      "label_set_correct": 172
+    },
+    "per_gold_label": {
+      "CANCEL_ORDER": {
+        "gold": 2,
+        "correct": 2,
+        "predicted": 2
+      },
+      "CONFIRM_ORDER": {
+        "gold": 9,
+        "correct": 8,
+        "predicted": 8
+      },
+      "DELIVERY_QUESTION": {
+        "gold": 4,
+        "correct": 3,
+        "predicted": 5
+      },
+      "HUMAN_REQUEST": {
+        "gold": 2,
+        "correct": 2,
+        "predicted": 4
+      },
+      "MENU_QUESTION": {
+        "gold": 12,
+        "correct": 11,
+        "predicted": 13
+      },
+      "MODIFY_ORDER": {
+        "gold": 18,
+        "correct": 18,
+        "predicted": 20
+      },
+      "ORDER_PROBLEM": {
+        "gold": 4,
+        "correct": 4,
+        "predicted": 4
+      },
+      "ORDER_STATUS": {
+        "gold": 5,
+        "correct": 4,
+        "predicted": 4
+      },
+      "OUT_OF_SCOPE": {
+        "gold": 6,
+        "correct": 3,
+        "predicted": 5
+      },
+      "PAYMENT_CLAIM": {
+        "gold": 2,
+        "correct": 1,
+        "predicted": 1
+      },
+      "PAYMENT_QUESTION": {
+        "gold": 2,
+        "correct": 2,
+        "predicted": 2
+      },
+      "PLACE_ORDER": {
+        "gold": 173,
+        "correct": 169,
+        "predicted": 172
+      },
+      "REFUND_REQUEST": {
+        "gold": 4,
+        "correct": 4,
+        "predicted": 4
+      },
+      "SMALL_TALK": {
+        "gold": 25,
+        "correct": 23,
+        "predicted": 26
+      },
+      "UNKNOWN": {
+        "gold": 7,
+        "correct": 3,
+        "predicted": 4
+      }
+    },
+    "confusions": [
+      {
+        "gold": "OUT_OF_SCOPE",
+        "pred": "HUMAN_REQUEST",
+        "count": 2
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "MODIFY_ORDER",
+        "count": 2
+      },
+      {
+        "gold": "UNKNOWN",
+        "pred": "SMALL_TALK",
+        "count": 2
+      },
+      {
+        "gold": "PAYMENT_CLAIM",
+        "pred": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": null,
+        "count": 1
+      },
+      {
+        "gold": "UNKNOWN",
+        "pred": "PLACE_ORDER",
+        "count": 1
+      },
+      {
+        "gold": "SMALL_TALK",
+        "pred": "OUT_OF_SCOPE",
+        "count": 1
+      },
+      {
+        "gold": "SMALL_TALK",
+        "pred": "DELIVERY_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "CONFIRM_ORDER",
+        "pred": "SMALL_TALK",
+        "count": 1
+      },
+      {
+        "gold": "UNKNOWN",
+        "pred": "MENU_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "OUT_OF_SCOPE",
+        "pred": "UNKNOWN",
+        "count": 1
+      },
+      {
+        "gold": "MENU_QUESTION",
+        "pred": "OUT_OF_SCOPE",
+        "count": 1
+      },
+      {
+        "gold": "PLACE_ORDER",
+        "pred": "MENU_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "ORDER_STATUS",
+        "pred": "DELIVERY_QUESTION",
+        "count": 1
+      },
+      {
+        "gold": "DELIVERY_QUESTION",
+        "pred": "PLACE_ORDER",
+        "count": 1
+      }
+    ]
+  },
+  "teacher_reference": null
+}
