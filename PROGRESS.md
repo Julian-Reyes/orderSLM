@@ -44,7 +44,9 @@ _Last updated 2026-11-16._
   ~17.5 h of Kaggle session time in total; the remaining weekly quota is Julian's to confirm.
 - **Session A pushed 2026-11-16 13:41 UTC** (Julian: "Kaggle limit reset, please continue with the plan", taken as
   the OK for the plan incl. xgrammar in the kernel): run dir `runs/train/20261116T133857Z/`, kernel version 17
-  (QUEUED at push). Upload secrets check clean. When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import
+  (QUEUED at push). A second push (v18, 13:50 UTC) did not replace v17: Kaggle queued both (max 2 GPU sessions);
+  v17 cancelled in the web UI before it started (0 s), **v18 is the session**. Pushing again never cancels a queued
+  version; cancel it in the web UI. Upload secrets check clean. When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import
   runs/train/20261116T133857Z"`, then stage session B. (The `kaggle` CLI lives in `~/.local/bin`; add it to PATH.)
 
 
