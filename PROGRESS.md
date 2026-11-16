@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-13._
+_Last updated 2026-11-16._
 
 ## Start here next session
 
@@ -42,6 +42,10 @@ _Last updated 2026-11-13._
   Unconstrained numbers come from the same runs: a message the grammar never steered is the plain greedy answer;
   a steered one would have been invalid unconstrained (the grammar accepts every valid answer, checked).
   ~17.5 h of Kaggle session time in total; the remaining weekly quota is Julian's to confirm.
+- **Session A pushed 2026-11-16 13:41 UTC** (Julian: "Kaggle limit reset, please continue with the plan", taken as
+  the OK for the plan incl. xgrammar in the kernel): run dir `runs/train/20261116T133857Z/`, kernel version 17
+  (QUEUED at push). Upload secrets check clean. When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import
+  runs/train/20261116T133857Z"`, then stage session B. (The `kaggle` CLI lives in `~/.local/bin`; add it to PATH.)
 
 
 ### Orders for another day (2026-11-12; Julian: "do the recommended fix, then the training batch and v4 retrain, then the new test chats. We have to get this to 95%+ accuracy")
