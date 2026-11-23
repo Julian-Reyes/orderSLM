@@ -1,0 +1,220 @@
+{
+  "experiment": "train",
+  "session": "20261123T212018Z",
+  "data_version": [
+    "student-data@0.4",
+    "student-data@0.5"
+  ],
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ],
+    "grammar": [
+      "xgrammar==0.2.8"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536,
+    "constrained": {
+      "library": "xgrammar==0.2.8",
+      "schema": "student-schema.json",
+      "whitespace": "none"
+    }
+  },
+  "deadline_hours": 11.25,
+  "jobs": [
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4-fresh4-cd",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "fresh4",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "adapters/qwen3.5-0.8b-single-v4",
+      "adapter_sha256": "5cace07b983a151224f18a2e1499f3857f3fbd0110a12e10f71d73841778074d",
+      "after_train": null,
+      "requests": "fresh4-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4-cd",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "dev",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "adapters/qwen3.5-0.8b-single-v4",
+      "adapter_sha256": "5cace07b983a151224f18a2e1499f3857f3fbd0110a12e10f71d73841778074d",
+      "after_train": null,
+      "requests": "dev-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4-fresh-cd",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "fresh",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "adapters/qwen3.5-0.8b-single-v4",
+      "adapter_sha256": "5cace07b983a151224f18a2e1499f3857f3fbd0110a12e10f71d73841778074d",
+      "after_train": null,
+      "requests": "fresh-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4-fresh2-cd",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "fresh2",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "adapters/qwen3.5-0.8b-single-v4",
+      "adapter_sha256": "5cace07b983a151224f18a2e1499f3857f3fbd0110a12e10f71d73841778074d",
+      "after_train": null,
+      "requests": "fresh2-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v4-fresh3-cd",
+      "student": "qwen3.5-0.8b-single-v4",
+      "split": "fresh3",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "adapters/qwen3.5-0.8b-single-v4",
+      "adapter_sha256": "5cace07b983a151224f18a2e1499f3857f3fbd0110a12e10f71d73841778074d",
+      "after_train": null,
+      "requests": "fresh3-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-fresh4-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "fresh4",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "fresh4-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "dev",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "dev-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-fresh-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "fresh",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "fresh-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-fresh2-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "fresh2",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "fresh2-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-fresh3-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "fresh3",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "fresh3-requests.jsonl",
+      "constrained": true
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "fresh4-requests.jsonl": "251ef1775ebccedcedbdbebfa3d2eaf181db0281be4e2ca2755fec7048fcc265",
+    "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b",
+    "fresh-requests.jsonl": "ddc349daf25f7c61883af5da7382bab737aba5e35f2354420e9cc9dd391a455f",
+    "fresh2-requests.jsonl": "b83dbfeb58a6ca80703da18fdabc0b0dcf0e1810328f28a7429944353fe7002a",
+    "fresh3-requests.jsonl": "9e542e22667c2d4e30db199ab4490bc131dd56dd40f0b9fefb3c41da19d9c411",
+    "student-schema.json": "0365008e0f293c9ca5ced0c7cbb8bc319ec3b9df7d81128708323663dbb35785"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.4": {
+      "single": "6502c963092937a0e2d4284326fd4296ca182fb91d0acc170272665cdbac0cdc",
+      "mixed": "160be0b86fc9db5ecd382ee7350fb3e16c0b4d36b0160d28bbc9044d231dc3f6"
+    },
+    "student-data@0.5": {
+      "single": "1347a7247e0e9dc5420271e355482163b6d1b851c72bf5ebe5516bd2d21b87fa",
+      "mixed": "ab9200e44ef0e60a630fac04d7e953d85e3bac2d14f3d74c09be9ed228d5577a"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.4": "e101d197db70622f39220b370fc0906616943dbc-dirty",
+    "student-data@0.5": "b8096a02390cdce3177ae923dc8c3cf2b185471a-dirty"
+  },
+  "exported_at": "2026-11-23T21:20:18.786850+00:00",
+  "git_commit": "6a3a1d36b8367d83136b0ed28175829bc6479256",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}

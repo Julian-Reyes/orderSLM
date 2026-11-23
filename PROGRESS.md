@@ -34,8 +34,12 @@ _Last updated 2026-11-23._
     `test_crashed_scoring_is_refused_not_scored_as_invalid`.
 - **Note:** v4's unconstrained answers end with `\n` after the JSON; the grammar (no whitespace) ends at the closing
   `}` instead. Same JSON; the step isn't counted as steered (the grammar is complete there).
-- **Next (Julian to OK before any Kaggle push):** score v4 and v5, both constrained, on all five splits (~12 h of
-  GPU, likely 2 sessions; free quota). fresh4 is the clean v5 measure.
+- **Scoring session pushed 2026-11-23 18:21 Brasília (Julian: "yes push then start kaggle"):** kernel v19, run dir
+  `runs/train/20261123T212018Z/`, RUNNING at once. Constrained, all five splits, fresh4 first: GPU0 v4, GPU1 v5, in
+  parallel (no training), ~6–7 h, deadline 11.25 h. The v4 adapter wasn't on this Mac (imported on the other one):
+  taken from the session A dataset, sha256 `5cace07b…` = the hash in v4's runs. When it ends:
+  `make kaggle-pull JOB=m6`, `make train ARGS="import runs/train/20261123T212018Z"`; any `crashed` job means the fix
+  didn't hold on the real model. Then `student_compare` v4 vs v5 per split (fresh4 = clean v5 result).
 
 ### Student v5 (2026-11-13; Julian: "keep going with 0.8B", "go ahead with v5 and stop before kaggle run so I can confirm limits")
 
