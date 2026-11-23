@@ -58,6 +58,14 @@ def unanswered(run_dir: Path, messages: dict[tuple[str, int], bool]) -> list[str
     return sorted(i for cid, k in messages if (i := request_id(cid, k)) not in answered)
 
 
+def crashed(run_dir: Path, messages: dict[tuple[str, int], bool]) -> list[str]:
+    """Scored messages whose record has an error and no text: the scoring code failed (v4 constrained, 2026-11-16:
+    every answer crashed in xgrammar), so the model gave no answer. Not an invalid answer either."""
+    ids = {request_id(cid, k) for cid, k in messages}
+    last = {r["id"]: r for r in _read_jsonl(run_dir / "outputs.jsonl")}  # a resumed session retries crashes
+    return sorted(i for i, r in last.items() if i in ids and "text" not in r)
+
+
 def load_run(run_dir: Path) -> dict[str, Any]:
     """Per-chat counts of one student's dev run: messages, intents right, invalid answers, exact, tp/fp/fn."""
     if not (run_dir / "order_rows.jsonl").exists():
@@ -78,6 +86,11 @@ def load_run(run_dir: Path) -> dict[str, Any]:
         raise SystemExit(
             f"{run_dir}: incomplete run ({len(missing)} of {len(messages)} messages never answered, the "
             f"session stopped first, e.g. {missing[0]}); score the split again before comparing"
+        )
+    if failed := crashed(run_dir, messages):
+        raise SystemExit(
+            f"{run_dir}: incomplete run (the scoring code crashed on {len(failed)} of {len(messages)} messages, "
+            f"e.g. {failed[0]}); fix it and score the split again before comparing"
         )
     orders = {r["conversation_id"]: r for r in _read_jsonl(run_dir / "order_rows.jsonl")}
     if set(orders) != set(chats):

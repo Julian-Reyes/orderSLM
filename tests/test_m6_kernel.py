@@ -223,3 +223,202 @@ def test_constrained_scoring_needs_the_schema_file(tmp_path, monkeypatch):
     assert k.missing_inputs(run, src) == ["student-schema.json"]
     _write(src / "student-schema.json")
     assert k.missing_inputs(run, src) == []
+
+
+def test_grammar_and_generate_share_every_stop_token(tmp_path, monkeypatch):
+    """Session A (2026-11-16): the grammar knew only the tokenizer's EOS (248046) and `generate` stopped only on the
+    model's (248044), so every constrained answer crashed after its last token. Both must get the union."""
+    from types import SimpleNamespace as NS
+
+    k = _kernel(tmp_path, monkeypatch)
+    tok = NS(eos_token_id=248046)
+    assert k.stop_token_ids(tok, NS(eos_token_id=248044)) == [248044, 248046]
+    assert k.stop_token_ids(tok, NS(eos_token_id=[248044, 248046])) == [248044, 248046]
+    assert k.stop_token_ids(tok, NS(eos_token_id=None)) == [248046]
+    src = (ROOT / "kaggle" / "m6" / "run.py").read_text()
+    assert "stop_token_ids=stop_ids" in src and '"eos_token_id": stop_ids' in src
+
+
+def test_finished_grammar_allows_only_stop_tokens_and_asks_no_mask(tmp_path, monkeypatch):
+    """After the grammar accepts a stop token, xgrammar raises if asked for another mask (the session A crash):
+    the processor must not ask, and must leave only stop tokens."""
+    import sys
+    import types
+
+    class T:
+        """The few torch.Tensor operations the processor uses, batch of one (torch isn't installed locally)."""
+
+        device = "cpu"
+
+        def __init__(self, rows):
+            self.rows = [list(r) for r in rows]
+
+        def __getitem__(self, key):
+            if isinstance(key, int):
+                return Row(self.rows[key])
+            i, j = key
+            if isinstance(i, slice):
+                return T([[r[c] for c in j] for r in self.rows])
+            return self.rows[i][j]
+
+        def __setitem__(self, key, value):
+            _, cols = key
+            for r, vals in zip(self.rows, value.rows, strict=True):
+                for c, v in zip(cols, vals, strict=True):
+                    r[c] = v
+
+        def clone(self):
+            return T(self.rows)
+
+        def fill_(self, v):
+            self.rows = [[v] * len(r) for r in self.rows]
+            return self
+
+        def to(self, device):
+            return self
+
+    class Row(list):
+        def argmax(self):
+            return max(range(len(self)), key=self.__getitem__)
+
+    def tensor(x):
+        return T(x)
+
+    calls = {"fill": 0}
+
+    class Matcher:
+        def __init__(self, compiled):
+            self.done = False
+
+        def accept_token(self, t):
+            assert not self.done, "accepted a token after terminating"
+            self.done = t in (1, 2)
+
+        def is_terminated(self):
+            return self.done
+
+        def is_completed(self):
+            return self.done
+
+        def fill_next_token_bitmask(self, bitmask):
+            assert not self.done, "asked for a mask after terminating"
+            calls["fill"] += 1
+
+    fake = types.SimpleNamespace(
+        GrammarMatcher=Matcher,
+        allocate_token_bitmask=lambda n, v: tensor([[0.0] * v] * n),
+        apply_token_bitmask_inplace=lambda scores, mask: None,
+    )
+    monkeypatch.setitem(sys.modules, "xgrammar", fake)
+    k = _kernel(tmp_path, monkeypatch)
+    transformers = types.SimpleNamespace(LogitsProcessor=object)
+    compiled = types.SimpleNamespace(tokenizer_info=types.SimpleNamespace(vocab_size=5))
+    p = k.grammar_processor_factory(compiled, transformers, [1, 2])()
+    p(tensor([[0]]), tensor([[0.0] * 5]))
+    p(tensor([[0, 3]]), tensor([[0.0] * 5]))  # a JSON token
+    out = p(tensor([[0, 3, 2]]), tensor([[0.0, 0.5, 0.2, 9.0, 1.0]]))  # the stop token
+    assert calls["fill"] == 2
+    assert out[0, 3] == float("-inf") and out[0, 0] == float("-inf") and out[0, 4] == float("-inf")
+    assert out[0, 1] == 0.5 and out[0, 2] == 0.2
+    p(tensor([[0, 3, 2, 1]]), tensor([[0.0] * 5]))  # still no mask, no accept after the end
+
+
+def _fake_scoring(monkeypatch, generate):
+    """torch / transformers / peft stand-ins for score_job (none is installed locally); `generate` is the model's."""
+    import contextlib
+    import sys
+    import types
+
+    class Ids:
+        shape = (1, 3)
+
+        def to(self, dev):
+            return self
+
+    class Out:
+        def __getitem__(self, key):
+            return types.SimpleNamespace(shape=(2,))
+
+    class Tok:
+        pad_token_id, eos_token_id = 0, 1
+
+        def apply_chat_template(self, *a, **kw):
+            return {"input_ids": Ids()}
+
+        def decode(self, ids, skip_special_tokens=True):
+            return "{}"
+
+    class Model:
+        def eval(self):
+            return self
+
+        def generate(self, ids, **kw):
+            generate()
+            return Out()
+
+    torch = types.SimpleNamespace(
+        cuda=types.SimpleNamespace(is_available=lambda: False),
+        device=lambda d: d,
+        float16="f16",
+        float32="f32",
+        inference_mode=contextlib.nullcontext,
+        ones_like=lambda x: x,
+    )
+    transformers = types.SimpleNamespace(
+        AutoTokenizer=types.SimpleNamespace(from_pretrained=lambda p: Tok()),
+        AutoModelForCausalLM=types.SimpleNamespace(from_pretrained=lambda p, **kw: Model()),
+    )
+    for name, mod in (
+        ("torch", torch),
+        ("transformers", transformers),
+        ("peft", types.SimpleNamespace(PeftModel=None)),
+    ):
+        monkeypatch.setitem(sys.modules, name, mod)
+
+
+def _score(k, tmp_path, n=8):
+    import json
+
+    src = tmp_path / "in"
+    _write(
+        src / "r.jsonl",
+        "".join(json.dumps({"id": f"c{i}#0", "system": "s", "user": "u"}) + "\n" for i in range(n)),
+    )
+    k.no_gqa_flag, k.kernel_paths = (lambda: False), (lambda: {})
+    run = {"models": {"0.8b": {"path": "x"}}, "generation": {"max_new_tokens": 5}, "deadline_hours": 1}
+    job = {"name": "s", "model": "0.8b", "requests": "r.jsonl", "after_train": None}
+    k.score_job(job, run, src, __import__("time").time())
+    out = tmp_path / "out" / "s"
+    recs = [json.loads(x) for x in (out / "outputs.jsonl").read_text().splitlines()]
+    return json.loads((out / "status.json").read_text()), recs
+
+
+def test_scoring_stops_when_every_first_request_crashes(tmp_path, monkeypatch):
+    """Session A spent ~6 h of GPU on 1,485 requests that all crashed alike: stop after the first CRASH_STOP."""
+
+    def crash():
+        raise RuntimeError("GrammarMatcher has terminated")
+
+    _fake_scoring(monkeypatch, crash)
+    k = _kernel(tmp_path / "out", monkeypatch)
+    status, recs = _score(k, tmp_path)
+    assert status == {"status": "crashed", "answered": 0, "errors": k.CRASH_STOP}
+    assert len(recs) == k.CRASH_STOP
+
+
+def test_resumed_scoring_retries_crashed_requests(tmp_path, monkeypatch):
+    """A crash is no answer: a resumed session answers it again, and status counts the last record per id."""
+    import json
+
+    _fake_scoring(monkeypatch, lambda: None)
+    k = _kernel(tmp_path / "out", monkeypatch)
+    _write(
+        tmp_path / "out" / "s" / "outputs.jsonl",
+        json.dumps({"id": "c0#0", "text": "{}"})
+        + "\n"
+        + json.dumps({"id": "c1#0", "error": "RuntimeError: x"})
+        + "\n",
+    )
+    status, recs = _score(k, tmp_path, n=3)
+    assert status == {"status": "done", "answered": 3, "errors": 0}
+    assert [r["id"] for r in recs] == ["c0#0", "c1#0", "c1#0", "c2#0"]  # c0 kept, c1 retried, c2 new

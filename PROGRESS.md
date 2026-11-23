@@ -2,9 +2,40 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-16._
+_Last updated 2026-11-23._
 
 ## Start here next session
+
+### Session A result (kernel v18, imported 2026-11-23): v5 trained; constrained v4 scoring all crashed (fixed, not re-run)
+
+- **v5 trained** (`runs/train/20261116T133857Z/qwen3.5-0.8b-single-v5`, adapter `models/m6/qwen3.5-0.8b-single-v5`):
+  818/818 steps (2 epochs), best val loss 0.0092 at the last step. **Not scored yet.**
+- **Constrained v4 scoring: no result.** All 1,485 requests (dev 268, fresh 278, fresh2 275, fresh3 321, fresh4 343)
+  crashed: xgrammar "GrammarMatcher has terminated after accepting the stop token, but is trying to find the next
+  token mask". The five `runs/student-dev/20261116T133857Z-…-cd` runs are marked incomplete ("crashed"), not results.
+- **Cause (reproduced):** the grammar got only the tokenizer's EOS (248046 `<|im_end|>`) as stop token; `generate`
+  stopped only on the model config's EOS (248044 `<|endoftext|>`). After a complete answer the grammar had ended
+  and generation asked for one more token. The Nov 13 offline check used its own loop (stopping on 248046), so it
+  missed it. Reproduction with the real tokenizer + xgrammar 0.2.8 + the kernel's processor, a stand-in model
+  replaying v4's own answers, stopping like `generate` (400 answers, the first of dev + fresh v4 runs; script kept in the session
+  scratchpad, not a result): **old code crashed on 399/400 with the Kaggle error; fixed code ended all 399 at a stop
+  token with the same JSON**. The 400th (`a-dev-011#0`) is one v4 already got wrong (contract-invalid): the grammar
+  refused it in both versions, and the stand-in, which has no second choice, ran to the token limit.
+  (Real model on this Mac: impossible: transformers 5.20 needs torch ≥ 2.6, which has no Intel-Mac build.)
+- **Fixes ($0; `make check` green):**
+  - `kaggle/m6/run.py`: `stop_token_ids()` = tokenizer EOS ∪ model generation EOS, given to both xgrammar and
+    `generate(eos_token_id=…)`; after the grammar terminates the processor asks no mask and leaves only stop tokens;
+    a score job stops (`status: crashed`) when its first `CRASH_STOP` = 5 requests all crash; a resumed job retries
+    crashed requests; `status.json` counts `answered` and `errors` from the last record per id.
+  - `student_dev.report`: `crashed` count, `complete` needs 0 unanswered and 0 crashed, report banner.
+    `student_compare.crashed()` refuses such a run. Import prints a warning and records `unanswered/crashed/complete`.
+  - Tests: `test_grammar_and_generate_share_every_stop_token`, `test_finished_grammar_allows_only_stop_tokens_and_asks_no_mask`,
+    `test_scoring_stops_when_every_first_request_crashes`, `test_resumed_scoring_retries_crashed_requests`,
+    `test_crashed_scoring_is_refused_not_scored_as_invalid`.
+- **Note:** v4's unconstrained answers end with `\n` after the JSON; the grammar (no whitespace) ends at the closing
+  `}` instead. Same JSON; the step isn't counted as steered (the grammar is complete there).
+- **Next (Julian to OK before any Kaggle push):** score v4 and v5, both constrained, on all five splits (~12 h of
+  GPU, likely 2 sessions; free quota). fresh4 is the clean v5 measure.
 
 ### Student v5 (2026-11-13; Julian: "keep going with 0.8B", "go ahead with v5 and stop before kaggle run so I can confirm limits")
 

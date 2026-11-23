@@ -89,6 +89,7 @@ def report(run_dir: Path) -> dict[str, Any]:
     scores, intents, errors = [], [], Counter()
     validity = {"last": [0, 0], "earlier": [0, 0]}
     unanswered = 0  # no record at all: the session stopped first (paused), not an invalid answer
+    crashed = 0  # a record with an error and no text: the scoring code failed, the model gave no answer
     for ac in dev:
         conv = ac.conversation
         menu = load_menu(conv.business_id)
@@ -97,6 +98,7 @@ def report(run_dir: Path) -> dict[str, Any]:
         for k in conv.customer_indices():
             rec = outputs.get(request_id(conv.id, k))
             unanswered += rec is None
+            crashed += rec is not None and "text" not in rec
             out, err = (
                 (None, (rec or {}).get("error", "no output"))
                 if not rec or "text" not in rec
@@ -164,7 +166,9 @@ def report(run_dir: Path) -> dict[str, Any]:
         # a paused scoring session leaves requests unanswered; they score as invalid, so such a run is
         # incomplete and student_compare refuses it (v3 fresh, 2026-11-10: 32 of 278 unanswered)
         "unanswered": unanswered,
-        "complete": unanswered == 0,
+        # a scoring crash is no answer either (v4 constrained, 2026-11-16: all 1,485 crashed in xgrammar)
+        "crashed": crashed,
+        "complete": unanswered == 0 and crashed == 0,
         "contract_valid": {k: {"valid": v[0], "of": v[1]} for k, v in validity.items()},
         "invalid_reasons": dict(errors.most_common(10)),
         "hit_token_limit": sum(r.get("finish_reason") == "length" for r in recs),
@@ -229,6 +233,15 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
                 "",
             ]
             if m.get("unanswered")
+            else []
+        ),
+        *(
+            [
+                f"**Incomplete run: the scoring code crashed on {m['crashed']} customer messages (no answer, "
+                "e.g. a decoding error); they count as invalid below. Not a result.**",
+                "",
+            ]
+            if m.get("crashed")
             else []
         ),
         "| | Student | Teacher (`teacher-label@0.7`, reference) |",

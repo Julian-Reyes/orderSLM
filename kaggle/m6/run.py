@@ -537,9 +537,22 @@ def unfinished_training(job: dict) -> str | None:
     return None if trained == "done" else f"{job['after_train']} is {trained}"
 
 
-def grammar_processor_factory(compiled, transformers):
+def stop_token_ids(tok, generation_config) -> list[int]:
+    """Every token that ends an answer: the tokenizer's EOS and the model's generation EOS (one id or a list).
+    Qwen3.5-0.8B: tokenizer 248046 (<|im_end|>), model config 248044 (<|endoftext|>). The grammar and `generate`
+    must share this list: session A (2026-11-16) gave the grammar only 248046 while `generate` stopped only on
+    248044, so after a complete answer the grammar had finished and generation asked for one more token (all 1,485
+    constrained answers crashed)."""
+    ids = [tok.eos_token_id]
+    gen_eos = getattr(generation_config, "eos_token_id", None)
+    ids += gen_eos if isinstance(gen_eos, list) else [gen_eos]
+    return sorted({int(i) for i in ids if i is not None})
+
+
+def grammar_processor_factory(compiled, transformers, stop_ids: list[int]):
     """A fresh logits processor per request (batch of one): masks tokens the grammar can't take next and counts the
-    steps where the mask changed the greedy choice."""
+    steps where the mask changed the greedy choice. Once the grammar has accepted a stop token, only stop tokens
+    remain (a guard: with the shared stop list `generate` has already ended by then)."""
     import xgrammar as xgr
 
     class Grammar(transformers.LogitsProcessor):
@@ -550,9 +563,14 @@ def grammar_processor_factory(compiled, transformers):
             self.steered = 0
 
         def __call__(self, input_ids, scores):
-            if self.started:
+            if self.started and not self.matcher.is_terminated():
                 self.matcher.accept_token(int(input_ids[0, -1]))
             self.started = True
+            if self.matcher.is_terminated():
+                keep = scores[:, stop_ids].clone()
+                scores.fill_(float("-inf"))
+                scores[:, stop_ids] = keep
+                return scores
             top = int(scores[0].argmax())
             self.matcher.fill_next_token_bitmask(self.bitmask)
             xgr.apply_token_bitmask_inplace(scores, self.bitmask.to(scores.device))
@@ -561,6 +579,10 @@ def grammar_processor_factory(compiled, transformers):
             return scores
 
     return Grammar
+
+
+# Session A (2026-11-16) spent ~6 h of GPU time on 1,485 requests that all crashed the same way.
+CRASH_STOP = 5
 
 
 def score_job(job: dict, run: dict, src: Path, start: float) -> None:
@@ -591,28 +613,35 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
         model = PeftModel.from_pretrained(model, adapter).merge_and_unload()
     model.eval()
     gen = run["generation"]
-    grammar = None
+    grammar, stop_ids = None, None
     if job.get("constrained"):
         import xgrammar as xgr
 
         vocab = model.get_output_embeddings().weight.shape[0]
-        tinfo = xgr.TokenizerInfo.from_huggingface(tok, vocab_size=vocab, stop_token_ids=[tok.eos_token_id])
+        stop_ids = stop_token_ids(tok, model.generation_config)
+        tinfo = xgr.TokenizerInfo.from_huggingface(tok, vocab_size=vocab, stop_token_ids=stop_ids)
         compiled = xgr.GrammarCompiler(tinfo).compile_json_schema(
             (src / gen["constrained"]["schema"]).read_text(),
             any_whitespace=False,
             separators=(",", ":"),
             strict_mode=True,
         )
-        grammar = grammar_processor_factory(compiled, transformers)
-        info["constrained"] = {"vocab_size": vocab, "eos_token_id": tok.eos_token_id}
+        grammar = grammar_processor_factory(compiled, transformers, stop_ids)
+        info["constrained"] = {
+            "vocab_size": vocab,
+            "eos_token_id": tok.eos_token_id,
+            "stop_token_ids": stop_ids,
+        }
     write_json(out / "config.json", info)
     requests = read_jsonl(src / job["requests"])
     done = set()
     outputs = out / "outputs.jsonl"
     if outputs.exists():  # resume: skip what this session already answered
-        done = {json.loads(x)["id"] for x in outputs.read_text().splitlines()}
+        # a crashed request has no answer: try it again (status.json counts only the last record per id)
+        done = {r["id"] for r in map(json.loads, outputs.read_text().splitlines()) if "text" in r}
     deadline = start + run["deadline_hours"] * 3600
     status = "done"
+    answered_any, tried = False, 0
     with outputs.open("a") as f:
         for k, req in enumerate(requests, 1):
             if req["id"] in done:
@@ -635,7 +664,14 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
                         do_sample=False,
                         max_new_tokens=gen["max_new_tokens"],
                         pad_token_id=tok.pad_token_id or tok.eos_token_id,
-                        **({"logits_processor": transformers.LogitsProcessorList([proc])} if proc else {}),
+                        **(
+                            {
+                                "logits_processor": transformers.LogitsProcessorList([proc]),
+                                "eos_token_id": stop_ids,
+                            }
+                            if proc
+                            else {}
+                        ),
                     )
                 if proc:
                     rec["grammar_steered"] = proc.steered
@@ -651,12 +687,24 @@ def score_job(job: dict, run: dict, src: Path, start: float) -> None:
             rec["at"] = datetime.now(UTC).isoformat()
             f.write(json.dumps(rec) + "\n")
             f.flush()
+            tried += 1
+            answered_any = answered_any or "error" not in rec
+            if (
+                not answered_any and tried >= CRASH_STOP
+            ):  # a broken setup, not a bad answer: save the GPU time
+                status = "crashed"
+                log(f"{name}: the first {tried} requests all crashed ({rec['error'][:200]}); job stopped")
+                break
             if k % 20 == 0:
                 log(
                     f"{name}: {k}/{len(requests)} ({rec.get('output_tokens')} tok, {rec['latency_ms'] / 1000:.1f} s)"
                 )
-    write_json(out / "status.json", {"status": status, "answered": len(outputs.read_text().splitlines())})
-    log(f"{name}: {status}")
+    recs = list(
+        {r["id"]: r for r in map(json.loads, outputs.read_text().splitlines())}.values()
+    )  # last per id
+    errors = sum("text" not in r for r in recs)  # the scoring code crashed: no answer, not an invalid one
+    write_json(out / "status.json", {"status": status, "answered": len(recs) - errors, "errors": errors})
+    log(f"{name}: {status}" + (f", {errors} of {len(recs)} requests CRASHED (no answer)" if errors else ""))
 
 
 # ---------------------------------------------------------------- driver

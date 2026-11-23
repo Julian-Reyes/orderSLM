@@ -1,0 +1,329 @@
+{
+  "env": {
+    "session": "20261116T133857Z",
+    "started_at": "2026-11-16T16:19:09.249515+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.87,
+        "Cached": 4.41,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.93,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-11-17T03:01:11.573460+00:00"
+  },
+  "jobs": {
+    "qwen3.5-0.8b-single-v5": {
+      "status": {
+        "status": "done",
+        "opt_step": 818,
+        "epoch": 2,
+        "pos": 0,
+        "best_val": 0.009161093046554372,
+        "best_step": 818,
+        "skipped_updates": 6,
+        "finished_at": "2026-11-17T03:00:55.408926+00:00"
+      },
+      "val": [
+        {
+          "val_loss": 1.379245902186993,
+          "val_tokens": 64553,
+          "seconds": 323.4,
+          "opt_step": 0,
+          "epoch": 0.0,
+          "best": false
+        },
+        {
+          "val_loss": 0.016493099645912872,
+          "val_tokens": 64553,
+          "seconds": 263.2,
+          "opt_step": 204,
+          "epoch": 0.49877750611246946,
+          "best": true
+        },
+        {
+          "val_loss": 0.011496495707489895,
+          "val_tokens": 64553,
+          "seconds": 263.4,
+          "opt_step": 409,
+          "epoch": 1.0,
+          "best": true
+        },
+        {
+          "val_loss": 0.01007274235725342,
+          "val_tokens": 64553,
+          "seconds": 263.5,
+          "opt_step": 614,
+          "epoch": 1.5012224938875305,
+          "best": true
+        },
+        {
+          "val_loss": 0.009161093046554372,
+          "val_tokens": 64553,
+          "seconds": 263.3,
+          "opt_step": 818,
+          "epoch": 2.0,
+          "best": true
+        }
+      ],
+      "best_adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "best": {
+        "val_loss": 0.009161093046554372,
+        "val_tokens": 64553,
+        "seconds": 263.3,
+        "opt_step": 818,
+        "epoch": 2.0
+      },
+      "steps_logged": 818,
+      "skipped_updates": 6,
+      "train_hours_logged": 10.27,
+      "peak_memory_gb": 4.56,
+      "tokens_per_second": 678.7
+    },
+    "score-qwen3.5-0.8b-single-v4-fresh4-cd": {
+      "status": {
+        "status": "done",
+        "answered": 343
+      },
+      "dev_run": "runs/student-dev/20261116T133857Z-qwen3.5-0.8b-single-v4-fresh4-cd",
+      "intent_all": {
+        "messages": 343,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.011075949367088606
+        ],
+        "label_set_correct": 0
+      },
+      "intent_earlier": {
+        "messages": 233,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.016220123491819
+        ],
+        "label_set_correct": 0
+      },
+      "items_f1": 0.0,
+      "exact": "0/110",
+      "contract_valid": {
+        "last": {
+          "valid": 0,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 0,
+          "of": 233
+        }
+      },
+      "unanswered": 0,
+      "crashed": 343,
+      "complete": false
+    },
+    "score-qwen3.5-0.8b-single-v4-cd": {
+      "status": {
+        "status": "done",
+        "answered": 268
+      },
+      "dev_run": "runs/student-dev/20261116T133857Z-qwen3.5-0.8b-single-v4-cd",
+      "intent_all": {
+        "messages": 268,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.014131759083230822
+        ],
+        "label_set_correct": 0
+      },
+      "intent_earlier": {
+        "messages": 177,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.02124289986374816
+        ],
+        "label_set_correct": 0
+      },
+      "items_f1": 0.0,
+      "exact": "0/91",
+      "contract_valid": {
+        "last": {
+          "valid": 0,
+          "of": 91
+        },
+        "earlier": {
+          "valid": 0,
+          "of": 177
+        }
+      },
+      "unanswered": 0,
+      "crashed": 268,
+      "complete": false
+    },
+    "score-qwen3.5-0.8b-single-v4-fresh-cd": {
+      "status": {
+        "status": "done",
+        "answered": 278
+      },
+      "dev_run": "runs/student-dev/20261116T133857Z-qwen3.5-0.8b-single-v4-fresh-cd",
+      "intent_all": {
+        "messages": 278,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.013630351232749173
+        ],
+        "label_set_correct": 0
+      },
+      "intent_earlier": {
+        "messages": 188,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          1.734723475976807e-18,
+          0.020024853837749476
+        ],
+        "label_set_correct": 0
+      },
+      "items_f1": 0.0,
+      "exact": "0/90",
+      "contract_valid": {
+        "last": {
+          "valid": 0,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 0,
+          "of": 188
+        }
+      },
+      "unanswered": 0,
+      "crashed": 278,
+      "complete": false
+    },
+    "score-qwen3.5-0.8b-single-v4-fresh2-cd": {
+      "status": {
+        "status": "done",
+        "answered": 275
+      },
+      "dev_run": "runs/student-dev/20261116T133857Z-qwen3.5-0.8b-single-v4-fresh2-cd",
+      "intent_all": {
+        "messages": 275,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.013776997406412816
+        ],
+        "label_set_correct": 0
+      },
+      "intent_earlier": {
+        "messages": 185,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.02034297527663396
+        ],
+        "label_set_correct": 0
+      },
+      "items_f1": 0.0,
+      "exact": "0/90",
+      "contract_valid": {
+        "last": {
+          "valid": 0,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 0,
+          "of": 185
+        }
+      },
+      "unanswered": 0,
+      "crashed": 275,
+      "complete": false
+    },
+    "score-qwen3.5-0.8b-single-v4-fresh3-cd": {
+      "status": {
+        "status": "done",
+        "answered": 321
+      },
+      "dev_run": "runs/student-dev/20261116T133857Z-qwen3.5-0.8b-single-v4-fresh3-cd",
+      "intent_all": {
+        "messages": 321,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.011826071537635574
+        ],
+        "label_set_correct": 0
+      },
+      "intent_earlier": {
+        "messages": 211,
+        "primary_correct": 0,
+        "primary_accuracy": 0.0,
+        "primary_ci95": [
+          0.0,
+          0.017881080759033628
+        ],
+        "label_set_correct": 0
+      },
+      "items_f1": 0.0,
+      "exact": "0/110",
+      "contract_valid": {
+        "last": {
+          "valid": 0,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 0,
+          "of": 211
+        }
+      },
+      "unanswered": 0,
+      "crashed": 321,
+      "complete": false
+    }
+  },
+  "host_memory": {
+    "samples": 1282,
+    "total_gb": 33.66,
+    "min_available_gb": 25.51,
+    "max_shmem_gb": 0.03,
+    "max_rss_gb": {
+      "gpu0": 3.51,
+      "gpu1": 4.05
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}

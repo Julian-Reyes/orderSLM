@@ -147,3 +147,35 @@ def test_parts_split_fresh3_into_standard_and_future_day():
         "mcnemar_p": 1.0,
     }
     assert c["parts"]["standard"]["pairs"][0]["only_a_right"] == 0
+
+
+def test_crashed_scoring_is_refused_not_scored_as_invalid(tmp_path):
+    """Session A (2026-11-16): every constrained answer crashed in xgrammar; the records had an error and no text,
+    and the report scored them as invalid (0/110 valid). A crash is no answer: the comparison refuses the run."""
+    import json
+
+    import pytest
+
+    from orderslm.eval.student_compare import crashed, load_run
+
+    messages = {("c1", 0): True, ("c2", 0): False}
+    (tmp_path / "outputs.jsonl").write_text(
+        json.dumps({"id": "c1#0", "text": "{}"})
+        + "\n"
+        + json.dumps({"id": "c2#0", "error": "RuntimeError: GrammarMatcher has terminated"})
+        + "\n"
+    )
+    assert crashed(tmp_path, messages) == ["c2#0"]
+    rows = [
+        {"conversation_id": c, "message_index": k, "primary_ok": ok, "pred": None}
+        for (c, k), ok in messages.items()
+    ]
+    (tmp_path / "intent_rows.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    (tmp_path / "order_rows.jsonl").write_text("")
+    (tmp_path / "metrics.json").write_text("{}")
+    (tmp_path / "manifest.json").write_text("{}")
+    with pytest.raises(SystemExit, match="scoring code crashed on 1 of 2"):
+        load_run(tmp_path)
+    with (tmp_path / "outputs.jsonl").open("a") as f:  # a resumed session answered it after all
+        f.write(json.dumps({"id": "c2#0", "text": "{}"}) + "\n")
+    assert crashed(tmp_path, messages) == []

@@ -431,7 +431,16 @@ def import_(run_dir: Path, output_dir: Path) -> dict[str, Any]:
                     "items_f1": m["order"]["item"]["f1"],
                     "exact": f"{m['order']['exact_match']}/{m['order']['conversations']}",
                     "contract_valid": m["contract_valid"],
+                    "unanswered": m["unanswered"],
+                    "crashed": m["crashed"],
+                    "complete": m["complete"],
                 }
+                if not m["complete"]:
+                    print(
+                        f"WARNING {name}: incomplete ({m['unanswered']} unanswered, {m['crashed']} crashed); "
+                        "its numbers are not a result",
+                        file=sys.stderr,
+                    )
     kernel = run_dir / "kernel"
     _copy(output_dir, kernel, ("env.json", "run.log", "memory.jsonl"))
     if (kernel / "memory.jsonl").exists():
