@@ -1,0 +1,168 @@
+{
+  "conversation": {
+    "id": "a-fresh5-083",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello!",
+        "sent_at": "2026-12-01T14:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "I'd like to place an order for December 5th.",
+        "sent_at": "2026-12-01T14:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Two veggie burgers and two lemonades.",
+        "sent_at": "2026-12-01T14:01:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "I'll pick them up at 1:30.",
+        "sent_at": "2026-12-01T14:01:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "Paying cash.",
+        "sent_at": "2026-12-01T14:02:24-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "Two veggie burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "two lemonades"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "I'll pick them up"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 1:30",
+        "normalized_local": "13:30",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "at 1:30"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "month": 12,
+          "day_of_month": 5,
+          "raw_text": "December 5th",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "December 5th"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "Paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-083"
+}

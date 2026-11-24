@@ -1,0 +1,77 @@
+{
+ "card_id": "syn-t8-0220",
+ "kind": "hand_label",
+ "reason": "training data v6: chat and label written by hand (Julian, 2026-11-24; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-24T23:51:02.007269+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": "HUMAN_REQUEST"
+   }
+  ],
+  "order": {
+   "items": [],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "ambiguous",
+     "kind": null,
+     "raw_text": "monday",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "monday"
+      }
+     ],
+     "day": {
+      "kind": "weekday",
+      "weekday": "mon",
+      "month": null,
+      "day_of_month": null,
+      "raw_text": "monday",
+      "evidence": [
+       {
+        "message_index": 0,
+        "quote": "monday"
+       }
+      ]
+     }
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "unknown",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": []
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

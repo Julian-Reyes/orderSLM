@@ -1,0 +1,34 @@
+{
+  "conversation": {
+    "id": "a-fresh5-098",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, what's the most popular thing on your menu?",
+        "sent_at": "2026-12-01T07:40:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "menu_question"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-098"
+}

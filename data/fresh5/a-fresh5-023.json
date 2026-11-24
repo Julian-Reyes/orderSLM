@@ -1,0 +1,123 @@
+{
+  "conversation": {
+    "id": "a-fresh5-023",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "4 BACON BURGERS, 2 WITH NO TOMATO",
+        "sent_at": "2026-12-02T12:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "PICKUP",
+        "sent_at": "2026-12-02T12:40:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "CARD",
+        "sent_at": "2026-12-02T12:41:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 BACON BURGERS, 2 WITH NO TOMATO"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "tomato",
+            "raw_text": "NO TOMATO"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "4 BACON BURGERS, 2 WITH NO TOMATO"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-023"
+}

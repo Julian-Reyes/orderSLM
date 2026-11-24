@@ -1,0 +1,154 @@
+{
+  "conversation": {
+    "id": "a-fresh5-016",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-30T18:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "medium pepperoni",
+        "sent_at": "2026-11-30T18:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "n an order of knots, do u deliver to the east side?",
+        "sent_at": "2026-11-30T18:01:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Yes, within 5 miles of the shop!",
+        "sent_at": "2026-11-30T18:01:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "eh ill just pick it up",
+        "sent_at": "2026-11-30T18:02:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-30T18:02:58-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "two_requests"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "medium pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "garlic_knots",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "an order of knots"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pick it up"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "secondary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-016"
+}

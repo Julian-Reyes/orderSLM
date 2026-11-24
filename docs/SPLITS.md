@@ -103,6 +103,18 @@ training chats (t7 included). Evaluation-only (tests/test_fresh4.py). Not review
 (report it). Two cards asked for a late change that only adds a topping, which the guide labels `PLACE_ORDER`
 (nothing replaced); those chats (062, 084) swap one topping for another instead, so the card's `MODIFY_ORDER` holds.
 
+## Fresh5 split (M6 v6)
+
+`data/fresh5/` (`Split.fresh5`, `conversation@0.9`): 110 Source A conversations written **after** the v6 fixes (batch
+t8, which used the dev, fresh, fresh2 and fresh3 misses; fresh4 untouched), to measure v5 vs v6 together with fresh4.
+Cards: `cards generate --split fresh5`: fresh4's shape from its own seed (`20261007-fresh5-2026-11-24`), training menus
+only. Written and labeled by claude-opus-5.5 in the session ($0, 2026-11-24) with `runs/source-a/fresh5/build.py`
+(fresh4's builder; the week of 2026-11-30), from fresh5's own cards only: 358 customer messages, every chat passes
+`validate()`, all 20 future-day golds resolve to a later day; no near-duplicates within fresh5, against dev, fresh,
+fresh2, fresh3 or fresh4, or against the training chats (t8 included). Evaluation-only (tests/test_fresh5.py). Not
+reviewed by Julian; same writer as t8 (report it). As in fresh4, late "add a topping" cards swap one topping for
+another (057, 069) so the card's `MODIFY_ORDER` holds; asking whether they can order ahead is `DELIVERY_QUESTION`.
+
 ## Review (Source A)
 
 Julian reviews **all of dev and at least 25% of test** in the tool. "Save as reviewed" saves his version and

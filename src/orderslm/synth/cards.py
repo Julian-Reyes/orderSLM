@@ -237,6 +237,28 @@ V5_WEIGHTS = {
 }
 V5_MODIFY_KIND_WEIGHTS = {"option_swap": 12, "remove_item": 12, "quantity": 8, "add_mod": 8, "swap_item": 5}
 V5_FUTURE_DAY_KIND_WEIGHTS = {"date_time": 6, "day_no_time": 6, "weekday_time": 3}
+# Training data v6 (Julian, 2026-11-24: "let's do another data round to get the percentage higher"): the 60 chats v5
+# still gets wrong on dev, fresh, fresh2 and fresh3 (runs/student-errors/20261124T165018Z, …T165020Z, …T165021Z,
+# …T165022Z), weighted toward the patterns its training data barely shows: a size said only as "big" / "bigger"
+# (2 training examples; 6 misses), a day said in an earlier message than the time (20 of 117 day examples; 4 misses).
+# By hand, $0.
+V6_WEIGHTS = {
+    "vague_size": 30,  # "one of the big margheritas", "a bigger size": item_variant / ambiguous, never large (6)
+    "vague_ref": 25,  # "that one", "same as last time", "the big one" left unmatched after a list or a refusal (7)
+    "future_day": 35,  # the day in one message, the time in a later one; date + weekday; a day with a staff ask (6)
+    "modify_last": 30,  # "make it 5", "swap the cokes for lemonades" losing other lines or the variant (6)
+    "split_lines": 25,  # "4 vanilla shakes but 2 chocolate", "gluten free on all 3", "one plain and one everything" (7)
+    "big_order": 25,  # long one-message orders: every count, variant and add-on kept, nothing invented (8)
+    "combo_picks": 15,  # combo picks named in a later message read as extra items, or invented (4)
+    "offmenu_item": 10,  # "a red bull", "a mountain dew" mapped to the nearest drink (2)
+    "offmenu_addon": 5,  # "w pesto drizzle", "w lox" (3)
+    "no_such_size": 10,  # "party size" mapped to a real size (2)
+    "qty_unstated": 10,  # "some garlic knots", "some breadsticks" read as 1 (2)
+    "short_reply": 15,  # "k", "ya", "🤔", "nvm the other one": intent from what came before (intent misses)
+    "question_mid": 5,  # "do u deliver to …?" with the order: a question, not a delivery choice (dev 077)
+}
+V6_MODIFY_KIND_WEIGHTS = {"swap_item": 10, "quantity": 8, "option_swap": 4, "size": 4, "remove_item": 4}
+V6_FUTURE_DAY_KIND_WEIGHTS = {"day_then_time": 20, "date_weekday": 5, "day_staff": 5, "ask_ahead": 5}
 FUTURE_DAY_KIND_WEIGHTS = {
     "tomorrow_time": 30,
     "weekday_time": 25,
@@ -259,6 +281,11 @@ FUTURE_DAY_SENTENCES = {
     "that day at a time.",
     "context_day": "Mentions a day of the week only as small talk ('rough monday lol', 'happy friday'); the order "
     "is for now.",
+    "day_then_time": "Says the later day in an early message ('lunch for the office tmrw', 'for friday') and the "
+    "clock time only in a later message ('pickup at 12:30'); the order is for that day at that time.",
+    "date_weekday": "Names the later day both as a weekday and as a date ('thursday nov 19'), with a time.",
+    "day_staff": "Wants a large or catering order for a later day (tomorrow or a weekday, no clock time), names no "
+    "items, and asks to talk to a person about it.",
 }
 # Kinds of change in the 160 modify_last chats, weighted toward what all three students got wrong on dev (Julian,
 # 2026-10-25: "the whole point is to help the students on what they got wrong"): size changes ("make the fries
@@ -636,7 +663,7 @@ def _card(
             ]
             gaps += ["size"] if sizeable else []
             gap = rng.choice(gaps)
-            if target == "size_unstated" and sizeable:
+            if target in ("size_unstated", "vague_size") and sizeable:
                 gap = "size"
         n_items = rng.choices([1, 2, 3], weights=[45, 35, 20])[0]
         if scenario is S.half_and_half:
@@ -905,6 +932,11 @@ TARGET_SCENARIOS: dict[str, tuple[Scenario, ...]] = {
     "implicit": (S.implicit_category,),
     "question_mid": (S.two_requests, S.multi_message_order),
     "alias_variant": (S.simple_order, S.multi_message_order),
+    "vague_size": (S.missing_info,),
+    "combo_picks": (S.combo,),
+    "offmenu_item": (S.off_menu,),
+    "no_such_size": (S.off_menu, S.simple_order),
+    "short_reply": (S.contextual_yes, S.unclear_message, S.small_talk),
 }
 V3_SENTENCES = {
     "qty_unstated": "Never says how many of the first item: asks for it vaguely ('some', 'a few', 'muffins for the "
@@ -922,6 +954,16 @@ V3_SENTENCES = {
     "the question; every item named before and after the question is ordered.",
     "alias_variant": "Names an item only by a nickname or its parts ('bec', 'bacon egg n cheese', 'a number 2', "
     "'1 on a croissant' after asking about it) with its variant said casually.",
+    "vague_size": "Says the size of a sized item only vaguely ('one of the big ones', 'a bigger size', 'the larger "
+    "pepperonis', 'not the small'), so more than one size fits; the chat ends before the business asks which.",
+    "combo_picks": "Orders a combo or deal and names its picks in a later message or after the business asks; the "
+    "picks belong to the combo, not separate items. Any pick never named stays unchosen.",
+    "offmenu_item": "Also asks for a drink or dish the place doesn't sell (a brand drink or a dish from another "
+    "kind of restaurant), as if it were on the menu.",
+    "no_such_size": "Asks for a size the item doesn't come in ('party size', 'a jumbo', 'a medium fries' where the "
+    "item has no medium) and never picks a real size.",
+    "short_reply": "Includes a very short customer message ('k', 'ya', 'ok', 'hm', an emoji alone, 'nvm the other "
+    "one') whose meaning depends on what came just before: a yes to a read-back, a reply to nothing, or unclear.",
 }
 
 

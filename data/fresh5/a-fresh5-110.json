@@ -1,0 +1,132 @@
+{
+  "conversation": {
+    "id": "a-fresh5-110",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi there!",
+        "sent_at": "2026-12-06T15:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could I order two bacon burgers and an order of onion rings for Friday at 6, delivered to 14 Willow Ln?",
+        "sent_at": "2026-12-06T15:00:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "two bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "an order of onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivered to 14 Willow Ln"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 6",
+        "normalized_local": "18:00",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "at 6"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "fri",
+          "raw_text": "Friday",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "Friday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Willow Ln",
+      "number": "14",
+      "raw_text": "14 Willow Ln",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "14 Willow Ln"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-110"
+}

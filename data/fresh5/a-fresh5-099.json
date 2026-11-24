@@ -1,0 +1,123 @@
+{
+  "conversation": {
+    "id": "a-fresh5-099",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, do your breadsticks come with marinara?",
+        "sent_at": "2026-12-02T18:50:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, every order comes with marinara.",
+        "sent_at": "2026-12-02T18:50:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Great, some breadsticks and a large cheese pizza delivered to 40 Glenwood Ave, please.",
+        "sent_at": "2026-12-02T18:51:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "breadsticks",
+        "quantity": null,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "some breadsticks"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a large cheese pizza"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "delivered to 40 Glenwood Ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Glenwood Ave",
+      "number": "40",
+      "raw_text": "40 Glenwood Ave",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "40 Glenwood Ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many orders of breadsticks would you like (4 per order), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-099"
+}

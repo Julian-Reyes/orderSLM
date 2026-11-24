@@ -1,0 +1,177 @@
+{
+  "conversation": {
+    "id": "a-fresh5-089",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "xl pepperoni",
+        "sent_at": "2026-11-30T19:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "medium veggie no onions",
+        "sent_at": "2026-11-30T19:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "2 cans of coke",
+        "sent_at": "2026-11-30T19:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "330 elm st apt 7",
+        "sent_at": "2026-11-30T19:31:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-11-30T19:32:24-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "xl pepperoni"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "veggie_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "remove",
+            "modifier_id": "onions",
+            "raw_text": "no onions"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "medium veggie no onions"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "coke",
+        "quantity": 2,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 cans of coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "330 elm st apt 7"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elm st",
+      "number": "330",
+      "unit": "apt 7",
+      "raw_text": "330 elm st apt 7",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "330 elm st apt 7"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-089"
+}

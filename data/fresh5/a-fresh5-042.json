@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-fresh5-042",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, two cheeseburgers and an order of onion rings for pickup at 5:15.",
+        "sent_at": "2026-12-03T14:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Name is Hal, paying cash.",
+        "sent_at": "2026-12-03T14:00:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "onion_rings",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "an order of onion rings"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 5:15",
+        "normalized_local": "17:15",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 5:15"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Hal",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Hal"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-042",
+  "annotation_notes": "'at 5:15' at 14:00, open 11-22: 17:15."
+}

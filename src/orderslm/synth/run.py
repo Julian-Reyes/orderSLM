@@ -60,6 +60,9 @@ from .cards import (
     V5_FUTURE_DAY_KIND_WEIGHTS,
     V5_MODIFY_KIND_WEIGHTS,
     V5_WEIGHTS,
+    V6_FUTURE_DAY_KIND_WEIGHTS,
+    V6_MODIFY_KIND_WEIGHTS,
+    V6_WEIGHTS,
     plan_cards,
     plan_targeted_cards,
 )
@@ -142,11 +145,13 @@ def plan(args: argparse.Namespace) -> int:
         if unknown:
             raise SystemExit(f"unknown generators {unknown}")
     business_ids = tuple(args.menus.split(",")) if args.menus else None
-    if args.targeted or args.topup or args.v3 or args.v4 or args.v5:
+    if args.targeted or args.topup or args.v3 or args.v4 or args.v5 or args.v6:
         if business_ids:
             raise SystemExit("--targeted plans over the three training menus; --menus doesn't apply")
         weights = (
-            V5_WEIGHTS
+            V6_WEIGHTS
+            if args.v6
+            else V5_WEIGHTS
             if args.v5
             else V4_WEIGHTS
             if args.v4
@@ -169,6 +174,11 @@ def plan(args: argparse.Namespace) -> int:
                 if args.v5
                 else {}
             ),
+            **(
+                {"modify_weights": V6_MODIFY_KIND_WEIGHTS, "future_day_weights": V6_FUTURE_DAY_KIND_WEIGHTS}
+                if args.v6
+                else {}
+            ),
         )
     else:
         cards = plan_cards(
@@ -186,12 +196,13 @@ def plan(args: argparse.Namespace) -> int:
         "seed": args.seed,
         "cards_version": CARDS_VERSION,
         "targets_version": TARGETS_VERSION
-        if args.targeted or args.topup or args.v3 or args.v4 or args.v5
+        if args.targeted or args.topup or args.v3 or args.v4 or args.v5 or args.v6
         else None,
         "topup": args.topup,
         "v3": args.v3,
         "v4": args.v4,
         "v5": args.v5,
+        "v6": args.v6,
         "rewrite_missing": args.rewrite_missing,
         "synth_schema_version": SYNTH_SCHEMA_VERSION,
         "generators": dict(generators),
@@ -667,6 +678,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     p.add_argument(
         "--v5", action="store_true", help="training data v5 targets (cards.V5_WEIGHTS), $0 by hand"
+    )
+    p.add_argument(
+        "--v6", action="store_true", help="training data v6 targets (cards.V6_WEIGHTS), $0 by hand"
     )
     p.add_argument(
         "--rewrite-missing", metavar="BATCH", help="also copy BATCH's cards whose chat was dropped"

@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-fresh5-007",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 🍕 3 medium margheritas",
+        "sent_at": "2026-12-01T19:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 of them thin crust",
+        "sent_at": "2026-12-01T19:10:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "to 88 kensington ave apt 4",
+        "sent_at": "2026-12-01T19:11:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "card 💳",
+        "sent_at": "2026-12-01T19:11:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium margheritas"
+          },
+          {
+            "message_index": 1,
+            "quote": "2 of them thin crust"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "crust_thin",
+            "raw_text": "thin crust"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 medium margheritas"
+          },
+          {
+            "message_index": 1,
+            "quote": "2 of them thin crust"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "to 88 kensington ave apt 4"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "kensington ave",
+      "number": "88",
+      "unit": "apt 4",
+      "raw_text": "88 kensington ave apt 4",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "88 kensington ave apt 4"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-007"
+}

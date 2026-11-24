@@ -1,0 +1,158 @@
+{
+  "conversation": {
+    "id": "a-fresh5-078",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "lg drip w cinnamon",
+        "sent_at": "2026-12-02T07:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a blueberry muffin",
+        "sent_at": "2026-12-02T07:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "asap",
+        "sent_at": "2026-12-02T07:31:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-12-02T07:31:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w cinnamon",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "lg drip w cinnamon"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "muffin",
+        "quantity": 1,
+        "variant_id": "blueberry",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a blueberry muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "asap",
+        "raw_text": "asap",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "asap"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "We don't have cinnamon for the drip coffee. Would you like it as it comes, or with something else instead? Also, is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-078"
+}

@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-fresh5-065",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 cheeseburgers n a lemonade to 19 grant ave, card 💳 oh n can u put a fried egg on one 🍳",
+        "sent_at": "2026-12-03T18:10:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "single",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "a fried egg",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 cheeseburgers"
+          },
+          {
+            "message_index": 0,
+            "quote": "put a fried egg on one"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "to 19 grant ave"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "grant ave",
+      "number": "19",
+      "raw_text": "19 grant ave",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "19 grant ave"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L2"
+      }
+    ],
+    "clarification_question": "We don't have fried egg for the cheeseburger. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-065"
+}

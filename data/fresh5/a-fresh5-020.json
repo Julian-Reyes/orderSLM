@@ -1,0 +1,127 @@
+{
+  "conversation": {
+    "id": "a-fresh5-020",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 single cheeseburgers n a fries 🍟",
+        "sent_at": "2026-12-04T12:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "card 💳",
+        "sent_at": "2026-12-04T12:50:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh make the burgers doubles n the fries a large 🍔",
+        "sent_at": "2026-12-04T12:51:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 2,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 single cheeseburgers"
+          },
+          {
+            "message_index": 2,
+            "quote": "make the burgers doubles"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a fries"
+          },
+          {
+            "message_index": 2,
+            "quote": "the fries a large"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-020"
+}

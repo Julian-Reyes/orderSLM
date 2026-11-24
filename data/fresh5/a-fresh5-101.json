@@ -1,0 +1,34 @@
+{
+  "conversation": {
+    "id": "a-fresh5-101",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 😕 i ordered an almond croissant but got a plain one",
+        "sent_at": "2026-12-04T10:10:00-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "order_problem"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "ORDER_PROBLEM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-101"
+}

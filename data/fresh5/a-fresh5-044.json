@@ -1,0 +1,146 @@
+{
+  "conversation": {
+    "id": "a-fresh5-044",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HEY THERE",
+        "sent_at": "2026-12-04T18:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "3 CHEESEBURGERS, 2 BACON BURGERS, A VEGGIE BURGER, 4 LARGE FRIES AND 6 COKES TO 210 HOLLIS ST, PAYING CARD",
+        "sent_at": "2026-12-04T18:20:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 3,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "3 CHEESEBURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 BACON BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "veggie_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "A VEGGIE BURGER"
+          }
+        ]
+      },
+      {
+        "line_id": "L4",
+        "menu_item_id": "fries",
+        "quantity": 4,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "4 LARGE FRIES"
+          }
+        ]
+      },
+      {
+        "line_id": "L5",
+        "menu_item_id": "coke",
+        "quantity": 6,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "6 COKES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "TO 210 HOLLIS ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "HOLLIS ST",
+      "number": "210",
+      "raw_text": "210 HOLLIS ST",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "210 HOLLIS ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "PAYING CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-044"
+}

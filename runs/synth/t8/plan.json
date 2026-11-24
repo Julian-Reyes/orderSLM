@@ -1,0 +1,99 @@
+{
+  "batch": "t8",
+  "n": 240,
+  "seed": 20261016,
+  "cards_version": "synth-cards@0.5",
+  "targets_version": "synth-targets@0.1",
+  "topup": false,
+  "v3": false,
+  "v4": false,
+  "v5": false,
+  "v6": true,
+  "rewrite_missing": null,
+  "synth_schema_version": "synth@0.1",
+  "generators": {
+    "claude-session/claude-opus-5-5": 1
+  },
+  "menu_versions": {
+    "corner-patty": "corner-patty@ff1a995e0937",
+    "halfmoon-pizza": "halfmoon-pizza@76a71f5db02f",
+    "morning-crumb": "morning-crumb@176c82480e7c"
+  },
+  "planned_at": "2026-11-24T20:00:06.113365+00:00",
+  "git_commit": "ec4bdf4cd0c96afbbce71a7a6224f20e201f2d47-dirty",
+  "distribution": {
+    "generator": {
+      "claude-session/claude-opus-5-5": 240
+    },
+    "scenario": {
+      "missing_info": 80,
+      "multi_message_order": 35,
+      "simple_order": 32,
+      "correction_after_confirmation": 16,
+      "combo": 15,
+      "off_menu": 15,
+      "ambiguous_reference": 15,
+      "correction": 14,
+      "unclear_message": 9,
+      "contextual_yes": 4,
+      "two_requests": 3,
+      "small_talk": 2
+    },
+    "business": {
+      "morning-crumb": 85,
+      "corner-patty": 81,
+      "halfmoon-pizza": 74
+    },
+    "style": {
+      "texting": 72,
+      "rapid_fire": 48,
+      "emoji": 48,
+      "clean": 48,
+      "shouty": 24
+    },
+    "fulfillment": {
+      "pickup": 112,
+      "delivery": 60,
+      "unstated": 57,
+      "not_applicable": 11
+    },
+    "payment": {
+      "card": 98,
+      "cash": 66,
+      "unstated": 65,
+      "not_applicable": 11
+    },
+    "items": {
+      "1": 74,
+      "2": 59,
+      "3": 52,
+      "4": 21,
+      "5": 18,
+      "0": 11,
+      "6": 5
+    },
+    "expected_labels": {
+      "PLACE_ORDER": 229,
+      "MENU_QUESTION": 37,
+      "MODIFY_ORDER": 30,
+      "CONFIRM_ORDER": 20,
+      "UNKNOWN": 9,
+      "SMALL_TALK": 2
+    },
+    "target": {
+      "future_day": 35,
+      "modify_last": 30,
+      "vague_size": 30,
+      "vague_ref": 25,
+      "big_order": 25,
+      "split_lines": 25,
+      "combo_picks": 15,
+      "short_reply": 15,
+      "qty_unstated": 10,
+      "no_such_size": 10,
+      "offmenu_item": 10,
+      "question_mid": 5,
+      "offmenu_addon": 5
+    }
+  }
+}

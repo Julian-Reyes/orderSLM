@@ -1,0 +1,119 @@
+{
+  "conversation": {
+    "id": "a-fresh5-094",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HELLO",
+        "sent_at": "2026-12-05T18:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "2 OF YOUR BIGGEST BURGERS AND 2 LARGE FRIES TO 81 PROSPECT ST",
+        "sent_at": "2026-12-05T18:40:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "unmatched_text": "YOUR BIGGEST BURGERS",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 OF YOUR BIGGEST BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "2 LARGE FRIES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "TO 81 PROSPECT ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "PROSPECT ST",
+      "number": "81",
+      "raw_text": "81 PROSPECT ST",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "81 PROSPECT ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_menu_match",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Which one do you mean by “YOUR BIGGEST BURGERS”, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-094",
+  "annotation_notes": "The double cheeseburger and the bacon burger are both the biggest: unclear item, asked."
+}

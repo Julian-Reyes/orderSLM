@@ -1,0 +1,154 @@
+{
+ "card_id": "syn-t8-0014",
+ "kind": "hand_label",
+ "reason": "training data v6: chat and label written by hand (Julian, 2026-11-24; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-24T23:51:02.007269+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "coffee_pastry_combo",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [
+      {
+       "slot_id": "drink",
+       "menu_item_id": "latte",
+       "variant_id": "medium"
+      },
+      {
+       "slot_id": "pastry",
+       "menu_item_id": "croissant",
+       "variant_id": "plain"
+      }
+     ],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 0,
+       "quote": "coffee n pastry deal"
+      },
+      {
+       "message_index": 2,
+       "quote": "a medium latte n a plain croissant"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": "hot_chocolate",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 1,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "a small hot choc"
+      }
+     ]
+    },
+    {
+     "line_id": "L3",
+     "menu_item_id": "cappuccino",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "small",
+     "unmatched_variant_text": null,
+     "modifications": [
+      {
+       "kind": "substitute",
+       "modifier_id": "whole_milk",
+       "replacement_modifier_id": "oat_milk",
+       "amount": "normal",
+       "raw_text": "w oat milk",
+       "not_on_menu": false,
+       "kitchen_note": false
+      }
+     ],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "2 sm caps w oat milk"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "unknown",
+    "method_evidence": [],
+    "requested_time": {
+     "state": "provided",
+     "kind": "clock_time",
+     "raw_text": "at 9:15",
+     "normalized_local": "09:15",
+     "evidence": [
+      {
+       "message_index": 2,
+       "quote": "at 9:15"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "not_mentioned",
+    "street": null,
+    "number": null,
+    "unit": null,
+    "reference": null,
+    "raw_text": null,
+    "evidence": []
+   },
+   "payment": {
+    "method": "cash",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "cash"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

@@ -1,0 +1,193 @@
+{
+  "conversation": {
+    "id": "a-fresh5-063",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-11-30T13:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordering for wednesday",
+        "sent_at": "2026-11-30T13:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "is the bbq chicken spicy",
+        "sent_at": "2026-11-30T13:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Not spicy, it's sweet and smoky!",
+        "sent_at": "2026-11-30T13:31:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ok a large one",
+        "sent_at": "2026-11-30T13:32:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "n a 2 liter dr pepper",
+        "sent_at": "2026-11-30T13:32:58-06:00"
+      },
+      {
+        "index": 6,
+        "role": "customer",
+        "text": "at 6",
+        "sent_at": "2026-11-30T13:33:39-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "rapid_fire",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "the bbq chicken"
+          },
+          {
+            "message_index": 4,
+            "quote": "a large one"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "dr_pepper",
+        "quantity": 1,
+        "variant_id": "two_liter",
+        "evidence": [
+          {
+            "message_index": 5,
+            "quote": "a 2 liter dr pepper"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 6",
+        "normalized_local": "18:00",
+        "evidence": [
+          {
+            "message_index": 6,
+            "quote": "at 6"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "wed",
+          "raw_text": "wednesday",
+          "evidence": [
+            {
+              "message_index": 1,
+              "quote": "wednesday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 6,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-063",
+  "annotation_notes": "'a large one' right after asking about the BBQ chicken is that pizza."
+}

@@ -1,0 +1,140 @@
+{
+  "conversation": {
+    "id": "a-fresh5-082",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "A LARGE CAPPUCCINO WITH HAZELNUT",
+        "sent_at": "2026-12-06T09:20:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "AND AN EVERYTHING BAGEL WITH BUTTER",
+        "sent_at": "2026-12-06T09:20:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "PICKUP FOR ABE",
+        "sent_at": "2026-12-06T09:21:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "multi_message_order"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "hazelnut_syrup",
+            "raw_text": "WITH HAZELNUT"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "A LARGE CAPPUCCINO WITH HAZELNUT"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "everything",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "butter",
+            "raw_text": "WITH BUTTER"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "AN EVERYTHING BAGEL WITH BUTTER"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Abe",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "ABE"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-082"
+}

@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh5-018",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "ok weird q but settling a bet",
+        "sent_at": "2026-12-02T16:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "how tall is the empire state building",
+        "sent_at": "2026-12-02T16:20:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-018"
+}

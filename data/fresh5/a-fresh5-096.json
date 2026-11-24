@@ -1,0 +1,114 @@
+{
+  "conversation": {
+    "id": "a-fresh5-096",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "3 VEGGIE BURGERS AND 3 SPRITES TO 12 BIRCH ST, CARD",
+        "sent_at": "2026-12-03T12:15:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "SORRY MAKE THAT 4 VEGGIE BURGERS",
+        "sent_at": "2026-12-03T12:15:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "veggie_burger",
+        "quantity": 4,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 VEGGIE BURGERS"
+          },
+          {
+            "message_index": 1,
+            "quote": "MAKE THAT 4 VEGGIE BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 3,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "3 SPRITES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "TO 12 BIRCH ST"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "BIRCH ST",
+      "number": "12",
+      "raw_text": "12 BIRCH ST",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "12 BIRCH ST"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "CARD"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-096"
+}

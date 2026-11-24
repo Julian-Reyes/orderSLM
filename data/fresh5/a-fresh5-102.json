@@ -1,0 +1,140 @@
+{
+  "conversation": {
+    "id": "a-fresh5-102",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "bacon burger w chili 🌶️",
+        "sent_at": "2026-12-05T19:50:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a lemonade",
+        "sent_at": "2026-12-05T19:50:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "to 77 sunset blvd, cash 💵",
+        "sent_at": "2026-12-05T19:51:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w chili",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "bacon burger w chili"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "to 77 sunset blvd"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "sunset blvd",
+      "number": "77",
+      "raw_text": "77 sunset blvd",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "77 sunset blvd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have chili for the bacon burger. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-102"
+}

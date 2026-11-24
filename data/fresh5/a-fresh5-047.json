@@ -1,0 +1,139 @@
+{
+  "conversation": {
+    "id": "a-fresh5-047",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "HOW BIG IS A MEDIUM?",
+        "sent_at": "2026-11-30T19:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Our medium is 12 inches, 8 slices.",
+        "sent_at": "2026-11-30T19:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "OK 2 MEDIUM SUPREMES FOR PICKUP, CASH",
+        "sent_at": "2026-11-30T19:01:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 2 medium Supreme Pizzas, pickup, paying cash. Is that right?",
+        "sent_at": "2026-11-30T19:01:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "YES",
+        "sent_at": "2026-11-30T19:02:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "ACTUALLY MAKE THEM LARGE",
+        "sent_at": "2026-11-30T19:02:58-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "supreme_pizza",
+        "quantity": 2,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 MEDIUM SUPREMES"
+          },
+          {
+            "message_index": 5,
+            "quote": "MAKE THEM LARGE"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "FOR PICKUP"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-047"
+}

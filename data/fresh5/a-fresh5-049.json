@@ -1,0 +1,136 @@
+{
+  "conversation": {
+    "id": "a-fresh5-049",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "CAN I ORDER AHEAD FOR SATURDAY?",
+        "sent_at": "2026-12-02T17:00:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, you can order up to a week ahead!",
+        "sent_at": "2026-12-02T17:00:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "GREAT, 2 BACON BURGERS AND 2 LEMONADES TO 15 CEDAR LN SATURDAY AT 7, CASH",
+        "sent_at": "2026-12-02T17:01:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "shouty",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 BACON BURGERS"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "2 LEMONADES"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "TO 15 CEDAR LN"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "AT 7",
+        "normalized_local": "19:00",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "AT 7"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "sat",
+          "raw_text": "SATURDAY",
+          "evidence": [
+            {
+              "message_index": 2,
+              "quote": "SATURDAY"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "CEDAR LN",
+      "number": "15",
+      "raw_text": "15 CEDAR LN",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "15 CEDAR LN"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "CASH"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "DELIVERY_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-049"
+}

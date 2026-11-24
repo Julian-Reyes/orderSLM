@@ -1,0 +1,113 @@
+{
+  "conversation": {
+    "id": "a-fresh5-029",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "can i get a few chocolate croissants n a med cap",
+        "sent_at": "2026-12-01T10:20:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-12-01T10:20:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "croissant",
+        "quantity": null,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a few chocolate croissants"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cappuccino",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a med cap"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many croissants would you like, is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-029"
+}

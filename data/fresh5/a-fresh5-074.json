@@ -1,0 +1,64 @@
+{
+  "conversation": {
+    "id": "a-fresh5-074",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 🍕",
+        "sent_at": "2026-12-05T20:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i ge",
+        "sent_at": "2026-12-05T20:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "t a lar",
+        "sent_at": "2026-12-05T20:31:11-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "unclear_message"
+  ],
+  "style": "emoji",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "UNKNOWN",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-074"
+}

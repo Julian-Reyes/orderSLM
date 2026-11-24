@@ -1,0 +1,121 @@
+{
+ "card_id": "syn-t8-0022",
+ "kind": "hand_label",
+ "reason": "training data v6: chat and label written by hand (Julian, 2026-11-24; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-24T23:51:02.007269+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "fries",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": null,
+     "unmatched_variant_text": "MEDIUM",
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "2 MEDIUM FRIES"
+      }
+     ]
+    },
+    {
+     "line_id": "L2",
+     "menu_item_id": null,
+     "unmatched_text": "A SIDE SALAD",
+     "halves": null,
+     "quantity": 1,
+     "variant_id": null,
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "A SIDE SALAD"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 1,
+      "quote": "TO 55 BROOKSIDE ST APT 6C"
+     }
+    ],
+    "requested_time": {
+     "state": "provided",
+     "kind": "asap",
+     "raw_text": "ASAP",
+     "normalized_local": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "ASAP"
+      }
+     ]
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "BROOKSIDE ST",
+    "number": "55",
+    "unit": "APT 6C",
+    "reference": null,
+    "raw_text": "55 BROOKSIDE ST APT 6C",
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "55 BROOKSIDE ST APT 6C"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 1,
+      "quote": "CARD"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

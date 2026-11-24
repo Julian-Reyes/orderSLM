@@ -1,0 +1,143 @@
+{
+  "conversation": {
+    "id": "a-fresh5-048",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "xl cheese n 2 cans of iced tea",
+        "sent_at": "2026-12-01T20:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "18 vine st apt 2",
+        "sent_at": "2026-12-01T20:10:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-12-01T20:11:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "swap the iced teas for 2 cans of dr pepper",
+        "sent_at": "2026-12-01T20:11:57-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 1,
+        "variant_id": "extra_large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "xl cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "dr_pepper",
+        "quantity": 2,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 3,
+            "quote": "2 cans of dr pepper"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "18 vine st apt 2"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "vine st",
+      "number": "18",
+      "unit": "apt 2",
+      "raw_text": "18 vine st apt 2",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "18 vine st apt 2"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-048"
+}

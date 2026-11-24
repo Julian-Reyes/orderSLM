@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-fresh5-070",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "breakfast deal w a large latte n a choc chip muffin",
+        "sent_at": "2026-12-01T08:15:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup for sol, cash",
+        "sent_at": "2026-12-01T08:15:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "combo"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "coffee_pastry_combo",
+        "quantity": 1,
+        "combo_selections": [
+          {
+            "slot_id": "drink",
+            "menu_item_id": "latte",
+            "variant_id": "large"
+          },
+          {
+            "slot_id": "pastry",
+            "menu_item_id": "muffin",
+            "variant_id": "chocolate_chip"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "breakfast deal w a large latte n a choc chip muffin"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sol",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "sol"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-070"
+}

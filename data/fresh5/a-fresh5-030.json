@@ -1,0 +1,145 @@
+{
+  "conversation": {
+    "id": "a-fresh5-030",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "is the bacon burger big?",
+        "sent_at": "2026-12-02T13:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "It's a single patty with bacon, cheese and the works.",
+        "sent_at": "2026-12-02T13:40:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "ok a bacon burger n a lemonade, pickup, cash",
+        "sent_at": "2026-12-02T13:41:11-05:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 1 Bacon Burger and 1 Lemonade, pickup, paying cash. Is that right?",
+        "sent_at": "2026-12-02T13:41:57-05:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "ya",
+        "sent_at": "2026-12-02T13:42:24-05:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "oh actually ill pay by card",
+        "sent_at": "2026-12-02T13:42:58-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a bacon burger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "lemonade",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "a lemonade"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "ill pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-030"
+}

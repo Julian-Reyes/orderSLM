@@ -1,0 +1,161 @@
+{
+  "conversation": {
+    "id": "a-fresh5-021",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 😊 a lg latte n 2 almond croissants for pickup at 10, name is ivy",
+        "sent_at": "2026-12-01T08:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "card 💳",
+        "sent_at": "2026-12-01T08:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oh wait can we make it saturday at 10 instead? not in today 🙈",
+        "sent_at": "2026-12-01T08:31:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "ty!",
+        "sent_at": "2026-12-01T08:31:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a lg latte"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "croissant",
+        "quantity": 2,
+        "variant_id": "almond",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 almond croissants"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 10",
+        "normalized_local": "10:00",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 10"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "sat",
+          "raw_text": "saturday",
+          "evidence": [
+            {
+              "message_index": 2,
+              "quote": "saturday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Ivy",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "ivy"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-021",
+  "annotation_notes": "Moved from today to Saturday at 10 before any confirmation: MODIFY_ORDER, day sat."
+}

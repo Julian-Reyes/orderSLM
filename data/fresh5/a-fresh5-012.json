@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh5-012",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey i ordered 2 cheeseburgers for pickup under kai, already paid online, got the screenshot",
+        "sent_at": "2026-12-03T17:40:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "i can show it when i get there",
+        "sent_at": "2026-12-03T17:40:32-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "payment_claim"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PAYMENT_CLAIM",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-012",
+  "annotation_notes": "A claim about an order placed earlier, not in this chat: PAYMENT_CLAIM, no gold order."
+}

@@ -1,0 +1,113 @@
+{
+  "conversation": {
+    "id": "a-fresh5-053",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "want to order a large margherita for tomorrow",
+        "sent_at": "2026-12-06T13:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "pickup",
+        "sent_at": "2026-12-06T13:00:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "margherita_pizza",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large margherita"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "ambiguous",
+        "raw_text": "for tomorrow",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "for tomorrow"
+          }
+        ],
+        "day": {
+          "kind": "tomorrow",
+          "raw_text": "tomorrow",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "tomorrow"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "requested_time",
+        "reason": "ambiguous"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "What time tomorrow would you like it, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-053"
+}

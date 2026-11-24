@@ -223,6 +223,8 @@ def _write_report(run_dir: Path, m: dict[str, Any]) -> None:
             if m.get("split") == "fresh3"
             else "Fresh4 split: written after the v5 fixes that used dev, fresh, fresh2 and fresh3, never tuned on."
             if m.get("split") == "fresh4"
+            else "Fresh5 split: written after the v6 fixes that used dev, fresh, fresh2 and fresh3, never tuned on."
+            if m.get("split") == "fresh5"
             else "Dev numbers (tuning), not held-out results."
         ),
         "",

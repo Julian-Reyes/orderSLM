@@ -1,0 +1,117 @@
+{
+ "card_id": "syn-t8-0156",
+ "kind": "hand_label",
+ "reason": "training data v6: chat and label written by hand (Julian, 2026-11-24; no API spend)",
+ "fixed_by": "claude-opus-5-5 (Claude Code session, by hand)",
+ "fixed_at": "2026-11-24T23:51:02.007269+00:00",
+ "label_prompt_version": "teacher-label@0.7+hand",
+ "label": {
+  "schema_version": "label@0.2",
+  "intents": [
+   {
+    "message_index": 0,
+    "primary": "SMALL_TALK",
+    "secondary": null
+   },
+   {
+    "message_index": 1,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 2,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   },
+   {
+    "message_index": 4,
+    "primary": "MENU_QUESTION",
+    "secondary": null
+   },
+   {
+    "message_index": 6,
+    "primary": "PLACE_ORDER",
+    "secondary": null
+   }
+  ],
+  "order": {
+   "items": [
+    {
+     "line_id": "L1",
+     "menu_item_id": "margherita_pizza",
+     "unmatched_text": null,
+     "halves": null,
+     "quantity": 2,
+     "variant_id": "medium",
+     "unmatched_variant_text": null,
+     "modifications": [],
+     "combo_selections": [],
+     "notes": null,
+     "evidence": [
+      {
+       "message_index": 1,
+       "quote": "2 margheritas"
+      },
+      {
+       "message_index": 6,
+       "quote": "medium then"
+      }
+     ]
+    }
+   ],
+   "fulfillment": {
+    "method": "delivery",
+    "method_evidence": [
+     {
+      "message_index": 2,
+      "quote": "to 672 union blvd apt 21b"
+     }
+    ],
+    "requested_time": {
+     "state": "not_mentioned",
+     "kind": null,
+     "raw_text": null,
+     "normalized_local": null,
+     "evidence": []
+    }
+   },
+   "address": {
+    "state": "provided",
+    "street": "union blvd",
+    "number": "672",
+    "unit": "apt 21b",
+    "reference": null,
+    "raw_text": "672 union blvd apt 21b",
+    "evidence": [
+     {
+      "message_index": 2,
+      "quote": "672 union blvd apt 21b"
+     }
+    ]
+   },
+   "payment": {
+    "method": "card",
+    "change_for_cents": null,
+    "customer_claims_paid": false,
+    "evidence": [
+     {
+      "message_index": 6,
+      "quote": "card"
+     }
+    ]
+   },
+   "customer_name": {
+    "state": "not_mentioned",
+    "value": null,
+    "evidence": []
+   },
+   "customer_decision": {
+    "state": "pending",
+    "agreed_while_incomplete": false,
+    "evidence": []
+   },
+   "notes": [],
+   "ambiguity_flags": []
+  }
+ }
+}

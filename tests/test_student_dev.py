@@ -67,7 +67,9 @@ def test_settings_are_the_agreed_ones():
     assert t["lora"] == {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": "all-linear"}
     assert (t["epochs"], t["effective_batch"], t["warmup_share"], t["eval_every_epochs"]) == (2, 8, 0.05, 0.5)
     students = kaggle_train.STUDENTS
-    assert {k: v["lr"] for k, v in students.items() if not k.endswith(("-v2", "-v3", "-v4", "-v5"))} == {
+    assert {
+        k: v["lr"] for k, v in students.items() if not k.endswith(("-v2", "-v3", "-v4", "-v5", "-v6"))
+    } == {
         "qwen3.5-0.8b-single": 2e-4,
         "qwen3.5-2b-single": 1e-4,
         "qwen3.5-2b-mixed": 1e-4,
@@ -96,4 +98,10 @@ def test_settings_are_the_agreed_ones():
     assert v5["data_version"] == "student-data@0.5"
     assert {k: x for k, x in v4.items() if k != "data_version"} == {
         k: x for k, x in v5.items() if k != "data_version"
+    }
+    # and the v0.6 retrain differs from v5 only in its data
+    v6 = students["qwen3.5-0.8b-single-v6"]
+    assert v6["data_version"] == "student-data@0.6"
+    assert {k: x for k, x in v5.items() if k != "data_version"} == {
+        k: x for k, x in v6.items() if k != "data_version"
     }

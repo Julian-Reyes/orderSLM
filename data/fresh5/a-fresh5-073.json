@@ -1,0 +1,120 @@
+{
+  "conversation": {
+    "id": "a-fresh5-073",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hello!",
+        "sent_at": "2026-12-04T19:10:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could I get four medium cheese pizzas, two of them with sausage, delivered to 25 Quincy St? Paying cash.",
+        "sent_at": "2026-12-04T19:10:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order",
+    "small_talk"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "four medium cheese pizzas, two of them with sausage"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "cheese_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "sausage",
+            "raw_text": "with sausage"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "four medium cheese pizzas, two of them with sausage"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "delivered to 25 Quincy St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Quincy St",
+      "number": "25",
+      "raw_text": "25 Quincy St",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "25 Quincy St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "Paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-073"
+}

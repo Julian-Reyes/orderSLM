@@ -1,0 +1,64 @@
+{
+  "conversation": {
+    "id": "a-fresh5-080",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-12-04T20:20:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "ordered delivery to 9 oak st like 45 min ago",
+        "sent_at": "2026-12-04T20:20:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "any eta?",
+        "sent_at": "2026-12-04T20:21:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "status_question"
+  ],
+  "style": "texting",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "ORDER_STATUS",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-080"
+}

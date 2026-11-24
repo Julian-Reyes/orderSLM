@@ -451,6 +451,9 @@ FRESH3_FUTURE_DAY = 20
 # Fresh4 (M6 v5, 2026-11-13): fresh3's shape (fresh's 90 quotas + 20 orders for another day) from its own seed,
 # written after t7 and finalize@0.4 (which used dev, fresh, fresh2 and fresh3), to measure v4 vs v5.
 FRESH4_SEED = f"{SEED}-fresh4-2026-11-13"
+# Fresh5 (M6 v6, 2026-11-24): fresh4's shape from its own seed, written after t8 (which used dev, fresh, fresh2 and
+# fresh3; fresh4 untouched), to measure v5 vs v6.
+FRESH5_SEED = f"{SEED}-fresh5-2026-11-24"
 FUTURE_DAY = Situation(
     (L.PLACE_ORDER,),
     (S.future_day,),
@@ -607,11 +610,12 @@ def generate_fresh(split: Split = Split.fresh) -> list[ScenarioCard]:
         Split.fresh2: FRESH2_SEED,
         Split.fresh3: FRESH3_SEED,
         Split.fresh4: FRESH4_SEED,
+        Split.fresh5: FRESH5_SEED,
     }[split]
     menus = load_menus(include_held_out=True)
     rng = random.Random(seed)
     jobs = [name for name, n in fresh_quotas().items() for _ in range(n)]
-    if split in (Split.fresh3, Split.fresh4):
+    if split in (Split.fresh3, Split.fresh4, Split.fresh5):
         jobs += ["future_day"] * FRESH3_FUTURE_DAY
     rng.shuffle(jobs)
     cards = _cards(split, jobs, rng, menus, Counter(), Counter(), 0, True)
@@ -740,21 +744,23 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("--force", action="store_true")
     g.add_argument(
         "--split",
-        choices=["dev", "test", "fresh", "fresh2", "fresh3", "fresh4"],
+        choices=["dev", "test", "fresh", "fresh2", "fresh3", "fresh4", "fresh5"],
         action="append",
         help="default: dev + test",
     )
     s = sub.add_parser("summary")
-    s.add_argument("--split", choices=["dev", "test", "fresh", "fresh2", "fresh3", "fresh4"], action="append")
+    s.add_argument(
+        "--split", choices=["dev", "test", "fresh", "fresh2", "fresh3", "fresh4", "fresh5"], action="append"
+    )
     args = ap.parse_args(argv)
     if args.cmd == "generate":
         chosen = {Split(x) for x in (args.split or ["dev", "test"])}
         cards = (
             {s: cs for s, cs in generate().items() if s in chosen}
-            if chosen - {Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4}
+            if chosen - {Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4, Split.fresh5}
             else {}
         )
-        for split in {Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4} & chosen:
+        for split in {Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4, Split.fresh5} & chosen:
             cards[split] = generate_fresh(split)
         write(cards, force=args.force)
     for split in (

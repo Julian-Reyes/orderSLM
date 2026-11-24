@@ -25,12 +25,20 @@ from orderslm.checks import check_all
 from orderslm.core.missing import required_missing
 from orderslm.domain.clock import Clock, system_clock
 from orderslm.menus import load_menus
-from orderslm.paths import DEV, FRESH, FRESH2, FRESH3, FRESH4, test_split_dir
+from orderslm.paths import DEV, FRESH, FRESH2, FRESH3, FRESH4, FRESH5, test_split_dir
 from orderslm.schema.annotation import AnnotatedConversation
 from orderslm.schema.conversation import Role, Source, Split
 from orderslm.schema.routing import ORDER_LABELS
 
-EDITABLE = (Split.dev, Split.test, Split.fresh, Split.fresh2, Split.fresh3, Split.fresh4)
+EDITABLE = (
+    Split.dev,
+    Split.test,
+    Split.fresh,
+    Split.fresh2,
+    Split.fresh3,
+    Split.fresh4,
+    Split.fresh5,
+)
 EVAL_SOURCES = (Source.claude_written, Source.human)
 LOCK_FILE = "LOCK.json"
 REVIEWS_FILE = "REVIEWS.jsonl"
@@ -58,6 +66,8 @@ def split_dir(split: Split) -> Path:
         return FRESH3
     if split is Split.fresh4:
         return FRESH4
+    if split is Split.fresh5:
+        return FRESH5
     if split is Split.test:
         return test_split_dir()  # raises SealedSplitError unless unsealed
     raise SplitError(f"{split.value} is not a human-written split")
@@ -444,6 +454,10 @@ def main(argv: list[str] | None = None) -> None:
         fresh4 = load_split(Split.fresh4)
         pairs += near_duplicates(fresh4) + [
             p for other in (dev, fresh, fresh2, fresh3) for p in near_duplicates(fresh4, other)
+        ]
+        fresh5 = load_split(Split.fresh5)
+        pairs += near_duplicates(fresh5) + [
+            p for other in (dev, fresh, fresh2, fresh3, fresh4) for p in near_duplicates(fresh5, other)
         ]
         for x, y, score in pairs:
             print(f"{score:.3f}  {x}  {y}")

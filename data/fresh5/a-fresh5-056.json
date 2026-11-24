@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-fresh5-056",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, one double cheeseburger, a large fries and a chocolate milkshake delivered to 300 Union St, I'll pay by card.",
+        "sent_at": "2026-12-02T19:20:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "double",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "one double cheeseburger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large fries"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "milkshake",
+        "quantity": 1,
+        "variant_id": "chocolate",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a chocolate milkshake"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 300 Union St"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Union St",
+      "number": "300",
+      "raw_text": "300 Union St",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "300 Union St"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "I'll pay by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-056"
+}

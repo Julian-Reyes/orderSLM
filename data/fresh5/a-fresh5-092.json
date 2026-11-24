@@ -1,0 +1,96 @@
+{
+  "conversation": {
+    "id": "a-fresh5-092",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hey",
+        "sent_at": "2026-12-03T19:20:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "can i get a few medium cheese pizzas",
+        "sent_at": "2026-12-03T19:20:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheese_pizza",
+        "quantity": null,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a few medium cheese pizzas"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many cheese pizzas would you like, is this for pickup or delivery, and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-092"
+}

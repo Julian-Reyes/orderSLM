@@ -29,6 +29,9 @@ class Split(StrEnum):
     fresh4 = (
         "fresh4"  # M6 v5: written after the v5 fixes that used dev, fresh, fresh2 and fresh3; evaluation-only
     )
+    fresh5 = (
+        "fresh5"  # M6 v6: written after the v6 fixes that used dev, fresh, fresh2 and fresh3; evaluation-only
+    )
 
 
 class Source(StrEnum):

@@ -1,0 +1,109 @@
+{
+  "conversation": {
+    "id": "a-fresh5-104",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, a cheeseburger and something fizzy to drink, for pickup.",
+        "sent_at": "2026-11-30T13:10:00-05:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "We have Coke and Sprite. Which would you like?",
+        "sent_at": "2026-11-30T13:10:32-05:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Sprite, please. Paying cash.",
+        "sent_at": "2026-11-30T13:11:11-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "implicit_category"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cheeseburger",
+        "quantity": 1,
+        "variant_id": "single",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a cheeseburger"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "sprite",
+        "quantity": 1,
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "Sprite, please"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "cash",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "Paying cash"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-104",
+  "annotation_notes": "'something fizzy' is settled by the next message: the vague line is dropped."
+}

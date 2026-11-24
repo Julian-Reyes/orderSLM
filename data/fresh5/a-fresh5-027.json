@@ -1,0 +1,161 @@
+{
+  "conversation": {
+    "id": "a-fresh5-027",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "medium pepperoni w arugula",
+        "sent_at": "2026-12-06T17:00:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "n a can of diet coke",
+        "sent_at": "2026-12-06T17:00:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "is the diet coke cold?",
+        "sent_at": "2026-12-06T17:01:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Yes, straight from the fridge!",
+        "sent_at": "2026-12-06T17:01:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "cool, pickup for sasha, card",
+        "sent_at": "2026-12-06T17:02:24-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "off_menu"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "pepperoni_pizza",
+        "quantity": 1,
+        "variant_id": "medium",
+        "modifications": [
+          {
+            "kind": "add",
+            "raw_text": "w arugula",
+            "not_on_menu": true
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "medium pepperoni w arugula"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "diet_coke",
+        "quantity": 1,
+        "variant_id": "can",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a can of diet coke"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 4,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Sasha",
+      "evidence": [
+        {
+          "message_index": 4,
+          "quote": "sasha"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_modification",
+        "reason": "off_menu",
+        "line_id": "L1"
+      }
+    ],
+    "clarification_question": "We don't have arugula for the pepperoni pizza. Would you like it as it comes, or with something else instead?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-027"
+}

@@ -1,0 +1,153 @@
+{
+  "conversation": {
+    "id": "a-fresh5-036",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 medium bbq chicken",
+        "sent_at": "2026-12-05T17:30:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "to 77 elm st",
+        "sent_at": "2026-12-05T17:30:32-06:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "cash",
+        "sent_at": "2026-12-05T17:31:11-06:00"
+      },
+      {
+        "index": 3,
+        "role": "business",
+        "text": "Got it: 2 medium BBQ Chicken Pizzas, delivered to 77 Elm St, paying cash. Is that right?",
+        "sent_at": "2026-12-05T17:31:57-06:00"
+      },
+      {
+        "index": 4,
+        "role": "customer",
+        "text": "yep",
+        "sent_at": "2026-12-05T17:32:24-06:00"
+      },
+      {
+        "index": 5,
+        "role": "customer",
+        "text": "actually card instead",
+        "sent_at": "2026-12-05T17:32:58-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "correction_after_confirmation",
+    "contextual_yes"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bbq_chicken_pizza",
+        "quantity": 2,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 medium bbq chicken"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 1,
+          "quote": "to 77 elm st"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "elm st",
+      "number": "77",
+      "raw_text": "77 elm st",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "77 elm st"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 5,
+          "quote": "card instead"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 4,
+      "decision": {
+        "primary": "CONFIRM_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 5,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "urgency": "time_sensitive",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-036"
+}

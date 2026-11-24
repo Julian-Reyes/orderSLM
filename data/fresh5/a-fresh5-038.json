@@ -1,0 +1,143 @@
+{
+  "conversation": {
+    "id": "a-fresh5-038",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "morning!",
+        "sent_at": "2026-11-30T08:10:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "some bagels w cream cheese n a large drip",
+        "sent_at": "2026-11-30T08:10:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "pickup for gus",
+        "sent_at": "2026-11-30T08:11:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "missing_info",
+    "small_talk"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bagel",
+        "quantity": null,
+        "modifications": [
+          {
+            "kind": "add",
+            "modifier_id": "cream_cheese",
+            "raw_text": "w cream cheese"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "some bagels w cream cheese"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "a large drip"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 2,
+          "quote": "pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "unknown"
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Gus",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "gus"
+        }
+      ]
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "item_quantity",
+        "reason": "ambiguous",
+        "line_id": "L1"
+      },
+      {
+        "field": "item_variant",
+        "reason": "missing",
+        "line_id": "L1"
+      },
+      {
+        "field": "payment_method",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "How many bagels would you like, which bagel would you like (plain, everything, sesame or cinnamon raisin), and will you pay by card or cash?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-038"
+}

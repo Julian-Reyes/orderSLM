@@ -1,0 +1,139 @@
+{
+  "conversation": {
+    "id": "a-fresh5-077",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Do you have almond milk?",
+        "sent_at": "2026-12-01T10:50:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "business",
+        "text": "Yes, we have almond and oat milk.",
+        "sent_at": "2026-12-01T10:50:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "Great. Three large lattes, two of them with almond milk.",
+        "sent_at": "2026-12-01T10:51:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "For pickup, the name is Liv. Paying by card.",
+        "sent_at": "2026-12-01T10:51:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "latte",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "Three large lattes, two of them with almond milk"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "latte",
+        "quantity": 2,
+        "variant_id": "large",
+        "modifications": [
+          {
+            "kind": "substitute",
+            "modifier_id": "whole_milk",
+            "replacement_modifier_id": "almond_milk",
+            "raw_text": "with almond milk"
+          }
+        ],
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "Three large lattes, two of them with almond milk"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 3,
+          "quote": "For pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "not_mentioned"
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Liv",
+      "evidence": [
+        {
+          "message_index": 3,
+          "quote": "Liv"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "MENU_QUESTION",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-077"
+}

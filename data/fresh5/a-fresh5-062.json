@@ -1,0 +1,133 @@
+{
+  "conversation": {
+    "id": "a-fresh5-062",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "2 med caps n a sesame bagel",
+        "sent_at": "2026-12-01T09:40:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "for 2:30",
+        "sent_at": "2026-12-01T09:40:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "card",
+        "sent_at": "2026-12-01T09:41:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "simple_order"
+  ],
+  "style": "texting",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "cappuccino",
+        "quantity": 2,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 med caps"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a sesame bagel"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "unknown",
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "for 2:30",
+        "normalized_local": "14:30",
+        "evidence": [
+          {
+            "message_index": 1,
+            "quote": "for 2:30"
+          }
+        ]
+      }
+    },
+    "address": {
+      "state": "not_mentioned"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 2,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    },
+    "missing_or_ambiguous": [
+      {
+        "field": "fulfillment_method",
+        "reason": "missing"
+      },
+      {
+        "field": "customer_name",
+        "reason": "missing"
+      }
+    ],
+    "clarification_question": "Is this for pickup, and can I get a name for the order?"
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-062",
+  "annotation_notes": "'for 2:30' at 09:40, open 7-15: only 14:30 fits."
+}

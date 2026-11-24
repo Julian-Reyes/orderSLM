@@ -1,0 +1,117 @@
+{
+  "conversation": {
+    "id": "a-fresh5-008",
+    "business_id": "corner-patty",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I'd like two bacon burgers and a large fries delivered to 77 Orchard Rd on Dec 3 at 12:30, paying by card.",
+        "sent_at": "2026-11-30T15:00:00-05:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "clean",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bacon_burger",
+        "quantity": 2,
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "two bacon burgers"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "fries",
+        "quantity": 1,
+        "variant_id": "large",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a large fries"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "delivery",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "delivered to 77 Orchard Rd"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 12:30",
+        "normalized_local": "12:30",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "at 12:30"
+          }
+        ],
+        "day": {
+          "kind": "date",
+          "month": 12,
+          "day_of_month": 3,
+          "raw_text": "Dec 3",
+          "evidence": [
+            {
+              "message_index": 0,
+              "quote": "Dec 3"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "provided",
+      "street": "Orchard Rd",
+      "number": "77",
+      "raw_text": "77 Orchard Rd",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "77 Orchard Rd"
+        }
+      ]
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 0,
+          "quote": "paying by card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "not_mentioned"
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-008"
+}

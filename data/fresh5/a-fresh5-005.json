@@ -1,0 +1,49 @@
+{
+  "conversation": {
+    "id": "a-fresh5-005",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "QUICK QUESTION",
+        "sent_at": "2026-12-05T10:05:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "HOW MANY PLAYERS ARE ON A SOCCER TEAM?",
+        "sent_at": "2026-12-05T10:05:32-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "out_of_scope"
+  ],
+  "style": "shouty",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "OUT_OF_SCOPE",
+        "flags": {
+          "refers_to": "none"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-005"
+}

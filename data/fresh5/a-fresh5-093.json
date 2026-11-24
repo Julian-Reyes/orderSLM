@@ -1,0 +1,67 @@
+{
+  "conversation": {
+    "id": "a-fresh5-093",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, my son has a severe tree nut allergy.",
+        "sent_at": "2026-12-04T08:30:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Can I speak to someone about how your pastries are made?",
+        "sent_at": "2026-12-04T08:30:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "I'd rather talk to a person about it.",
+        "sent_at": "2026-12-04T08:31:11-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "human_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "HUMAN_REQUEST",
+        "flags": {
+          "refers_to": "none",
+          "asks_for_human": true
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-093"
+}

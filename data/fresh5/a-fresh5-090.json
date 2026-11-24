@@ -1,0 +1,173 @@
+{
+  "conversation": {
+    "id": "a-fresh5-090",
+    "business_id": "morning-crumb",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "hi 😊 2 bagels, 1 sesame 1 plain, n a med drip for pickup at 11",
+        "sent_at": "2026-12-01T08:00:00-08:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "name is mo, card 💳",
+        "sent_at": "2026-12-01T08:00:32-08:00"
+      },
+      {
+        "index": 2,
+        "role": "customer",
+        "text": "oops wrong day, can it be for thursday at 11? 🙏",
+        "sent_at": "2026-12-01T08:01:11-08:00"
+      },
+      {
+        "index": 3,
+        "role": "customer",
+        "text": "thx!",
+        "sent_at": "2026-12-01T08:01:57-08:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "future_day"
+  ],
+  "style": "emoji",
+  "gold_extraction": {
+    "items": [
+      {
+        "line_id": "L1",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "sesame",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bagels, 1 sesame 1 plain"
+          }
+        ]
+      },
+      {
+        "line_id": "L2",
+        "menu_item_id": "bagel",
+        "quantity": 1,
+        "variant_id": "plain",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "2 bagels, 1 sesame 1 plain"
+          }
+        ]
+      },
+      {
+        "line_id": "L3",
+        "menu_item_id": "drip_coffee",
+        "quantity": 1,
+        "variant_id": "medium",
+        "evidence": [
+          {
+            "message_index": 0,
+            "quote": "a med drip"
+          }
+        ]
+      }
+    ],
+    "fulfillment": {
+      "method": "pickup",
+      "method_evidence": [
+        {
+          "message_index": 0,
+          "quote": "for pickup"
+        }
+      ],
+      "requested_time": {
+        "state": "provided",
+        "kind": "clock_time",
+        "raw_text": "at 11",
+        "normalized_local": "11:00",
+        "evidence": [
+          {
+            "message_index": 2,
+            "quote": "at 11"
+          }
+        ],
+        "day": {
+          "kind": "weekday",
+          "weekday": "thu",
+          "raw_text": "thursday",
+          "evidence": [
+            {
+              "message_index": 2,
+              "quote": "thursday"
+            }
+          ]
+        }
+      }
+    },
+    "address": {
+      "state": "not_applicable"
+    },
+    "payment": {
+      "method": "card",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "card"
+        }
+      ]
+    },
+    "customer_name": {
+      "state": "provided",
+      "value": "Mo",
+      "evidence": [
+        {
+          "message_index": 1,
+          "quote": "mo"
+        }
+      ]
+    }
+  },
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "PLACE_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 2,
+      "decision": {
+        "primary": "MODIFY_ORDER",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    },
+    {
+      "message_index": 3,
+      "decision": {
+        "primary": "SMALL_TALK",
+        "flags": {
+          "refers_to": "draft"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-090",
+  "annotation_notes": "Moved from today to Thursday at 11 before any confirmation: MODIFY_ORDER."
+}

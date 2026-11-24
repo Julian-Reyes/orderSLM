@@ -1,0 +1,50 @@
+{
+  "conversation": {
+    "id": "a-fresh5-075",
+    "business_id": "halfmoon-pizza",
+    "split": "fresh5",
+    "source": "claude_written",
+    "messages": [
+      {
+        "index": 0,
+        "role": "customer",
+        "text": "Hi, I was charged twice for my order last night.",
+        "sent_at": "2026-12-06T12:40:00-06:00"
+      },
+      {
+        "index": 1,
+        "role": "customer",
+        "text": "Could you refund the extra charge, please?",
+        "sent_at": "2026-12-06T12:40:32-06:00"
+      }
+    ]
+  },
+  "scenarios": [
+    "refund_request"
+  ],
+  "style": "clean",
+  "gold_extraction": null,
+  "gold_routing": [
+    {
+      "message_index": 0,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    },
+    {
+      "message_index": 1,
+      "decision": {
+        "primary": "REFUND_REQUEST",
+        "flags": {
+          "refers_to": "placed_order"
+        }
+      }
+    }
+  ],
+  "annotator": "claude-opus-5.5 (Claude Code session, 2026-11-24)",
+  "card_id": "a-fresh5-075",
+  "annotation_notes": "A double charge is a billing problem, not a complaint about the food: REFUND_REQUEST."
+}

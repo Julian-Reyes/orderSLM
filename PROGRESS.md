@@ -6,6 +6,32 @@ _Last updated 2026-11-24._
 
 ## Start here next session
 
+### v6 data round (2026-11-24; Julian: "let's do another data round to get the percentage higher", "go ahead and start kaggle session")
+
+- **v5 error review ($0):** `runs/student-errors/20261124T165018Z` dev 16, `…T165020Z` fresh 9, `…T165021Z` fresh2 15,
+  `…T165022Z` fresh3 20 = 60 chats. Causes: size said only as "big/bigger/larger" 6 (v5's training had 2 such
+  examples; the pizza menu also lists "big" as a large alias, while gold says unclear), unresolved vague references 7,
+  day said in an earlier message than the time 4 + a day with a staff ask 2 (20 of 117 training day examples had the
+  day earlier), late changes 6, split lines 7, long orders 8, combo picks 4, off-menu 5, unclear quantity 2, a size
+  the item lacks 2, other 7. **For Julian:** fresh3-101 gold "HI, FIRST TIME ORDERING" is SMALL_TALK, but the
+  opener rule (2026-11-03) says announcing an order is PLACE_ORDER; and the "big" alias on the pizza menu conflicts
+  with the gold rule (not changed: a menu change touches the sealed test).
+- **Batch t8 (done, $0):** 240 chats + labels by hand (`runs/synth/t8/`, `synth plan --v6`, `cards.V6_WEIGHTS`:
+  future_day 35 (day_then_time 20, date_weekday 5, day_staff 5, ask_ahead 5), vague_size 30, modify_last 30,
+  vague_ref 25, split_lines 25, big_order 25, combo_picks 15, short_reply 15, offmenu_item 10, no_such_size 10,
+  qty_unstated 10, offmenu_addon 5, question_mid 5). 0 drops; no near-duplicates within t8, vs dev/fresh–fresh4 or vs
+  earlier training (one "k" chat identical to fresh3-007 replaced); all 35 day labels resolve 1–5 days ahead.
+- **student-data@0.6 (done):** + t8; single 3,493 train / 184 valid (sha256 `6d96fcc0…`). Unclear-size examples
+  ("big/bigger/larger") 2 → 16, item_variant flags 3 → 30, day-before-time examples 20 → 40.
+  `qwen3.5-0.8b-single-v6` in `STUDENTS` (same settings as v5).
+- **Test batch fresh5 (done, $0):** `data/fresh5/` (`Split.fresh5`, `conversation@0.9`), 110 chats + gold, fresh4's
+  shape from a new seed, written after t8 from its own cards (docs/SPLITS.md). 358 customer messages. With fresh4,
+  the clean measure of v6. Not reviewed by Julian; same writer.
+- **Kaggle plan:** session A `make train ARGS="export --train qwen3.5-0.8b-single-v6 --score
+  qwen3.5-0.8b-single-v5:fresh5 --constrained"` (v6 training ≈ 11.4 h at v5's rate, stops itself at 11.5 h and
+  resumes if short; GPU1 scores v5 on fresh5); session B scores v6 constrained on fresh4, fresh5, dev, fresh, fresh2,
+  fresh3. Then `student_compare` v5 vs v6 per split (fresh4 + fresh5 = clean).
+
 ### v5 result + constrained decoding (kernel v19, imported 2026-11-24)
 
 - **Session:** `runs/train/20261123T212018Z/`, ran 2026-11-23 18:22 → 23:58 Brasília (5.6 h on 2 T4s, within the ~6–7 h

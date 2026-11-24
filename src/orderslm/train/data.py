@@ -81,12 +81,23 @@ VERSIONS = {
         "exclude": ("syn-t3-0502", "syn-m1-0057", "syn-b1-0909", "syn-b1-0495", "syn-b1-0582"),
         "fix_exclusive_choice": True,
     },
+    # Julian, 2026-11-24 ("let's do another data round to get the percentage higher"): + t8, 240 chats written and
+    # labeled by hand on the patterns behind v5's 60 remaining misses (dev, fresh, fresh2, fresh3), $0. Same
+    # exclusions and rule 6.
+    "student-data@0.6": {
+        "single": ("p3", "b1", "t3", "t4", "t5", "t6", "t7", "t8"),
+        "mixed": ("p3", "b1", "m1", "t3", "t4", "t5", "t6", "t7", "t8"),
+        "valid_groups": (("p3", "b1"), ("m1",), ("t3", "t4"), ("t5",), ("t6",), ("t7",), ("t8",)),
+        "exclude": ("syn-t3-0502", "syn-m1-0057", "syn-b1-0909", "syn-b1-0495", "syn-b1-0582"),
+        "fix_exclusive_choice": True,
+    },
 }
 STUDENT_SCHEMA = {v: "student@0.1" for v in VERSIONS} | {
     "student-data@0.4": "student@0.2",
     "student-data@0.5": "student@0.2",
+    "student-data@0.6": "student@0.2",
 }
-DATA_VERSION = "student-data@0.5"
+DATA_VERSION = "student-data@0.6"
 STUDENT_PROMPT_VERSION = "student-extract@0.1"
 SINGLE_BATCHES = VERSIONS[DATA_VERSION]["single"]
 MIXED_BATCHES = VERSIONS[DATA_VERSION]["mixed"]
