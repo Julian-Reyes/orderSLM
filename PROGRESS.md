@@ -31,6 +31,11 @@ _Last updated 2026-11-24._
   qwen3.5-0.8b-single-v5:fresh5 --constrained"` (v6 training ≈ 11.4 h at v5's rate, stops itself at 11.5 h and
   resumes if short; GPU1 scores v5 on fresh5); session B scores v6 constrained on fresh4, fresh5, dev, fresh, fresh2,
   fresh3. Then `student_compare` v5 vs v6 per split (fresh4 + fresh5 = clean).
+- **Session A pushed 2026-11-24 20:57 Brasília** (Julian: "go ahead and start kaggle session"): kernel version 20, run
+  dir `runs/train/20261124T235616Z/`, RUNNING at once. GPU0 trains v6 on student-data@0.6; GPU1 scores v5
+  constrained on fresh5 (`score-qwen3.5-0.8b-single-v5-fresh5-cd`). Upload secrets check clean (the only hits were
+  chat text about a wifi password). When it ends: `make kaggle-pull JOB=m6`, `make train ARGS="import
+  runs/train/20261124T235616Z"`; if v6 stopped short of 2 epochs at 11.5 h, push again to resume; then stage session B.
 
 ### v5 result + constrained decoding (kernel v19, imported 2026-11-24)
 

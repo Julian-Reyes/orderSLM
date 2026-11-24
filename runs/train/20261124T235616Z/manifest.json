@@ -1,0 +1,116 @@
+{
+  "experiment": "train",
+  "session": "20261124T235616Z",
+  "data_version": [
+    "student-data@0.5",
+    "student-data@0.6"
+  ],
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ],
+    "grammar": [
+      "xgrammar==0.2.8"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536,
+    "constrained": {
+      "library": "xgrammar==0.2.8",
+      "schema": "student-schema.json",
+      "whitespace": "none"
+    }
+  },
+  "deadline_hours": 11.25,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single-v6",
+      "model": "0.8b",
+      "data": "single",
+      "data_version": "student-data@0.6",
+      "gpu": 0,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.6-single-train.jsonl",
+      "valid_file": "0.6-single-valid.jsonl",
+      "resume": null
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v5-fresh5-cd",
+      "student": "qwen3.5-0.8b-single-v5",
+      "split": "fresh5",
+      "model": "0.8b",
+      "gpu": 1,
+      "adapter": "adapters/qwen3.5-0.8b-single-v5",
+      "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+      "after_train": null,
+      "requests": "fresh5-requests.jsonl",
+      "constrained": true
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "0.6-single-train.jsonl": "6d96fcc09fbef3d51b1995a9e5f75362326fd14c45d803b40527d66e3d244d6b",
+    "0.6-single-valid.jsonl": "98194cdbc25ec51917a8aa1d609ef83be867352072ce5b7d2ee2fe87f417b16b",
+    "fresh5-requests.jsonl": "4659fd6eb3692d8a1c391bdb7404b97961d3c9b7ab61d4cf6c4657d7a11de2e9",
+    "student-schema.json": "0365008e0f293c9ca5ced0c7cbb8bc319ec3b9df7d81128708323663dbb35785"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.5": {
+      "single": "1347a7247e0e9dc5420271e355482163b6d1b851c72bf5ebe5516bd2d21b87fa",
+      "mixed": "ab9200e44ef0e60a630fac04d7e953d85e3bac2d14f3d74c09be9ed228d5577a"
+    },
+    "student-data@0.6": {
+      "single": "6d96fcc09fbef3d51b1995a9e5f75362326fd14c45d803b40527d66e3d244d6b",
+      "mixed": "d8b8ce0bf7c19f28ae0ac99f7f885e51e1a36c31795d1feb2a786648fbfea36e"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.5": "b8096a02390cdce3177ae923dc8c3cf2b185471a-dirty",
+    "student-data@0.6": "ec4bdf4cd0c96afbbce71a7a6224f20e201f2d47-dirty"
+  },
+  "exported_at": "2026-11-24T23:56:16.001447+00:00",
+  "git_commit": "d08c632a14579ef276b6e012b587defffae9d2ad",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}
