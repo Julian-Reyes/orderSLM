@@ -107,8 +107,10 @@ def load_run(run_dir: Path) -> dict[str, Any]:
             "fp": o["fp"],
             "fn": o["fn"],
         }
+    # schema-constrained decoding is a different setting of the same student: label it, so the two can be compared
+    constrained = bool((manifest.get("generation") or {}).get("constrained"))
     return {
-        "student": metrics["student"],
+        "student": metrics["student"] + (" (constrained)" if constrained else ""),
         "run_dir": str(run_dir.resolve().relative_to(ROOT)),
         "split": manifest.get("split", "dev"),
         "versions": {
@@ -161,6 +163,9 @@ def compare(
     seed: int = SEED,
     parts: dict[str, list[str]] | None = None,
 ) -> dict[str, Any]:
+    names = [r["student"] for r in runs]
+    if len(set(names)) != len(names):  # results are keyed by name: two runs of one name would merge silently
+        raise SystemExit(f"two runs share a student name ({names}); compare distinct students or settings")
     ids = sorted(runs[0]["chats"])
     for r in runs[1:]:
         if set(r["messages"]) != set(runs[0]["messages"]):

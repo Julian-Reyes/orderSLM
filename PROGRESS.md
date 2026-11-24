@@ -2,9 +2,40 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-23._
+_Last updated 2026-11-24._
 
 ## Start here next session
+
+### v5 result + constrained decoding (kernel v19, imported 2026-11-24)
+
+- **Session:** `runs/train/20261123T212018Z/`, ran 2026-11-23 18:22 → 23:58 Brasília (5.6 h on 2 T4s, within the ~6–7 h
+  estimated; $0, free quota). 10 jobs, 2,970 requests, **0 crashed**: the stop-token fix held on the real model.
+- **v4 vs v5, both constrained** (fully correct orders; Δ = v4 − v5, 95% paired bootstrap CI; chats only v4 / only v5
+  right; McNemar p):
+
+  | split | v4 | v5 | Δ (pp) | only v4 / v5 | p | run |
+  |---|---|---|---|---|---|---|
+  | **fresh4 (clean)** | 80.9% (89/110) | **85.5% (94/110)** | −4.5 [−10.9, +0.9] | 3 / 8 | 0.227 | `student-compare/20261124T115835Z` |
+  | dev | 86.8% | 82.4% | +4.4 [−3.3, +12.1] | 8 / 4 | 0.388 | `…T115837Z` |
+  | fresh | 91.1% | 90.0% | +1.1 [−5.6, +7.8] | 5 / 4 | 1.000 | `…T115840Z` |
+  | fresh2 | 78.9% | 83.3% | −4.4 [−11.1, +1.1] | 2 / 6 | 0.289 | `…T115842Z` |
+  | fresh3 | 84.5% | 81.8% | +2.7 [−2.7, +8.2] | 6 / 3 | 0.508 | `…T115845Z` |
+
+  fresh4 parts: standard (90) v4 80.0% / v5 83.3%; future day (20) 85.0% / 95.0%. Item F1 on fresh4 0.880 → 0.912
+  (CI [−6.7, +0.1] pp). Intents ~94–96% for both everywhere. **No difference is significant; v5 is not better on the
+  splits its training targeted (dev, fresh, fresh3).** fresh4 is now "used for fixes" only if we fix from it.
+  Still far from Julian's 95% goal (best clean number 85.5%).
+- **Constrained decoding alone (v4 plain vs v4 constrained, same weights):** dev 0 / 1, fresh 0 / 0, fresh2 0 / 2,
+  fresh3 0 / 3 messages only plain / only constrained right; invalid answers 0.4–1.2% → 0.0–0.7%; fully correct
+  orders +0 / +0 / +1 / +1 chats (`…T115847Z`, `…T115850Z`, `…T115852Z`, `…T115856Z`). Small, never worse. The
+  invalid answers left under the grammar break cross-field rules the grammar can't express.
+- **Bug fixed in `student_compare`:** plain and constrained runs of one student shared a name, so results (keyed by
+  name) merged into one row and every Δ printed +0.0. Constrained runs are now labelled `… (constrained)` and
+  same-name runs are refused (`test_same_name_runs_are_refused_and_constrained_runs_are_labelled`). The 9 compare
+  dirs made before the fix were deleted (never committed).
+- **v4 adapter on this Mac:** `models/m6/qwen3.5-0.8b-single-v4/best` came from the session A dataset (sha256
+  `5cace07b…`, same as v4's runs).
+- **For Julian to pick next:** ship v4 or v5 (constrained either way), or another data round; the site still shows v2.
 
 ### Session A result (kernel v18, imported 2026-11-23): v5 trained; constrained v4 scoring all crashed (fixed, not re-run)
 

@@ -179,3 +179,29 @@ def test_crashed_scoring_is_refused_not_scored_as_invalid(tmp_path):
     with (tmp_path / "outputs.jsonl").open("a") as f:  # a resumed session answered it after all
         f.write(json.dumps({"id": "c2#0", "text": "{}"}) + "\n")
     assert crashed(tmp_path, messages) == []
+
+
+def test_same_name_runs_are_refused_and_constrained_runs_are_labelled(tmp_path, monkeypatch):
+    """Plain vs constrained v4 (2026-11-24) both carried `qwen3.5-0.8b-single-v4`: results keyed by name merged
+    into one row and every difference printed as +0.0. Same names are refused; a constrained run is labelled."""
+    import json
+
+    import pytest
+
+    with pytest.raises(SystemExit, match="share a student name"):
+        sc.compare([_run("a", CHATS), _run("a", CHATS)], resamples=10)
+    monkeypatch.setattr(sc, "ROOT", tmp_path.parent)
+    (tmp_path / "outputs.jsonl").write_text(json.dumps({"id": "c1#0", "text": "{}"}) + "\n")
+    (tmp_path / "intent_rows.jsonl").write_text(
+        json.dumps({"conversation_id": "c1", "message_index": 0, "primary_ok": True, "pred": "X"}) + "\n"
+    )
+    (tmp_path / "order_rows.jsonl").write_text(
+        json.dumps({"conversation_id": "c1", "exact": True, "action_exact": True, "tp": 1, "fp": 0, "fn": 0})
+        + "\n"
+    )
+    versions = {k: "v" for k in ("prompt_version", "data_version", "scorer_version", "finalize_version")}
+    (tmp_path / "metrics.json").write_text(json.dumps({"student": "s"} | versions))
+    (tmp_path / "manifest.json").write_text(json.dumps({"generation": {"constrained": {"library": "x"}}}))
+    assert sc.load_run(tmp_path)["student"] == "s (constrained)"
+    (tmp_path / "manifest.json").write_text(json.dumps({"generation": {}}))
+    assert sc.load_run(tmp_path)["student"] == "s"

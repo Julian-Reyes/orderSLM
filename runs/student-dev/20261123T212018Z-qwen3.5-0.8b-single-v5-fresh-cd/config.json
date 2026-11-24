@@ -1,0 +1,31 @@
+{
+  "job": {
+    "kind": "score",
+    "name": "score-qwen3.5-0.8b-single-v5-fresh-cd",
+    "student": "qwen3.5-0.8b-single-v5",
+    "split": "fresh",
+    "model": "0.8b",
+    "gpu": 1,
+    "adapter": "adapters/qwen3.5-0.8b-single-v5",
+    "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+    "after_train": null,
+    "requests": "fresh-requests.jsonl",
+    "constrained": true
+  },
+  "sdpa_gqa_flag_off": true,
+  "kernels": {
+    "chunk_gated_delta_rule": "fla.ops.gated_delta_rule.chunk.chunk_gated_delta_rule",
+    "causal_conv1d_fn": "transformers.models.qwen3_5.modeling_qwen3_5.causal_conv1d_fn"
+  },
+  "dtype": "torch.float16",
+  "adapter_path": "/kaggle/input/datasets/jreyes33/orderslm-m6/adapters/qwen3.5-0.8b-single-v5",
+  "adapter_sha256": "b0122417725a963dbe40e1e0aebc4777fa0ad2ede989fd114911c857e39bcfad",
+  "constrained": {
+    "vocab_size": 248320,
+    "eos_token_id": 248046,
+    "stop_token_ids": [
+      248044,
+      248046
+    ]
+  }
+}
