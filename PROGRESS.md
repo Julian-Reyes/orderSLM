@@ -34,6 +34,11 @@ _Last updated 2026-11-24._
 - **Session A result (imported 2026-11-25):** v6 paused at step 861/874 (the 11.5 h guard; 42.5 s/step), best val
   loss 0.0090 at step 656 (v5: 0.0092); resumes next session. **v5 on fresh5 (clean, constrained): 89/110 fully
   correct (80.9%)**, items F1 0.895, 0 crashed (`runs/student-dev/20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd`).
+- **Session B pushed 2026-11-25 10:08 Brasília:** kernel version 21 (QUEUED at push), run dir
+  `runs/train/20261125T130650Z/`. GPU0 resumes v6 at step 861/874, then scores v6 constrained on fresh4, fresh5,
+  dev, fresh, fresh2, fresh3 (1,843 requests, ~7 h). When it ends: pull, import, then `student_compare` v5 vs v6
+  per split (v5's fresh4 run: `runs/student-dev/20261123T212018Z-…-v5-fresh4-cd`; fresh5:
+  `…20261124T235616Z-…-v5-fresh5-cd`).
 - **Session A pushed 2026-11-24 20:57 Brasília** (Julian: "go ahead and start kaggle session"): kernel version 20, run
   dir `runs/train/20261124T235616Z/`, RUNNING at once. GPU0 trains v6 on student-data@0.6; GPU1 scores v5
   constrained on fresh5 (`score-qwen3.5-0.8b-single-v5-fresh5-cd`). Upload secrets check clean (the only hits were

@@ -1,0 +1,179 @@
+{
+  "experiment": "train",
+  "session": "20261125T130650Z",
+  "data_version": "student-data@0.6",
+  "prompt_version": "student-extract@0.1",
+  "models": {
+    "0.8b": {
+      "repo": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "2b": {
+      "repo": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+    }
+  },
+  "packages": {
+    "main": [
+      "transformers==5.20.2",
+      "peft==0.21.2",
+      "accelerate"
+    ],
+    "fla": [
+      "fla-core==0.5.2"
+    ],
+    "grammar": [
+      "xgrammar==0.2.8"
+    ]
+  },
+  "train": {
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "all-linear"
+    },
+    "epochs": 2,
+    "effective_batch": 8,
+    "warmup_share": 0.05,
+    "schedule": "cosine",
+    "eval_every_epochs": 0.5,
+    "optimizer": "adamw",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "checkpoint_every": 20,
+    "dtype": "float16",
+    "pad_to_multiple": 128
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536,
+    "constrained": {
+      "library": "xgrammar==0.2.8",
+      "schema": "student-schema.json",
+      "whitespace": "none"
+    }
+  },
+  "deadline_hours": 11.25,
+  "jobs": [
+    {
+      "kind": "train",
+      "name": "qwen3.5-0.8b-single-v6",
+      "model": "0.8b",
+      "data": "single",
+      "data_version": "student-data@0.6",
+      "gpu": 0,
+      "lr": 0.0002,
+      "epochs": 2,
+      "seed": 20261021,
+      "dtype": "float16",
+      "train_file": "0.6-single-train.jsonl",
+      "valid_file": "0.6-single-valid.jsonl",
+      "resume": "resume/qwen3.5-0.8b-single-v6",
+      "resumed_at_step": 861
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-fresh4-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "fresh4",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "fresh4-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-fresh5-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "fresh5",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "fresh5-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "dev",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "dev-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-fresh-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "fresh",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "fresh-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-fresh2-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "fresh2",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "fresh2-requests.jsonl",
+      "constrained": true
+    },
+    {
+      "kind": "score",
+      "name": "score-qwen3.5-0.8b-single-v6-fresh3-cd",
+      "student": "qwen3.5-0.8b-single-v6",
+      "split": "fresh3",
+      "model": "0.8b",
+      "gpu": 0,
+      "adapter": "qwen3.5-0.8b-single-v6/best",
+      "adapter_sha256": null,
+      "after_train": "qwen3.5-0.8b-single-v6",
+      "requests": "fresh3-requests.jsonl",
+      "constrained": true
+    }
+  ],
+  "seed": 20261021,
+  "staged_files_sha256": {
+    "0.6-single-train.jsonl": "6d96fcc09fbef3d51b1995a9e5f75362326fd14c45d803b40527d66e3d244d6b",
+    "0.6-single-valid.jsonl": "98194cdbc25ec51917a8aa1d609ef83be867352072ce5b7d2ee2fe87f417b16b",
+    "fresh4-requests.jsonl": "251ef1775ebccedcedbdbebfa3d2eaf181db0281be4e2ca2755fec7048fcc265",
+    "fresh5-requests.jsonl": "4659fd6eb3692d8a1c391bdb7404b97961d3c9b7ab61d4cf6c4657d7a11de2e9",
+    "dev-requests.jsonl": "e60403efddec574937be1524dfd9bdfe42bf0805935c6b03ef45b548773c363b",
+    "fresh-requests.jsonl": "ddc349daf25f7c61883af5da7382bab737aba5e35f2354420e9cc9dd391a455f",
+    "fresh2-requests.jsonl": "b83dbfeb58a6ca80703da18fdabc0b0dcf0e1810328f28a7429944353fe7002a",
+    "fresh3-requests.jsonl": "9e542e22667c2d4e30db199ab4490bc131dd56dd40f0b9fefb3c41da19d9c411",
+    "student-schema.json": "0365008e0f293c9ca5ced0c7cbb8bc319ec3b9df7d81128708323663dbb35785"
+  },
+  "data_manifest_sha256": {
+    "student-data@0.6": {
+      "single": "6d96fcc09fbef3d51b1995a9e5f75362326fd14c45d803b40527d66e3d244d6b",
+      "mixed": "d8b8ce0bf7c19f28ae0ac99f7f885e51e1a36c31795d1feb2a786648fbfea36e"
+    }
+  },
+  "data_built_at_commit": {
+    "student-data@0.6": "ec4bdf4cd0c96afbbce71a7a6224f20e201f2d47-dirty"
+  },
+  "exported_at": "2026-11-25T13:06:50.910995+00:00",
+  "git_commit": "479722eeef8f2737ebc3917985c54456cda1fcbd",
+  "kaggle_dataset": "JReyes33/orderslm-m6",
+  "cost_usd": 0.0
+}
