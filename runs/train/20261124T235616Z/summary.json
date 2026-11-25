@@ -1,0 +1,154 @@
+{
+  "env": {
+    "session": "20261124T235616Z",
+    "started_at": "2026-11-24T23:57:31.005075+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.87,
+        "Cached": 5.16,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.93,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-11-25T11:13:26.540525+00:00"
+  },
+  "jobs": {
+    "qwen3.5-0.8b-single-v6": {
+      "status": {
+        "status": "paused",
+        "opt_step": 861,
+        "epoch": 1,
+        "pos": 3392,
+        "best_val": 0.009039372376001458,
+        "best_step": 656,
+        "skipped_updates": 5,
+        "finished_at": "2026-11-25T11:13:11.077028+00:00"
+      },
+      "val": [
+        {
+          "val_loss": 1.376243179409123,
+          "val_tokens": 69663,
+          "seconds": 337.1,
+          "opt_step": 0,
+          "epoch": 0.0,
+          "best": false
+        },
+        {
+          "val_loss": 0.01636973489194883,
+          "val_tokens": 69663,
+          "seconds": 281.6,
+          "opt_step": 218,
+          "epoch": 0.4988558352402746,
+          "best": true
+        },
+        {
+          "val_loss": 0.011304581984098977,
+          "val_tokens": 69663,
+          "seconds": 281.3,
+          "opt_step": 437,
+          "epoch": 1.0,
+          "best": true
+        },
+        {
+          "val_loss": 0.009039372376001458,
+          "val_tokens": 69663,
+          "seconds": 281.3,
+          "opt_step": 656,
+          "epoch": 1.5011441647597255,
+          "best": true
+        }
+      ],
+      "best_adapter_sha256": "62f08f096b184cb2acbb4c102f0eba3f102125c12c14f34359d3ef9905f979c9",
+      "best": {
+        "val_loss": 0.009039372376001458,
+        "val_tokens": 69663,
+        "seconds": 281.3,
+        "opt_step": 656,
+        "epoch": 1.5011441647597255
+      },
+      "steps_logged": 861,
+      "skipped_updates": 5,
+      "train_hours_logged": 10.89,
+      "peak_memory_gb": 4.56,
+      "tokens_per_second": 674.0
+    },
+    "score-qwen3.5-0.8b-single-v5-fresh5-cd": {
+      "status": {
+        "status": "done",
+        "answered": 358,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd",
+      "intent_all": {
+        "messages": 358,
+        "primary_correct": 334,
+        "primary_accuracy": 0.933,
+        "primary_ci95": [
+          0.902188757235822,
+          0.9545397117959309
+        ],
+        "label_set_correct": 332
+      },
+      "intent_earlier": {
+        "messages": 248,
+        "primary_correct": 233,
+        "primary_accuracy": 0.9395,
+        "primary_ci95": [
+          0.9026162387993177,
+          0.9630072324619832
+        ],
+        "label_set_correct": 231
+      },
+      "items_f1": 0.8954423592493298,
+      "exact": "89/110",
+      "contract_valid": {
+        "last": {
+          "valid": 106,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 247,
+          "of": 248
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    }
+  },
+  "host_memory": {
+    "samples": 1350,
+    "total_gb": 33.66,
+    "min_available_gb": 25.41,
+    "max_shmem_gb": 0.03,
+    "max_rss_gb": {
+      "gpu0": 3.61,
+      "gpu1": 4.08
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}
