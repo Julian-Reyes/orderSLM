@@ -51,6 +51,12 @@ _Last updated 2026-11-26._
   answers 0 → 5 (1.6%). Of the 15: 5 invalid answers, 5 opening greetings no longer `SMALL_TALK` (→ `UNKNOWN` 3,
   `PLACE_ORDER` 2), 3 `PLACE_ORDER` → `MENU_QUESTION`. Other splits' intents −0.8 to −1.8 pp (n.s.).
   Still below Julian's 95% goal (best clean 88.2%). Next is Julian's pick: ship v6 (constrained), or another round.
+- **v6 error review ($0; dev, fresh, fresh2, fresh3 only; fresh4/fresh5 left unopened to stay clean):**
+  `runs/student-errors/20261126T120215Z` dev 9, `…T120218Z` fresh 11, `…T120221Z` fresh2 15, `…T120223Z` fresh3 17 =
+  52 chats. Items lost/miscounted in long orders 15, guessing or dropping instead of asking 14 (vague reference 4,
+  size unstated → item dropped 4, unstated size/qty/pick filled in 4, missing-vs-ambiguous flag 2), modifications /
+  off-menu 12, invalid answers 6 (cross-field rules; 5 in fresh3), day/time 4, payment claim 1. Intents 83 of 1,142
+  wrong (invalid 8, greeting → UNKNOWN 8, PLACE→MODIFY 7, PLACE→MENU_QUESTION 7).
 - **Session A result (imported 2026-11-25):** v6 paused at step 861/874 (the 11.5 h guard; 42.5 s/step), best val
   loss 0.0090 at step 656 (v5: 0.0092); resumes next session. **v5 on fresh5 (clean, constrained): 89/110 fully
   correct (80.9%)**, items F1 0.895, 0 crashed (`runs/student-dev/20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd`).
