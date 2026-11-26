@@ -170,3 +170,12 @@ without touching the locked files.
 
 `make split-stats` prints the dev counts; the stats tab shows them, with review coverage, for either split.
 The locked counts are in `data/test/LOCK.json` and get copied into PROGRESS.md when the split is locked.
+
+## sim1: simulated-customer test (live-sim@0.1, 2026-11-26)
+
+`data/sim1/` (`Split.sim1`, `conversation@0.10`): 60 scenario cards (`cards.jsonl`, built by
+`runs/live-sim/build_cards.py`), each with a hidden target order the code checks (prices, inside opening hours), 20 per
+training menu; 15 customers say yes to the first summary without reading it. The chats (`chats/`) are written live:
+Claude plays the customer in rounds (`turns/<round>.jsonl`), replying to the real bot (shipped v6 Q8_0 on Kaggle +
+`bot/turn.py`). Scored on the order the customer confirms (`eval/live_sim.py`). Evaluation-only: never training or
+generation input (`tests/test_live_sim.py`). Same writer as the training chats (caveat).

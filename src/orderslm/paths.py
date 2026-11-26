@@ -27,6 +27,9 @@ FRESH4 = (
 FRESH5 = (
     DATA / "fresh5"
 )  # M6 v6: written after the v6 fixes that used dev, fresh, fresh2, fresh3 (evaluation-only)
+SIM1 = (
+    DATA / "sim1"
+)  # live simulated-customer test: cards with hidden target orders + the live chats (evaluation-only)
 _TEST = DATA / "test"  # M2, sealed
 EXTERNAL = DATA / "external"  # third-party downloads + anything derived from them, gitignored
 RUNS = ROOT / "runs"  # eval outputs, committed (M3+)

@@ -454,6 +454,160 @@
       }
     }
   ],
+  "rounds": {
+    "versions": [
+      {
+        "version": "v4",
+        "data": "student-data@0.4",
+        "train_chats": 3037,
+        "clean": {
+          "fresh4": {
+            "run": "runs/student-dev/20261123T212018Z-qwen3.5-0.8b-single-v4-fresh4-cd",
+            "chats": 110,
+            "exact": 89,
+            "exact_ci95": [
+              0.7257143161698456,
+              0.8716068739750575
+            ],
+            "same_action": 90,
+            "item_f1": 0.88,
+            "messages": 343,
+            "intents_right": 326,
+            "invalid_answers": 0,
+            "latency_ms_p50": 14536,
+            "scorer": "scorer@0.5",
+            "finalize": "finalize@0.4"
+          }
+        }
+      },
+      {
+        "version": "v5",
+        "data": "student-data@0.5",
+        "train_chats": 3265,
+        "clean": {
+          "fresh4": {
+            "run": "runs/student-dev/20261123T212018Z-qwen3.5-0.8b-single-v5-fresh4-cd",
+            "chats": 110,
+            "exact": 94,
+            "exact_ci95": [
+              0.7767209782912426,
+              0.9084415633455579
+            ],
+            "same_action": 94,
+            "item_f1": 0.912,
+            "messages": 343,
+            "intents_right": 324,
+            "invalid_answers": 3,
+            "latency_ms_p50": 14391,
+            "scorer": "scorer@0.5",
+            "finalize": "finalize@0.4"
+          },
+          "fresh5": {
+            "run": "runs/student-dev/20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd",
+            "chats": 110,
+            "exact": 89,
+            "exact_ci95": [
+              0.7257143161698456,
+              0.8716068739750575
+            ],
+            "same_action": 89,
+            "item_f1": 0.895,
+            "messages": 358,
+            "intents_right": 334,
+            "invalid_answers": 5,
+            "latency_ms_p50": 13696,
+            "scorer": "scorer@0.5",
+            "finalize": "finalize@0.4"
+          }
+        }
+      },
+      {
+        "version": "v6",
+        "data": "student-data@0.6",
+        "train_chats": 3493,
+        "clean": {
+          "fresh4": {
+            "run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh4-cd",
+            "chats": 110,
+            "exact": 97,
+            "exact_ci95": [
+              0.8082479662756031,
+              0.9296193862563361
+            ],
+            "same_action": 97,
+            "item_f1": 0.928,
+            "messages": 343,
+            "intents_right": 321,
+            "invalid_answers": 1,
+            "latency_ms_p50": 14626,
+            "scorer": "scorer@0.5",
+            "finalize": "finalize@0.4"
+          },
+          "fresh5": {
+            "run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh5-cd",
+            "chats": 110,
+            "exact": 95,
+            "exact_ci95": [
+              0.787141630195824,
+              0.9155891817393563
+            ],
+            "same_action": 95,
+            "item_f1": 0.931,
+            "messages": 358,
+            "intents_right": 331,
+            "invalid_answers": 0,
+            "latency_ms_p50": 14203,
+            "scorer": "scorer@0.5",
+            "finalize": "finalize@0.4"
+          }
+        }
+      }
+    ],
+    "paired_v5_v6": {
+      "fresh4": {
+        "run": "runs/student-compare/20261126T115057Z",
+        "only_v5_right": 1,
+        "only_v6_right": 4,
+        "mcnemar_p": 0.375,
+        "v6_minus_v5_pp": 2.7,
+        "ci95_pp": [
+          -0.9,
+          7.3
+        ]
+      },
+      "fresh5": {
+        "run": "runs/student-compare/20261126T115103Z",
+        "only_v5_right": 1,
+        "only_v6_right": 7,
+        "mcnemar_p": 0.07,
+        "v6_minus_v5_pp": 5.5,
+        "ci95_pp": [
+          0.9,
+          10.9
+        ]
+      }
+    },
+    "v6_errors": {
+      "runs": [
+        "runs/student-errors/20261126T120215Z",
+        "runs/student-errors/20261126T120218Z",
+        "runs/student-errors/20261126T120221Z",
+        "runs/student-errors/20261126T120223Z"
+      ],
+      "splits": "dev, fresh, fresh2, fresh3 (used for fixes; fresh4/fresh5 not opened)",
+      "chats": 381,
+      "chats_wrong": 52,
+      "item_kinds": {
+        "missing_item": 19,
+        "wrong_modifications": 8,
+        "wrong_quantity": 5,
+        "wrong_combo_picks": 1,
+        "extra_item": 7,
+        "wrong_variant": 5,
+        "wrong_quantity+modifications": 1
+      }
+    }
+  },
   "packaging": {
     "run": "runs/student-deploy/20261105T121614Z",
     "llama_cpp": "b11700",

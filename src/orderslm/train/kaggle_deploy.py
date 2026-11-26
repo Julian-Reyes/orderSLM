@@ -198,6 +198,65 @@ def export(args: argparse.Namespace) -> Path:
     return out_dir
 
 
+def export_sim(requests: list[dict[str, Any]], session: str, deadline_hours: float = 2.0) -> dict[str, Any]:
+    """One round of the simulated-customer test (eval/live_sim.py): the shipped student, rebuilt as Q8_0 GGUF exactly
+    as in export(), answers `requests` on both GPUs (half each). Stages kaggle/m6-deploy/upload/; returns run.json."""
+    student = STUDENTS[STUDENT]
+    best = WEIGHTS / STUDENT / "best"
+    adapter_sha = _sha256(best / "adapter_model.safetensors")
+    ref_sha = json.loads((REFERENCE["fresh4"] / "manifest.json").read_text())["adapter_sha256"]
+    if adapter_sha != ref_sha:
+        raise SystemExit(f"adapter {adapter_sha[:12]}… is not the shipped one ({ref_sha[:12]}…)")
+    if not requests:
+        raise SystemExit("no requests: every chat is waiting for the customer or has ended")
+    if STAGE.exists():
+        shutil.rmtree(STAGE)
+    STAGE.mkdir(parents=True)
+    shutil.copytree(best, STAGE / "adapter")
+    half = (len(requests) + 1) // 2
+    jobs = []
+    for gpu, part in ((0, requests[:half]), (1, requests[half:])):
+        if not part:
+            continue
+        name = f"sim-{'ab'[gpu]}"
+        (STAGE / f"{name}-requests.jsonl").write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in part)
+        )
+        jobs.append(
+            {
+                "name": name,
+                "device": "cuda",
+                "gpu": gpu,
+                "format": "Q8_0",
+                "split": "sim1",
+                "requests": f"{name}-requests.jsonl",
+            }
+        )
+    run = {
+        "session": session,
+        "student": STUDENT,
+        "data_version": student["data_version"],
+        "prompt_version": STUDENT_PROMPT_VERSION,
+        "model": MODELS[student["model"]],
+        "adapter": "adapter",
+        "adapter_sha256": adapter_sha,
+        "packages": {"main": PACKAGES["main"]},
+        "llama_cpp": LLAMA_CPP,
+        "server": SERVER,
+        "generation": GENERATION,
+        "formats": ["Q8_0"],
+        "deadline_hours": deadline_hours,
+        "guard": GUARD,
+        "timing_sample": [],
+        "jobs": jobs,
+    }
+    (STAGE / "run.json").write_text(json.dumps(run, indent=2) + "\n")
+    (STAGE / "dataset-metadata.json").write_text(
+        json.dumps({"title": "orderslm-m6-deploy", "id": DATASET, "licenses": [{"name": "unknown"}]}) + "\n"
+    )
+    return run
+
+
 # ---------------------------------------------------------------- import
 
 

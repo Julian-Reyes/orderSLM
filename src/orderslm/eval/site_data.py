@@ -87,6 +87,35 @@ FORMATS = [  # (format, dev run, fresh run, deploy job with the GPU timing on th
 ]
 
 
+# Data rounds v3-v6 (2026-11-09 .. 11-26): each round = study the latest model's mistakes, hand-write ~240 targeted
+# training chats, retrain the 0.8B, measure on a test batch written after the fixes. fresh4 (written after v5's data)
+# and fresh5 (after v6's) were never used for fixes: the same-set comparison below. All with constrained decoding.
+ROUNDS = [  # (version, data version, {clean split: run})
+    ("v4", "student-data@0.4", {"fresh4": "20261123T212018Z-qwen3.5-0.8b-single-v4-fresh4-cd"}),
+    (
+        "v5",
+        "student-data@0.5",
+        {
+            "fresh4": "20261123T212018Z-qwen3.5-0.8b-single-v5-fresh4-cd",
+            "fresh5": "20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd",
+        },
+    ),
+    (
+        "v6",
+        "student-data@0.6",
+        {
+            "fresh4": "20261125T130650Z-qwen3.5-0.8b-single-v6-fresh4-cd",
+            "fresh5": "20261125T130650Z-qwen3.5-0.8b-single-v6-fresh5-cd",
+        },
+    ),
+]
+ROUND_COMPARE = {  # paired v5 vs v6 (student-compare@0.3)
+    "fresh4": RUNS / "student-compare" / "20261126T115057Z",
+    "fresh5": RUNS / "student-compare" / "20261126T115103Z",
+}
+V6_ERRORS = [RUNS / "student-errors" / f"20261126T{t}" for t in ("120215Z", "120218Z", "120221Z", "120223Z")]
+
+
 def _j(path: Path) -> Any:
     return json.loads(path.read_text())
 
@@ -224,6 +253,51 @@ def packaging() -> dict[str, Any]:
     }
 
 
+def rounds() -> dict[str, Any]:
+    """v4-v6 on the clean batches, the v5 vs v6 paired tests, and what v6 still misses (used-for-fixes splits only)."""
+    versions = []
+    for ver, data, runs in ROUNDS:
+        train = _j(DATA / data / "manifest.json")["sets"]["single"]["train"]["rows"]
+        versions.append(
+            {
+                "version": ver,
+                "data": data,
+                "train_chats": train,
+                "clean": {split: student_scores(SD / run) for split, run in runs.items()},
+            }
+        )
+    paired = {}
+    for split, path in ROUND_COMPARE.items():
+        p = _j(path / "compare.json")["pairs"][0]
+        paired[split] = {
+            "run": _rel(path),
+            "only_v5_right": p["exact_chats"]["only_a_right"],
+            "only_v6_right": p["exact_chats"]["only_b_right"],
+            "mcnemar_p": round(p["exact_chats"]["mcnemar_p"], 3),
+            "v6_minus_v5_pp": round(-100 * p["differences"]["exact_rate"]["a_minus_b"], 1),
+            "ci95_pp": sorted(round(-100 * x, 1) for x in p["differences"]["exact_rate"]["ci95"]),
+        }
+    misses: dict[str, int] = {}
+    chats = wrong = 0
+    for path in V6_ERRORS:
+        e = _j(path / "summary.json")["qwen3.5-0.8b-single-v6"]
+        wrong += e["chats_wrong"]
+        chats += _j(path / "errors.json")["n_chats"]
+        for k, v in e["item_kinds"].items():
+            misses[k] = misses.get(k, 0) + v
+    return {
+        "versions": versions,
+        "paired_v5_v6": paired,
+        "v6_errors": {
+            "runs": [_rel(p) for p in V6_ERRORS],
+            "splits": "dev, fresh, fresh2, fresh3 (used for fixes; fresh4/fresh5 not opened)",
+            "chats": chats,
+            "chats_wrong": wrong,
+            "item_kinds": misses,
+        },
+    }
+
+
 def checker() -> dict[str, Any]:
     m = _j(CHECK / "metrics.json")
     names = {
@@ -332,6 +406,7 @@ def build() -> dict[str, Any]:
             {"student": n, "data": d, "dev": student_scores(SD / dev), "fresh": student_scores(SD / fresh)}
             for n, d, dev, fresh in STUDENTS
         ],
+        "rounds": rounds(),
         "packaging": packaging(),
         "order_checker": checker(),
         "example": example(),

@@ -6,6 +6,20 @@ _Last updated 2026-11-26._
 
 ## Start here next session
 
+### Ship v6 (2026-11-26; Julian: "push everything, then ship v6 and update documentation on the project website to explain what we did. then do a simulated customer test")
+
+- **Deploy run 3 pushed 2026-11-26 ~10:55 Brasília:** `make deploy ARGS="export"` → `runs/student-deploy/20261126T125414Z/`,
+  kernel `orderslm-m6-deploy-run` v4. `kaggle_deploy.py` now packages `qwen3.5-0.8b-single-v6` in Q8_0 only (the
+  shipped format, Julian 2026-11-05), plain greedy in llama.cpp b11700 (no grammar: it changed 9 of v6's 1,843
+  transformers answers), on all six splits (fresh4 + fresh5 first), reference = v6's constrained transformers runs;
+  + a 50-request dev timing sample on GPU 0 and on the CPU. Upload check: no secrets; 1,843 requests, all Source A.
+  Runs 1–2 (v2) keep their config in their manifests. When it ends: `make kaggle-pull JOB=m6-deploy`,
+  `make deploy ARGS="import runs/student-deploy/20261126T125414Z"`.
+- **Website:** `site_data.rounds()` adds v4–v6 on fresh4/fresh5 (constrained), the v5 vs v6 paired tests and the v6
+  error review to `docs/site/case-study.json`; new "Step 6 · Four more data rounds" section in the site repo's
+  `orderslm/index.html` (not pushed: this machine gets 403 on that repo). Packaging numbers + hero tiles wait for
+  the deploy import.
+
 ### v6 data round (2026-11-24; Julian: "let's do another data round to get the percentage higher", "go ahead and start kaggle session")
 
 - **v5 error review ($0):** `runs/student-errors/20261124T165018Z` dev 16, `…T165020Z` fresh 9, `…T165021Z` fresh2 15,

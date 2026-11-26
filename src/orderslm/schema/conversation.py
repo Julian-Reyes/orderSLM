@@ -32,6 +32,7 @@ class Split(StrEnum):
     fresh5 = (
         "fresh5"  # M6 v6: written after the v6 fixes that used dev, fresh, fresh2 and fresh3; evaluation-only
     )
+    sim1 = "sim1"  # live simulated-customer chats (eval/live_sim.py): customer turns written against the real bot's replies
 
 
 class Source(StrEnum):
