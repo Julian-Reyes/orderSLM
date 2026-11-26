@@ -60,19 +60,23 @@ def test_pull_skips_the_gguf_models():
     assert pat.search("env.json") and pat.search("gpu-q8_0/outputs.jsonl") and pat.search("run.log")
 
 
-def test_run_2_plan_does_what_run_1_left_and_times_every_format_on_one_sample():
+def test_v6_plan_scores_q8_0_on_every_split_clean_ones_first_and_times_one_sample():
     dev_ids = [f"a-dev-{i:03d}#0" for i in range(1, 92)]
     jobs = kd.plan_jobs(dev_ids)
     sample = kd.cpu_sample(dev_ids)
-    full = {(j["format"], j["split"]) for j in jobs if j["device"] == "cuda" and not j.get("request_ids")}
-    # run 1 answered dev in full for F16 and Q8_0 (on the CPU); every other format x split runs in full on a GPU
-    assert full == {(f, s) for f in kd.FORMATS for s in ("dev", "fresh")} - {("F16", "dev"), ("Q8_0", "dev")}
+    assert kd.STUDENT == "qwen3.5-0.8b-single-v6" and kd.FORMATS == [
+        "Q8_0"
+    ]  # the shipped format (2026-11-05)
+    full = [(j["format"], j["split"]) for j in jobs if j["device"] == "cuda" and not j.get("request_ids")]
+    # every scored split once, in the shipped format, each with a reference run of the same student
+    assert sorted(full) == sorted(("Q8_0", s) for s in kd.REFERENCE)
+    assert all(kd.STUDENT in str(v) for v in kd.REFERENCE.values())
+    for g in (0, 1):  # the clean splits come first on their GPU, after at most the short timing sample
+        first_full = next(j for j in jobs if j["gpu"] == g and not j.get("request_ids"))
+        assert first_full["split"] in ("fresh4", "fresh5")
     timing = [j for j in jobs if j["device"] == "cuda" and j.get("request_ids")]
-    assert {j["format"] for j in timing} == {"F16", "Q8_0"} and all(
-        j["request_ids"] == sample for j in timing
-    )
-    for g in (0, 1):  # each GPU starts with a short timing job, so a GPU problem shows in minutes
-        assert next(j for j in jobs if j["gpu"] == g)["request_ids"] == sample
+    assert [j["gpu"] for j in timing] == [0] and timing[0]["request_ids"] == sample
+    assert jobs[0] is timing[0]  # a GPU problem shows in minutes
     cpu = [j for j in jobs if j["device"] == "cpu"]
     assert [j["format"] for j in cpu] == kd.CPU_FORMATS and all(j["request_ids"] == sample for j in cpu)
     assert len(sample) == kd.CPU_SAMPLE and set(sample) <= set(dev_ids)
@@ -105,7 +109,7 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
     session = "20990101T000000Z"
     run_dir = tmp_path / "runs" / kd.EXPERIMENT / session
     run_dir.mkdir(parents=True)
-    jobs = [j for j in kd.plan_jobs(dev_ids) if j["format"] in ("Q4_K_M", "Q8_0")]
+    jobs = kd.plan_jobs(dev_ids)
     manifest = {
         "session": session,
         "student": kd.STUDENT,
@@ -121,7 +125,7 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
     }
     (run_dir / "manifest.json").write_text(json.dumps(manifest))
     out = tmp_path / "output"
-    files = {"Q4_K_M": {"file": "q4_k_m.gguf", "bytes": 530_000_000, "sha256": "f" * 64}}
+    files = {"Q8_0": {"file": "q8_0.gguf", "bytes": 810_000_000, "sha256": "f" * 64}}
     env = {"session": session, "steps": {"merge": {"adapter_sha256": "abc"}, "convert": {"files": files}}}
     (out).mkdir()
     (out / "env.json").write_text(json.dumps(env))
@@ -137,7 +141,7 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
         (out / j["name"] / "memory.json").write_text(json.dumps({"peak_gpu_used_mib": gpu_mib}))
     s = kd.import_(run_dir, out)
     ref_metrics = {k: json.loads((v / "metrics.json").read_text()) for k, v in refs.items()}
-    for name, split in (("gpu-q4_k_m", "dev"), ("gpu-q4_k_m-fresh", "fresh")):
+    for name, split in (("gpu-q8_0", "dev"), ("gpu-q8_0-fresh4", "fresh4"), ("gpu-q8_0-fresh5", "fresh5")):
         j = s["jobs"][name]
         o = ref_metrics[split]["order"]
         assert j["exact"] == f"{o['exact_match']}/{o['conversations']}"
@@ -145,7 +149,7 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
             j["vs_fp16_transformers"]["same_text"] == j["vs_fp16_transformers"]["compared"] == j["answered"]
         )
         m = json.loads((tmp_path / j["dev_run"] / "manifest.json").read_text())
-        assert m["runtime"]["format"] == "Q4_K_M" and m["runtime"]["gguf"]["bytes"] == 530_000_000
+        assert m["runtime"]["format"] == "Q8_0" and m["runtime"]["gguf"]["bytes"] == 810_000_000
         assert m["runtime"]["gpu_used"] is True and "did not load" not in m["runtime"]["engine"]
         assert j["timing_sample"] is None or j["timing_sample"]["answered"] == kd.CPU_SAMPLE
     assert s["jobs"]["gpu-q8_0-fresh"]["gpu_used"] is False
@@ -156,7 +160,7 @@ def test_import_scores_each_gpu_run_like_the_transformers_runs(tmp_path, monkeyp
     t = s["jobs"]["gpu-q8_0-timing"]
     assert "dev_run" not in t and t["timing_sample"]["answered"] == kd.CPU_SAMPLE
     assert (run_dir / "gpu-q8_0-timing" / "outputs.jsonl").exists()
-    for fmt in ("q4_k_m", "q8_0"):
+    for fmt in ("q8_0",):
         cpu = s["jobs"][f"cpu-{fmt}"]
         assert cpu["answered"] == kd.CPU_SAMPLE and cpu["vs_same_format_on_gpu"]["same_text"] == kd.CPU_SAMPLE
         assert (run_dir / f"cpu-{fmt}" / "outputs.jsonl").exists()

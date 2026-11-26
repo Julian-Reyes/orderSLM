@@ -37,26 +37,34 @@ EXPERIMENT = "student-deploy"
 JOB_DIR = ROOT / "kaggle" / "m6-deploy"
 STAGE = JOB_DIR / "upload"  # gitignored
 DATASET = "JReyes33/orderslm-m6-deploy"
-STUDENT = "qwen3.5-0.8b-single-v2"  # picked 2026-11-03 (Julian)
-# the transformers fp16 runs of the same adapter on the same requests (the reference)
+# Run 3 (2026-11-26, Julian: "ship v6"): v6 replaces v2 as the shipped student, in the shipped format only (Q8_0,
+# Julian 2026-11-05). Runs 1-2 (20261104T115735Z, 20261105T121614Z) packaged v2 in F16 / Q8_0 / Q4_K_M; their
+# manifests keep that config. v6 was scored with schema-constrained decoding (xgrammar), which changed 9 of its 1,843
+# answers; llama.cpp runs it plain greedy (Q8_0), so "same text" vs the reference also counts those 9.
+STUDENT = "qwen3.5-0.8b-single-v6"
+# the transformers fp16 runs of the same adapter on the same requests (the reference; constrained decoding)
+_V6 = RUNS / "student-dev" / "20261125T130650Z-qwen3.5-0.8b-single-v6"
 REFERENCE = {
-    "dev": RUNS / "student-dev" / "20261026T131201Z-qwen3.5-0.8b-single-v2",
-    "fresh": RUNS / "student-dev" / "20261026T131201Z-qwen3.5-0.8b-single-v2-fresh",
+    "fresh4": Path(f"{_V6}-fresh4-cd"),
+    "fresh5": Path(f"{_V6}-fresh5-cd"),
+    "dev": Path(f"{_V6}-cd"),
+    "fresh": Path(f"{_V6}-fresh-cd"),
+    "fresh2": Path(f"{_V6}-fresh2-cd"),
+    "fresh3": Path(f"{_V6}-fresh3-cd"),
 }
-FORMATS = ["F16", "Q8_0", "Q4_K_M"]
-# Run 2 (2026-11-05, Julian: "go ahead with the smaller run"). Run 1 (20261104T115735Z) answered every dev request in
-# F16 and Q8_0, but on the CPU: the CUDA backend never loaded, so its speed numbers are void and it ran out of time.
-# Its dev answers stay as accuracy runs; run 2 does the rest on a GPU that is checked first. Queue order per GPU:
-# the timing samples first (so a GPU problem shows in minutes), then the full splits.
+FORMATS = ["Q8_0"]
+# Queue per GPU, clean splits (fresh4, fresh5) first; GPU 0 starts with the short timing sample. Every GPU job's first
+# answer is checked against GUARD, so a GPU problem stops the run within minutes on either GPU.
 GPU_PLAN = [  # (gpu, format, split, timing sample only)
-    (0, "F16", "dev", True),
-    (0, "Q4_K_M", "dev", False),
-    (0, "F16", "fresh", False),
-    (1, "Q8_0", "dev", True),
-    (1, "Q4_K_M", "fresh", False),
-    (1, "Q8_0", "fresh", False),
+    (0, "Q8_0", "dev", True),
+    (0, "Q8_0", "fresh4", False),
+    (0, "Q8_0", "fresh", False),
+    (0, "Q8_0", "fresh2", False),
+    (1, "Q8_0", "fresh5", False),
+    (1, "Q8_0", "dev", False),
+    (1, "Q8_0", "fresh3", False),
 ]
-CPU_FORMATS = ["Q8_0", "Q4_K_M"]
+CPU_FORMATS = ["Q8_0"]
 CPU_SAMPLE = 50  # dev requests, seeded: the same sample times every format on the GPU and on the CPU
 SEED = 20261104
 LLAMA_TAG = "b11700"  # 2026-10-16; registers Qwen3_5ForConditionalGeneration (conversion/qwen.py), src/models/qwen35.cpp
@@ -135,7 +143,7 @@ def export(args: argparse.Namespace) -> Path:
     shutil.copytree(best, STAGE / "adapter")
     files = {"adapter/adapter_model.safetensors": adapter_sha}
     dev_ids: list[str] = []
-    for split in ("dev", "fresh"):
+    for split in REFERENCE:
         reqs = student_dev.build_requests(Split(split))
         f = STAGE / f"{split}-requests.jsonl"
         f.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in reqs))
@@ -380,7 +388,8 @@ def _write_report(run_dir: Path, manifest: dict, s: dict) -> None:
         f"Merged fp16 (base `{manifest['model']['repo']}` @ `{manifest['model']['revision'][:12]}` + adapter "
         f"`{manifest['adapter_sha256'][:12]}`), converted to GGUF and quantized on Kaggle; greedy, the same "
         f"requests and token ids as the transformers runs. Hardware: {hw.get('gpus')}, CPU {hw.get('cpu_model')} "
-        f"× {hw.get('cpu_count')}. Dev is tuning data; fresh helped shape finalize@0.2 (used for fixes). $0.",
+        f"× {hw.get('cpu_count')}. Splits: {', '.join(manifest['reference_runs'])} (see PROGRESS.md for which are "
+        "clean and which are used for fixes). $0.",
         "",
         "| format | GGUF size |",
         "|---|---|",
