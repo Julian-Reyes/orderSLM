@@ -1,0 +1,376 @@
+{
+  "env": {
+    "session": "20261125T130650Z",
+    "started_at": "2026-11-25T14:09:07.983408+00:00",
+    "torchao_uninstall": 0,
+    "fla_install": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "torch": "2.11.0+cu128",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "mounts": {
+      "/tmp": "overlay",
+      "/kaggle/working": "ext4"
+    },
+    "host_memory_at_start": {
+      "meminfo": {
+        "MemTotal": 33.66,
+        "MemAvailable": 31.79,
+        "Cached": 5.19,
+        "SwapFree": 0.0,
+        "Shmem": 0.0
+      },
+      "cgroup": {
+        "current": 1.93,
+        "max": 32.21
+      }
+    },
+    "finished_at": "2026-11-25T21:29:33.711198+00:00"
+  },
+  "jobs": {
+    "qwen3.5-0.8b-single-v6": {
+      "status": {
+        "status": "done",
+        "opt_step": 874,
+        "epoch": 2,
+        "pos": 0,
+        "best_val": 0.008462480906764857,
+        "best_step": 874,
+        "skipped_updates": 5,
+        "finished_at": "2026-11-25T14:31:25.845321+00:00"
+      },
+      "val": [
+        {
+          "val_loss": 1.376243179409123,
+          "val_tokens": 69663,
+          "seconds": 337.1,
+          "opt_step": 0,
+          "epoch": 0.0,
+          "best": false
+        },
+        {
+          "val_loss": 0.01636973489194883,
+          "val_tokens": 69663,
+          "seconds": 281.6,
+          "opt_step": 218,
+          "epoch": 0.4988558352402746,
+          "best": true
+        },
+        {
+          "val_loss": 0.011304581984098977,
+          "val_tokens": 69663,
+          "seconds": 281.3,
+          "opt_step": 437,
+          "epoch": 1.0,
+          "best": true
+        },
+        {
+          "val_loss": 0.009039372376001458,
+          "val_tokens": 69663,
+          "seconds": 281.3,
+          "opt_step": 656,
+          "epoch": 1.5011441647597255,
+          "best": true
+        },
+        {
+          "val_loss": 0.008462480906764857,
+          "val_tokens": 69663,
+          "seconds": 302.2,
+          "opt_step": 874,
+          "epoch": 2.0,
+          "best": true
+        }
+      ],
+      "best_adapter_sha256": "df14b06055d76c7f95fa2fbf5975668c2d30a734412e6ea97845fba2d3747f6b",
+      "best": {
+        "val_loss": 0.008462480906764857,
+        "val_tokens": 69663,
+        "seconds": 302.2,
+        "opt_step": 874,
+        "epoch": 2.0
+      },
+      "steps_logged": 874,
+      "skipped_updates": 5,
+      "train_hours_logged": 11.14,
+      "peak_memory_gb": 4.56,
+      "tokens_per_second": 668.5
+    },
+    "score-qwen3.5-0.8b-single-v6-fresh4-cd": {
+      "status": {
+        "status": "done",
+        "answered": 343,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh4-cd",
+      "intent_all": {
+        "messages": 343,
+        "primary_correct": 321,
+        "primary_accuracy": 0.9359,
+        "primary_ci95": [
+          0.9047998731480958,
+          0.9572651155960453
+        ],
+        "label_set_correct": 314
+      },
+      "intent_earlier": {
+        "messages": 233,
+        "primary_correct": 219,
+        "primary_accuracy": 0.9399,
+        "primary_ci95": [
+          0.9016828029951006,
+          0.9638745990829128
+        ],
+        "label_set_correct": 215
+      },
+      "items_f1": 0.9282051282051282,
+      "exact": "97/110",
+      "contract_valid": {
+        "last": {
+          "valid": 109,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 233,
+          "of": 233
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    },
+    "score-qwen3.5-0.8b-single-v6-fresh5-cd": {
+      "status": {
+        "status": "done",
+        "answered": 358,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh5-cd",
+      "intent_all": {
+        "messages": 358,
+        "primary_correct": 331,
+        "primary_accuracy": 0.9246,
+        "primary_ci95": [
+          0.8924936281469822,
+          0.9476529995486724
+        ],
+        "label_set_correct": 329
+      },
+      "intent_earlier": {
+        "messages": 248,
+        "primary_correct": 226,
+        "primary_accuracy": 0.9113,
+        "primary_ci95": [
+          0.8693443524927388,
+          0.9406886206141666
+        ],
+        "label_set_correct": 224
+      },
+      "items_f1": 0.9312169312169312,
+      "exact": "95/110",
+      "contract_valid": {
+        "last": {
+          "valid": 110,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 248,
+          "of": 248
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    },
+    "score-qwen3.5-0.8b-single-v6-cd": {
+      "status": {
+        "status": "done",
+        "answered": 268,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-cd",
+      "intent_all": {
+        "messages": 268,
+        "primary_correct": 251,
+        "primary_accuracy": 0.9366,
+        "primary_ci95": [
+          0.9007730923627915,
+          0.9600223120197606
+        ],
+        "label_set_correct": 243
+      },
+      "intent_earlier": {
+        "messages": 177,
+        "primary_correct": 166,
+        "primary_accuracy": 0.9379,
+        "primary_ci95": [
+          0.8921561134644358,
+          0.9649475617961236
+        ],
+        "label_set_correct": 162
+      },
+      "items_f1": 0.9480968858131488,
+      "exact": "82/91",
+      "contract_valid": {
+        "last": {
+          "valid": 91,
+          "of": 91
+        },
+        "earlier": {
+          "valid": 176,
+          "of": 177
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    },
+    "score-qwen3.5-0.8b-single-v6-fresh-cd": {
+      "status": {
+        "status": "done",
+        "answered": 278,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh-cd",
+      "intent_all": {
+        "messages": 278,
+        "primary_correct": 262,
+        "primary_accuracy": 0.9424,
+        "primary_ci95": [
+          0.908563957511392,
+          0.9642667388797725
+        ],
+        "label_set_correct": 259
+      },
+      "intent_earlier": {
+        "messages": 188,
+        "primary_correct": 178,
+        "primary_accuracy": 0.9468,
+        "primary_ci95": [
+          0.9048680768147578,
+          0.9708543942238491
+        ],
+        "label_set_correct": 175
+      },
+      "items_f1": 0.9442622950819672,
+      "exact": "79/90",
+      "contract_valid": {
+        "last": {
+          "valid": 88,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 186,
+          "of": 188
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    },
+    "score-qwen3.5-0.8b-single-v6-fresh2-cd": {
+      "status": {
+        "status": "done",
+        "answered": 275,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh2-cd",
+      "intent_all": {
+        "messages": 275,
+        "primary_correct": 257,
+        "primary_accuracy": 0.9345,
+        "primary_ci95": [
+          0.8989178170483269,
+          0.9581996288420999
+        ],
+        "label_set_correct": 254
+      },
+      "intent_earlier": {
+        "messages": 185,
+        "primary_correct": 173,
+        "primary_accuracy": 0.9351,
+        "primary_ci95": [
+          0.8900573836777741,
+          0.9625090000003984
+        ],
+        "label_set_correct": 170
+      },
+      "items_f1": 0.9266862170087976,
+      "exact": "75/90",
+      "contract_valid": {
+        "last": {
+          "valid": 90,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 185,
+          "of": 185
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    },
+    "score-qwen3.5-0.8b-single-v6-fresh3-cd": {
+      "status": {
+        "status": "done",
+        "answered": 321,
+        "errors": 0
+      },
+      "dev_run": "runs/student-dev/20261125T130650Z-qwen3.5-0.8b-single-v6-fresh3-cd",
+      "intent_all": {
+        "messages": 321,
+        "primary_correct": 289,
+        "primary_accuracy": 0.9003,
+        "primary_ci95": [
+          0.8626561469463366,
+          0.9284986805141856
+        ],
+        "label_set_correct": 287
+      },
+      "intent_earlier": {
+        "messages": 211,
+        "primary_correct": 193,
+        "primary_accuracy": 0.9147,
+        "primary_ci95": [
+          0.8691945810907971,
+          0.9453590249147437
+        ],
+        "label_set_correct": 192
+      },
+      "items_f1": 0.9418282548476454,
+      "exact": "93/110",
+      "contract_valid": {
+        "last": {
+          "valid": 106,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 210,
+          "of": 211
+        }
+      },
+      "unanswered": 0,
+      "crashed": 0,
+      "complete": true
+    }
+  },
+  "host_memory": {
+    "samples": 879,
+    "total_gb": 33.66,
+    "min_available_gb": 28.51,
+    "max_shmem_gb": 0.02,
+    "max_rss_gb": {
+      "gpu0": 3.89
+    },
+    "cgroup_max_gb": 32.21,
+    "errors": 0
+  }
+}

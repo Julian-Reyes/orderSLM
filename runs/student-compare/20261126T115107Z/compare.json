@@ -1,0 +1,83 @@
+{
+  "compare_version": "student-compare@0.3",
+  "split": "dev",
+  "chats": 91,
+  "messages": 268,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single-v5 (constrained)": {
+      "intent_accuracy": 0.9402985074626866,
+      "invalid_rate": 0.0037313432835820895,
+      "item_f1": 0.9072164948453608,
+      "exact_rate": 0.8241758241758241,
+      "action_rate": 0.8241758241758241
+    },
+    "qwen3.5-0.8b-single-v6 (constrained)": {
+      "intent_accuracy": 0.9365671641791045,
+      "invalid_rate": 0.0037313432835820895,
+      "item_f1": 0.9480968858131488,
+      "exact_rate": 0.9010989010989011,
+      "action_rate": 0.9010989010989011
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single-v5 (constrained)",
+      "b": "qwen3.5-0.8b-single-v6 (constrained)",
+      "intent_messages": {
+        "only_a_right": 3,
+        "only_b_right": 2
+      },
+      "exact_chats": {
+        "only_a_right": 2,
+        "only_b_right": 9,
+        "mcnemar_p": 0.0654296875,
+        "mcnemar_p_holm": 0.0654296875
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.003731343283582156,
+          "ci95": [
+            -0.00793650793650802,
+            0.017123287671232945
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": -0.04088039096778795,
+          "ci95": [
+            -0.07973421926910307,
+            -0.005750968221125863
+          ],
+          "ci_excludes_0": true
+        },
+        "exact_rate": {
+          "a_minus_b": -0.07692307692307698,
+          "ci95": [
+            -0.1428571428571429,
+            -0.01098901098901095
+          ],
+          "ci_excludes_0": true
+        },
+        "action_rate": {
+          "a_minus_b": -0.07692307692307698,
+          "ci95": [
+            -0.1428571428571429,
+            -0.01098901098901095
+          ],
+          "ci_excludes_0": true
+        }
+      }
+    }
+  ],
+  "parts": {}
+}

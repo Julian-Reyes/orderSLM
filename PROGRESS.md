@@ -2,7 +2,7 @@
 
 Read this first each session. Spec: `orderslm-project-plan.md` (authoritative; replaces the Pedido Fácil plan).
 
-_Last updated 2026-11-24._
+_Last updated 2026-11-26._
 
 ## Start here next session
 
@@ -31,6 +31,26 @@ _Last updated 2026-11-24._
   qwen3.5-0.8b-single-v5:fresh5 --constrained"` (v6 training ≈ 11.4 h at v5's rate, stops itself at 11.5 h and
   resumes if short; GPU1 scores v5 on fresh5); session B scores v6 constrained on fresh4, fresh5, dev, fresh, fresh2,
   fresh3. Then `student_compare` v5 vs v6 per split (fresh4 + fresh5 = clean).
+- **Session B result (kernel v21, imported 2026-11-26):** v6 finished 874/874 (2 epochs), best val loss 0.0085 at
+  the last step (v5: 0.0092); adapter `models/m6/qwen3.5-0.8b-single-v6`. All six constrained score jobs done,
+  1,843 requests, 0 errors, 0 crashed. v5 vs v6 (both constrained), fully correct orders:
+
+  | split | v5 | v6 | v6 − v5 (pp) [95% CI] | only v5 / v6 | McNemar p | run |
+  |---|---|---|---|---|---|---|
+  | **fresh4 (clean)** | 85.5% (94/110) | **88.2% (97/110)** | +2.7 [−0.9, +7.3] | 1 / 4 | 0.375 | `student-compare/20261126T115057Z` |
+  | **fresh5 (clean)** | 80.9% (89/110) | **86.4% (95/110)** | +5.5 [+0.9, +10.9] | 1 / 7 | 0.070 | `…T115103Z` |
+  | dev | 82.4% | 90.1% | +7.7 [+1.1, +14.3] | 2 / 9 | 0.065 | `…T115107Z` |
+  | fresh | 90.0% | 87.8% | −2.2 [−8.9, +4.4] | 5 / 3 | 0.727 | `…T115112Z` |
+  | fresh2 | 83.3% | 83.3% | 0.0 [−6.7, +6.7] | 5 / 5 | 1.000 | `…T115116Z` |
+  | fresh3 | 81.8% | 84.5% | +2.7 [−2.7, +8.2] | 4 / 7 | 0.549 | `…T115124Z` |
+
+  **Clean (fresh4 + fresh5, 220 chats): v5 83.2% → v6 87.3%**; pooled 2 / 11 discordant, exact McNemar p = 0.022
+  (pooling is my after-the-fact choice; per split neither p < 0.05). Item F1 fresh4 0.912 → 0.928, fresh5 0.895 →
+  0.931 (CI excludes 0 on fresh5). Future-day parts: fresh4 95% / 95%, fresh5 80% / 95%.
+  **Regression on fresh3 intents:** 94.4% → 90.0% (15 messages only v5 right, 1 only v6; CI excludes 0); invalid
+  answers 0 → 5 (1.6%). Of the 15: 5 invalid answers, 5 opening greetings no longer `SMALL_TALK` (→ `UNKNOWN` 3,
+  `PLACE_ORDER` 2), 3 `PLACE_ORDER` → `MENU_QUESTION`. Other splits' intents −0.8 to −1.8 pp (n.s.).
+  Still below Julian's 95% goal (best clean 88.2%). Next is Julian's pick: ship v6 (constrained), or another round.
 - **Session A result (imported 2026-11-25):** v6 paused at step 861/874 (the 11.5 h guard; 42.5 s/step), best val
   loss 0.0090 at step 656 (v5: 0.0092); resumes next session. **v5 on fresh5 (clean, constrained): 89/110 fully
   correct (80.9%)**, items F1 0.895, 0 crashed (`runs/student-dev/20261124T235616Z-qwen3.5-0.8b-single-v5-fresh5-cd`).

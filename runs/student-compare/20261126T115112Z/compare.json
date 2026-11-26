@@ -1,0 +1,83 @@
+{
+  "compare_version": "student-compare@0.3",
+  "split": "fresh",
+  "chats": 90,
+  "messages": 278,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single-v5 (constrained)": {
+      "intent_accuracy": 0.960431654676259,
+      "invalid_rate": 0.007194244604316547,
+      "item_f1": 0.9551282051282052,
+      "exact_rate": 0.9,
+      "action_rate": 0.9222222222222223
+    },
+    "qwen3.5-0.8b-single-v6 (constrained)": {
+      "intent_accuracy": 0.9424460431654677,
+      "invalid_rate": 0.014388489208633094,
+      "item_f1": 0.9442622950819672,
+      "exact_rate": 0.8777777777777778,
+      "action_rate": 0.9
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single-v5 (constrained)",
+      "b": "qwen3.5-0.8b-single-v6 (constrained)",
+      "intent_messages": {
+        "only_a_right": 11,
+        "only_b_right": 6
+      },
+      "exact_chats": {
+        "only_a_right": 5,
+        "only_b_right": 3,
+        "mcnemar_p": 0.7265625,
+        "mcnemar_p_holm": 0.7265625
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.017985611510791366,
+          "ci95": [
+            -0.018181818181818188,
+            0.05902777777777779
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": -0.007194244604316547,
+          "ci95": [
+            -0.03558718861209965,
+            0.017361111111111112
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": 0.010865910046237937,
+          "ci95": [
+            -0.023380543301601997,
+            0.04737718356757126
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": 0.022222222222222254,
+          "ci95": [
+            -0.0444444444444444,
+            0.0888888888888889
+          ],
+          "ci_excludes_0": false
+        },
+        "action_rate": {
+          "a_minus_b": 0.022222222222222254,
+          "ci95": [
+            -0.03333333333333344,
+            0.0888888888888889
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    }
+  ],
+  "parts": {}
+}
