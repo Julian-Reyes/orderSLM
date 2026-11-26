@@ -15,10 +15,22 @@ _Last updated 2026-11-26._
   + a 50-request dev timing sample on GPU 0 and on the CPU. Upload check: no secrets; 1,843 requests, all Source A.
   Runs 1–2 (v2) keep their config in their manifests. When it ends: `make kaggle-pull JOB=m6-deploy`,
   `make deploy ARGS="import runs/student-deploy/20261126T125414Z"`.
+- **Deploy result (kernel v4, imported 2026-11-26 11:45 Brasília, 1.6 h, $0):** `runs/student-deploy/20261126T125414Z`.
+  Q8_0 0.81 GB, T4 p50 2.5 s (p95 3.7), CPU p50 50 s; every job complete, GPU used. **Shipped v6 Q8_0, fully correct:
+  fresh4 97/110, fresh5 93/110 (clean together 190/220 = 86.4%)**, dev 82/91, fresh 78/90, fresh2 76/90, fresh3
+  90/110. vs v6 fp16 constrained (`student-compare/20261126T144610Z` … `T144640Z`): 6 chats only fp16 right, 1 only
+  Q8_0 (fresh5 2, fresh 1, fresh3 3 / fresh2 1), each split n.s.; 5 of the 6 are valid Q8_0 answers, so it's the
+  quantization, not the missing grammar (v2's Q8_0 matched fp16 on every chat). Same text as fp16 on 1,766/1,843.
 - **Website:** `site_data.rounds()` adds v4–v6 on fresh4/fresh5 (constrained), the v5 vs v6 paired tests and the v6
-  error review to `docs/site/case-study.json`; new "Step 6 · Four more data rounds" section in the site repo's
-  `orderslm/index.html` (not pushed: this machine gets 403 on that repo). Packaging numbers + hero tiles wait for
-  the deploy import.
+  error review to `docs/site/case-study.json`, `site_data.shipped()` the shipped Q8_0's numbers, and the example is
+  now the shipped model's answer (same order). Site repo `orderslm/index.html` + `data.json` updated: new "Step 6 ·
+  Four more data rounds", hero tiles (86% of 220 clean chats, 93% of 701 messages, 0.81 GB, 2.5 s), v6 packaging
+  note, footer Nov 26. **Not pushed** (this machine gets 403 on that repo): Julian pushes it.
+- **Simulated-customer test built ($0, Julian: "just you write it"):** `bot/turn.py` (`bot@0.1`, extractor-only
+  routing by the student's intent; no menu-question answers or small-talk lines yet, M8), `eval/live_sim.py`
+  (`live-sim@0.1`, rounds on Kaggle via `kaggle_deploy.export_sim`), `Split.sim1` (`conversation@0.10`), 60 cards
+  (`runs/live-sim/build_cards.py` → `data/sim1/cards.jsonl`; the card check caught 4 impossible targets of mine:
+  Morning Crumb is pickup-only, 2 deliveries under the $15 minimum), round 0 written (60 opening messages).
 
 ### v6 data round (2026-11-24; Julian: "let's do another data round to get the percentage higher", "go ahead and start kaggle session")
 

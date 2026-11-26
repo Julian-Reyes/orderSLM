@@ -1,0 +1,634 @@
+{
+  "env": {
+    "session": "20261126T125414Z",
+    "started_at": "2026-11-26T13:05:33.412563+00:00",
+    "steps": {
+      "install": {
+        "status": "done",
+        "torchao_uninstall": 0,
+        "seconds": 4.1
+      },
+      "llama_cpp": {
+        "status": "done",
+        "builds": {
+          "cuda": {
+            "server": "/tmp/deploy/llama.cpp/cuda/llama-b11700/llama-server",
+            "ld_library_path": "/tmp/deploy/llama.cpp/cuda/llama-b11700:/tmp/deploy/llama.cpp/cudart/cudart-llama-b11700-bin-ubuntu-cuda-12.8-x64:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib",
+            "probe": {
+              "list_devices": "Available devices:\n  CUDA0: Tesla T4 (14911 MiB, 14806 MiB free)\n  CUDA1: Tesla T4 (14911 MiB, 14806 MiB free)\n",
+              "cuda": true,
+              "driver_lib": "/usr/local/nvidia/lib64/libcuda.so.580.178.04",
+              "ldd_libggml_cuda_not_found": []
+            }
+          },
+          "cpu": {
+            "server": "/tmp/deploy/llama.cpp/cpu/llama-b11700/llama-server",
+            "ld_library_path": "/tmp/deploy/llama.cpp/cpu/llama-b11700:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib"
+          },
+          "quantize": "/tmp/deploy/llama.cpp/cpu/llama-b11700/llama-quantize",
+          "convert": "/tmp/deploy/llama.cpp/source/llama.cpp-b11700/convert_hf_to_gguf.py",
+          "cuda_build": "prebuilt CUDA 12.8"
+        },
+        "cuda_build": "prebuilt CUDA 12.8",
+        "seconds": 57.7
+      },
+      "merge": {
+        "status": "done",
+        "model_class": "Qwen3_5ForCausalLM",
+        "architectures": [
+          "Qwen3_5ForCausalLM"
+        ],
+        "model_type": "qwen3_5_text",
+        "adapter_sha256": "df14b06055d76c7f95fa2fbf5975668c2d30a734412e6ea97845fba2d3747f6b",
+        "copied_from_base": [
+          ".gitattributes",
+          "LICENSE",
+          "README.md",
+          "chat_template.jinja",
+          "merges.txt",
+          "preprocessor_config.json",
+          "tokenizer.json",
+          "tokenizer_config.json",
+          "video_preprocessor_config.json",
+          "vocab.json"
+        ],
+        "merged_gb": 1.528,
+        "seconds": 44.3
+      },
+      "convert": {
+        "status": "done",
+        "convert": {
+          "returncode": 0,
+          "stderr_tail": " and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is defined %}\n                    {%- for args_name, args_value in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected message role.') }}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is true %}\n        {{- '<think>\\n' }}\n    {%- else %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}\nINFO:gguf.vocab:Setting normalizer_nfc to True\nINFO:gguf.gguf_writer:Writing the following files:\nINFO:gguf.gguf_writer:/kaggle/working/gguf/f16.gguf: n_tensors = 320, total_size = 1.5G\n\nWriting:   0%|          | 0.00/1.51G [00:00<?, ?byte/s]\nWriting:  34%|\u2588\u2588\u2588\u258d      | 509M/1.51G [00:00<00:00, 1.68Gbyte/s]\nWriting:  46%|\u2588\u2588\u2588\u2588\u258c     | 688M/1.51G [00:00<00:00, 1.48Gbyte/s]\nWriting:  55%|\u2588\u2588\u2588\u2588\u2588\u258d    | 827M/1.51G [00:00<00:00, 1.42Gbyte/s]\nWriting:  64%|\u2588\u2588\u2588\u2588\u2588\u2588\u258d   | 963M/1.51G [00:00<00:00, 1.38Gbyte/s]\nWriting:  73%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258e  | 1.11G/1.51G [00:00<00:00, 1.37Gbyte/s]\nWriting:  82%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258f | 1.24G/1.51G [00:00<00:00, 1.34Gbyte/s]\nWriting:  91%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258f| 1.38G/1.51G [00:00<00:00, 1.34Gbyte/s]\nWriting: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 1.51G/1.51G [00:01<00:00, 1.39Gbyte/s]\nINFO:hf-to-gguf:Model successfully exported to /kaggle/working/gguf/f16.gguf\n"
+        },
+        "quantize_Q8_0": {
+          "returncode": 0,
+          "stderr_tail": "      1,      1,      1], type =    f32, size =    0.001 MiB\n[ 312/ 320] blk.23.attn_norm.weight              - [  1024,      1,      1,      1], type =    f32, size =    0.004 MiB\n[ 313/ 320] blk.23.attn_output.weight            - [  2048,   1024,      1,      1], type =    f16, converting to q8_0 .. size =     4.00 MiB ->     2.12 MiB\n[ 314/ 320] blk.23.attn_q.weight                 - [  1024,   4096,      1,      1], type =    f16, converting to q8_0 .. size =     8.00 MiB ->     4.25 MiB\n[ 315/ 320] blk.23.attn_q_norm.weight            - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB\n[ 316/ 320] blk.23.attn_v.weight                 - [  1024,    512,      1,      1], type =    f16, converting to q8_0 .. size =     1.00 MiB ->     0.53 MiB\n[ 317/ 320] blk.23.ffn_down.weight               - [  3584,   1024,      1,      1], type =    f16, converting to q8_0 .. size =     7.00 MiB ->     3.72 MiB\n[ 318/ 320] blk.23.ffn_gate.weight               - [  1024,   3584,      1,      1], type =    f16, converting to q8_0 .. size =     7.00 MiB ->     3.72 MiB\n[ 319/ 320] blk.23.ffn_up.weight                 - [  1024,   3584,      1,      1], type =    f16, converting to q8_0 .. size =     7.00 MiB ->     3.72 MiB\n[ 320/ 320] blk.23.post_attention_norm.weight    - [  1024,      1,      1,      1], type =    f32, size =    0.004 MiB\nllama_model_quantize_impl: model size  =  1436.03 MiB (16.01 BPW)\nllama_model_quantize_impl: quant size  =   763.78 MiB (8.52 BPW)\n"
+        },
+        "files": {
+          "Q8_0": {
+            "file": "q8_0.gguf",
+            "bytes": 811843648,
+            "sha256": "116eb0f03cddb844ac1893d9d7a77881520b4708d001a7b5e1fa7d5b5ee2b00f"
+          }
+        },
+        "seconds": 24.9
+      },
+      "prompts": {
+        "status": "done",
+        "dev-requests.jsonl": 268,
+        "fresh-requests.jsonl": 278,
+        "fresh2-requests.jsonl": 275,
+        "fresh3-requests.jsonl": 321,
+        "fresh4-requests.jsonl": 343,
+        "fresh5-requests.jsonl": 358,
+        "seconds": 20.0
+      },
+      "gpu": {
+        "seconds": 2689.3
+      },
+      "cpu": {
+        "seconds": 3083.6
+      }
+    },
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.2",
+    "cuda": "13.0",
+    "python": "3.13.16",
+    "hardware": {
+      "cpu_count": 4,
+      "cpu_model": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+      "gpus": [
+        "Tesla T4, 580.178.04, 15360 MiB",
+        "Tesla T4, 580.178.04, 15360 MiB"
+      ],
+      "host_memory_gb": 33.7
+    },
+    "llama_cpp": "b11700",
+    "stopped": null,
+    "finished_at": "2026-11-26T14:44:32.706147+00:00"
+  },
+  "gguf": {
+    "Q8_0": {
+      "file": "q8_0.gguf",
+      "bytes": 811843648,
+      "sha256": "116eb0f03cddb844ac1893d9d7a77881520b4708d001a7b5e1fa7d5b5ee2b00f"
+    }
+  },
+  "reference_latency": {
+    "fresh4": {
+      "answered": 343,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 14626,
+        "p95": 19696,
+        "n": 343
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    },
+    "fresh5": {
+      "answered": 358,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 14203,
+        "p95": 20824,
+        "n": 358
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    },
+    "dev": {
+      "answered": 268,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 13471,
+        "p95": 19994,
+        "n": 268
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    },
+    "fresh": {
+      "answered": 278,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 13964,
+        "p95": 23564,
+        "n": 278
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    },
+    "fresh2": {
+      "answered": 275,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 14339,
+        "p95": 21061,
+        "n": 275
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    },
+    "fresh3": {
+      "answered": 321,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 13550,
+        "p95": 18289,
+        "n": 321
+      },
+      "prompt_tokens_per_s": null,
+      "output_tokens_per_s": null
+    }
+  },
+  "jobs": {
+    "gpu-q8_0-timing": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "dev",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.441,
+        "peak_gpu_used_mib": 1049,
+        "samples": 55
+      },
+      "answered": 50,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2537,
+        "p95": 3725,
+        "n": 50
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6723.884222458477,
+        "p95": 7012.063492063492,
+        "n": 50
+      },
+      "output_tokens_per_s": {
+        "p50": 148.66373759887745,
+        "p95": 153.1793020625812,
+        "n": 50
+      },
+      "timing_sample": {
+        "answered": 50,
+        "errors": 0,
+        "hit_token_limit": 0,
+        "latency_ms": {
+          "p50": 2537,
+          "p95": 3725,
+          "n": 50
+        },
+        "prompt_tokens_per_s": {
+          "p50": 6723.884222458477,
+          "p95": 7012.063492063492,
+          "n": 50
+        },
+        "output_tokens_per_s": {
+          "p50": 148.66373759887745,
+          "p95": 153.1793020625812,
+          "n": 50
+        }
+      },
+      "vs_fp16_transformers": {
+        "compared": 50,
+        "same_text": 48,
+        "same_input_tokens": 50
+      }
+    },
+    "gpu-q8_0-fresh4": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "fresh4",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.169,
+        "peak_gpu_used_mib": 1049,
+        "samples": 310
+      },
+      "answered": 343,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2822,
+        "p95": 3919,
+        "n": 343
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6461.962912923216,
+        "p95": 6542.383791028,
+        "n": 343
+      },
+      "output_tokens_per_s": {
+        "p50": 146.04487763175763,
+        "p95": 147.4637484951616,
+        "n": 343
+      },
+      "timing_sample": null,
+      "vs_fp16_transformers": {
+        "compared": 343,
+        "same_text": 332,
+        "same_input_tokens": 343
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0-fresh4",
+      "exact": "97/110",
+      "same_action": "97/110",
+      "intent_all": 321,
+      "items_f1": 0.9329896907216495,
+      "contract_valid": {
+        "last": {
+          "valid": 108,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 233,
+          "of": 233
+        }
+      }
+    },
+    "gpu-q8_0-fresh": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "fresh",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.172,
+        "peak_gpu_used_mib": 1049,
+        "samples": 246
+      },
+      "answered": 278,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2689,
+        "p95": 4346,
+        "n": 278
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6465.18669509848,
+        "p95": 6540.940221964209,
+        "n": 278
+      },
+      "output_tokens_per_s": {
+        "p50": 146.0295860836252,
+        "p95": 147.46989156380573,
+        "n": 278
+      },
+      "timing_sample": null,
+      "vs_fp16_transformers": {
+        "compared": 278,
+        "same_text": 268,
+        "same_input_tokens": 278
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0-fresh",
+      "exact": "78/90",
+      "same_action": "79/90",
+      "intent_all": 261,
+      "items_f1": 0.934640522875817,
+      "contract_valid": {
+        "last": {
+          "valid": 88,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 187,
+          "of": 188
+        }
+      }
+    },
+    "gpu-q8_0-fresh2": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "fresh2",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.169,
+        "peak_gpu_used_mib": 1049,
+        "samples": 250
+      },
+      "answered": 275,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2811,
+        "p95": 4090,
+        "n": 275
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6467.028224336015,
+        "p95": 6549.472858559992,
+        "n": 275
+      },
+      "output_tokens_per_s": {
+        "p50": 146.0428542377688,
+        "p95": 147.56604359849152,
+        "n": 275
+      },
+      "timing_sample": null,
+      "vs_fp16_transformers": {
+        "compared": 275,
+        "same_text": 261,
+        "same_input_tokens": 275
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0-fresh2",
+      "exact": "76/90",
+      "same_action": "78/90",
+      "intent_all": 255,
+      "items_f1": 0.9262536873156342,
+      "contract_valid": {
+        "last": {
+          "valid": 90,
+          "of": 90
+        },
+        "earlier": {
+          "valid": 184,
+          "of": 185
+        }
+      }
+    },
+    "gpu-q8_0-fresh5": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "fresh5",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.508,
+        "peak_gpu_used_mib": 1049,
+        "samples": 339
+      },
+      "answered": 358,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2788,
+        "p95": 4114,
+        "n": 358
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6380.862041042963,
+        "p95": 6812.919802088365,
+        "n": 358
+      },
+      "output_tokens_per_s": {
+        "p50": 144.09233373058237,
+        "p95": 148.53535076579905,
+        "n": 358
+      },
+      "timing_sample": null,
+      "vs_fp16_transformers": {
+        "compared": 358,
+        "same_text": 342,
+        "same_input_tokens": 358
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0-fresh5",
+      "exact": "93/110",
+      "same_action": "93/110",
+      "intent_all": 328,
+      "items_f1": 0.9202127659574468,
+      "contract_valid": {
+        "last": {
+          "valid": 108,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 247,
+          "of": 248
+        }
+      }
+    },
+    "gpu-q8_0": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "dev",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.14,
+        "peak_gpu_used_mib": 1049,
+        "samples": 240
+      },
+      "answered": 268,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2716,
+        "p95": 3889,
+        "n": 268
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6350.299155806902,
+        "p95": 6421.098674517704,
+        "n": 268
+      },
+      "output_tokens_per_s": {
+        "p50": 143.88008799403275,
+        "p95": 145.4468523978897,
+        "n": 268
+      },
+      "timing_sample": {
+        "answered": 50,
+        "errors": 0,
+        "hit_token_limit": 0,
+        "latency_ms": {
+          "p50": 2666,
+          "p95": 3746,
+          "n": 50
+        },
+        "prompt_tokens_per_s": {
+          "p50": 6355.560526765057,
+          "p95": 6424.397137686886,
+          "n": 50
+        },
+        "output_tokens_per_s": {
+          "p50": 143.95010607066385,
+          "p95": 145.3830233731754,
+          "n": 50
+        }
+      },
+      "vs_fp16_transformers": {
+        "compared": 268,
+        "same_text": 256,
+        "same_input_tokens": 268
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0",
+      "exact": "82/91",
+      "same_action": "82/91",
+      "intent_all": 249,
+      "items_f1": 0.9513888888888888,
+      "contract_valid": {
+        "last": {
+          "valid": 90,
+          "of": 91
+        },
+        "earlier": {
+          "valid": 176,
+          "of": 177
+        }
+      }
+    },
+    "gpu-q8_0-fresh3": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cuda",
+      "split": "fresh3",
+      "gpu_used": true,
+      "memory": {
+        "peak_server_rss_gb": 1.169,
+        "peak_gpu_used_mib": 1049,
+        "samples": 286
+      },
+      "answered": 321,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 2734,
+        "p95": 3777,
+        "n": 321
+      },
+      "prompt_tokens_per_s": {
+        "p50": 6358.957613447508,
+        "p95": 6435.158829557099,
+        "n": 321
+      },
+      "output_tokens_per_s": {
+        "p50": 143.8941329402937,
+        "p95": 145.4827602929053,
+        "n": 321
+      },
+      "timing_sample": null,
+      "vs_fp16_transformers": {
+        "compared": 321,
+        "same_text": 307,
+        "same_input_tokens": 321
+      },
+      "dev_run": "runs/student-dev/20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0-fresh3",
+      "exact": "90/110",
+      "same_action": "91/110",
+      "intent_all": 288,
+      "items_f1": 0.9265536723163842,
+      "contract_valid": {
+        "last": {
+          "valid": 104,
+          "of": 110
+        },
+        "earlier": {
+          "valid": 210,
+          "of": 211
+        }
+      }
+    },
+    "cpu-q8_0": {
+      "status": "done",
+      "format": "Q8_0",
+      "device": "cpu",
+      "split": "dev",
+      "gpu_used": null,
+      "memory": {
+        "peak_server_rss_gb": 1.415,
+        "peak_gpu_used_mib": null,
+        "samples": 1027
+      },
+      "answered": 50,
+      "errors": 0,
+      "hit_token_limit": 0,
+      "latency_ms": {
+        "p50": 50265,
+        "p95": 97734,
+        "n": 50
+      },
+      "prompt_tokens_per_s": {
+        "p50": 79.38309985381798,
+        "p95": 81.59111137251858,
+        "n": 50
+      },
+      "output_tokens_per_s": {
+        "p50": 16.023483427942487,
+        "p95": 16.734706339714677,
+        "n": 50
+      },
+      "timing_sample": {
+        "answered": 50,
+        "errors": 0,
+        "hit_token_limit": 0,
+        "latency_ms": {
+          "p50": 50265,
+          "p95": 97734,
+          "n": 50
+        },
+        "prompt_tokens_per_s": {
+          "p50": 79.38309985381798,
+          "p95": 81.59111137251858,
+          "n": 50
+        },
+        "output_tokens_per_s": {
+          "p50": 16.023483427942487,
+          "p95": 16.734706339714677,
+          "n": 50
+        }
+      },
+      "vs_fp16_transformers": {
+        "compared": 50,
+        "same_text": 49,
+        "same_input_tokens": 50
+      },
+      "vs_same_format_on_gpu": {
+        "compared": 50,
+        "same_text": 47,
+        "same_input_tokens": 50
+      }
+    }
+  }
+}

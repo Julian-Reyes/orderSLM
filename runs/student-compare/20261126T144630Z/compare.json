@@ -1,0 +1,83 @@
+{
+  "compare_version": "student-compare@0.3",
+  "split": "fresh",
+  "chats": 90,
+  "messages": 278,
+  "resamples": 10000,
+  "seed": 20261025,
+  "students": {
+    "qwen3.5-0.8b-single-v6 (constrained)": {
+      "intent_accuracy": 0.9424460431654677,
+      "invalid_rate": 0.014388489208633094,
+      "item_f1": 0.9442622950819672,
+      "exact_rate": 0.8777777777777778,
+      "action_rate": 0.9
+    },
+    "qwen3.5-0.8b-single-v6-q8_0": {
+      "intent_accuracy": 0.9388489208633094,
+      "invalid_rate": 0.01079136690647482,
+      "item_f1": 0.934640522875817,
+      "exact_rate": 0.8666666666666667,
+      "action_rate": 0.8777777777777778
+    }
+  },
+  "pairs": [
+    {
+      "a": "qwen3.5-0.8b-single-v6 (constrained)",
+      "b": "qwen3.5-0.8b-single-v6-q8_0",
+      "intent_messages": {
+        "only_a_right": 2,
+        "only_b_right": 1
+      },
+      "exact_chats": {
+        "only_a_right": 1,
+        "only_b_right": 0,
+        "mcnemar_p": 1.0,
+        "mcnemar_p_holm": 1.0
+      },
+      "differences": {
+        "intent_accuracy": {
+          "a_minus_b": 0.003597122302158251,
+          "ci95": [
+            -0.00766283524904221,
+            0.01650165016501648
+          ],
+          "ci_excludes_0": false
+        },
+        "invalid_rate": {
+          "a_minus_b": 0.0035971223021582736,
+          "ci95": [
+            0.0,
+            0.011450381679389315
+          ],
+          "ci_excludes_0": false
+        },
+        "item_f1": {
+          "a_minus_b": 0.009621772206150236,
+          "ci95": [
+            0.0,
+            0.02630872483221469
+          ],
+          "ci_excludes_0": false
+        },
+        "exact_rate": {
+          "a_minus_b": 0.011111111111111072,
+          "ci95": [
+            0.0,
+            0.033333333333333326
+          ],
+          "ci_excludes_0": false
+        },
+        "action_rate": {
+          "a_minus_b": 0.022222222222222254,
+          "ci95": [
+            0.0,
+            0.05555555555555558
+          ],
+          "ci_excludes_0": false
+        }
+      }
+    }
+  ],
+  "parts": {}
+}

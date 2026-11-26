@@ -113,6 +113,19 @@ ROUND_COMPARE = {  # paired v5 vs v6 (student-compare@0.3)
     "fresh4": RUNS / "student-compare" / "20261126T115057Z",
     "fresh5": RUNS / "student-compare" / "20261126T115103Z",
 }
+SHIPPED_DEPLOY = RUNS / "student-deploy" / "20261126T125414Z"  # v6 as Q8_0 GGUF (shipped 2026-11-26)
+SHIPPED_RUN = "20261126T125414Z-qwen3.5-0.8b-single-v6-q8_0"
+SHIPPED_COMPARE = {  # v6 transformers (constrained) vs the shipped Q8_0, paired
+    s: RUNS / "student-compare" / f"20261126T{t}"
+    for s, t in (
+        ("fresh4", "144610Z"),
+        ("fresh5", "144617Z"),
+        ("dev", "144623Z"),
+        ("fresh", "144630Z"),
+        ("fresh2", "144634Z"),
+        ("fresh3", "144640Z"),
+    )
+}
 V6_ERRORS = [RUNS / "student-errors" / f"20261126T{t}" for t in ("120215Z", "120218Z", "120221Z", "120223Z")]
 
 
@@ -298,6 +311,40 @@ def rounds() -> dict[str, Any]:
     }
 
 
+def shipped() -> dict[str, Any]:
+    """The shipped v6 Q8_0 file: its own scores on every split, speed, and how it differs from v6 in fp16."""
+    s = _j(SHIPPED_DEPLOY / "summary.json")
+    splits = {}
+    for split, cmp_dir in SHIPPED_COMPARE.items():
+        run = SD / (SHIPPED_RUN + ("" if split == "dev" else f"-{split}"))
+        p = _j(cmp_dir / "compare.json")["pairs"][0]["exact_chats"]
+        splits[split] = student_scores(run) | {
+            "vs_fp16_only_fp16_right": p["only_a_right"],
+            "vs_fp16_only_q8_right": p["only_b_right"],
+        }
+    t, cpu = s["jobs"]["gpu-q8_0-timing"]["timing_sample"], s["jobs"]["cpu-q8_0"]["timing_sample"]
+    return {
+        "run": _rel(SHIPPED_DEPLOY),
+        "student": "qwen3.5-0.8b-single-v6",
+        "format": "Q8_0",
+        "gguf_gb": round(s["gguf"]["Q8_0"]["bytes"] / 1e9, 2),
+        "decoding": "plain greedy (llama.cpp b11700), no grammar",
+        "splits": splits,
+        "clean_fully_correct": {
+            "right": splits["fresh4"]["exact"] + splits["fresh5"]["exact"],
+            "chats": splits["fresh4"]["chats"] + splits["fresh5"]["chats"],
+        },
+        "clean_intents": {
+            "right": splits["fresh4"]["intents_right"] + splits["fresh5"]["intents_right"],
+            "messages": splits["fresh4"]["messages"] + splits["fresh5"]["messages"],
+        },
+        "t4_latency_s_p50": round(t["latency_ms"]["p50"] / 1000, 1),
+        "t4_latency_s_p95": round(t["latency_ms"]["p95"] / 1000, 1),
+        "cpu_latency_s_p50": round(cpu["latency_ms"]["p50"] / 1000, 1),
+        "peak_gpu_mib": s["jobs"]["gpu-q8_0-timing"]["memory"]["peak_gpu_used_mib"],
+    }
+
+
 def checker() -> dict[str, Any]:
     m = _j(CHECK / "metrics.json")
     names = {
@@ -319,7 +366,7 @@ def checker() -> dict[str, Any]:
 
 EXAMPLE = (
     "a-dev-065",
-    STUDENTS[3][2],
+    SHIPPED_RUN,
 )  # short, all caps, typos, a correction, time, name and payment; exact match
 
 
@@ -408,6 +455,7 @@ def build() -> dict[str, Any]:
         ],
         "rounds": rounds(),
         "packaging": packaging(),
+        "shipped": shipped(),
         "order_checker": checker(),
         "example": example(),
         "spend": spend(),

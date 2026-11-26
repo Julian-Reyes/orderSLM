@@ -1,0 +1,34 @@
+{
+  "experiment": "student-dev",
+  "student": "qwen3.5-0.8b-single-v6-q8_0",
+  "split": "fresh",
+  "adapter_sha256": "df14b06055d76c7f95fa2fbf5975668c2d30a734412e6ea97845fba2d3747f6b",
+  "session": "20261126T125414Z",
+  "data_version": "student-data@0.6",
+  "prompt_version": "student-extract@0.1",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536
+  },
+  "model": {
+    "repo": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+  },
+  "runtime": {
+    "engine": "llama.cpp llama-server (prebuilt CUDA 12.8)",
+    "gpu_used": true,
+    "llama_cpp": "b11700",
+    "format": "Q8_0",
+    "gguf": {
+      "file": "q8_0.gguf",
+      "bytes": 811843648,
+      "sha256": "116eb0f03cddb844ac1893d9d7a77881520b4708d001a7b5e1fa7d5b5ee2b00f"
+    },
+    "server": {
+      "ctx_size": 8192
+    },
+    "greedy": "samplers [top_k], top_k 1, temperature 0, no prompt cache"
+  },
+  "deploy_run": "runs/student-deploy/20261126T125414Z",
+  "cost_usd": 0.0
+}
