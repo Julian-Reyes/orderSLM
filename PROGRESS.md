@@ -8,7 +8,7 @@ _Last updated 2026-11-26._
 
 ### Ship v6 (2026-11-26; Julian: "push everything, then ship v6 and update documentation on the project website to explain what we did. then do a simulated customer test")
 
-- **Deploy run 3 pushed 2026-11-26 ~10:55 Brasília:** `make deploy ARGS="export"` → `runs/student-deploy/20261126T125414Z/`,
+- **Deploy run 3 pushed 2026-11-26 ~09:55 Brasília:** `make deploy ARGS="export"` → `runs/student-deploy/20261126T125414Z/`,
   kernel `orderslm-m6-deploy-run` v4. `kaggle_deploy.py` now packages `qwen3.5-0.8b-single-v6` in Q8_0 only (the
   shipped format, Julian 2026-11-05), plain greedy in llama.cpp b11700 (no grammar: it changed 9 of v6's 1,843
   transformers answers), on all six splits (fresh4 + fresh5 first), reference = v6's constrained transformers runs;
